@@ -1,0 +1,50 @@
+footer {
+    border: 1px solid black;
+    width: 1200px;
+    padding: 25px 30px;
+    margin: auto;
+}
+
+/* 푸터 메뉴 리스트 */
+.footer-menu-nav {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+/* 푸터 메뉴 */
+.footer-menu-nav a {
+    padding: 5px 20px;
+    font-size: 17px;
+}
+.footer-menu-nav li:not(li:last-child){
+    border-right: 2px solid black;
+}
+
+/* 푸터 내용 */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 푸터 설명 */
+.footer-description {
+    display: flex;
+    flex-direction: column;
+}
+.footer-description span {
+    margin: 5px 0px;
+    font-size: 14px;
+}
+.footer-description span:last-child {
+    margin-top: 15px;
+    font-size: 17px;
+}
+
+/* 푸터 로고 이미지 */
+.footer-logo {
+    display: flex;
+    align-items: center;
+}
+.footer-logo img {
+    height: 130px;
+}

@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<footer>
+    <!------------------ 푸터 메뉴 ------------------>
+    <ul class="footer-menu-nav">
+        <li><a href="">이용약관</a></li>
+        <li><a href="">개인정보처리방침</a></li>
+        <li><a href="">저작권정책</a></li>
+        <li><a href="">FAQ</a></li>
+    </ul>
+    <!------------------ 헤더 내용 ------------------>
+    <div class="footer-content">
+        <div class="footer-description">
+            <span>대표자 : BDH</span>
+            <span>대표전화 : 010 - 8108 - 1399</span>
+            <span>사업자등록번호 : 870 - 85 - 01234</span>
+            <span>주소 : 서울특별시 중구 남대문로 120 그레이츠 청계(구 대일빌딩) 2F A클래스 E조</span>
+            <span>ⓒCubespace. All Rights Reserved.</span>
+        </div>
+        <div class="footer-logo">
+            <img src="/resources/images/common/mark.gif" alt="푸터 로고 이미지">
+        </div>
+    </div>
+</footer>

@@ -3,3 +3,20 @@
 
 @Import "variables.css";
 @import "reset.css";
+
+
+@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap'); /* singleDay */
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap'); /* gowonDadum */
+@import url('https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap'); /* kirangHaerang */
+@import url('https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&family=Kirang+Haerang&display=swap'); /* dokdo */
+@import url('https://fonts.googleapis.com/css2?family=Cute+Font&display=swap'); /* cuteFont */
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap'); /* poorStory */
+@import url('https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap'); /* yeonsung */
+@import url('https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap'); /* hiMelody */
+@import url('https://fonts.googleapis.com/css2?family=Dongle&display=swap'); /* dongle */
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&display=swap'); /* gaegu */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap'); /* nanumGothic */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap'); /* notoSerifKorean */
+@import url('https://fonts.googleapis.com/css2?family=Sunflower:wght@500&display=swap'); /* sunFlower */
+@import url('https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css'); /* 나눔고딕(메인폰트) */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap'); /* orbitron */

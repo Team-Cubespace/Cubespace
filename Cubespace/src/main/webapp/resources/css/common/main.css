@@ -15,15 +15,15 @@ body{
     justify-content: center;
 }
 
-.profile{
+.profile-container{
     background-color: blueviolet;
 }
 
-.myInfo{
+.profile{
     display: flex;
 }
 
-.myInfo-detail{
+.profile-info{
     display: flex;
     flex-direction: column;
 }

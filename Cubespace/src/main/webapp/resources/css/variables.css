@@ -2,4 +2,18 @@
     /* 여기에 폰트, 색깔 단축키 저장하면됩니다 */
     /* --yellow:rgb(251, 238, 97); <---예시 */
 
+    --singleDay:'Single Day', cursive;
+    --gowonDadum: 'Gowun Dodum', sans-serif;
+    --kirangHaerang: 'Kirang Haerang', cursive;
+    --dokdo: 'East Sea Dokdo', cursive;
+    --cuteFont: 'Cute Font', cursive;
+    --poorStory: 'Poor Story', cursive;
+    --yeonsung: 'Yeon Sung', cursive;
+    --hiMelody:  'Hi Melody', cursive;
+    --dongle:  'Dongle', sans-serif;
+    --gaegu: 'Gaegu', cursive;
+    --nanumGothic:  'Nanum Gothic', sans-serif;
+    --notoSerifKorean: 'Noto Serif KR', serif;
+    --sunFlower: 'Sunflower', sans-serif;
+    --orbitron:  'Orbitron', sans-serif;
 }

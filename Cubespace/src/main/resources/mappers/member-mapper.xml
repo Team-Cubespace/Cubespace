@@ -22,25 +22,16 @@
    		<result property="loginType" column="LOGIN_TYPE"></result>
    		<result property="birthday" column="BIRTHDAY"></result>
    		<result property="birthYear" column="BIRTHYEAR"></result>
+   		<result property="emotion" column="EMOTION"></result>
+   		<result property="fontNo" column="FONT_NO"></result>
    		
    		
    		
-   		<result property="blockFlag" column="BLOCK_FL"></result>
-   		<result property="memberBirth" column="BIRTHDAY"></result>
-   		<result property="manner" column="MANNER"></result>
-  
-  		<result property="remainPay" column="REMAIN_PAY"></result>
-  		<result property="sellCount" column="SELL_COUNT"></result>
-  		<result property="buyCount" column="BUY_COUNT"></result>
-  		<result property="boardBlockCount" column="BOARD_BL_COUNT"></result>
-  		<result property="userBlockCount" column="USER_BL_COUNT"></result>
+   		<result property="memberBlockYN" column="MEMBER_BLOCK_YN"></result>
   
  	 </resultMap>
  	 
- 	 <resultMap type="UserBlock" id="userBlock_rm">
- 	 	<result property="userBlocker" column="USER_BLOCKER"></result>
-  		<result property="userBlocked" column="USER_BLOCKED"></result>
- 	 </resultMap>
+
 
  	 
 

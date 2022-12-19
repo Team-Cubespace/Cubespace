@@ -27,7 +27,7 @@
         </li>
         <!-- 로그인 X -->
         <li>
-            <a href="">
+            <a href="/member/login">
                 <i class="fa-solid fa-right-to-bracket"></i>
                 <span>로그인</span>
             </a>

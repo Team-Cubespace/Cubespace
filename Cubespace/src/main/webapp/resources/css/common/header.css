@@ -49,7 +49,7 @@ header {
 
 /* 헤더 로고 영역 */
 .header-logo {
-    height: 150px;
+    /* height: 150px; */
     font-size: 60px;
     display: flex;
     align-items: center;
@@ -112,4 +112,33 @@ header {
 
 .header-drop-down a:hover {
     background-color: #ddd;
+}
+
+/* 로고 애니메이션 */
+.header-logo-title {
+    --bg-size: 400%;
+    --color-one: #4C4DFF;
+    --color-two: #ca94ff;
+    background: linear-gradient(
+        90deg,
+        var(--color-one),
+        var(--color-two),
+        var(--color-one)
+        )
+        0 0 / var(--bg-size) 100%;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .header-logo-title {
+        animation: move-bg 8s linear infinite;
+    }
+
+    @keyframes move-bg {
+        to {
+        background-position: var(--bg-size) 0;
+        }
+    }
 }

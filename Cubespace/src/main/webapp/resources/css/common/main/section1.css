@@ -1,4 +1,3 @@
-/* 투데이 랭킹, 내 정보 section */
 section:first-child{
     display: flex;
     justify-content: space-between;
@@ -9,7 +8,7 @@ section:first-child{
     width: 65%;
     height: 250px;
     padding: 20px;
-    border: 2px rebeccapurple solid;
+    border: 2px var(--mainColor) solid;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -17,7 +16,7 @@ section:first-child{
 }
 
 .star-select{
-    width: 90%;
+    width: 55%;
     margin-bottom: 20px;
     text-align: center;
     display: flex;
@@ -35,11 +34,18 @@ section:first-child{
 }
 
 .star-profile{
+    margin: 0 25px;
+    position: relative;
     align-items: center;
 }
 
-.no-last-star{
-    margin-right: 50px;
+.star-profile > img{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    transform: rotate(-35deg);
 }
 
 .star-profile a{
@@ -72,7 +78,7 @@ section:first-child{
     width: 30%;
     height: 250px;
     padding: 20px;
-    border: 2px rebeccapurple solid;
+    border: 2px var(--mainColor) solid;
     border-radius: 20px;
 }
 
@@ -99,10 +105,14 @@ section:first-child{
     cursor: pointer;
 }
 
+.profile-info span:first-child a{
+    font-size: 0.7em;
+}
+
 #home-btn{
     width: 100%;
     height: 28%;
-    background-color: rebeccapurple;
+    background-color: var(--mainColor);
     border-radius: 15px;
     color: white;
     font-size: 1.2em;
@@ -113,6 +123,11 @@ section:first-child{
 }
 
 #home-btn:hover{
-    background-color: rgb(64, 24, 106);
-    transition-duration: 0.2s;
+    background-color: var(--subColor);
+    transition-duration: 0.3s;
+}
+
+/* 선택 */
+.select{
+    color: var(--subColor);
 }

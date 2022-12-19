@@ -1,20 +1,13 @@
+// 슬라이드 기능
 document.addEventListener("DOMContentLoaded", function(){
-    
-
-    // ------------------------------------ 슬라이드 기능 ---------------------------------------------------
-    // section을 가져옴
     let placeListArea = document.querySelector(".place-list-area");
 
-    // section 안에서 클릭이벤트가 발생하면
     placeListArea.addEventListener("click", function (e) {
-
-        // 현재 Node = 
         currentNode = e.target;
         if (e.target.nodeName == "I") {
             currentNode = currentNode.parentElement;
         }
 
-        // console.log(currentNode);
         if (currentNode.className == "prev-arrow") {
             prevMove(currentNode);
         } else if(currentNode.className == "next-arrow") {
@@ -24,10 +17,8 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     })
 
-
     // 공통 
-    let offset = 1220;
-    // let placeListWidth = document.querySelector(".place-list").clientWidth;
+    let offset = 1176;
     let placeItemWidth = 305;
 
     // 이전 슬라이드로 이동
@@ -68,9 +59,46 @@ document.addEventListener("DOMContentLoaded", function(){
             nextBtn.style.display = "none";
         }
     }
+})
 
-    // var mySwiper = new Swiper('.swiper-container', {
-    //     autoplay: true,
-    //     loop: true
-    // });
+// today, shorts 선택
+const todayStar = document.getElementById("today-star");
+const todayRank = document.getElementById("today-rank");
+const popularShorts = document.getElementById("popular-shorts");
+const newShorts = document.getElementById("new-shorts");
+
+const todaySelect = () => {
+    /* 여기에 ajax로 리스트를 가져오는 코드 작성 */
+    todayStar.classList.add("select");
+    todayRank.classList.remove("select");
+};
+
+(todaySelect)();
+
+todayStar.addEventListener("click", () => {
+    todaySelect();
+})
+
+todayRank.addEventListener("click", () => {
+    /* 여기에 ajax로 리스트를 가져오는 코드 작성 */
+    todayRank.classList.add("select");
+    todayStar.classList.remove("select");
+})
+
+const shortsSelect = () => {
+    /* 여기에 ajax로 리스트를 가져오는 코드 작성 */
+    popularShorts.classList.add("select");
+    newShorts.classList.remove("select");
+}
+
+(shortsSelect)();
+
+popularShorts.addEventListener("click", () => {
+    shortsSelect();
+})
+
+newShorts.addEventListener("click", () => {
+    /* 여기에 ajax로 리스트를 가져오는 코드 작성 */
+    newShorts.classList.add("select");
+    popularShorts.classList.remove("select");
 })

@@ -5,44 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cubespace</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/common/header-footer.css">
     <link rel="stylesheet" href="../css/common/main.css">
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div data-include-path="header.html"></div>
-
+    
     <main>
         <section>
             <!-- 투데이 인기 스타, 누적 투데이 랭킹 -->
             <div class="star-container">
                 <div class="star-select">
-                    <span><i class="fa-solid fa-star"></i> 투데이 인기 스타</span>
-                    <span><i class="fa-solid fa-ranking-star"></i> 누적 투데이 랭킹</span>
+                    <span id="today-star"><i class="fa-solid fa-star"></i> 투데이 인기 스타</span>
+                    <span id="today-rank"><i class="fa-solid fa-ranking-star"></i> 누적 투데이 랭킹</span>
                 </div>
                 
                 <div class="star-profile-container">
-                    <div class="star-profile no-last-star">
-                        <a href="#" class="star-profile-img"><img src="../images/삐약.gif"></a>
+                    <div class="star-profile">
+                        <img src="../images/crown.png">
+                        <a href="#" class="star-profile-img"><img src="../images/zz.png"></a>
                         <a href="#">1. 기묘동</a>
                         <span>Today 400</span>
                     </div>
     
-                    <div class="star-profile no-last-star">
-                        <a href="#" class="star-profile-img"><img src="../images/삐약.gif"></a>
+                    <div class="star-profile">
+                        <img src="../images/crown.png">
+                        <a href="#" class="star-profile-img"><img src="../images/zz.png"></a>
                         <a href="#">2. 기묘동2</a>
                         <span>Today 300</span>
                     </div>
     
-                    <div class="star-profile no-last-star">
-                        <a href="#" class="star-profile-img"><img src="../images/삐약.gif"></a>
+                    <div class="star-profile">
+                        <img src="../images/crown.png">
+                        <a href="#" class="star-profile-img"><img src="../images/zz.png"></a>
                         <a href="#">3. 기묘동3</a>
                         <span>Today 200</span>
                     </div>
 
                     <div class="star-profile">
-                        <a class="star-profile-img"><img src="../images/삐약.gif"></a>
+                        <a href="#" class="star-profile-img"><img src="../images/zz.png"></a>
                         <a href="#">4. 기묘동4</a>
                         <span>Today 100</span>
                     </div>
@@ -52,7 +56,7 @@
             <!-- 내 프로필, 미니홈피 가기-->
             <div class="profile-container">
                 <div class="profile">
-                    <div class="profile-img"><img src="../images/삐약.gif"></div>
+                    <div class="profile-img"><img src="../images/zz.png"></div>
     
                     <div class="profile-info">
                         <span>
@@ -73,102 +77,102 @@
         <section class="place-list-area">
             <div class="place-area" id="placeArea">
                 <div class="shorts-select">
-                    <span class="place-area-title"><i class="fa-brands fa-gratipay"></i> 인기 shorts</span>
-                    <span class="place-area-title"><i class="fa-solid fa-circle-play"></i> 최신 shorts</span>
+                    <span id="popular-shorts" class="place-area-title"><i class="fa-brands fa-gratipay"></i> 인기 shorts</span>
+                    <span id="new-shorts" class="place-area-title"><i class="fa-solid fa-circle-play"></i> 최신 shorts</span>
                 </div>
 
                 <div class="slide-container">
                     <span class="prev-arrow"><i class="fa-solid fa-arrow-left"></i></span>
                     <span class="next-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+
                     <ul class="place-list">
-                        <li class="place-item">
+                        <li class="place-item place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="../images/제로투.png">
-                                <span class="place-title">제로투 춰봤어요</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                </div>
+                                <img src="../images/toy.jpg">
+                                <span class="place-title">형이 인형 뽑는 방법 알려준다</span>
+                                <span>김효동2</span>
+                                <span>조회수 5,000</span>
                             </a>
                         </li>
+
                         <li class="place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="../images/제로투.png">
-                                <span class="place-title">제로투 춰봤어요</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                </div>
+                                <img src="../images/toy.jpg">
+                                <span class="place-title">형이 인형 뽑는 방법 알려준다</span>
+                                <span>김효동2</span>
+                                <span>조회수 5,000</span>
                             </a>
                         </li>
+
                         <li class="place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="../images/제로투.png">
-                                <span class="place-title">제로투 춰봤어요</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                </div>
+                                <img src="../images/toy.jpg">
+                                <span class="place-title">형이 인형 뽑는 방법 알려준다</span>
+                                <span>김효동2</span>
+                                <span>조회수 5,000</span>
                             </a>
                         </li>
+
                         <li class="place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="../images/제로투.png">
-                                <span class="place-title">제로투 춰봤어요</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                </div>
+                                <img src="../images/toy.jpg">
+                                <span class="place-title">형이 인형 뽑는 방법 알려준다</span>
+                                <span>김효동2</span>
+                                <span>조회수 5,000</span>
                             </a>
                         </li>
+
                         <li class="place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="../images/제로투.png">
-                                <span class="place-title">제로투 춰봤어요</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                </div>
+                                <img src="../images/toy.jpg">
+                                <span class="place-title">형이 인형 뽑는 방법 알려준다</span>
+                                <span>김효동2</span>
+                                <span>조회수 5,000</span>
                             </a>
                         </li>
+
                         <li class="place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="../images/제로투.png">
-                                <span class="place-title">제로투 춰봤어요</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                </div>
+                                <img src="../images/toy.jpg">
+                                <span class="place-title">형이 인형 뽑는 방법 알려준다</span>
+                                <span>김효동2</span>
+                                <span>조회수 5,000</span>
                             </a>
                         </li>
+
                         <li class="place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="../images/제로투.png">
-                                <span class="place-title">제로투 춰봤어요</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                </div>
+                                <img src="../images/toy.jpg">
+                                <span class="place-title">형이 인형 뽑는 방법 알려준다</span>
+                                <span>김효동2</span>
+                                <span>조회수 5,000</span>
                             </a>
                         </li>
+
                         <li class="place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="../images/제로투.png">
-                                <span class="place-title">제로투 춰봤어요</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                </div>
+                                <img src="../images/toy.jpg">
+                                <span class="place-title">형이 인형 뽑는 방법 알려준다</span>
+                                <span>김효동2</span>
+                                <span>조회수 5,000</span>
                             </a>
                         </li>
+
                         <li class="place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="../images/제로투.png">
-                                <span class="place-title">제로투 춰봤어요</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                </div>
+                                <img src="../images/toy.jpg">
+                                <span class="place-title">형이 인형 뽑는 방법 알려준다</span>
+                                <span>김효동2</span>
+                                <span>조회수 5,000</span>
                             </a>
                         </li>
+
                         <li class="place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="../images/제로투.png">
-                                <span class="place-title">제로투 춰봤어요0</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                </div>
+                                <img src="../images/toy.jpg">
+                                <span class="place-title">형이 인형 뽑는 방법 알려준다</span>
+                                <span>김효동2</span>
+                                <span>조회수 5,000</span>
                             </a>
                         </li>
                     </ul>
@@ -176,6 +180,9 @@
             </div>
         </section>
     </main>
+
+    <div data-include-path="footer.html"></div>
+
     <script src="../js/common/tempory.js"></script>
     <script src="../js/common/main.js"></script>
 </body>

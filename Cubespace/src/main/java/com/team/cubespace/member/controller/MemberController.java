@@ -39,7 +39,7 @@ public class MemberController {
 		Member loginMember = new Member();
 		
 		if(loginType.equals("3")) {
-			loginMember = service.kakaoLogin(inputMember);
+//			loginMember = service.kakaoLogin(inputMember);
 		}
 		
 		

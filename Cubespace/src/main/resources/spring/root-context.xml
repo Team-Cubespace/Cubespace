@@ -23,9 +23,9 @@
       <property name="username" value="tco"/>
       <property name="password" value="tco1234"/> -->
       <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-      <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-      <property name="username" value="tco"/>
-      <property name="password" value="tco1234"/>
+      <property name="url" value="jdbc:oracle:thin:@115.90.212.22:9000:xe" />
+      <property name="username" value="cubespace"/>
+      <property name="password" value="cubespace"/>
       
       <!-- SQL이 수행된 후 자동으로 Commit 되는것을 지정 -->
       <property name="defaultAutoCommit" value="false"/>

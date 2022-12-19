@@ -1,10 +1,11 @@
-
+/* 인기 shrots 최신 shorts 감싼  */
 .place-area {
     padding: 20px;
     border: 2px rebeccapurple solid;
     border-radius: 20px;
     margin-top: 60px;
     margin-bottom: 70px;
+    text-align: center;
 }
 
 .place-area-title {
@@ -110,4 +111,11 @@
 }
 .place-list {
     position: absolute;
+}
+
+.shorts-select {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
 }

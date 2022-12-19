@@ -17,12 +17,14 @@ section:first-child{
 }
 
 .star-select{
+    width: 90%;
     margin-bottom: 20px;
     text-align: center;
+    display: flex;
+    justify-content: space-around;
 }
 
 .star-select > span{
-    margin: 0 100px;
     font-size: 1.1em;
     font-weight: bold;
     cursor: pointer;
@@ -91,6 +93,10 @@ section:first-child{
     margin-bottom: 10px;
     font-size: 1.1em;
     font-weight: bold;
+}
+
+.profile-info span:first-child span{
+    cursor: pointer;
 }
 
 #home-btn{

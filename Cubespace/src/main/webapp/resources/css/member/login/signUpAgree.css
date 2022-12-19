@@ -1,0 +1,167 @@
+/* 전체 div */
+.signUp_agree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*************************************************/
+
+/* 약관동이 가이드  */
+.guideArea {
+    width: 800px;
+    height: 100px;
+    margin: 30px auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 25px;
+    border-bottom: 3px solid var(--lightViolet);
+
+}
+
+.guideText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.guideText>p:nth-child(1) {
+    padding-bottom: 5px;
+}
+
+.chevron {
+    font-size: 40px;
+    margin: 0 70px;
+}
+
+.agreeText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.agreeText>p:nth-child(1){
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+.agreeText>p:nth-child(2){
+    color: #aaa;
+    margin-bottom: 50px;
+}
+.guideText:nth-child(1) > * {
+    font-weight: bold;
+}
+
+/*************************************************/
+
+/* 약관동의 내용 감싼 div */
+.SignUpAgreement4 {
+    background-color: rgba(0, 0, 0, 0.01);
+    border: 1px solid #eee;
+    justify-content: center;
+    width: 920px;
+    height: 430px;
+    border-radius: 15px;
+    overflow-y: scroll;
+    padding: 50px 50px 25px;
+    flex-direction: column;
+
+}
+
+/* 약관동의 내용 */
+.SignUpAgreement4>p {
+    word-wrap: break-word;
+    width: 800px;
+    letter-spacing: 2px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* 스크롤바 설정*/
+.Scroll::-webkit-scrollbar {
+    width: 15px;
+}
+
+/* 스크롤바 막대 설정*/
+.Scroll::-webkit-scrollbar-thumb {
+    height: 17%;
+    background-color: var(--lightViolet);
+    border-radius: 5px;
+}
+
+/* 스크롤바 뒷 배경 설정*/
+.Scroll::-webkit-scrollbar-track {
+    opacity: 1;
+}
+
+
+/*************************************************/
+/* 회원약관동의  */
+.SignUpAgreement5{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+ /* 체크박스 숨기기 */
+#nextSignUp{display: none}
+
+#nextSignUp + label{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#nextSignUp + label > i{
+    display:  flex;
+    justify-content: center;
+    align-items: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid white;
+    border-radius: 20%;
+    color: white;
+    background-color: #ddd;
+    font-size: 35px;
+    margin-right: 10px;
+}
+
+/* 체크박스 체크 시 아이콘 스타일 지정 */
+#nextSignUp:checked + label > i{
+    background-color: var(--lightViolet);
+    color: white;
+}
+
+/*회원가입하기 다음페이지 이동 감싼 div */
+.SignUpAgreement6{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    font-size: 15px;
+
+}
+
+/*회원가입하기 다음페이지 이동 버튼 */
+.SignUp{ 
+    width: 300px;
+    height: 50px;
+    margin: 50px 0 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: var(--lightViolet);
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+}
+
+.SignUp:hover{
+    transform: scale(0.95);
+}

@@ -16,4 +16,12 @@
     --notoSerifKorean: 'Noto Serif KR', serif;
     --sunFlower: 'Sunflower', sans-serif;
     --orbitron:  'Orbitron', sans-serif;
+
+
+
+    /* color */
+    --violet: #9426ff;
+    --lightViolet: #d9b2ff;
+    --naver: #03c75a;
+    --kakao: #fddc3f;
 }

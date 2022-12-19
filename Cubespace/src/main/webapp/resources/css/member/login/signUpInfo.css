@@ -1,0 +1,186 @@
+
+.signUp {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+}
+
+
+
+#signUp-frm {
+    padding: 100px 0;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/*************************************************/
+/* 약관동이 가이드  */
+.guideArea {
+    width: 800px;
+    height: 100px;
+    margin: 30px auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 25px;
+    border-bottom: 3px solid var(--lightViolet);
+
+}
+
+.guideText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.guideText>p:nth-child(1) {
+    padding-bottom: 5px;
+}
+
+.chevron {
+    font-size: 40px;
+    margin: 0 70px;
+}
+
+.agreeText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.agreeText>p:nth-child(1){
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+.agreeText>p:nth-child(2){
+    color: #aaa;
+    margin-bottom: 50px;
+}
+.guideText:nth-child(3) > * {
+    font-weight: bold;
+}
+
+/*************************************************/
+.questionBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 800px;
+    height: 75px;
+    border-bottom: 3px solid #eee;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    position: relative;
+}
+
+
+
+.lock{
+    height: 20px;
+}
+
+.textbox {
+    display: flex;
+    height: 35px;
+    width: 800px;
+
+    position:relative;
+    align-items: center;
+}
+.textbox>*:nth-child(1){
+    padding: 0 20px;
+}
+
+.checkButton {
+    position:absolute;
+    right: 0;
+    height: 30px;
+}
+.inputBox {
+    /* height: 100%; */
+    border:none;
+    outline:none;
+    font-size: 20px;
+    /* padding: 15px 0; */
+    width: 500px;
+}
+.firstBox {
+    position:absolute;
+    right: 0;
+    bottom: 5px;
+    color: #aaa;
+
+}
+#smallCube {
+    height: 15px;
+}
+.fa-solid{
+    font-size: 20px;
+}
+
+#selectText {
+    position:inherit;
+    display: flex;
+    justify-content: space-between;
+}
+#selectText>span:nth-child(1){
+    color: green;
+}
+
+
+/*************************************************/
+/*회원가입하기 다음페이지 이동 버튼 */
+.SignUpAgreement6{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    font-size: 15px;
+    margin-top: 50px;
+}
+
+/*회원가입하기 다음페이지 이동 버튼 */
+.SignUp{ 
+    width: 300px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: var(--lightViolet);
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+}
+
+.SignUp:hover{
+    transform: scale(0.95);
+}
+.signUp-input-password{
+    display: flex;
+    justify-content: space-between;
+
+}
+.passwordArea>img{
+    padding: 0 20px;
+}
+.passwordArea{
+    padding: 0 0 !important;
+}
+.questionBox:hover {
+    border-bottom: 3px solid var(--lightViolet);
+}
+
+
+.confirm{
+    color: green;
+}
+.error{
+    color: red;
+}

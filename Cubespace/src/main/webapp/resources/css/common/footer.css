@@ -1,6 +1,7 @@
 footer {
     border: 1px solid black;
     width: 1200px;
+    height: auto;
     padding: 25px 30px;
     margin: auto;
 }

@@ -1,0 +1,115 @@
+* {
+    font-family: var(--nanumGothic);
+}
+
+/* 헤더 */
+header {
+    padding: 20px 0px;
+    width: 1200px;
+    margin: auto;
+}
+
+/* 헤더 메뉴 리스트 */
+.header-menu-nav {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 0px;
+    font-size: 17px;
+}
+
+/* 헤더 메뉴 */
+.header-menu-nav a{
+    display: flex;
+    padding: 15px;
+    height: 100%;
+    align-items: center;
+}
+.header-menu-nav i {
+    font-size: 25px;
+}
+
+.header-menu-nav span {
+    margin-left: 5px;
+}
+
+/* 새로운 알림 */
+.notice {
+    position: relative;
+}
+
+.notice-new {
+    position: absolute;
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+    right: 0px;
+}
+
+/* 헤더 로고 영역 */
+.header-logo {
+    height: 150px;
+    font-size: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header-logo a {
+    display: flex;
+    align-items: center;
+}
+.header-logo img {
+    width: 100px;
+    margin-right: 10px;
+}
+.header-logo-title {
+    font-family: var(--orbitron);
+}
+
+/* 로그인 시 */
+/* 프로필 이미지 */
+#headerDropDownButton {
+    position: relative;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+#headerDropDownButton i {
+    position: absolute;
+    right: 5px;
+    border: 2px solid white;
+    background-color: #ddd;
+    border-radius: 50%;
+    bottom: 7px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+}
+
+.header-profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+/* 헤더 드랍다운 */
+.header-drop-down {
+    position: absolute;
+    top: 100%;
+    right: 0px;
+    width: 100px;
+    border: 1px solid black;
+    display: none;
+}
+.header-drop-down a {
+    padding: 10px;
+}
+
+.header-drop-down a:hover {
+    background-color: #ddd;
+}

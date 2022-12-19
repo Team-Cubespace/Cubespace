@@ -63,13 +63,19 @@
             <!-- 내 프로필, 미니홈피 가기-->
             <div class="profile-container">
                 <div class="profile">
-                    <div class="profile-img"><img src="../../resources/images/zz.png"></div>
-    
+                    <div class="profile-img">
+                        <img src="../../resources/images/zz.png">
+                        <div class="dropdown-btn"><i class="fa-solid fa-caret-down dropdown-btn-icon"></i></div>
+                        
+                        <%-- dropdown --%>
+                        <div class="dropdown">
+                            <a href="#">내 정보 수정</a>
+                            <a href="#">로그아웃</a>
+                        </div>
+                    </div>
+
                     <div class="profile-info">
-                        <span>
-                            <span>김효동2</span>
-                            <a href="#"><i class="fa-solid fa-pen"></i></a>
-                        </span>
+                        <span>김효동2</span>
                         <span><a href="#">알림</a> : <a href="#">0</a></span>
                         <span>Today : 0</span>
                         <span>일촌 : 1,000명</span>
@@ -190,7 +196,6 @@
 
     <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 
-    <script src="/resources/js/common/tempory.js"></script>
     <script src="/resources/js/common/main.js"></script>
 </body>
 </html>

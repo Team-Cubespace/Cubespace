@@ -1,4 +1,4 @@
-// 슬라이드 기능
+/* 슬라이드 기능 */
 document.addEventListener("DOMContentLoaded", function(){
     let placeListArea = document.querySelector(".place-list-area");
 
@@ -61,14 +61,14 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 })
 
-// today, shorts 선택
+/* today, shorts 선택 */
 const todayStar = document.getElementById("today-star");
 const todayRank = document.getElementById("today-rank");
 const popularShorts = document.getElementById("popular-shorts");
 const newShorts = document.getElementById("new-shorts");
 
 const todaySelect = () => {
-    /* 여기에 ajax로 리스트를 가져오는 코드 작성 */
+    // 여기에 ajax로 리스트를 가져오는 코드 작성
     todayStar.classList.add("select");
     todayRank.classList.remove("select");
 };
@@ -80,13 +80,13 @@ todayStar.addEventListener("click", () => {
 })
 
 todayRank.addEventListener("click", () => {
-    /* 여기에 ajax로 리스트를 가져오는 코드 작성 */
+    // 여기에 ajax로 리스트를 가져오는 코드 작성
     todayRank.classList.add("select");
     todayStar.classList.remove("select");
 })
 
 const shortsSelect = () => {
-    /* 여기에 ajax로 리스트를 가져오는 코드 작성 */
+    // 여기에 ajax로 리스트를 가져오는 코드 작성
     popularShorts.classList.add("select");
     newShorts.classList.remove("select");
 }
@@ -98,7 +98,44 @@ popularShorts.addEventListener("click", () => {
 })
 
 newShorts.addEventListener("click", () => {
-    /* 여기에 ajax로 리스트를 가져오는 코드 작성 */
+    // 여기에 ajax로 리스트를 가져오는 코드 작성
     newShorts.classList.add("select");
     popularShorts.classList.remove("select");
+})
+
+/* dropdown */
+const dropDownBtn = document.querySelector(".dropdown-btn");
+const dropDownBtnIcon = document.querySelector(".dropdown-btn-icon");
+const dropdown = document.querySelector(".dropdown");
+let toggleFlag = true;
+
+const hideDropdown = () => {
+    dropdown.style.height = "0px";
+    dropdown.style.border = "none";
+    dropDownBtnIcon.classList.toggle("fa-caret-up");
+    dropDownBtnIcon.classList.toggle("fa-caret-down");
+    toggleFlag = true;
+}
+
+const dropdownEvent = () => {
+    if(toggleFlag){
+        dropdown.style.height = "50px";
+        dropdown.style.border = "1px solid black";
+        dropDownBtnIcon.classList.toggle("fa-caret-up");
+        dropDownBtnIcon.classList.toggle("fa-caret-down");
+        toggleFlag = false;
+        
+    }else{
+        hideDropdown();
+    }
+}
+
+dropDownBtn.addEventListener("click", () => {
+    dropdownEvent();
+})
+
+window.addEventListener("click", e => {
+    if(!e.target.matches('.dropdown, .dropdown-btn, .dropdown-btn-icon')){
+        hideDropdown();
+    }
 })

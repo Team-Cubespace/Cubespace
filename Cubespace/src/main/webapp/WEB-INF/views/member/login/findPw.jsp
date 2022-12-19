@@ -15,6 +15,21 @@
 
 
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
+    <style>
+        #findPwLink {
+        border-bottom: none;
+        border-top: 1px solid black;
+        border-right: 1px solid black;
+        color: var(--violet);
+        font-weight: bold;
+    }
+    #findIdLink{
+        color: black;
+        border-left: none;
+        border-top: none;
+        border-bottom: 1px solid black;
+    }
+    </style>
 
 </head>
 
@@ -71,21 +86,31 @@
                 <img src="../../images/common/bigCube.png">
                 <span class="header-logo-title">Cubespace</span>
             </a>
-        </div>
     </header>
 
     <div class="findIdPw">
 
         <div class="signUpInfoLink">
-            <a href="findId.html" id="findIdLink">아이디 찾기</a>
-            <a href="findPw.html" id="findPwLink">비밀번호 찾기</a>
+            <a href="" id="findIdLink">아이디 찾기</a>
+            <a href="" id="findPwLink">비밀번호 찾기</a>
         </div>
 
 
-        <form action="/member/findId" method="POST" name="findId-frm" id="findId-frm">
+        <form action="/member/login/findPw" method="POST" name="findPw-frm" id="findPw-frm">
 
             <div>
-                <!-- 이름/생년월일/휴대번호 -->
+                <!-- 아이디(이메일) -->
+                <div class="questionBox">
+                    <div class="signUp-input-Email textbox">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="text" name="memberEmail" id="memberEmail" class="inputBox" placeholder="회원가입한 계정 이메일"
+                            maxlength="40" autocomplete="off" value="${tempMember.memberEmail}" />
+                    </div>
+                    <div class="emailMessageBox firstBox">
+                        <span class="signUp-message" id="emailMessage">사용가능한 이메일을 입력해주세요.</span>
+                    </div>
+                </div>
+
                 <!-- 이름 -->
                 <div class="questionBox">
                     <div class="signUp-input-Name textbox">
@@ -113,26 +138,16 @@
                 </div>
 
 
-                <!-- 아이디(이메일) -->
-                <div class="questionBox">
-                    <div class="signUp-input-Email textbox">
-                        <i class="fa-regular fa-envelope"></i>
-                        <input type="text" name="memberEmail" id="memberEmail" class="inputBox" placeholder="아이디 정보를 받을 새 이메일을 입력해주세요"
-                            maxlength="40" autocomplete="off" value="${tempMember.memberEmail}" />
-                    </div>
-                    <div class="emailMessageBox firstBox">
-                        <span class="signUp-message" id="emailMessage">사용가능한 이메일을 입력해주세요.</span>
-                    </div>
-                </div>
-
             </div>
+
+            <p class="findPwInfo">임시 비밀번호가 회원가입한 이메일 계정으로 전송됩니다</p>
 
 
 
             <!--------------------- 회원 정보 입력 끝  --------------------->
             <!-- 회원 가입 다음 단계 -->
             <div class="SignUpAgreement6">
-                <button class="SignUp">아이디 찾기</button>
+                <button class="SignUp">비밀번호 찾기</button>
                 <a href="" id="toLoginPage">로그인하기</a>
             </div>
         </form>
@@ -166,7 +181,7 @@
     </footer>
 
 
-    <script src="../../js/member/login/findIdPw.js"></script>
+    <script src="../../js/member/login/signUpInfo.js"></script>
 </body>
 
 </html>

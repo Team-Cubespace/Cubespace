@@ -171,3 +171,9 @@
 }
 
 
+.confirm{
+    color: green;
+}
+.error{
+    color: red;
+}

@@ -1,5 +1,6 @@
 package com.team.cubespace.member.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.team.cubespace.member.model.Member;
+import com.team.cubespace.member.model.vo.Member;
 import com.team.cubespace.member.model.service.MemberService;
 
 @Controller
@@ -26,6 +27,16 @@ public class MemberController {
 	private MemberService service;
 	
 	
+	/** 로그인
+	 * @param inputMember
+	 * @param model
+	 * @param ra
+	 * @param resp
+	 * @param saveId
+	 * @param referer
+	 * @param loginType
+	 * @return loginMember
+	 */
 	@PostMapping("/login")
 	public String login(Member inputMember,
 			Model model,
@@ -38,15 +49,46 @@ public class MemberController {
 		
 		Member loginMember = new Member();
 		
-		if(loginType.equals("3")) {
-			loginMember = service.kakaoLogin(inputMember);
+//		if(loginType.equals("3")) {
+//			loginMember = service.kakaoLogin(inputMember);
+//		}
+		
+		
+	loginMember = service.login(inputMember);
+	String path = null;
+	
+	if(loginMember != null) {
+		if(loginMember.getMemberBlockYN().equals("Y")){
+			path = referer;
+			String message = "차단된 회원은 이용할 수 없습니다" 
+					+ loginMember.getBlockStart() + "부터" 
+					+ loginMember.getBlockEnd() + "까지 이용할 수 없습니다."
+					+ "자세한 사항은 고객센터를 참고하세요";
+			ra.addFlashAttribute("message", message);
+
+		} else {
+			
+			path = "/";
+			model.addAttribute("loginMember", loginMember);
+			Cookie cookie = new Cookie("saveId", loginMember.getMemberEmail());
+			
+			if(saveId != null) {
+				cookie.setMaxAge(60*60*24*365);
+			} else {
+				cookie.setMaxAge(0);
+			}
+			cookie.setPath("/");
+			resp.addCookie(cookie);
 		}
+
+	} else {
 		
-		
-//	loginMember = service.login(inputMember);
+		path = referer;
+		ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다");
+	}
 	
 	
-	return null;
+	return "redirect:" + path;
 	}
 
 }

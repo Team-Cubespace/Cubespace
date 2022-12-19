@@ -307,9 +307,9 @@ memberTel.addEventListener("input",()=>{
                 }
             });
     } else { // 정규표현식이 일치하지 않는 경우
-        temlMessage.innerText="전화번호 형식이 유효하지 않습니다.";
-        temlMessage.classList.remove("confirm");
-        temlMessage.classList.add("error");
+        telMessage.innerText="전화번호 형식이 유효하지 않습니다.";
+        telMessage.classList.remove("confirm");
+        telMessage.classList.add("error");
         checkObj.memberTel = false;
     }
 })

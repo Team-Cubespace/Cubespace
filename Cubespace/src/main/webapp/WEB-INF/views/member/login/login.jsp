@@ -98,7 +98,7 @@
                   <span>네이버 로그아웃</span>
               </a>
             </li>
-        </ul>
+        </ul> -->
 
 
 -------------------------------------------
@@ -107,7 +107,7 @@
         <ul>
             <li onclick="kakaoLogin();">
             <a href="javascript:void(0)">
-                <span>카카오 로그인</span> -->
+                <span>카카오 로그인</span> 
 
         <!-- id: 2580968502
                 birthday :  "0210"
@@ -127,7 +127,7 @@
 
 
 
-        <!-- </a>
+         </a>
             </li>
             <li onclick="kakaoLogout();">
             <a href="javascript:void(0)">
@@ -137,7 +137,7 @@
         </ul>
 
 
-------------------------------------------- -->
+<!-- ------------------------------------------- -->
 
         <div>
 
@@ -222,6 +222,7 @@
     </footer>
 
 
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script src="/resources/js/member/login.js"></script>

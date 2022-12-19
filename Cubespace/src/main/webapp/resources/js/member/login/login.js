@@ -61,7 +61,7 @@ function kakaoLogin() {
         Kakao.API.request({
           url: '/v2/user/me',
           success: function (response) {
-        	  console.log(response)
+        	  console.log(JSON.stringify(response))
           },
           fail: function (error) {
             console.log(error)
@@ -78,27 +78,28 @@ function kakaoLogout() {
     if (Kakao.Auth.getAccessToken()) {
       Kakao.API.request({
         url: '/v1/user/unlink'
-        // , success: function (response) {
+        , success: function (response) {
         	
-        //    (() => {
+           (() => {
 
-        //     $.ajax({
-        //         url:"/member/login",
-        //         type:"post",
-        //         data : {inputMember: JSON.stringify(response),
-        //         loginType: '3'},
-        //         dataType: "json",
-        //         success : () => {console.log("로그인 성공"); }
-        //     })
+            $.ajax({
+                url:"/member/login",
+                type:"post",
+                data : {inputMember: JSON.stringify(response),
+                loginType: '3'},
+                dataType: "json",
+                success : () => {console.log("로그인 성공"); }
+            })
 
-        //    })();
-        // },
-        // fail: function (error) {
+           })();
+        },
+        fail: function () {
           
-        //     alert("로그아웃에 실패하셨습니다");
-        // }
+            alert("로그아웃에 실패하셨습니다");
+        }
       })
-      Kakao.Auth.setAccessToken(undefined)
+      Kakao.Auth.setAccessToken(undefined);
+      
     } else {
         alert("이미 로그아웃 상태입니다");
     }

@@ -3,7 +3,7 @@ section:first-child{
     justify-content: space-between;
 }
 
-/* 오늘의 투데이 인기스타, 누적 투데이 랭킹 */
+/* 투데이 인기스타, 누적 투데이 랭킹 */
 .star-container{
     width: 65%;
     height: 250px;
@@ -74,7 +74,27 @@ section:first-child{
     border-radius: 50%;
 }
 
-/* 내 프로필, 미니홈피 가기 */
+/* 로그인 */
+.login{
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login img{
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    top: -12px;
+}
+
+.login span{
+    margin-top: 112px;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+/* 프로필, 미니홈피 */
 .profile-container{
     width: 30%;
     height: 250px;
@@ -83,7 +103,7 @@ section:first-child{
     border-radius: 20px;
 }
 
-.profile{
+.login, .profile{
     width: 100%;
     height: 72%;
     position: relative;
@@ -124,7 +144,7 @@ section:first-child{
     font-size: 20px;
 }
 
-#home-btn{
+#login-btn, #home-btn{
     width: 100%;
     height: 28%;
     background-color: var(--mainColor);
@@ -137,7 +157,7 @@ section:first-child{
     cursor: pointer;
 }
 
-#home-btn:hover{
+#login-btn:hover, #home-btn:hover{
     background-color: var(--subColor);
     transition-duration: 0.3s;
 }

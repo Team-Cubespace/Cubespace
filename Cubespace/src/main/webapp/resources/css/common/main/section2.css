@@ -1,6 +1,5 @@
 .place-area {
-    margin-top: 55px;
-    margin-bottom: 50px;
+    margin: 55px 0;
     padding: 20px 10px;
     border: 2px var(--mainColor) solid;
     border-radius: 20px;

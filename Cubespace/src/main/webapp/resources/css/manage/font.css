@@ -1,0 +1,170 @@
+/* 헤더(경로 부분) */
+div, span, header, section {
+    /* border: 1px solid black; */
+}
+
+body {
+    width: 940px;
+    display: flex;
+}
+.side {
+    width: 300px;
+}
+main {
+    width: 640px;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10px;
+    /* overflow-y: auto; */
+}
+header {
+    border-bottom: 2px solid black;
+    padding: 20px 0px 5px;
+    width: 640px;
+
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+}
+
+
+#writeButton {
+    align-self: flex-end;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* ------------------------------------------ */
+/* 사이드바 */
+.sideBarLink {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    font-size: 20px;
+}
+.sideBarLink > a {
+    padding-bottom: 15px;
+}
+
+.fa-heart {
+    font-size: 18px;
+}
+/* ------------------------------------------ */
+/* 우측 타이틀 */
+.rightTitle {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+.searchArea {
+    position:relative;
+}
+.fa-magnifying-glass{
+    position: absolute;
+    right: 5px;
+    top: 3px;
+    cursor: pointer;
+}
+.fontUse button{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.fa-store {
+    font-size: 25px;
+}
+.storeLinkArea {
+    display: flex;
+    align-items: center;
+}
+
+/* ------------------------------------------ */
+/* 폰트 리스트 */
+.fontArea {
+    display: flex;
+    flex-direction: column;
+}
+.fontHeader, .fontMain {
+    display: flex;
+}
+.fontHeader>div, .fontMain>div{
+    padding: 5px 0;
+}
+
+.fontHeader>div:nth-child(1), .fontMain>div:nth-child(1){
+    flex-basis: 25%;
+    padding-left: 5px;
+    border-right: 3px solid #eee;
+}
+.fontHeader>div:nth-child(2), .fontMain>div:nth-child(2){
+    flex-basis: 60%;
+    padding-left: 5px;
+    border-right: 3px solid #eee;
+}
+.fontHeader>div:nth-child(3), .fontMain>div:nth-child(3){
+    flex-basis: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fontHeader >div {
+    font-size: 18px;
+    color: #aaa;
+    font-weight: bold;
+    border-bottom: 2px solid rgba(0,0,0,0.7);
+
+}
+/* ------------------------------------------------ */
+/* 친구 리스트 */
+.friendArea {
+    display: flex;
+    flex-direction: column;
+}
+.profileImg {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    padding: 5px;
+}
+.listTitle {
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+}
+.friendDetail{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.friendImgName, .friendBtn {
+    display: flex;
+    align-items: center;
+}
+#minihomeImg {
+    height: 20px;
+    /* width: 30px; */
+}
+.minihomeLink{
+    display: flex;
+    align-items: center;
+}
+.minihomeLink {
+    padding : 0 20px 0 20px;
+}
+.fa-minus {
+    border:2px solid black;
+    border-radius: 50%;
+}
+.deleteFriend {
+    cursor: pointer;
+}
+.friendDetail{
+    border-bottom: 3px solid #eee;
+}

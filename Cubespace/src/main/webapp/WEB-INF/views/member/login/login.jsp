@@ -85,64 +85,7 @@
 
         <img src="/resources/images/common/bigCube.png" class="bigCube">
 
-
-
-        <!-- <ul>
-            <li>
-              <a id="naverIdLogin_loginButton" href="javascript:void(0)">
-                  <span>네이버 로그인</span>
-              </a>
-            </li>
-            <li onclick="naverLogout(); return false;">
-              <a href="javascript:void(0)">
-                  <span>네이버 로그아웃</span>
-              </a>
-            </li>
-        </ul> -->
-
-
--------------------------------------------
-
-
-        <ul>
-            <li onclick="kakaoLogin();">
-            <a href="javascript:void(0)">
-                <span>카카오 로그인</span> 
-
-        <!-- id: 2580968502
-                birthday :  "0210"
-                birthday_needs_agreement :  false // false인 경우가 동의
-                birthday_type :  "SOLAR"
-                email :  "ekdnjs113@naver.com"
-                email_needs_agreement :  false
-                has_birthday :  true
-                has_email :  true
-                is_email_valid :  true
-                is_email_verified :  true
-                profile : 
-                {nickname: '이다원', thumbnail_image_url: 'http://k.kakaocdn.net/dn/imSw2/btrTKLh0yey/94Pb1hAAOGhftzCqsTwDJ0/img_110x110.jpg', profile_image_url: 'http://k.kakaocdn.net/dn/imSw2/btrTKLh0yey/94Pb1hAAOGhftzCqsTwDJ0/img_640x640.jpg', is_default_image: false}
-                profile_image_needs_agreement :  false
-                profile_nickname_needs_agreement :  false -->
-
-
-
-
-         </a>
-            </li>
-            <li onclick="kakaoLogout();">
-            <a href="javascript:void(0)">
-                <span>카카오 로그아웃</span>
-            </a>
-            </li>
-        </ul>
-
-
-<!-- ------------------------------------------- -->
-
         <div>
-
-
-
 
             <!-- 아이디(이메일) -->
             <div class="signUp-input-Email textbox">
@@ -186,7 +129,7 @@
             <img src="/resources/images/common/naverLogo.png" class="loginLogo">
             <div>네이버로 시작하기</div>
         </div>
-        <div class="simpleLogin kakao">
+        <div class="simpleLogin kakao" onclick="kakaoLogin();">
             <img src="/resources/images/common/kakaoLogo.png" class="loginLogo">
             <div id="startKakao">카카오로 시작하기</div>
         </div>
@@ -225,7 +168,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <script src="/resources/js/member/login.js"></script>
+    <script src="/resources/js/member/login/login.js"></script>
 </body>
 
 </html>

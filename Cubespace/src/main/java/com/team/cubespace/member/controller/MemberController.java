@@ -30,9 +30,9 @@ public class MemberController {
 	/** 로그인
 	 * @return
 	 */
-	@GetMapping("/member/login") 
+	@GetMapping("/login") 
 	public String loginPage() {
-		return "member/login"; 
+		return "member/login/login"; 
 	}
 	
 	
@@ -52,6 +52,7 @@ public class MemberController {
 			RedirectAttributes ra,
 			HttpServletResponse resp,
 			@RequestParam(value="saveId", required=false) String saveId,
+			@RequestParam(value="kakaoLoginMember", required=false) String kakaoLoginMember,
 			@RequestHeader(value="referer") String referer,
 			@RequestParam(value="loginType", required=false, defaultValue = "1") String loginType) {
 		

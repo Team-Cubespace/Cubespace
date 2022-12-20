@@ -7,6 +7,7 @@
 <body>
 <h1>
 	Hello world!  
+	<a href="/member/login">시험삼아 로그인링크 넣었어요 지울거임</a>ㅇㅇ
 </h1>
 
 </body>

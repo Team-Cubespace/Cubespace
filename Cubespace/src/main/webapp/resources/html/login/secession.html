@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/common/header.css">
     <link rel="stylesheet" href="../../css/common/footer.css">
-    <link rel="stylesheet" href="../../css/member/login/findIdPw.css">
+    <link rel="stylesheet" href="../../css/member/login/secession.css">
 
 
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
@@ -76,55 +76,48 @@
 
     <div class="findIdPw">
 
-        <div class="signUpInfoLink">
-            <a href="findId.html" id="findIdLink">아이디 찾기</a>
-            <a href="findPw.html" id="findPwLink">비밀번호 찾기</a>
-        </div>
+        <div class="signUpInfoLink">회원 탈퇴</div>
 
 
-        <form action="/member/findId" method="POST" name="findId-frm" id="findId-frm">
+        <form action="/member/secession" method="POST" name="findId-frm" id="findId-frm" onsubmit="return varifySecession()">
 
             <div>
                 <!-- 이름/생년월일/휴대번호 -->
-                <!-- 이름 -->
-                <div class="questionBox">
-                    <div class="signUp-input-Name textbox">
-                        <i class="fa-regular fa-user"></i>
-                        <input type="text" name="memberName" class="inputBox" id="memberName" placeholder="회원가입한 계정 이름"
-                            maxlength="10" />
-                    </div>
-                    <div class="firstBox">
-                        <span class="signUp-message" id="nameMessage"></span>
-                    </div>
-                </div>
-
-
-
-                <!-- 휴대번호 -->
-                <div class="questionBox">
-                    <div class="signUp-input-Tel textbox">
-                        <i class="fa-solid fa-mobile-screen"></i>
-                        <input type="text" name="memberTel" class="inputBox" id="memberTel"
-                            placeholder="회원가입한 전화번호 ex)01045459986" maxlength="11" value="${tempMember.memberTel}" />
-                    </div>
-                    <div class="firstBox">
-                        <span class="signUp-message" id="telMessage">"-" 기호를 제외하고 숫자만 입력해주세요"</span>
-                    </div>
-                </div>
-
-
                 <!-- 아이디(이메일) -->
                 <div class="questionBox">
                     <div class="signUp-input-Email textbox">
                         <i class="fa-regular fa-envelope"></i>
-                        <input type="text" name="memberEmail" id="memberEmail" class="inputBox" placeholder="아이디 정보를 받을 새 이메일을 입력해주세요"
-                            maxlength="40" autocomplete="off" value="${tempMember.memberEmail}" />
-                    </div>
-                    <div class="emailMessageBox firstBox">
-                        <span class="signUp-message" id="emailMessage">사용가능한 이메일을 입력해주세요.</span>
+                        <input type="text" name="memberEmail" id="memberEmail" class="inputBox" placeholder="아이디(이메일)"
+                            maxlength="40" autocomplete="off"  />
                     </div>
                 </div>
 
+                <!-- 이름 -->
+                <div class="questionBox">
+                    <div class="signUp-input-Name textbox">
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" name="memberName" class="inputBox" id="memberName" placeholder="이름"
+                            maxlength="10" />
+                    </div>
+                </div>
+
+
+                <!-- 비밀번호 -->
+                <div class="questionBox">
+                    <div class="signUp-input-Tel textbox">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" name="memberPw" class="inputBox" id="memberPw"
+                            placeholder="비밀번호"  />
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+            <div class="newEmailMessageBox">
+                <span class="newEmai-message"id="newEmaiMessage">회원 탈퇴를 위해 본인 회원정보를 입력해주세요.</span>
             </div>
 
 
@@ -132,8 +125,7 @@
             <!--------------------- 회원 정보 입력 끝  --------------------->
             <!-- 회원 가입 다음 단계 -->
             <div class="SignUpAgreement6">
-                <button class="SignUp">아이디 찾기</button>
-                <a href="" id="toLoginPage">로그인하기</a>
+                <button class="SignUp">회원 탈퇴하기</button>
             </div>
         </form>
     </div>
@@ -166,36 +158,7 @@
     </footer>
 
 
-    <script src="../../js/member/login/findIdPw.js"></script>
-    <script>
-        const findIdLink = document.getElementById("findIdLink");
-        const  findPwLink= document.getElementById("findPwLink");
-
-        findPwLink.addEventListener("mouseover", () => {
-            findIdLink.style.border = "none";
-            findIdLink.style.borderBottom = "1px solid black";
-            findPwLink.style.border = "1px solid black";
-            findPwLink.style.borderBottom = "none";
-
-            findIdLink.style.color = "black";
-            findIdLink.style.fontWeight = "normal";
-            findPwLink.style.color = "var(--mainColor)";
-            findPwLink.style.fontWeight = "bold";
-            
-
-        })
-        findPwLink.addEventListener("mouseout", () => {
-            findPwLink.style.border = "none";
-            findPwLink.style.borderBottom = "1px solid black";
-            findIdLink.style.border = "1px solid black";
-            findIdLink.style.borderBottom = "none";
-
-            findPwLink.style.color = "black";
-            findPwLink.style.fontWeight = "normal";
-            findIdLink.style.color = "var(--mainColor)";
-            findIdLink.style.fontWeight = "bold";
-        })
-    </script>
+    <script src="../../js/member/login/secession.js"></script>
 </body>
 
 </html>

@@ -28,7 +28,7 @@
     align-items: center;
 
     font-size: 25px;
-    border-bottom: 3px solid var(--lightViolet);
+    border-bottom: 3px solid var(--lightMain);
 
 }
 
@@ -100,6 +100,10 @@
     position:absolute;
     right: 0;
     height: 30px;
+    background-color: var(--subColor);
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 .inputBox {
     /* height: 100%; */
@@ -152,15 +156,16 @@
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    background-color: var(--lightViolet);
-    color: black;
+    background-color: var(--subColor);
+    color: white;
     cursor: pointer;
     font-weight: bold;
     border: none;
 }
 
 .SignUp:hover{
-    transform: scale(0.95);
+    transition-duration: 0.3s;
+    background-color: var(--mainColor);
 }
 .signUp-input-password{
     display: flex;
@@ -174,7 +179,7 @@
     padding: 0 0 !important;
 }
 .questionBox:hover {
-    border-bottom: 3px solid var(--lightViolet);
+    border-bottom: 3px solid var(--lightMain);
 }
 
 
@@ -183,4 +188,23 @@
 }
 .error{
     color: red;
+}
+
+
+.fa-eye, .fa-eye-slash {
+    cursor: pointer;
+}
+
+.fa-solid, .fa-regular{
+    font-size: 25px;
+}
+.lock{
+    height: 25px;
+}
+#smallCube{
+    height: 25px;
+    padding: 0 10px;
+}
+.fa-key{
+    padding: 0 0 0 20px;
 }

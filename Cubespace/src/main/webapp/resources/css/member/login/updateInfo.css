@@ -1,3 +1,20 @@
+
+.signUp {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+}
+
+
+
+#signUp-frm {
+    padding: 100px 0;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+}
+
 /*************************************************/
 .signUpInfoLink {
     display: flex;
@@ -36,24 +53,6 @@
     margin: 30px auto;
 }
 
-/* .textbox {
-    height: 60px;
-    width: 600px;
-    border-bottom: 3px solid #eee;
-
-    display: flex;
-    align-items: center;
-    
-}
-.textbox> input{
-    height: 96%;
-    width: 500px;
-    outline: none;
-    border: none;
-}
-.textbox >i{
-    margin: 0 15px;
-} */ 
 
 
 /*************************************************/
@@ -85,13 +84,16 @@
 }
 .textbox>*:nth-child(1){
     padding: 0 20px;
-    font-size: 30px;
 }
 
 .checkButton {
     position:absolute;
     right: 0;
     height: 30px;
+    background-color: var(--subColor);
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 .inputBox {
     /* height: 100%; */
@@ -129,18 +131,11 @@
 /*회원가입하기 다음페이지 이동 버튼 */
 .SignUpAgreement6{ 
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100px;
     font-size: 15px;
-    margin: 50px 0 20px;
-}
-.SignUpAgreement6 > button{
-    margin-bottom: 10px;
-}
-#toLoginPage {
-    color: #aaa;
+    margin-top: 50px;
 }
 
 /*회원가입하기 다음페이지 이동 버튼 */
@@ -155,16 +150,26 @@
     color: white;
     cursor: pointer;
     font-weight: bold;
-    font-size: 18px;
     border: none;
 }
 
+.SignUp:hover{
+    transition-duration: 0.3s;
+    background-color: var(--mainColor);
+}
+.signUp-input-password{
+    display: flex;
+    justify-content: space-between;
 
-
-.findPwInfo {
-    color: #aaa;
-    margin: 20px 0;
-    text-align: center;
+}
+.passwordArea>img{
+    padding: 0 20px;
+}
+.passwordArea{
+    padding: 0 0 !important;
+}
+.questionBox:hover {
+    border-bottom: 3px solid var(--lightMain);
 }
 
 
@@ -173,4 +178,23 @@
 }
 .error{
     color: red;
+}
+
+
+.fa-eye, .fa-eye-slash {
+    cursor: pointer;
+}
+
+.fa-solid, .fa-regular{
+    font-size: 25px;
+}
+.lock{
+    height: 25px;
+}
+#smallCube{
+    height: 25px;
+    padding: 0 10px;
+}
+.fa-key{
+    padding: 0 0 0 20px;
 }

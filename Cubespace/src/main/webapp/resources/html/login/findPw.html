@@ -91,12 +91,12 @@
     <div class="findIdPw">
 
         <div class="signUpInfoLink">
-            <a href="" id="findIdLink">아이디 찾기</a>
-            <a href="" id="findPwLink">비밀번호 찾기</a>
+            <a href="findId.html" id="findIdLink">아이디 찾기</a>
+            <a href="findPw.html" id="findPwLink">비밀번호 찾기</a>
         </div>
 
 
-        <form action="/member/login/findPw" method="POST" name="findPw-frm" id="findPw-frm">
+        <form action="/member/login/findPw" method="POST" name="findId-frm" id="findId-frm">
 
             <div>
                 <!-- 아이디(이메일) -->
@@ -181,7 +181,37 @@
     </footer>
 
 
-    <script src="../../js/member/login/signUpInfo.js"></script>
+    <script src="../../js/member/login/findIdPw.js"></script>
+    <script>
+        const findIdLink = document.getElementById("findIdLink");
+        const  findPwLink= document.getElementById("findPwLink");
+
+
+        findIdLink.addEventListener("mouseout", () => {
+            findIdLink.style.border = "none";
+            findIdLink.style.borderBottom = "1px solid black";
+            findPwLink.style.border = "1px solid black";
+            findPwLink.style.borderBottom = "none";
+
+            findIdLink.style.color = "black";
+            findIdLink.style.fontWeight = "normal";
+            findPwLink.style.color = "var(--mainColor)";
+            findPwLink.style.fontWeight = "bold";
+            
+
+        })
+        findIdLink.addEventListener("mouseover", () => {
+            findPwLink.style.border = "none";
+            findPwLink.style.borderBottom = "1px solid black";
+            findIdLink.style.border = "1px solid black";
+            findIdLink.style.borderBottom = "none";
+
+            findPwLink.style.color = "black";
+            findPwLink.style.fontWeight = "normal";
+            findIdLink.style.color = "var(--mainColor)";
+            findIdLink.style.fontWeight = "bold";
+        })
+    </script>
 </body>
 
 </html>

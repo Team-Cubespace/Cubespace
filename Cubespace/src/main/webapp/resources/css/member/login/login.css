@@ -30,11 +30,13 @@
 }
 
 .inputBox:hover {
-    border-bottom: 2px solid var(--violet);
+    border-bottom: 2px solid var(--subColor);
+    transition-duration: 0.3s;
 }
 
 .inputBox:active {
-    border-bottom: 2px solid var(--violet);
+    border-bottom: 2px solid var(--subColor);
+    transition-duration: 0.3s;
 }
 
 .smallCube {
@@ -80,7 +82,7 @@
     align-items: center;
     width: 25px;
     height: 25px;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     border-radius: 50%;
     color: #ccc;
     margin-right: 10px;
@@ -95,8 +97,8 @@
 /* 체크박스 체크 시 아이콘 스타일 지정 */
 #saveId:checked+label>i {
     background-color: white;
-    border-color: var(--violet);
-    color: var(--violet);
+    border-color: var(--subColor);
+    color: var(--subColor);
 }
 
 

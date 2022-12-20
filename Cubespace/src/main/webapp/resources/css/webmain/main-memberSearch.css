@@ -1,0 +1,8 @@
+*{
+    border: 1px solid black;
+}
+.modal{
+    width: 700px;
+    height: 800px;
+    background-color: red;
+}

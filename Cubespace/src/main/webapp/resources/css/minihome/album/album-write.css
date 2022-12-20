@@ -1,0 +1,70 @@
+.input-row label:first-child{
+    width: 100px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* 입력창 단위 */
+.input-row {
+    border-bottom: 1px solid #ddd;
+    padding: 6px 0px;
+    display: flex;
+    align-items: flex-start;
+}
+.input-row input {
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+.input-row textarea {
+    resize: none;
+    width: 80%;
+    font-size: 15px;
+    /* padding: 10px; */
+    border: none;
+    outline: none;
+}
+
+/* 라디오 리스트 */
+.radio-list {
+    display: flex;
+}
+.radio-list li{
+    margin-right: 10px;
+    display: flex;
+}
+.radio-list label {
+    cursor: pointer;
+}
+.radio-list input[type='radio'] {
+    display: none;
+}
+.radio-list input[type='radio']:checked + label {
+    background-color: var(--subColor);
+    color: white;
+}
+/* 라디오 레이블 */
+.radio {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    border: 1px solid var(--subColor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    margin-right: 10px;
+    color: var(--subColor);
+}
+
+/* 이미지 등록 버튼 영역 */
+.add-image {
+    display: flex;
+    flex-direction: column;
+}
+.add-image button {
+    background-color: transparent;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+}

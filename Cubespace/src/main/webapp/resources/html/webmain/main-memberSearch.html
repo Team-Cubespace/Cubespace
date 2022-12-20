@@ -10,10 +10,70 @@
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/webmain/main-memberSearch.css">
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
+
+    <!-- <link rel="stylesheet" href="../../css/member/login/findIdPw.css"> -->
+
 </head>
 <body>
     <div class="modal">
-        
+        <div class="modal-back"><</div>
+
+        <div class="modal-head">
+            <img class="head-img" src="../../images/common/memberSearch.png" alt="깐부찾기이미지">
+            <div class="head-font">깐부 찾기</div>
+        </div>
+
+        <div class="modal-body">
+            <div class="member-search">
+                <a href="" id="memberSearch">깐부 찾기</a>
+                <a href="" id="memberMySearch">내가 신청한 깐부</a>
+            </div>
+            <div class="member-search-input-div">
+                <input type="text" class="member-search-input" maxlength="33" placeholder="검색할 회원을 입력하세요.">
+                <button>검색</button>
+            </div>
+            <section class="mebmer-search-profile">
+                <div class="mebmer-profile">
+                    <img class="member-img" src="../../images/common/test_user_profile.gif" alt="">
+                    <div>묘동닉네임테스트</div>
+                    <div>신청이미지</div>
+                    <div>신청</div>
+                    <div>정사각형</div>
+                    <div>미니홈피</div>
+                </div>
+            </section>
+
+        </div>
     </div>
+
+    <script>
+        const memberSearch = document.getElementById("memberSearch");
+        const  memberMySearch= document.getElementById("memberMySearch");
+
+        memberMySearch.addEventListener("mouseover", () => {
+            memberSearch.style.border = "none";
+            memberSearch.style.borderBottom = "1px solid black";
+            memberMySearch.style.border = "1px solid black";
+            memberMySearch.style.borderBottom = "none";
+
+            memberSearch.style.color = "black";
+            memberSearch.style.fontWeight = "normal";
+            memberMySearch.style.color = "var(--subColor)";
+            memberMySearch.style.fontWeight = "bold";
+            
+
+        })
+        memberMySearch.addEventListener("mouseout", () => {
+            memberMySearch.style.border = "none";
+            memberMySearch.style.borderBottom = "1px solid black";
+            memberSearch.style.border = "1px solid black";
+            memberSearch.style.borderBottom = "none";
+
+            memberMySearch.style.color = "black";
+            memberMySearch.style.fontWeight = "normal";
+            memberSearch.style.color = "var(--subColor)";
+            memberSearch.style.fontWeight = "bold";
+        })
+    </script>
 </body>
 </html>

@@ -46,7 +46,7 @@
                 
             </div>
             <section class="minihome-main">
-                <iframe src="/albumList" frameborder="0">
+                <iframe src="/manage/changeFont" frameborder="0">
                     
                 </iframe>
                 <ul class="minihome-menu">
@@ -55,7 +55,7 @@
                     <li><a href="">사진첩</a></li>
                     <li><a href="">동영상</a></li>
                     <li><a href="">방명록</a></li>
-                    <li><a href="">관리</a></li>
+                    <li><a href="/manage/changeFont">관리</a></li>
                 </ul>
             </section>
         </div>

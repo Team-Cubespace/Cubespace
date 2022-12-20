@@ -1,0 +1,13 @@
+body {
+    width: 920px;
+    display: flex;
+}
+.side {
+    width: 300px;
+}
+main {
+    width: 620px;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10px;
+}

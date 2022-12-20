@@ -49,7 +49,7 @@
     <!------------------ 헤더 로고 영역 ------------------>
     <div class="header-logo">
         <a href="/">
-            <img src="/resources/images/common/cube.png" alt="메인 로고 이미지">
+            <img src="/resources/images/common/cubes.png" alt="메인 로고 이미지">
             <span class="header-logo-title">Cubespace</span>
         </a>
     </div>

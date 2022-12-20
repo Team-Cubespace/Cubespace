@@ -20,8 +20,9 @@
 
 
     /* color */
-    --violet: #46008c;
-    --lightViolet: #d9b2ff;
     --naver: #03c75a;
     --kakao: #fddc3f;
+    
+    --mainColor: #4B4DFF;
+    --subColor: #8D18FF;
 }

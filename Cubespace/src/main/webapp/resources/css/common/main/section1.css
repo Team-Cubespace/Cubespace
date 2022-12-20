@@ -1,0 +1,148 @@
+section:first-child{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 오늘의 투데이 인기스타, 누적 투데이 랭킹 */
+.star-container{
+    width: 65%;
+    height: 250px;
+    padding: 20px;
+    border: 2px var(--mainColor) solid;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.star-select{
+    width: 55%;
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+.star-select > span{
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.star-profile-container{
+    display: flex;
+}
+
+.star-profile{
+    margin: 0 25px;
+    position: relative;
+    align-items: center;
+}
+
+.star-profile > img{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    transform: rotate(-35deg);
+}
+
+.star-profile a{
+    margin-bottom: 8px;
+}
+
+/* 프로필 공통 */
+.profile-info, .star-profile{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-img, .star-profile-img{
+    width: 120px;
+    height: 120px;
+    background-color: lavender;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+}
+
+.profile-img img, .star-profile-img img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+/* 내 프로필, 미니홈피 가기 */
+.profile-container{
+    width: 30%;
+    height: 250px;
+    padding: 20px;
+    border: 2px var(--mainColor) solid;
+    border-radius: 20px;
+}
+
+.profile{
+    width: 100%;
+    height: 72%;
+    position: relative;
+    display: flex;
+}
+
+.profile-info{
+    height: 120px;
+    margin-left: 25px;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.profile-info span:first-child{
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.dropdown-btn{
+    width: 30px;
+    height: 30px;
+    background-color: var(--mainColor);
+    border: 3px solid white;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.dropdown-btn-icon{
+    color: white;
+    font-size: 20px;
+}
+
+#home-btn{
+    width: 100%;
+    height: 28%;
+    background-color: var(--mainColor);
+    border-radius: 15px;
+    color: white;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#home-btn:hover{
+    background-color: var(--subColor);
+    transition-duration: 0.3s;
+}
+
+/* 선택 */
+.select{
+    color: var(--subColor);
+}

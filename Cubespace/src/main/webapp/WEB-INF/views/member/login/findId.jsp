@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../css/reset.css">
-    <link rel="stylesheet" href="../../css/variables.css">
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/common/header.css">
-    <link rel="stylesheet" href="../../css/common/footer.css">
-    <link rel="stylesheet" href="../../css/member/login/findIdPw.css">
+    <link rel="stylesheet" href="/resources/css/reset.css">
+    <link rel="stylesheet" href="/resources/css/variables.css">
+    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="/resources/css/common/header.css">
+    <link rel="stylesheet" href="/resources/css/common/footer.css">
+    <link rel="stylesheet" href="/resources//css/member/login/findIdPw.css">
 
 
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
@@ -20,17 +20,7 @@
 
 <body>
 
-    <header>
-
-        <jsp:include page="/WEB-INF/views/include/header.jsp" />
-
-        <div class="header-logo">
-            <a href="/">
-                <img src="../../images/common/bigCube.png">
-                <span class="header-logo-title">Cubespace</span>
-            </a>
-        </div>
-    </header>
+    <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
     <div class="findIdPw">
 
@@ -103,7 +93,7 @@
     <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 
 
-    <script src="../../js/member/login/findIdPw.js"></script>
+    <script src="/resources/js/member/login/findIdPw.js"></script>
 </body>
 
 </html>

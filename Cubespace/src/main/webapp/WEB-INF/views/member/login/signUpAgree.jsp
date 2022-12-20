@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../css/reset.css">
-    <link rel="stylesheet" href="../../css/variables.css">
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/common/header.css">
-    <link rel="stylesheet" href="../../css/common/footer.css">
-    <link rel="stylesheet" href="../../css/member/login/signUpAgree.css">
+    <link rel="stylesheet" href="/resources/css/reset.css">
+    <link rel="stylesheet" href="/resources/css/variables.css">
+    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="/resources/css/common/header.css">
+    <link rel="stylesheet" href="/resources/css/common/footer.css">
+    <link rel="stylesheet" href="/resources/css/member/login/signUpAgree.css">
 
 
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
@@ -20,59 +20,8 @@
 
 <body>
 
-    <header>
-        <!------------------ 헤더 메뉴 ------------------>
-        <ul class="header-menu-nav">
-            <li>
-                <a href="">
-                    <i class="fa-solid fa-shop"></i>
-                    <span>상점</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <span>깐부 찾기</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <div class="notice">
-                        <span class="notice-new"></span>
-                        <i class="fa-solid fa-bell"></i>
-                    </div>
-                    <span>알림</span>
-                </a>
-            </li>
-            <!-- 로그인 X -->
-            <li>
-                <a href="">
-                    <i class="fa-solid fa-right-to-bracket"></i>
-                    <span>로그인</span>
-                </a>
-            </li>
+    <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
-            <!-- 로그인 O -->
-            <!-- <li>
-                <button type="button" id="headerDropDownButton">
-                    <img src="cat4.jpg" alt="로그인 회원 프로필 이미지" class="header-profile-image">
-                    <ul class="header-drop-down" id="headerDropDown">
-                        <li><a href="">내 미니홈피</a></li>
-                        <li><a href="">내 정보 수정</a></li>
-                        <li><a href="">로그아웃</a></li>
-                    </ul>
-                    <i class="fa-solid fa-angle-down"></i>
-                </button>
-            </li> -->
-        </ul>
-        <!------------------ 헤더 로고 영역 ------------------>
-        <div class="header-logo">
-            <a href="/">
-                <img src="../../images/common/bigCube.png">
-                <span class="header-logo-title">Cubespace</span>
-            </a>
-        </div>
-    </header>
 
     <div class="signUp_agree">
         <div class="guideArea">
@@ -140,28 +89,8 @@
 
 
 
-    <footer>
-        <!------------------ 푸터 메뉴 ------------------>
-        <ul class="footer-menu-nav">
-            <li><a href="">이용약관</a></li>
-            <li><a href="">개인정보처리방침</a></li>
-            <li><a href="">저작권정책</a></li>
-            <li><a href="">FAQ</a></li>
-        </ul>
-        <!------------------ 헤더 내용 ------------------>
-        <div class="footer-content">
-            <div class="footer-description">
-                <span>대표자 : BDH</span>
-                <span>대표전화 : 010 - 8108 - 1399</span>
-                <span>사업자등록번호 : 870 - 85 - 01234</span>
-                <span>주소 : 서울특별시 중구 남대문로 120 그레이츠 청계(구 대일빌딩) 2F A클래스 E조</span>
-                <span>ⓒCubespace. All Rights Reserved.</span>
-            </div>
-            <div class="footer-logo">
-                <img src="../../images/common/mark.gif">
-            </div>
-        </div>
-    </footer>
+    <jsp:include page="/WEB-INF/views/include/footer.jsp" />
+
 
 
     <script>

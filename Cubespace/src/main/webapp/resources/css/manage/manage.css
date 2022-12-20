@@ -69,7 +69,7 @@ header {
     top: 3px;
     cursor: pointer;
 }
-.fontUse button{
+.whiteBtn{
     background-color: white;
     border: 1px solid black;
     border-radius: 5px;
@@ -137,6 +137,9 @@ header {
     border-bottom: 1px solid black;
     padding-bottom: 10px;
     margin-bottom: 5px;
+
+    font-weight: bold;
+    color: rgba(0,0,0,0.7);
 }
 .friendDetail{
     display: flex;
@@ -167,4 +170,81 @@ header {
 }
 .friendDetail{
     border-bottom: 3px solid #eee;
+}
+
+/* ----------------------------------------------------- */
+/* 배경설정 */
+.backgroundTitle {
+    display: flex;
+    justify-content: space-between;
+}
+.backgroundTitle {
+    padding-top: 20px;
+}
+.backgroundExplain {
+    color: #aaa;
+    margin-right: 10px;
+}
+.backgroundExplain>p{
+    padding-top: 5px;
+    font-size: 14px;
+}
+#selectImgBtn {
+    width: 50px;
+    cursor: pointer;
+}
+#chooseImg {
+    display: none;
+}
+.changeImgArea {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+.changeColorArea {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px 0;
+    border-bottom : 3px solid #eee;
+}
+.colorShow {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+.changeColorTitle {
+    margin-right: 15px;
+    cursor: pointer;
+    /* border: 1px solid black; */
+    background-color: var(--subColor);
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+
+}
+.changeColorTitle:hover{
+    transition-duration: 0.3s;
+    background-color: var(--mainColor);
+}
+#chooseBGColor{
+    display: none;
+}
+#chooseFrameColor {
+    display: none;
+}
+.backgroundBtnArea>span:nth-child(2){
+    margin: 5px;
+}
+.changeImgArea > .backgroundBtnArea {
+    margin-left: 35px;
+}
+.bgImage {
+    height: 100px;
+    width: 100px;
+    border-radius: 5px;
+    border : 1px solid #eee;
 }

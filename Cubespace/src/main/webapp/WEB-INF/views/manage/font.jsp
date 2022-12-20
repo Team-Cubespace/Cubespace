@@ -6,32 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/resources/css/reset.css">
     <link rel="stylesheet" href="/resources/css/style.css">
-    <link rel="stylesheet" href="/resources/css/manage/font.css">
+    <link rel="stylesheet" href="/resources/css/manage/manage.css">
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
     <title></title>
 </head>
 <body>
     <%-- include side --%>
-    <section class="side">
-        <div class="sideBarLink">
-            <a href="/manage/music">
-                <i class="fa-solid fa-heart"></i> 배경음악 설정
-            </a>
-            <a href="/manage/font">
-                <i class="fa-solid fa-heart"></i> 폰트 설정
-            </a>
-            <a href="/manage/friend">
-                <i class="fa-solid fa-heart"></i> 깐부 관리
-            </a>
-            <a href="/manage/menu">
-                <i class="fa-solid fa-heart"></i> 메뉴 관리
-            </a>
-            <a href="/manage/background">
-                <i class="fa-solid fa-heart"></i> 배경 설정
-            </a>
-        </div>
+    <jsp:include page="/WEB-INF/views/include/manageLeftBar.jsp"/>
 
-    </section>
     <main>
         <header>
             <span class="rightTitle">폰트 관리</span>
@@ -48,7 +30,7 @@
                 <div class="fontTitle">폰트 이름</div>
                 <div class="fontExample">예시 문구</div>
                 <div class="fontUse">
-                    <button class="useFontBtn">적용하기</button>
+                    <button class="useFontBtn whiteBtn">적용하기</button>
                 </div>
             </div>
 

@@ -46,7 +46,7 @@
                 
             </div>
             <section class="minihome-main">
-                <iframe src="/manage/friend" frameborder="0" name="minihomeMenu">
+                <iframe src="/manage/background" frameborder="0" name="minihomeMenu">
                     
                 </iframe>
                 <ul class="minihome-menu">

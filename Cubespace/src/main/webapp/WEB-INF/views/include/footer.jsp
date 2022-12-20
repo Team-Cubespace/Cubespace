@@ -8,6 +8,7 @@
         <li><a href="">개인정보처리방침</a></li>
         <li><a href="">저작권정책</a></li>
         <li><a href="">FAQ</a></li>
+        <li><a href="">관리자</a></li>
     </ul>
     <!------------------ 헤더 내용 ------------------>
     <div class="footer-content">

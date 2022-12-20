@@ -16,7 +16,17 @@
                 <span>깐부 찾기</span>
             </a>
         </li>
-        <li>
+        
+        <!-- 로그인 X && 메인 페이지 X -->
+        <%-- <li>
+            <a href="">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>로그인</span>
+            </a>
+        </li> --%>
+
+        <!-- 로그인 O -->
+        <%-- <li>
             <a href="">
                 <div class="notice">
                     <span class="notice-new"></span>
@@ -25,16 +35,7 @@
                 <span>알림</span>
             </a>
         </li>
-        <!-- 로그인 X -->
         <li>
-            <a href="/member/login">
-                <i class="fa-solid fa-right-to-bracket"></i>
-                <span>로그인</span>
-            </a>
-        </li>
-
-        <!-- 로그인 O -->
-        <!-- <li>
             <button type="button" id="headerDropDownButton">
                 <img src="cat4.jpg" alt="로그인 회원 프로필 이미지" class="header-profile-image">
                 <ul class="header-drop-down" id="headerDropDown">
@@ -44,7 +45,7 @@
                 </ul>
                 <i class="fa-solid fa-angle-down"></i>
             </button>
-        </li> -->
+        </li> --%>
     </ul>
     <!------------------ 헤더 로고 영역 ------------------>
     <div class="header-logo">

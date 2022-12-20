@@ -1,0 +1,155 @@
+#loginForm {
+    height: 800px;
+    width: 820px;
+    border: 1px solid black;
+    margin: 100px auto;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+
+/*************************************************/
+
+/* inputBox  */
+.inputBox {
+    height: 30px;
+    width: 350px;
+    padding: 20px;
+    /* margin-bottom: 20px; */
+
+    font-size: 20px;
+    border: none;
+    border-bottom: 2px solid black;
+    outline: none;
+}
+
+.inputBox:hover {
+    border-bottom: 2px solid var(--subColor);
+    transition-duration: 0.3s;
+}
+
+.inputBox:active {
+    border-bottom: 2px solid var(--subColor);
+    transition-duration: 0.3s;
+}
+
+.smallCube {
+    margin-top: 10px;
+    height: 50px;
+}
+
+.textbox {
+    display: flex;
+    margin-top: 20px;
+}
+
+
+.bigCube {
+    height: 200px;
+}
+
+
+
+/*************************************************/
+
+/* 아이디 저장  */
+#saveId {
+    display: none;
+}
+
+/* 체크박스 숨기기 */
+
+.saveId-area {
+    margin-bottom: 20px;
+}
+
+#saveId+label {
+    display: flex;
+    cursor: pointer;
+    margin-left: 70px;
+    margin-top: 10px;
+}
+
+#saveId+label>i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    color: #ccc;
+    margin-right: 10px;
+}
+
+#saveId+label>div {
+    color: gray;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* 체크박스 체크 시 아이콘 스타일 지정 */
+#saveId:checked+label>i {
+    background-color: white;
+    border-color: var(--subColor);
+    color: var(--subColor);
+}
+
+
+
+/*************************************************/
+/* ID/PW찾기, 회원가입 */
+.text-area {
+    display: flex;
+    padding: 30px 30px 90px;
+}
+
+.findArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.findArea:nth-child(2) {
+    margin-left: 50px;
+}
+
+
+/*************************************************/
+/* 네이버, 카카오 */
+.simpleLogin {
+    display: flex;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.simpleLogin div {
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+    font-size: 20px;
+    color: white;
+}
+
+.naver {
+    background-color: #03c75a;
+}
+
+.kakao {
+    background-color: #fddc3f;
+}
+
+.loginLogo {
+    height: 50px;
+}
+
+#startKakao {
+    color: black;
+}

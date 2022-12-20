@@ -12,6 +12,14 @@
 <body>
     <%-- include side --%>
     <section class="side">
+        <ul>
+            <li>배경음악 설정</li>
+            <li>폰트 설정</li>
+            <li>깐부 관리</li>
+            <li>메뉴 관리</li>
+            <li>배경 설정</li>
+        </ul>
+
     </section>
     <main>
         <header>
@@ -19,7 +27,7 @@
             <span> > </span>
             <span>폴더 이름</span>
         </header>
-        <button id="writeButton" type="button">글쓰기</button>
+        <button id="writeButton" type="button">adsfasdfsd글쓰기</button>
         <ul class="album-list">
             <li>
                 <a href="">

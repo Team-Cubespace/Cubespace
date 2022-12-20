@@ -3,6 +3,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<!-- 임시로 만든 변수 -->
+<c:set var="loginMember" value="a"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,29 +63,41 @@
                 </div>
             </div>
 
-            <!-- 내 프로필, 미니홈피 가기-->
+            <!-- 로그인, 프로필, 미니홈피 -->
             <div class="profile-container">
-                <div class="profile">
-                    <div class="profile-img">
-                        <img src="../../resources/images/zz.png">
-                        <div class="dropdown-btn"><i class="fa-solid fa-caret-down dropdown-btn-icon"></i></div>
-                        
-                        <%-- dropdown --%>
-                        <div class="dropdown">
-                            <a href="#">내 정보 수정</a>
-                            <a href="#">로그아웃</a>
+                <c:choose>
+                    <c:when test="${loginMember == ''}">
+                        <div class="login">
+                            <img src="../../resources/images/common/cubes.png">
+                            <span>로그인 후 이용해주세요.</span>
                         </div>
-                    </div>
+                        <a href="#" id="login-btn"><i class="fa-solid fa-right-to-bracket"></i>&nbsp;Login</a>
+                    </c:when>
 
-                    <div class="profile-info">
-                        <span>김효동2</span>
-                        <span><a href="#">알림</a> : <a href="#">0</a></span>
-                        <span>Today : 0</span>
-                        <span>일촌 : 1,000명</span>
-                    </div>
-                </div>
-    
-                <a href="#" id="home-btn"><i class="fa-solid fa-house"></i>&nbsp;Minihomepage</a>
+                    <c:otherwise>
+                        <div class="profile">
+                            <div class="profile-img">
+                                <img src="../../resources/images/zz.png">
+                                <div class="dropdown-btn"><i class="fa-solid fa-caret-down dropdown-btn-icon"></i></div>
+                                
+                                <!-- dropdown -->
+                                <div class="dropdown">
+                                    <a href="#">내 정보 수정</a>
+                                    <a href="#">로그아웃</a>
+                                </div>
+                            </div>
+        
+                            <div class="profile-info">
+                                <span>김효동2</span>
+                                <span><a href="#">알림</a> : <a href="#">0</a></span>
+                                <span>Today : 0</span>
+                                <span>일촌 : 1,000명</span>
+                            </div>
+                        </div>
+
+                        <a href="#" id="home-btn"><i class="fa-solid fa-house"></i>&nbsp;Minihomepage</a>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </section>
 
@@ -196,6 +211,9 @@
 
     <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 
+    <script>
+        const loginMember = "${loginMember}";
+    </script>
     <script src="/resources/js/common/main.js"></script>
 </body>
 </html>

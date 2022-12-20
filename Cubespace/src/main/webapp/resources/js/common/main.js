@@ -112,8 +112,8 @@ let toggleFlag = true;
 const hideDropdown = () => {
     dropdown.style.height = "0px";
     dropdown.style.border = "none";
-    dropDownBtnIcon.classList.toggle("fa-caret-up");
-    dropDownBtnIcon.classList.toggle("fa-caret-down");
+    dropDownBtnIcon.classList.add("fa-caret-down");
+    dropDownBtnIcon.classList.remove("fa-caret-up");
     toggleFlag = true;
 }
 
@@ -121,8 +121,8 @@ const dropdownEvent = () => {
     if(toggleFlag){
         dropdown.style.height = "50px";
         dropdown.style.border = "1px solid black";
-        dropDownBtnIcon.classList.toggle("fa-caret-up");
-        dropDownBtnIcon.classList.toggle("fa-caret-down");
+        dropDownBtnIcon.classList.add("fa-caret-up");
+        dropDownBtnIcon.classList.remove("fa-caret-down");
         toggleFlag = false;
         
     }else{
@@ -130,12 +130,25 @@ const dropdownEvent = () => {
     }
 }
 
-dropDownBtn.addEventListener("click", () => {
-    dropdownEvent();
-})
+if(loginMember != '') {
+    dropDownBtn.addEventListener("click", () => {
+        dropdownEvent();
+    })
+    
+    window.addEventListener("click", e => {
+        if(!e.target.matches('.dropdown, .dropdown-btn, .dropdown-btn-icon')){
+            hideDropdown();
+        }
+    })
+}
 
-window.addEventListener("click", e => {
-    if(!e.target.matches('.dropdown, .dropdown-btn, .dropdown-btn-icon')){
-        hideDropdown();
-    }
-})
+// 미니홈페이지 오픈
+const openMinihome = (url) => {
+    console.log(url);
+    let title = "minihome";
+
+    let status = "resizable=no, status=no, menubar=no, width=1203, height=718, top=50, left=300";
+    window.open(url, title, status);
+
+    return false;
+}

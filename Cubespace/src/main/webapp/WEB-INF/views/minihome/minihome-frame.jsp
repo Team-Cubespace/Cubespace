@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>미니홈피</title>
-    <%-- <link rel="stylesheet" href="/component/include/reset.css"> --%>
+    <link rel="stylesheet" href="/resources/css/reset.css">
+    <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/minihome/minihome-frame.css">
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
 </head>
@@ -45,8 +46,8 @@
                 
             </div>
             <section class="minihome-main">
-                <iframe src="" frameborder="0">
-
+                <iframe src="/albumList" frameborder="0">
+                    
                 </iframe>
                 <ul class="minihome-menu">
                     <li><a href="">홈</a></li>

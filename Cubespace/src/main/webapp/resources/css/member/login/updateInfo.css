@@ -1,0 +1,200 @@
+
+.signUp {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+}
+
+
+
+#signUp-frm {
+    padding: 100px 0;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+}
+
+/*************************************************/
+.signUpInfoLink {
+    display: flex;
+    width: 800px;
+    height: 50px;
+    margin: 70px 0 100px;
+}
+.signUpInfoLink > a {
+    height: 100%;
+    width: 400px;
+    padding: 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    font-size: 20px;
+}
+
+#findIdLink {
+    border-bottom: none;
+    color: var(--mainColor);
+    font-weight: bold;
+}
+#findPwLink{
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
+
+.findIdPw{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 600px;
+    width: 800px;
+    margin: 30px auto;
+}
+
+
+
+/*************************************************/
+.questionBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 800px;
+    height: 75px;
+    border-bottom: 3px solid #eee;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    position: relative;
+}
+
+
+
+.lock{
+    height: 20px;
+}
+
+.textbox {
+    display: flex;
+    height: 35px;
+    width: 800px;
+
+    position:relative;
+    align-items: center;
+}
+.textbox>*:nth-child(1){
+    padding: 0 20px;
+}
+
+.checkButton {
+    position:absolute;
+    right: 0;
+    height: 30px;
+    background-color: var(--subColor);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.inputBox {
+    /* height: 100%; */
+    border:none;
+    outline:none;
+    font-size: 20px;
+    /* padding: 15px 0; */
+    width: 500px;
+}
+.firstBox {
+    position:absolute;
+    right: 0;
+    bottom: 5px;
+    color: #aaa;
+
+}
+#smallCube {
+    height: 15px;
+}
+.fa-solid{
+    font-size: 20px;
+}
+
+#selectText {
+    position:inherit;
+    display: flex;
+    justify-content: space-between;
+}
+#selectText>span:nth-child(1){
+    color: green;
+}
+
+
+/*************************************************/
+/*회원가입하기 다음페이지 이동 버튼 */
+.SignUpAgreement6{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    font-size: 15px;
+    margin-top: 50px;
+}
+
+/*회원가입하기 다음페이지 이동 버튼 */
+.SignUp{ 
+    width: 300px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: var(--subColor);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+}
+
+.SignUp:hover{
+    transition-duration: 0.3s;
+    background-color: var(--mainColor);
+}
+.signUp-input-password{
+    display: flex;
+    justify-content: space-between;
+
+}
+.passwordArea>img{
+    padding: 0 20px;
+}
+.passwordArea{
+    padding: 0 0 !important;
+}
+.questionBox:hover {
+    border-bottom: 3px solid var(--lightMain);
+}
+
+
+.confirm{
+    color: green;
+}
+.error{
+    color: red;
+}
+
+
+.fa-eye, .fa-eye-slash {
+    cursor: pointer;
+}
+
+.fa-solid, .fa-regular{
+    font-size: 25px;
+}
+.lock{
+    height: 25px;
+}
+#smallCube{
+    height: 25px;
+    padding: 0 10px;
+}
+.fa-key{
+    padding: 0 0 0 20px;
+}

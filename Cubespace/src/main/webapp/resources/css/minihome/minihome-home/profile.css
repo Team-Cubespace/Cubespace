@@ -12,7 +12,8 @@
 
 .today-emoji{
     width: 100%;
-    height: 25px;
+    font-size: 0.8em;
+    height: 20px;
     padding: 0 10px;
     border: 1px solid black;
     border-radius: 5px;
@@ -23,7 +24,7 @@
 
 .profile-message{
     width: 100%;
-    height: 140px;
+    height: 130px;
     padding: 0 10px;
     font-size: 0.9em;
     line-height: 20px;
@@ -44,10 +45,6 @@
 .line{
     height: 1px;
     background-color: rgb(131, 131, 131);
-}
-
-.user-info{
-    margin-bottom: 5px;
 }
 
 .detail-info{

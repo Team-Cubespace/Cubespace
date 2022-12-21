@@ -47,8 +47,9 @@
                         <span class="whiteBtn" id="bgImageUse">적용하기</span>
                         <span class="whiteBtn" id="bgImageReturn">원래대로</span>
                     </div>
-                    <div id="imageShow"></div>
+                    
                 </div>
+                <img src="" alt="" id="imageShow">
             </div>
             <div>
                 <div class="listTitle backgroundTitle">

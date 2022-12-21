@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <header>
     <!------------------ 헤더 메뉴 ------------------>
@@ -10,13 +10,13 @@
                 <span>상점</span>
             </a>
         </li>
-        <li>
-            <a href="">
+        <li onclick="openPop()">
+            <a>
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <span>깐부 찾기</span>
             </a>
         </li>
-        
+        <jsp:include page="/WEB-INF/views/webmain/main-memberSearch.jsp"/>
         <!-- 로그인 X && 메인 페이지 X -->
         <%-- <li>
             <a href="">

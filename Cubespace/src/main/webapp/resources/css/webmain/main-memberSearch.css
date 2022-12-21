@@ -1,6 +1,7 @@
-body >* {
+/* body >* {
     border: 1px solid black;
-}
+} */
+
 /* input 클릭 시 테두리 삭제 */
 input:focus {outline:none;}
 
@@ -9,8 +10,35 @@ input:focus {outline:none;}
     color: var(--mainColor);
     cursor: pointer;
 }
+/* 스크롤바 투명 */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* 모달 공용 설정*/
 .modal{
-    width: 600px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10001;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+}
+
+.modal-box{
+    border-radius: 20px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
+    -webkit-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
+    width: 700px;
     height: 800px;
     /* background-color: red; */
 }
@@ -60,7 +88,7 @@ input:focus {outline:none;}
 }
 .member-search > a {
     height: 100%;
-    width: 250px;
+    width: 350px;
     /* padding: 30px 0; */
     display: flex;
     justify-content: center;
@@ -86,7 +114,7 @@ input:focus {outline:none;}
     justify-content: center;
     align-items: center;
     position: relative;
-    width: 500px;
+    width: 600px;
     height: 35px;
     /* background-color: aqua; */
     /* border: 1px solid black;
@@ -101,9 +129,10 @@ input:focus {outline:none;}
 /* 회원 검색 input태그 */
 .member-search-input{
     height: 100%;
-    width: 500px;
+    width: 100%;
     border: 1px solid black;
     padding: 0 50px;
+    font-size: 18px;
 }
 
 
@@ -134,12 +163,15 @@ input:focus {outline:none;}
 .mebmer-search-profile{
     margin-top: 10px;
     border-top: 1px solid black;
+    width: 600px;
+    height: 500px;
+    overflow-y: scroll;
 }
 
 /* 회원 프로필 */
 .mebmer-profile{
     border-bottom: 1px solid black;
-    width: 500px;
+    width: 100%;
     height: 70px;
     display: flex;
     /* justify-content: center; */
@@ -149,7 +181,7 @@ input:focus {outline:none;}
 .profile-head{
     display: flex;
     align-items: center;
-    width: 270px;
+    width: 320px;
     margin: 0 0 0 20px;
 }
 /* 회원 프로필 사진 */
@@ -164,6 +196,20 @@ input:focus {outline:none;}
     margin: 0 10px 0 10px;
     font-size: 18px;
 }
+
+/* 회원 신청상태, 미니홈 */
+.profile-body{
+    display: flex;
+    justify-content: space-between;
+    width: 220px;
+    margin-right: 20px;
+}
+
+.profile-body > div{
+    display: flex;
+    align-items: center;
+
+}
 /* 신청 이미지 */
 .apply-img{
     width: 30px;
@@ -173,5 +219,5 @@ input:focus {outline:none;}
 /* 미니홈피 이미지 */
 .minihome-img{
     height: 20px;
-    margin-left: 20px;
+    /* margin-left: 20px; */
 }

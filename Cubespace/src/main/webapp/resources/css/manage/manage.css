@@ -89,11 +89,19 @@ header {
     display: flex;
     flex-direction: column;
 }
+
+.fontHeader{
+    margin-top: 20px;
+    border-top: 2px solid #aaa;
+    background-color: rgba(0,0,0,0.05);
+}
+
+
 .fontHeader, .fontMain {
     display: flex;
 }
 .fontHeader>div, .fontMain>div{
-    padding: 5px 0;
+    padding: 10px 5px;
 }
 
 .fontHeader>div:nth-child(1), .fontMain>div:nth-child(1){
@@ -115,10 +123,17 @@ header {
 
 .fontHeader >div {
     font-size: 18px;
-    color: #aaa;
-    font-weight: bold;
-    border-bottom: 2px solid rgba(0,0,0,0.7);
+    /* color: #aaa; */
+    /* font-weight: bold; */
+    /* border-bottom: 2px solid rgba(0,0,0,0.7); */
+    text-align: center;
 
+}
+.fontTitle{
+    text-align: center;
+}
+.fontExample{
+    text-align: center;
 }
 /* ------------------------------------------------ */
 /* 친구 리스트 */
@@ -247,4 +262,62 @@ header {
     width: 100px;
     border-radius: 5px;
     border : 1px solid #eee;
+}
+
+/* ----------------------------------------------------- */
+/* 메뉴설정 */
+.menuHeader, .menuMain{
+    display: flex;
+}
+
+.menuHeader > div:nth-child(2), .menuMain > div:nth-child(2){
+    flex-basis: 15%;
+
+    display: flex;
+    justify-content: center;
+}
+.menuHeader > div:nth-child(3), .menuMain > div:nth-child(3){
+    flex-basis: 60%;
+}
+.menuExample {
+    color: #aaa;
+}
+
+.menuArea {
+    display: flex;
+}
+.menuListArea{
+    border: 1px solid black;
+    width: 250px;
+    margin-top: 20px;
+}
+.categoryTitle{
+    font-size: 23px;
+}
+.subCategoryArea {
+    margin-left: 20px;
+    padding: 3px;
+
+    display: flex;
+    align-content: center;
+}
+.categoryArea {
+    padding: 10px 0 3px;
+
+    display: flex;
+    align-content: center;
+}
+
+
+
+
+
+
+.category{
+    height: 20px;
+    width: 20px;
+}
+.subCategory{
+    width: 15px;
+    height: 15px;
 }

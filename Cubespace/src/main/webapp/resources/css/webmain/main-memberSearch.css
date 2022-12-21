@@ -4,6 +4,11 @@ body >* {
 /* input 클릭 시 테두리 삭제 */
 input:focus {outline:none;}
 
+/* 마우스 올리면 색상 변경 */
+.member-choice:hover{
+    color: var(--mainColor);
+    cursor: pointer;
+}
 .modal{
     width: 600px;
     height: 800px;
@@ -126,12 +131,14 @@ input:focus {outline:none;}
 }
 
 /****************************************************/
+.mebmer-search-profile{
+    margin-top: 10px;
+    border-top: 1px solid black;
+}
+
 /* 회원 프로필 */
 .mebmer-profile{
-    margin-top: 10px;
-    border: 1px solid black;
-    border-left: none;
-    border-right: none;
+    border-bottom: 1px solid black;
     width: 500px;
     height: 70px;
     display: flex;
@@ -142,8 +149,8 @@ input:focus {outline:none;}
 .profile-head{
     display: flex;
     align-items: center;
-    width: 300px;
-    margin: 0 0 0 30px;
+    width: 270px;
+    margin: 0 0 0 20px;
 }
 /* 회원 프로필 사진 */
 .member-img{
@@ -152,9 +159,19 @@ input:focus {outline:none;}
     border-radius: 50%;
     background-color: black;
 }
-
-/* 신청 미니홈피 사진 */
+/* 회원 닉네임 */
+.member-nickname{
+    margin: 0 10px 0 10px;
+    font-size: 18px;
+}
+/* 신청 이미지 */
 .apply-img{
     width: 30px;
     height: 30px;
+}
+
+/* 미니홈피 이미지 */
+.minihome-img{
+    height: 20px;
+    margin-left: 20px;
 }

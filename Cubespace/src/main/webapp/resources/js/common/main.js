@@ -141,3 +141,14 @@ if(loginMember != '') {
         }
     })
 }
+
+// 미니홈페이지 오픈
+const openMinihome = (url) => {
+    console.log(url);
+    let title = "minihome";
+
+    let status = "resizable=no, status=no, menubar=no, width=1203, height=718, top=50, left=300";
+    window.open(url, title, status);
+
+    return false;
+}

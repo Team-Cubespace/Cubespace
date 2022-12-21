@@ -7,8 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>미니홈피</title>
-    <link rel="stylesheet" href="/component/include/reset.css">
-    <link rel="stylesheet" href="minihome-frame.css">
+    <link rel="stylesheet" href="/resources/css/reset.css">
+    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="/resources/css/minihome/minihome-frame.css">
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
 </head>
 <body>
@@ -45,17 +46,18 @@
                 
             </div>
             <section class="minihome-main">
-                <iframe src="" frameborder="0">
+                <iframe src="/manage/changeFont" frameborder="0" name="minihomeMenu">
                     
                 </iframe>
                 <ul class="minihome-menu">
                     <li><a href="">홈</a></li>
                     <li><a href="">다이어리</a></li>
-                    <li><a href="">사진첩</a></li>
+                    <li><a href="/albumList" target="minihomeMenu">사진첩</a></li>
                     <li><a href="">동영상</a></li>
                     <li><a href="">방명록</a></li>
-                    <li><a href="">관리</a></li>
+                    <li><a href="/manage/changeFont" target="minihomeMenu">관리</a></li>
                 </ul>
+
             </section>
         </div>
     </div>

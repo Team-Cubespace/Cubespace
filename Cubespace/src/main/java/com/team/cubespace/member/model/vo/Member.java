@@ -1,8 +1,9 @@
-package com.team.cubespace.member.model;
+package com.team.cubespace.member.model.vo;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 
 @Getter
 @Setter
@@ -27,4 +28,8 @@ public class Member {
 	private int emotion;
 	private int fontNo;
 	
-}
+	// 회원 정지여부
+	private String memberBlockYN;
+	private String blockStart; // 형식 : 2022년 12월 17일 17:59
+	private String blockEnd;
+	}

@@ -95,7 +95,7 @@
                             </div>
                         </div>
 
-                        <a href="#" id="home-btn"><i class="fa-solid fa-house"></i>&nbsp;Minihomepage</a>
+                        <a href="/minihome" id="home-btn" onclick="return openMinihome(this.href)"><i class="fa-solid fa-house"></i>&nbsp;Minihomepage</a>
                     </c:otherwise>
                 </c:choose>
             </div>

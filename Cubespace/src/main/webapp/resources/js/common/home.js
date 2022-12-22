@@ -1,5 +1,8 @@
-
 /* 슬라이드 기능 */
+if(document.getElementsByClassName('place-item').length < 5) {
+    document.querySelector(".slide-container > .next-arrow").style.display = "none";
+}
+
 document.addEventListener("DOMContentLoaded", function(){
     let placeListArea = document.querySelector(".place-list-area");
 

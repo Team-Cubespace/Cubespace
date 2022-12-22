@@ -1,11 +1,26 @@
+.miniroom-header{
+    position: relative;
+    margin: 0;
+    border: none;
+}
+
+.miniroom-deco{
+    font-size: 10px;
+    font-weight: normal;
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+}
+
 .miniroom-container{
     width: 100%;
-    height: 100%;
-    border: 2px solid black;
+    height: 350px;
+    margin-bottom: 30px;
+    border: 2px solid #2e2e2e;
     position: relative;
 }
 
-.miniroom , .front{
+.miniroom, .front{
     width: 100%;
     height: 100%;
     position: absolute;
@@ -27,39 +42,38 @@
 }
 
 .left{
-    transform: rotateX(345deg) rotateY(45deg) rotateZ(0deg);
     height: 380px;
     width: 380px;
-    left: -8px;
+    background-color: rgb(242, 247, 255);
     top: -31px;
-    background-color: rgb(234, 237, 255);
+    left: -13px;
+    transform: rotateX(345deg) rotateY(45deg) rotateZ(0deg);
 }
 
 .right{
-    transform: rotateX(345deg) rotateY(-45deg) rotateZ(0deg);
-    
-    height: 380px;
     width: 380px;
-    right: -7px;
+    height: 380px;
+    background-color: rgb(242, 247, 255);
     top: -31px;
-    background-color: rgb(234, 237, 255);
+    right: -12px;
+    transform: rotateX(345deg) rotateY(-45deg) rotateZ(0deg);
 }
 
 .bottom{
-    background-color: white;
-    transform: rotateX(45deg) rotateY(0deg) rotateZ(45deg);
     width: 500px;
     height: 500px;
-    top: 170px;
-    left: 66px;
+    background-color: rgb(223, 236, 255);
+    top: 124px;
+    left: 61px;
+    transform: rotateX(45deg) rotateY(0deg) rotateZ(45deg);
 }
 
 #test{
     width: 128px;
     height: 123px;
-    transform: rotateX(356deg) rotateY(312deg) rotateZ(360deg);
-    top: 242px;
-    left: 68px;
     background-image: url(pngegg.png);
     background-size: cover;
+    top: 242px;
+    left: 68px;
+    transform: rotateX(356deg) rotateY(312deg) rotateZ(360deg);
 }

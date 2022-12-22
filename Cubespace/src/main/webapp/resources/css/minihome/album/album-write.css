@@ -1,3 +1,8 @@
+main {
+    font-size: 13px;
+    position: relative;
+}
+
 .input-row label:first-child{
     width: 100px;
     font-weight: bold;
@@ -10,16 +15,18 @@
     padding: 6px 0px;
     display: flex;
     align-items: flex-start;
+    /* font-size: 13px; */
+    letter-spacing: -1px;
 }
 .input-row input {
     border: none;
     outline: none;
-    font-size: 15px;
+    /* font-size: 15px; */
 }
 .input-row textarea {
     resize: none;
     width: 80%;
-    font-size: 15px;
+    /* font-size: 15px; */
     /* padding: 10px; */
     border: none;
     outline: none;
@@ -61,10 +68,172 @@
 .add-image {
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
-.add-image button {
+.add-image img{
     background-color: transparent;
     margin-top: 10px;
     border: none;
     cursor: pointer;
 }
+input[type='file'] {
+    display: none;
+}
+
+/* 파일 리스트 */
+.file-item {
+    background-color: #ddd;
+    padding: 5px;
+    margin: 5px 0px;
+}
+.file-item button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* 맵 펼치기 버튼 */
+#addLocationButton {
+    background-color: transparent;
+    color: #2E2E2E;
+    cursor: pointer;
+    border: none;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+}
+#locationArea span {
+    font-size: 13px;
+}
+#locationArea i {
+    color: var(--subColor);
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+
+/* 맵 모달 크기 */
+#mapModal {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: none;
+}
+
+/* 맵 모달 헤더 */
+.map-modal-header {
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    z-index: 4000;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+
+}
+#searchPlaceForm {
+    display: flex;
+    align-items: center;
+}
+.map-modal-header:focus-within {
+    opacity: 1;
+}
+/* 맵 모달 헤더 검색창 */
+.map-modal-header input {
+    width: 240px;
+    font-size: 19x;
+    border-radius: 25px;
+    border: 1px solid #aaa;
+    padding: 5px 15px;
+    outline-color: var(--ink);
+    opacity: 0.6;
+    margin-right: 5px;
+}
+.map-modal-header input:focus {
+    opacity: 1;
+}
+
+/* 모달 헤더 버튼 */
+.modal-header-button {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+.modal-header-button:hover {
+    background-color: var(--ink);
+    color: white;
+}
+
+/* 카카오맵 크기 */
+#mapContainer {
+    width: 100%;
+    height: 100%;
+}
+
+/* 커스텀 오버레이 */
+.marker-content {
+    width: 70px;
+    height: 30px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    margin-bottom: 45px;
+    cursor: pointer;
+    border: 1px solid var(--ink);
+}
+.marker-content:hover {
+    background-color: var(--ink);
+    color: white;
+}
+
+/* 위치 설정 영역 */
+.location {
+    display: flex;
+    align-items: center;
+}
+.location a {
+    display: flex;
+    align-items: center;
+}
+.location span {
+    margin-left: 6px;
+    cursor: pointer;
+}
+
+/* 폼 버튼 영역 */
+.form-button-area {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 7px;
+}
+
+/* 글 작성 버튼 */
+.form-button-area button,
+.form-button-area a{
+    width: 47px;
+    height: 33px;
+    border: 1px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.form-button-area button {
+    margin-right: 5px;
+    background-color: var(--ink);
+    color: white;
+}
+
+/* 취소 버튼 */

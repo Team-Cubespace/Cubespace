@@ -1,6 +1,8 @@
 /* screens */
+
 @Import "/resources/css/variables.css";
 @import "/resources/css/reset.css";
+
 
 @import "/resources/css/common/header.css";
 @import "/resources/css/common/footer.css";

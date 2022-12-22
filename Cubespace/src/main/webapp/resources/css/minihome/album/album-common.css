@@ -1,0 +1,23 @@
+body {
+    width: 940px;
+    display: flex;
+}
+.side {
+    width: 300px;
+}
+main {
+    width: 640px;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10px;
+    overflow: auto;
+    height: 500px;
+}
+main::-webkit-scrollbar {
+    display: none;
+}
+header {
+    border-bottom: 2px solid black;
+    padding: 15px 0px;
+    margin-bottom: 10px;
+}

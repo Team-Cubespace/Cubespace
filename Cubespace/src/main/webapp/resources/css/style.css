@@ -1,9 +1,9 @@
 /* screens */
-@import "/resources/css/common/header.css";
-@import "/resources/css/common/footer.css";
-
 @Import "/resources/css/variables.css";
 @import "/resources/css/reset.css";
+
+@import "/resources/css/common/header.css";
+@import "/resources/css/common/footer.css";
 
 @import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap'); /* singleDay */
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap'); /* gowonDadum */

@@ -1,9 +1,18 @@
-/* font-size 13px, 투명 scrollbar 모두 적용 */
+/* 전체 font-size 13px | header font-size 17px | 투명 scrollbar 모두 적용 */
 body{
     width: 940px;
     height: 500px;
     margin: 0;
     font-size: 13px;
+}
+
+header{
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom : 2px solid #2e2e2e;
+    color: #2e2e2e;
+    font-size: 17px;
+    font-weight: bold;
 }
 
 .content-area{

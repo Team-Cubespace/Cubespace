@@ -1,0 +1,65 @@
+.miniroom-container{
+    width: 100%;
+    height: 100%;
+    border: 2px solid black;
+    position: relative;
+}
+
+.miniroom , .front{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+}
+
+.miniroom{
+    perspective: 500px; /* 원근감 */
+}
+
+.front > div{
+    position: absolute;
+}
+
+.miniroom > div{
+    border: 1px solid black;
+    position: absolute;
+    transform-style: preserve-3d; /* 3d객체로 인식하여 색상을 입체적으로 표현 */
+}
+
+.left{
+    transform: rotateX(345deg) rotateY(45deg) rotateZ(0deg);
+    height: 380px;
+    width: 380px;
+    left: -8px;
+    top: -31px;
+    background-color: rgb(234, 237, 255);
+}
+
+.right{
+    transform: rotateX(345deg) rotateY(-45deg) rotateZ(0deg);
+    
+    height: 380px;
+    width: 380px;
+    right: -7px;
+    top: -31px;
+    background-color: rgb(234, 237, 255);
+}
+
+.bottom{
+    background-color: white;
+    transform: rotateX(45deg) rotateY(0deg) rotateZ(45deg);
+    width: 500px;
+    height: 500px;
+    top: 170px;
+    left: 66px;
+}
+
+#test{
+    width: 128px;
+    height: 123px;
+    transform: rotateX(356deg) rotateY(312deg) rotateZ(360deg);
+    top: 242px;
+    left: 68px;
+    background-image: url(pngegg.png);
+    background-size: cover;
+}

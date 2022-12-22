@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <footer>
     <!------------------ 푸터 메뉴 ------------------>
     <ul class="footer-menu-nav">
@@ -22,3 +24,11 @@
         </div>
     </div>
 </footer>
+
+    <c:if test="${!empty message}">
+        <script>
+            alert("${message}")
+        </script>
+
+        <c:remove var="message"></c:remove>
+    </c:if>

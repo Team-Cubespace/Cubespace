@@ -13,12 +13,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cubespace</title>
-    <link rel="stylesheet" href="/resources/css/reset.css">
-    <link rel="stylesheet" href="/resources/css/variables.css">
     <link rel="stylesheet" href="/resources/css/style.css">
-    <link rel="stylesheet" href="/resources/css/common/main.css">
-    <link rel="stylesheet" href="/resources/css/common/header.css">
-    <link rel="stylesheet" href="/resources/css/common/footer.css">
+    <link rel="stylesheet" href="/resources/css/common/home/home.css">
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -29,8 +25,8 @@
             <!-- 투데이 인기 스타, 누적 투데이 랭킹 -->
             <div class="star-container">
                 <div class="star-select">
-                    <span id="today-star"><i class="fa-solid fa-star"></i> 투데이 인기 스타</span>
-                    <span id="today-rank"><i class="fa-solid fa-ranking-star"></i> 누적 투데이 랭킹</span>
+                    <span id="todayStar"><i class="fa-solid fa-star"></i> 투데이 인기 스타</span>
+                    <span id="todayRank"><i class="fa-solid fa-ranking-star"></i> 누적 투데이 랭킹</span>
                 </div>
                 
                 <div class="star-profile-container">
@@ -71,7 +67,7 @@
                             <img src="../../resources/images/common/cubes.png">
                             <span>로그인 후 이용해주세요.</span>
                         </div>
-                        <a href="#" id="login-btn"><i class="fa-solid fa-right-to-bracket"></i>&nbsp;Login</a>
+                        <a href="#" id="loginBtn"><i class="fa-solid fa-right-to-bracket"></i>&nbsp;Login</a>
                     </c:when>
 
                     <c:otherwise>
@@ -95,7 +91,7 @@
                             </div>
                         </div>
 
-                        <a href="/minihome" id="home-btn" onclick="return openMinihome(this.href)"><i class="fa-solid fa-house"></i>&nbsp;Minihomepage</a>
+                        <a href="/minihome" id="homeBtn" onclick="return openMinihome(this.href)"><i class="fa-solid fa-house"></i>&nbsp;Minihomepage</a>
                     </c:otherwise>
                 </c:choose>
             </div>
@@ -214,6 +210,6 @@
     <script>
         const loginMember = "${loginMember}";
     </script>
-    <script src="/resources/js/common/main.js"></script>
+    <script src="/resources/js/common/home.js"></script>
 </body>
 </html>

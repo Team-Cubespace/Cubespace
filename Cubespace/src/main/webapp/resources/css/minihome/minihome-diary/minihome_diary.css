@@ -1,0 +1,70 @@
+
+
+/* 맨 위의 폴더 이름 있는 곳 */
+.category{
+    
+    background-color: red;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    border-bottom: 1px solid black;
+}
+
+
+/* 강사님의 은총_달력 section */
+.calendar-section {
+    display: flex;
+    justify-content: center;
+    margin : 10px;
+}
+
+/* 글쓰기 버튼이 있는 공간 */
+.write-section{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 40px;
+}
+
+/* 글쓰기 버튼 */
+.writeBtn{
+    border: 1px solid black;
+    border-radius: 3px;
+    padding :2px;
+    margin-right: 20px;
+}
+
+/* 일기가 있는 공간 */
+.diary-section {
+    border: 1px solid black;
+   
+}
+
+/* 제목이 있는 공간 */
+.title-section {
+    background-color: aqua;
+}
+
+
+.title-section > div:nth-child(2) {
+    display: flex;
+}
+
+/* 내용이 있는 공간 */
+.content{
+    background-color: aquamarine;
+    height: 200px;
+}
+
+.under-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,138 @@
+.calendar-container * {
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+}
+
+.calendar-container{
+    display: flex;
+    border: 2px solid #ccc;
+    width: 513px;
+    border-radius: 5px;
+   
+}
+
+.calendar-left-area{
+    display: flex;
+    flex-direction : column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5px;
+    border-right: 2px solid #ccc;
+}
+
+.calendar-left-area > span{
+    line-height: 20px;
+}
+
+.today{
+    font-weight: bold;
+    font-size: 1.5em;
+    color : #538ca3;
+}
+
+.today-day{
+    letter-spacing: -1.5px;
+    font-weight: bold;
+    color : #bbb;
+}
+
+
+.calendar-right-area{
+    display: flex;
+    flex-wrap: wrap;
+    width: 420px;
+    padding : 5px 10px;
+    box-sizing: content-box;
+    font-size: 1.0em;
+    
+}
+
+.calendar-right-area > *{
+    padding : 5px 0;
+
+}
+
+.calendar-header{
+    width: 114px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 0;
+    border-bottom: 2px dashed #ccc;
+}
+
+.year-month{
+    font-size: 1.1em;
+    font-weight: bold;
+    color: gray;
+}
+
+.calendar-header > button{
+    height: 14px;
+    font-size: 10px;
+    width: 10px;
+    border: none;
+    border-radius: 2px;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+.calendar-day{
+    list-style: none;
+    display: flex;
+    height: 20px;
+}
+
+.calendar-day:first-of-type{
+    border-bottom: 2px dashed #ccc;
+    margin-left: 3px;
+    padding-right: 3px;
+}
+.calendar-day:last-of-type{
+    margin-left: 3px;
+    padding-right: 3px;
+}
+
+.calendar-day > li{
+    font-size: 1.0em;
+    width: 23px;
+    height: 20px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.calendar-day > li > a{
+    display: inline-block;
+    color: #bbb;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: -2px;
+    width: 15px;
+    position: absolute;
+    left: 3px;
+    top: 1px;
+    font-size: 16px;
+    pointer-events: none;
+}
+
+
+
+
+.holiday > a{ color :red !important;}
+
+.day-active > a{ color : steelblue !important;}
+
+.day-click{ 
+    border-radius: 3px;
+    background-color : skyblue !important;
+}
+
+.day-click > a{ 
+    color: white !important;;
+}

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/resources/css/minihome/minihome-rayout.css">
     <link rel="stylesheet" href="/resources/css/common/swiper.min.css">
     <link rel="stylesheet" href="/resources/css/minihome/album/album-detail.css">
+    <link rel="stylesheet" href="/resources/css/minihome/include/comment.css">
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -34,5 +35,9 @@
                 <!-- ex) <div class="home-area"> <div></div> <span></span> ... </div> -->
         </section>
     </div>
+
+    <script src="/resources/js/common/swiper.min.js"></script>
+    <script src="/resources/js/minihome/album/album-detail.js"></script>
+    <script src="/resources/js/minihome/include/comment.js"></script>
 </body>
 </html>

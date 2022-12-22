@@ -8,9 +8,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/manage")
 public class manageController {
 	
-	@GetMapping("/changeFont")
+	@GetMapping("/font")
 	public String changeFont() {
-		return "manage/changeFont";
+		return "manage/font";
+	}
+	@GetMapping("/music")
+	public String changeMusic() {
+		return "manage/music";
+	}
+	@GetMapping("/friend")
+	public String changeFriend() {
+		return "manage/friend";
+	}
+	@GetMapping("/menu")
+	public String changeMenu() {
+		return "manage/menu";
+	}
+	@GetMapping("/background")
+	public String changeBackground() {
+		return "manage/background";
 	}
 
 }

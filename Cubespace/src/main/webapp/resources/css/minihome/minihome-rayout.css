@@ -2,6 +2,7 @@ body{
     width: 940px;
     height: 500px;
     margin: 0;
+    font-size: 13px;
 }
 
 .content-area{

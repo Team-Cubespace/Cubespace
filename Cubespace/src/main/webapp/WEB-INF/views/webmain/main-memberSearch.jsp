@@ -7,208 +7,212 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cubespace</title>
+    <%-- 공통 css --%>
     <link rel="stylesheet" href="/resources/css/reset.css">
     <link rel="stylesheet" href="/resources/css/variables.css">
     <link rel="stylesheet" href="/resources/css/style.css">
+    <%-- 웹 메인 모달 공통 css --%>
+    <link rel="stylesheet" href="/resources/css/webmain/modalSettings.css">
+    <%-- 해당 모달 개인 css --%>
     <link rel="stylesheet" href="/resources/css/webmain/main-memberSearch.css">
+    <%-- 폰트어썸 Key --%>
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
-
-
 </head>
 <body>
+    <%-- 모달 --%>
     <div class="modal" id="modal" style="display: none;">
+        <%-- 모달 창 --%>
         <div class="modal-box" >
-            <div class="modal-back"><</div>
-
+            <div class="modal-close" id="modalClose" onclick="closeModal()"><</div>
+            <%-- 모달 헤더 --%>
             <div class="modal-head">
                 <img class="head-img" src="/resources/images/common/memberSearch.png" alt="깐부찾기이미지">
-                <div class="head-font">깐부 찾기</div>
+                <div>깐부 찾기</div>
             </div>
-
+            <%-- 모달 바디 --%>
             <div class="modal-body">
-                <div class="member-search">
-                    <a href="" id="memberSearch">깐부 찾기</a>
-                    <a href="" id="memberMySearch">내가 신청한 깐부</a>
+                <%-- 모달선택변경 --%>
+                <div class="modal-choice">
+                    <a id="leftChoice">깐부 찾기</a>
+                    <a id="rightChoice">내가 신청한 깐부</a>
                 </div>
+                <%-- 회원검색 --%>
                 <div class="member-search-input-div">
-                    <input type="text" class="member-search-input" maxlength="33" placeholder="검색할 회원을 입력하세요.">
+                    <input type="text" class="member-search-input" id="memberSearchInput" maxlength="10" placeholder="검색할 회원을 입력하세요.">
                     <button>검색</button>
                 </div>
+
+                <%-- 검색된 회원 목록 --%>
                 <section class="mebmer-search-profile">
 
                     <%----------------------------------%>
+                    <%-- 이미 친구일때 --%>
                     <div class="mebmer-profile">
                         <div class="profile-head">
                             <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">묘동닉네임테스트</div>
+                            <div class="member-nickname">묘동닉네임글자테스트</div>
                         </div>
                         <div class="profile-body">
                             <div>
-                                <img class="apply-img" src="/resources/images/common/check.png" alt="">
-                                <div class="member-choice">깐부</div>
+                                <i class="fa-solid fa-check" id="faCheck"></i>
+                                <div>깐부</div>
                             </div>
-                            <div>
+                            <div class="member-choice">
                                 <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div class="member-choice">미니홈피</div>
+                                <div>미니홈피</div>
                             </div>
                         </div>
                     </div>
                     <%----------------------------------%>
+                    <%-- 친구가 아닐때 --%>
                     <div class="mebmer-profile">
                         <div class="profile-head">
                             <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">묘동닉네임테스트</div>
+                            <div class="member-nickname">묘동닉네임글자테스트</div>
                         </div>
                         <div class="profile-body">
-                            <div>
-                                <img class="apply-img" src="/resources/images/common/check2.png" alt="">
-                                <div class="member-choice">신청</div>
+                            <div class="member-choice">
+                                <i class="fa-regular fa-paper-plane" id="faPaperPlane"></i>
+                                <div>신청</div>
                             </div>
-                            <div>
-                                <img class="minihome-img" src="/resources/images/common/smallCube2.png" alt="">
-                                <div class="member-choice">미니홈피</div>
+                            <div class="member-choice">
+                                <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
+                                <div>미니홈피</div>
                             </div>
                         </div>
                     </div>
                     <%----------------------------------%>
+                    <%-- 친구신청을 했을때 --%>
                     <div class="mebmer-profile">
                         <div class="profile-head">
                             <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">묘동닉네임테스트</div>
+                            <div class="member-nickname">묘동닉네임글자테스트</div>
                         </div>
                         <div class="profile-body">
                             <div>
-                                <img class="apply-img" src="/resources/images/common/check.png" alt="">
+                                <i class="fa-regular fa-comment-dots" id="faCommentDots"></i>
                                 <div>수락대기</div>
                             </div>
-                            <div>
+                            <div class="member-choice">
                                 <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div class="member-choice">미니홈피</div>
+                                <div>미니홈피</div>
                             </div>
                         </div>
                     </div>
 
 
 
+
+
+
                     <div class="mebmer-profile">
                         <div class="profile-head">
                             <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">묘동닉네임테스트</div>
+                            <div class="member-nickname">묘동닉네임글자테스트</div>
                         </div>
                         <div class="profile-body">
                             <div>
-                                <img class="apply-img" src="/resources/images/common/check.png" alt="">
-                                <div>수락대기</div>
+                                <i class="fa-solid fa-check" id="faCheck"></i>
+                                <div>깐부</div>
                             </div>
-                            <div>
+                            <div class="member-choice">
                                 <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div class="member-choice">미니홈피</div>
+                                <div>미니홈피</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mebmer-profile">
+                        <div class="profile-head">
+                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
+                            <div class="member-nickname">mung</div>
+                        </div>
+                        <div class="profile-body">
+                            <div class="member-choice">
+                                <i class="fa-regular fa-paper-plane" id="faPaperPlane"></i>
+                                <div>신청</div>
+                            </div>
+                            <div class="member-choice">
+                                <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
+                                <div>미니홈피</div>
                             </div>
                         </div>
                     </div>
                     <div class="mebmer-profile">
                         <div class="profile-head">
                             <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">묘동닉네임테스트</div>
+                            <div class="member-nickname">여너</div>
                         </div>
                         <div class="profile-body">
-                            <div>
-                                <img class="apply-img" src="/resources/images/common/check.png" alt="">
-                                <div>수락대기</div>
+                            <div class="member-choice">
+                                <i class="fa-regular fa-paper-plane" id="faPaperPlane"></i>
+                                <div>신청</div>
                             </div>
-                            <div>
+                            <div class="member-choice">
                                 <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div class="member-choice">미니홈피</div>
+                                <div>미니홈피</div>
                             </div>
                         </div>
                     </div>
                     <div class="mebmer-profile">
                         <div class="profile-head">
                             <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">묘동닉네임테스트</div>
+                            <div class="member-nickname">포뱅이</div>
                         </div>
                         <div class="profile-body">
-                            <div>
-                                <img class="apply-img" src="/resources/images/common/check.png" alt="">
-                                <div>수락대기</div>
+                            <div class="member-choice">
+                                <i class="fa-regular fa-paper-plane" id="faPaperPlane"></i>
+                                <div>신청</div>
                             </div>
-                            <div>
+                            <div class="member-choice">
                                 <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div class="member-choice">미니홈피</div>
+                                <div>미니홈피</div>
                             </div>
                         </div>
                     </div>
                     <div class="mebmer-profile">
                         <div class="profile-head">
                             <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">묘동닉네임테스트</div>
+                            <div class="member-nickname">슈슈</div>
                         </div>
                         <div class="profile-body">
-                            <div>
-                                <img class="apply-img" src="/resources/images/common/check.png" alt="">
-                                <div>수락대기</div>
+                            <div class="member-choice">
+                                <i class="fa-regular fa-paper-plane" id="faPaperPlane"></i>
+                                <div>신청</div>
                             </div>
-                            <div>
+                            <div class="member-choice">
                                 <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div class="member-choice">미니홈피</div>
+                                <div>미니홈피</div>
                             </div>
                         </div>
                     </div>
+
                     <div class="mebmer-profile">
                         <div class="profile-head">
                             <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">묘동닉네임테스트</div>
+                            <div class="member-nickname">묘동</div>
                         </div>
                         <div class="profile-body">
                             <div>
-                                <img class="apply-img" src="/resources/images/common/check.png" alt="">
+                                <i class="fa-regular fa-comment-dots" id="faCommentDots"></i>
                                 <div>수락대기</div>
                             </div>
-                            <div>
+                            <div class="member-choice">
                                 <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div class="member-choice">미니홈피</div>
+                                <div>미니홈피</div>
                             </div>
                         </div>
                     </div>
-                    <div class="mebmer-profile">
-                        <div class="profile-head">
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">묘동닉네임테스트</div>
-                        </div>
-                        <div class="profile-body">
-                            <div>
-                                <img class="apply-img" src="/resources/images/common/check.png" alt="">
-                                <div>수락대기</div>
-                            </div>
-                            <div>
-                                <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div class="member-choice">미니홈피</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mebmer-profile">
-                        <div class="profile-head">
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">묘동닉네임테스트</div>
-                        </div>
-                        <div class="profile-body">
-                            <div>
-                                <img class="apply-img" src="/resources/images/common/check.png" alt="">
-                                <div>수락대기</div>
-                            </div>
-                            <div>
-                                <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div class="member-choice">미니홈피</div>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                 </section>
 
             </div>
         </div>
     </div>
-
+    <%-- 해당 모달 개인 js --%>
     <script src="/resources/js/webmain/main-memberSearch.js"></script>
+    <%-- 웹 메인 모달 공통 js --%>
+    <script src="/resources/js/webmain/modalSettings.js"></script>
 </body>
 </html>

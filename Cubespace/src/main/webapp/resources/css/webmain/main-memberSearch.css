@@ -5,108 +5,14 @@
 /* input 클릭 시 테두리 삭제 */
 input:focus {outline:none;}
 
-/* 마우스 올리면 색상 변경 */
-.member-choice:hover{
-    color: var(--mainColor);
+/* 마우스 올리면 색상 변경 (폰트,이미지) */
+.member-choice:hover {
+    /* color: var(--mainColor); */
     cursor: pointer;
-}
-/* 스크롤바 투명 */
-::-webkit-scrollbar {
-    display: none;
-}
-
-/* 모달 공용 설정*/
-.modal{
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10001;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    border-radius: 10px;
-}
-
-.modal-box{
-    border-radius: 20px;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-sizing: border-box;
-    background: #fff;
-    box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
-    -webkit-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
-    -moz-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
-    width: 700px;
-    height: 800px;
-    /* background-color: red; */
-}
-
-/****************************************************/
-/* 뒤로가기 버튼 < */
-.modal-back{
-    display: inline;
-    font-size: 50px;
-    margin: 0 0 0 10px;
-    cursor: pointer;
-    /* background-color: red; */
-}
-/****************************************************/
-/* 이미지 및 깐부찾기 */
-.modal-head{
-    /* background-color: gray; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80px;
-    font-size: 42px;
-}
-/* 이미지 설정 */
-.head-img{
-    width: 80px;
-    height: 80px;
-}
-/****************************************************/
-.modal-body{
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* 깐부찾기 / 내가 신청한 깐부 변경 버튼 */
-.member-search {
-    display: flex;
-    width: 600px;
-    height: 50px;
-    justify-content: center;
-    align-items: center;
-    margin: 40px 0 20px 0;
-    /* background-color: #e53095; */
-    /* background-color: gold; */
-}
-.member-search > a {
-    height: 100%;
-    width: 350px;
-    /* padding: 30px 0; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
-    font-size: 20px;
-}
-
-#memberSearch {
-    border-bottom: none;
-    color: var(--subColor);
+    filter: invert(15%) sepia(77%) saturate(6158%) hue-rotate(267deg) brightness(110%) contrast(108%);
     font-weight: bold;
 }
-#memberMySearch{
-    border-left: none;
-    border-right: none;
-    border-top: none;
-}
+
 /****************************************************/
 /* 회원검색 입력박스 최상위 부모 */
 .member-search-input-div{
@@ -135,8 +41,6 @@ input:focus {outline:none;}
     font-size: 18px;
 }
 
-
-
 /* 회원 검색 버튼  */
 .member-search-input-div > button{
     position: absolute;
@@ -155,10 +59,10 @@ input:focus {outline:none;}
     /* text-align: center; */
 }
 
+/* 회원검색창 테두리색 */
 .member-search-input:focus{
     border: 2px solid var(--mainColor);
 }
-
 /****************************************************/
 .mebmer-search-profile{
     margin-top: 10px;
@@ -210,14 +114,20 @@ input:focus {outline:none;}
     align-items: center;
 
 }
-/* 신청 이미지 */
-.apply-img{
-    width: 30px;
-    height: 30px;
-}
 
 /* 미니홈피 이미지 */
 .minihome-img{
     height: 20px;
-    /* margin-left: 20px; */
+}
+
+/* 깐부 이미지 */
+.friend-img{
+    width: 30px;
+    height: 30px;
+}
+
+/* 깐부, 신청, 수락대기 폰트이미지 */
+#faCheck,#faPaperPlane, #faCommentDots{
+    font-size: 20px;
+    margin-right: 5px;
 }

@@ -1,3 +1,4 @@
+
 /* 슬라이드 기능 */
 document.addEventListener("DOMContentLoaded", function(){
     let placeListArea = document.querySelector(".place-list-area");
@@ -62,8 +63,8 @@ document.addEventListener("DOMContentLoaded", function(){
 })
 
 /* today, shorts 선택 */
-const todayStar = document.getElementById("today-star");
-const todayRank = document.getElementById("today-rank");
+const todayStar = document.getElementById("todayStar");
+const todayRank = document.getElementById("todayRank");
 const popularShorts = document.getElementById("popular-shorts");
 const newShorts = document.getElementById("new-shorts");
 
@@ -142,7 +143,7 @@ if(loginMember != '') {
     })
 }
 
-// 미니홈페이지 오픈
+/* 미니홈페이지 오픈 */
 const openMinihome = (url) => {
     console.log(url);
     let title = "minihome";

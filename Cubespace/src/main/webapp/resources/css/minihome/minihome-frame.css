@@ -161,14 +161,16 @@ html {
 .minihome-menu {
     position: absolute;
     top: 20px;
-    right: -45px;
+    right: -47px;
 }
 .minihome-menu li {
-    margin: 4px 0px;
+    margin: 5px 0px;
+    font-size: 13px;
+    letter-spacing: -1px;
 }
 .minihome-menu a {
     display: flex;
-    padding: 8px 0px;
+    padding: 10px 9px;
     border: 1px solid black;
     border-left: none;
     justify-content: center;

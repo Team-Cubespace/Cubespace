@@ -4,17 +4,22 @@ div, span, header, section {
 }
 
 body {
-    width: 920px;
+    width: 940px;
     display: flex;
 }
 .side {
     width: 300px;
 }
 main {
-    width: 620px;
+    width: 640px;
     display: flex;
     flex-direction: column;
     padding: 0px 10px;
+    overflow: auto;
+    height: 500px;
+}
+main::-webkit-scrollbar {
+    display: none;
 }
 header {
     border-bottom: 2px solid black;
@@ -36,15 +41,14 @@ header {
     flex-wrap: wrap;
     margin-top: 20px;
 }
-
 .album-list li{
     width: 190px;
     height: 190px;
     border: 1px solid #ddd;
-    margin: 11px 0px;
+    margin: 13.5px 0px;
 }
 .album-list li:not(:nth-child(3n)) {
-    margin-right: 17.5px;
+    margin-right: 27.5px;
 }
 
 .album-list img {

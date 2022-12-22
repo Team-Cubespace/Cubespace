@@ -48,7 +48,7 @@ header{
     padding: 15px;
 }
 
-.minihome-rayout:nth-child(2) > div{
+.minihome-rayout:nth-child(2) > *{
     padding: 20px;
 }
 

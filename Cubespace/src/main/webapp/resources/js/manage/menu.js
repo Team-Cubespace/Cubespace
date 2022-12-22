@@ -27,16 +27,14 @@ const useMenuList = document.querySelectorAll("input[name='useMenu']");
 /* 변경사항 저장 */
 menuSelectBtn.addEventListener("click", () => {
     
-    var len = $("input[name='useMenu']:checked").length;
     var checkArr = [];
     
     $("input[name='useMenu']:checked").each(function(e){
         var value = $(this).val();
         checkArr.push(value);        
     })
-    
-
-    console.log(checkArr);
+    // console.log(checkArr);
+    window.href = window.href;
     
 })
 
@@ -79,19 +77,19 @@ document.getElementById("menuSaveBtn").addEventListener("click", () => {
     }
     const orderArr = Array.from(orderString);
 
-    $.ajax({
-        url : "/manage/menu",
-        type: "get",
-        data : {
-                "diary" : orderArr[1],
-                "album" : orderArr[2],
-                "video" : orderArr[3],
-                "guestBook" : orderArr[4],
-            /*  */},
-        success : result => {
-            if(result > 0) {
+    // $.ajax({
+    //     url : "/manage/menu",
+    //     type: "get",
+    //     data : {
+    //             "diary" : orderArr[1],
+    //             "album" : orderArr[2],
+    //             "video" : orderArr[3],
+    //             "guestBook" : orderArr[4],
+    //         /*  */},
+    //     success : result => {
+    //         if(result > 0) {
 
-            }
-        }
-    })
+    //         }
+    //     }
+    // })
 })

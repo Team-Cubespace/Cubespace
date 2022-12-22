@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberSearch">
+	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
+
+	<resultMap type="memberSearch" id="memberSearch_rm">
+   
+		<id property="memberNo" column="MEMBER_NO"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"></result>
+		<result property="profileImage" column="PROFILE_IMG"></result>
+		<result property="friendAcceptFl" column="FRIEND_ACCEPT_FL"></result>
+		
+	</resultMap>
+ 	 
+
+ 	 <!-- 깐부찾기 자동완성 조회 -->
+ 	 <select id="memberSearchAll"  resultMap="memberSearch_rm">
+ 	 	SELECT DISTINCT MEMBER_NO,MEMBER_NICKNAME,PROFILE_IMG, NVL(FRIEND_ACCEPT_FL,2) FRIEND_ACCEPT_FL, NVL(ASKING_MEMBER_NO,0)  ASKING_MEMBER_NO
+		FROM "MEMBER"
+		LEFT JOIN
+		(SELECT ASKED_MEMBER_NO MEMBER_NO, ASKING_MEMBER_NO, FRIEND_ACCEPT_FL FROM FRIEND WHERE ASKING_MEMBER_NO = #{loginMemberNo}
+		UNION
+		SELECT ASKING_MEMBER_NO MEMBER_NO, ASKING_MEMBER_NO, FRIEND_ACCEPT_FL FROM FRIEND WHERE ASKED_MEMBER_NO = #{loginMemberNo})
+		USING (MEMBER_NO)
+		WHERE MEMBER_DEL_YN = 'N'
+		AND MEMBER_NICKNAME LIKE '%${memberSearchInput}%'
+		ORDER BY MEMBER_NO
+ 	 </select>
+ 	 
+ 	
+  
+</mapper>

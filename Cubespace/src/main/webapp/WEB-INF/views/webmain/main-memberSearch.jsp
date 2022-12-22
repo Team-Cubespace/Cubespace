@@ -52,11 +52,13 @@
                             <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
                             <div class="member-nickname">묘동닉네임글자테스트</div>
                         </div>
+
                         <div class="profile-body">
                             <div>
                                 <i class="fa-solid fa-check" id="faCheck"></i>
                                 <div>깐부</div>
                             </div>
+
                             <div class="member-choice">
                                 <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
                                 <div>미니홈피</div>
@@ -70,11 +72,13 @@
                             <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
                             <div class="member-nickname">묘동닉네임글자테스트</div>
                         </div>
+
                         <div class="profile-body">
                             <div class="member-choice">
                                 <i class="fa-regular fa-paper-plane" id="faPaperPlane"></i>
                                 <div>신청</div>
                             </div>
+
                             <div class="member-choice">
                                 <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
                                 <div>미니홈피</div>
@@ -82,17 +86,19 @@
                         </div>
                     </div>
                     <%----------------------------------%>
-                    <%-- 친구신청을 했을때 --%>
+                    <%-- 수락대기 일때 --%>
                     <div class="mebmer-profile">
                         <div class="profile-head">
                             <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
                             <div class="member-nickname">묘동닉네임글자테스트</div>
                         </div>
+
                         <div class="profile-body">
                             <div>
                                 <i class="fa-regular fa-comment-dots" id="faCommentDots"></i>
                                 <div>수락대기</div>
                             </div>
+                            
                             <div class="member-choice">
                                 <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
                                 <div>미니홈피</div>
@@ -210,6 +216,10 @@
             </div>
         </div>
     </div>
+    <script>
+    		// 로그인한 회원 번호
+		const loginMemberNo = "${loginMember.memberNo}";
+    </script>
     <!-- jQuery 라이브러리(.js 파일) 추가(CDN 방식) -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <%-- 해당 모달 개인 js --%>

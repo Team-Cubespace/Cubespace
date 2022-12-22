@@ -26,4 +26,12 @@ public class AlbumController {
 	public String albumWrite() {
 		return "minihome/album/album-write";
 	}
+	
+	/** 앨범 상세조회
+	 * @return minihome/album/album-write 포워드
+	 */
+	@GetMapping("/albumDetail")
+	public String albumDetail() {
+		return "minihome/album/album-detail";
+	}
 }

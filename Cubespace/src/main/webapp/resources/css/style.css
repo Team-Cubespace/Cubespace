@@ -4,8 +4,11 @@
 @import "/resources/css/reset.css";
 
 
-@import "/resources/css/common/header.css";
-@import "/resources/css/common/footer.css";
+
+/* @import "/resources/css/common/header.css";
+@import "/resources/css/common/footer.css"; */
+@import "/resources/css/common/checkBox.css";
+
 
 @import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap'); /* singleDay */
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap'); /* gowonDadum */
@@ -22,3 +25,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Sunflower:wght@500&display=swap'); /* sunFlower */
 @import url('https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css'); /* 나눔고딕(메인폰트) */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap'); /* orbitron */
+

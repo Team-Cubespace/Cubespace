@@ -29,12 +29,12 @@ menuSelectBtn.addEventListener("click", () => {
     
     var len = $("input[name='useMenu']:checked").length;
     var checkArr = [];
-    if(len > 1){ 
-        $("input[name='useMenu']:checked").each(function(e){
-            var value = $(this).val();
-            checkArr.push(value);        
-        })
-    }
+    
+    $("input[name='useMenu']:checked").each(function(e){
+        var value = $(this).val();
+        checkArr.push(value);        
+    })
+    
 
     console.log(checkArr);
     

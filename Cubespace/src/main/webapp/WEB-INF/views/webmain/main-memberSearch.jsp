@@ -47,21 +47,22 @@
 
                     <%----------------------------------%>
                     <%-- 이미 친구일때 --%>
-                    <div class="mebmer-profile">
-                        <div class="profile-head">
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">묘동닉네임글자테스트</div>
+                    <div class="mebmer-profile"> <%-- div --%>
+                        <div class="profile-head"> <%-- div1 --%>
+                            <img class="member-img" src="/resources/images/common/test_user_profile.gif"> <%-- img --%>
+                            <div class="member-nickname">묘동닉네임글자테스트</div> <%-- div1_div --%>
                         </div>
 
-                        <div class="profile-body">
-                            <div>
-                                <i class="fa-solid fa-check" id="faCheck"></i>
-                                <div>깐부</div>
+                        <div class="profile-body"> <%-- div2 --%>
+
+                            <div> <%-- div2_div --%>
+                                <i class="fa-solid fa-check" id="faCheck"></i> <%-- i --%>
+                                <div>깐부</div> <%--div2_divdiv --%>
                             </div>
 
-                            <div class="member-choice">
-                                <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div>미니홈피</div>
+                            <div class="member-choice"> <%-- div2_div2 --%>
+                                <img class="minihome-img" src="/resources/images/common/smallCube.png"> <%-- div2_divimg --%>
+                                <div>미니홈피</div> <%-- div2_div3 --%>
                             </div>
                         </div>
                     </div>
@@ -76,7 +77,7 @@
                         <div class="profile-body">
                             <div class="member-choice">
                                 <i class="fa-regular fa-paper-plane" id="faPaperPlane"></i>
-                                <div>신청</div>
+                                <div id="addFriend">신청</div>
                             </div>
 
                             <div class="member-choice">
@@ -98,7 +99,7 @@
                                 <i class="fa-regular fa-comment-dots" id="faCommentDots"></i>
                                 <div>수락대기</div>
                             </div>
-                            
+
                             <div class="member-choice">
                                 <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
                                 <div>미니홈피</div>

@@ -214,7 +214,7 @@ input[type='file'] {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-top: 7px;
+    margin : 7px 0px;
 }
 
 /* 글 작성 버튼 */

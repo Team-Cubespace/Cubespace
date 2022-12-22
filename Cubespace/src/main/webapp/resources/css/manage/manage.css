@@ -283,41 +283,64 @@ header {
     color: #aaa;
 }
 
-.menuArea {
-    display: flex;
-}
-.menuListArea{
+
+.menuArea{
     border: 1px solid black;
     width: 250px;
     margin-top: 20px;
+
+    display: flex;
+    flex-direction: column;
 }
 .categoryTitle{
     font-size: 23px;
 }
-.subCategoryArea {
-    margin-left: 20px;
+.subCategoryArea{
+    display: flex;
+    flex-direction: column;
+}
+.subCategory {
     padding: 3px;
+    padding-left: 20px;
+    cursor: pointer;
 
     display: flex;
-    align-content: center;
+    align-items: center;
 }
 .categoryArea {
     padding: 10px 0 3px;
+    cursor: pointer;
 
     display: flex;
     align-content: center;
 }
-
-
-
-
-
+.categoryArea:hover, .subCategory:hover {
+    background-color: #eee;
+}
+.homeCategoryArea:hover{
+    background-color: white;
+}
 
 .category{
     height: 20px;
     width: 20px;
 }
-.subCategory{
+.subCategoryImg{
     width: 15px;
     height: 15px;
+}
+
+
+.menuSaveArea {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+#menuSaveBtn {
+    margin-right: 10px;
+}
+.checkedImg {
+    height: 13px;
+    width: 13px;
 }

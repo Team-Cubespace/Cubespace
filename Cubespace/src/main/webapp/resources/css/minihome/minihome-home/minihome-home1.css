@@ -1,0 +1,78 @@
+.profile-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.profile-img{
+    width: 100%;
+    height: 170px;
+    border-radius: 10px;
+}
+
+.today-emoji{
+    width: 100%;
+    height: 20px;
+    padding: 0 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.profile-message{
+    width: 100%;
+    height: 130px;
+    padding: 0 10px;
+    line-height: 20px;
+}
+
+.surf-container{
+    width: 70%;
+    height: 50px;
+    border: 1px solid rgb(170, 170, 170);
+    border-radius: 5px;
+}
+
+#profileHistory, #profileUpdate{
+    font-size: 0.7em;
+    cursor: pointer;
+}
+
+.line{
+    height: 1px;
+    background-color: rgb(131, 131, 131);
+}
+
+.detail-info{
+    font-size: 0.7em;
+}
+
+.user-info span:first-child{
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.user-email{
+    display: inline-block;
+}
+
+.surf-container{
+    width: 150px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#surf{
+    width: 90%;
+    height: 65%;
+}
+
+#returnMyHome{
+    color: darksalmon;
+    font-size: 0.7em;
+    cursor: pointer;
+}

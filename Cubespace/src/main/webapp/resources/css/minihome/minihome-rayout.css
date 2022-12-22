@@ -1,0 +1,48 @@
+/* font-size 13px, 투명 scrollbar 모두 적용 */
+body{
+    width: 940px;
+    height: 500px;
+    margin: 0;
+    font-size: 13px;
+}
+
+.content-area{
+    width: 100%;
+    height: 100%;
+    background-color: #82C9E8;
+    display: flex;
+    justify-content: space-between;
+}
+
+.minihome-rayout{
+    height: 100%;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.minihome-rayout:nth-child(1){
+    width: 25%;
+}
+
+.minihome-rayout:nth-child(2){
+    width: 72%;
+}
+
+.minihome-rayout > div{
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.minihome-rayout:nth-child(1) > div{
+    padding: 15px;
+}
+
+.minihome-rayout:nth-child(2) > div{
+    padding: 20px;
+}
+
+.minihome-rayout > div::-webkit-scrollbar{
+    display: none;
+}

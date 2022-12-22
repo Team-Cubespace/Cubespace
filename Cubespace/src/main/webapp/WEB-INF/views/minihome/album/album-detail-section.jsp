@@ -45,8 +45,5 @@
         하ㅏ하하하ㅏ하ㅏㅎ하ㅏ하하ㅏ하하하ㅏ하ㅏ하하ㅏ하ㅏㅎ
         하ㅏ하하ㅏ하하ㅏ하ㅏ하하ㅏ하하    
     </p>
-
-    
-    <script src="/resources/js/common/swiper.min.js"></script>
-    <script src="/resources/js/minihome/album/album-detail.js"></script>
+    <jsp:include page="/WEB-INF/views/include/comment.jsp" />
 </div>

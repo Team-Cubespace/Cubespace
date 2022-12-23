@@ -95,7 +95,7 @@
                             </div>
                         </div>
 
-                        <a href="/minihome" id="homeBtn" onclick="return openMinihome(this.href)"><i class="fa-solid fa-house"></i>&nbsp;Minihomepage</a>
+                        <a href="/minihome" id="homeBtn" onclick="return openMinihome(this.href)"><i class="fa-solid fa-house"></i>&nbsp;My Space</a>
                     </c:otherwise>
                 </c:choose>
             </div>
@@ -114,7 +114,7 @@
                     <span class="next-arrow"><i class="fa-solid fa-arrow-right"></i></span>
 
                     <ul class="place-list">
-                        <li class="place-item place-item">
+                        <li class="place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
                                 <img src="../../resources/images/toy.jpg">
                                 <span class="place-title">형이 인형 뽑는 방법 알려준다</span>

@@ -45,5 +45,20 @@
         하ㅏ하하하ㅏ하ㅏㅎ하ㅏ하하ㅏ하하하ㅏ하ㅏ하하ㅏ하ㅏㅎ
         하ㅏ하하ㅏ하하ㅏ하ㅏ하하ㅏ하하    
     </p>
+    <div class="album-detail-footer">
+        <%-- 게시글에 좌표가 등록 되었을때만 --%>
+        <a href="https://map.kakao.com/link/map/우리회사,37.402056,127.108212" target="_blank" class="location">
+            <i class="fa-solid fa-location-dot"></i>
+            우리회사
+        </a>
+
+        <div class="album-button-area">
+            <%-- 게시글의 작성자번호와 로그인된 회원의 번호가 일치하지 않을 때 --%>
+            <button type="button">스크랩</button>
+            <%-- 게시글의 작성자번호와 로그인된 회원의 번호가 일치할 때 --%>
+            <a href="">수정</a>
+            <a href="">삭제</a>
+        </div>
+    </div>
     <jsp:include page="/WEB-INF/views/include/comment.jsp" />
 </div>

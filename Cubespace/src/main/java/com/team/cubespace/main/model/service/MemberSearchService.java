@@ -13,4 +13,10 @@ public interface MemberSearchService {
 	 */
 	List<MemberSearch> memberSearchAll(Map<String, Object> map);
 
+	/** 깐부 신청하기
+	 * @param paramMap
+	 * @return
+	 */
+	int memberAddFriend(Map<String, Object> paramMap);
+
 }

@@ -127,7 +127,7 @@ input:focus {outline:none;}
 }
 
 /* 깐부, 신청, 수락대기 폰트이미지 */
-#faCheck,#faPaperPlane, #faCommentDots{
+.fa-solid{
     font-size: 20px;
     margin-right: 5px;
 }

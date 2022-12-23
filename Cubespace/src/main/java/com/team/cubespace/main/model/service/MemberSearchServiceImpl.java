@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.team.cubespace.main.model.dao.MemberSearchDAO;
 import com.team.cubespace.main.model.vo.MemberSearch;
@@ -19,6 +20,13 @@ public class MemberSearchServiceImpl implements MemberSearchService{
 	@Override
 	public List<MemberSearch> memberSearchAll(Map<String, Object> map) {
 		return dao.memberSearchAll(map);
+	}
+
+	// 깐부 신청하기
+	@Override
+	@Transactional
+	public int memberAddFriend(Map<String, Object> paramMap) {
+		return dao.memberAddFriend(paramMap);
 	}
 
 }

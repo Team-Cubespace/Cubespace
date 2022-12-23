@@ -22,4 +22,12 @@ public class MemberSearchDAO {
 	public List<MemberSearch> memberSearchAll(Map<String, Object> map) {
 		return sqlSession.selectList("memberSearch.memberSearchAll",map);
 	}
+
+	/** 깐부 신청하기
+	 * @param paramMap
+	 * @return
+	 */
+	public int memberAddFriend(Map<String, Object> paramMap) {
+		return sqlSession.insert("memberSearch.memberAddFriend",paramMap);
+	}
 }

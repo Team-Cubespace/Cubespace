@@ -14,5 +14,4 @@ public class MemberSearch {
 	private String profileImage;	// 회원 프로필사진
 	private int friendAcceptFl;		// 깐부 수락여부 ( 0대기 1수락)
 
-
 }

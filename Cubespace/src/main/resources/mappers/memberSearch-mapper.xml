@@ -16,17 +16,21 @@
  	 <!-- 깐부찾기 자동완성 조회 -->
  	 <select id="memberSearchAll"  resultMap="memberSearch_rm">
  	 	SELECT DISTINCT MEMBER_NO,MEMBER_NICKNAME,PROFILE_IMG, NVL(FRIEND_ACCEPT_FL,2) FRIEND_ACCEPT_FL, NVL(ASKING_MEMBER_NO,0)  ASKING_MEMBER_NO
-		FROM "MEMBER"
-		LEFT JOIN
+		FROM "MEMBER"		LEFT JOIN
 		(SELECT ASKED_MEMBER_NO MEMBER_NO, ASKING_MEMBER_NO, FRIEND_ACCEPT_FL FROM FRIEND WHERE ASKING_MEMBER_NO = #{loginMemberNo}
 		UNION
 		SELECT ASKING_MEMBER_NO MEMBER_NO, ASKING_MEMBER_NO, FRIEND_ACCEPT_FL FROM FRIEND WHERE ASKED_MEMBER_NO = #{loginMemberNo})
 		USING (MEMBER_NO)
 		WHERE MEMBER_DEL_YN = 'N'
 		AND MEMBER_NICKNAME LIKE '%${memberSearchInput}%'
+		AND MEMBER_NO != #{loginMemberNo}
 		ORDER BY MEMBER_NO
  	 </select>
  	 
- 	
+ 	 <!-- 깐부 신청하기 -->
+ 		<select id="memberAddFriend" resultType="_int">
+ 		INSERT INTO FRIEND 
+		VALUES(#{memberNo},#{loginMemberNo},0)
+ 		</select>
   
 </mapper>

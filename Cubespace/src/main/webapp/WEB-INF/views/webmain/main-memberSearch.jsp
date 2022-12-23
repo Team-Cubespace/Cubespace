@@ -75,9 +75,9 @@
                         </div>
 
                         <div class="profile-body">
-                            <div class="member-choice">
+                            <div class="member-choice" id="friendWaiting">
                                 <i class="fa-regular fa-paper-plane" id="faPaperPlane"></i>
-                                <div id="addFriend">신청</div>
+                                <div onclick="addFriend()" id="add">신청</div>
                             </div>
 
                             <div class="member-choice">

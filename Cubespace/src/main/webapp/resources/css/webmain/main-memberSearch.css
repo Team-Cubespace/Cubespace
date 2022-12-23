@@ -12,6 +12,13 @@ input:focus {outline:none;}
     filter: invert(15%) sepia(77%) saturate(6158%) hue-rotate(267deg) brightness(110%) contrast(108%);
     font-weight: bold;
 }
+/* 신청취소 마우스 올리면 색상 변경(폰트,이미지) */
+.member-cancel:hover{
+    cursor: pointer;
+    filter: invert(34%) sepia(98%) saturate(4685%) hue-rotate(310deg) brightness(97%) contrast(85%);
+    font-weight: bold;
+}
+
 
 /****************************************************/
 /* 회원검색 입력박스 최상위 부모 */

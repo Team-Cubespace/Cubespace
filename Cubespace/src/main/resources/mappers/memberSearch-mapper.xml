@@ -32,5 +32,21 @@
  		INSERT INTO FRIEND 
 		VALUES(#{memberNo},#{loginMemberNo},0)
  		</select>
+ 		
+ 		<!-- 내가 신청한 회원 목록 조회 -->
+ 		<select id="memberAddFriendList" resultMap="memberSearch_rm">
+	 		SELECT DISTINCT MEMBER_NO,MEMBER_NICKNAME,PROFILE_IMG
+	 		FROM "MEMBER"
+			LEFT JOIN
+			(SELECT ASKED_MEMBER_NO MEMBER_NO, ASKING_MEMBER_NO, FRIEND_ACCEPT_FL FROM FRIEND WHERE ASKING_MEMBER_NO = #{loginMemberNo}
+			UNION
+			SELECT ASKING_MEMBER_NO MEMBER_NO, ASKING_MEMBER_NO, FRIEND_ACCEPT_FL FROM FRIEND WHERE ASKED_MEMBER_NO = #{loginMemberNo})
+			USING (MEMBER_NO)
+			WHERE MEMBER_DEL_YN = 'N'
+			AND MEMBER_NICKNAME LIKE '%${leftChoiceInput}%'
+			AND MEMBER_NO != #{loginMemberNo}
+			AND ASKING_MEMBER_NO =#{loginMemberNo}
+			ORDER BY MEMBER_NO
+ 		</select>
   
 </mapper>

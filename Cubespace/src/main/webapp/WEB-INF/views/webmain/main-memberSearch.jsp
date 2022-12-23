@@ -10,7 +10,7 @@
     <%-- 공통 css --%>
     <link rel="stylesheet" href="/resources/css/reset.css">
     <link rel="stylesheet" href="/resources/css/variables.css">
-    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="/resources/css/style-web.css">
     <%-- 웹 메인 모달 공통 css --%>
     <link rel="stylesheet" href="/resources/css/webmain/modalSettings.css">
     <%-- 해당 모달 개인 css --%>
@@ -103,6 +103,26 @@
                             <div class="member-choice">
                                 <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
                                 <div>미니홈피</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <%-- 내가 신청한 깐부일때 --%>
+                    <div class="mebmer-profile">
+                        <div class="profile-head">
+                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
+                            <div class="member-nickname">묘동닉네임글자테스트</div>
+                        </div>
+
+                        <div class="profile-body">
+                            <div class="member-cancel">
+                                <i class="fa-solid fa-xmark"></i>
+                                <div onclick="addFriendCancel()">신청 취소</div>
+                            </div>
+
+                            <div class="member-choice">
+                                <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
+                                <a href="/minihome" onclick="return openMinihome(this.href)">미니홈피</a> <%-- a --%>
                             </div>
                         </div>
                     </div>

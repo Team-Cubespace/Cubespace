@@ -29,4 +29,10 @@ public class MemberSearchServiceImpl implements MemberSearchService{
 		return dao.memberAddFriend(paramMap);
 	}
 
+	// 내가 신청한 회원 목록 조회
+	@Override
+	public List<MemberSearch> memberAddFriendList(Map<String, Object> paramMap) {
+		return  dao.memberAddFriendList(paramMap);
+	}
+
 }

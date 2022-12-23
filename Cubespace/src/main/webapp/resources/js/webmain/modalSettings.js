@@ -74,6 +74,7 @@ function closeModal(){
             
             //검색 id변경 하여 검색시 회원조회가 아닌 내가 신청한 목록조회로 변경
             const leftChoiceInput = document.getElementById("leftChoiceInput");
+            leftChoiceInput.value = null; 
             leftChoiceInput.setAttribute("id","rightChoiceInput")
             
             //기존 검색 목록 제거
@@ -86,6 +87,7 @@ function closeModal(){
     
             //검색 id변경 하여 검색시 내가 신청한 목록조회가 아닌 회원조회로 변경
             const rightChoiceInput = document.getElementById("rightChoiceInput");
+            rightChoiceInput.value = null;
             rightChoiceInput.setAttribute("id","leftChoiceInput")
 
             //기존 검색 목록 제거

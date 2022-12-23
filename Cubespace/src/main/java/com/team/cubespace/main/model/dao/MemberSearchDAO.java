@@ -30,4 +30,12 @@ public class MemberSearchDAO {
 	public int memberAddFriend(Map<String, Object> paramMap) {
 		return sqlSession.insert("memberSearch.memberAddFriend",paramMap);
 	}
+
+	/** 내가 신청한 회원 목록 조회
+	 * @param paramMap
+	 * @return
+	 */
+	public List<MemberSearch> memberAddFriendList(Map<String, Object> paramMap) {
+		return sqlSession.selectList("memberSearch.memberAddFriendList",paramMap);
+	}
 }

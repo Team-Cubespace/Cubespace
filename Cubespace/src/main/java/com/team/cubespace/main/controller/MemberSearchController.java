@@ -54,7 +54,19 @@ public class MemberSearchController {
 	}
 	
 	
-	
+	/** 내가 신청한 회원 목록 조회
+	 * @param loginMemberNo
+	 * @param leftChoiceInput
+	 * @return
+	 */
+	@GetMapping("/memberAddFriendList")
+	@ResponseBody
+	public String memberAddFriendList(@RequestParam Map<String, Object> paramMap) {
+		
+		List<MemberSearch> memberAddFriendList =  service.memberAddFriendList(paramMap);
+		
+		return new Gson().toJson(memberAddFriendList); 
+	}
 	
 	
 	

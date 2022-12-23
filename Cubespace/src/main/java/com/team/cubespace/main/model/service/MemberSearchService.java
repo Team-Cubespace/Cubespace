@@ -19,4 +19,10 @@ public interface MemberSearchService {
 	 */
 	int memberAddFriend(Map<String, Object> paramMap);
 
+	/** 내가 신청한 회원 목록 조회
+	 * @param paramMap
+	 * @return
+	 */
+	List<MemberSearch> memberAddFriendList(Map<String, Object> paramMap);
+
 }

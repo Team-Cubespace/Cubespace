@@ -1,16 +1,32 @@
 /* 값을 저장할 변수 선언 */
 let memberNo;
 
-/* 깐부찾기 자동완성 */
-document.getElementById("leftChoiceInput").addEventListener("keyup",()=>{
 
-    memberSearch();
+/* 이건 왜 안되는 것인가? 도와주세요 */
+/*  */
+// document.querySelector(".member-search-input").addEventListener("keyup",()=>{
+//     memberSearch()
+// })
+/* 이건 왜 위에 있으면 안되는가 */
+// document.querySelector(".member-search-input").addEventListener("keyup",memberSearch)
+
+
+
+/* 오른쪽 클릭 시 이벤트리스너 제거/추가 */
+document.getElementById("rightChoice").addEventListener("click",()=>{
+
+    var reset = document.querySelector(".member-search-input")
+    reset.removeEventListener("keyup",memberSearch)
+    reset.addEventListener("keyup",memberAddFriendList)
 })
 
-/* 내가 신청한 깐부 자동완성*/
-// document.getElementById("rightChoiceInput").addEventListener("keyup",()=>{
+/* 왼쪽 클릭 시 이벤트리스너 제거/추가 */
+document.getElementById("leftChoice").addEventListener("click",()=>{
 
-// })
+    var reset = document.querySelector(".member-search-input")
+    reset.removeEventListener("keyup",memberAddFriendList)
+    reset.addEventListener("keyup",memberSearch)
+})
 
 
 /* 비동기로 회원 목록 조회 함수  */
@@ -99,7 +115,7 @@ const memberSearch=()=>{
                             const a = document.createElement("a");
                             a.innerText="미니홈피";
                             a.setAttribute("href","/minihome/"+profile.memberNo);
-                            a.setAttribute("onclick","/return openMinihome(this.href)");
+                            a.setAttribute("onclick","return openMinihome(this.href)");
 
                             section.append(div);
                             div.append(div1,div2);
@@ -110,6 +126,7 @@ const memberSearch=()=>{
         }
     })
 }
+document.querySelector(".member-search-input").addEventListener("keyup",memberSearch);
 
 /* 비동기로 회원깐부신청 함수  */
 const addFriend = (memberNo, btn)=>{
@@ -140,4 +157,118 @@ const addFriend = (memberNo, btn)=>{
     })
 }
 
-// 비동기로 내가 신청한 개쉐리들 조회 취소시 바로 없어져야 하니깐 비동기다 맞지 취소가 있으니 
+
+/* 비동기로 내가 신청한 회원 목록 조회 함수  */
+const memberAddFriendList=()=>{
+    console.log("함수는 실행됨");
+/* 수정 필용요요요요요요 */
+
+    const rightChoiceInput =document.getElementById("rightChoiceInput");
+
+    $.ajax ({
+        url : "/memberAddFriendList",
+        data: {"rightChoiceInput":rightChoiceInput.value,"loginMemberNo":3},
+        dataType : "JSON",
+        success : memberAddList =>{
+
+            const section = document.querySelector(".mebmer-search-profile");
+            section.innerHTML=""; // 이전 내용 제거
+            
+            // 검색된 회원 폼만들어서 출력
+            for(let profile of memberAddList){
+
+                /* 회원번호 전역변수 저장 */
+                memberNo= profile.memberNo;
+    
+                const div = document.createElement("div");
+                div.classList.add("mebmer-profile");
+    
+                    const div1 = document.createElement("div");
+                    div1.classList.add("profile-head");
+    
+                        /* 프로필 사진 생성 */
+                        const img  =document.createElement("img");
+                        img.classList.add("member-img");
+
+                        /* DB에 프로필 사진이 NUll이라면 */
+                        if(profile.profileImage == null){
+                            img.setAttribute("src","/resources/images/common/cubes.png")
+                        } else{//null이 아니라면
+                            img.setAttribute("src",profile.profileImage)
+                        } 
+    
+                        /* 프로필 닉네임 생성 */
+                        const div1_div =document.createElement("div");
+                        div1_div.classList.add("member-nickname");
+                        div1_div.innerText=profile.memberNickname;
+    
+                    const div2  = document.createElement("div");
+                    div2.classList.add("profile-body");
+                    
+    
+                        const div2_div =document.createElement("div");
+                        const i =document.createElement("i");
+                        const div2_divdiv =document.createElement("div");
+    
+    
+                        /* 신청취소 생성 */
+                            div2_div.classList.add("member-cancel");
+
+                            i.classList.add("fa-solid","fa-xmark");
+                            div2_divdiv.innerText="신청 취소";
+                            div2_divdiv.setAttribute("onclick","addFriendCancel("+profile.memberNo+", this)")
+                        /* 생성완료 */
+    
+                        const div2_div2 =document.createElement("div");
+                        div2_div2.classList.add("member-choice");
+    
+                            const div2_divimg =document.createElement("img");
+                            div2_divimg.classList.add("minihome-img");
+                            div2_divimg.setAttribute("src","/resources/images/common/smallCube.png");
+    
+                            const a = document.createElement("a");
+                            a.innerText="미니홈피";
+                            a.setAttribute("href","/minihome/"+profile.memberNo);
+                            a.setAttribute("onclick","return openMinihome(this.href)");
+
+                            section.append(div);
+                            div.append(div1,div2);
+                            div1.append(img,div1_div);
+                            div2.append(div2_div,div2_div2);
+                            div2_div.append(i,div2_divdiv);
+                            div2_div2.append(div2_divimg,a);
+            }
+        }
+    })
+}
+
+
+
+/* 비동기로 회원신청 취소   */
+const addFriendCancel = (memberNo, btn)=>{
+
+    $.ajax ({
+        url : "/memberAddFriend",
+        data : {"loginMemberNo":3,"memberNo":memberNo},
+        success : memberAddFriend =>{
+            console.log(memberAddFriend);
+
+            if(memberAddFriend==1){// 깐부신청 성공
+                //업데이트 신청 -> 대기중 변경
+                const friendWaiting = btn.parentElement;
+                friendWaiting.classList.remove("member-choice");
+
+                const faPaperPlane = btn.previousElementSibling;
+                faPaperPlane.classList.remove("fa-paper-plane");
+                faPaperPlane.classList.add("fa-comment-dots");
+
+                const add = btn;
+                add.innerText="수락대기"
+                add.removeAttribute("onclick");
+                add.removeAttribute("id");
+            }else{
+                alert("깐부신청 실패")
+            }
+        }
+    })
+}

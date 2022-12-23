@@ -5,7 +5,7 @@
 
 <!-- 임시로 만든 변수 -->
 <c:if test="${not empty sessionScope.loginMember}">
-    <c:set var="loginMember" value="sessionScope.loginMember"/>
+    <c:set var="loginMember" value="${sessionScope.loginMember}"/>
 </c:if>
 
 
@@ -71,7 +71,7 @@
                             <img src="../../resources/images/common/cubes.png">
                             <span>로그인 후 이용해주세요.</span>
                         </div>
-                        <a href="#" id="loginBtn"><i class="fa-solid fa-right-to-bracket"></i>&nbsp;Login</a>
+                        <a href="/member/login" id="loginBtn"><i class="fa-solid fa-right-to-bracket"></i>&nbsp;Login</a>
                     </c:when>
 
                     <c:otherwise>

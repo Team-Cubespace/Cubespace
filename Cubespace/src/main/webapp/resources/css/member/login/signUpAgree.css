@@ -132,7 +132,7 @@
 
 /* 체크박스 체크 시 아이콘 스타일 지정 */
 #nextSignUp:checked + label > i{
-    background-color: var(--subColor);
+    background-color: var(--mainColor);
     color: white;
 }
 
@@ -155,7 +155,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    background-color: var(--subColor);
+    background-color: var(--mainColor);
     color: white;
     cursor: pointer;
     font-weight: bold;
@@ -163,6 +163,6 @@
 }
 
 .SignUp:hover{
-    background-color: var(--mainColor);
+    background-color: var(--subColor);
     transition-duration: 0.3s;
 }

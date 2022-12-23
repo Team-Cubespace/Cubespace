@@ -19,17 +19,17 @@ header {
 }
 
 /* 헤더 메뉴 */
-.header-menu-nav a{
+.header-menu a{
     display: flex;
     padding: 15px;
     height: 100%;
     align-items: center;
 }
-.header-menu-nav i {
+.header-menu i {
     font-size: 25px;
 }
 
-.header-menu-nav span {
+.header-menu span {
     margin-left: 5px;
 }
 

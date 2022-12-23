@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MinihomeController {
 	
-	
 	/** 미니홈피 열기
 	 * @return minihome/minihome-frame 포워드
 	 */

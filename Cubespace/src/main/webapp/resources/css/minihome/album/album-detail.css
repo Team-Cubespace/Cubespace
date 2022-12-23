@@ -1,0 +1,110 @@
+.slide-container {
+    display: flex;
+    justify-content: center;
+    height: 87%;
+    position: relative;
+}
+.swiper-container {
+    border: 1px solid #ddd;
+    width: 60%;
+    height: 100%;
+}
+.swiper-wrapper {
+    width: 100%;
+    height: 100%;
+}
+.swiper-slide {
+    /* width: 345px; */
+    height: 100%;
+    width: 100%;
+}
+.swiper-slide img {
+    height: 100%;
+    width: 100%;
+}
+/* 페이지네이션 */
+.swiper-pagination {
+    position: absolute;
+    bottom: 0px;
+}
+.swiper-pagination-bullet {
+    width: 15px;
+    height: 15px;
+    margin: 0px 3px;
+    background-color: black;
+}
+/* 네비게이션 */
+.button-prev,
+.button-next {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: var(--ink);
+    opacity: 0.3;
+    position: absolute;
+    cursor: pointer;
+}
+.button-prev:hover,
+.button-next:hover {
+    opacity: 0.7;
+}
+
+.button-prev {
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.button-next {
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.detail-subtitle {
+    margin-bottom: 20px;
+    font-size: 15px;
+    display: flex;
+}
+.detail-open-flag {
+    width: 70px;
+    display: flex;
+    justify-content: center;
+}
+.detail-create-date {
+    font-size: 13px;
+    color: grey;
+    margin-left: auto;
+}
+
+/* 앨범 내용 영역 */
+.album-content {
+    margin: 10px 0px;
+}
+
+/* 앨범 내용 푸터 */
+.album-detail-footer {
+    display: flex;
+    align-items: center;
+}
+.location {
+    color: grey;    
+    font-size: 15px;
+}
+.location i {
+    font-size: 17px;
+    color: var(--mainColor);
+}
+
+.album-button-area {
+    margin-left: auto;
+}
+.album-button-area > * {
+    background-color: transparent;
+    border: none;
+    padding: 5px 5px;
+    font-weight: bold;
+}

@@ -4,7 +4,7 @@
 <header>
     <!------------------ 헤더 메뉴 ------------------>
     <ul class="header-menu-nav">
-        <li>
+        <li class="header-menu">
             <a href="">
                 <i class="fa-solid fa-shop"></i>
                 <span>상점</span>
@@ -20,7 +20,7 @@
         <!-- 로그인 X && 메인 페이지 X -->
         <c:choose>
             <c:when test="${empty loginMember}">
-                <li>
+                <li class="header-menu">
                     <a href="">
                         <i class="fa-solid fa-right-to-bracket"></i>
                         <span>로그인</span>
@@ -29,7 +29,7 @@
             </c:when>
             <c:otherwise>
             <!-- 로그인 O -->
-                <li>
+                <li class="header-menu">
                     <a href="">
                         <div class="notice">
                             <span class="notice-new"></span>
@@ -38,7 +38,7 @@
                         <span>알림</span>
                     </a>
                 </li>
-                <li>
+                <li class="header-menu">
                     <button type="button" id="headerDropDownButton">
                         <img src="cat4.jpg" alt="로그인 회원 프로필 이미지" class="header-profile-image">
                         <ul class="header-drop-down" id="headerDropDown">

@@ -13,9 +13,9 @@
 </head>
 <body>
     <div class="content-area">
-        <section  class="minihome-rayout">
+        <section class="minihome-rayout">
             <div class="profile-area">
-                <img src="../../../images/phone.png" class="profile-img">
+                <img src="../../../images/삐약.gif" class="profile-img">
         
                 <div class="today-emoji">
                     <div>
@@ -56,23 +56,62 @@
             </div>
         </section>
 
-        <section  class="minihome-rayout">
-            <div>
-                <span class="title">최근 게시물</span>
-                <hr>
+        <section class="minihome-rayout">
+            <div id="homeArea">
+                <header>최근 게시물</header>
         
-                <div>
-                    <span>다이어리 >></span>
-                    3D 변환 진짜 거지같네 이걸 어케 함? 어이가 없어서
-                    <span>1시간 전</span>
+                <div class="new-posts">
+                    <div class="new-post">
+                        <span>
+                            <a href="#" class="post-category">동영상</a>
+                            <span>::</span>
+                            <a href="#" class="post-title">심뽀찜뽀를 춰봤습니다</a>
+                        </span>
+                        <span class="post-time">5분 전</span>
+                    </div>
+
+                    <div class="new-post">
+                        <span>
+                            <a href="#" class="post-category">다이어리</a>
+                            <span>::</span>
+                            <a href="#" class="post-title">오늘 우리 조에 6번째 멤버가 들어왔다</a>
+                        </span>
+                        <span class="post-time">40분 전</span>
+                    </div>
+
+                    <div class="new-post">
+                        <span>
+                            <a href="#" class="post-category">다이어리</a>
+                            <span>::</span>
+                            <a href="#" class="post-title">너무 세게 때리면 개강한다</a>
+                        </span>
+                        <span class="post-time">1시간 전</span>
+                    </div>
+            
+                    <div class="new-post">
+                        <span>
+                            <a href="#" class="post-category">사진첩</a>
+                            <span>::</span>
+                            <a href="#" class="post-title">[스크랩] 종강하는 법 : 선생님 종강이를 때리면 아이고 종강이야</a>
+                        </span>
+                        <span class="post-time">2시간 전</span>
+                    </div>
+
+                    <div class="new-post">
+                        <span>
+                            <a href="#" class="post-category">동영상</a>
+                            <span>::</span>
+                            <a href="#" class="post-title">오늘의 게스트 이수연4씨와 함께 뿌링클 먹방</a>
+                        </span>
+                        <span class="post-time">2022.11.05</span>
+                    </div>
                 </div>
         
-                <div>
-                    <span>사진첩 >></span>
-                    [스크랩] 종강하는 법 : 선생님 종강이를 때리면 아이고 종강이야...
-                    <span>2시간 전</span>
-                </div>
-        
+                <header class="miniroom-header">
+                    <span>미니룸</span>
+                    <a href="#" class="miniroom-deco"><i class="fa-solid fa-gear"></i>&nbsp;미니룸 꾸미기</a>
+                </header>
+
                 <div class="miniroom-container">
                     <div class="miniroom">
                         <div class="left"></div>
@@ -86,20 +125,36 @@
                 </div>
             
         
-                <span class="title">깐부 평</span>
-        
-                <div class="line-bold"></div>
-        
-                <div>
-                    <input type="text">
+                <header>깐부 메시지</header>
+
+                <div class="updatefriend">
+                    <span>메시지 남기기</span>
+                    <input type="text" id="dearFriend" placeholder="제발 집에 보내줘">
+                    <span>등록</span>
                 </div>
-                <div>
-                    파이널 언제 끝남?
+
+                <div class="friend-messages">
+                    <div class="friend-message">
+                        <span>
+                            김현진&nbsp;파이널 언제 끝남?
+                        </span>
+
+                        <span>
+
+                        </span>
+                        7일 전
+                    </div>
+
+                    <div id="btnArea">
+                        <span id="moreBtn">메시지 더보기</span>
+                        <span id="topBtn">처음으로 가기</span>
+                    </div>
                 </div>
             </div>
         </section>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="../../../js/minihome/minihome-home.js"></script>
 <script src="../../../js/common/temp.js"></script>
 </html>

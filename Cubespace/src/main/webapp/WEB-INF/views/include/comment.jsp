@@ -8,7 +8,7 @@
             <img class="comment-profile-image" src="/resources/images/zz.png" alt="" class="comment-profile-image">
         </div>
         <div class="comment-content">
-            <textarea name="" id="" placeholder="댓글 추가.."></textarea>
+            <textarea name="" id="" placeholder="댓글 추가.." rows="1" onkeyup="resizeTextarea(this)"></textarea>
             <div class="comment-write-button-area">
                 <button class="cancel-button" type="button">취소</button>
                 <button class="insert-button" type="button">등록</button>

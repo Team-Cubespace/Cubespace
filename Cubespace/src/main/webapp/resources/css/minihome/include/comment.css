@@ -60,7 +60,7 @@
     padding: 5px;
     padding-top: 10px;
     outline: none;
-    height: 20px;
+    overflow: hidden;
 }
 
 .comment-write-button-area {

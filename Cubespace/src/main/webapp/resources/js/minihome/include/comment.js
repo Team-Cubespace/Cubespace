@@ -45,7 +45,8 @@ function addCommentArea(commentNo, target) {
     // name값 세팅
     // textarea.setAttribute("name", "");
     textarea.setAttribute("placeholder", "댓글 추가..");
-
+    textarea.setAttribute("onkeyup", "resizeTextarea(this)");
+    textarea.setAttribute("rows", 1);
     // 버튼 영역 생성
     const commentWriteButtonArea = document.createElement("div");
     commentWriteButtonArea.classList.add("comment-write-button-area");
@@ -104,6 +105,11 @@ function toggleChildComment(target) {
     }
 }
 
+/* 댓글 textarea */
+const resizeTextarea = (textarea)=>{
+   textarea.style.height = "auto"   // height 초기화
+   textarea.style.height = textarea.scrollHeight - 12 + "px";
+}
 /* 댓글 리스트 비동기 조회 및 출력 */
 
 /* 댓글 수정 함수 */

@@ -38,6 +38,6 @@ public class Member {
 	private String emotionName; // 기분 이름
 	
 	private int alarmCount; // 알람 수
-	private int countToday; // 투데이 방문자수
+	private int today; // 투데이 방문자수
 	private int friendCount; // 친구수
 	}

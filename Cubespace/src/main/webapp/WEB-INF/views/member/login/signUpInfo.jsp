@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cubespace</title>
     <link rel="stylesheet" href="/resources/css/reset.css">
     <link rel="stylesheet" href="/resources/css/variables.css">
     <link rel="stylesheet" href="/resources/css/style.css">
@@ -151,7 +155,7 @@
                     </div>
                     <div class="firstBox" id="selectText">
                         <span>선택사항입니다</span>
-                        <span class="signUp-message" id="birthMessage">6자리의 숫자로 입력해주세요(ex-940210)</span>
+                        <span class="signUp-message" id="birthMessage">8자리의 숫자로 입력해주세요(ex-19940210)</span>
                     </div>
                 </div>
 

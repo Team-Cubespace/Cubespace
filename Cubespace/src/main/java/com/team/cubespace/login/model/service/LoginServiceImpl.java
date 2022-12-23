@@ -25,8 +25,6 @@ public class LoginServiceImpl implements LoginService{
 		
 		Member loginMember = dao.login(inputMember.getMemberEmail());
 		
-		System.out.println(inputMember.getMemberPw());
-		System.out.println(loginMember.getMemberPw());
 		
 		if(loginMember != null) {
 			if(bcrypt.matches(inputMember.getMemberPw(), loginMember.getMemberPw())) {

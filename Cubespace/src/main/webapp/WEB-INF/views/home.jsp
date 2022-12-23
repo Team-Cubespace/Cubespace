@@ -90,7 +90,7 @@
                             <div class="profile-info">
                                 <span>${loginMember.memberNickname}</span>
                                 <span><a href="#">알림</a> : <a href="#">${loginMember.alarmCount}</a></span>
-                                <span>Today : ${loginMember.countToday}</span>
+                                <span>Today : ${loginMember.today}</span>
                                 <span>일촌 : <fmt:formatNumber value="${loginMember.friendCount}" pattern="#,###"/>명</span>
                             </div>
                         </div>

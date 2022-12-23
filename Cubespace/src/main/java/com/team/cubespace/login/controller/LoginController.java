@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.cubespace.login.model.service.LoginService;
@@ -52,14 +53,22 @@ public class LoginController {
 			RedirectAttributes ra,
 			HttpServletResponse resp,
 			@RequestParam(value="saveId", required=false) String saveId,
-			@RequestParam(value="kakaoLoginMember", required=false) String kakaoLoginMember,
+//			@RequestParam(value="profile_image_url", required=false) String profile_image_url,
+//			@RequestParam(value="nickname", required=false) String nickname,
+//			@RequestParam(value="email", required=false) String email,
+//			@RequestParam(value="birthday", required=false) String birthday,
 			@RequestHeader(value="referer") String referer,
 			@RequestParam(value="loginType", required=false, defaultValue = "1") String loginType) {
 		
 		
 		Member loginMember = new Member();
-		
+//		
+//
+//		
 //		if(loginType.equals("3")) {
+//			
+//			loginMember.setMemberEmail(kakaoLoginMember.email);
+//			
 //			loginMember = service.kakaoLogin(inputMember);
 //		}
 		
@@ -70,9 +79,9 @@ public class LoginController {
 	if(loginMember != null) {
 		if(loginMember.getMemberBlockYN().equals("Y")){
 			path = referer;
-			String message = "차단된 회원은 이용할 수 없습니다" 
+			String message = "차단된 회원은 이용할 수 없습니다\n" 
 					+ loginMember.getBlockStart() + "부터" 
-					+ loginMember.getBlockEnd() + "까지 이용할 수 없습니다."
+					+ loginMember.getBlockEnd() + "까지 이용할 수 없습니다.\n"
 					+ "자세한 사항은 고객센터를 참고하세요";
 			ra.addFlashAttribute("message", message);
 
@@ -100,5 +109,65 @@ public class LoginController {
 	
 	return "redirect:" + path;
 	}
+	
+	/** 로그아웃
+	 * @param status
+	 * @return
+	 */
+	@GetMapping("/logout")
+	public String logout(SessionStatus status) {
+		status.setComplete();
+		return "redirect:/";
+	}
+	
+	
+	/** 회원가입 동의 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/signUp/agreement")
+	public String signUpAgreement() {
+		return "member/login/signUpAgree";
+	}
+	
+	/** 회원가입 정보입력 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/signUp/info")
+	public String signUpInfo() {
+		return "member/login/signUpInfo";
+	}
+	
+	
+	/** 회원가입 입력 정보 제출
+	 * @return
+	 */
+	@PostMapping("/signUp/info")
+	public String signUp(/* @ModelAttribute */ Member inputMember,
+						RedirectAttributes ra,
+						@RequestHeader("referer") String referer) {
+		 
+
+		
+		int result = service.signUp(inputMember);
+		
+		String path = null;
+		String message = null;
+		
+		if (result > 0) { //회원가입 성공
+			path = "/";
+			message = "회원가입 성공했습니다.";
+			 
+		} else { //회원가입 실패
+			path = referer;
+			message = "회원가입 도중 문제가 발생하여 실패하였습니다.";
+			
+			inputMember.setMemberPw(null); 
+			ra.addFlashAttribute("tempMember", inputMember);
+		}
+		
+		ra.addFlashAttribute("message",message);
+		return "redirect:"+ path;
+	} 
+
 
 }

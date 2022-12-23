@@ -20,7 +20,7 @@
    		<result property="authority" column="AUTHORITY"></result>
    		<result property="birthYear" column="BIRTHYEAR"></result>
    		<result property="loginType" column="LOGIN_TYPE"></result>
-   		<result property="birthday" column="BIRTHDAY"></result>
+   		<result property="birthDay" column="BIRTHDAY"></result>
    		<result property="birthYear" column="BIRTHYEAR"></result>
    		<result property="emotion" column="EMOTION"></result>
    		<result property="fontNo" column="FONT_NO"></result>
@@ -86,22 +86,45 @@
 	<!-- 회원 ID/PW 찾기 회원조회 -->
 	<select id="infoFindSelect" resultType="string">
 		SELECT MEMBER_EMAIL
-		FROM "MEMBER"
+		FROM "MEMBER" M
 		WHERE MEMBER_NAME = #{memberName}
-		AND MEMBER_TEL =#{memberTel}
-		AND BLOCK_FL = 'N'
-		AND MEMBER_DEL_FL = 'N'
+		AND MEMBER_TEL = #{memberTel}
+		AND (SELECT COUNT(*) FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = M.MEMBER_NO) = 0
+		AND MEMBER_DEL_YN = 'N'
  	 </select>
  	 
  	 <update id="findEmailPw">
 		UPDATE "MEMBER" SET
 		MEMBER_PW = #{encPw}
 		WHERE MEMBER_EMAIL = #{result}
-		AND BLOCK_FL = 'N'
-		AND MEMBER_DEL_FL = 'N'
+		AND MEMBER_BLOCK_YN = 'N'
+		AND MEMBER_DEL_YN = 'N'
  	 </update>
  	 
  	 
+ 	<!-- 이메일 중복 검사 -->
+	<select id="emailDupCheck" parameterType = "string" resultType = "_int">
+	SELECT COUNT(*)
+   FROM "MEMBER"
+   WHERE MEMBER_EMAIL = #{memberEmail}
+   AND MEMBER_DEL_YN  = 'N'
+	</select>
+	
+	<!-- 닉네임 중복 검사 -->
+	<select id="nicknameDupCheck" resultType = "_int">
+	SELECT  COUNT(*)
+	FROM "MEMBER"
+	WHERE MEMBER_NICKNAME = #{memberNickname}
+	AND MEMBER_DEL_YN  = 'N'
+	</select>
+	 
+	 	<!-- 전화번호 중복 검사 -->
+	<select id="telDupCheck" resultType = "_int">
+	SELECT  COUNT(*)
+	FROM "MEMBER"
+	WHERE MEMBER_TEL = #{memberTel}
+	AND MEMBER_DEL_YN  = 'N'
+	</select>
  	 
  	 
  	 

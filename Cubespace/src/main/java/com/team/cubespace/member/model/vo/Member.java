@@ -24,7 +24,7 @@ public class Member {
 	private int authority;
 	private String birthYear;
 	private int loginType;
-	private String birthday;
+	private String birthDay;
 	private int emotion;
 	private int fontNo;
 	

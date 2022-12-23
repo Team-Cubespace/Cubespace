@@ -1,5 +1,7 @@
 package com.team.cubespace.login.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,25 +15,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.team.cubespace.email.model.service.EmailService;
 import com.team.cubespace.login.model.service.LoginService;
 import com.team.cubespace.member.model.vo.Member;
 
+import lombok.Getter;
+
 @Controller
 @SessionAttributes({"loginMember", "message"})
-@RequestMapping("/member")
 public class LoginController {
 	
 	@Autowired
 	private LoginService service;
 	
+	@Autowired
+    private EmailService eService;
+	
 	/** 로그인
 	 * @return
 	 */
-	@GetMapping("/login") 
+	@GetMapping("/member/login") 
 	public String loginPage() {
 		return "member/login/login"; 
 	}
@@ -47,7 +55,7 @@ public class LoginController {
 	 * @param loginType
 	 * @return loginMember
 	 */
-	@PostMapping("/login")
+	@PostMapping("/member/login")
 	public String login(Member inputMember,
 			Model model,
 			RedirectAttributes ra,
@@ -114,7 +122,7 @@ public class LoginController {
 	 * @param status
 	 * @return
 	 */
-	@GetMapping("/logout")
+	@GetMapping("/member/logout")
 	public String logout(SessionStatus status) {
 		status.setComplete();
 		return "redirect:/";
@@ -124,7 +132,7 @@ public class LoginController {
 	/** 회원가입 동의 페이지 이동
 	 * @return
 	 */
-	@GetMapping("/signUp/agreement")
+	@GetMapping("/member/signUp/agreement")
 	public String signUpAgreement() {
 		return "member/login/signUpAgree";
 	}
@@ -132,7 +140,7 @@ public class LoginController {
 	/** 회원가입 정보입력 페이지 이동
 	 * @return
 	 */
-	@GetMapping("/signUp/info")
+	@GetMapping("/member/signUp/info")
 	public String signUpInfo() {
 		return "member/login/signUpInfo";
 	}
@@ -141,7 +149,7 @@ public class LoginController {
 	/** 회원가입 입력 정보 제출
 	 * @return
 	 */
-	@PostMapping("/signUp/info")
+	@PostMapping("/member/signUp/info")
 	public String signUp(/* @ModelAttribute */ Member inputMember,
 						RedirectAttributes ra,
 						@RequestHeader("referer") String referer) {
@@ -168,6 +176,118 @@ public class LoginController {
 		ra.addFlashAttribute("message",message);
 		return "redirect:"+ path;
 	} 
-
+	
+	
+	
+	/** 회원 ID/PW 찾기 페이지로 이동
+	 * @return
+	 */
+	@GetMapping("/member/findId")
+	public String infoFind() {
+		return "member/login/findId";
+	}
+	
+	
+	/** 회원 ID 찾기
+	 * @return
+	 */
+	@PostMapping("/member/findId")
+	public String infoFindId(@RequestParam Map<String, Object> paramMap,
+							@RequestHeader("referer") String referer,
+							RedirectAttributes ra) {
+		// 회원 조회
+		String result = service.infoFindSelect(paramMap);
+		
+		String path = null;
+		String message = null;
+		
+		// 조회된 회원 메일로 보내기
+		 eService.findEmailId(result,paramMap);
+		
+		
+		if (result != null) { // 등록된 회원 있음 
+			path="/member/login";
+			message="등록된 회원이 있어 이메일을 발송했습니다.";
+			
+			
+		} else { // 등록된 회원 없음
+			path=referer;
+			message="등록된 회원이 없습니다. 이름과 전화번호를 확인해주세요.";
+			
+			ra.addFlashAttribute("tempMember", paramMap);
+		}
+		
+		ra.addFlashAttribute("message",message);
+		return "redirect:"+ path;
+	}
+	
+	
+	
+	
+	/** 회원 PW 찾기
+	 * @return
+	 */
+	@PostMapping("/member/findPw")
+	public String infoFindPw(@RequestParam Map<String, Object> paramMap,
+							@RequestHeader("referer") String referer,
+							RedirectAttributes ra) {
+		// 회원 조회
+		String result = service.infoFindSelect(paramMap);
+		
+		String path = null;
+		String message = null;
+		
+		if (result != null) { // 등록된 회원 있음 
+			// 조회된 회원 메일로 보내기
+			int result1 = eService.findEmailPw(result,paramMap);
+			
+			if (result1> 0) {
+				path="/member/login";
+				message="등록된 회원이 있어 이메일로 임시 비밀번호를 발송했습니다.";
+			}
+			
+		} else { // 등록된 회원 없음
+			path=referer;
+			message="등록된 회원이 없습니다. 이름과 전화번호를 확인해주세요.";
+			
+			ra.addFlashAttribute("tempMember", paramMap);
+		}
+		
+		ra.addFlashAttribute("message",message);
+		return "redirect:"+ path;
+	}
+	
+	
+//  이메일 중복 검사
+	
+	   @GetMapping("/emailDupCheck")
+	   @ResponseBody 
+	   public int emailDupCheck(String memberEmail) {
+	      
+		      int result = service.emailDupCheck(memberEmail);
+		      
+		      System.out.println(result);
+		      return result;
+		   }
+	   
+	   // 닉네임 중복검사 
+	   @GetMapping("/nicknameDupCheck")
+	   @ResponseBody
+	   public int nicknameDupCheck(String memberNickname) {
+		   
+		   int result = service.nicknameDupCheck(memberNickname);
+		   
+		   return result;
+	   }
+	   
+	   // 전화번호 중복검사
+	   @GetMapping("/telDupCheck")
+	   @ResponseBody
+	   public int telDupCheck(String memberTel) {
+		   
+		   int result = service.telDupCheck(memberTel);
+		   
+		   return result;
+	   }
 
 }

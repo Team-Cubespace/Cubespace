@@ -88,7 +88,6 @@
                             <input type="password" name="memberPw" class="inputBox" id="memberPw" placeholder="비밀번호"
                                 maxlength="16" />
                         </div>
-                        <!-- <i class="fa-regular fa-eye-slash"></i> -->
                         <i class="fa-regular fa-eye" id="seePw"></i>
                     </div>
                     <div class="firstBox">
@@ -104,7 +103,6 @@
                             <input type="password" name="memberPwConfirm" class="inputBox" id="memberPwConfirm"
                                 placeholder="비밀번호 확인" maxlength="16" />
                         </div>
-                        <!-- <i class="fa-regular fa-eye-slash"></i> -->
                         <i class="fa-regular fa-eye" id="seePwConfirm"></i>
                     </div>
                     <div class="firstBox">
@@ -153,6 +151,8 @@
                         <input type="text" name="memberBirth" class="inputBox" id="memberBirth"
                             placeholder="생년월일 ex)19910502" maxlength="8" />
                     </div>
+                    <input type="hidden" name="birthYear" id="birthYear">
+                    <input type="hidden" name="birthDay" id="birthDay">
                     <div class="firstBox" id="selectText">
                         <span>선택사항입니다</span>
                         <span class="signUp-message" id="birthMessage">8자리의 숫자로 입력해주세요(ex-19940210)</span>
@@ -178,7 +178,7 @@
     <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 
 
-
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="/resources/js/member/login/signUpInfo.js"></script>
 </body>
 

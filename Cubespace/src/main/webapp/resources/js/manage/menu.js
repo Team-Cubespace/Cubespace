@@ -93,3 +93,63 @@ document.getElementById("menuSaveBtn").addEventListener("click", () => {
     //     }
     // })
 })
+
+/* ------------------------------------------- */
+/* 폴더 추가 */
+
+
+/* ------------------------------------------- */
+/* 폴더 관리 */
+const diary = document.getElementsByClassName("diary")[0];
+diary.addEventListener("click", e => {
+
+    /* border추가 */
+    const clickedList = document.getElementsByClassName("clicked");
+    if(clickedList.length != 0) {
+        for(let clicked of clickedList){
+            clicked.classList.remove("clicked");
+        }
+    } else {
+
+        diary.classList.add("clicked");
+    
+        /* "+"버튼 추가 */
+        const fileAddBtn = document.createElement("i");
+        fileAddBtn.classList.add("fa-solid");
+        fileAddBtn.classList.add("fa-plus");
+        diary.firstElementChild.append(fileAddBtn);
+    
+        /* "-"버튼 추가 */
+        const folderList = document.querySelectorAll(".diary > .subCategoryArea > .subCategory");
+        for(let i = 1; i < folderList.length; i++){
+            const fileRemoveBtn = document.createElement("i");
+            fileRemoveBtn.classList.add("fa-solid");
+            fileRemoveBtn.classList.add("fa-minus");
+    
+            folderList[i].append(fileRemoveBtn);
+        }
+    }
+
+    /* "+"버튼 클릭시 */
+    document.getElementsByClassName("fa-plus")[0].addEventListener("click", e => {
+        const subCategoryLength = document.querySelectorAll(".diary  .subCategory").length;
+        const lastSubCath = document.querySelectorAll(".diary  .subCategory")[subCategoryLength-1];
+
+        const img = document.createElement("img");
+        img.src = "/resources/images/common/folder.png";
+        img.classList.add("subCategoryImg");
+
+        const span = document.createElement("span");
+        span.classList.add("folderTitle");
+        span.innerText = "나의 다이어리22";
+
+        const div = document.createElement("div");
+        div.classList.add("subCategory");
+        div.setAttribute("name", Number(subCategoryLength)+1);
+
+        div.append(img/* , '&nbsp;' */, span);
+
+        lastSubCath.after(div);
+    })
+
+})

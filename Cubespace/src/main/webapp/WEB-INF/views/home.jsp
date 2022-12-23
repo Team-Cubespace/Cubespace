@@ -4,7 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- 임시로 만든 변수 -->
-<c:set var="loginMember" value="a"/>
+<c:if test="${not empty sessionScope.loginMember}">
+    <c:set var="loginMember" value="sessionScope.loginMember"/>
+</c:if>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,8 +35,8 @@
                 
                 <div class="star-profile-container">
                     <div class="star-profile">
-                        <img src="../../resources/images/crown.png">
-                        <a href="#" class="star-profile-img"><img src="../../resources/images/zz.png"></a>
+                        <img src="/resources/images/crown.png">
+                        <a href="#" class="star-profile-img"><img src="/resources/images/zz.png"></a>
                         <a href="#">1. 기묘동</a>
                         <span>Today 400</span>
                     </div>
@@ -62,7 +66,7 @@
             <!-- 로그인, 프로필, 미니홈피 -->
             <div class="profile-container">
                 <c:choose>
-                    <c:when test="${loginMember == ''}">
+                    <c:when test="${empty loginMember}">
                         <div class="login">
                             <img src="../../resources/images/common/cubes.png">
                             <span>로그인 후 이용해주세요.</span>
@@ -73,21 +77,21 @@
                     <c:otherwise>
                         <div class="profile">
                             <div class="profile-img">
-                                <img src="../../resources/images/zz.png">
+                                <img src="/resources/images/zz.png">
                                 <div class="dropdown-btn"><i class="fa-solid fa-caret-down dropdown-btn-icon"></i></div>
                                 
                                 <!-- dropdown -->
                                 <div class="dropdown">
-                                    <a href="#">내 정보 수정</a>
-                                    <a href="#">로그아웃</a>
+                                    <a href="/member/login/updateInfo">내 정보 수정</a>
+                                    <a href="/member/logout">로그아웃</a>
                                 </div>
                             </div>
         
                             <div class="profile-info">
-                                <span>김효동2</span>
-                                <span><a href="#">알림</a> : <a href="#">0</a></span>
-                                <span>Today : 0</span>
-                                <span>일촌 : 1,000명</span>
+                                <span>${loginMember.memberNickname}</span>
+                                <span><a href="#">알림</a> : <a href="#">${loginMember.alarmCount}</a></span>
+                                <span>Today : ${loginMember.countToday}</span>
+                                <span>일촌 : <fmt:formatNumber value="${loginMember.friendCount}" pattern="#,###"/>명</span>
                             </div>
                         </div>
 

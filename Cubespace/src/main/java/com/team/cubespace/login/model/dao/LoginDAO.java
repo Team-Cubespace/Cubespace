@@ -1,4 +1,4 @@
-package com.team.cubespace.member.model.dao;
+package com.team.cubespace.login.model.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.team.cubespace.member.model.vo.Member;
 
 @Repository
-public class MemberDAO {
+public class LoginDAO {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
@@ -17,6 +17,6 @@ public class MemberDAO {
 	 * @return loginMember
 	 */
 	public Member login(String memberEmail) {
-		return sqlSession.selectOne("memberMapper.login", memberEmail);
+		return sqlSession.selectOne("loginMapper.login", memberEmail);
 	}
 }

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,8 +30,10 @@
 
 
     <form action="/member/login" method="post" id="loginForm">
-
-        <img src="/resources/images/common/bigCube.png" class="bigCube">
+        <button id="loginBtn">
+            <img src="/resources/images/common/bigCube.png" class="bigCube" >
+        </button>
+        <p class="loginIntroduce">큐브를 눌러 로그인하세요</p>
 
         <div>
 
@@ -65,7 +67,7 @@
 
         <!-- 회원 가입 /찾기 버튼 -->
         <div class="text-area">
-            <a href="/member/infoFind" class="findArea">
+            <a href="/member/findId" class="findArea">
                 <img src="/resources/images/common/smallCube.png" class="smallCube">
                 ID/PW 찾기</a>
             <a href="/member/signUp/agreement" class="findArea">
@@ -73,16 +75,16 @@
                 회원가입</a>
         </div>
 
-        <div class="simpleLogin naver">
-            <img src="/resources/images/common/naverLogo.png" class="loginLogo">
-            <div>네이버로 시작하기</div>
+        <div class="socialLogin">
+            <div class="simpleLogin naver">
+                <img src="/resources/images/common/naverLogo.png" class="loginLogo">
+                <div>네이버로 시작하기</div>
+            </div>
+            <div class="simpleLogin kakao" onclick="kakaoLogin();">
+                <img src="/resources/images/common/kakaoLogo.png" class="loginLogo">
+                <div id="startKakao">카카오로 시작하기</div>
+            </div>
         </div>
-        <div class="simpleLogin kakao" onclick="kakaoLogin();">
-            <img src="/resources/images/common/kakaoLogo.png" class="loginLogo">
-            <div id="startKakao">카카오로 시작하기</div>
-        </div>
-
-
 
     </form>
 

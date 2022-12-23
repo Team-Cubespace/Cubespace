@@ -14,6 +14,14 @@
     <link rel="stylesheet" href="/resources/css/manage/manage.css">
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
     <title></title>
+
+    <style>
+        .fa-minus {
+            border: 2px solid black;
+            border-radius: 50%;
+            padding: 2px;
+        }
+    </style>
 </head>
 <body>
     <div class="content-area">

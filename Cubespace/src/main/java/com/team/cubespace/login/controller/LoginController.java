@@ -1,4 +1,4 @@
-package com.team.cubespace.member.controller;
+package com.team.cubespace.login.controller;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.team.cubespace.login.model.service.LoginService;
 import com.team.cubespace.member.model.vo.Member;
-import com.team.cubespace.member.model.service.MemberService;
 
 @Controller
 @SessionAttributes({"loginMember", "message"})
 @RequestMapping("/member")
-public class MemberController {
+public class LoginController {
 	
 	@Autowired
-	private MemberService service;
+	private LoginService service;
 	
 	/** 로그인
 	 * @return

@@ -14,6 +14,24 @@
     <link rel="stylesheet" href="/resources/css/manage/manage.css">
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
     <title></title>
+    <style>
+        .fa-minus{
+            height: 20px;
+            width: 20px;
+            position:absolute;
+            right: 0;
+            top: 0px;
+
+            display:flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .fa-minus:hover{
+            background-color: black;
+            color: white;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 <body>
     <div class="content-area">
@@ -118,83 +136,86 @@
                                 <p>메뉴 구성을 변경할 수 있으며 메뉴 하단에 폴더를 생성할 수 있습니다</p>
                             </div>
                         </div>
-                        <div class="menuArea" >
+                        <div class="menuLeftRight">
+                            <div class="menuLeftArea" >
+                                <%-- <c:choose>
+                                    <c:when></c:when>
+                                </c:choose> --%>
 
-                            <%-- <c:choose>
-                                <c:when></c:when>
-                            </c:choose> --%>
+                                <div class="home" >
+                                    <div class="categoryArea homeCategoryArea">
+                                        <span class="menuTitle">홈</span>
+                                    </div>
+                                </div>
 
-                            <div class="home" >
-                                <div class="categoryArea homeCategoryArea">
-                                    <img src="/resources/images/common/category.png" class="category">
-                                    <span class="menuTitle">홈</span>
+                                <div class="menuListArea" id="sortable1">
+                                <c:if test="${diary != -1}">
+                                    <div class="diary">
+                                        <div class="categoryArea" name="1">
+                                            <span class="menuTitle">다이어리</span><%-- <i class="fa-solid fa-plus"></i> --%>
+                                        </div>
+                                        <div class="subCategoryArea" id="sortable2">
+                                            <div class="subCategory" name="1">
+                                                <img src="/resources/images/common/folder.png" class="subCategoryImg">&nbsp;
+                                                <span class="folderTitle">나의 월간일정</span><%-- <i class="fa-solid fa-minus"></i> --%>
+                                            </div>
+                                            <div class="subCategory" name="2">
+                                                <img src="/resources/images/common/folder.png" class="subCategoryImg">&nbsp;
+                                                <span class="folderTitle">나의 다이어리</span><%-- <i class="fa-solid fa-minus"></i> --%>
+                                            </div>
+                                            <div class="subCategory" name="3">
+                                                <img src="/resources/images/common/folder.png" class="subCategoryImg">&nbsp;
+                                                <span class="folderTitle">나의 뭐시기기록장</span><%-- <i class="fa-solid fa-minus"></i> --%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:if>
+                                <c:if test="${album != -1}">
+                                    <div class="album">
+                                        <div class="categoryArea" name="2">
+                                            <span class="menuTitle">사진첩</span>
+                                        </div>
+                                        <div class="subCategoryArea" id="sortable3">
+                                            <div class="subCategory" name="1">
+                                                <img src="/resources/images/common/folder.png" class="subCategoryImg">&nbsp;
+                                                <span  class="folderTitle">나의 사진첩</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:if>
+                                <c:if test="${video != -1}">
+                                    <div class="video">
+                                        <div class="categoryArea" name="3">
+                                            <span class="menuTitle">동영상</span>
+                                        </div>
+                                        <div class="subCategoryArea" id="sortable4">
+                                            <div class="subCategory" name="1">
+                                                <img src="/resources/images/common/folder.png" class="subCategoryImg">&nbsp;
+                                                <span  class="folderTitle">나의 동영상</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:if>
+                                <c:if test="${guestBook != -1}">
+                                    <div class="guestBook">
+                                        <div class="categoryArea" name="4">
+                                            <span class="menuTitle">방명록</span>
+                                        </div>
+                                    </div>
+                                </c:if>
+                                </div>
+                                <div class="home" >
+                                    <div class="categoryArea homeCategoryArea">
+                                        <span class="menuTitle">관리</span>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="menuRightArea">
+                                <div class="menuRightTitle">폴더 추가, 삭제</div>
+                                <div class="menuRightContent">
 
-                            <div class="menuListArea" id="sortable1">
-                            <c:if test="${diary != -1}">
-                                <div class="diary">
-                                    <div class="categoryArea" name="1">
-                                        <img src="/resources/images/common/category.png" class="category">
-                                        <span class="menuTitle">다이어리</span>
-                                    </div>
-                                    <div class="subCategoryArea" id="sortable2">
-                                        <div class="subCategory" name="1">
-                                            <img src="/resources/images/common/subCategory.png" class="subCategoryImg">
-                                            <span  class="folderTitle">나의 월간일정</span>
-                                        </div>
-                                        <div class="subCategory" name="2">
-                                            <img src="/resources/images/common/subCategory.png" class="subCategoryImg">
-                                            <span class="folderTitle">나의 다이어리</span>
-                                        </div>
-                                    </div>
                                 </div>
-                            </c:if>
-                            <c:if test="${album != -1}">
-                                <div class="album">
-                                    <div class="categoryArea" name="2">
-                                        <img src="/resources/images/common/category.png" class="category">
-                                        <span class="menuTitle">사진첩</span>
-                                    </div>
-                                    <div class="subCategoryArea" id="sortable3">
-                                        <div class="subCategory" name="1">
-                                            <img src="/resources/images/common/subCategory.png" class="subCategoryImg">
-                                            <span  class="folderTitle">나의 사진첩</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:if>
-                            <c:if test="${video != -1}">
-                                <div class="video">
-                                    <div class="categoryArea" name="3">
-                                        <img src="/resources/images/common/category.png" class="category">
-                                        <span class="menuTitle">동영상</span>
-                                    </div>
-                                    <div class="subCategoryArea" id="sortable4">
-                                        <div class="subCategory" name="1">
-                                            <img src="/resources/images/common/subCategory.png" class="subCategoryImg">
-                                            <span  class="folderTitle">나의 동영상</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:if>
-                            <c:if test="${guestBook != -1}">
-                                <div class="guestBook">
-                                    <div class="categoryArea" name="4">
-                                        <img src="/resources/images/common/category.png" class="category">
-                                        <span class="menuTitle">방명록</span>
-                                    </div>
-                                </div>
-                            </c:if>
-                            </div>
-                            <div class="home" >
-                                <div class="categoryArea homeCategoryArea">
-                                    <img src="/resources/images/common/category.png" class="category">
-                                    <span class="menuTitle">관리</span>
-                                </div>
-                            </div>
-
-                            <div></div> <%-- 여기엔 뭘 적을까 --%>
+                            </div> 
                         </div>
                         <div class="menuSaveArea">
                             <button class="whiteBtn" id="menuSaveBtn">변경사항 저장</button>

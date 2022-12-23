@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="memberMapper">
+<mapper namespace="loginMapper">
 	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
 
 	<resultMap type="Member" id="member_rm">
@@ -28,6 +28,14 @@
    		
    		
    		<result property="memberBlockYN" column="MEMBER_BLOCK_YN"></result>
+   		<result property="blockStart" column="BLOCK_START"></result>
+   		<result property="blockEnd" column="BLOCK_END"></result>
+   		<result property="fontPath" column="FONT_PATH"></result>
+   		<result property="emotionPath" column="EMOTION_PATH"></result>
+   		<result property="emotionName" column="EMOTION_NAME"></result>
+   		<result property="alarmCount" column="ALARM_COUNT"></result>
+   		<result property="countToday" column="COUNT_TODAY"></result>
+   		<result property="friendCount" column="FRIEND_COUNT"></result>
   
  	 </resultMap>
  	 
@@ -40,14 +48,27 @@
 
 	<!-- 로그인 기능 -->
 	<select id="login" parameterType="string" resultMap="member_rm">
-		SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_PW, MEMBER_NICKNAME, INTRODUCE, BLOCK_FL,
-		MEMBER_TEL,MEMBER_NAME,
-		MEMBER_ADDRESS, PROFILE_IMG, AUTHORITY,
-		TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS ENROLL_DATE,
-		BIRTHDAY, MANNER, AUTHORITY
-		FROM "MEMBER"
-		WHERE MEMBER_DEL_FL = 'N'
-		<!-- AND BLOCK_FL = 'N' -->
+		SELECT M.MEMBER_NO, MEMBER_EMAIL, MEMBER_PW, MEMBER_NAME, MEMBER_NICKNAME, INTRODUCE,
+		MEMBER_TEL, PROFILE_IMG , AUTHORITY,
+		TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS ENROLL_DATE, BIRTHYEAR , 
+		BIRTHDAY , EMOTION_NO , 
+		TO_CHAR(BLOCK_START, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분"') AS BLOCK_START, 
+		TO_CHAR(BLOCK_END, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분"') AS BLOCK_END, 
+		CASE 
+			WHEN (SELECT MEMBER_NO FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = M.MEMBER_NO) IS NULL 
+			THEN 'N'
+			ELSE 'Y'
+		END MEMBER_BLOCK_YN,
+		(SELECT FONT_PATH FROM FONT_SHOP
+		JOIN MEMBER_OWN_GOODS MOG ON (OWN_NO = FONT_NO) WHERE MOG.OWN_NO = M.OWN_NO ) FONT_PATH,
+		(SELECT EMOTION_PATH FROM EMOTION E WHERE E.EMOTION_NO = M.EMOTION_NO) EMOTION_PATH,
+		(SELECT EMOTION_NAME FROM EMOTION E WHERE E.EMOTION_NO = M.EMOTION_NO) EMOTION_NAME,
+		(SELECT COUNT(*) FROM ALARM WHERE RECEIVER_NO = M.MEMBER_NO) ALARM_COUNT,
+		(SELECT COUNT_TODAY FROM MINI_HOMEPAGE MH WHERE MH.MEMBER_NO = M.MEMBER_NO) COUNT_TODAY,
+		(SELECT COUNT(*) FROM FRIEND WHERE FRIEND_ACCEPT_FL = 1 AND M.MEMBER_NO IN (ASKED_MEMBER_NO, ASKING_MEMBER_NO)) FRIEND_COUNT
+		FROM MEMBER M
+		LEFT JOIN MEMBER_BLOCK MB ON(M.MEMBER_NO = MB.MEMBER_NO)
+		WHERE MEMBER_DEL_YN = 'N'
 		AND MEMBER_EMAIL = #{memberEmail}
 	</select>
 

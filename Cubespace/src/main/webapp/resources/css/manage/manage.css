@@ -255,11 +255,6 @@ header {
     padding: 0 20px 0 20px;
 }
 
-.fa-minus {
-    border: 2px solid black;
-    border-radius: 50%;
-}
-
 .deleteFriend {
     cursor: pointer;
 }
@@ -406,7 +401,7 @@ header {
 }
 
 
-.menuArea {
+.menuLeftArea {
     border: 1px solid black;
     width: 250px;
     margin-top: 20px;
@@ -431,6 +426,7 @@ header {
 
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .categoryArea {
@@ -439,6 +435,7 @@ header {
 
     display: flex;
     align-content: center;
+    position: relative;
 }
 
 .categoryArea:hover,
@@ -481,6 +478,40 @@ header {
     font-size: 17px;
 }
 
+.menuLeftRight {
+    display: flex;
+}
+
+.menuRightArea {
+    border: 1px solid black;
+    width: 370px;
+    margin-left: 30px;
+    margin-top: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.clicked{
+    border:2px solid #aaa;
+}
+
+.fa-plus{
+    height: 20px;
+    width: 20px;
+    position:absolute;
+    right: 0;
+    top: 0;
+
+    display:flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.fa-plus:hover{
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+}
 
 /* ------------------------------------------------------ */
 /* 배경음악 설정 */

@@ -38,7 +38,7 @@
                 </div>
                 <%-- 회원검색 --%>
                 <div class="member-search-input-div">
-                    <input type="text" class="member-search-input" id="memberSearchInput" maxlength="10" placeholder="검색할 회원을 입력하세요.">
+                    <input type="text" class="member-search-input" id="leftChoiceInput" maxlength="10" placeholder="검색할 회원을 입력하세요.">
                     <button>검색</button>
                 </div>
 
@@ -62,7 +62,7 @@
 
                             <div class="member-choice"> <%-- div2_div2 --%>
                                 <img class="minihome-img" src="/resources/images/common/smallCube.png"> <%-- div2_divimg --%>
-                                <div>미니홈피</div> <%-- div2_div3 --%>
+                                <a href="/minihome" onclick="return openMinihome(this.href)">미니홈피</a> <%-- a --%>
                             </div>
                         </div>
                     </div>
@@ -75,9 +75,9 @@
                         </div>
 
                         <div class="profile-body">
-                            <div class="member-choice" id="friendWaiting">
-                                <i class="fa-regular fa-paper-plane" id="faPaperPlane"></i>
-                                <div onclick="addFriend()" id="add">신청</div>
+                            <div class="member-choice">
+                                <i class="fa-regular fa-paper-plane" ></i>
+                                <div onclick="addFriend()">신청</div>
                             </div>
 
                             <div class="member-choice">
@@ -96,7 +96,7 @@
 
                         <div class="profile-body">
                             <div>
-                                <i class="fa-regular fa-comment-dots" id="faCommentDots"></i>
+                                <i class="fa-regular fa-comment-dots"></i>
                                 <div>수락대기</div>
                             </div>
 
@@ -111,106 +111,6 @@
 
 
 
-
-                    <div class="mebmer-profile">
-                        <div class="profile-head">
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">묘동닉네임글자테스트</div>
-                        </div>
-                        <div class="profile-body">
-                            <div>
-                                <i class="fa-solid fa-check" id="faCheck"></i>
-                                <div>깐부</div>
-                            </div>
-                            <div class="member-choice">
-                                <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div>미니홈피</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mebmer-profile">
-                        <div class="profile-head">
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">mung</div>
-                        </div>
-                        <div class="profile-body">
-                            <div class="member-choice">
-                                <i class="fa-regular fa-paper-plane" id="faPaperPlane"></i>
-                                <div>신청</div>
-                            </div>
-                            <div class="member-choice">
-                                <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div>미니홈피</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mebmer-profile">
-                        <div class="profile-head">
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">여너</div>
-                        </div>
-                        <div class="profile-body">
-                            <div class="member-choice">
-                                <i class="fa-regular fa-paper-plane" id="faPaperPlane"></i>
-                                <div>신청</div>
-                            </div>
-                            <div class="member-choice">
-                                <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div>미니홈피</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mebmer-profile">
-                        <div class="profile-head">
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">포뱅이</div>
-                        </div>
-                        <div class="profile-body">
-                            <div class="member-choice">
-                                <i class="fa-regular fa-paper-plane" id="faPaperPlane"></i>
-                                <div>신청</div>
-                            </div>
-                            <div class="member-choice">
-                                <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div>미니홈피</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mebmer-profile">
-                        <div class="profile-head">
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">슈슈</div>
-                        </div>
-                        <div class="profile-body">
-                            <div class="member-choice">
-                                <i class="fa-regular fa-paper-plane" id="faPaperPlane"></i>
-                                <div>신청</div>
-                            </div>
-                            <div class="member-choice">
-                                <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div>미니홈피</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mebmer-profile">
-                        <div class="profile-head">
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">묘동</div>
-                        </div>
-                        <div class="profile-body">
-                            <div>
-                                <i class="fa-regular fa-comment-dots" id="faCommentDots"></i>
-                                <div>수락대기</div>
-                            </div>
-                            <div class="member-choice">
-                                <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div>미니홈피</div>
-                            </div>
-                        </div>
-                    </div>
-                    
 
                 </section>
 

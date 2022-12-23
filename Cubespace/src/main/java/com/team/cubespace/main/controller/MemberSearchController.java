@@ -24,16 +24,16 @@ public class MemberSearchController {
 	
 	/** 깐부찾기 자동완성 조회
 	 * @param loginMemberNo
-	 * @param memberSearchInput
+	 * @param leftChoice
 	 * @return
 	 */
 	@GetMapping("/memberAllSearch")
 	@ResponseBody
-	public String memberSearchAll(int loginMemberNo, String memberSearchInput) {
+	public String memberSearchAll(int loginMemberNo, String leftChoiceInput) {
 		
 		Map<String, Object> map =new HashMap<String, Object>();
 		map.put("loginMemberNo", loginMemberNo);
-		map.put("memberSearchInput", memberSearchInput);
+		map.put("leftChoiceInput", leftChoiceInput);
 		
 		List<MemberSearch> memberSearchList =  service.memberSearchAll(map);
 		

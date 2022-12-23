@@ -14,26 +14,81 @@ function closeModal(){
         const leftChoice = document.getElementById("leftChoice");
         const  rightChoice= document.getElementById("rightChoice");
 
-        rightChoice.addEventListener("mouseover", () => {
-            leftChoice.style.border = "none";
-            leftChoice.style.borderBottom = "1px solid black";
-            rightChoice.style.border = "1px solid black";
-            rightChoice.style.borderBottom = "none";
+            rightChoice.addEventListener("mouseover", () => {
+                leftChoice.style.border = "none";
+                leftChoice.style.borderBottom = "1px solid black";
+                rightChoice.style.border = "1px solid black";
+                rightChoice.style.borderBottom = "none";
+    
+                leftChoice.style.color = "black";
+                leftChoice.style.fontWeight = "normal";
+                rightChoice.style.color = "var(--subColor)";
+                rightChoice.style.fontWeight = "bold";
+            })
+    
+            rightChoice.addEventListener("mouseout", () => {
 
-            leftChoice.style.color = "black";
-            leftChoice.style.fontWeight = "normal";
-            rightChoice.style.color = "var(--subColor)";
-            rightChoice.style.fontWeight = "bold";
+                if(document.getElementById("leftChoiceInput")!=null ){
+                    rightChoice.style.border = "none";
+                    rightChoice.style.borderBottom = "1px solid black";
+                    leftChoice.style.border = "1px solid black";
+                    leftChoice.style.borderBottom = "none";
+        
+                    rightChoice.style.color = "black";
+                    rightChoice.style.fontWeight = "normal";
+                    leftChoice.style.color = "var(--subColor)";
+                    leftChoice.style.fontWeight = "bold";
+                }
+            })
+
+            leftChoice.addEventListener("mouseover", () => {
+                rightChoice.style.border = "none";
+                rightChoice.style.borderBottom = "1px solid black";
+                leftChoice.style.border = "1px solid black";
+                leftChoice.style.borderBottom = "none";
+                
+                rightChoice.style.color = "black";
+                rightChoice.style.fontWeight = "normal";
+                leftChoice.style.color = "var(--subColor)";
+                leftChoice.style.fontWeight = "bold";
+            })
+            
+            leftChoice.addEventListener("mouseout", () => {
+                
+                if(document.getElementById("rightChoiceInput")!=null ){
+                    leftChoice.style.border = "none";
+                    leftChoice.style.borderBottom = "1px solid black";
+                    rightChoice.style.border = "1px solid black";
+                    rightChoice.style.borderBottom = "none";
+                    
+                    leftChoice.style.color = "black";
+                    leftChoice.style.fontWeight = "normal";
+                    rightChoice.style.color = "var(--subColor)";
+                    rightChoice.style.fontWeight = "bold";
+                }
+
+            })
+
+        /* 오른쪽 클릭 시 */
+        rightChoice.addEventListener("click",()=>{
+            
+            //검색 id변경 하여 검색시 회원조회가 아닌 내가 신청한 목록조회로 변경
+            const leftChoiceInput = document.getElementById("leftChoiceInput");
+            leftChoiceInput.setAttribute("id","rightChoiceInput")
+            
+            //기존 검색 목록 제거
+            const section = document.querySelector(".mebmer-search-profile");
+            section.innerHTML=""; // 이전 내용 제거
         })
 
-        rightChoice.addEventListener("mouseout", () => {
-            rightChoice.style.border = "none";
-            rightChoice.style.borderBottom = "1px solid black";
-            leftChoice.style.border = "1px solid black";
-            leftChoice.style.borderBottom = "none";
+        /* 왼쪽 클릭 시 */
+        leftChoice.addEventListener("click",()=>{
+    
+            //검색 id변경 하여 검색시 내가 신청한 목록조회가 아닌 회원조회로 변경
+            const rightChoiceInput = document.getElementById("rightChoiceInput");
+            rightChoiceInput.setAttribute("id","leftChoiceInput")
 
-            rightChoice.style.color = "black";
-            rightChoice.style.fontWeight = "normal";
-            leftChoice.style.color = "var(--subColor)";
-            leftChoice.style.fontWeight = "bold";
+            //기존 검색 목록 제거
+            const section = document.querySelector(".mebmer-search-profile");
+            section.innerHTML=""; // 이전 내용 제거
         })

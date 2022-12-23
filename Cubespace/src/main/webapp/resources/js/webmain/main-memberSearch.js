@@ -2,23 +2,28 @@
 let memberNo;
 
 /* 깐부찾기 자동완성 */
-document.getElementById("memberSearchInput").addEventListener("keyup",()=>{
+document.getElementById("leftChoiceInput").addEventListener("keyup",()=>{
 
     memberSearch();
 })
+
+/* 내가 신청한 깐부 자동완성*/
+// document.getElementById("rightChoiceInput").addEventListener("keyup",()=>{
+
+// })
+
 
 /* 비동기로 회원 목록 조회 함수  */
 const memberSearch=()=>{
     
     // input 값 가져오기 
-    var memberSearchInput=$('#memberSearchInput').val();
+    var leftChoiceInput=$('#leftChoiceInput').val();
     
     $.ajax({
         url : "/memberAllSearch",
-        data: {"memberSearchInput":memberSearchInput,"loginMemberNo":3},
+        data: {"leftChoiceInput":leftChoiceInput,"loginMemberNo":3},
         dataType : "JSON",
         success : memberSearchList =>{
-            console.log(memberSearchList);
 
             const section = document.querySelector(".mebmer-search-profile");
             section.innerHTML=""; // 이전 내용 제거
@@ -40,7 +45,7 @@ const memberSearch=()=>{
                         img.classList.add("member-img");
 
                         /* DB에 프로필 사진이 NUll이라면 */
-                        if(profile.profileImage == "NULL"){
+                        if(profile.profileImage == null){
                             img.setAttribute("src","/resources/images/common/cubes.png")
                         } else{//null이 아니라면
                             img.setAttribute("src",profile.profileImage)
@@ -62,16 +67,15 @@ const memberSearch=()=>{
     
                         if(profile.friendAcceptFl==1){ /* 이미 깐부일 경우 */
     
-                                i.classList.add("fa-solid","fa-check");
-                                i.setAttribute("id","faCheck");
-                                div2_divdiv.innerText="깐부";
-    
-                                div2_div.append(i,div2_divdiv);
+                            i.classList.add("fa-solid","fa-check");
+                            i.setAttribute("id","faCheck");
+                            div2_divdiv.innerText="깐부";
+
+                            div2_div.append(i,div2_divdiv);
     
                         }else if (profile.friendAcceptFl==0) { /* 수락대기중일 경우 */
     
                             i.classList.add("fa-regular","fa-comment-dots");
-                            // i.setAttribute("id","faCommentDots");
                             div2_divdiv.innerText="수락대기";
     
                             div2_div.append(i,div2_divdiv);
@@ -79,10 +83,8 @@ const memberSearch=()=>{
                             div2_div.classList.add("member-choice");
 
                             i.classList.add("fa-regular","fa-paper-plane");
-                            // i.setAttribute("id","faPaperPlane"); 
                             div2_divdiv.innerText="신청";
                             div2_divdiv.setAttribute("onclick","addFriend("+profile.memberNo+", this)")
-                            div2_divdiv.setAttribute("id","add")
 
                             div2_div.append(i,div2_divdiv);
                         }
@@ -94,14 +96,16 @@ const memberSearch=()=>{
                             div2_divimg.classList.add("minihome-img");
                             div2_divimg.setAttribute("src","/resources/images/common/smallCube.png");
     
-                            const div2_div3 = document.createElement("div");
-                            div2_div3.innerText="미니홈피";
-    
+                            const a = document.createElement("a");
+                            a.innerText="미니홈피";
+                            a.setAttribute("href","/minihome/"+profile.memberNo);
+                            a.setAttribute("onclick","/return openMinihome(this.href)");
+
                             section.append(div);
                             div.append(div1,div2);
                             div1.append(img,div1_div);
                             div2.append(div2_div,div2_div2);
-                            div2_div2.append(div2_divimg,div2_div3);
+                            div2_div2.append(div2_divimg,a);
             }
         }
     })
@@ -110,33 +114,28 @@ const memberSearch=()=>{
 /* 비동기로 회원깐부신청 함수  */
 const addFriend = (memberNo, btn)=>{
 
-        $.ajax ({
-            url : "/memberAddFriend",
-            data : {"loginMemberNo":3,"memberNo":memberNo},
-            success : memberAddFriend =>{
-                console.log(memberAddFriend);
+    $.ajax ({
+        url : "/memberAddFriend",
+        data : {"loginMemberNo":3,"memberNo":memberNo},
+        success : memberAddFriend =>{
+            console.log(memberAddFriend);
 
-                if(memberAddFriend==1){// 깐부신청 성공
-                    //업데이트 신청 -> 대기중 변경
-                    // const friendWaiting =document.getElementById("friendWaiting")
-                    const friendWaiting = btn.parentElement;
-                    friendWaiting.classList.remove("member-choice");
-    
-                    // const faPaperPlane =document.getElementById("faPaperPlane")
-                    const faPaperPlane = btn.previousElementSibling;
-                    faPaperPlane.classList.remove("fa-paper-plane");
-                    // faPaperPlane.removeAttribute("id");
-    
-                    faPaperPlane.classList.add("fa-comment-dots");
-                    // faPaperPlane.setAttribute("id","faCommentDots");
-    
-                    const add = btn;
-                    add.innerText="수락대기"
-                    add.removeAttribute("onclick");
-                    add.removeAttribute("id");
-                }else{
-                    alert("깐부신청 실패")
-                }
+            if(memberAddFriend==1){// 깐부신청 성공
+                //업데이트 신청 -> 대기중 변경
+                const friendWaiting = btn.parentElement;
+                friendWaiting.classList.remove("member-choice");
+
+                const faPaperPlane = btn.previousElementSibling;
+                faPaperPlane.classList.remove("fa-paper-plane");
+                faPaperPlane.classList.add("fa-comment-dots");
+
+                const add = btn;
+                add.innerText="수락대기"
+                add.removeAttribute("onclick");
+                add.removeAttribute("id");
+            }else{
+                alert("깐부신청 실패")
             }
-        })
+        }
+    })
 }

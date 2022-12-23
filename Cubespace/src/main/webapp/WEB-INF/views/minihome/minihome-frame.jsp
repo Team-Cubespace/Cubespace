@@ -54,7 +54,7 @@
             </div>
             <section class="minihome-main">
 
-                <iframe src="/albumDetail" frameborder="0" name="minihomeMenu" scrolling="no">
+                <iframe src="/albumList" frameborder="0" name="minihomeMenu" scrolling="no">
 
                 </iframe>
                 <ul class="minihome-menu">

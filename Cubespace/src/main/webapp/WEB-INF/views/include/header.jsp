@@ -10,7 +10,7 @@
                 <span>상점</span>
             </a>
         </li>
-        <li onclick="openModal()">
+        <li class="header-menu" onclick="openModal()">
             <a>
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <span>깐부 찾기</span>

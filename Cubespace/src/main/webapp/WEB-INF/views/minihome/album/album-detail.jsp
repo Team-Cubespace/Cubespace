@@ -18,9 +18,14 @@
     <link rel="stylesheet" href="/resources/css/minihome/album/album-detail.css">
     <link rel="stylesheet" href="/resources/css/minihome/include/comment.css">
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
+    <style>
+        .frame-color {
+            background-color : ${minihome.frameColor};
+        }
+    </style>
 </head>
 <body>
-    <div class="content-area">
+    <div class="content-area frame-color">
         <section class="minihome-rayout">
             <jsp:include page="/WEB-INF/views/include/side-folder.jsp"/>
                 <!-- 좌측 section 코드 작성 또는 include -->

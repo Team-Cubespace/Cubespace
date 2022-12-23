@@ -1,4 +1,5 @@
 .comment-section {
+    width: 100%;
     margin-top: 30px;
 }
 
@@ -86,9 +87,6 @@
     background-color: var(--ink);
 }
 /* 자식 댓글 작성 영역 */
-.comment-section {
-    width: 640px;
-}
 
 /* 댓글 조회 */
 .comment-row {

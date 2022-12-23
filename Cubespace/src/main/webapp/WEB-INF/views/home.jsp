@@ -17,7 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cubespace</title>
-    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="/resources/css/style-web.css">
     <link rel="stylesheet" href="/resources/css/common/home/home.css">
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
 </head>
@@ -95,7 +95,7 @@
                             </div>
                         </div>
 
-                        <a href="/minihome" id="homeBtn" onclick="return openMinihome(this.href)"><i class="fa-solid fa-house"></i>&nbsp;My Space</a>
+                        <a href="/minihome/3" id="homeBtn" onclick="return openMinihome(this.href)"><i class="fa-solid fa-house"></i>&nbsp;My Space</a>
                     </c:otherwise>
                 </c:choose>
             </div>

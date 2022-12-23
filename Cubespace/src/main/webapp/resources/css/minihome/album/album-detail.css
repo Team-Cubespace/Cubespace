@@ -84,3 +84,27 @@
 .album-content {
     margin: 10px 0px;
 }
+
+/* 앨범 내용 푸터 */
+.album-detail-footer {
+    display: flex;
+    align-items: center;
+}
+.location {
+    color: grey;    
+    font-size: 15px;
+}
+.location i {
+    font-size: 17px;
+    color: var(--mainColor);
+}
+
+.album-button-area {
+    margin-left: auto;
+}
+.album-button-area > * {
+    background-color: transparent;
+    border: none;
+    padding: 5px 5px;
+    font-weight: bold;
+}

@@ -2,7 +2,7 @@
 
 <div class="album-main">
     <header>
-        <span>메뉴 이름</span>
+        <span>${minihome.homepageName}</span>
         <span> > </span>
         <span>폴더 이름</span>
     </header>

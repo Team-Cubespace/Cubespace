@@ -1,21 +1,11 @@
-/* minihome css */
+/* web css */
 /* screens */
 @Import "/resources/css/variables.css";
 @import "/resources/css/reset.css";
 
-
-
-
-/* @import "/resources/css/common/header.css";
-@import "/resources/css/common/footer.css"; */
-
+@import "/resources/css/common/header.css";
+@import "/resources/css/common/footer.css";
 @import "/resources/css/common/checkBox.css";
-
-/* HTML 확인용 */
-@Import "variables.css";
-@import "reset.css";
-
-@import "common/checkBox.css";
 
 @import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap'); /* singleDay */
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap'); /* gowonDadum */

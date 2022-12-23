@@ -1,7 +1,8 @@
+/* 미니룸 헤더 */
 .miniroom-header{
-    position: relative;
     margin: 0;
     border: none;
+    position: relative;
 }
 
 .miniroom-deco{
@@ -12,6 +13,7 @@
     bottom: 10px;
 }
 
+/* 미니룸 */
 .miniroom-container{
     width: 100%;
     height: 350px;
@@ -29,10 +31,6 @@
 
 .miniroom{
     perspective: 500px; /* 원근감 */
-}
-
-.front > div{
-    position: absolute;
 }
 
 .miniroom > div{
@@ -68,10 +66,15 @@
     transform: rotateX(45deg) rotateY(0deg) rotateZ(45deg);
 }
 
-#test{
+/* front 영역 (미니미, 소품 배치) */
+.front > div{
+    position: absolute;
+}
+
+#props{
     width: 128px;
     height: 123px;
-    background-image: url(pngegg.png);
+    background-image: url("../../../images/crown.png");
     background-size: cover;
     top: 242px;
     left: 68px;

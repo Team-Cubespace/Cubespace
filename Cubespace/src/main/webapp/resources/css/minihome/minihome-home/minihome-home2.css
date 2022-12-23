@@ -1,12 +1,31 @@
-.new-posts{
+/* contents container margin-bottom 30px 고정 */
+
+/* 최근 게시물 */
+.new-post-container, .friend-message-container{
     margin-bottom: 30px;
     padding: 0 7px;
 }
 
 .new-post, .friend-message{
-    margin-bottom: 7px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.new-post > div:first-child{
+    display: flex;
+}
+
+.new-post a{
+    /* width: 400px; */
+    display: flex;
+}
+
+.new-post a > div{
+    text-overflow: ellipsis;
+    white-space : nowrap;
+    overflow : hidden;
 }
 
 .post-category{
@@ -14,16 +33,11 @@
     margin-right: 10px;
     color: darksalmon;
     font-weight: bold;
-    display: inline-block;
 }
 
 .post-title{
-    width: 440px;
+    width: 200px;
     margin: 0 10px;
-    text-overflow: ellipsis;
-    display: inline-block;
-    white-space : nowrap;
-    overflow : hidden;
 }
 
 .post-time{
@@ -32,6 +46,7 @@
     display: inline-block;
 }
 
+/* 깐부 메시지 */
 .updatefriend{
     background-color: #2e2e2e;
     height: 50px;
@@ -75,4 +90,13 @@
 
 #moreBtn{
     margin-right: 50px;
+}
+
+.nickname{
+    width: auto;
+    margin: 0;
+}
+
+.fri-message{
+    margin: 0;
 }

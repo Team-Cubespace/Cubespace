@@ -127,33 +127,57 @@ const makeCalendar = (date) => {
             // 클릭한 날짜(년-월-일)
             console.log(`${currentYear}-${currentMonth}-${temp}`);
 
+            /* 작성일 */
+            const diaryDate = `${currentYear}-${currentMonth}-${temp}`;
+
             // !!!!!!!!!!!!!!요기다 해당 날짜 다이어리 조회 ajax 코드 작성!!!!!!!!!!!!!!!!!
             // $.ajax({}) 
 
             /* [나의 주석] 
             
-                구현할 때 들고가야 하는 것 : 작성일 / 미니홈피 주인장 회원넘버 /
+                구현할 때 들고가야 하는 것 : 작성일 / (loginmember 넘버 &미니홈피 주인장 회원넘버 = 관계조회시 필요) / 폴더 넘버
+                가져와서 뿌리는 것 : 제목 / 내용 / 작성일(시간만) / 공개여부 / 공감목록(map으로 select 2번해가지고 공감목록 & 글목록을 map에다가 넣으면 될 듯?)
                 만약에 loginmember와 (미니홈피 주인)이 같을 경우,
                 만약에 loginmember와 (미니홈피 주인)이 깐부관계인 경우(둘의 관계를 select한다음에 번호를 줘야하나?)
-                
+
                 -> 그러면 불러오는 글 목록이 if문으로 달라지지 않을까?
                 1. DB에 작성일을 들고, 작성일이 일치하는 목록을 불러온다.
-                2. 글쓰기 할 때도 저 작성일넣어야됨
-                
+                2. 글쓰기 할 때도 저 작성일 넣어야됨.
+
+                -> [ 글 목록 ]
+                1) 본인의 미니홈피    : 1,2,3 다 조회 (3 공개 여부는 controller에서 처리)
+                (나머지 1,2 공개 여부는 jsp에서 처리 // if문으로.....)
+                2) 깐부의 미니홈피    : 1,2 조회
+                3) 낯선 자의 미니홈피 : 1 조회
+
+                -> [공감목록]
+                1) 목록이 있는 경우 : 조회됨
+                2) 
+
+                -> [ 공감하기 버튼 ]
+                1) 본인의 미니홈피 O   : 공감하기 버튼 보여짐 X 
+                2) 본인의 미니홈피 X   : 공감하기 버튼 보여짐 O
+                    (1) 깐부인 경우    : 공감하기 버튼 누름 O
+                        (1) 이미 누른 경우 : 누른 공감버튼에 border표시
+                        (2) 취소하면 border 빼고, 숫자 내려가고,
+                        (3) 다른 공감 emoji 누르면 다른 쪽꺼 (2)됨.
+                    (2) 낯선 자인 경우 : 공감하기 버튼 누름 X
             
             */
 
+            $.ajax({
 
+            });
 
             // ------- 여긴 ajax success 코드로 활용 -------------
-            // 클릭된 날짜가 있을 경우 클릭 해제
+            // 기존에 클릭된 날짜가 있을 경우 기존 날짜를 클릭 해제
             if(document.querySelector(".day-click") != null){
                 document.querySelector(".day-click").classList.remove("day-click");
             }
 
             e.target.classList.add("day-click");
 
-            // 클릭한 날짜에 클릭 표시
+            // 새로 클릭한 날짜에 클릭 표시
             document.querySelector(".today").innerText = `${currentMonth}.${temp}`;
             document.querySelector(".today-day").innerText = weekDay[new Date(`${currentYear}-${currentMonth}-${i}`).getDay()];
             // ------- 여긴 ajax success 코드로 활용 -------------

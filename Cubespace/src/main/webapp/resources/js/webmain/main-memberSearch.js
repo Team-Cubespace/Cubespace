@@ -1,16 +1,14 @@
 /* 값을 저장할 변수 선언 */
 let memberNo;
 
-
-/* 이건 왜 안되는 것인가? 도와주세요 */
+/* 강사님께 여쭤보기 1 도와주세요 */
+/* 이건 왜 안되는 것인가? */
 /*  */
 // document.querySelector(".member-search-input").addEventListener("keyup",()=>{
 //     memberSearch()
 // })
 /* 이건 왜 위에 있으면 안되는가 */
 // document.querySelector(".member-search-input").addEventListener("keyup",memberSearch)
-
-
 
 /* 오른쪽 클릭 시 이벤트리스너 제거/추가 */
 document.getElementById("rightChoice").addEventListener("click",()=>{
@@ -28,7 +26,6 @@ document.getElementById("leftChoice").addEventListener("click",()=>{
     reset.removeEventListener("keyup",memberAddFriendList)
     reset.addEventListener("keyup",memberSearch)
 })
-
 
 /* 비동기로 회원 목록 조회 함수  */
 const memberSearch=()=>{
@@ -76,11 +73,9 @@ const memberSearch=()=>{
                     const div2  = document.createElement("div");
                     div2.classList.add("profile-body");
                     
-    
                         const div2_div =document.createElement("div");
                         const i =document.createElement("i");
                         const div2_divdiv =document.createElement("div");
-    
     
                         if(profile.friendAcceptFl==1){ /* 이미 깐부일 경우 */
     
@@ -127,6 +122,7 @@ const memberSearch=()=>{
         }
     })
 }
+/* 여기둬야 적용됨 */
 document.querySelector(".member-search-input").addEventListener("keyup",memberSearch);
 
 /* 비동기로 회원깐부신청 함수  */
@@ -136,7 +132,6 @@ const addFriend = (memberNo, btn)=>{
         url : "/memberAddFriend",
         data : {"loginMemberNo":loginMemberNo,"memberNo":memberNo},
         success : memberAddFriend =>{
-            console.log(memberAddFriend);
 
             if(memberAddFriend==1){// 깐부신청 성공
                 //업데이트 신청 -> 대기중 변경
@@ -158,11 +153,8 @@ const addFriend = (memberNo, btn)=>{
     })
 }
 
-
 /* 비동기로 내가 신청한 회원 목록 조회 함수  */
 const memberAddFriendList=()=>{
-    console.log("함수는 실행됨");
-/* 수정 필용요요요요요요 */
 
     // const rightChoiceInput =document.getElementById("rightChoiceInput");
     var rightChoiceInput=$('#rightChoiceInput').val();
@@ -171,8 +163,6 @@ const memberAddFriendList=()=>{
         data: {"rightChoiceInput":rightChoiceInput,"loginMemberNo":loginMemberNo},
         dataType : "JSON",
         success : memberAddList =>{
-
-            console.log(rightChoiceInput);
 
             const section = document.querySelector(".mebmer-search-profile");
             section.innerHTML=""; // 이전 내용 제거
@@ -245,8 +235,6 @@ const memberAddFriendList=()=>{
     })
 }
 
-
-
 /* 비동기로 회원신청 취소   */
 const addFriendCancel = (memberNo, btn)=>{
 
@@ -254,13 +242,10 @@ const addFriendCancel = (memberNo, btn)=>{
         url : "/memberAddCancel",
         data : {"loginMemberNo":loginMemberNo,"memberNo":memberNo},
         success : memberAddCancel =>{
-            console.log(memberAddCancel);
 
             if(memberAddCancel==1){// 깐부신청취소 성공
                 //프로필 삭제 
-                //  강사님께 물어보기 도와주세요
                 const mebmerProfile = btn.parentElement.parentElement.parentElement;
-                mebmerProfile.innerHTML="";
                 mebmerProfile.remove()
             }else{
                 alert("깐부신청취소 실패")

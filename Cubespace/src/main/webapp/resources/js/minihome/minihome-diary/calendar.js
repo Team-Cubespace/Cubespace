@@ -172,7 +172,7 @@ const makeCalendar = (date) => {
             //[나의 코드]
             /* 작성일 / 폴더 넘버 / 미니홈피 주인장 넘버 */
             const diaryDate = `${currentYear}-${currentMonth}-${temp}`;
-            const folderNumber = 1; 
+            const folderNumber = 1; /* 폴더 */
             const homepageMemberNo = 1; /* 이슬이 다이어리를 조회해보겠다. */
             const loginMemberNo = 2; 
 
@@ -182,12 +182,11 @@ const makeCalendar = (date) => {
                 url : "/diary/selectDiary",
                 data : {"diaryDate":diaryDate,"folderNumber":folderNumber,"homepageMemberNo":homepageMemberNo,"loginMemberNo":loginMemberNo},
                 dataType : "JSON",
-                success :  diaryList  => {
-                    // 요청 성공 시 데이터를 텍스트 형식을 얻어옴
-                    xmlDoc = result;
+                success :  (diaryList)  => {
+                    console.log("해당 날짜의 다이어리 목록 받기 성공")
+                
                 }, error : () => { 
-                    console.log("공공데이터 요청 실패"); 
-                    return;
+                    
                 }
                 
             });

@@ -1,0 +1,71 @@
+/* 상단 모달 헤더 설정 */
+/* 이미지 설정 */
+.head-img-bell{
+    width: 50px;
+    height: 60px;
+}
+
+/* 프로필 최상위 부모 */
+.mebmer-profile-alarm{
+    border-bottom: 1px solid black;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.profile-head-alarm{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0 0 0 20px;
+}
+/* 회원 정보 */
+.profile-info{
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* 게시된시간 */
+.alarm-time{
+    font-size: 12px;
+}
+/* 알림 글 설정 */
+.alarm-info{
+    width: 100%;
+    margin-left: 10px;
+    display: flex;
+    font-size: 15px;
+}
+/* 게시물 제목 길이 설정 */
+.board-title{
+    max-width: 240px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+/* 게시물 삭제 부모 */
+.alarm-delete{
+    height: 100%;
+    font-size: 14px;
+    line-height: 90%;
+    margin-left: 10px;
+}
+/* 알림 삭제  */
+.alarm-delete > i{
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* 게시글 타입설정 */
+.board-type{
+    width: 194px;
+}
+
+.contents{
+    width: 498px;
+}

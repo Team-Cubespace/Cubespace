@@ -1,0 +1,103 @@
+/* 웹사이트 메인 공용 모달 (깐부찾기, 알림) */
+
+/* 모달 공용 설정*/
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10001;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+}
+
+.modal-box{
+    border-radius: 20px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
+    -webkit-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
+    width: 700px;
+    height: 800px;
+    /* background-color: red; */
+}
+
+/****************************************************/
+/* 뒤로가기 버튼 < */
+.modal-close{
+    display: inline;
+    font-size: 50px;
+    margin: 0 0 0 10px;
+    cursor: pointer;
+    /* background-color: red; */
+}
+
+/****************************************************/
+/* 헤더 이미지 및 텍스트 */
+.modal-head{
+    /* background-color: gray; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    font-size: 42px;
+}
+/* 이미지 설정 */
+.head-img{
+    width: 80px;
+    height: 80px;
+}
+
+/****************************************************/
+/* 모달 바디 */
+.modal-body{
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 모달내 선택 변경 버튼 */
+.modal-choice {
+    display: flex;
+    width: 600px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0 20px 0;
+    /* background-color: #e53095; */
+    /* background-color: gold; */
+}
+.modal-choice > a {
+    height: 100%;
+    width: 350px;
+    /* padding: 30px 0; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#leftChoice {
+    border-bottom: none;
+    color: var(--subColor);
+    font-weight: bold;
+}
+#rightChoice{
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
+/****************************************************/
+/* 스크롤바 투명 */
+::-webkit-scrollbar {
+    display: none;
+}

@@ -10,13 +10,13 @@
                 <span>상점</span>
             </a>
         </li>
-        <li class="header-menu">
-            <a href="">
+        <li class="header-menu" onclick="openModal()">
+            <a>
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <span>깐부 찾기</span>
             </a>
         </li>
-        
+        <jsp:include page="/WEB-INF/views/webmain/main-memberSearch.jsp"/>
         <!-- 로그인 X && 메인 페이지 X -->
         <c:choose>
             <c:when test="${empty loginMember}">

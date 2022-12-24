@@ -251,14 +251,14 @@ const memberAddFriendList=()=>{
 const addFriendCancel = (memberNo, btn)=>{
 
     $.ajax ({
-        url : "/memberAddFriend",
+        url : "/memberAddCancel",
         data : {"loginMemberNo":3,"memberNo":memberNo},
-        success : memberAddFriend =>{
-            console.log(memberAddFriend);
+        success : memberAddCancel =>{
+            console.log(memberAddCancel);
 
-            if(memberAddFriend==1){// 깐부신청 성공
+            if(memberAddCancel==1){// 깐부신청 성공
                 //업데이트 신청 -> 대기중 변경
-                const friendWaiting = btn.parentElement;
+                const mebmerProfile = btn.parentElement;
                 friendWaiting.classList.remove("member-choice");
 
                 const faPaperPlane = btn.previousElementSibling;

@@ -127,9 +127,7 @@ const makeCalendar = (date) => {
             // 클릭한 날짜(년-월-일)
             console.log(`${currentYear}-${currentMonth}-${temp}`);
 
-            /* 작성일 */
-            const diaryDate = `${currentYear}-${currentMonth}-${temp}`;
-
+            
             // !!!!!!!!!!!!!!요기다 해당 날짜 다이어리 조회 ajax 코드 작성!!!!!!!!!!!!!!!!!
             // $.ajax({}) 
 
@@ -151,22 +149,47 @@ const makeCalendar = (date) => {
                 3) 낯선 자의 미니홈피 : 1 조회
 
                 -> [공감목록]
-                1) 목록이 있는 경우 : 조회됨
-                2) 
+                1) 목록이 있는 경우 : 조회됨 & 누르면 깐부 목록을 조회할 수 있음
+                2) 목록이 없는 경우 : 아예 뜨지를 않으니 클릭도 못하지...
 
-                -> [ 공감하기 버튼 ]
+                -> [ 공감하기 버튼 ] : ID말고 queryselector 써야 됨!!!!!!
                 1) 본인의 미니홈피 O   : 공감하기 버튼 보여짐 X 
                 2) 본인의 미니홈피 X   : 공감하기 버튼 보여짐 O
                     (1) 깐부인 경우    : 공감하기 버튼 누름 O
+                        1. 누른다. (emoji의번호 필요함.switch로 각각 값을 줘야하나?)
+                            -> ajax : insert한다.  & 새로 목록 조회해주기(or 특정이모지 +1)
+                        2. 이미 누른 경우
+                            1. 다시 그걸 누른다 = 취소됨  : delete  & 새로 목록 조회해주기(or 특정 이모지 -1)
+                            2. 다른 이모지를 누른다 = 변경됨 : update   & 새로 목록 조회해주기(or 누른 이모지 +1 / 이전 이모지 -1)
+
                         (1) 이미 누른 경우 : 누른 공감버튼에 border표시
                         (2) 취소하면 border 빼고, 숫자 내려가고,
                         (3) 다른 공감 emoji 누르면 다른 쪽꺼 (2)됨.
                     (2) 낯선 자인 경우 : 공감하기 버튼 누름 X
+
             
             */
+            //[나의 코드]
+            /* 작성일 / 폴더 넘버 / 미니홈피 주인장 넘버 */
+            const diaryDate = `${currentYear}-${currentMonth}-${temp}`;
+            const folderNumber = 1; 
+            const homepageMemberNo = 1; /* 이슬이 다이어리를 조회해보겠다. */
+            const loginMemberNo = 2; 
 
+            
+            /* 일기 목록 조회하는 ajax */
             $.ajax({
-
+                url : "/diary/selectDiary",
+                data : {"diaryDate":diaryDate,"folderNumber":folderNumber,"homepageMemberNo":homepageMemberNo,"loginMemberNo":loginMemberNo},
+                dataType : "JSON",
+                success :  diaryList  => {
+                    // 요청 성공 시 데이터를 텍스트 형식을 얻어옴
+                    xmlDoc = result;
+                }, error : () => { 
+                    console.log("공공데이터 요청 실패"); 
+                    return;
+                }
+                
             });
 
             // ------- 여긴 ajax success 코드로 활용 -------------
@@ -191,7 +214,7 @@ const makeCalendar = (date) => {
             sunday +=7;
         }
 
-       
+    
 
 
 

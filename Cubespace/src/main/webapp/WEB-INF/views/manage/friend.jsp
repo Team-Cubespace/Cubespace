@@ -21,13 +21,16 @@
             border-radius: 50%;
             padding: 2px;
         }
+        .frame-color {
+            background-color : ${minihome.frameColor};
+        }
     </style>
 </head>
 <body>
-    <div class="content-area">
+    <div class="content-area frame-color">
         <section class="minihome-rayout">
                 <div>
-                    <jsp:include page="/WEB-INF/views/include/manageLeftBar.jsp"/>
+                    <jsp:include page="/WEB-INF/views/manage/manageLeftBar.jsp"/>
                 </div>
         </section>
 

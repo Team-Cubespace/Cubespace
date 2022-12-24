@@ -31,18 +31,35 @@
             color: white;
             border-radius: 50%;
         }
+        .frame-color {
+            background-color : ${minihome.frameColor};
+        }
     </style>
 </head>
 <body>
-    <div class="content-area">
+
+    <c:set var="memberNo" value="${loginMember.memberNo}"/>
+    <%-- 
+        미니홈피 접속시 불러와야 하는 정보
+        - loginMember.memberNo
+        배경음악 -> ownMusicNo
+        폰트 -> fontPath
+        깐부 -> 깐부
+        메뉴 -> List로 담은 폴더정보(folderNo, boardTypeNo, folderName, forderOrder)
+        배경 -> frameColor, frameMenuColor, frameFontColor, backgroundSkin
+
+     --%>
+
+
+    <div class="content-area frame-color">
         <section class="minihome-rayout">
                 <div>
-                    <jsp:include page="/WEB-INF/views/include/manageLeftBar.jsp"/>
+                    <jsp:include page="/WEB-INF/views/manage/manageLeftBar.jsp"/>
                 </div>
         </section>
 
         <section class="minihome-rayout">
-            <main>
+            <div class="main">
                 <header>
                     <span class="rightTitle">메뉴 관리</span>
                 </header>
@@ -51,7 +68,6 @@
                         <div class="listTitle backgroundTitleArea">
                             <span class="backgroundTitle">상단메뉴 관리</span>
                             <div class="backgroundExplain">
-                                <%-- <p></p> --%>
                                 <p> 내 미니홈피 메뉴를 구성할수 있으며 최소 1개의 메뉴가 존재해야 합니다</p>
                             </div>
                         </div>
@@ -146,54 +162,59 @@
                                     <div class="categoryArea homeCategoryArea">
                                         <span class="menuTitle">홈</span>
                                     </div>
+                                    <div>---------------------------------------</div>
                                 </div>
 
                                 <div class="menuListArea" id="sortable1">
                                 <c:if test="${diary != -1}">
                                     <div class="diary">
                                         <div class="categoryArea" name="1">
-                                            <span class="menuTitle">다이어리</span><%-- <i class="fa-solid fa-plus"></i> --%>
+                                            <span class="menuTitle">다이어리</span><i class="fa-solid fa-plus"></i>
                                         </div>
                                         <div class="subCategoryArea" id="sortable2">
                                             <div class="subCategory" name="1">
                                                 <img src="/resources/images/common/folder.png" class="subCategoryImg">&nbsp;
-                                                <span class="folderTitle">나의 월간일정</span><%-- <i class="fa-solid fa-minus"></i> --%>
+                                                <span class="folderTitle">나의 월간일정</span>
                                             </div>
                                             <div class="subCategory" name="2">
                                                 <img src="/resources/images/common/folder.png" class="subCategoryImg">&nbsp;
-                                                <span class="folderTitle">나의 다이어리</span><%-- <i class="fa-solid fa-minus"></i> --%>
+                                                <span class="folderTitle">나의 다이어리</span><i class="fa-solid fa-minus"></i>
                                             </div>
                                             <div class="subCategory" name="3">
                                                 <img src="/resources/images/common/folder.png" class="subCategoryImg">&nbsp;
-                                                <span class="folderTitle">나의 뭐시기기록장</span><%-- <i class="fa-solid fa-minus"></i> --%>
+                                                <span class="folderTitle">나의 뭐시기기록장</span><i class="fa-solid fa-minus"></i>
                                             </div>
                                         </div>
+                                        <div>---------------------------------------</div>
                                     </div>
                                 </c:if>
                                 <c:if test="${album != -1}">
                                     <div class="album">
                                         <div class="categoryArea" name="2">
-                                            <span class="menuTitle">사진첩</span>
+                                            <span class="menuTitle">사진첩</span><i class="fa-solid fa-plus"></i>
                                         </div>
                                         <div class="subCategoryArea" id="sortable3">
                                             <div class="subCategory" name="1">
                                                 <img src="/resources/images/common/folder.png" class="subCategoryImg">&nbsp;
-                                                <span  class="folderTitle">나의 사진첩</span>
+                                                <span  class="folderTitle">나의 사진첩</span><i class="fa-solid fa-minus"></i>
                                             </div>
                                         </div>
+                                        <div>---------------------------------------</div>
+
                                     </div>
                                 </c:if>
                                 <c:if test="${video != -1}">
                                     <div class="video">
                                         <div class="categoryArea" name="3">
-                                            <span class="menuTitle">동영상</span>
+                                            <span class="menuTitle">동영상</span><i class="fa-solid fa-plus"></i>
                                         </div>
                                         <div class="subCategoryArea" id="sortable4">
                                             <div class="subCategory" name="1">
                                                 <img src="/resources/images/common/folder.png" class="subCategoryImg">&nbsp;
-                                                <span  class="folderTitle">나의 동영상</span>
+                                                <span  class="folderTitle">나의 동영상</span><i class="fa-solid fa-minus"></i>
                                             </div>
                                         </div>
+                                        <div>---------------------------------------</div>
                                     </div>
                                 </c:if>
                                 <c:if test="${guestBook != -1}">
@@ -201,6 +222,7 @@
                                         <div class="categoryArea" name="4">
                                             <span class="menuTitle">방명록</span>
                                         </div>
+                                        <div>---------------------------------------</div>
                                     </div>
                                 </c:if>
                                 </div>
@@ -227,7 +249,7 @@
                     
 
                 </div>
-            </main>
+            </div>
         </section>
     </div>
 </body>

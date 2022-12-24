@@ -18,6 +18,7 @@ document.getElementById("rightChoice").addEventListener("click",()=>{
     var reset = document.querySelector(".member-search-input")
     reset.removeEventListener("keyup",memberSearch)
     reset.addEventListener("keyup",memberAddFriendList)
+    memberAddFriendList()
 })
 
 /* 왼쪽 클릭 시 이벤트리스너 제거/추가 */

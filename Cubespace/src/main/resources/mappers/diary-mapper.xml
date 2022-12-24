@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="diaryMapper">
+	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
+
+	<resultMap type="Diary" id="diary_rm">
+  		<id property="diaryNo" column="DIARY_NO"/>
+  		
+  		<result property="memberNo" column="MEMBER_NO"/>
+  		<result property="diaryTitle" column="D_TITLE"/>
+  		<result property="diaryContent" column="D_CONTENT"/>
+  		<result property="diaryCreateDate" column="D_CREATE"/>
+  		<result property="diaryOpenFlag" column="D_OPEN_FL"/>
+  		<result property="folderNo" column="FOLDER_NO"/>
+  	</resultMap>
+  	
+  	<select id="checkFriend" resultType = "_int">
+  	SELECT COUNT(*) FROM (
+	SELECT * FROM FRIEND
+	WHERE (ASKED_MEMBER_NO = #{loginMemberNo} AND ASKING_MEMBER_NO = #{homepageMemberNo})
+	OR (ASKED_MEMBER_NO = #{homepageMemberNo} AND ASKING_MEMBER_NO = #{loginMemberNo})
+	AND FRIEND_ACCEPT_FL = 1)
+  	</select>
+ 	  
+ 	<select id="selectDiaryList" resultMap="diary_rm">
+ 	SELECT DIARY_NO, D_TITLE, D_CONTENT, TO_CHAR(D_CREATE,'AM HH24"시 "MM"분"') D_CREATE, D_OPEN_FL, FOLDER_NO  
+	FROM DIARY
+	WHERE MEMBER_NO = #{homepageMemberNo}
+	AND TO_CHAR (D_CREATE,'YYYY-MM-DD') = #{diaryDate}
+	AND FOLDER_NO = #{folderNumber}
+	AND D_DEL_YN  = 'N'
+	<choose>
+		<when test='openFlag == "0"'>
+		 AND (D_OPEN_FL = 1 OR D_OPEN_FL  = 2)
+		</when>
+		<when test='openFlag == "1"'>
+		 AND (D_OPEN_FL = 1)
+		</when>
+		<otherwise>
+		
+		</otherwise>
+	</choose>
+ 	</select>
+ 	
+</mapper>

@@ -174,7 +174,7 @@ const makeCalendar = (date) => {
             const diaryDate = `${currentYear}-${currentMonth}-${temp}`;
             const folderNumber = 1; /* 폴더 */
             const homepageMemberNo = 1; /* 이슬이 다이어리를 조회해보겠다. */
-            const loginMemberNo = 2; 
+            const loginMemberNo = 7; 
 
             
             /* 일기 목록 조회하는 ajax */
@@ -184,25 +184,30 @@ const makeCalendar = (date) => {
                 dataType : "JSON",
                 success :  (diaryList)  => {
                     console.log("해당 날짜의 다이어리 목록 받기 성공")
-                
+                    console.log(diaryList);
+
+                    for(diary of diaryList){
+                        
+                    }
+                    // ------- 여긴 ajax success 코드로 활용 -------------
+                    // 기존에 클릭된 날짜가 있을 경우 기존 날짜를 클릭 해제
+                    if(document.querySelector(".day-click") != null){
+                        document.querySelector(".day-click").classList.remove("day-click");
+                    }
+        
+                    e.target.classList.add("day-click");
+        
+                    // 새로 클릭한 날짜에 클릭 표시
+                    document.querySelector(".today").innerText = `${currentMonth}.${temp}`;
+                    document.querySelector(".today-day").innerText = weekDay[new Date(`${currentYear}-${currentMonth}-${i}`).getDay()];
+                    // ------- 여긴 ajax success 코드로 활용 -------------
+
                 }, error : () => { 
                     
                 }
                 
             });
 
-            // ------- 여긴 ajax success 코드로 활용 -------------
-            // 기존에 클릭된 날짜가 있을 경우 기존 날짜를 클릭 해제
-            if(document.querySelector(".day-click") != null){
-                document.querySelector(".day-click").classList.remove("day-click");
-            }
-
-            e.target.classList.add("day-click");
-
-            // 새로 클릭한 날짜에 클릭 표시
-            document.querySelector(".today").innerText = `${currentMonth}.${temp}`;
-            document.querySelector(".today-day").innerText = weekDay[new Date(`${currentYear}-${currentMonth}-${i}`).getDay()];
-            // ------- 여긴 ajax success 코드로 활용 -------------
 
 
         })

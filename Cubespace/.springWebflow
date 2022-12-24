@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webflow-project-description>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.9.18.202109140629-RELEASE]]></pluginVersion>
+	<configs>
+		<config>
+			<file>src/main/java/com/team/cubespace/login/controller/model/dao.xml</file>
+			<name><![CDATA[dao]]></name>
+		</config>
+	</configs>
+</webflow-project-description>

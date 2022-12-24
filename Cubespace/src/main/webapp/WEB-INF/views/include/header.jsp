@@ -21,7 +21,7 @@
         <c:choose>
             <c:when test="${empty loginMember}">
                 <li class="header-menu">
-                    <a href="">
+                    <a href="/member/login">
                         <i class="fa-solid fa-right-to-bracket"></i>
                         <span>로그인</span>
                     </a>
@@ -40,11 +40,16 @@
                 </li>
                 <li class="header-menu">
                     <button type="button" id="headerDropDownButton">
-                        <img src="cat4.jpg" alt="로그인 회원 프로필 이미지" class="header-profile-image">
+                        <c:if test="${empty loginMember.profileImage}">
+                            <img src="/resources/images/common/cubes.png" alt="로그인 회원 프로필 이미지" class="header-profile-image">
+                        </c:if>
+                        <c:if test="${not empty loginMember.profileImage}">
+                            <img src="${loginMember.profileImage}" alt="로그인 회원 프로필 이미지" class="header-profile-image">
+                        </c:if>
                         <ul class="header-drop-down" id="headerDropDown">
                             <li><a href="">내 미니홈피</a></li>
-                            <li><a href="">내 정보 수정</a></li>
-                            <li><a href="">로그아웃</a></li>
+                            <li><a href="/member/login/updateInfo">내 정보 수정</a></li>
+                            <li><a href="/member/logout">로그아웃</a></li>
                         </ul>
                         <i class="fa-solid fa-angle-down"></i>
                     </button>

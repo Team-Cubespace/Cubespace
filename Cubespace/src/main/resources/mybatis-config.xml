@@ -25,6 +25,7 @@
 	<mappers>
 		<mapper resource="/mappers/member-mapper.xml"/>
 		<mapper resource="/mappers/memberSearch-mapper.xml"/>
+		<mapper resource="/mappers/login-mapper.xml"/>
 		<mapper resource="/mappers/minihome-mapper.xml"/>
 	</mappers>
 </configuration>

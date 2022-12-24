@@ -1,6 +1,7 @@
 package com.team.cubespace.manage.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class ManageDAO {
 	 */
 	public int changeCategory(int memberNo) {
 		
-		return sqlSession.update("ManagerMapper.changeCategory", memberNo);
+		return sqlSession.update("ManageMapper.changeCategory", memberNo);
 	}
 
 	/** 카테고리 종류 원래대로
@@ -48,7 +49,25 @@ public class ManageDAO {
 	 */
 	public int categorySelectCancel(int memberNo) {
 		
-		return sqlSession.update("ManagerMapper.categorySelectCancel", memberNo);
+		return sqlSession.update("ManageMapper.categorySelectCancel", memberNo);
+	}
+
+	/** 친구 목록 조회
+	 * @param memberNo
+	 * @return
+	 */
+	public List<Map<String, String>> getFriendList(int memberNo) {
+		
+		return sqlSession.selectList("ManageMapper.getFriendList", memberNo);
+	}
+
+	/** 깐부끊기
+	 * @param paramMap
+	 * @return result
+	 */
+	public int deleteFriend(Map<String, Object> paramMap) {
+		
+		return sqlSession.delete("ManageMapper.deleteFriend", paramMap);
 	}
 
 }

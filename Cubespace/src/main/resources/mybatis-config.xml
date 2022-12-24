@@ -20,6 +20,7 @@
 		<typeAlias type="com.team.cubespace.minihome.model.vo.Minihome" alias="Minihome"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.Folder" alias="Folder"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.CategoryOrder" alias="CategoryOrder"/>		
+		<typeAlias type="com.team.cubespace.manage.model.vo.Friend" alias="Friend"/>		
 	</typeAliases>
 	
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->

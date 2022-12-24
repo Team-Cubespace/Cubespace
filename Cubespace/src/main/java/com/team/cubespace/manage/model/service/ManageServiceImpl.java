@@ -1,6 +1,7 @@
 package com.team.cubespace.manage.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,6 +50,24 @@ public class ManageServiceImpl implements ManageService{
 	public int categorySelectCancel(int memberNo) {
 		
 		return dao.categorySelectCancel(memberNo);
+	}
+
+	/**
+	 * 내 친구 목록 조회
+	 */
+	@Override
+	public List<Map<String, String>> getFriendList(int memberNo) {
+		
+		return dao.getFriendList(memberNo);
+	}
+
+	/**
+	 * 깐부끊기
+	 */
+	@Override
+	public int deleteFriend(Map<String, Object> paramMap) {
+		
+		return dao.deleteFriend(paramMap);
 	}
 
 }

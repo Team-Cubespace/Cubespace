@@ -1,12 +1,14 @@
 package com.team.cubespace.manage.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -18,7 +20,7 @@ import com.team.cubespace.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/manage")
-@SessionAttributes({"folderList"})
+@SessionAttributes({"folderList", "friendList"})
 public class manageController {
 	
 	@Autowired
@@ -32,10 +34,19 @@ public class manageController {
 	public String changeMusic() {
 		return "manage/music";
 	}
+	
 	@GetMapping("/friend")
-	public String changeFriend() {
+	public String changeFriend(@SessionAttribute("loginMember") Member inputMember, 
+			Model model) {
+		
+		List<Map<String, String>> friendList = service.getFriendList(inputMember.getMemberNo());
+		model.addAttribute(friendList);
+		
 		return "manage/friend";
 	}
+	
+	
+//	메뉴 관련-------------------------------------------------------------------------------
 	@GetMapping("/menu")
 	public String changeMenu(@SessionAttribute("loginMember") Member inputMember, 
 			Model model) {
@@ -80,4 +91,17 @@ public class manageController {
 		return service.categorySelectCancel(memberNo);
 	}
 
+	
+	
+//	친구(깐부) 관련-------------------------------------------------------------------------------
+
+	/** 깐부끊기
+	 * @param paramMap
+	 * @return result
+	 */
+	@GetMapping("/friend/deleteFriend")
+	@ResponseBody
+	public int deleteFriend(@RequestParam Map<String, Object> paramMap) {
+		return service.deleteFriend(paramMap);
+	}
 }

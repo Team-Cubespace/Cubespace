@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ManageMapper">
+	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
+
+	<resultMap type="Folder" id="folder_rm">
+   
+   		<id property="folderNo" column="FOLDER_NO"/>
+   		
+   		<result property="boardTypeNo" column="BOARD_TYPE_NO"></result>
+   		<result property="folderName" column="FOLDER_NAME"></result>
+   		<result property="folderOrder" column="FOLDER_ORDER"></result>
+ 	 </resultMap>
+ 	 
+ 	 
+	<resultMap type="CategoryOrder" id="categoryOrder_rm">
+   
+   		<id property="memberNo" column="MEMBER_NO"/>
+   		
+   		<result property="diary" column="DIARY"></result>
+   		<result property="album" column="ALBUM"></result>
+   		<result property="video" column="VIDEO"></result>
+   		<result property="guestBook" column="GUEST_BOOK"></result>
+ 	 </resultMap>
+ 	 
+
+	<!-- 폴더 리스트 조회 -->
+	<select id="getFolderList" resultMap="folder_rm">
+		SELECT * FROM FOLDER   WHERE MEMBER_NO  = #{memberNo}
+	</select>
+ 	 
+ 	<!-- 카테고리순서 조회 -->
+	<select id="getCategoryOrder" resultMap="categoryOrder_rm">
+		SELECT * FROM CATEGORY_ORDER  WHERE MEMBER_NO = #{memberNo}
+	</select>
+
+
+
+	
+ 	 
+ 	 
+ 	
+  
+</mapper>

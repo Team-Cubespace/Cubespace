@@ -35,4 +35,11 @@ public class MemberSearchServiceImpl implements MemberSearchService{
 		return  dao.memberAddFriendList(paramMap);
 	}
 
+	// 깐부 신청취소 하기
+	@Override
+	@Transactional
+	public int memberAddCancel(Map<String, Object> paramMap) {
+		return dao.memberAddCancel(paramMap);
+	}
+
 }

@@ -24,7 +24,7 @@
 		WHERE MEMBER_DEL_YN = 'N'
 		AND MEMBER_NICKNAME LIKE '%${leftChoiceInput}%'
 		AND MEMBER_NO != #{loginMemberNo}
-		ORDER BY MEMBER_NO
+		ORDER BY MEMBER_NICKNAME
  	 </select>
  	 
  	 <!-- 깐부 신청하기 -->
@@ -43,10 +43,11 @@
 			SELECT ASKING_MEMBER_NO MEMBER_NO, ASKING_MEMBER_NO, FRIEND_ACCEPT_FL FROM FRIEND WHERE ASKED_MEMBER_NO = #{loginMemberNo})
 			USING (MEMBER_NO)
 			WHERE MEMBER_DEL_YN = 'N'
-			AND MEMBER_NICKNAME LIKE '%${leftChoiceInput}%'
+			AND FRIEND_ACCEPT_FL = 0
+			AND MEMBER_NICKNAME LIKE '%${rightChoiceInput}%'
 			AND MEMBER_NO != #{loginMemberNo}
 			AND ASKING_MEMBER_NO =#{loginMemberNo}
-			ORDER BY MEMBER_NO
+			ORDER BY MEMBER_NICKNAME
  		</select>
   
 </mapper>

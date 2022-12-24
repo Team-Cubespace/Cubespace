@@ -40,7 +40,6 @@ public class MemberSearchController {
 		return new Gson().toJson(memberSearchList); 
 	}
 	
-	
 	/** 깐부 신청하기
 	 * @param loginMemberNo
 	 * @param memberNo
@@ -52,7 +51,6 @@ public class MemberSearchController {
 		int result = service.memberAddFriend(paramMap);
 		return result;
 	}
-	
 	
 	/** 내가 신청한 회원 목록 조회
 	 * @param loginMemberNo

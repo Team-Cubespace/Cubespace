@@ -163,13 +163,15 @@ const memberAddFriendList=()=>{
     console.log("함수는 실행됨");
 /* 수정 필용요요요요요요 */
 
-    const rightChoiceInput =document.getElementById("rightChoiceInput");
-
+    // const rightChoiceInput =document.getElementById("rightChoiceInput");
+    var rightChoiceInput=$('#rightChoiceInput').val();
     $.ajax ({
         url : "/memberAddFriendList",
-        data: {"rightChoiceInput":rightChoiceInput.value,"loginMemberNo":3},
+        data: {"rightChoiceInput":rightChoiceInput,"loginMemberNo":3},
         dataType : "JSON",
         success : memberAddList =>{
+
+            console.log(rightChoiceInput);
 
             const section = document.querySelector(".mebmer-search-profile");
             section.innerHTML=""; // 이전 내용 제거

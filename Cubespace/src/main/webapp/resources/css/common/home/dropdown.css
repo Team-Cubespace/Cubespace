@@ -1,3 +1,24 @@
+.dropdown-btn{
+    width: 30px;
+    height: 30px;
+    background-color: var(--mainColor);
+    border: 3px solid white;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.dropdown-btn-icon{
+    color: white;
+    font-size: 20px;
+}
+
 .dropdown {
     width: 100px;
     height: 0px;

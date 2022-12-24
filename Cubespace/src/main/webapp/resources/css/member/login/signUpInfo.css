@@ -100,10 +100,11 @@
     position:absolute;
     right: 0;
     height: 30px;
-    background-color: var(--subColor);
+    background-color: var(--mainColor);
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
 }
 .inputBox {
     /* height: 100%; */
@@ -156,7 +157,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    background-color: var(--subColor);
+    background-color: var(--mainColor);
     color: white;
     cursor: pointer;
     font-weight: bold;
@@ -165,7 +166,7 @@
 
 .SignUp:hover{
     transition-duration: 0.3s;
-    background-color: var(--mainColor);
+    background-color: var(--subColor);
 }
 .signUp-input-password{
     display: flex;

@@ -11,6 +11,20 @@ const checkObj = {
 // 회원 가입 양식이 제출 되었을 때
 document.getElementById("signUp-frm").addEventListener("submit",function(event){
 
+    const memberBirth = document.getElementById("memberBirth");
+    const birthYear = document.getElementById("birthYear");
+    const birthDay = document.getElementById("birthDay");
+
+
+    if(memberBirth.value != null){
+        birthYear.value = (memberBirth.value).substr(0,4);
+        birthDay.value = (memberBirth.value).substr(4,4);
+
+    } else {
+        checkObj.memberBirth = true;
+    }
+
+
     for(let key in checkObj){
 
         let str;
@@ -33,6 +47,8 @@ document.getElementById("signUp-frm").addEventListener("submit",function(event){
             return; 
         }
     }
+
+    
 })
 
 /*************************** 이메일 유효성 검사 ***************************/
@@ -240,13 +256,6 @@ const birthMessage = document.getElementById("birthMessage");
 
 memberBirth.addEventListener("input",()=>{
 
-    // 생년월일 미 입력시
-    if(memberBirth.value.trim().length == 0){
-        birthMessage.innerText="숫자로 생년월일 8자리를 입력해주세요.";
-        birthMessage.classList.remove("confirm","error");
-        checkObj.memberBirth = false;
-        return;
-    }
 
     //생년월일 정규표현식 검사
     const regEx =/^[\d]{8}$/;

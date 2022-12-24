@@ -1,11 +1,28 @@
-.miniroom-container{
-    width: 100%;
-    height: 100%;
-    border: 2px solid black;
+/* 미니룸 헤더 */
+.miniroom-header{
+    margin: 0;
+    border: none;
     position: relative;
 }
 
-.miniroom , .front{
+.miniroom-deco{
+    font-size: 10px;
+    font-weight: normal;
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+}
+
+/* 미니룸 */
+.miniroom-container{
+    width: 100%;
+    height: 350px;
+    margin-bottom: 30px;
+    border: 2px solid #2e2e2e;
+    position: relative;
+}
+
+.miniroom, .front{
     width: 100%;
     height: 100%;
     position: absolute;
@@ -16,10 +33,6 @@
     perspective: 500px; /* 원근감 */
 }
 
-.front > div{
-    position: absolute;
-}
-
 .miniroom > div{
     border: 1px solid black;
     position: absolute;
@@ -27,39 +40,43 @@
 }
 
 .left{
-    transform: rotateX(345deg) rotateY(45deg) rotateZ(0deg);
     height: 380px;
     width: 380px;
-    left: -8px;
+    background-color: rgb(242, 247, 255);
     top: -31px;
-    background-color: rgb(234, 237, 255);
+    left: -13px;
+    transform: rotateX(345deg) rotateY(45deg) rotateZ(0deg);
 }
 
 .right{
-    transform: rotateX(345deg) rotateY(-45deg) rotateZ(0deg);
-    
-    height: 380px;
     width: 380px;
-    right: -7px;
+    height: 380px;
+    background-color: rgb(242, 247, 255);
     top: -31px;
-    background-color: rgb(234, 237, 255);
+    right: -12px;
+    transform: rotateX(345deg) rotateY(-45deg) rotateZ(0deg);
 }
 
 .bottom{
-    background-color: white;
-    transform: rotateX(45deg) rotateY(0deg) rotateZ(45deg);
     width: 500px;
     height: 500px;
-    top: 170px;
-    left: 66px;
+    background-color: rgb(223, 236, 255);
+    top: 124px;
+    left: 61px;
+    transform: rotateX(45deg) rotateY(0deg) rotateZ(45deg);
 }
 
-#test{
+/* front 영역 (미니미, 소품 배치) */
+.front > div{
+    position: absolute;
+}
+
+#props{
     width: 128px;
     height: 123px;
-    transform: rotateX(356deg) rotateY(312deg) rotateZ(360deg);
+    background-image: url("../../../images/crown.png");
+    background-size: cover;
     top: 242px;
     left: 68px;
-    background-image: url(pngegg.png);
-    background-size: cover;
+    transform: rotateX(356deg) rotateY(312deg) rotateZ(360deg);
 }

@@ -1,0 +1,170 @@
+.comment-section {
+    width: 100%;
+    margin-top: 30px;
+}
+
+/* 댓글 닉네임, 드랍다운 버튼 */
+.comment-header {
+    border-top: 2px solid black;
+    padding: 10px 0px;
+}
+.comment-content {
+    margin: 10px 0px 5px 0px;
+}
+/* 전체 댓글 갯수 */
+.comment-count {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+/* 댓글 리스트 */
+.comment-list > li {
+    margin: 20px 0px;
+}
+.comment-list > li:first-of-type {
+    margin: 0px;
+    margin-bottom: 20px;
+}
+
+/* 댓글 작성 영역 */
+.comment-write-row {
+    display: flex;
+}
+
+.comment-profile-image-area {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+.comment-profile-image {
+    width: 100%;
+    height: 100%;
+}
+
+.comment-content {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+.comment-write-row .member-nickname {
+    font-size: 20px;
+    font-weight: bold;
+}
+.comment-write-row textarea {
+    border: none;
+    resize: none;
+    border-bottom: 2px solid black;
+    font-size: 13px;
+    padding: 5px;
+    padding-top: 10px;
+    outline: none;
+    overflow: hidden;
+}
+
+.comment-write-button-area {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+.comment-write-row button {
+    width: 70px;
+    margin-left: 5px;
+    /* 색 설정 필요 */
+    background-color: transparent;
+    border: none;
+    border-radius: 20px;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+}
+.comment-write-row button:last-child {
+    color: white;
+    background-color: var(--ink);
+}
+/* 자식 댓글 작성 영역 */
+
+/* 댓글 조회 */
+.comment-row {
+    display: flex;
+}
+/* .comment-row img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+} */
+.comment-nickname-area {
+    display: flex;
+    justify-content: space-between;
+}
+.member-nickname {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.comment-date {
+    color: grey;
+}
+.comment-button-area button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+}
+.child-comment-count {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    color: blue;
+    padding-left: 50px;
+}
+
+/* 자식 댓글 스타일 */
+.comment-row.child-comment {
+    padding-left: 50px;
+    display: none;
+}
+.comment-row.child-comment.show {
+    display: flex;
+}
+/* 자식댓글 작성 스타일 */
+.comment-write-row.child-comment {
+    padding-left : 50px;
+}
+
+/* 댓글 드랍다운 */
+.comment-row .comment-drop-down-button {
+    position: relative;
+    background-color: transparent;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    display: none;
+}
+.comment-drop-down-menu {
+    position: absolute;
+    width: 70px;
+    border: 1px solid black;
+    right: 0px;
+    top: 100%;
+    font-size: 13px;
+    display: none;
+    background-color: white;
+}
+.comment-drop-down-menu li {
+    padding: 10px;
+}
+.comment-drop-down-menu li:hover {
+    background-color: #ddd;
+}
+/* 드랍다운 버튼 오버시 보이기 */
+.comment-row:hover .comment-drop-down-button {
+    display: block;
+}

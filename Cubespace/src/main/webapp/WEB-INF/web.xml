@@ -9,6 +9,7 @@
 		<param-value>
 			classPath:spring/root-context.xml
 			classPath:spring/spring-security.xml
+			classPath:spring/email-context.xml
 		</param-value>
 	</context-param>
 	

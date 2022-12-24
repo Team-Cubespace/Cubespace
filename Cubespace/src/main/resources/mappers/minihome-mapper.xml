@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="minihomeMapper">
+	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
+
+	<resultMap type="Minihome" id="minihome_rm">
+  		<id property="memberNo" column="MEMBER_NO"/>
+  		
+  		<result property="homepageName" column="HOMEPAGE_NAME"/>
+  		<result property="backgroundSkin" column="BACKGROUND_SKIN"/>
+  		<result property="comment" column="COMMENT"/>
+  		<result property="today" column="TODAY"/>
+  		<result property="total" column="TOTAL"/>
+  		<result property="ownMusicNo" column="OWN_MUSIC_NO"/>
+  		<result property="frameColor" column="FRAME_COLOR"/>
+  		<result property="frameMenuColor" column="FRAME_MENU_COLOR"/>
+  		<result property="frameFontColor" column="FRAME_FONT_COLOR"/>
+ 	</resultMap>
+ 	  
+ 	  
+ 	<select id="selectMinihome" parameterType="_int" resultMap="minihome_rm">
+ 		SELECT MH.MEMBER_NO, HOMEPAGE_NAME, BACKGROUND_SKIN, "COMMENT", TODAY, TOTAL, FRAME_COLOR, FRAME_MENU_COLOR, FRAME_FONT_COLOR, MUSIC_PATH, MUSIC_NAME
+		FROM MINI_HOMEPAGE MH
+		LEFT JOIN MEMBER_OWN_GOODS ON(OWN_NO = OWN_MUSIC_NO)
+		LEFT JOIN MUSIC_SHOP ON(GOODS_NO = MUSIC_NO)
+		WHERE MH.MEMBER_NO = #{memberNo}
+ 	</select>
+</mapper>

@@ -1,0 +1,33 @@
+#sideFolder {
+    overflow: hidden;
+}
+
+.folder-list {
+    height: 100%;
+    overflow: auto;
+}
+.folder-list::-webkit-scrollbar {
+    display: none;
+}
+
+.folder {
+    display: flex;
+    align-items: center;
+    margin: 5px 0px;
+    font-size: 15px;
+}
+
+/* 폴더 이미지 */
+.folder img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* 폴더 이름 영역 */
+.folder-name {
+    width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

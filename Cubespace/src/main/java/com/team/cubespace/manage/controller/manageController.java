@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -45,18 +46,38 @@ public class manageController {
 		// categoryOrder 얻어옴
 		CategoryOrder categoryOrder = service.getCategoryOrder(inputMember.getMemberNo());
 		String realOrder = "";
-		realOrder += categoryOrder.getDiary() + "" + categoryOrder.getAlbum() + "" + 
-				categoryOrder.getVideo() + "" + categoryOrder.getGuestBook();
+		realOrder += categoryOrder.getDiary() + "," + categoryOrder.getAlbum() + "," + 
+				categoryOrder.getVideo() + "," + categoryOrder.getGuestBook();
 		
 		
 		model.addAttribute("folderList", folderList);
 		model.addAttribute("realOrder", realOrder);
+		model.addAttribute("categoryOrder", categoryOrder);
 		
 		return "manage/menu";
 	}
 	@GetMapping("/background")
 	public String changeBackground() {
 		return "manage/background";
+	}
+	
+	/** 카테고리 순서 변경
+	 * @param categoryOrder
+	 * @return
+	 */
+	@GetMapping("/menu/changeCategory")
+	@ResponseBody
+	public int changeMenu(CategoryOrder categoryOrder) {
+		return service.changeCategory(categoryOrder.getMemberNo());
+	}
+	
+	/** 카테고리 종류 원래대로
+	 * @return result
+	 */
+	@GetMapping("/menu/categorySelectCancel")
+	@ResponseBody
+	public int categorySelectCancel(int memberNo) {
+		return service.categorySelectCancel(memberNo);
 	}
 
 }

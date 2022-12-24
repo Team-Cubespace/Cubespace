@@ -19,4 +19,15 @@ public interface ManageService {
 	 */
 	CategoryOrder getCategoryOrder(int memberNo);
 
+	/** 카테고리 순서 변경
+	 * @param memberNo
+	 * @return result
+	 */
+	int changeCategory(int memberNo);
+
+	/** 카테고리 종류 원래대로
+	 * @return result
+	 */
+	int categorySelectCancel(int memberNo);
+
 }

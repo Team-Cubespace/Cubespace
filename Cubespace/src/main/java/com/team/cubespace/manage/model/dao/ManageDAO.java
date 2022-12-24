@@ -33,4 +33,22 @@ public class ManageDAO {
 		return sqlSession.selectOne("ManageMapper.getCategoryOrder", memberNo);
 	}
 
+	/** 카테고리 순서 변경
+	 * @param memberNo
+	 * @return result
+	 */
+	public int changeCategory(int memberNo) {
+		
+		return sqlSession.update("ManagerMapper.changeCategory", memberNo);
+	}
+
+	/** 카테고리 종류 원래대로
+	 * @param memberNo
+	 * @return result
+	 */
+	public int categorySelectCancel(int memberNo) {
+		
+		return sqlSession.update("ManagerMapper.categorySelectCancel", memberNo);
+	}
+
 }

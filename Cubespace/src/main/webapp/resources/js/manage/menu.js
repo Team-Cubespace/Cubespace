@@ -33,7 +33,17 @@ menuSelectBtn.addEventListener("click", () => {
         var value = $(this).val();
         checkArr.push(value);        
     })
-    // console.log(checkArr);
+    
+    $.ajax({
+        url : "/manage/menu/categorySelect",
+        data : "checkArr",
+        type : "get",
+        success : result => {
+            if(result > 0) {alert("변경사항이 저장되었습니다")}
+            else {alert("변경사항 저장 실패")}
+        },
+        error : () => {console.log("변경사항 저장 중 오류 발생");}
+    })
     window.href = window.href;
     
 })
@@ -48,8 +58,9 @@ menuSelectCancelBtn.addEventListener("click", () => {
     }
 
     $.ajax({
-        url : "/manage/menu/menuSelectCancel",
+        url : "/manage/menu/categorySelectCancel",
         type:"get",
+        data : {"memberNo" : loginMember.memberNo},
         success :  result=> {
             if(result > 0) {
                 alert("메뉴설정을 변경 완료했습니다");
@@ -74,24 +85,33 @@ document.getElementById("menuSaveBtn").addEventListener("click", () => {
     let orderString = "";
     for(let category of categoryArea){
         orderString += category.getAttribute("name");
+        console.log(orderString);
     }
     const orderArr = Array.from(orderString);
+    console.log(orderArr[0]);
+    console.log(orderArr[1]);
+    console.log(orderArr[2]);
+    console.log(orderArr[3]);
+    console.log(memberNo);
 
-    // $.ajax({
-    //     url : "/manage/menu",
-    //     type: "get",
-    //     data : {
-    //             "diary" : orderArr[1],
-    //             "album" : orderArr[2],
-    //             "video" : orderArr[3],
-    //             "guestBook" : orderArr[4],
-    //         /*  */},
-    //     success : result => {
-    //         if(result > 0) {
-
-    //         }
-    //     }
-    // })
+    $.ajax({
+        url : "/manage/menu/changeCategory",
+        type: "get",
+        data : {
+                "diary" : orderArr[0],
+                "album" : orderArr[1],
+                "video" : orderArr[2],
+                "guestBook" : orderArr[3],
+                "memberNo": memberNo},
+        success : result => {
+            if(result > 0) {
+                alert("변경사항이 저장되었습니다");
+            } else {
+                alert("변경사항 저장 실패");
+            }
+        },
+        error : () => {console.log("변경사항 저장 중 오류 발생");}
+    })
 })
 
 /* ------------------------------------------- */

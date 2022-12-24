@@ -27,6 +27,7 @@
 	<!-- 폴더 리스트 조회 -->
 	<select id="getFolderList" resultMap="folder_rm">
 		SELECT * FROM FOLDER   WHERE MEMBER_NO  = #{memberNo}
+		ORDER BY BOARD_TYPE_NO, FOLDER_ORDER
 	</select>
  	 
  	<!-- 카테고리순서 조회 -->
@@ -35,7 +36,26 @@
 	</select>
 
 
-
+	<!-- 카테고리 순서 변경 -->
+	<update id="changeCategory">
+		UPDATE CATEGORY_ORDER SET
+		DIARY = #{diary},
+		ALBUM = #{album},
+		VIDEO = #{video},
+		GUEST_BOOK = #{guestBook}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 카테고리 순서 원래대로 -->
+	<update id="categorySelectCancel">
+		UPDATE CATEGORY_ORDER SET
+		DIARY = 1,
+		ALBUM = 2,
+		VIDEO = 3,
+		GUEST_BOOK = 4
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
 	
  	 
  	 

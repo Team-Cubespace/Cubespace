@@ -33,4 +33,22 @@ public class ManageServiceImpl implements ManageService{
 		return dao.getCategoryOrder(memberNo);
 	}
 
+	/**
+	 * 카테고리 순서 변경
+	 */
+	@Override
+	public int changeCategory(int memberNo) {
+		
+		return dao.changeCategory(memberNo);
+	}
+
+	/**
+	 * 카테고리 종류 원래대로
+	 */
+	@Override
+	public int categorySelectCancel(int memberNo) {
+		
+		return dao.categorySelectCancel(memberNo);
+	}
+
 }

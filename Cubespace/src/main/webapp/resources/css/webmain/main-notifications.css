@@ -4,7 +4,22 @@
     width: 50px;
     height: 60px;
 }
-
+/* 전체삭제 설정 */
+.delete-all{
+    width: 600px;
+    display: flex;
+    justify-content: end;
+    margin-top: 10px;
+}
+.delete-all-button{
+    border: 1px solid black;
+    border-radius: 6px;
+    width: 70px;
+    height: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+/************************************************/
 /* 프로필 최상위 부모 */
 .mebmer-profile-alarm{
     border-bottom: 1px solid black;
@@ -15,12 +30,18 @@
     flex-direction: column;
 }
 
-.profile-head-alarm{
+.mebmer-profile-alarm >div{
     display: flex;
     align-items: center;
     width: 100%;
     margin: 0 0 0 20px;
 }
+/************************************************/
+/* 정보관련 설정 */
+.contents{
+    width: 498px;
+}
+
 /* 회원 정보 */
 .profile-info{
     display: flex;
@@ -33,6 +54,7 @@
 .alarm-time{
     font-size: 12px;
 }
+/************************************************/
 /* 알림 글 설정 */
 .alarm-info{
     width: 100%;
@@ -48,6 +70,11 @@
     white-space:nowrap;
 }
 
+/* 게시글 타입설정 */
+.board-type{
+    width: 194px;
+}
+/************************************************/
 /* 게시물 삭제 부모 */
 .alarm-delete{
     height: 100%;
@@ -61,11 +88,3 @@
     cursor: pointer;
 }
 
-/* 게시글 타입설정 */
-.board-type{
-    width: 194px;
-}
-
-.contents{
-    width: 498px;
-}

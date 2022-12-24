@@ -44,15 +44,20 @@
                     <a id="leftChoice">깐부 알림</a>
                     <a id="rightChoice">활동 알림</a>
                 </div>
-                <!-- <%-- 회원검색 --%> -->
+                
+                <!-- <%-- 회원검색이거 없으면 선택기 고장남 히든으로 숨겨둠 --%> -->
                 <div class="member-search-input-div">
-                    <input type="text" class="member-search-input" id="leftChoiceInput" maxlength="10" placeholder="검색할 회원을 입력하세요.">
+                    <input type="hidden" class="member-search-input" id="leftChoiceInput" maxlength="10" placeholder="검색할 회원을 입력하세요.">
                     <button>검색</button>
                 </div>
 
+                <!-- 활동 알림 클릭 시 전첵삭제 추가되는 위치 -->
+                <!-- <div class="delete-all">
+                    <div class="delete-all-button">전체삭제</div>
+                </div> -->
+
                 <!-- <%-- 검색된 회원 목록 --%> -->
                 <section class="mebmer-search-profile">
-
                     <!-- <%----------------------------------%> -->
                     <!-- <%-- 깐부알림 --%> -->
                     <div class="mebmer-profile">
@@ -64,12 +69,12 @@
                         <div class="profile-body">
                             <div class="member-choice">
                                 <i class="fa-solid fa-check" id="faCheck"></i>
-                                <div onclick="addFriendCancel()">수락</div>
+                                <div >수락</div>
                             </div>
 
                             <div class="member-cancel">
                                 <i class="fa-solid fa-xmark"></i>
-                                <div onclick="addFriendCancel()">거절</div>
+                                <div >거절</div>
                             </div>
 
                             <div class="member-choice">
@@ -82,7 +87,7 @@
                     <!-- <%-- 깐부알림 --%> -->
                     <!-- 사진첩 스크랩 -->
                     <div class="mebmer-profile-alarm">
-                        <div class="profile-head-alarm">
+                        <div>
                             <img class="member-img" src="../../images/common/test_user_profile.gif" alt="">
                             <div class="contents">
                                 <div class="profile-info">
@@ -96,13 +101,13 @@
                                 </div>                    
                             </div>
                             <div class="alarm-delete">
-                                <i class="fa-solid fa-xmark "></i>
+                                <i class="fa-solid fa-xmark message-delete" onclick="messageDelete(this)"></i>
                             </div>
                         </div>
                     </div>
                     <!-- 사진첩 댓글 -->
                     <div class="mebmer-profile-alarm">
-                        <div class="profile-head-alarm">
+                        <div>
                             <img class="member-img" src="../../images/common/test_user_profile.gif" alt="">
                             <div class="contents">
                                 <div class="profile-info">
@@ -112,16 +117,17 @@
                                 <div class="alarm-info">
                                     <div>{사진첩}</div>
                                     <div class="board-title">{제로투 5시간춤춰봄ddddddddddd}</div>
-                                    <div class="board-type">게시물에 댓글을 남겼습니다.</div>                                </div>          
+                                    <div class="board-type">게시물에 댓글을 남겼습니다.</div>
+                                </div>          
                             </div>
                             <div class="alarm-delete">
-                                <i class="fa-solid fa-xmark "></i>
+                                <i class="fa-solid fa-xmark message-delete" onclick="messageDelete(this)"></i>
                             </div>
                         </div>
                     </div>
                     <!-- 동영상 스크랩 -->
                     <div class="mebmer-profile-alarm">
-                        <div class="profile-head-alarm">
+                        <div>
                             <img class="member-img" src="../../images/common/test_user_profile.gif" alt="">
                             <div class="contents">
                                 <div class="profile-info">
@@ -135,14 +141,14 @@
                                 </div>           
                             </div>
                             <div class="alarm-delete">
-                                <i class="fa-solid fa-xmark "></i>
+                                <i class="fa-solid fa-xmark message-delete" onclick="messageDelete(this)"></i>
                             </div>
                         </div>
                     </div>
 
                     <!-- 동영상 댓글 -->
-                    <div class="mebmer-profile-alarm">
-                        <div class="profile-head-alarm">
+                    <div class="mebmer-profile-alarm" >
+                        <div>
                             <img class="member-img" src="../../images/common/test_user_profile.gif" alt="">
                             <div class="contents">
                                 <div class="profile-info">
@@ -156,15 +162,10 @@
                                 </div>
                             </div>
                             <div class="alarm-delete">
-                                <i class="fa-solid fa-xmark "></i>
+                                <i class="fa-solid fa-xmark message-delete" onclick="messageDelete(this)"></i>
                             </div>
                         </div>
                     </div>
-
-
-
-
-
 
                 </section>
 
@@ -172,13 +173,13 @@
         </div>
     </div>
     <script>
-    		// 로그인한 회원 번호
-		const loginMemberNo = "${loginMember.memberNo}";
+    // 로그인한 회원 번호
+    const loginMemberNo = "${loginMember.memberNo}";
     </script>
     <!-- jQuery 라이브러리(.js 파일) 추가(CDN 방식) -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <!-- <%-- 해당 모달 개인 js --%> -->
-    <script src="../../js/webmain/main-memberSearch.js"></script>
+    <script src="../../js/webmain/main-notifications.js"></script>
     <!-- <%-- 웹 메인 모달 공통 js --%> -->
     <script src="../../js/webmain/modalSettings.js"></script>
 </body>

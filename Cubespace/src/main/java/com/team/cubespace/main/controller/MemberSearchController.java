@@ -66,6 +66,17 @@ public class MemberSearchController {
 		return new Gson().toJson(memberAddFriendList); 
 	}
 	
+	/** 깐부 신청취소 하기
+	 * @param loginMemberNo
+	 * @param memberNo
+	 * @return
+	 */
+	@GetMapping("/memberAddCancel")
+	@ResponseBody
+	public int memberAddCancel(@RequestParam Map<String, Object> paramMap) {
+		int result = service.memberAddCancel(paramMap);
+		return result;
+	}
 	
 	
 	

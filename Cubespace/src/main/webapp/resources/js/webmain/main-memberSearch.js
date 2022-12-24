@@ -38,7 +38,7 @@ const memberSearch=()=>{
     
     $.ajax({
         url : "/memberAllSearch",
-        data: {"leftChoiceInput":leftChoiceInput,"loginMemberNo":3},
+        data: {"leftChoiceInput":leftChoiceInput,"loginMemberNo":loginMemberNo},
         dataType : "JSON",
         success : memberSearchList =>{
 
@@ -134,7 +134,7 @@ const addFriend = (memberNo, btn)=>{
 
     $.ajax ({
         url : "/memberAddFriend",
-        data : {"loginMemberNo":3,"memberNo":memberNo},
+        data : {"loginMemberNo":loginMemberNo,"memberNo":memberNo},
         success : memberAddFriend =>{
             console.log(memberAddFriend);
 
@@ -168,7 +168,7 @@ const memberAddFriendList=()=>{
     var rightChoiceInput=$('#rightChoiceInput').val();
     $.ajax ({
         url : "/memberAddFriendList",
-        data: {"rightChoiceInput":rightChoiceInput,"loginMemberNo":3},
+        data: {"rightChoiceInput":rightChoiceInput,"loginMemberNo":loginMemberNo},
         dataType : "JSON",
         success : memberAddList =>{
 
@@ -252,25 +252,18 @@ const addFriendCancel = (memberNo, btn)=>{
 
     $.ajax ({
         url : "/memberAddCancel",
-        data : {"loginMemberNo":3,"memberNo":memberNo},
+        data : {"loginMemberNo":loginMemberNo,"memberNo":memberNo},
         success : memberAddCancel =>{
             console.log(memberAddCancel);
 
-            if(memberAddCancel==1){// 깐부신청 성공
-                //업데이트 신청 -> 대기중 변경
-                const mebmerProfile = btn.parentElement;
-                friendWaiting.classList.remove("member-choice");
-
-                const faPaperPlane = btn.previousElementSibling;
-                faPaperPlane.classList.remove("fa-paper-plane");
-                faPaperPlane.classList.add("fa-comment-dots");
-
-                const add = btn;
-                add.innerText="수락대기"
-                add.removeAttribute("onclick");
-                add.removeAttribute("id");
+            if(memberAddCancel==1){// 깐부신청취소 성공
+                //프로필 삭제 
+                //  강사님께 물어보기 도와주세요
+                const mebmerProfile = btn.parentElement.parentElement.parentElement;
+                mebmerProfile.innerHTML="";
+                mebmerProfile.remove()
             }else{
-                alert("깐부신청 실패")
+                alert("깐부신청취소 실패")
             }
         }
     })

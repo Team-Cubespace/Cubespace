@@ -187,6 +187,8 @@ const makeCalendar = (date) => {
                     console.log(diaryList);
 
                     for(diary of diaryList){
+
+                        
                         
                     }
                     // ------- 여긴 ajax success 코드로 활용 -------------

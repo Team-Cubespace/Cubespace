@@ -1,0 +1,96 @@
+<!-- 임시로 만든 변수 -->
+<!-- <c:if test="${not empty sessionScope.loginMember}">
+    <c:set var="loginMember" value="${sessionScope.loginMember}"/>
+</c:if> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cubespace</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/variables.css">
+    <!-- <link rel="stylesheet" href="../../css/style-web.css"> -->
+    <link rel="stylesheet" href="../../css/common/checkBox.css">
+    <link rel="stylesheet" href="../../css/webmain/main-shopFont.css">
+
+    <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div data-include-path="headercopy.html"></div>
+    <main>
+        <div class="shop-main-frame">
+            <div class="shop-header">
+                <div class="shop-move">
+                    <div class="shop-font"> 
+                        <img class="cube-img" src="../../images/common/smallCube.png"> 
+                        <a href="" >폰트</a> 
+                    </div>
+                    <div class="shop-music"> 
+                        <img class="cube-img" src="../../images/common/smallCube.png"> 
+                        <a href="" >배경음악</a> 
+                    </div>
+                    <div class="shop-miniroom"> 
+                        <img class="cube-img" src="../../images/common/smallCube.png"> 
+                        <a href="" >미니룸 소품</a> 
+                    </div>
+                </div>
+
+                <div class="shop-search">
+                    <!-- 인풋박스 포커스 시 돋보기 이미지 색상 변경예정 -->
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input class="goods-search" type="text">
+                    검색
+                </div>
+            </div>
+            
+            <div class="shop-rank-box">
+                <div class="rank-choose">
+                    <div>인기랭킹</div>
+                    <div>최신폰트</div>
+                </div>
+                <div class="shop-rank-lsit">
+
+                </div>
+            </div>
+            <div class="goods-list">
+
+            </div>
+
+            <div class="pagination-area">
+                <ul class="pagination">
+                    <!-- 첫 페이지로 이동( <<) -->
+                    <li><a href="/board/${boardCode}">&lt;&lt;</a></li>
+                    <!-- 이전 목록 마지막 번호로 이동 ( < ) -->
+                    <li><a href="/board/${boardCode}?cp=${pagination.prevPage}">&lt;</a></li>
+                    <!-- 특정 페이지로 이동 -->
+                    <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                        <c:choose>
+                            <c:when test="${i == pagination.currentPage}">
+                                <!-- <%-- 현재 보고있는 페이지 --%> -->
+                                <li><a class="current">${i}</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <!-- <%-- 현재 페이지를 제외한 나머지 --%> -->
+                                <li><a href="/board/${boardCode}?cp=${i}">${i}</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                    <!-- 다음 목록 시작 번호로 이동 ( > )-->
+                    <li><a href="/board/${boardCode}?cp=${pagination.nextPage}">&gt;</a></li>
+                    <!-- 끝 페이지로 이동 ( >> ) -->
+                    <li><a href="/board/${boardCode}?cp=${pagination.maxPage}">&gt;&gt;</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </main>
+    <!-- <script>
+        const loginMember = "${loginMember}";
+    </script> -->
+    <script src="../../js/common/temp.js"></script>
+</body>
+</html>

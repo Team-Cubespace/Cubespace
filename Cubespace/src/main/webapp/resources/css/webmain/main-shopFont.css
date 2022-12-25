@@ -1,0 +1,142 @@
+
+body *{
+    border: 1px solid black;
+}
+/* 최상위 div 설정 */
+.shop-main-frame{
+    border-top: 1px solid #e53095;
+    width: 100%;
+    height: 500px;
+}   
+
+/* 카테고리/검색 창 설정 */
+.shop-header{
+    display: flex;
+    width: 100%;
+    height: 40px;
+
+}
+/* 카테고리 설정 */
+.shop-move{
+    display: flex;
+    justify-content: space-evenly ;
+    width: 60%;
+}
+.shop-move >*{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 박스 이미지 설정 */
+.cube-img{
+    width: 45px;
+    height: 30px;
+}
+
+/* 검색창 부모 설정 */
+.shop-search{
+    display: flex;
+    align-items: center;
+    border: 1px solid #000;
+    width: 40%;
+    border-radius: 5px;
+    box-shadow: 1px 6px 3px 0px rgba(192, 192, 192, 0.934); /* 박스그림자 */
+
+}
+/* 돋보기 설정 */
+.fa-magnifying-glass{
+    font-size: 30px;
+    margin-left: 15px
+}
+/* 검색 input 설정 */
+.goods-search{
+    background-color: #e53095;
+    width: 78%;
+    height: 95%;
+    outline: none;
+    border: none;
+}
+
+/* 랭크 최상위 div */
+.shop-rank-box{
+    border: 1px solid black;
+    width: 100%;
+    height: 200px;
+    margin-top: 30px;
+}
+/* 랭크/ 최신상품 */
+.rank-choose{
+    display: flex;
+}
+/* pagination-------------------------------------------------- */
+.pagination-area {
+    margin-top: 100px;
+}
+
+.pagination{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.pagination li{
+    width: 20px;
+    margin: 0 10px;
+    text-align: center;
+}
+
+.pagination a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.current{
+    padding: 4px;
+    font-weight: bold;
+    background-color: var(--darkYellow);
+    border-radius: 50%;
+    color: white !important;
+    letter-spacing: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#boardSearch{
+    text-align: center;
+    width: 500px;
+    height: 30px;
+    margin: 30px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#boardSearch * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#boardSearch select{
+    width: 100px;
+}
+
+#boardSearch input{
+    flex-grow: 1;
+    margin: 0 10px;
+    padding-left: 10px;
+}  
+
+#boardSearch button{
+    width: 100px;
+    font-weight: bold;
+    background-color: var(--darkYellow);
+    border: none;
+    color: white;
+    cursor: pointer;
+}

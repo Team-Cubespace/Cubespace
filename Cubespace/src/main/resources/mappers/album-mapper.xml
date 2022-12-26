@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="albumMapper">
+	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
+
+	<select id="checkFriend" parameterType="map" resultType="_int">
+		SELECT COUNT(*)
+		FROM (SELECT * FROM FRIEND WHERE ASKED_MEMBER_NO = #{loginMemberNo} AND ASKING_MEMBER_NO = #{hostMemberNo} AND FRIEND_ACCEPT_FL = 1
+			UNION 
+			SELECT * FROM FRIEND WHERE ASKED_MEMBER_NO = #{hostMemberNo} AND ASKING_MEMBER_NO = #{loginMemberNo} AND FRIEND_ACCEPT_FL = 1)
+	</select>
+</mapper>

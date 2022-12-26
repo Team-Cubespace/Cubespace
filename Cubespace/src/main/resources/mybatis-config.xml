@@ -17,6 +17,7 @@
 	<!-- VO클래스의 패키지명 + 클래스명 작성하는 것이 불편하기 때문에 짧은 별칭 부여 -->
 	<typeAliases>
 		<typeAlias type="com.team.cubespace.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.team.cubespace.main.model.vo.MemberSearch" alias="MemberSearch"/>
 		<typeAlias type="com.team.cubespace.minihome.model.vo.Minihome" alias="Minihome"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.Folder" alias="Folder"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.CategoryOrder" alias="CategoryOrder"/>		
@@ -25,6 +26,7 @@
 	
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->
 	<mappers>
+		<mapper resource="/mappers/memberSearch-mapper.xml"/>
 		<mapper resource="/mappers/login-mapper.xml"/>
 		<mapper resource="/mappers/minihome-mapper.xml"/>
 		<mapper resource="/mappers/manage-mapper.xml"/>

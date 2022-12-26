@@ -69,14 +69,14 @@
             </div>
             <section class="minihome-main">
 
-                <iframe src="/albumList" frameborder="0" name="minihomeMenu" scrolling="no">
+                <iframe src="/albumList/2" frameborder="0" name="minihomeMenu" scrolling="no">
                 <%-- <iframe src="/manage/friend" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
 
                 </iframe>
                 <ul class="minihome-menu frame-menu-color">
                     <li><a href="">홈</a></li>
                     <li><a href="">다이어리</a></li>
-                    <li><a href="/albumList" target="minihomeMenu">사진첩</a></li>
+                    <li><a href="/albumList/2" target="minihomeMenu">사진첩</a></li>
                     <li><a href="">동영상</a></li>
                     <li><a href="">방명록</a></li>
                     <li><a href="/manage/font" target="minihomeMenu">관리</a></li>

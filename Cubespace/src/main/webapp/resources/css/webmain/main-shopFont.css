@@ -20,13 +20,20 @@ body *{
 .shop-move{
     display: flex;
     justify-content: space-evenly ;
-    width: 60%;
+    width: 44%;
+    margin-right: 192px;
 }
 .shop-move >*{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+.shop-move>*:hover{
+    font-weight: bold;
+    filter: invert(15%) sepia(77%) saturate(6158%) hue-rotate(267deg) brightness(110%) contrast(108%);
+
+}
+
 
 /* 박스 이미지 설정 */
 .cube-img{
@@ -42,21 +49,32 @@ body *{
     width: 40%;
     border-radius: 5px;
     box-shadow: 1px 6px 3px 0px rgba(192, 192, 192, 0.934); /* 박스그림자 */
+    color: #e53095;
+    font-size: 20px;
+    /* font-weight: bold; */
 
 }
 /* 돋보기 설정 */
-.fa-magnifying-glass{
+/* .fa-magnifying-glass{
     font-size: 30px;
     margin-left: 15px
+} */
+.search-img{
+    width: 30px;
+    margin-left: 15px
 }
+
 /* 검색 input 설정 */
 .goods-search{
-    background-color: #e53095;
+    /* background-color: #e53095; */
     width: 78%;
     height: 95%;
     outline: none;
     border: none;
 }
+
+
+
 
 /* 랭크 최상위 div */
 .shop-rank-box{

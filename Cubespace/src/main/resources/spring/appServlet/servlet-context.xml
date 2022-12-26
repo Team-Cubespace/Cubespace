@@ -40,7 +40,7 @@
 	<!-- 인터셉터 등록 -->
 	<interceptors>
 		<interceptor>
-			<mapping path="/albumList"/>
+			<mapping path="/albumList/*"/>
 			<beans:bean id="folderInterceptor" class="com.team.cubespace.common.interceptor.FolderInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>

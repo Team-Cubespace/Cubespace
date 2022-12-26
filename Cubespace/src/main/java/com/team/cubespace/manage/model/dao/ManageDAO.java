@@ -7,8 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
-import com.team.cubespace.manage.model.vo.Folder;
 
 @Repository
 public class ManageDAO {

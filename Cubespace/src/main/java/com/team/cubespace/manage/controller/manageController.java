@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.manage.model.service.ManageService;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
-import com.team.cubespace.manage.model.vo.Folder;
 import com.team.cubespace.member.model.vo.Member;
 
 @Controller

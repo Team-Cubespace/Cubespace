@@ -6,9 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.manage.model.dao.ManageDAO;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
-import com.team.cubespace.manage.model.vo.Folder;
 
 @Service
 public class ManageServiceImpl implements ManageService{

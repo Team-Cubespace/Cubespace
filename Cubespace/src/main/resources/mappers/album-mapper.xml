@@ -2,11 +2,67 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="albumMapper">
 	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
+	
+	<resultMap type="Folder" id="folder_rm">
+		<id property="folderNo" column="FOLDER_NO"/>
+		
+		<result property="boardTypeNo" column="BOARD_TYPE_NO"/>
+		<result property="folderName" column="FOLDER_NAME"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+	</resultMap>
 
+	<resultMap type="Album" id="album_rm">
+		<id property="albumNo" column="ALBUM_NO"/>
+		
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="albumTitle" column="A_TITLE"/>
+		<result property="albumContent" column="A_CONTENT"/>
+		<result property="thumbnailImg" column="THUMBNAIL_IMG"/>		
+		<result property="albumCreate" column="A_CREATE"/>
+		<result property="latitude" column="LATITUDE"/>
+		<result property="longitude" column="LONGITUDE"/>
+		<result property="albumScrapAllowYN" column="A_SCRAP_ALLOW_YN"/>
+		<result property="locationName" column="LOCATION_NAME"/>
+	</resultMap>
+
+	<!-- 깐부 여부 체크 -->
 	<select id="checkFriend" parameterType="map" resultType="_int">
 		SELECT COUNT(*)
 		FROM (SELECT * FROM FRIEND WHERE ASKED_MEMBER_NO = #{loginMemberNo} AND ASKING_MEMBER_NO = #{hostMemberNo} AND FRIEND_ACCEPT_FL = 1
 			UNION 
 			SELECT * FROM FRIEND WHERE ASKED_MEMBER_NO = #{hostMemberNo} AND ASKING_MEMBER_NO = #{loginMemberNo} AND FRIEND_ACCEPT_FL = 1)
+	</select>
+	
+	<!-- 폴더 목록 조회 -->
+	<select id="selectFolderList" parameterType="map" resultMap="folder_rm">
+		SELECT * FROM FOLDER
+		WHERE MEMBER_NO = #{hostMemberNo}	-- 미니홈 주인 회원 번호
+		AND BOARD_TYPE_NO = #{boardTypeNo}
+		ORDER BY FOLDER_ORDER
+	</select>
+	
+	<!-- 특정 폴더의 앨범 갯수 조회 -->
+	<select id="getListCount" parameterType="map" resultType="_int">
+		SELECT COUNT(*)
+		<![CDATA[
+			FROM ALBUM
+			WHERE FOLDER_NO = #{folderNo}
+			AND A_OPEN_FL <= #{flag}
+			AND A_DEL_FL = 'N'
+		]]>
+	</select>
+	
+	<!-- 앨범 목록 조회 -->
+	<select id="selectAlbumList" parameterType="map" resultMap="album_rm">
+		<![CDATA[
+			SELECT A.ALBUM_NO, MEMBER_NO, A.A_OPEN_FL,
+				(SELECT IMG_PATH || IMG_RENAME 
+				FROM ALBUM_IMG AI 
+				WHERE AI.ALBUM_NO = A.ALBUM_NO AND AI.IMG_ORDER = 0) THUMBNAIL_IMG
+			FROM ALBUM A
+			WHERE FOLDER_NO = #{folderNo}
+			AND A_DEL_FL = 'N'
+			AND A_OPEN_FL <= #{flag}
+		]]>
 	</select>
 </mapper>

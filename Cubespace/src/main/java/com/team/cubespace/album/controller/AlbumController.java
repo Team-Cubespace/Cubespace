@@ -1,9 +1,11 @@
 package com.team.cubespace.album.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.team.cubespace.album.model.service.AlbumService;
+import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.member.model.vo.Member;
 import com.team.cubespace.minihome.model.vo.Minihome;
 
@@ -32,6 +35,7 @@ public class AlbumController {
 	public String albumList(@PathVariable("boardTypeNo") int boardTypeNo, 
 			Model model, @SessionAttribute(value="loginMember", required=false) Member loginMember,
 			@SessionAttribute("minihome") Minihome minihome,
+			@SessionAttribute("folderList") List<Folder> folderList,
 			@RequestParam(value="folderNo", required=false, defaultValue="-1") int folderNo,
 			@RequestParam(value="cp", required=false, defaultValue="1") int cp,
 			HttpServletRequest req) {
@@ -40,7 +44,7 @@ public class AlbumController {
 			// 폴더리스트를 가져와
 			// 폴더리스트의 0번째 인덱스의 폴더번호를
 			// folderNo로 지정
-//			req.getAttribute("folderList");
+			folderNo = folderList.get(0).getFolderNo();
 		}
 		
 		Map<String, Integer> paramMap = new HashMap<>();
@@ -64,12 +68,13 @@ public class AlbumController {
 			}
 		}
 		
-		
 		paramMap.put("folderNo", folderNo);
 		paramMap.put("flag", flag);
 		
-		model.addAttribute("albumList");
+		// 앨범 목록 조회 서비스 호출
+		Map<String, Object> resultMap = service.selectAlbumList(paramMap, cp); 
 		
+		model.addAttribute("resultMap", resultMap);
 		
 		return "minihome/album/album-list";
 	}

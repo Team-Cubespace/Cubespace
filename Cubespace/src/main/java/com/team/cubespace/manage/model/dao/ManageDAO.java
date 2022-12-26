@@ -56,9 +56,15 @@ public class ManageDAO {
 	 * @param memberNo
 	 * @return
 	 */
-	public List<Map<String, String>> getFriendList(int memberNo) {
+	public List<Map<String, String>> getFriendList(Map<String, Object> paramMap) {
 		
-		return sqlSession.selectList("ManageMapper.getFriendList", memberNo);
+		String query = "";
+		if(paramMap.containsKey("searchInput")){
+			query = "AND MEMBER_NICKNAME LIKE '%" + paramMap.get("searchInput") + "%'";
+		}
+		paramMap.put("query", query);
+		
+		return sqlSession.selectList("ManageMapper.getFriendList", paramMap);
 	}
 
 	/** 깐부끊기

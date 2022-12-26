@@ -38,13 +38,14 @@
             <div class="main">
                 <header>
                     <span class="rightTitle">깐부 관리</span>
-                    <div class="searchArea">
-                        <input type="text" id="searchInput" class="headerSearch" placeholder="깐부 닉네임 검색">
+                    <form class="searchArea">
+                        <button id="allFriend" class="whiteBtn">모든 깐부</button>
+                        <input type="text" id="searchInput" name="searchInput" class="headerSearch" placeholder="깐부 닉네임 검색" onsubmit="return false" value="${searchInput}">
                         <i class="fa-solid fa-magnifying-glass" id="searchBtn"></i>
-                    </div>
+                    </form>
                 </header>
                 <div class="FriendArea">
-                    <div class="listTitle">나의 깐부목록</div>
+                    <div class="listTitle">나의 깐부목록 (${fn:length(friendList)}명)</div>
                     <c:forEach var="friend" items="${friendList}">
                         <div class="friendDetail">
                             <div class="friendImgName">

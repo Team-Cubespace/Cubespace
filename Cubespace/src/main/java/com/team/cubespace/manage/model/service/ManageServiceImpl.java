@@ -56,9 +56,9 @@ public class ManageServiceImpl implements ManageService{
 	 * 내 친구 목록 조회
 	 */
 	@Override
-	public List<Map<String, String>> getFriendList(int memberNo) {
+	public List<Map<String, String>> getFriendList(Map<String, Object> paramMap) {
 		
-		return dao.getFriendList(memberNo);
+		return dao.getFriendList(paramMap);
 	}
 
 	/**

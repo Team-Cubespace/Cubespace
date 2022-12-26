@@ -35,7 +35,7 @@ public interface ManageService {
 	 * @param memberNo
 	 * @return
 	 */
-	List<Map<String, String>> getFriendList(int memberNo);
+	List<Map<String, String>> getFriendList(Map<String, Object> paramMap);
 
 	/** 깐부끊기
 	 * @param paramMap

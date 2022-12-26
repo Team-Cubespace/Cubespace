@@ -35,12 +35,23 @@ public class manageController {
 		return "manage/music";
 	}
 	
+	/** 깐부관리 페이지 이동
+	 * @param inputMember
+	 * @param paramMap
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/friend")
 	public String changeFriend(@SessionAttribute("loginMember") Member inputMember, 
+			@RequestParam Map<String, Object> paramMap, /*searchInput*/
 			Model model) {
 		
-		List<Map<String, String>> friendList = service.getFriendList(inputMember.getMemberNo());
+		paramMap.put("memberNo", inputMember.getMemberNo());
+		List<Map<String, String>> friendList = service.getFriendList(paramMap);
 		model.addAttribute(friendList);
+		if(paramMap.containsKey("searchInput")) {
+			model.addAttribute(paramMap.get("searchInput"));
+		}
 		
 		return "manage/friend";
 	}

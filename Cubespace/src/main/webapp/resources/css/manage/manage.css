@@ -261,7 +261,9 @@ header {
 .friendDetail {
     border-bottom: 3px solid #eee;
 }
-
+#searchBtn {
+    top: 7px;
+}
 /* ----------------------------------------------------- */
 /* 배경설정 */
 .backgroundTitleArea {

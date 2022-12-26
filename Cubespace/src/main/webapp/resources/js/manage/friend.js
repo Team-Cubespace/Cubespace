@@ -1,3 +1,5 @@
+
+/* 깐부 끊기 */
 const deleteFriendBtnList = document.getElementsByClassName("fa-minus");
 
 for(let deleteFriendBtn of deleteFriendBtnList){
@@ -24,3 +26,28 @@ for(let deleteFriendBtn of deleteFriendBtnList){
     
     })
 }
+
+
+/* 깐부 닉네임 검색 */
+const searchBtn = document.getElementById("searchBtn");
+const searchInput = document.getElementById("searchInput");
+
+
+searchBtn.addEventListener("click", e => {
+
+    if(searchInput.value.trim().length > 0){
+        
+        window.href=window.href;
+        
+    } else {
+        alert("검색어를 입력해주세요");
+    }
+
+})
+
+/* 모든깐부 조회(모든깐부 버튼) */
+const allFriend = document.getElementById("allFriend");
+allFriend.addEventListener("click", e => {
+    searchInput.value="";
+    window.href=  window.href;
+})

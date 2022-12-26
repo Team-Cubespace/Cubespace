@@ -163,7 +163,7 @@ public class LoginController {
 		
 		if (result > 0) { //회원가입 성공
 			path = "/";
-			message = "회원가입 성공했습니다.";
+			message = "회원가입 되었습니다!";
 			 
 		} else { //회원가입 실패
 			path = referer;

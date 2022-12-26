@@ -50,7 +50,7 @@ public class manageController {
 		List<Map<String, String>> friendList = service.getFriendList(paramMap);
 		model.addAttribute(friendList);
 		if(paramMap.containsKey("searchInput")) {
-			model.addAttribute(paramMap.get("searchInput"));
+			model.addAttribute("searchInput", paramMap.get("searchInput"));
 		}
 		
 		return "manage/friend";

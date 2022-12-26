@@ -74,11 +74,15 @@
 
 	<!-- 회원가입 입력 정보 제출 서비스 -->
 	<insert id="signUp" parameterType="Member">
-		INSERT INTO "MEMBER"
-		VALUES (SEQ_MEMBER_NO.NEXTVAL,
-		#{memberEmail},#{memberPw},#{memberName},#{memberNickname},
-		DEFAULT,#{memberTel},#{memberAddress},NULL,DEFAULT,DEFAULT,DEFAULT,
-		DEFAULT,#{memberBirth},DEFAULT)
+		INSERT INTO MEMBER VALUES(
+			SEQ_MEMBER_NO.NEXTVAL, #{memberEmail}, #{memberPw}, #{memberName}, #{memberNickname}, DEFAULT, #{memberTel}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, 
+		<if test='birthYear != null and birthDay != null'>
+			#{birthYear}, #{birthDay}, 
+		</if>
+		<if test='birthYear == null and birthDay == null'>
+			NULL, NULL,
+		</if>
+			DEFAULT, DEFAULT)
 	</insert>
 
 	

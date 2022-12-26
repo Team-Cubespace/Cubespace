@@ -43,4 +43,12 @@ public class AlbumDAO {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		return sqlSession.selectList("albumMapper.selectAlbumList", paramMap, rowBounds);
 	}
+
+	/** 앨범 상세 조회
+	 * @param albumNo
+	 * @return album
+	 */
+	public Album selectAlbum(int albumNo) {
+		return sqlSession.selectOne("albumMapper.selectAlbum", albumNo);
+	}
 }

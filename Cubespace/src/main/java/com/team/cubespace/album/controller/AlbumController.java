@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.team.cubespace.album.model.service.AlbumService;
+import com.team.cubespace.album.model.vo.Album;
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.member.model.vo.Member;
 import com.team.cubespace.minihome.model.vo.Minihome;
@@ -74,8 +74,18 @@ public class AlbumController {
 		// 앨범 목록 조회 서비스 호출
 		Map<String, Object> resultMap = service.selectAlbumList(paramMap, cp); 
 		
+		// 폴더 이름 찾기
+		String folderName = "";
+		for(Folder folder : folderList) {
+			if(folder.getFolderNo() == folderNo) {
+				folderName = folder.getFolderName();
+				break;
+			}
+		}
 		model.addAttribute("resultMap", resultMap);
-		
+		model.addAttribute("folderNo", folderNo);
+		model.addAttribute("folderName", folderName);
+		model.addAttribute("cp", cp);
 		return "minihome/album/album-list";
 	}
 	
@@ -90,8 +100,27 @@ public class AlbumController {
 	/** 앨범 상세조회
 	 * @return minihome/album/album-write 포워드
 	 */
-	@GetMapping("/albumDetail")
-	public String albumDetail() {
+	@GetMapping("/albumDetail/{albumNo}")
+	public String albumDetail(@PathVariable("albumNo") int albumNo,
+			Model model,
+			int folderNo,
+			@SessionAttribute("folderList") List<Folder> folderList) {
+		
+		// 폴더 이름 찾기
+		String folderName = "";
+		for(Folder folder : folderList) {
+			if(folder.getFolderNo() == folderNo) {
+				folderName = folder.getFolderName();
+				break;
+			}
+		}
+		
+		// 앨범 서비스 호출
+		Album album = service.selectAlbum(albumNo);
+		model.addAttribute("folderName", folderName);
+		model.addAttribute("album", album);
+		
+		
 		return "minihome/album/album-detail";
 	}
 }

@@ -11,20 +11,41 @@
 		<result property="memberNo" column="MEMBER_NO"/>
 	</resultMap>
 
-	<resultMap type="Album" id="album_rm">
+	<resultMap type="Album" id="albumList_rm">
 		<id property="albumNo" column="ALBUM_NO"/>
 		
 		<result property="memberNo" column="MEMBER_NO"/>
 		<result property="albumTitle" column="A_TITLE"/>
 		<result property="albumContent" column="A_CONTENT"/>
-		<result property="thumbnailImg" column="THUMBNAIL_IMG"/>		
+		<result property="thumbnailImage" column="THUMBNAIL_IMG"/>		
+		<result property="albumCreate" column="A_CREATE"/>
+	</resultMap>
+	
+	<resultMap type="Album" id="albumDetail_rm">
+		<id property="albumNo" column="ALBUM_NO"/>
+		
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="albumTitle" column="A_TITLE"/>
+		<result property="albumContent" column="A_CONTENT"/>
+		<result property="thumbnailImage" column="THUMBNAIL_IMG"/>		
 		<result property="albumCreate" column="A_CREATE"/>
 		<result property="latitude" column="LATITUDE"/>
 		<result property="longitude" column="LONGITUDE"/>
 		<result property="albumScrapAllowYN" column="A_SCRAP_ALLOW_YN"/>
 		<result property="locationName" column="LOCATION_NAME"/>
+		
+		<collection property="albumImageList" javaType="java.util.ArrayList" ofType="AlbumImage" select="selectAlbumImageList" column="ALBUM_NO"></collection>
 	</resultMap>
 
+	<resultMap type="AlbumImage" id="albumImage_rm">
+		<id property="imageNo" column="IMG_NO"/>
+		
+		<result property="albumNo" column="ALBUM_NO"/>
+		<result property="imagePath" column="IMG_PATH"/>
+		<result property="imageRename" column="IMG_RENAME"/>
+		<result property="imageOrder" column="IMG_ORDER"/>
+	</resultMap>
+	
 	<!-- 깐부 여부 체크 -->
 	<select id="checkFriend" parameterType="map" resultType="_int">
 		SELECT COUNT(*)
@@ -53,7 +74,7 @@
 	</select>
 	
 	<!-- 앨범 목록 조회 -->
-	<select id="selectAlbumList" parameterType="map" resultMap="album_rm">
+	<select id="selectAlbumList" parameterType="map" resultMap="albumList_rm">
 		<![CDATA[
 			SELECT A.ALBUM_NO, MEMBER_NO, A.A_OPEN_FL,
 				(SELECT IMG_PATH || IMG_RENAME 
@@ -64,5 +85,21 @@
 			AND A_DEL_FL = 'N'
 			AND A_OPEN_FL <= #{flag}
 		]]>
+	</select>
+	
+	<!-- 앨범 상세 조회 -->
+	<select id="selectAlbum" parameterType="_int" resultMap="albumDetail_rm">
+		SELECT ALBUM_NO, MEMBER_NO, A_TITLE, A_CONTENT, LATITUDE, LONGITUDE, LOCATION_NAME, A_SCRAP_YN, FOLDER_NO, A_SCRAP_ALLOW_YN,
+			TO_CHAR(A_CREATE, 'YYYY.MM.DD') A_CREATE 
+		FROM ALBUM
+		WHERE ALBUM_NO = #{albumNo}
+	</select>
+	
+	<!-- 앨범 이미지 목록 조회 -->
+	<select id="selectAlbumImageList" parameterType="_int" resultMap="albumImage_rm">
+		SELECT * FROM 
+		ALBUM_IMG 
+		WHERE ALBUM_NO = #{albumNo}
+		ORDER BY IMG_ORDER
 	</select>
 </mapper>

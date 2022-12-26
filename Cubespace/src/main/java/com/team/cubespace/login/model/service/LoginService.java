@@ -50,4 +50,10 @@ public interface LoginService {
 	 */
 	int telDupCheck(String memberTel);
 
+	/** 카카오로그인
+	 * @param paramMap
+	 * @return loginMember
+	 */
+	Member kakaoLogin(Map<String, Object> paramMap);
+
 }

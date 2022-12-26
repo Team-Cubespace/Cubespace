@@ -56,29 +56,31 @@ public class LoginController {
 	 * @return loginMember
 	 */
 	@PostMapping("/member/login")
-	public String login(Member inputMember,
+	public String login(@RequestParam(value="inputMember", required=false) Member inputMember,
 			Model model,
 			RedirectAttributes ra,
 			HttpServletResponse resp,
 			@RequestParam(value="saveId", required=false) String saveId,
-//			@RequestParam(value="profile_image_url", required=false) String profile_image_url,
-//			@RequestParam(value="nickname", required=false) String nickname,
-//			@RequestParam(value="email", required=false) String email,
-//			@RequestParam(value="birthday", required=false) String birthday,
+			@RequestParam Map<String, Object> paramMap,
 			@RequestHeader(value="referer") String referer,
 			@RequestParam(value="loginType", required=false, defaultValue = "1") String loginType) {
 		
-		
 		Member loginMember = new Member();
-//		
-//
-//		
-//		if(loginType.equals("3")) {
-//			
-//			loginMember.setMemberEmail(kakaoLoginMember.email);
-//			
-//			loginMember = service.kakaoLogin(inputMember);
-//		}
+	
+		
+		if(loginType.equals("3")) {
+//			paramMap : profile_image_url, nickname, email, birthday(생일 4글자)
+			loginMember = service.kakaoLogin(paramMap);
+			
+			if(paramMap.get("newKakaoMember").equals("1")) { // 처음 카카오 회원가입시
+				
+				ra.addFlashAttribute(paramMap);
+				return "redirect:/member/login/kakaoSignUp";
+				
+			} else {
+				return "redirect:/";
+			}
+		}
 		
 		
 	loginMember = service.login(inputMember);

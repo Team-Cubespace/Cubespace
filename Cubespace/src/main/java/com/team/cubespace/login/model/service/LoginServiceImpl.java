@@ -94,6 +94,45 @@ public class LoginServiceImpl implements LoginService{
 	public int telDupCheck(String memberTel) {
 		return dao.telDupCheck(memberTel);
 	}
+
+
+	/**
+	 * 카카오 로그인
+	 */
+	@Override
+	public Member kakaoLogin(Map<String, Object> paramMap) {
+		
+		// paramMap의 email을 기존의 회원과 조회해서 
+		// 있다면 -> 기존의 로그인메서드 호출
+		// 없다면 -> 카카오 회원가입 진행(비밀번호 = 아이디랑 동일하게) 이후 return loginMember
+		
+		Member loginMember = dao.login((String)paramMap.get("email"));
+		if(loginMember != null) {
+			
+			loginMember.setMemberPw(null);
+			return loginMember;
+			
+		} else {
+			
+			paramMap.put("memberPw", bcrypt.encode((String) paramMap.get("email")));
+			paramMap.put("newKakaoMember", 1); // 처음 카카오 회원가입시->추가정보 입력을 위한 flag
+			
+			int result = dao.kakaoSignUp(paramMap);
+			
+			if(result != 0) {
+				loginMember = dao.login((String)paramMap.get("email"));
+				if(loginMember != null) {
+					
+					loginMember.setMemberPw(null);
+					return loginMember;
+				}
+			}
+		}
+		
+		return loginMember;
+	}
+
+
 	
 
 }

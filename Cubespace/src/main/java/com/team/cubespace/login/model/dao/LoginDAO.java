@@ -82,5 +82,14 @@ public class LoginDAO {
 	public int telDupCheck(String memberTel) {
 		return sqlSession.selectOne("loginMapper.telDupCheck",memberTel);
 	}
+
+	/** 카카오 회원가입
+	 * @param paramMap
+	 * @return
+	 */
+	public int kakaoSignUp(Map<String, Object> paramMap) {
+		
+		return sqlSession.insert("loginMapper.kakaoSignUp", paramMap);
+	}
 	
 }

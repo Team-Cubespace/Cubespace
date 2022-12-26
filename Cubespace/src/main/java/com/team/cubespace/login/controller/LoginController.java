@@ -179,12 +179,20 @@ public class LoginController {
 	
 	
 	
-	/** 회원 ID/PW 찾기 페이지로 이동
+	/** 회원 ID 찾기 페이지로 이동
 	 * @return
 	 */
 	@GetMapping("/member/findId")
-	public String infoFind() {
+	public String infoFindId() {
 		return "member/login/findId";
+	}
+	
+	/** 회원 PW 찾기 페이지로 이동
+	 * @return
+	 */
+	@GetMapping("/member/findPw")
+	public String infoFindPw() {
+		return "member/login/findPw";
 	}
 	
 	

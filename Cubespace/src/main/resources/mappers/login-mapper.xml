@@ -91,17 +91,17 @@
 	<select id="infoFindSelect" resultType="string">
 		SELECT MEMBER_EMAIL
 		FROM "MEMBER" M
-		WHERE MEMBER_NAME = #{memberName}
-		AND MEMBER_TEL = #{memberTel}
+		WHERE MEMBER_NAME = '${memberName}'
+		AND MEMBER_TEL = '${memberTel}'
 		AND (SELECT COUNT(*) FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = M.MEMBER_NO) = 0
 		AND MEMBER_DEL_YN = 'N'
  	 </select>
  	 
  	 <update id="findEmailPw">
-		UPDATE "MEMBER" SET
+		UPDATE "MEMBER" M SET
 		MEMBER_PW = #{encPw}
 		WHERE MEMBER_EMAIL = #{result}
-		AND MEMBER_BLOCK_YN = 'N'
+		AND (SELECT COUNT(*) FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = M.MEMBER_NO) = 0
 		AND MEMBER_DEL_YN = 'N'
  	 </update>
  	 

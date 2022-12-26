@@ -36,6 +36,7 @@ public class LoginDAO {
 	 * @return 
 	 */
 	public String infoFindSelect(Map<String, Object> paramMap) {
+		System.out.println(paramMap);
 		return sqlSession.selectOne("loginMapper.infoFindSelect",paramMap);
 	}
 

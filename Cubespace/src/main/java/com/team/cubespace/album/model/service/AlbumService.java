@@ -25,4 +25,10 @@ public interface AlbumService {
 	 */
 	public Map<String, Object> selectAlbumList(Map<String, Integer> paramMap, int cp);
 
+	/** 앨범 상세 조회
+	 * @param albumNo
+	 * @return album
+	 */
+	public Album selectAlbum(int albumNo);
+
 }

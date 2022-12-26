@@ -44,4 +44,10 @@ public class AlbumServiceImpl implements AlbumService{
 		
 		return resultMap;
 	}
+	
+	// 앨범 상세 조회
+	@Override
+	public Album selectAlbum(int albumNo) {
+		return dao.selectAlbum(albumNo);
+	}
 }

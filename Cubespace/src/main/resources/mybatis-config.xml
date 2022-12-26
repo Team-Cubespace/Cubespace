@@ -22,7 +22,8 @@
 		<typeAlias type="com.team.cubespace.folder.model.vo.Folder" alias="Folder"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.CategoryOrder" alias="CategoryOrder"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.Friend" alias="Friend"/>		
-		<typeAlias type="com.team.cubespace.album.model.vo.Album" alias="Album"/>				
+		<typeAlias type="com.team.cubespace.album.model.vo.Album" alias="Album"/>		
+		<typeAlias type="com.team.cubespace.album.model.vo.AlbumImage" alias="AlbumImage"/>		
 	</typeAliases>
 	
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->

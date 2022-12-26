@@ -8,9 +8,11 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Folder {
-
 	private int folderNo;
 	private int boardTypeNo;
 	private String folderName;
 	private int folderOrder;
+	private int memberNo;
+	private String memberNickname;
+
 }

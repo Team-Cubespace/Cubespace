@@ -132,23 +132,23 @@
  	 
  	 
  	 <!-- 카카오 회원가입 -->
- 	<!-- paramMap : profile_image_url, nickname, email, birthday(생일 4글자), memberPw -->
  	 <insert id="kakaoSignUp" parameterType="Member">
  	 			INSERT INTO MEMBER VALUES(
-			SEQ_MEMBER_NO.NEXTVAL, #{email}, #{memberPw}, #{nickname}, #{nickname}, DEFAULT, '010-0000-0000', 
+			SEQ_MEMBER_NO.NEXTVAL, #{memberEmail}, #{memberPw}, #{memberNickname}, #{memberNickname}, DEFAULT, '010-0000-0000', 
 		
-		<if test='profile_image_url != null'>
-			#{profile_image_url},
+		<if test='profileImage != null'>
+			#{profileImage},
 		</if>
-		<if test='profile_image_url == null'>
+		<if test='profileImage == null'>
 			DEFAULT,
 		</if>
 		
 			DEFAULT, DEFAULT, DEFAULT, NULL,
-		<if test='birthday != null'>
-			#{birthday}, 
+			
+		<if test='birthDay != null'>
+			#{birthDay}, 
 		</if>
-		<if test='birthday == null'>
+		<if test='birthDay == null'>
 			NULL,
 		</if>
 			DEFAULT, DEFAULT)

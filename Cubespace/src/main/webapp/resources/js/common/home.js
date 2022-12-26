@@ -156,3 +156,40 @@ const openMinihome = (url) => {
 
     return false;
 }
+
+
+/* 로그아웃 */
+const logout = document.getElementById("logout");
+if(logout != null){
+
+    logout.addEventListener("click", e => {
+    
+        //카카오로그아웃  
+        (()=>{
+            
+            if (Kakao.Auth.getAccessToken()) {
+            Kakao.API.request({
+                url: '/v1/user/unlink'
+                , success: function (response) {
+        
+                console.log(response);
+                window.location.href="/";
+                },
+                fail: function () {
+        
+                alert("로그아웃에 실패하셨습니다");
+                }
+            })
+            Kakao.Auth.setAccessToken(undefined);
+        
+            } else {
+            alert("이미 로그아웃 상태입니다");
+            }
+        })();
+        
+        
+          
+    
+        location.href = "/member/logout";
+    })
+}

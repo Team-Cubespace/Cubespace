@@ -87,9 +87,56 @@ public class LoginDAO {
 	 * @param paramMap
 	 * @return
 	 */
-	public int kakaoSignUp(Map<String, Object> paramMap) {
+	public int kakaoSignUp(Member inputMember) {
 		
-		return sqlSession.insert("loginMapper.kakaoSignUp", paramMap);
+		return sqlSession.insert("loginMapper.kakaoSignUp", inputMember);
 	}
 	
+	/** 내 회원 정보 수정 (비밀번호 포함)
+	 * @param inputMember
+	 * @return
+	 */
+	public int updateInfoPw(Member inputMember) {
+		return sqlSession.update("myPageMapper.updateInfoPw",inputMember);
+	}
+
+	/** 내 회원 정보 수정 (비밀번호 제외)
+	 * @param inputMember
+	 * @return
+	 */
+	public int updateInfoNoPw(Member inputMember) {
+		return sqlSession.update("myPageMapper.updateInfoNoPw",inputMember);
+	}
+	
+	/** 마이페이지 자기소개 수정 
+	 * @param member
+	 * @return
+	 */
+	public int changeIntroduce(Member member) {
+		return sqlSession.update("myPageMapper.changeIntroduce",member);
+	}
+	
+	/** 회원탈퇴 회원 조회
+	 * @param memberNo
+	 * @return 
+	 */
+	public Member secessionSelect(int memberNo) {
+		return sqlSession.selectOne("memberMapper.secessionSelect", memberNo);
+	}
+
+	/** 회원 탈퇴
+	 * @param memberNo
+	 * @return result
+	 */
+	public int secession(int memberNo) {
+		return sqlSession.update("myPageMapper.secession",memberNo);
+	}
+	
+	/** 회원 탈퇴
+	 * @param memberNo
+	 * @return
+	 */
+	public int secessionDelete(int memberNo) {
+		return sqlSession.update("memberMapper.secessionDelete",memberNo);
+	}
 }

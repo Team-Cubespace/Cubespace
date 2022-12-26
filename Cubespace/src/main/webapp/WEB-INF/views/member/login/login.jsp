@@ -75,6 +75,7 @@
                 회원가입</a>
         </div>
 
+
         <div class="socialLogin">
             <div class="simpleLogin naver">
                 <img src="/resources/images/common/naverLogo.png" class="loginLogo">
@@ -85,7 +86,6 @@
                 <div id="startKakao">카카오로 시작하기</div>
             </div>
         </div>
-
     </form>
 
 

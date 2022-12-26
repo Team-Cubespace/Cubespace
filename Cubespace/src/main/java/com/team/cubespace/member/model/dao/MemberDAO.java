@@ -1,5 +1,5 @@
 package com.team.cubespace.member.model.dao;
 
-public class memberDAO {
+public class MemberDAO {
 
 }

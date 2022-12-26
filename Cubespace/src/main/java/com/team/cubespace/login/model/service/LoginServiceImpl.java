@@ -100,29 +100,27 @@ public class LoginServiceImpl implements LoginService{
 	 * 카카오 로그인
 	 */
 	@Override
-	public Member kakaoLogin(Map<String, Object> paramMap) {
+	public Member kakaoLogin(Member inputMember) {
 		
 		// paramMap의 email을 기존의 회원과 조회해서 
 		// 있다면 -> 기존의 로그인메서드 호출
 		// 없다면 -> 카카오 회원가입 진행(비밀번호 = 아이디랑 동일하게) 이후 return loginMember
 		
-		Member loginMember = dao.login((String)paramMap.get("email"));
+		Member loginMember = dao.login(inputMember.getMemberEmail());
+		
 		if(loginMember != null) {
-			
 			loginMember.setMemberPw(null);
 			return loginMember;
 			
 		} else {
+			inputMember.setMemberPw(bcrypt.encode(inputMember.getMemberPw())); // 비밀번호 자리에 로그인 인코딩정보 넣음
 			
-			paramMap.put("memberPw", bcrypt.encode((String) paramMap.get("email")));
-			paramMap.put("newKakaoMember", 1); // 처음 카카오 회원가입시->추가정보 입력을 위한 flag
-			
-			int result = dao.kakaoSignUp(paramMap);
+			int result = dao.kakaoSignUp(inputMember);
 			
 			if(result != 0) {
-				loginMember = dao.login((String)paramMap.get("email"));
+				loginMember = dao.login(inputMember.getMemberEmail());
+				
 				if(loginMember != null) {
-					
 					loginMember.setMemberPw(null);
 					return loginMember;
 				}
@@ -133,6 +131,49 @@ public class LoginServiceImpl implements LoginService{
 	}
 
 
-	
+	// 내 회원 정보 수정
+		@Override
+		@Transactional(rollbackFor = Exception.class)
+		public int updateInfo(Member inputMember) {
+			
+			int result = -1;
+			
+			if (inputMember.getMemberPw().equals("")) {
+				result = dao.updateInfoNoPw(inputMember);
+			}else {
+				// 비밀번호 암호화
+				String encPw = bcrypt.encode(inputMember.getMemberPw());
+				inputMember.setMemberPw(encPw);
+				 result =  dao.updateInfoPw(inputMember);
+			}
+			
+			return result;
+		}
+		
+		// 회원 탈퇴 
+		@Transactional
+		@Override
+		public int secessionSelect(int memberNo, Map<String, Object> parMap) {
+			
+			// 1. 회원탈퇴 회원 조회 (아이디/ 비밀번호/이름)
+		    	Member memeberInf = dao.secessionSelect(memberNo);
+	 
+		    	
+				// 2. 입력 값 과 조회된 값이 같은지 확인
+	    	// 비밀번호가 맞는지 먼저 확인
+			if (bcrypt.matches((CharSequence) parMap.get("memberPw"), memeberInf.getMemberPw())) {
+			
+				// map 에서 값 꺼내서 아이디 , 이름 같은지 조회
+				if ( parMap.get("memberNewEmail").equals(memeberInf.getMemberEmail()) &&
+					 parMap.get("memberName").equals(memeberInf.getMemberName())	) {
+					
+					// 같다면 탈퇴 처리 
+					int result = dao.secessionDelete(memberNo);
+					
+	               return result;
+				}
+			}
+			return 0;
+		}
 
 }

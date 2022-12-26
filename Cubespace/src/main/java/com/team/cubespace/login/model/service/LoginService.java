@@ -7,7 +7,7 @@ import com.team.cubespace.member.model.vo.Member;
 public interface LoginService {
 
 	/** 로그인
-	 * @param inputMember
+	 * @param paramMap
 	 * @return loginMember
 	 */
 	Member login(Member inputMember);
@@ -54,6 +54,18 @@ public interface LoginService {
 	 * @param paramMap
 	 * @return loginMember
 	 */
-	Member kakaoLogin(Map<String, Object> paramMap);
+	Member kakaoLogin(Member inputMember);
+	
+	/** 내 회원 정보 수정
+	 * @param inputMember
+	 * @return
+	 */
+	public abstract int updateInfo(Member inputMember);
+	
+	/** 회원 탈퇴
+	 * @param memberNo
+	 * @return result
+	 */
+	int secessionSelect(int memberNo, Map<String, Object> parMap);
 
 }

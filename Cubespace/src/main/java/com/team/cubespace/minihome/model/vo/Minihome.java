@@ -1,5 +1,7 @@
 package com.team.cubespace.minihome.model.vo;
 
+import com.team.cubespace.manage.model.vo.CategoryOrder;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,5 +18,6 @@ public class Minihome {
 	private String musicName;		// 음악 이름
 	private String frameColor;		// 프레임 색
 	private String frameMenuColor;	// 프레임 메뉴 색
-	private String frameFontColor;	// 프레임 글자 색 
+	private String frameFontColor;	// 프레임 글자 색
+	private CategoryOrder categoryOrder;	// 메뉴 카테고리 순서
 }

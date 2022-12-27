@@ -21,7 +21,7 @@
             <ul class="album-list">
                 <c:forEach var="album" items="${resultMap.albumList}">
                     <li>
-                        <a href="/albumDetail/${album.albumNo}?folderNo=${folderNo}&cp=${param.cp}">
+                        <a href="/albumDetail/${album.albumNo}?folderNo=${folderNo}&cp=${cp}">
                             <img src="${album.thumbnailImage}" alt="">
                         </a>
                     </li>

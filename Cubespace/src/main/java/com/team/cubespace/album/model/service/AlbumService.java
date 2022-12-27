@@ -51,4 +51,17 @@ public interface AlbumService {
 	 */
 	public int albumDelete(int albumNo);
 
+	/** 앨범 수정
+	 * @param album
+	 * @param webPath
+	 * @param folderPath
+	 * @param imageList
+	 * @param deleteImageList
+	 * @return result
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	public int albumUpdate(Album album, String webPath, String folderPath, List<MultipartFile> imageList,
+			List<String> deleteImageList, int prevLength) throws IllegalStateException, IOException;
+
 }

@@ -33,6 +33,7 @@
 		<result property="latitude" column="LATITUDE"/>
 		<result property="longitude" column="LONGITUDE"/>
 		<result property="albumScrapAllowYN" column="A_SCRAP_ALLOW_YN"/>
+		<result property="albumOpenFlag" column="A_OPEN_FL"/>
 		<result property="locationName" column="LOCATION_NAME"/>
 		
 		<collection property="albumImageList" javaType="java.util.ArrayList" ofType="AlbumImage" select="selectAlbumImageList" column="ALBUM_NO"></collection>
@@ -44,6 +45,7 @@
 		<result property="albumNo" column="ALBUM_NO"/>
 		<result property="imagePath" column="IMG_PATH"/>
 		<result property="imageRename" column="IMG_RENAME"/>
+		<result property="imageOriginalName" column="IMG_ORIGINAL_NAME"/>
 		<result property="imageOrder" column="IMG_ORDER"/>
 	</resultMap>
 	
@@ -90,7 +92,7 @@
 	
 	<!-- 앨범 상세 조회 -->
 	<select id="selectAlbum" parameterType="_int" resultMap="albumDetail_rm">
-		SELECT ALBUM_NO, MEMBER_NO, A_TITLE, A_CONTENT, LATITUDE, LONGITUDE, LOCATION_NAME, A_SCRAP_YN, FOLDER_NO, A_SCRAP_ALLOW_YN,
+		SELECT ALBUM_NO, MEMBER_NO, A_TITLE, A_CONTENT, LATITUDE, LONGITUDE, LOCATION_NAME, A_SCRAP_YN, FOLDER_NO, A_SCRAP_ALLOW_YN, A_OPEN_FL,
 			TO_CHAR(A_CREATE, 'YYYY.MM.DD') A_CREATE 
 		FROM ALBUM
 		WHERE ALBUM_NO = #{albumNo}
@@ -121,7 +123,8 @@
 			SELECT #{albumImage.albumNo} ALBUM_NO,
 					#{albumImage.imagePath} IMG_PATH,
 					#{albumImage.imageRename} IMG_RENAME,
-					#{albumImage.imageOrder} IMG_ORDER
+					#{albumImage.imageOrder} IMG_ORDER,
+					#{albumImage.imageOriginalName} IMG_ORIGINAL_NAME
 					FROM DUAL
 		</foreach>
 	</insert>
@@ -130,6 +133,38 @@
 	<update id="albumDelete" parameterType="_int">
 		UPDATE ALBUM SET
 		A_DEL_FL = 'Y'
+		WHERE ALBUM_NO = #{albumNo}
+	</update>
+	
+	<!-- 앨범 수정 -->
+	<update id="albumUpdate">
+		UPDATE ALBUM SET
+		FOLDER_NO = #{folderNo},
+		A_TITLE = #{albumTitle},
+		A_CONTENT = #{albumContent},
+		LATITUDE = #{latitude},
+		LONGITUDE = #{longitude},
+		LOCATION_NAME = #{locationName},
+		A_OPEN_FL = #{albumOpenFlag},
+		A_SCRAP_ALLOW_YN = #{albumScrapAllowYN}
+		WHERE ALBUM_NO = #{albumNo}
+	</update>
+	
+	<!-- 앨범 이미지 삭제 -->
+	<delete id="albumImageDelete">
+		DELETE FROM ALBUM_IMG
+		${condition}
+	</delete>
+	
+	<!-- 앨범 이미지 순서 초기화 -->
+	<update id="initImageOrder">
+		UPDATE ALBUM_IMG MAIN SET 
+		IMG_ORDER = (SELECT RNUM - 1
+					FROM (SELECT ROWNUM RNUM, IMG_ORDER
+						FROM ALBUM_IMG
+						WHERE ALBUM_NO = #{albumNo}
+						ORDER BY IMG_ORDER) SUB			
+					WHERE SUB.IMG_ORDER = MAIN.IMG_ORDER)
 		WHERE ALBUM_NO = #{albumNo}
 	</update>
 </mapper>

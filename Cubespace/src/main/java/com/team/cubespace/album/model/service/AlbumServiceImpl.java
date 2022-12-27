@@ -89,6 +89,8 @@ public class AlbumServiceImpl implements AlbumService{
 					albumImage.setImageOrder(i);
 					// 웹 경로
 					albumImage.setImagePath(webPath);
+					// 파일 원본명
+					albumImage.setImageOriginalName(imageList.get(i).getOriginalFilename());
 					// 변경된 파일명
 					albumImage.setImageRename(Util.fileRename(imageList.get(i).getOriginalFilename()));
 					// 작성된 앨범 번호
@@ -125,5 +127,99 @@ public class AlbumServiceImpl implements AlbumService{
 	@Override
 	public int albumDelete(int albumNo) {
 		return dao.albumDelete(albumNo);
+	}
+
+	
+	// 앨범 수정
+	@Transactional
+	@Override
+	public int albumUpdate(Album album, String webPath, String folderPath, List<MultipartFile> imageList,
+			List<String> deleteImageList, int prevLength) throws IllegalStateException, IOException {
+		
+		album.setAlbumTitle(Util.XSSHandling(album.getAlbumTitle()));
+		if(album.getAlbumContent() != null) {
+			album.setAlbumContent(Util.XSSHandling(album.getAlbumContent()));
+			album.setAlbumContent(Util.newLineHandling(album.getAlbumContent()));
+		}
+		
+		// 앨범 글 수정(이미지 x)
+		int result = dao.albumUpdate(album);
+		// 삭제할 이미지 리스트의 길이
+		int deleteImageLength = 0;
+		
+		if(result > 0) {	// 수정 된 경우
+			if(!deleteImageList.isEmpty()) {	// 삭제된 이미지가 있을 경우
+				// 삭제한 이미지 길이
+				deleteImageLength = deleteImageList.size();
+				
+				String deleteImageStr = String.join(",", deleteImageList);
+				
+				String condition = "WHERE ALBUM_NO = " + album.getAlbumNo()
+									+ " AND IMG_ORDER IN (" + deleteImageStr + ")";
+				
+				result = dao.albumImageDelete(condition);
+				
+				System.out.println(result);
+				if(result == 0) {
+					// 예외 발생
+				} else {
+					// 이미지 순서 초기화
+					result = dao.initImageOrder(album.getAlbumNo());
+				}
+			}
+			
+			if(result == prevLength - deleteImageLength) {
+				// 새로운 이미지 추가
+			} else {
+				// 예외 발생
+			}
+			
+			if(imageList != null) {	// 새롭게 추가된 이미지가 있으면
+				int startImageOrder = prevLength - deleteImageLength;
+				List<AlbumImage> albumImageList = new ArrayList<>();
+				for(int i =0; i< imageList.size(); i++) {
+					if(imageList.get(i).getSize() > 0) {
+						// AlbumImage 객체 생성
+						AlbumImage albumImage = new AlbumImage();
+						
+						// 값 세팅
+						// 이미지 순서
+						albumImage.setImageOrder(i + startImageOrder);
+						// 웹 경로
+						albumImage.setImagePath(webPath);
+						// 파일 원본명
+						albumImage.setImageOriginalName(imageList.get(i).getOriginalFilename());
+						// 변경된 파일명
+						albumImage.setImageRename(Util.fileRename(imageList.get(i).getOriginalFilename()));
+						// 작성된 앨범 번호
+						albumImage.setAlbumNo(album.getAlbumNo());
+						
+						// 리스트에 추가
+						albumImageList.add(albumImage);			
+					}
+				}
+				
+				// 업로드한 이미지가 있으면
+				if(!albumImageList.isEmpty()) {
+					// DB에 파일정보 업로드
+					result = dao.insertAlbumImageList(albumImageList);
+					
+					// 삽입 결과 행의 수 == 이미지 리스트의 크기
+					// 전부다 삽입된 경우
+					if(result == albumImageList.size()) {
+						
+						// 파일 변환 작업
+						for(int i =0; i<albumImageList.size(); i++) {
+							// 순서 == imageList의 인덱스
+							int index = albumImageList.get(i).getImageOrder() - startImageOrder;
+							
+							// 실제 파일로 변환
+							imageList.get(index).transferTo(new File(folderPath + albumImageList.get(i).getImageRename()));
+						}
+					}
+				}
+			}
+		}
+		return result;
 	}
 }

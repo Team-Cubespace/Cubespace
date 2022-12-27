@@ -136,18 +136,20 @@ public class LoginServiceImpl implements LoginService{
 		@Transactional(rollbackFor = Exception.class)
 		public int updateInfo(Member inputMember) {
 			
-			int result = -1;
 			
-			if (inputMember.getMemberPw().equals("")) {
-				result = dao.updateInfoNoPw(inputMember);
-			}else {
-				// 비밀번호 암호화
-				String encPw = bcrypt.encode(inputMember.getMemberPw());
-				inputMember.setMemberPw(encPw);
-				 result =  dao.updateInfoPw(inputMember);
-			}
+			return dao.updateInfo(inputMember);
+		}
+		
+		/**
+		 * 회원 비밀번호 변경
+		 */
+		@Override
+		public int changePw(Map<String, Object> paramMap) {
 			
-			return result;
+			String encPw = bcrypt.encode((String)paramMap.get("memberPw"));
+			paramMap.put("encPw", encPw);
+			
+			return dao.changePw(paramMap);
 		}
 		
 		// 회원 탈퇴 
@@ -175,5 +177,8 @@ public class LoginServiceImpl implements LoginService{
 			}
 			return 0;
 		}
+
+
+
 
 }

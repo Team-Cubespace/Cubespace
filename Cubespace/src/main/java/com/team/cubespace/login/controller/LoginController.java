@@ -168,7 +168,6 @@ public class LoginController {
 				
 			} else {
 				model.addAttribute("loginMember", loginMember);
-				path = "/";
 			}
 			return "0";
 		}
@@ -375,18 +374,38 @@ public class LoginController {
 			int result = service.updateInfo(inputMember);
 
 			String message = null;
+			String path = null;
 
 			if (result > 0) {
 				message = "회원 정보가 수정 되었습니다.";
+				path = "/";
+
 				loginMember.setMemberNickname(inputMember.getMemberNickname());
 				loginMember.setMemberTel(inputMember.getMemberTel());
-				loginMember.setMemberPw(inputMember.getMemberPw());
+				loginMember.setMemberName(inputMember.getMemberName());
+				// birthYear가 있다->생년월일 8자리가 다 있으므로 전부 업데이트
+				if(inputMember.getBirthYear() != null) {
+					loginMember.setBirthYear(inputMember.getBirthYear());
+					loginMember.setBirthDay(inputMember.getBirthDay());
+				}
 
 			} else {
 				message = "회원 정보 수정 실패";
+				path = "updateInfo";
 			}
 			ra.addFlashAttribute("message", message);
-			return "redirect:updateInfo";
+			return "redirect:" + path;
+		}
+		
+		@PostMapping("/member/changePw")
+		public String changePw(Map<String, Object> paramMap,
+				@SessionAttribute("loginMember") Member loginMember,
+				RedirectAttributes ra) {
+			
+			paramMap.put("memberNo", loginMember.getMemberNo());
+			int result = service.changePw(paramMap);
+			
+			return null;
 		}
 		
 		/**

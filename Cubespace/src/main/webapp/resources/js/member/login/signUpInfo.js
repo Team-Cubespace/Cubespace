@@ -16,6 +16,15 @@ document.getElementById("signUp-frm").addEventListener("submit",function(event){
     const birthDay = document.getElementById("birthDay");
 
 
+    // memberBirth가 비어있거나 꽉 채워져있을 때 유효성검사 통과
+    if(checkObj.memberBirth){
+        birthYear.value = (memberBirth.value).substr(0,4);
+        birthDay.value = (memberBirth.value).substr(4,4);
+    } else if(memberBirth.value.trim().length == 0){
+        checkObj.memberBirth = true;
+    }
+
+
     if(memberBirth.value != ""){
         birthYear.value = (memberBirth.value).substr(0,4);
         birthDay.value = (memberBirth.value).substr(4,4);

@@ -19,9 +19,8 @@
    		<result property="memberDeleteYN" column="MEMBER_DEL_YN"></result>
    		<result property="authority" column="AUTHORITY"></result>
    		<result property="birthYear" column="BIRTHYEAR"></result>
-   		<result property="loginType" column="LOGIN_TYPE"></result>
    		<result property="birthDay" column="BIRTHDAY"></result>
-   		<result property="birthYear" column="BIRTHYEAR"></result>
+   		<result property="loginType" column="LOGIN_TYPE"></result>
    		<result property="emotion" column="EMOTION"></result>
    		<result property="fontNo" column="FONT_NO"></result>
    		
@@ -108,26 +107,26 @@
  	 
  	<!-- 이메일 중복 검사 -->
 	<select id="emailDupCheck" parameterType = "string" resultType = "_int">
-	SELECT COUNT(*)
-   FROM "MEMBER"
-   WHERE MEMBER_EMAIL = #{memberEmail}
-   AND MEMBER_DEL_YN  = 'N'
+		SELECT COUNT(*)
+	   FROM "MEMBER"
+	   WHERE MEMBER_EMAIL = #{memberEmail}
+	   AND MEMBER_DEL_YN  = 'N'
 	</select>
 	
 	<!-- 닉네임 중복 검사 -->
 	<select id="nicknameDupCheck" resultType = "_int">
-	SELECT  COUNT(*)
-	FROM "MEMBER"
-	WHERE MEMBER_NICKNAME = #{memberNickname}
-	AND MEMBER_DEL_YN  = 'N'
+		SELECT  COUNT(*)
+		FROM "MEMBER"
+		WHERE MEMBER_NICKNAME = #{memberNickname}
+		AND MEMBER_DEL_YN  = 'N'
 	</select>
 	 
 	 	<!-- 전화번호 중복 검사 -->
 	<select id="telDupCheck" resultType = "_int">
-	SELECT  COUNT(*)
-	FROM "MEMBER"
-	WHERE MEMBER_TEL = #{memberTel}
-	AND MEMBER_DEL_YN  = 'N'
+		SELECT  COUNT(*)
+		FROM "MEMBER"
+		WHERE MEMBER_TEL = #{memberTel}
+		AND MEMBER_DEL_YN  = 'N'
 	</select>
  	 
  	 
@@ -154,5 +153,19 @@
 			DEFAULT, DEFAULT)
  	 </insert>
  	
+ 	
+ 	
+ 	 <!-- 내 회원 정보 수정 -->
+	 <update id="updateInfo" parameterType="Member">
+		 	UPDATE "MEMBER" SET
+			MEMBER_NICKNAME = #{memberNickname},
+			MEMBER_TEL= #{memberTel},
+			MEMBER_NAME = #{memberName}
+			<if test='birthYear != null'>
+				,BIRTHYEAR = #{birthYear},
+				BIRTHDAY = #{birthDay}
+			</if>
+			WHERE MEMBER_NO = #{memberNo}
+	</update>
   
 </mapper>

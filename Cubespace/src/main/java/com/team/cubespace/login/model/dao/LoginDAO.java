@@ -92,39 +92,32 @@ public class LoginDAO {
 		return sqlSession.insert("loginMapper.kakaoSignUp", inputMember);
 	}
 	
-	/** 내 회원 정보 수정 (비밀번호 포함)
+	/** 비밀번호 수정
 	 * @param inputMember
 	 * @return
 	 */
-	public int updateInfoPw(Member inputMember) {
-		return sqlSession.update("myPageMapper.updateInfoPw",inputMember);
+	public int changePw(Map<String, Object> paramMap) {
+		return sqlSession.update("loginMapper.updateInfoPw",paramMap);
 	}
 
-	/** 내 회원 정보 수정 (비밀번호 제외)
+	/** 내 회원 정보 수정
 	 * @param inputMember
 	 * @return
 	 */
-	public int updateInfoNoPw(Member inputMember) {
-		return sqlSession.update("myPageMapper.updateInfoNoPw",inputMember);
+	public int updateInfo(Member inputMember) {
+		return sqlSession.update("loginMapper.updateInfo",inputMember);
 	}
 	
-	/** 마이페이지 자기소개 수정 
-	 * @param member
-	 * @return
-	 */
-	public int changeIntroduce(Member member) {
-		return sqlSession.update("myPageMapper.changeIntroduce",member);
-	}
 	
-	/** 회원탈퇴 회원 조회
+	/** 회원탈퇴 회원 조회-------------------
 	 * @param memberNo
 	 * @return 
 	 */
 	public Member secessionSelect(int memberNo) {
-		return sqlSession.selectOne("memberMapper.secessionSelect", memberNo);
+		return sqlSession.selectOne("loginMapper.secessionSelect", memberNo);
 	}
 
-	/** 회원 탈퇴
+	/** 회원 탈퇴----------------------
 	 * @param memberNo
 	 * @return result
 	 */
@@ -132,11 +125,11 @@ public class LoginDAO {
 		return sqlSession.update("myPageMapper.secession",memberNo);
 	}
 	
-	/** 회원 탈퇴
+	/** 회원 탈퇴---------------------
 	 * @param memberNo
 	 * @return
 	 */
 	public int secessionDelete(int memberNo) {
-		return sqlSession.update("memberMapper.secessionDelete",memberNo);
+		return sqlSession.update("loginMapper.secessionDelete",memberNo);
 	}
 }

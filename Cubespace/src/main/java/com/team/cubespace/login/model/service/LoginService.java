@@ -60,12 +60,18 @@ public interface LoginService {
 	 * @param inputMember
 	 * @return
 	 */
-	public abstract int updateInfo(Member inputMember);
+	int updateInfo(Member inputMember);
 	
 	/** 회원 탈퇴
 	 * @param memberNo
 	 * @return result
 	 */
 	int secessionSelect(int memberNo, Map<String, Object> parMap);
+
+	/** 회원 비밀번호 변경
+	 * @param paramMap
+	 * @return
+	 */
+	int changePw(Map<String, Object> paramMap);
 
 }

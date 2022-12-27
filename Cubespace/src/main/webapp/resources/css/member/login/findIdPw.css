@@ -183,19 +183,31 @@
     border: none !important;
     border-left: 1px solid black  !important;
     border-top : 1px solid black  !important;
+
+    color: var(--mainColor) !important;
+    font-weight: bold !important;
 }
 .pwHover{
     border: none  !important;
     border-top: 1px solid black  !important;
     border-right: 1px solid black  !important;
+
+    color: var(--mainColor) !important;
+    font-weight: bold !important;
 }
 .idNotHover{
     border: none !important;
     border-bottom: 1px solid black !important;
     border-right: 1px solid black !important;
+
+    color: black !important;
+    font-weight: normal !important;
 }
 .pwNotHover{
     border: none !important;
     border-bottom: 1px solid black !important;
     border-left: 1px solid black !important;
+    
+    color: black !important;
+    font-weight: normal !important;
 }

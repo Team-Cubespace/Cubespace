@@ -13,6 +13,7 @@
     <title>Minihome Content Area</title>
     <link rel="stylesheet" href="../../css/reset.css">
     <link rel="stylesheet" href="../../css/variables.css">
+    <link rel="stylesheet" href="../../css/common/checkBox.css">
     <link rel="stylesheet" href="../../css/minihome/minihome-rayout.css">
     <link rel="stylesheet" href="../../css/minihome/minihome-home/minihome-home.css">
     <link rel="stylesheet" href="../../css/minihome/guestBook/minihome-guestBook.css">
@@ -85,19 +86,119 @@
                     <span>></span>
                     <span>방명록</span>
                 </header>
-                <div class="guest-list-box"></div>
+                <div class="guest-list-box">
+<!----------------------------------------------->
+                    <div class="guest-message">
+                        <div class="message-header">
+                            <div>
+                                <div class="member-nickname">이글을쓴본인</div>
+                                <div>(2022.12.15 오후03:30)</div>
+                            </div>
+                            <div class="btn-box">
+                                <div>비밀글변경</div>
+                                <div>수정</div>
+                                <div>삭제</div>
+                            </div>
+                        </div>
+                        <div class="message-body">
+                            <div class="member-img">
+                                <img src="../../images/삐약.gif" alt="">
+                            </div>
+                            <div>
+                                <div class="secret-situation">
+                                </div>
+                                <div class="member-message">작성자 시점 비밀글 아닐때</div>
+                            </div>
+                        </div>
+                    </div>
+<!----------------------------------------------->
+                    <div class="guest-message">
+                        <div class="message-header">
+                            <div>
+                                <div class="member-nickname">이글을쓴본인</div>
+                                <div>(2022.12.15 오후03:30)</div>
+                            </div>
+                            <div class="btn-box">
+                                <div>수정</div>
+                                <div>삭제</div>
+                            </div>
+                        </div>
+                        <div class="message-body">
+                            <div class="member-img">
+                                <img src="../../images/삐약.gif" alt="">
+                            </div>
+                            <div>
+                                <div class="secret-situation">
+                                    <img src="../../images/common/guestBook.png" alt="">
+                                    <div>비밀글(이글은 작성자와 주인만 볼수 있어요)</div>
+                                </div>
+                                <div class="member-message">작성자 시점 비밀글 일때</div>
+                            </div>
+                        </div>
+                    </div>
+<!----------------------------------------------->
+                    <div class="guest-message">
+                        <div class="message-header">
+                            <div>
+                                <div class="member-nickname">미니홈피주인</div>
+                                <div>(2022.12.15 오후03:30)</div>
+                            </div>
+                            <div class="btn-box">
+                                <div>비밀글변경</div>
+                                <div>삭제</div>
+                            </div>
+                        </div>
+                        <div class="message-body">
+                            <div class="member-img">
+                                <img src="../../images/common/Mokoko1.gif" alt="">
+                            </div>
+                            <div>
+                                <div class="secret-situation">
+                                </div>
+                                <div class="member-message">홈피주인시점 작성글이 비밀글이 아닐때</div>
+                            </div>
+                        </div>
+                    </div>
+<!----------------------------------------------->
+                    <div class="guest-message">
+                        <div class="message-header">
+                            <div>
+                                <div class="member-nickname">다른사람시점</div>
+                                <div>(2022.12.15 오후03:30)</div>
+                            </div>
+                            <!-- <div class="btn-box"> -->
+                                <!-- <div>비밀글변경</div> -->
+                                <!-- <div>삭제</div> -->
+                            <!-- </div> -->
+                        </div>
+                        <div class="message-body">
+                            <div class="member-img">
+                                <img src="../../images/제로투.png" alt="">
+                            </div>
+                            <div>
+                                <div class="secret-situation">
+                                    <img src="../../images/common/guestBook.png" alt="">
+                                    <div>비밀글(이글은 작성자와 주인만 볼수 있어요)</div>
+                                </div>
+                                <!-- <div class="member-message">홈피주인시점 작성글이 비밀글이 아닐때</div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 방명록쓰기 -->
                 <div class="guest-box">
                     <div class="guest-img">
-                        <img src="../../images/common/Mokoko1.gif" alt="">
+                        <img src="../../images/삐약.gif" alt="">
                     </div>
                     <form action="" class="guest-content">
-                        <input class="guest-input" type="text">
+                        <textarea  class="guest-input" placeholder="내용을 입력해 주세요."></textarea>
                         <div class="guest-btn">
                             <div>
-                                <input type="checkbox">
-                                <span>비밀글로쓰기</span>
+                                <span class="secret-message">비밀글로 작성</span>
+                                <input type="checkbox" class="switch">
                             </div>
-                            <button class="guest-upload">글 등록하기</button>
+                            <button class="btn-secondary btn">등록하기</button>
                         </div>
                     </form>
                 </div>

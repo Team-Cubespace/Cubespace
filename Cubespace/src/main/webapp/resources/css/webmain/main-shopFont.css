@@ -204,6 +204,17 @@ body *{
     transition-duration: 0.3s;
 }
 
+/* 이미 보유중 일때 */
+.goods-holding{
+    background-color: #e53095;
+    border: 1px solid  #e53095;
+    color: white;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
 /* pagination-------------------------------------------------- */
 .pagination-area {
     margin-top: 30px;

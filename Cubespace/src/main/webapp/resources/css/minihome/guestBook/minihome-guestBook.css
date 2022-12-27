@@ -1,53 +1,193 @@
+::-webkit-scrollbar {
+    display: none;
+}
+/* 방명록 글 목록  */
 .guest-list-box{
-    background-color: beige;
     width: 100%;
-    height: 295px;
+    height: 294px;
+    overflow: auto;
+}
+/* 방명록 글 */
+.guest-message{
+    height: 115px;
+}
+/* 방명록 글 헤더설정 */
+.message-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 25px;
+    padding: 0 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    background-color: #cfcfcf;
+}
+/* 헤더 자식 설정 */
+.message-header > div{
+    display: flex;
+    align-items: center;
+}
+/* 글쓴이 닉네임 */
+.member-nickname{
+    font-size: 15px;
+    font-weight: bold;
 }
 
+.btn-box{
+    width: 150px;
+    justify-content: end;
+}
+.btn-box>div{
+    margin: 0 3px;
+    cursor: pointer;
+}
 
+/* 방명록 바디설정 */
+.message-body{
+    height: 80px;
+    display: flex;
+}
+
+.member-img{
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.member-img >img{
+    width: 72px;
+    height: 72px;
+}
+/* 비밀글 상태 */
+.secret-situation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+    height: 20px;
+    color: chocolate;
+}
+.secret-situation>img{
+    width: 20px;
+}
+
+.member-message{
+    font-size: 16px;
+}
+
+/**********************************************/
 /* 방명록 글쓰기 */
 .guest-box{
     width: 100%;
     height: 117px;
-    /* border: 1px solid black; */
-    background-color: rgb(187, 187, 187);
+    background-color: rgb(213 212 212);
     display: flex;
     border-radius: 5px;
 }
-
+/* 프로필사진설정 */
 .guest-img{
     height: 100%;
     width: 20%;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background-color: rebeccapurple; */
 }
-.guest-img > img{
-    width: 91px;
+.guest-img >img{
+    width: 92px;
+    height: 92px;
 }
 
+/* form태그 글작성 */
 .guest-content{
     height: 100%;
     width: 77%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    /* align-items: center; */
-    /* background-color: bisque; */
+    padding-top: 12px;
 }
+/* 글 입력 설정 */
 .guest-input{
-    height: 60px;
+    height: 65px;
     border-radius: 5px;
     border: none;
+    resize: none;
+    outline: none;
 }
-
+/* 제출 버튼 최상위 박스 */
 .guest-btn{
     display: flex;
     justify-content: end;
     align-items: center;
     margin-top: 5px;
 }
-.guest-upload{
-    margin-left: 10px;
+/* 버튼 설정 */
+.guest-btn>div{
+    display: flex;
+    align-items:  center;
+    justify-content: center;
 }
+.secret-message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    font-size: 12px;
+    color: var(--primary);
+    border-radius: 5px;
+    width: 90px;
+    height: 21px;
+    font-weight: bold;
+}
+
+
+/* 비밀글 버튼 설정  */
+input[type='checkbox'], input[type='radio'] {
+    --active: #ffffff;
+    --active-inner: #8679f7;
+    --focus: 2px rgba(39, 94, 254, .3);
+    --border: #bbc1e1;
+    --border-hover: #275efe;
+    --background: #fff;
+    --disabled: #f6f8ff;
+    --disabled-inner: #e1e6f9;
+}
+
+/* 버튼 관련 설정 */
+:root {
+    --primary-light: #8abdff;
+    --primary: #6d5dfc;
+    --primary-dark: #5b0eeb;
+    --white: #FFFFFF;
+    --greyLight-1: #E4EBF5;
+    --greyLight-2: #c8d0e7;
+    --greyLight-3: #bec8e4;
+    --greyDark: #9baacf;
+}
+
+.btn-secondary {
+    grid-column: 1/2;
+    grid-row: 5/6;
+    color: var(--greyDark);
+}
+.btn-secondary:hover {
+    color: var(--primary);
+}
+.btn-secondary:active {
+    box-shadow: inset 0.2rem 0.2rem 0.5rem var(--greyLight-2), inset -0.2rem -0.2rem 0.5rem var(--white);
+}
+
+.btn {
+    width: 85px;
+    height: 24px;
+    border-radius: 5px;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s ease;
+    border: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+

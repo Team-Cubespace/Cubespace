@@ -56,20 +56,26 @@ public class LoginServiceImpl implements LoginService{
 		String encPw = bcrypt.encode(inputMember.getMemberPw());
 		inputMember.setMemberPw(encPw);
 		
-		int result = dao.signUp(inputMember);
+		int memberNo = dao.signUp(inputMember);
+		int result = 0;
 		
-		if(result > 0) {
+		if(memberNo > 0) {
 			
-			int ownResult = dao.insertOwnGoods(inputMember.getMemberNo()); // 회원소유품목
-			int minihomeResult = dao.insertMinihome(inputMember.getMemberNo()); // 미니홈
-			int folderResult = dao.insertFolder(inputMember.getMemberNo()); // 폴더
-			int categoryOrderResult = dao.insertCategoryOrder(inputMember.getMemberNo()); // 카테고리순서
-			
+			int ownResult = dao.insertOwnGoods(inputMember); // 회원소유품목
+			int minihomeResult = dao.insertMinihome(memberNo); // 미니홈
+			int folderResult = dao.insertFolder(memberNo); // 폴더
+			int categoryOrderResult = dao.insertCategoryOrder(memberNo); // 카테고리순서
 			if(ownResult * minihomeResult * folderResult * categoryOrderResult <= 0) {
 				
 				throw new Exception("회원가입 중 오류 발생");
-			} 
+				
+			}  else {
+				
+				inputMember.setOwnFontNo(ownResult);
+				result = dao.insertOwnGoods(inputMember);
+			}
 		}
+		
 		
 		return result;
 	}
@@ -136,21 +142,28 @@ public class LoginServiceImpl implements LoginService{
 			
 			int result = dao.kakaoSignUp(inputMember);
 			
-			if(result != 0) {
-				loginMember = dao.login(inputMember.getMemberEmail());
+			if(result != 0) { // 카카오 회원가입 성공시
+				loginMember = dao.login(inputMember.getMemberEmail()); // 방금 회원가입한 회원의 정보를 가져옴
 				
 				if(loginMember != null) {
 					loginMember.setMemberPw(null);
 					
 					
-					int ownResult = dao.insertOwnGoods(loginMember.getMemberNo()); // 회원소유품목
+					int ownResult = dao.insertOwnGoods(loginMember); // 회원소유품목
 					int minihomeResult = dao.insertMinihome(loginMember.getMemberNo()); // 미니홈
 					int folderResult = dao.insertFolder(loginMember.getMemberNo()); // 폴더
 					int categoryOrderResult = dao.insertCategoryOrder(loginMember.getMemberNo()); // 카테고리순서
 					
 					if(ownResult * minihomeResult * folderResult * categoryOrderResult > 0) {
 						
-						return loginMember;
+						// 생성된 회원번호를 이용해 회원의 ownFontNo를 member테이블에 넣어줌
+						loginMember.setOwnFontNo(ownResult);
+						int updateResult = dao.updateOwnGoods(loginMember);
+						if(updateResult > 0) {
+							return loginMember;							
+						} else {
+							throw new Exception("회원가입 중 오류 발생");
+						}
 					} else {
 						throw new Exception("회원가입 중 오류 발생");
 					}

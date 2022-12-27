@@ -32,7 +32,12 @@ public class LoginDAO {
 	 * @return
 	 */
 	public int signUp(Member inputMember) {
-		return sqlSession.insert("loginMapper.signUp", inputMember);
+		int result =  sqlSession.insert("loginMapper.signUp", inputMember);
+		if(result > 0) {
+			result = inputMember.getMemberNo();
+		}
+		
+		return result;
 	}
 
 	/** 회원 ID/PW 찾기 회원조회
@@ -65,9 +70,14 @@ public class LoginDAO {
 	 * @param memberNo
 	 * @return
 	 */
-	public int insertOwnGoods(int memberNo) {
+	public int insertOwnGoods(Member inputMember) {
 		
-		return sqlSession.insert("loginMapper.insertOwnGoods", memberNo);
+		int result =  sqlSession.insert("loginMapper.insertOwnGoods", inputMember);
+		if(result > 0) {
+			result = inputMember.getOwnFontNo();
+		}
+		
+		return result;
 	}
 	
 	/** 미니홈 테이블에 값 삽입
@@ -192,6 +202,18 @@ public class LoginDAO {
 	public int deleteMemberBlock() {
 		
 		return sqlSession.delete("loginMapper.deleteMemberBlock");
+	}
+
+
+
+
+	/** 회원의 소유폰트번호 업데이트 
+	 * @param loginMember
+	 * @return
+	 */
+	public int updateOwnGoods(Member loginMember) {
+		
+		return sqlSession.update("loginMapper.updateOwnGoods", loginMember);
 	}
 
 }

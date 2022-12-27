@@ -26,7 +26,7 @@ public class Member {
 	private int loginType;
 	private String birthDay;
 	private int emotion;
-	private int fontNo;
+	private int ownFontNo;
 	
 	// 회원 정지여부
 	private String memberBlockYN;

@@ -21,7 +21,7 @@
    		<result property="birthDay" column="BIRTHDAY"></result>
    		<result property="loginType" column="LOGIN_TYPE"></result>
    		<result property="emotion" column="EMOTION"></result>
-   		<result property="fontNo" column="FONT_NO"></result>
+   		<result property="ownFontNo" column="OWN_FONT_NO"></result>
    		
    		
    		
@@ -71,9 +71,14 @@
 
 
 	<!-- 회원가입 입력 정보 제출 서비스 -->
-	<insert id="signUp" parameterType="Member">
+	<insert id="signUp" parameterType="Member" useGeneratedKeys = "true">
+		
+		<selectKey keyProperty = "memberNo" resultType="_int" order="BEFORE">
+ 			SELECT SEQ_MEMBER_NO.NEXTVAL FROM DUAL
+ 		</selectKey>
+ 		
 		INSERT INTO MEMBER VALUES(
-			SEQ_MEMBER_NO.NEXTVAL, #{memberEmail}, #{memberPw}, #{memberName}, #{memberNickname},  #{memberTel}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, 
+			#{memberNo}, #{memberEmail}, #{memberPw}, #{memberName}, #{memberNickname},  #{memberTel}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, 
 		<if test='birthYear != null and birthDay != null'>
 			#{birthYear}, #{birthDay}, 
 		</if>
@@ -154,8 +159,12 @@
  	
  	
  	<!-- 회원소유품목 테이블에 값 삽입 -->
- 	<insert id="insertOwnGoods">
- 		INSERT INTO MEMBER_OWN_GOODS VALUES(SEQ_OWN_NO.NEXTVAL, #{memberNo}, 1, 1)
+ 	<insert id="insertOwnGoods" parameterType="Member" useGeneratedKeys = "true">
+ 	
+ 		<selectKey keyProperty = "ownFontNo" resultType="_int" order="BEFORE">
+ 			SELECT SEQ_OWN_NO.NEXTVAL FROM DUAL
+ 		</selectKey>
+ 		INSERT INTO MEMBER_OWN_GOODS VALUES(#{ownFontNo}, #{memberNo}, 1, 1)
  	</insert>
  	
  	
@@ -195,7 +204,12 @@
 		#{memberNo}, 1,2,3,4)
  	</insert>
  	
- 	
+ 	<!-- 회원의 소유폰트번호 업데이트  -->
+ 	<update id="updateOwnGoods">
+ 		UPDATE MEMBER SET 
+ 		OWN_FONT_NO = #{ownFontNo}
+ 		WHERE MEMBER_NO = #{memberNo}
+ 	</update>
  	
  	
  	

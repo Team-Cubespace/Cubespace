@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/common/header.css">
     <link rel="stylesheet" href="/resources/css/common/footer.css">
-    <link rel="stylesheet" href="/resources/css/admin/admin-goods.css">
+    <link rel="stylesheet" href="/resources/css/admin/admin-music.css">
     <link rel="stylesheet" href="/resources/css/admin/admin-member.css">
     <link rel="stylesheet" href="/resources/css/admin/admin-all.css">
 
@@ -36,23 +36,23 @@
             <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
             <section class="category-lists">
-                <a href = "/admin/goods/font" class="detail link-member ">폰트 등록</a>
-                <a href = "/admin/goods/music" class="detail link-product">배경음악 등록</a>
-                <a href = "/admin/goods/goods" class="detail link-product activate">소품 등록</a>
+                <a href = "/admin/goods/font" class="detail link-member ">폰트</a>
+                <a href = "/admin/goods/music" class="detail link-product activate">배경음악</a>
+                <a href = "/admin/goods/goods" class="detail link-product">소품</a>
             </section>
 
             <section class="main-class">
                 <div class="member-title">
-                    <h3>소품 리스트</h3>
+                    <h3>배경음악 리스트</h3>
                     <div>
-                        <button id="fontAddBtn">+ 소품 등록</button>
+                        <button id="fontAddBtn">+ 배경음악 등록</button>
                     </div>
                 </div>
 
 
                 <form id="frmSearchBase" method="get" class="member-search" action="/manager/memberSearch">
                     <input type="hidden" name="sort" id="orderInput">
-                    <p class="search__title">소품 검색</p>
+                    <p class="search__title">배경음악 검색</p>
                     <div class="search-detail-box form-inline">
                         <div class="search-detail-div">
                             <div class="search-detail-keyword">검색어</div>
@@ -64,7 +64,7 @@
                                     <c:set var="emailChk" value="selected"></c:set>
                                 </c:if>
                                     
-                                <option value="email" ${emailChk} >소품 이름</option>
+                                <option value="email" ${emailChk} >배경음악 이름</option>
                                         
                                         
                                 </select>
@@ -107,7 +107,7 @@
                 <div class="pull-left">
                     검색
                     <strong>${listCount}</strong>
-                    개 / 전체
+                    명 / 전체
                     <strong>${allMemberCount}</strong>
                     개
                 </div>
@@ -117,43 +117,46 @@
                 <div class="search-result-area">
                     <div class="search-result-div" id="number">
                         <div class="search-result-tab">번호</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <div class="search-content">${member.memberNo}</div>
+                        <c:forEach var="music" items="${musicList}">
+                            <div class="search-content">${music.musicNo}</div>
                         </c:forEach>
                     </div>
                     <div class="search-result-div"  id="email">
-                        <div class="search-result-tab">소품 이름</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <div class="search-content">${member.memberEmail}</div>
+                        <div class="search-result-tab">썸네일</div>
+                        <c:forEach var="music" items="${musicList}">
+                            <div class="search-content">${music.musicName}</div>
+                        </c:forEach>
+                    </div>
+                    <div class="search-result-div"  id="email">
+                        <div class="search-result-tab">이름</div>
+                        <c:forEach var="music" items="${musicList}">
+                            <img class="search-content" src="${music.musicThumbnail}">
                         </c:forEach>
                     </div>
                     <div class="search-result-div" id="nickname">
-                        <div class="search-result-tab">소품 예시</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <%-- form태그 말고 다른 형식으로 수정해야함 --%>
-                            <form method="post" class="seller" onsubmit="return false;">
-                                <span class="search-content sellerPage">우리들의 작은 공간 큐브스페이스에서 시작하세요</span>
-                                <input type="hidden" name="sellerNo" value="${member.memberNo}">
-                            </form>
+                        <div class="search-result-tab">듣기</div>
+                        <c:forEach var="music" items="${musicList}">
+                            <%-- 이 태그 말고 다른 형식으로 수정해야함 --%>
+                            <div class="search-content"></div>
                         </c:forEach>
                     </div>
                     <div class="search-result-div" id="signDate">
                         <div class="search-result-tab">제작자</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <div class="search-content">${member.enrollDate}</div>
+                        <c:forEach var="music" items="${musicList}">
+                            <div class="search-content">${music.musicCreater}</div>
                         </c:forEach>
                     </div>
                     <div class="search-result-div" id="signDate">
                         <div class="search-result-tab">사용횟수</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <div class="search-content">${member.today}</div>
+                        <c:forEach var="music" items="${musicList}">
+                            <div class="search-content">${music.musicCount}</div>
                         </c:forEach>
                     </div>
                 </div>
 
 
 
-                <%-- 소품 등록------------------------------------------- --%>
+                <%-- 폰트 등록------------------------------------------- --%>
                 <div class="popup_layer" id="popup_layer2" style="display: none;">
                     <div class="popup_box scroll">
                         <div style="height: 10px; width: 500px; float: top;">
@@ -162,27 +165,36 @@
                         <!--팝업 컨텐츠 영역-->
                         <div class="popup_cont">
                             <div class="payRemainArea">
-                                <h1><span>소품 등록</span></h1>
+                                <h1><span>배경음악 등록</span></h1>
                             </div>
 
                             <form  method="get" name="signUp-frm" id="signUp-frm" onsubmit="return false">
                                 <div>
-                                    <!-- 소품 이름 -->
+                                    <!-- 배경음악 이름 -->
                                     <div class="signUp-input-Email textbox">
-                                        <input  type="text" name="fontName"  class="inputBox" id="fontName" 
-                                            placeholder="소품 이름"  autocomplete="off" />
+                                        <p>배경음악 이름</p>
+                                        <input  type="text" name="musicName"  class="inputBox" id="musicName" 
+                                            placeholder="배경음악 이름"  autocomplete="off" />
                                     </div>
                                     
-                                    <!-- 소품 경로 -->
+                                    <!-- 배경음악 경로 -->
                                     <div class="signUp-input-password textbox">
-                                        <input type="file"  name="fontPath"  class="inputBox" id="fontPath"  />
+                                        <p>배경음악 경로</p>
+                                        <input type="file" placeholder="배경음악 경로"  name="musicPath"  class="inputBox" id="musicPath"  />
+                                    </div>
+
+                                    <!-- 배경음악 썸네일 경로 -->
+                                    <div class="signUp-input-password textbox">
+                                        <p>썸네일 경로</p>
+                                        <input type="file"  name="musicThumbnail"  class="inputBox" id="musicThumbnail" accept="image/*" />
                                     </div>
                                     
 
-                                    <!-- 소품 제작자 -->
+                                    <!-- 배경음악 제작자 -->
                                     <div class="signUp-input-Nickname textbox">
-                                        <input type="text" name="fontCreater" class="inputBox"  id="fontCreater"
-                                            placeholder="소품 제작자" />
+                                        <p>배경음악 제작자</p>
+                                        <input type="text" name="musicCreater" class="inputBox"  id="musicCreater"
+                                            placeholder="배경음악 제작자" />
                                     </div>
 
                                     
@@ -190,7 +202,7 @@
                                 </div>
 
                                 <div class="SignUpAgreement6">
-                                    <button type="button" class="SignUp" id="signUpBtn">소품 등록 완료</button>
+                                    <button type="button" class="SignUp" id="signUpBtn">배경음악 등록 완료</button>
                                 </div>
                             </form>
                         </div>
@@ -207,10 +219,10 @@
                     <ul class="pagination">
                     
                         <!-- 첫 페이지로 이동( <<) -->
-                        <li><a href="/admin/goods?${sURL}">&lt;&lt;</a></li>
+                        <li><a href="/admin/music?${sURL}">&lt;&lt;</a></li>
 
                         <!-- 이전 목록 마지막 번호로 이동 ( < ) -->
-                        <li><a href="/admin/goods?cp=${pagination.prevPage}&${sURL}">&lt;</a></li>
+                        <li><a href="/admin/music?cp=${pagination.prevPage}&${sURL}">&lt;</a></li>
 
                         
                         <!-- 특정 페이지로 이동 -->
@@ -222,16 +234,16 @@
                                 </c:when>
                                 <c:otherwise>
                                     <%-- 현재 페이지를 제외한 나머지 --%>
-                                    <li><a href="/admin/goods?cp=${i}&${sURL}">${i}</a></li>
+                                    <li><a href="/admin/music?cp=${i}&${sURL}">${i}</a></li>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
                         
                         <!-- 다음 목록 시작 번호로 이동 ( > )-->
-                        <li><a href="/admin/goods?cp=${pagination.nextPage}&${sURL}">&gt;</a></li>
+                        <li><a href="/admin/music?cp=${pagination.nextPage}&${sURL}">&gt;</a></li>
 
                         <!-- 끝 페이지로 이동 ( >> ) -->
-                        <li><a href="/admin/goods?cp=${pagination.maxPage}&${sURL}">&gt;&gt;</a></li>
+                        <li><a href="/admin/music?cp=${pagination.maxPage}&${sURL}">&gt;&gt;</a></li>
 
                     </ul>
                 </div>
@@ -254,7 +266,7 @@
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
         <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
-        <script src="/resources/js/admin/admin-goods.js"></script>
+        <script src="/resources/js/admin/admin-music.js"></script>
     </body>
 </html>
 

@@ -81,10 +81,9 @@ public class LoginController {
 			} else {
 				
 				// 관리자가 로그인했을 경우 관리자 알림 출력
-				if(loginMember.getAuthority() == 1) {
+				if(loginMember.getAuthority() == 2) {
 					ra.addFlashAttribute("message", "관리자 로그인!");
 				}
-				
 				
 				path = "/";
 				model.addAttribute("loginMember", loginMember);

@@ -21,115 +21,56 @@
             border-radius: 50%;
             padding: 2px;
         }
+        .frame-color {
+            background-color : ${minihome.frameColor};
+        }
     </style>
 </head>
 <body>
-    <div class="content-area">
+    <div class="content-area frame-color">
         <section class="minihome-rayout">
                 <div>
-                    <jsp:include page="/WEB-INF/views/include/manageLeftBar.jsp"/>
+                    <jsp:include page="/WEB-INF/views/manage/manageLeftBar.jsp"/>
                 </div>
         </section>
 
         <section class="minihome-rayout">
-            <main>
+            <div class="main">
                 <header>
                     <span class="rightTitle">깐부 관리</span>
-                    <div class="searchArea">
-                        <input type="text" id="searchInput" class="headerSearch" placeholder="깐부 닉네임 검색">
-                        <i class="fa-solid fa-magnifying-glass" id="searchBtn"></i>
-                    </div>
-
+                    <form class="searchArea" id="searchArea">
+                        <button id="allFriend" class="whiteBtn">모든 깐부</button>
+                        <input type="text" id="searchInput" name="searchInput" class="headerSearch" placeholder="깐부 닉네임 검색">
+                        <button class="fa-solid fa-magnifying-glass" id="searchBtn"></button>
+                    </form>
                 </header>
                 <div class="FriendArea">
-                    <div class="listTitle">나의 깐부목록</div>
-                    <div class="friendDetail">
-                        <div class="friendImgName">
-                            <img src="/resources/images/toy.jpg" class="profileImg">
-                            <span class="nickname">김효동(묘동)</span>
+                    <div class="listTitle">나의 깐부목록 (${fn:length(friendList)}명)</div>
+                    <c:forEach var="friend" items="${friendList}">
+                        <div class="friendDetail">
+                            <div class="friendImgName">
+                                <c:if test="${empty friend.profileImage}">
+                                    <img src="/resources/images/common/cubes.png" class="profileImg">
+                                </c:if>
+                                <c:if test="${not empty friend.profileImage}">
+                                    <img src="${friend.profileImage}" class="profileImg">
+                                </c:if>
+                                <span class="nickname">${friend.memberNickname}</span>
+                            </div>
+                            <div class="friendBtn">
+                                <span class="deleteFriend"><i class="fa-solid fa-minus"></i> 깐부끊기</span>
+                                <a href="" id="${friend.friendNo}" class="minihomeLink"><img src="/resources/images/common/smallCube.png" id="minihomeImg"> 미니홈피</a>
+                            </div>
                         </div>
-                        <div class="friendBtn">
-                            <span class="deleteFriend"><i class="fa-solid fa-minus"></i> 깐부끊기</span>
-                            <a href="" id="" class="minihomeLink"><img src="/resources/images/common/smallCube.png" id="minihomeImg"> 미니홈피</a>
-                        </div>
-                    </div>
-                    <div class="friendDetail">
-                        <div class="friendImgName">
-                            <img src="/resources/images/toy.jpg" class="profileImg">
-                            <span class="nickname">김효동(묘동)</span>
-                        </div>
-                        <div class="friendBtn">
-                            <span class="deleteFriend"><i class="fa-solid fa-minus"></i> 깐부끊기</span>
-                            <a href="" id="" class="minihomeLink"><img src="/resources/images/common/smallCube.png" id="minihomeImg"> 미니홈피</a>
-                        </div>
-                    </div>
-                    <div class="friendDetail">
-                        <div class="friendImgName">
-                            <img src="/resources/images/toy.jpg" class="profileImg">
-                            <span class="nickname">김효동(묘동)</span>
-                        </div>
-                        <div class="friendBtn">
-                            <span class="deleteFriend"><i class="fa-solid fa-minus"></i> 깐부끊기</span>
-                            <a href="" id="" class="minihomeLink"><img src="/resources/images/common/smallCube.png" id="minihomeImg"> 미니홈피</a>
-                        </div>
-                    </div>
-                    <div class="friendDetail">
-                        <div class="friendImgName">
-                            <img src="/resources/images/toy.jpg" class="profileImg">
-                            <span class="nickname">김효동(묘동)</span>
-                        </div>
-                        <div class="friendBtn">
-                            <span class="deleteFriend"><i class="fa-solid fa-minus"></i> 깐부끊기</span>
-                            <a href="" id="" class="minihomeLink"><img src="/resources/images/common/smallCube.png" id="minihomeImg"> 미니홈피</a>
-                        </div>
-                    </div>
-                    <div class="friendDetail">
-                        <div class="friendImgName">
-                            <img src="/resources/images/toy.jpg" class="profileImg">
-                            <span class="nickname">김효동(묘동)</span>
-                        </div>
-                        <div class="friendBtn">
-                            <span class="deleteFriend"><i class="fa-solid fa-minus"></i> 깐부끊기</span>
-                            <a href="" id="" class="minihomeLink"><img src="/resources/images/common/smallCube.png" id="minihomeImg"> 미니홈피</a>
-                        </div>
-                    </div>
-                    <div class="friendDetail">
-                        <div class="friendImgName">
-                            <img src="/resources/images/toy.jpg" class="profileImg">
-                            <span class="nickname">김효동(묘동)</span>
-                        </div>
-                        <div class="friendBtn">
-                            <span class="deleteFriend"><i class="fa-solid fa-minus"></i> 깐부끊기</span>
-                            <a href="" id="" class="minihomeLink"><img src="/resources/images/common/smallCube.png" id="minihomeImg"> 미니홈피</a>
-                        </div>
-                    </div>
-                    <div class="friendDetail">
-                        <div class="friendImgName">
-                            <img src="/resources/images/toy.jpg" class="profileImg">
-                            <span class="nickname">김효동(묘동)</span>
-                        </div>
-                        <div class="friendBtn">
-                            <span class="deleteFriend"><i class="fa-solid fa-minus"></i> 깐부끊기</span>
-                            <a href="" id="" class="minihomeLink"><img src="/resources/images/common/smallCube.png" id="minihomeImg"> 미니홈피</a>
-                        </div>
-                    </div>
-                    <div class="friendDetail">
-                        <div class="friendImgName">
-                            <img src="/resources/images/toy.jpg" class="profileImg">
-                            <span class="nickname">김효동(묘동)</span>
-                        </div>
-                        <div class="friendBtn">
-                            <span class="deleteFriend"><i class="fa-solid fa-minus"></i> 깐부끊기</span>
-                            <a href="" id="" class="minihomeLink"><img src="/resources/images/common/smallCube.png" id="minihomeImg"> 미니홈피</a>
-                        </div>
-                    </div>
-                    
+                    </c:forEach>
                 </div>
-            </main>
+            </div>
         </section>
     </div>
 </body>
+<script>
+    const memberNo = "${loginMember.memberNo}"
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script> <%-- jquery --%>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> <%-- jquery ui --%>
-<script src="/resources/js/manage/font.js"></script>
+<script src="/resources/js/manage/friend.js"></script>
 </html>

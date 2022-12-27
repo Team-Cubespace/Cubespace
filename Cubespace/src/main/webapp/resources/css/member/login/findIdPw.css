@@ -12,7 +12,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
     font-size: 20px;
 }
 
@@ -35,6 +34,16 @@
     width: 800px;
     margin: 30px auto;
 }
+.questionBox:hover{
+    border-bottom: 2px solid var(--mainColor);
+    transition-duration: 0.3s;
+}
+.inputBox:active questionBox{
+    border-bottom: 2px solid var(--mainColor);
+    transition-duration: 0.3s;
+}
+
+
 
 /* .textbox {
     height: 60px;
@@ -63,7 +72,7 @@
     justify-content: space-between;
     width: 800px;
     height: 75px;
-    border-bottom: 3px solid #eee;
+    border-bottom: 2px solid #eee;
     margin-bottom: 10px;
     padding-top: 10px;
     position: relative;
@@ -150,8 +159,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
-    background-color: var(--subColor);
+    border-radius: 15px;
+    background-color: var(--mainColor);
     color: white;
     cursor: pointer;
     font-weight: bold;
@@ -159,7 +168,10 @@
     border: none;
 }
 
-
+.SignUp:hover{
+    background-color: var(--subColor);
+    transition-duration: 0.3s;
+}
 
 .findPwInfo {
     color: #aaa;
@@ -173,4 +185,55 @@
 }
 .error{
     color: red;
+}
+
+
+/* id, pw hover시 */
+.idHover{
+    border: none !important;
+    border-left: 1px solid black  !important;
+    border-top : 1px solid black  !important;
+
+    color: var(--mainColor) !important;
+    font-weight: bold !important;
+}
+.pwHover{
+    border: none  !important;
+    border-top: 1px solid black  !important;
+    border-right: 1px solid black  !important;
+
+    color: var(--mainColor) !important;
+    font-weight: bold !important;
+}
+.idNotHover{
+    border: none !important;
+    border-bottom: 1px solid black !important;
+    border-right: 1px solid black !important;
+
+    color: black !important;
+    font-weight: normal !important;
+}
+.pwNotHover{
+    border: none !important;
+    border-bottom: 1px solid black !important;
+    border-left: 1px solid black !important;
+    
+    color: black !important;
+    font-weight: normal !important;
+}
+
+
+
+
+
+/* 회원탈퇴 관련 */
+.secessionTitle{
+    display: flex;
+    justify-content: center;
+    width: 800px;
+    font-size: 25px;
+    font-weight: bold;
+    border-bottom: 3px solid var(--lightMain);
+    margin: 30px auto 80px;
+    padding-bottom: 10px;
 }

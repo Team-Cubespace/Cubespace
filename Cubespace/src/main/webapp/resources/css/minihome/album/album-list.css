@@ -64,3 +64,16 @@ main::-webkit-scrollbar {
 .current-page {
     background-color: var(--mainColor);
 }
+
+/* 비어있는 영역 */
+.empty-space {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.empty-space i {
+    font-size: 130px;
+    color: #ddd;
+}

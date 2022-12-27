@@ -1,0 +1,407 @@
+/*팝업 박스*/
+.popup_box {
+    position: relative;
+    top: 0px;
+    left: 50%;
+
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 650px;
+    width: 600px;
+    transform: translate(-50%, -50%);
+    z-index: 1002;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
+    -webkit-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
+}
+
+
+
+/* 팝업박스 스크롤 */
+.scroll::-webkit-scrollbar{
+    width: 15px;
+}
+
+/* 스크롤바 막대 설정*/
+.scroll::-webkit-scrollbar-thumb{
+    height: 17%;
+    background-color: var(--yellow);
+    /* border-radius: 10px;   */
+}
+
+
+/*컨텐츠 영역*/
+.popup_box .popup_cont {
+    /* padding: 30px; */
+    /* line-height: 3rem; */
+    font-size: 14px;
+
+}
+
+.popup_box .popup_cont h2 {
+    padding: 15px 0;
+    color: #333;
+    margin: 0;
+}
+
+.popup_cont {
+    position: absolute;
+    width: 580px;
+    /* background-color: red; */
+    margin-left: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+
+
+/*버튼영역*/
+.popup_box .popup_btn {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    height: 70px;
+    background: #ECECEC;
+    word-break: break-word;
+}
+
+.popup_box .popup_btn a {
+    position: relative;
+    display: table-cell;
+
+    font-size: 17px;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    background: #ECECEC;
+}
+
+.popup_box .popup_btn a:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 26px;
+    right: 29px;
+    width: 1px;
+    height: 21px;
+    background: #fff;
+    -moz-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.popup_box .popup_btn a:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 26px;
+    right: 29px;
+    width: 1px;
+    height: 21px;
+    background: #fff;
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.popup_box .popup_btn a.close_day {
+    background: #5d5d5d;
+}
+
+.popup_box .popup_btn a.close_day:before,
+.popup_box .popup_btn a.close_day:after {
+    display: none;
+}
+
+/*오버레이 뒷배경*/
+.popup_overlay {
+    position: fixed;
+    top: 0px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1001;
+    
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/*popup*/
+
+.fa-x {
+    padding: 5px 15px 15px;
+    cursor: pointer;
+}
+
+.allClose {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 15px;
+    z-index: 10;
+    color: black;
+}
+
+
+.payRemainArea {
+    margin: 30px 0;
+    width: 570px;
+    padding: 15px;
+    background-color: var(--yellow);
+    border-radius: 10px;
+}
+
+.payButton {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.fa-store,
+.fa-database {
+    margin-right: 10px;
+}
+
+
+.fa-store,
+.fa-rotate-right,
+.fa-database {
+    margin-top: 10px;
+    width: 70px;
+    padding: 10px;
+    background-color: var(--lightYellow);
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fa-database {
+    width: 150px;
+}
+
+.payButton>button {
+    color: rgba(0, 0, 0, 0.7);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+
+}
+
+#chargeBtn:active,
+#refundBtn:active,
+#logBtn:active {
+    box-shadow: 3px 3px 3px #ddd;
+    transition-duration: 0.3s;
+}
+
+
+
+
+/* -------------------------------------------------------------------------- */
+/* 최상위 div */
+.signUpInfoClass  *{ 
+    /* border: 1px solid black; */
+    justify-content: center;
+}
+.signUpInfoClass{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+}
+
+/*************************************************/
+/* 상단 내 정보 수정 텍스트 설정 */
+.SignUpAgreement1{ 
+    display: flex;
+    height: 250px;
+    font-size: 45px;
+    align-items: center;
+    color: #333;
+    font-weight : bolder;
+}
+
+/*************************************************/
+ /* 개인정보 입력 및 회색 부분은 수정이 불가능 합니다. 텍스트 설정 */
+.SignUpAgreement3{
+    display: flex;
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+}
+/* 개인정보 입력 텍스트 설정 */
+#SignUpAgreement3-1{
+    font-size: 25px;
+    text-align: center;
+    align-items: center;
+    color: #333;
+    padding: 0 0 25px;
+    font-weight : bolder;
+}
+/* 회색 부분은 수정이 불가능 합니다. 텍스트 설정 */
+#SignUpAgreement3-2{
+    font-size: 16px;
+    text-align: center;
+    align-items: center;
+    color: #e53095;
+    font-weight : bolder;
+}
+
+
+/*************************************************/
+/* 수정 불가능 부분 설정 : 아이디 / 이름 / 생년월일 */
+
+.textboxNo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    padding: 0 0 10px 0;
+    position: relative;  
+}
+/* 텍스트 입력 박스 설정 */
+.inputBoxNo{
+    display: flex;
+    width: 500px;
+    height: 58px;
+    border-radius: 50px;
+    border: none;
+    padding: 0 40px;
+    background-color: var(--lightYellow);
+    font-size: 18px;
+    outline: none;
+    box-shadow: 3px 3px 3px 3px rgba(221, 221, 221, 0.934); /* 박스그림자 */
+}
+/*************************************************/
+
+/*  회원 정보 입력 텍스트 박스 감싼 div 박스 설정 */
+.textbox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    padding: 0 0 10px 0;
+    position: relative;  
+}
+
+/* 회원 정보 입력 텍스트 입력 박스 설정 */
+.inputBox{
+    display: flex;
+    width: 500px;
+    height: 58px;
+    border-radius: 50px;
+    border: none;
+    padding: 0 40px;
+    background-color: var(--lightYellow);
+    font-size: 18px;
+    outline: none;
+    box-shadow: 3px 3px 3px 3px rgba(221, 221, 221, 0.934); /* 박스그림자 */
+}
+
+.inputBox:focus{
+    border: 2px solid #e53095;
+}
+
+/* 인증번호받기, 인증하기, 중복확인 */
+.checkButton{
+    position: absolute;
+    cursor: pointer;
+    color: #e53095;
+    background-color: var(--lightYellow);
+    font-size: 18px;
+    width: 120px;
+    right: 15px; 
+    border: none;
+}
+
+/* 입력 관련 메세지 */
+.signUp-message{
+    font-size: 14px;
+    letter-spacing: -1px;
+    position: relative;
+    left: 20px;
+    /* top: 100px; */
+}
+.confirm{ color: green;}
+.error{ color: red;}
+
+/* 입력관련 메세지 바로아래 박스 */
+.firstBox  {
+    height: 50px;
+    padding: 0 0 35px 0;
+}
+.emailMessageBox{
+    height: 35px;
+    padding: 0 0 10px 0;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    box-shadow: 0 0 0 30px var(--lightYellow) inset;
+}
+
+/*************************************************/
+/*내정보 수정 완료 버튼 */
+.SignUpAgreement6{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    font-size: 15px;
+}
+
+/*내정보 수정 완료 버튼 */
+.SignUp{ 
+    width: 300px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: var(--yellow);
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+}
+
+.SignUp:hover{
+    transform: scale(0.9);
+}
+/*************************************************/
+
+/* --------------------------------------------------------------- */
+#signUp-frm > div:nth-child(1), #userUpdate-frm > div:nth-child(1){
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* .popup_layer {
+    position:relative;
+}
+
+.search-detail-select-box {
+    position: absolute;
+} */
+
+.disabled {
+    background-color: #eee;
+}

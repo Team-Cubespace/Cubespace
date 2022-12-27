@@ -73,6 +73,10 @@
 }
 
 /* tile-container 영역 (좌표) */
+.tile-container{
+    opacity: 0;
+}
+
 .tile-container > div{
     width: 85px;
     height: 85px;
@@ -81,7 +85,6 @@
     justify-content: center;
     align-items: center;
     transform: rotateX(45deg) rotateY(0deg) rotateZ(45deg);
-    opacity: 0;
 }
 
 /* 1-1 */
@@ -145,26 +148,31 @@
 }
 
 .empty{
-    background-color: rgba(170, 0, 255, 0.097);
+    background-color: rgba(170, 0, 255, 0.3);
     border: 2px dashed rgb(160, 93, 255);
 }
 
+.empty:hover{
+    opacity: 0.7;
+}
+
 .already{
-    background-color: rgba(255, 0, 0, 0.097);
+    background-color: rgba(255, 0, 0, 0.3);
     border: 2px dashed rgb(255, 93, 93);
 }
 
 /* 미니미, 소품 */
-.prop{
+.props{
     width: 100px;
     height: 100px;
     position: absolute;
     z-index: 5;
 }
 
-.prop img{
+.props img{
     width: 100%;
     height: 100%;
+    cursor: pointer;
 }
 
 .dropdown {
@@ -172,8 +180,8 @@
     height: 0px;
     background-color: white;
     position: absolute;
-    top: 113px;
-    right: -85px;
+    /* top: 113px; */
+    /* right: -85px; */
     overflow:hidden;
     transition-duration : 0.3s;
     z-index: 20;

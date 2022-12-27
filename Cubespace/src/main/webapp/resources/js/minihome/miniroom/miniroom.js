@@ -1,55 +1,113 @@
-/* 이미 배치되어 있던 소품 좌표 불러오기 */
-
-// 미니룸 컨테이너 좌표
+/* 미니룸 컨테이너 좌표 */
 const miniroomContainer = document.querySelector(".miniroom-container");
+const tileContainer = document.querySelector(".tile-container");
 const miniroomX = window.pageYOffset + miniroomContainer.getBoundingClientRect().left;
 const miniroomY = window.pageYOffset + miniroomContainer.getBoundingClientRect().top;
 
-const tileContainer = document.querySelector(".tile-container");
-
-(() => {
-    let i = 5;
-
-    // 해당 요소 아이디로 가져오기
-    let tileId = "tile" + i;
-    const tile = document.getElementById(tileId);
-    tile.classList.add("already");
+/* 소품이 배치된 타일 */
+const alreadyTile = tileNumber => {
+    const tile = document.getElementById("tile" + tileNumber);
     tile.classList.remove("empty");
+    tile.classList.add("already");
+}
 
-    let tileLocationId = "tileLocation" + i;
-    let tileLocation = document.getElementById(tileLocationId);
+/* 소품 좌표 */
+const propsLocation = (tile, props) => {
+    const tileX = window.pageYOffset + tile.getBoundingClientRect().left;
+    const tileY = window.pageYOffset + tile.getBoundingClientRect().top;
 
-    // 타일의 좌표
-    const tileX = window.pageYOffset + tileLocation.getBoundingClientRect().left;
-    const tileY = window.pageYOffset + tileLocation.getBoundingClientRect().top;
+    let propsX = tileX-miniroomX-props.offsetWidth/2;
+    let propsY = tileY-miniroomY-props.offsetHeight/1.2;
 
-    // 소품 추가
-    const prop = document.createElement("div");
-    prop.classList.add("prop");
-    
-    // 소품 이미지 추가
-    const propImg = document.createElement("img");
-    propImg.src = "../../../images/ribbit.png";
+    props.style.left = propsX + "px";
+    props.style.top = propsY + "px";
+}
 
-    prop.appendChild(propImg);
-    miniroomContainer.appendChild(prop);
+/* dropdown */
+const dropdown = document.querySelector(".dropdown");
+let toggleFlag = true;
 
-    // 소품의 좌표
-    let propX = tileX-miniroomX-prop.offsetWidth/2;
-    let propY = tileY-miniroomY-prop.offsetHeight/1.2;
+const hideDropdown = () => {
+    dropdown.style.height = "0px";
+    dropdown.style.border = "none";
+    toggleFlag = true;
+}
 
-    prop.style.left = propX + "px";
-    prop.style.top = propY + "px";
-    // tileContainer.style.display = "none";
-
-    prop.addEventListener("click", () => {
-        const dropdown = document.querySelector(".dropdown");
+const dropdownEvent = () => {
+    if(toggleFlag){
         dropdown.style.height = "50px";
         dropdown.style.border = "1px solid black";
-        dropdown.style.left = propX + "px";
-        dropdown.style.top = propY - 50 + "px";
-    })
+        toggleFlag = false;
+        
+    }else{
+        hideDropdown();
+    }
+}
+
+/* 이미 배치된 소품 */
+(() => {
+    // 소품이 여러 개이기 때문에 for문을 사용할 예정
+
+    // 소품의 자리 번호를 가져오는 코드 추가 예정
+    alreadyTile(5);
+
+    const tileLocation = document.getElementById("tileLocation" + 5);
+
+    // 소품 추가
+    const props = document.createElement("div");
+    props.classList.add("props");
+    
+    // 소품 이미지 추가
+    const propsImg = document.createElement("img");
+    propsImg.src = "../../../images/ribbit.png";
+
+    props.appendChild(propsImg);
+    miniroomContainer.appendChild(props);
+
+    // 타일 좌표, 소품 좌표
+    propsLocation(tileLocation, props);
+
+    const propsList = document.getElementsByClassName("props");   
+
+    // 소품이 여러 개이기 때문에 for문을 사용할 예정
+    for(let moveProps of propsList){
+        moveProps.addEventListener("click", () => {
+            dropdownEvent();
+
+            document.getElementById("moveBtn").addEventListener("click", () => {
+                $(document).mousemove(function(e){
+                    var mouseX = e.pageX - miniroomX - moveProps.offsetWidth/2;
+                    var mouseY = e.pageY - miniroomY - moveProps.offsetHeight/2;
+            
+                    $(moveProps).css({
+                        left: mouseX + "px",
+                        top : mouseY + "px"
+                    })
+                })
+
+                $('#homeArea').addClass('scrollDisable').on('scroll touchmove mousewheel', function(e){
+                    e.preventDefault();
+                });
+
+                moveProps.style.opacity = "0.7";
+                moveProps.style.pointerEvents = "none";
+
+                tileContainer.style.opacity = "1";
+                tileContainer.style.transitionDuration = "0.3s";
+                tileContainer.style.cursor = "pointer";
+                hideDropdown();
+
+                const empty = document.getElementsByClassName("empty");
+                
+            })
+        })
+    }
 })();
+
+
+
+
+
 
 const testBtn = document.getElementById("testBtn");
 const testArea = document.getElementById("testArea");
@@ -64,8 +122,4 @@ $(function(){
             el.click()
         })
     })
-})
-
-document.getElementById("moveBtn").addEventListener("click", () => {
-    // tileContainer.style.transitionDuration = "0.5s";
 })

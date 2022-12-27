@@ -3,8 +3,8 @@ package com.team.cubespace.manage.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
-import com.team.cubespace.manage.model.vo.Folder;
 
 public interface ManageService {
 

@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cubespace</title>
     <!-- <%-- 공통 css --%> -->
-    <link rel="stylesheet" href="../../css/reset.css">
-    <link rel="stylesheet" href="../../css/variables.css">
-    <link rel="stylesheet" href="../../css/style-web.css">
+    <link rel="stylesheet" href="/resources/css/reset.css">
+    <link rel="stylesheet" href="/resources/css/variables.css">
+    <link rel="stylesheet" href="/resources/css/style-web.css">
     <!-- <%-- 웹 메인 모달 공통 /css --%> -->
-    <link rel="stylesheet" href="../../css/webmain/modalSettings.css">
-    <link rel="stylesheet" href="../../css/webmain/main-memberSearch.css">
+    <link rel="stylesheet" href="/resources/css/webmain/modalSettings.css">
+    <link rel="stylesheet" href="/resources/css/webmain/main-memberSearch.css">
     <!-- <%-- 해당 모달 개인 css --%> -->
-    <link rel="stylesheet" href="../../css/webmain/main-notifications.css">
+    <link rel="stylesheet" href="/resources/css/webmain/main-notifications.css">
 
     <!-- <%-- 폰트어썸 Key --%> -->
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
@@ -34,7 +34,7 @@
             <div class="modal-close" id="modalClose" onclick="closeModal()"><</div>
             <!-- <%-- 모달 헤더 --%> -->
             <div class="modal-head">
-                <img class="head-img-bell" src="../../images/common/bell.png" alt="알림">
+                <img class="head-img-bell" src="/resources/images/common/bell.png" alt="알림">
                 <div>알림</div>
             </div>
             <!-- <%-- 모달 바디 --%> -->
@@ -61,7 +61,7 @@
                     <!-- <%-- 깐부알림 --%> -->
                     <div class="mebmer-profile">
                         <div class="profile-head">
-                            <img class="member-img" src="../../images/common/test_user_profile.gif" alt="">
+                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
                             <div class="member-nickname">묘동닉네임글자테스트</div>
                         </div>
 
@@ -77,7 +77,7 @@
                             </div>
 
                             <div class="member-choice">
-                                <img class="minihome-img" src="../../images/common/smallCube.png" alt="">
+                                <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
                                 <a href="/minihome" onclick="return openMinihome(this.href)">미니홈피</a><!--  <%-- a --%> -->
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                     <!-- 사진첩 스크랩 -->
                     <div class="mebmer-profile-alarm">
                         <div>
-                            <img class="member-img" src="../../images/common/test_user_profile.gif" alt="">
+                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
                             <div class="contents">
                                 <div class="profile-info">
                                     <div class="member-nickname">묘동닉네임글자테스트</div>
@@ -107,7 +107,7 @@
                     <!-- 사진첩 댓글 -->
                     <div class="mebmer-profile-alarm">
                         <div>
-                            <img class="member-img" src="../../images/common/test_user_profile.gif" alt="">
+                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
                             <div class="contents">
                                 <div class="profile-info">
                                     <div class="member-nickname">묘동닉네임글자테스트</div>
@@ -127,7 +127,7 @@
                     <!-- 동영상 스크랩 -->
                     <div class="mebmer-profile-alarm">
                         <div>
-                            <img class="member-img" src="../../images/common/test_user_profile.gif" alt="">
+                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
                             <div class="contents">
                                 <div class="profile-info">
                                     <div class="member-nickname">묘동닉네임글자테스트</div>
@@ -148,7 +148,7 @@
                     <!-- 동영상 댓글 -->
                     <div class="mebmer-profile-alarm" >
                         <div>
-                            <img class="member-img" src="../../images/common/test_user_profile.gif" alt="">
+                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
                             <div class="contents">
                                 <div class="profile-info">
                                     <div class="member-nickname">묘동닉네임글자테스트</div>
@@ -178,8 +178,8 @@
     <!-- jQuery 라이브러리(.js 파일) 추가(CDN 방식) -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <!-- <%-- 해당 모달 개인 js --%> -->
-    <script src="../../js/webmain/main-notifications.js"></script>
+    <script src="/resources/js/webmain/main-notifications.js"></script>
     <!-- <%-- 웹 메인 모달 공통 js --%> -->
-    <script src="../../js/webmain/modalSettings.js"></script>
+    <script src="/resources/js/webmain/modalSettings.js"></script>
 </body>
 </html>

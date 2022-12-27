@@ -123,6 +123,9 @@ const memberSearch=()=>{
     })
 }
 /* 여기둬야 적용됨 */
+/* 이유 자바스크립트는 해석순서가  function 을 먼저 찾은 후 위에서 내려옴
+그래서 함수 사용시 function으로 해두면 호출을 먼저해도 function으로 이미 위치를 알고있으니
+가져올수 있짐나 const는 호출 아래 함수를 선언했기 때문에 위치를 알수없음*/
 document.querySelector(".member-search-input").addEventListener("keyup",memberSearch);
 
 /* 비동기로 회원깐부신청 함수  */

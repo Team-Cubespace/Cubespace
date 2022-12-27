@@ -201,8 +201,10 @@ function createCalendar(events){
           allDay: event.allDay,
           title: event.title,
           description: event.description,
-          // start: date.hour(timeStart.hour()).minutes(timeStart.minutes()).format("YYYY-MM-DD"),
-          start: date.format("YYYY-MM-DD"),
+          /* 기존 : 이거였는데 */
+          start: date.hour(timeStart.hour()).minutes(timeStart.minutes()).format("YYYY-MM-DD"),
+          /* 12a 안 뜨게 하려고 바꿔봄... 소용 없었다고 한다. */
+          // start: date.format("YYYY-MM-DD"),
           end: event.end ? event.end.format("YYYY-MM-DD") : "",
           url: event.url,
           className: 'scheduler_basic_event',

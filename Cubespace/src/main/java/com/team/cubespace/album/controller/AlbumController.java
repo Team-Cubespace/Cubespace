@@ -1,21 +1,30 @@
 package com.team.cubespace.album.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
 import com.team.cubespace.album.model.service.AlbumService;
 import com.team.cubespace.album.model.vo.Album;
+import com.team.cubespace.common.Util;
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.member.model.vo.Member;
 import com.team.cubespace.minihome.model.vo.Minihome;
@@ -97,6 +106,28 @@ public class AlbumController {
 		return "minihome/album/album-write";
 	}
 	
+	@ResponseBody
+	@PostMapping("/albumWrite")
+	public String albumWrite(Album album,
+			@RequestParam("imageList") List<MultipartFile> imageList,
+			@SessionAttribute("loginMember") Member loginMember,
+			HttpSession session) throws IllegalStateException, IOException {
+		
+		// 작성된 앨범에 작성자 번호 세팅
+		album.setMemberNo(loginMember.getMemberNo());
+		
+		// 업로드된 파일의 웹 접근경로 / 서버 내부 경로 저장
+		String webPath = "/resources/images/album/";
+		String folderPath = session.getServletContext().getRealPath(webPath);
+		
+		// 앨범 작성 서비스 호출 후 앨범 번호 반환
+		int albumNo = service.albumWrite(album, imageList, webPath, folderPath);
+		Map<String, Integer> resultMap = new HashMap<>();
+		resultMap.put("albumNo", albumNo);
+		resultMap.put("folderNo", album.getFolderNo());
+		return new Gson().toJson(resultMap);
+	}
+	
 	/** 앨범 상세조회
 	 * @return minihome/album/album-write 포워드
 	 */
@@ -120,7 +151,47 @@ public class AlbumController {
 		model.addAttribute("folderName", folderName);
 		model.addAttribute("album", album);
 		
-		
 		return "minihome/album/album-detail";
+	}
+	
+	@GetMapping("/albumDelete/{albumNo}")
+	public String albumDelete(@PathVariable("albumNo") int albumNo,
+			@RequestHeader("referer") String referer,
+			int folderNo,
+			int cp,
+			RedirectAttributes ra) {
+		
+		// 삭제 서비스 호출
+		int result = service.albumDelete(albumNo);
+		
+		String message = "";
+		String path = "";
+		if(result > 0) {
+			// 삭제 성공
+			message = "삭제에 성공했습니다.";
+			path = "/albumList/2?folderNo=" + folderNo + "&cp=" + cp;
+		} else {
+			// 삭제 실패
+			message = "삭제에 실패했습니다.";
+			path = referer;
+		}
+		
+		ra.addFlashAttribute("message", message);
+		return "redirect:" + path;
+	}
+	
+	
+	@GetMapping("/albumUpdate/{albumNo}")
+	public String albumUpdate(@PathVariable("albumNo") int albumNo,
+			Model model) {
+		// 앨범 조회
+		Album album = service.selectAlbum(albumNo);
+		
+		if(album.getAlbumContent() != null) {
+			album.setAlbumContent(Util.newLineClear(album.getAlbumContent()));
+		}
+		model.addAttribute("album", album);
+		
+		return "/minihome/album/album-update";
 	}
 }

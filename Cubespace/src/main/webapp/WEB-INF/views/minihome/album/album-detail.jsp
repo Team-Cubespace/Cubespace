@@ -40,6 +40,11 @@
                 <!-- ex) <div class="home-area"> <div></div> <span></span> ... </div> -->
         </section>
     </div>
+    <c:if test="${not empty message}">
+        <script>
+                alert("${message}");
+        </script>
+    </c:if>
 
     <script src="/resources/js/common/swiper.min.js"></script>
     <script src="/resources/js/minihome/album/album-detail.js"></script>

@@ -1,7 +1,17 @@
-var fileNo = 0;
-var filesArr = new Array();
+let fileNo = 0;
+let filesArr = new Array();
+let deleteImageList = new Array();
 console.log("hello");
 /* 첨부파일 추가 */
+
+const deleteImage = (order, target) =>{
+    // 삭제리스트에 순서 추가
+    deleteImageList.push(order);
+
+    // html요소 삭제
+    target.parentElement.remove();
+    console.log(deleteImageList);
+}
 
 const addFile = (obj)=>{
     var maxFileCnt = 5;   // 첨부파일 최대 개수
@@ -104,11 +114,12 @@ function submitForm() {
         if (!filesArr[i].is_delete) {
             formData.append("imageList", filesArr[i]);
         }
+        formData.append("deleteImageList", deleteImageList);
     }
     console.log(filesArr);
     $.ajax({
         method: 'POST',
-        url: '/albumWrite',
+        url: '/albumUpdate',
         dataType: 'json',
         enctype: 'multipart/form-data',
         data: formData,

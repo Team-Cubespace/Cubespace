@@ -9,8 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.team.cubespace.album.model.vo.Album;
+import com.team.cubespace.album.model.vo.AlbumImage;
 import com.team.cubespace.common.Pagination;
 
+/**
+ * @author Tonic
+ *
+ */
 @Repository
 public class AlbumDAO {
 	@Autowired
@@ -50,5 +55,35 @@ public class AlbumDAO {
 	 */
 	public Album selectAlbum(int albumNo) {
 		return sqlSession.selectOne("albumMapper.selectAlbum", albumNo);
+	}
+
+	/** 앨범 개시글 삽입 (이미지 제외)
+	 * @param album
+	 * @return results
+	 */
+	public int albumWrite(Album album) {
+		int result = sqlSession.insert("albumMapper.albumWrite", album);
+		
+		if(result > 0) {
+			result = album.getAlbumNo();
+		}
+
+		return result; 
+	}
+
+	/** 앨범 작성 이미지 정보 업로드
+	 * @param albumImageList
+	 * @return result
+	 */
+	public int insertAlbumImageList(List<AlbumImage> albumImageList) {
+		return sqlSession.insert("albumMapper.insertAlbumImageList", albumImageList);
+	}
+
+	/** 앨범 삭제
+	 * @param albumNo
+	 * @return result
+	 */
+	public int albumDelete(int albumNo) {
+		return sqlSession.update("albumMapper.albumDelete", albumNo);
 	}
 }

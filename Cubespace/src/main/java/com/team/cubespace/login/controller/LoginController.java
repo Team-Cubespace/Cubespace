@@ -55,6 +55,7 @@ public class LoginController {
 	 * @param referer
 	 * @param loginType
 	 * @return loginMember
+	 * @throws Exception 
 	 */
 	@PostMapping("/member/login")
 	public String login(Member inputMember,
@@ -62,7 +63,7 @@ public class LoginController {
 			RedirectAttributes ra,
 			HttpServletResponse resp,
 			@RequestParam(value="saveId", required=false) String saveId,			
-			@RequestHeader(value="referer") String referer) {
+			@RequestHeader(value="referer") String referer) throws Exception {
 		
 
 		Member loginMember = service.login(inputMember);
@@ -112,13 +113,14 @@ public class LoginController {
 		 * @param referer
 		 * @param loginType
 		 * @return loginMember
+		 * @throws Exception 
 		 */
 		@PostMapping(value="/member/kakaoLogin",  produces = "application/text; charset=utf8")
 		@ResponseBody
 		public String login(Model model,
 				RedirectAttributes ra,
 				@RequestHeader(value="referer") String referer,
-				String kakaoLoginMember) {
+				String kakaoLoginMember) throws Exception {
 			
 			
 			ObjectMapper objectMapper = new ObjectMapper();

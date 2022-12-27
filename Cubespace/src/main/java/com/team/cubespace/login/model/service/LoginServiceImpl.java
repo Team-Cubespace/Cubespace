@@ -1,5 +1,6 @@
 package com.team.cubespace.login.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,11 @@ public class LoginServiceImpl implements LoginService{
 
 	/**
 	 * 로그인 서비스
+	 * @throws Exception 
 	 */
 	@Override
-	public Member login(Member inputMember) {
+	@Transactional(rollbackFor = Exception.class)
+	public Member login(Member inputMember) throws Exception {
 		
 		Member loginMember = dao.login(inputMember.getMemberEmail());
 		
@@ -32,11 +35,25 @@ public class LoginServiceImpl implements LoginService{
 		if(loginMember != null) {
 			if(bcrypt.matches(inputMember.getMemberPw(), loginMember.getMemberPw())) {
 				loginMember.setMemberPw(null);
+				
+				int ownResult = dao.insertOwnGoods(loginMember.getMemberNo()); // 회원소유품목
+				int minihomeResult = dao.insertMinihome(loginMember.getMemberNo()); // 미니홈
+				int folderResult = dao.insertFolder(loginMember.getMemberNo()); // 폴더
+				int categoryOrderResult = dao.insertCategoryOrder(loginMember.getMemberNo()); // 카테고리순서
+				
+				if(ownResult * minihomeResult * folderResult * categoryOrderResult > 0) {
+					
+					return loginMember;
+					
+				} else {
+					throw new Exception("회원가입 중 오류 발생");
+				}
+
+				
 			} else {
 				loginMember = null;
 			}
 		}
-		
 		return loginMember;
 	}
 	
@@ -98,9 +115,11 @@ public class LoginServiceImpl implements LoginService{
 
 	/**
 	 * 카카오 로그인
+	 * @throws Exception 
 	 */
 	@Override
-	public Member kakaoLogin(Member inputMember) {
+	@Transactional(rollbackFor = Exception.class)
+	public Member kakaoLogin(Member inputMember) throws Exception {
 		
 		// paramMap의 email을 기존의 회원과 조회해서 
 		// 있다면 -> 기존의 로그인메서드 호출
@@ -122,7 +141,22 @@ public class LoginServiceImpl implements LoginService{
 				
 				if(loginMember != null) {
 					loginMember.setMemberPw(null);
-					return loginMember;
+					
+					
+					int ownResult = dao.insertOwnGoods(loginMember.getMemberNo()); // 회원소유품목
+					int minihomeResult = dao.insertMinihome(loginMember.getMemberNo()); // 미니홈
+					int folderResult = dao.insertFolder(loginMember.getMemberNo()); // 폴더
+					int categoryOrderResult = dao.insertCategoryOrder(loginMember.getMemberNo()); // 카테고리순서
+					
+					if(ownResult * minihomeResult * folderResult * categoryOrderResult > 0) {
+						
+						return loginMember;
+					} else {
+						throw new Exception("회원가입 중 오류 발생");
+					}
+					
+					
+					
 				}
 			}
 		}
@@ -176,6 +210,26 @@ public class LoginServiceImpl implements LoginService{
 				}
 			}
 			return 0;
+		}
+
+
+		/**
+		 * 차단기한이 지난 회원의 정보 리스트
+		 */
+		@Override
+		public List<Member> selectMemberBlockList() {
+			
+			return dao.selectMemberBlockList();
+		}
+
+
+		/**
+		 * 차단기한이 지난 회원의 정보 삭제
+		 */
+		@Override
+		public int deleteMemberBlock() {
+
+			return dao.deleteMemberBlock();
 		}
 
 

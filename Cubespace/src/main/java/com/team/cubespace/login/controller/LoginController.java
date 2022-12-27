@@ -75,7 +75,6 @@ public class LoginController {
 						+ loginMember.getBlockStart() + "부터\n" 
 						+ loginMember.getBlockEnd() + "까지 이용할 수 없습니다.\n"
 						+ "자세한 사항은 고객센터를 참고하세요";
-				ra.addFlashAttribute("message", "차단된 회원은 이용할 수 없습니다");
 				ra.addFlashAttribute("message", message);
 	
 			} else {
@@ -114,7 +113,7 @@ public class LoginController {
 		 * @param loginType
 		 * @return loginMember
 		 */
-		@PostMapping("/member/kakaoLogin")
+		@PostMapping(value="/member/kakaoLogin",  produces = "application/text; charset=utf8")
 		@ResponseBody
 		public String login(Model model,
 				RedirectAttributes ra,

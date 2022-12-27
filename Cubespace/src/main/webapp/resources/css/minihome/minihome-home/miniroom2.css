@@ -39,9 +39,9 @@
     width: 450px;
     height: 500px;
     background-color: rgb(242, 247, 255);
-    background-image: url("../../../images/wallsample.jpg");
-    background-size: 150px;
-    /* background-repeat: repeat; */
+    background-image: url("../../../images/wallsample.gif");
+    /* background-size: 150px;
+    background-repeat: repeat; */
     background-size: cover;
     top: -187px;
     left: -72px;
@@ -52,9 +52,9 @@
     width: 450px;
     height: 500px;
     background-color: rgb(242, 247, 255);
-    background-image: url("../../../images/wallsample.jpg");
-    /* background-size: 150px;
-    background-repeat: repeat; */
+    background-image: url("../../../images/wallsample.gif");
+    /* background-size: 150px; */
+    /* background-repeat: repeat; */
     background-size: cover;
     top: -187px;
     right: -72px;
@@ -64,10 +64,9 @@
 .bottom{
     width: 450px;
     height: 450px;
-    background-color: rgb(10, 105, 132);
-    /* background-image: url("../../../images/help.png"); */
-    background-size: 150px;
-    background-repeat: repeat;
+    background-color: rgb(25 108 139);
+    background-size: cover;
+    /* background-repeat: repeat; */
     top: 125px;
     left: 86px;
     transform: rotateX(45deg) rotateY(0deg) rotateZ(45deg);
@@ -82,6 +81,7 @@
     justify-content: center;
     align-items: center;
     transform: rotateX(45deg) rotateY(0deg) rotateZ(45deg);
+    opacity: 0;
 }
 
 /* 1-1 */

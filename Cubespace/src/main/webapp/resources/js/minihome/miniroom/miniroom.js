@@ -54,6 +54,7 @@ const tileContainer = document.querySelector(".tile-container");
 const testBtn = document.getElementById("testBtn");
 const testArea = document.getElementById("testArea");
 
+/* 화면 캡처... 고민중 */
 $(function(){
     $("#testBtn").click(function(e){
         html2canvas(miniroomContainer).then(function(canvas) {
@@ -63,4 +64,8 @@ $(function(){
             el.click()
         })
     })
+})
+
+document.getElementById("moveBtn").addEventListener("click", () => {
+    // tileContainer.style.transitionDuration = "0.5s";
 })

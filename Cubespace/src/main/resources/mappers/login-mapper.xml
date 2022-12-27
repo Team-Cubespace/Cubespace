@@ -153,6 +153,51 @@
  	 </insert>
  	
  	
+ 	<!-- 회원소유품목 테이블에 값 삽입 -->
+ 	<insert id="insertOwnGoods">
+ 		INSERT INTO MEMBER_OWN_GOODS VALUES(SEQ_OWN_NO.NEXTVAL, #{memberNo}, 1, 1)
+ 	</insert>
+ 	
+ 	
+ 	<!--  미니홈 테이블에 값 삽입 -->
+ 	<insert id="insertMinihome">
+ 		INSERT INTO MINI_HOMEPAGE VALUES(
+		#{memberNo}, '나의 미니홈피', 'rgb(128,128,128)', 
+		NULL, DEFAULT, DEFAULT, NULL, '#82C9E8', '#1A8DBF', 'WHITE')
+ 	</insert>
+ 	
+ 	
+ 	<!--폴더 테이블에 값 삽입 -->
+ 	<insert id="insertFolder1">
+ 		INSERT INTO FOLDER VALUES(
+		SEQ_FOLDER_NO.NEXTVAL, 1, '나의 월간달력', 1, #{memberNo})
+ 	</insert>
+ 	<!--폴더 테이블에 값 삽입 -->
+ 	<insert id="insertFolder2">
+ 		INSERT INTO FOLDER VALUES(
+		SEQ_FOLDER_NO.NEXTVAL, 1, '나의 다이어리', 2, #{memberNo})
+ 	</insert>
+ 	<!--폴더 테이블에 값 삽입 -->
+ 	<insert id="insertFolder3">
+ 		INSERT INTO FOLDER VALUES(
+		SEQ_FOLDER_NO.NEXTVAL, 2, '나의 사진첩', 1, #{memberNo})
+ 	</insert>
+ 	<!--폴더 테이블에 값 삽입 -->
+ 	<insert id="insertFolder4">
+ 		INSERT INTO FOLDER VALUES(
+		SEQ_FOLDER_NO.NEXTVAL, 3, '나의 동영상', 1, #{memberNo})
+ 	</insert>
+ 	
+ 	
+ 	<!-- 카테고리순서 테이블에 값 삽입 -->
+ 	<insert id="insertCategoryOrder">
+	 	INSERT INTO CATEGORY_ORDER VALUES(
+		#{memberNo}, 1,2,3,4)
+ 	</insert>
+ 	
+ 	
+ 	
+ 	
  	
  	 <!-- 내 회원 정보 수정 -->
 	 <update id="updateInfo" parameterType="Member">
@@ -193,4 +238,19 @@
 		MEMBER_DEL_YN = 'Y'
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
+	
+	
+	
+	<!-- 차단기한이 지난 회원의 정보 리스트 -->
+	<select id="selectMemberBlockList" resultMap = "member_rm">
+		SELECT * FROM MEMBER_BLOCK mb WHERE BLOCK_END > SYSDATE
+	</select>
+	
+	<!-- 차단기한이 지난 회원의 정보 삭제 -->
+	<delete id="deleteMemberBlock">
+		DELETE FROM MEMBER_BLOCK mb WHERE BLOCK_END > SYSDATE
+	</delete>
+	
+	
+	
 </mapper>

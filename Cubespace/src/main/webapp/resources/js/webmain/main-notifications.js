@@ -37,16 +37,8 @@ if(deleteButton){
     })
 }
 
-
-/* 강사님께 여쭤보기 2 도와주세요 */
-/* 삭제 */ //콘솔 오류 왜나냐 ?
-const messageDeleteButton =document.querySelector(".message-delete");
-messageDeleteButton.addEventListener("click",()=>{
-    messageDelete()
-})
-
+/* 삭제버튼 */
 const messageDelete = (btn)=>{
-    /* 강사님께 여쭤보기 3 도와주세요 */
     const remove = btn.parentElement.parentElement.parentElement;
     remove.remove()
 }
@@ -59,7 +51,4 @@ const messageDelete = (btn)=>{
 // 거절 시 알림 삭제 하고 DB깐부상태 삭제
 
 
-// main-memberSearch.js 강사님 도움
-// 삭제 콘솔오류 강사님 도움
-// 부모의부모의부모 선택하는거 강사님 도움(이게 맞는코드인가?)
 // 전체삭제 css 더 수정 

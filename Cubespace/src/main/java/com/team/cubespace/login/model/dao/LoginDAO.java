@@ -1,6 +1,7 @@
 package com.team.cubespace.login.model.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -22,6 +23,9 @@ public class LoginDAO {
 	public Member login(String memberEmail) {
 		return sqlSession.selectOne("loginMapper.login", memberEmail);
 	}
+	
+	
+	
 	
 	/** 회원가입 입력 정보 제출 DAO
 	 * @param inputMember
@@ -56,6 +60,48 @@ public class LoginDAO {
 		return sqlSession.update("loginMapper.findEmailPw",map);
 	}
 	
+	
+	/** 회원소유품목 테이블에 값 삽입
+	 * @param memberNo
+	 * @return
+	 */
+	public int insertOwnGoods(int memberNo) {
+		
+		return sqlSession.insert("loginMapper.insertOwnGoods", memberNo);
+	}
+	
+	/** 미니홈 테이블에 값 삽입
+	 * @param memberNo
+	 * @return
+	 */
+	public int insertMinihome(int memberNo) {
+		
+		return sqlSession.insert("loginMapper.insertMinihome", memberNo);
+	}
+	
+	/** 폴더 테이블에 값 삽입
+	 * @param memberNo
+	 * @return
+	 */
+	public int insertFolder(int memberNo) {
+		
+		int result1 =  sqlSession.insert("loginMapper.insertFolder1", memberNo);
+		int result2 =  sqlSession.insert("loginMapper.insertFolder2", memberNo);
+		int result3 =  sqlSession.insert("loginMapper.insertFolder3", memberNo);
+		int result4 =  sqlSession.insert("loginMapper.insertFolder4", memberNo);
+		
+		return result1 * result2 * result3 * result4;
+	}
+	
+	/** 카테고리순서 테이블에 값 삽입
+	 * @param memberNo
+	 * @return
+	 */
+	public int insertCategoryOrder(int memberNo) {
+		
+		return sqlSession.insert("loginMapper.insertCategoryOrder", memberNo);
+	}
+
 
 	/** 이메일 중복 검사
 	 * @param memberEmail
@@ -125,4 +171,27 @@ public class LoginDAO {
 	public int secessionDelete(int memberNo) {
 		return sqlSession.update("loginMapper.secessionDelete",memberNo);
 	}
+
+
+
+
+	/** 차단기한이 지난 회원의 정보 리스트
+	 * @return memberBlockList
+	 */
+	public List<Member> selectMemberBlockList() {
+		
+		return sqlSession.selectList("loginMapper.selectMemberBlockList");
+	}
+
+
+
+
+	/** 차단기한이 지난 회원의 정보 삭제
+	 * @return
+	 */
+	public int deleteMemberBlock() {
+		
+		return sqlSession.delete("loginMapper.deleteMemberBlock");
+	}
+
 }

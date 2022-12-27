@@ -25,8 +25,6 @@
    		<result property="emotion" column="EMOTION"></result>
    		<result property="fontNo" column="FONT_NO"></result>
    		
-   		
-   		
    		<result property="memberBlockYN" column="MEMBER_BLOCK_YN"></result>
    		<result property="blockStart" column="BLOCK_START"></result>
    		<result property="blockEnd" column="BLOCK_END"></result>
@@ -36,7 +34,6 @@
    		<result property="alarmCount" column="ALARM_COUNT"></result>
    		<result property="today" column="TODAY"></result>
    		<result property="friendCount" column="FRIEND_COUNT"></result>
-  
  	 </resultMap>
  	 
 

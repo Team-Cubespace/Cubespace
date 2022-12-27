@@ -23,11 +23,20 @@
   		<result property="emojiPath" column="EMOJI_PATH"/>
   	</resultMap>
   	
-  		<resultMap type="Member" id="member_rm">
+  	<resultMap type="Member" id="member_rm">
   		<id property="memberNo" column="MEMBER_NO"/>
   		
   		<result property="memberNickname" column="MEMBER_NICKNAME"/>
   		<result property="profileImage" column="PROFILE_IMG"/>
+  	</resultMap>
+  	
+  	<resultMap type="Plan" id="plan_rm">
+  		<id property="planNo" column="PLAN_NO"/>
+  		
+  		<result property="memberNo" column="MEMBER_NO"/>
+  		<result property="startDate" column="START_DATE"/>
+  		<result property="endDate" column="END_DATE"/>
+  		<result property="planTitle" column="PLAN_TITLE"/>
   	</resultMap>
   	
   	<select id="checkFriend" resultType = "_int">
@@ -72,6 +81,13 @@
 	JOIN EMOJI_IMG I ON (E.EMOJI_NO = I.EMOJI_NO)
 	JOIN MEMBER M ON (M.MEMBER_NO = E.MEMBER_NO)
 	WHERE DIARY_NO = #{diaryNo} AND E.EMOJI_NO = #{emojiNo}
+	</select>
+	
+	<select id="selectscheduleList" resultMap = "plan_rm">
+	SELECT START_DATE , PLAN_TITLE 
+	FROM PLAN 
+	JOIN MEMBER USING (MEMBER_NO)
+	WHERE MEMBER_NO = #{memberNo}
 	</select>
  	
 </mapper>

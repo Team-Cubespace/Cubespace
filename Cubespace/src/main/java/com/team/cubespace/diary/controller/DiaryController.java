@@ -33,7 +33,10 @@ public class DiaryController {
 	@GetMapping("/miniroom")
 	public String move() {
 		
+		//다이어리part
 		return "/minihome/minihome-diary/minihome-rayout-copy";
+		//월간달력part
+//		return "/minihome/minihome-diary/minihome-calendarV3";
 	}
 	
 	
@@ -129,6 +132,17 @@ public class DiaryController {
 	
 //	@PostMapping("/calenderInput")
 //	@ResponseBody
+	
+	@GetMapping("/diary/calendar")
+	@ResponseBody
+	public String selectSchedule(@SessionAttribute("loginMember") Member loginMember) {
+		System.out.println("로그인한 멤버 넘버가 잘 넘어왔니? " +loginMember.getMemberNo());
+		List<Plan> scheduleList = service.selectSchedule(loginMember.getMemberNo());
+		System.out.println("스케쥴리스트 확인!");
+		System.out.println(scheduleList);
+		
+		return new Gson().toJson(scheduleList);
+	}
 	
 	
 

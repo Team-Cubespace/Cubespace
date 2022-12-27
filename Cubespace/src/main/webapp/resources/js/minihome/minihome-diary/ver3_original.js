@@ -1,63 +1,66 @@
-var defaultEvents = [
-  {
-    // Just an event
-    title: 'Long Event',
-    start: '2022-12-07',
-    end: '2022-12-10',
-    className: 'scheduler_basic_event'
-  },
-  {
-    // Custom repeating event
-    id: 999,
-    title: 'Repeating Event',
-    start: '2022-12-09T16:00:00',
-    className: 'scheduler_basic_event'
-  },
-  {
-    // Custom repeating event
-    id: 999,
-    title: 'Repeating Event',
-    start: '2022-12-16T16:00:00',
-    className: 'scheduler_basic_event'
-  },
-  {
-    // Just an event
-    title: 'Lunch',
-    start: '2022-12-12T12:00:00',
-    className: 'scheduler_basic_event',
-  },
-  {
-    // Just an event
-    title: 'Happy Hour',
-    start: '2022-12-12T17:30:00',
-    className: 'scheduler_basic_event'
-  },
-  {   
-    // Monthly event
-    id: 111,
-    title: 'Meeting',
-    start: '2022-12-01T00:00:00',
-    className: 'scheduler_basic_event',
-    repeat: 1
-  },
-  {
-    // Annual avent
-    id: 222,
-    title: 'Birthday Party',
-    start: '2022-12-04T07:00:00',
-    description: 'This is a cool event',
-    className: 'scheduler_basic_event',
-    repeat: 2
-  },
-  {
-    // Weekday event
-    title: 'Click for Google',
-    url: 'http://google.com/',
-    start: '2022-12-28',
-    className: 'scheduler_basic_event',
-    dow: [1,5]
-  }
-];
+var loginMember = 1;
+var defaultEvents ;
+
+// var defaultEvents = [
+//   {
+//     // Just an event
+//     title: 'Long Event',
+//     start: '2022-12-07',
+//     end: '2022-12-10',
+//     className: 'scheduler_basic_event'
+//   },
+//   {
+//     // Custom repeating event
+//     id: 999,
+//     title: 'Repeating Event',
+//     start: '2022-12-09T16:00:00',
+//     className: 'scheduler_basic_event'
+//   },
+//   {
+//     // Custom repeating event
+//     id: 999,
+//     title: 'Repeating Event',
+//     start: '2022-12-16T16:00:00',
+//     className: 'scheduler_basic_event'
+//   },
+//   {
+//     // Just an event
+//     title: 'Lunch',
+//     start: '2022-12-12T12:00:00',
+//     className: 'scheduler_basic_event',
+//   },
+//   {
+//     // Just an event
+//     title: 'Happy Hour',
+//     start: '2022-12-12T17:30:00',
+//     className: 'scheduler_basic_event'
+//   },
+//   {   
+//     // Monthly event
+//     id: 111,
+//     title: 'Meeting',
+//     start: '2022-12-01T00:00:00',
+//     className: 'scheduler_basic_event',
+//     repeat: 1
+//   },
+//   {
+//     // Annual avent
+//     id: 222,
+//     title: 'Birthday Party',
+//     start: '2022-12-04T07:00:00',
+//     description: 'This is a cool event',
+//     className: 'scheduler_basic_event',
+//     repeat: 2
+//   },
+//   {
+//     // Weekday event
+//     title: 'Click for Google',
+//     url: 'http://google.com/',
+//     start: '2022-12-28',
+//     className: 'scheduler_basic_event',
+//     dow: [1,5]
+//   }
+// ];
 
 // Any value represanting monthly repeat flag
 var REPEAT_MONTHLY = 1;
@@ -126,13 +129,16 @@ $('#calendar').fullCalendar({
     alert('Current view: ' + view.name);
 
     var titlee = prompt("일정이름을 입력해주세요");
-    var endDate = prompt("끝나는 날짜를 지정해주세요");
+    var endDateStr = prompt("끝나는 날짜를 지정해주세요");
+    var endDate = new Date(endDateStr + 'T12:00:00'); // will be in local time
     var startDate = date.format();
     if (date.isValid()) {
           $('#calendar').fullCalendar('renderEvent', {
             title: titlee,
             start: startDate,
-            end : endDate.format()
+            end : endDate,
+            backgroundColor: "red",
+            repeat : 2
             // allDay: true
           });
           alert('Great. Now, update your database...');
@@ -140,12 +146,13 @@ $('#calendar').fullCalendar({
           alert('Invalid date.');
         }
       console.log(startDate);
-      console.log(endDate.formate());
+      console.log(endDate);
+      //console.log(endDate.format()); -> 맞지 않는 듯
       
 
 
     // change the day's background color just for fun
-    $(this).css('background-color', 'red');
+    // $(this).css('background-color', 'red');
 
   },
   
@@ -169,55 +176,95 @@ $('#calendar').fullCalendar({
   //     alert('Invalid date.');
   //   }
   // },
-  eventSources: [defaultEvents],
-  dayRender: function( date, cell ) {
-    // Get all events
-    var events = $('#calendar').fullCalendar('clientEvents').length ? $('#calendar').fullCalendar('clientEvents') : defaultEvents;
-        // Start of a day timestamp
-    var dateTimestamp = date.hour(0).minutes(0);
-    var recurringEvents = new Array();
+  // eventSources: [defaultEvents],
+  //어떤 사람이 성공했다는 바로 그 함수!! 시도해보겠어요
+  events : function(start, end, timezone, callback){//이벤트 출력부분
+    $.ajax({
+        url: "/diary/calendar",
+        type:'GET',
+        dataType: 'json',
+        data:{"loginMember":loginMember},
+        success:function(data){
+          console.log("스케줄리스트가 잘 불러져 왔니?");
+          console.log(data);
 
-      // find all events with monthly repeating flag, having id, repeating at that day few months ago  
-    var monthlyEvents = events.filter(function (event) {
-    return event.repeat === REPEAT_MONTHLY &&
-        event.id &&
-        moment(event.start).hour(0).minutes(0).diff(dateTimestamp, 'months', true) % 1 == 0
-    });
+          var events=[];
+              $(data).each(function(index){
+              //alert(val.start);
+                  events.push({
+                  // id: data[index].day_pk,
+                  // title: data[index].title,
+                  // start: data[index].start,
+                  title: data[index].planTitle, //내 vo에서 넘어온 이름이 이거임
+                  start: data[index].startDate, //내 vo에서 넘어온 이름이 이거임
+                  repeat : 2
+                  // end: data[index].end,
+                  // textColor:'white',
+                  // backgroundColor:'#'+data[index].css,
+                  // url:'day_md_popup/'+data[index].day_pk
+                  });
+              });
+          callback(events);
+          console.log("이벤트 목록입니다.");
+          console.log(events);
+          defaultEvents = events;
+          console.log(defaultEvents);
+        },
+        error:function(status, request, error){
+          alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error"+error);
+        }
+    });//ajax
+  },
+  
+  // dayRender: function( date, cell ) {
+  //   // Get all events
+  //   var events = $('#calendar').fullCalendar('clientEvents').length ? $('#calendar').fullCalendar('clientEvents') : defaultEvents;
+  //   // var events = $('#calendar').fullCalendar('clientEvents').length ? $('#calendar').fullCalendar('clientEvents') : events;
+  //       // Start of a day timestamp
+  //   var dateTimestamp = date.hour(0).minutes(0);
+  //   var recurringEvents = new Array();
 
-    // find all events with monthly repeating flag, having id, repeating at that day few years ago  
-    var yearlyEvents = events.filter(function (event) {
-    return event.repeat === REPEAT_YEARLY &&
-        event.id &&
-        moment(event.start).hour(0).minutes(0).diff(dateTimestamp, 'years', true) % 1 == 0
-    });
+  //     // find all events with monthly repeating flag, having id, repeating at that day few months ago  
+  //   var monthlyEvents = events.filter(function (event) {
+  //   return event.repeat === REPEAT_MONTHLY &&
+  //       event.id &&
+  //       moment(event.start).hour(0).minutes(0).diff(dateTimestamp, 'months', true) % 1 == 0
+  //   });
 
-    recurringEvents = monthlyEvents.concat(yearlyEvents);
+  //   // find all events with monthly repeating flag, having id, repeating at that day few years ago  
+  //   var yearlyEvents = events.filter(function (event) {
+  //   return event.repeat === REPEAT_YEARLY &&
+  //       event.id &&
+  //       moment(event.start).hour(0).minutes(0).diff(dateTimestamp, 'years', true) % 1 == 0
+  //   });
 
-    $.each(recurringEvents, function(key, event) {
-    var timeStart = moment(event.start);
+  //   recurringEvents = monthlyEvents.concat(yearlyEvents);
 
-    // Refething event fields for event rendering 
-    var eventData = {
-        id: event.id,
-        allDay: event.allDay,
-        title: event.title,
-        description: event.description,
-        start: date.hour(timeStart.hour()).minutes(timeStart.minutes()).format("YYYY-MM-DD"),
-        end: event.end ? event.end.format("YYYY-MM-DD") : "",
-        url: event.url,
-        className: 'scheduler_basic_event',
-        repeat: event.repeat
-    };
+  //   $.each(recurringEvents, function(key, event) {
+  //   var timeStart = moment(event.start);
+
+  //   // Refething event fields for event rendering 
+  //   var eventData = {
+  //       id: event.id,
+  //       allDay: event.allDay,
+  //       title: event.title,
+  //       description: event.description,
+  //       start: date.hour(timeStart.hour()).minutes(timeStart.minutes()).format("YYYY-MM-DD"),
+  //       end: event.end ? event.end.format("YYYY-MM-DD") : "",
+  //       url: event.url,
+  //       className: 'scheduler_basic_event',
+  //       repeat: event.repeat
+  //   };
         
-    // Removing events to avoid duplication
-    $('#calendar').fullCalendar( 'removeEvents', function (event) {
-        return eventData.id === event.id &&
-        moment(event.start).isSame(date, 'day');      
-    });
-    // Render event
-    $('#calendar').fullCalendar('renderEvent', eventData, true);
+  //   // Removing events to avoid duplication
+  //   $('#calendar').fullCalendar( 'removeEvents', function (event) {
+  //       return eventData.id === event.id &&
+  //       moment(event.start).isSame(date, 'day');      
+  //   });
+  //   // Render event
+  //   $('#calendar').fullCalendar('renderEvent', eventData, true);
 
-    });
+  //   });
 
-  }
+  // }
 });

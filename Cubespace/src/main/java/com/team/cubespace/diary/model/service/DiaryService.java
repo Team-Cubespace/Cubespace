@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.team.cubespace.diary.model.vo.Diary;
 import com.team.cubespace.diary.model.vo.Emoji;
+import com.team.cubespace.diary.model.vo.Plan;
 
 /**
  * @author sue
@@ -39,5 +40,11 @@ public interface DiaryService {
 	 * @return
 	 */
 	List<Emoji> selectEmojiPeopleList(int diaryNo, int emojiNo);
+
+	/**
+	 * @param memberNo
+	 * @return
+	 */
+	List<Plan> selectSchedule(int memberNo);
 
 }

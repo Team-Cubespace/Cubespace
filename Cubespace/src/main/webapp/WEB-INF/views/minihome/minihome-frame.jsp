@@ -70,7 +70,7 @@
             <section class="minihome-main">
 
 
-                <iframe src="/albumWrite" frameborder="0" name="minihomeMenu" scrolling="no">
+                <iframe src="/miniroom" frameborder="0" name="minihomeMenu" scrolling="no">
                 <%-- <iframe src="/manage/friend" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
 
 

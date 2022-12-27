@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.team.cubespace.diary.model.dao.DiaryDAO;
 import com.team.cubespace.diary.model.vo.Diary;
 import com.team.cubespace.diary.model.vo.Emoji;
+import com.team.cubespace.diary.model.vo.Plan;
 
 
 /**
@@ -60,6 +61,15 @@ public class DiaryServiceImpl implements DiaryService {
 		map.put("emojiNo", emojiNo);
 		
 		return dao.selectEmojiPeopleList(map);
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public List<Plan> selectSchedule(int memberNo) {
+		// TODO Auto-generated method stub
+		return dao.selectSchedule(memberNo);
 	}
 
 }

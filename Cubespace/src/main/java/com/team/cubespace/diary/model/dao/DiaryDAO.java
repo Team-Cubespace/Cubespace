@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.team.cubespace.diary.model.vo.Diary;
 import com.team.cubespace.diary.model.vo.Emoji;
+import com.team.cubespace.diary.model.vo.Plan;
 
 /**
  * @author sue
@@ -54,6 +55,15 @@ public class DiaryDAO {
 	public List<Emoji> selectEmojiPeopleList(Map<String, Object> map) {
 		
 		return sqlSession.selectList("diaryMapper.selectEmojiPeopleList",map);
+	}
+
+	/**
+	 * @param memberNo
+	 * @return
+	 */
+	public List<Plan> selectSchedule(int memberNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("diaryMapper.selectscheduleList",memberNo);
 	}
 
 }

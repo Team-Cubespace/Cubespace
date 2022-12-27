@@ -21,6 +21,7 @@
 		<typeAlias type="com.team.cubespace.minihome.model.vo.Minihome" alias="Minihome"/>		
 		<typeAlias type="com.team.cubespace.diary.model.vo.Diary" alias="Diary"/>		
 		<typeAlias type="com.team.cubespace.diary.model.vo.Emoji" alias="Emoji"/>		
+		<typeAlias type="com.team.cubespace.diary.model.vo.Plan" alias="Plan"/>		
 		<typeAlias type="com.team.cubespace.folder.model.vo.Folder" alias="Folder"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.CategoryOrder" alias="CategoryOrder"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.Friend" alias="Friend"/>		

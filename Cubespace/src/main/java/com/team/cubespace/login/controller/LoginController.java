@@ -80,6 +80,12 @@ public class LoginController {
 	
 			} else {
 				
+				// 관리자가 로그인했을 경우 관리자 알림 출력
+				if(loginMember.getAuthority() == 1) {
+					ra.addFlashAttribute("message", "관리자 로그인!");
+				}
+				
+				
 				path = "/";
 				model.addAttribute("loginMember", loginMember);
 				Cookie cookie = new Cookie("saveId", loginMember.getMemberEmail());
@@ -203,11 +209,12 @@ public class LoginController {
 	
 	/** 회원가입 입력 정보 제출
 	 * @return
+	 * @throws Exception 
 	 */
 	@PostMapping("/member/signUp/info")
 	public String signUp(/* @ModelAttribute */ Member inputMember,
 						RedirectAttributes ra,
-						@RequestHeader("referer") String referer) {
+						@RequestHeader("referer") String referer) throws Exception {
 		 
 
 		

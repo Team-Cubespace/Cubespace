@@ -29,8 +29,8 @@
             </c:when>
             <c:otherwise>
             <!-- 로그인 O -->
-                <li class="header-menu">
-                    <a href="">
+                <li class="header-menu" onclick="openmodalAlarm()">
+                    <a>
                         <div class="notice">
                             <span class="notice-new"></span>
                             <i class="fa-solid fa-bell"></i>
@@ -38,6 +38,8 @@
                         <span>알림</span>
                     </a>
                 </li>
+                <%-- <jsp:include page="/WEB-INF/views/webmain/main-notifications.jsp"/> --%>
+
                 <li class="header-menu">
                     <button type="button" id="headerDropDownButton">
                         <c:if test="${empty loginMember.profileImage}">

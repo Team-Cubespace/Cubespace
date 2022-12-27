@@ -1,3 +1,12 @@
+/* 모달 열기 */
+function openmodalAlarm(){
+    document.getElementById("modalAlarm").style.display = "block";
+}
+/* 모달 닫기 */
+function closeModalAlarm(){
+    document.getElementById("modalAlarm").style.display = "none";
+}
+
 /* 오른쪽 클릭 시 전체삭제 추가 하기*/
 /* 다른스크립트에서 선언했는데 변수명이 사용됨!!!! */
 rightChoice.addEventListener("click",()=>{

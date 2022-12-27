@@ -1,5 +1,5 @@
-<!-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,11 +27,10 @@
 </head>
 <body>
     <!-- <%-- 모달 --%> -->
-    <!-- <div class="modal" id="modal" style="display: none;"> -->
-    <div class="modal" id="modal">
+    <div class="modal" id="modalAlarm" style="display: none;">
         <!-- <%-- 모달 창 --%> -->
         <div class="modal-box" >
-            <div class="modal-close" id="modalClose" onclick="closeModal()"><</div>
+            <div class="modal-close" id="modalClose" onclick="closeModalAlarm()"><</div>
             <!-- <%-- 모달 헤더 --%> -->
             <div class="modal-head">
                 <img class="head-img-bell" src="/resources/images/common/bell.png" alt="알림">
@@ -89,7 +88,7 @@
                         <div>
                             <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
                             <div class="contents">
-                                <div class="profile-info">
+                                <div class="profile-info-alarm">
                                     <div class="member-nickname">묘동닉네임글자테스트</div>
                                     <div class="alarm-time">5시간전</div>
                                 </div>
@@ -109,7 +108,7 @@
                         <div>
                             <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
                             <div class="contents">
-                                <div class="profile-info">
+                                <div class="profile-info-alarm">
                                     <div class="member-nickname">묘동닉네임글자테스트</div>
                                     <div class="alarm-time">5시간전</div>
                                 </div>
@@ -129,7 +128,7 @@
                         <div>
                             <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
                             <div class="contents">
-                                <div class="profile-info">
+                                <div class="profile-info-alarm">
                                     <div class="member-nickname">묘동닉네임글자테스트</div>
                                     <div class="alarm-time">5시간전</div>
                                 </div>
@@ -150,7 +149,7 @@
                         <div>
                             <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
                             <div class="contents">
-                                <div class="profile-info">
+                                <div class="profile-info-alarm">
                                     <div class="member-nickname">묘동닉네임글자테스트</div>
                                     <div class="alarm-time">5시간전</div>
                                 </div>
@@ -179,7 +178,5 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <!-- <%-- 해당 모달 개인 js --%> -->
     <script src="/resources/js/webmain/main-notifications.js"></script>
-    <!-- <%-- 웹 메인 모달 공통 js --%> -->
-    <script src="/resources/js/webmain/modalSettings.js"></script>
 </body>
 </html>

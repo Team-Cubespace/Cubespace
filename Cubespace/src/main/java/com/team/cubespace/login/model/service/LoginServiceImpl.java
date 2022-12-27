@@ -113,7 +113,7 @@ public class LoginServiceImpl implements LoginService{
 			return loginMember;
 			
 		} else {
-			inputMember.setMemberPw(bcrypt.encode(inputMember.getMemberPw())); // 비밀번호 자리에 로그인 인코딩정보 넣음
+			inputMember.setMemberPw(bcrypt.encode(inputMember.getMemberEmail())); // 비밀번호 자리에 로그인 인코딩정보 넣음
 			
 			int result = dao.kakaoSignUp(inputMember);
 			

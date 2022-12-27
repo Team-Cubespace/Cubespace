@@ -89,7 +89,12 @@
     </form>
 
 
-
+    <c:if test="${!empty message}">
+        <script>
+            alert("${message}")
+        </script>
+        <c:remove var="message"></c:remove>
+    </c:if>
 
     <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 

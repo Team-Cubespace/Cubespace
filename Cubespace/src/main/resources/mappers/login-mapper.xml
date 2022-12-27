@@ -132,7 +132,7 @@
  	 <!-- 카카오 회원가입 -->
  	 <insert id="kakaoSignUp" parameterType="Member">
  	 			INSERT INTO MEMBER VALUES(
-			SEQ_MEMBER_NO.NEXTVAL, #{memberEmail}, #{memberPw}, #{memberNickname}, #{memberNickname}, '010-0000-0000', 
+			SEQ_MEMBER_NO.NEXTVAL, #{memberEmail}, #{memberPw}, #{memberNickname}, #{memberNickname}, '01000000000', 
 		
 		<if test='profileImage != null'>
 			#{profileImage},

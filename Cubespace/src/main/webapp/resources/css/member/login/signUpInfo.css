@@ -166,7 +166,7 @@
 
 .SignUp:hover{
     transition-duration: 0.3s;
-    background-color: var(--subColor);
+    background-color: var(--mainColor);
 }
 .signUp-input-password{
     display: flex;
@@ -180,7 +180,7 @@
     padding: 0 0 !important;
 }
 .questionBox:hover {
-    border-bottom: 3px solid var(--lightMain);
+    border-bottom: 3px solid var(--mainColor);
 }
 
 

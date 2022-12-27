@@ -145,12 +145,10 @@ public class LoginController {
 							
 				
 			Member loginMember = service.kakaoLogin(inputMember);
-			String path = null;
 			
 			
 			
 			if(loginMember.getMemberBlockYN().equals("Y")){
-				path = referer;
 				String message = "차단된 회원은 이용할 수 없습니다\n" 
 						+ loginMember.getBlockStart() + "부터" 
 						+ loginMember.getBlockEnd() + "까지 이용할 수 없습니다.\n"
@@ -160,15 +158,15 @@ public class LoginController {
 				
 			} 
 			
-			if(loginMember.getMemberTel().equals("010-0000-0000")) { // 처음 카카오 회원가입시
-				Member tempMember = loginMember;
-				ra.addFlashAttribute(tempMember);
-				
-				return "1"; // 페이지 이동
-				
-			} else {
+//			if(loginMember.getMemberTel().equals("01000000000")) { // 처음 카카오 회원가입시
+//				Member tempMember = loginMember;
+//				ra.addFlashAttribute(tempMember);
+//				
+//				return "1"; // 페이지 이동
+//				
+//			} else {
 				model.addAttribute("loginMember", loginMember);
-			}
+//			}
 			return "0";
 		}
 		

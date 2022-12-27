@@ -34,6 +34,16 @@
     width: 800px;
     margin: 30px auto;
 }
+.questionBox:hover{
+    border-bottom: 2px solid var(--mainColor);
+    transition-duration: 0.3s;
+}
+.inputBox:active questionBox{
+    border-bottom: 2px solid var(--mainColor);
+    transition-duration: 0.3s;
+}
+
+
 
 /* .textbox {
     height: 60px;
@@ -62,7 +72,7 @@
     justify-content: space-between;
     width: 800px;
     height: 75px;
-    border-bottom: 3px solid #eee;
+    border-bottom: 2px solid #eee;
     margin-bottom: 10px;
     padding-top: 10px;
     position: relative;

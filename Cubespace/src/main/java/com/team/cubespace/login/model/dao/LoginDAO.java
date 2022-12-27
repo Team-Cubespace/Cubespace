@@ -96,8 +96,8 @@ public class LoginDAO {
 	 * @param inputMember
 	 * @return
 	 */
-	public int changePw(Map<String, Object> paramMap) {
-		return sqlSession.update("loginMapper.updateInfoPw",paramMap);
+	public int changePw(Member inputMember) {
+		return sqlSession.update("loginMapper.changePw",inputMember);
 	}
 
 	/** 내 회원 정보 수정
@@ -109,23 +109,16 @@ public class LoginDAO {
 	}
 	
 	
-	/** 회원탈퇴 회원 조회-------------------
+	/** 회원탈퇴 회원 조회
 	 * @param memberNo
 	 * @return 
 	 */
-	public Member secessionSelect(int memberNo) {
-		return sqlSession.selectOne("loginMapper.secessionSelect", memberNo);
+	public Member getMemberInfo(int memberNo) {
+		return sqlSession.selectOne("loginMapper.getMemberInfo", memberNo);
 	}
 
-	/** 회원 탈퇴----------------------
-	 * @param memberNo
-	 * @return result
-	 */
-	public int secession(int memberNo) {
-		return sqlSession.update("myPageMapper.secession",memberNo);
-	}
 	
-	/** 회원 탈퇴---------------------
+	/** 회원 탈퇴
 	 * @param memberNo
 	 * @return
 	 */

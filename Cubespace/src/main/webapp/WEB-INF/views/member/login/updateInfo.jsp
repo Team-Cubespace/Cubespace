@@ -28,6 +28,10 @@
             color: black;
             font-weight: normal;
         }
+        .SignUpAgreement6 {
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 </head>
 
@@ -39,8 +43,8 @@
     <div class="signUp">
 
         <div class="signUpInfoLink">
-            <a href="/member/findId" id="findIdLink" class="idHover">내 정보 수정</a>
-            <a href="/member/findPw" id="findPwLink" class="pwNotHover">비밀번호 변경</a>
+            <a href="/member/updateInfo" id="findIdLink" class="idHover">내 정보 수정</a>
+            <a href="/member/changePw" id="findPwLink" class="pwNotHover">비밀번호 변경</a>
         </div>
 
 
@@ -112,6 +116,7 @@
             <!-- 회원 가입 다음 단계 -->
             <div class="SignUpAgreement6">
                 <button class="SignUp">내 정보 수정 완료</button>
+                <a href="/member/secession" class="secessionBtn">회원 탈퇴하기</a>
             </div>
         </form>
     </div>

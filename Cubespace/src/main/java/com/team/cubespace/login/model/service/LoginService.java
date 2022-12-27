@@ -66,12 +66,12 @@ public interface LoginService {
 	 * @param memberNo
 	 * @return result
 	 */
-	int secessionSelect(int memberNo, Map<String, Object> parMap);
+	int secessionSelect(int memberNo, Member inputMember);
 
 	/** 회원 비밀번호 변경
 	 * @param paramMap
 	 * @return
 	 */
-	int changePw(Map<String, Object> paramMap);
+	int changePw(Member inputMember);
 
 }

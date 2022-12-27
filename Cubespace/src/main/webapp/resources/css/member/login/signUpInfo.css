@@ -272,3 +272,10 @@
     color: black !important;
     font-weight: normal !important;
 }
+
+
+/* 탈퇴버튼 */
+.secessionBtn{
+    color: #aaa;
+    margin-top: 10px;
+}

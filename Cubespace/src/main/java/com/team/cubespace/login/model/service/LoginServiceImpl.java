@@ -144,30 +144,30 @@ public class LoginServiceImpl implements LoginService{
 		 * 회원 비밀번호 변경
 		 */
 		@Override
-		public int changePw(Map<String, Object> paramMap) {
+		public int changePw(Member inputMember) {
 			
-			String encPw = bcrypt.encode((String)paramMap.get("memberPw"));
-			paramMap.put("encPw", encPw);
+			String encPw = bcrypt.encode(inputMember.getMemberPw());
+			inputMember.setMemberPw(encPw);
 			
-			return dao.changePw(paramMap);
+			return dao.changePw(inputMember);
 		}
 		
 		// 회원 탈퇴 
 		@Transactional
 		@Override
-		public int secessionSelect(int memberNo, Map<String, Object> parMap) {
+		public int secessionSelect(int memberNo, Member inputMember) {
 			
 			// 1. 회원탈퇴 회원 조회 (아이디/ 비밀번호/이름)
-		    	Member memeberInf = dao.secessionSelect(memberNo);
+		    	Member memeberInf = dao.getMemberInfo(memberNo);
 	 
 		    	
 				// 2. 입력 값 과 조회된 값이 같은지 확인
 	    	// 비밀번호가 맞는지 먼저 확인
-			if (bcrypt.matches((CharSequence) parMap.get("memberPw"), memeberInf.getMemberPw())) {
+			if (bcrypt.matches(inputMember.getMemberPw(), memeberInf.getMemberPw())) {
 			
 				// map 에서 값 꺼내서 아이디 , 이름 같은지 조회
-				if ( parMap.get("memberNewEmail").equals(memeberInf.getMemberEmail()) &&
-					 parMap.get("memberName").equals(memeberInf.getMemberName())	) {
+				if (inputMember.getMemberEmail().equals(memeberInf.getMemberEmail()) &&
+						inputMember.getMemberName().equals(memeberInf.getMemberName())	) {
 					
 					// 같다면 탈퇴 처리 
 					int result = dao.secessionDelete(memberNo);

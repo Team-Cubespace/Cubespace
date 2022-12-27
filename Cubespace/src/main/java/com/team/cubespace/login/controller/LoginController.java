@@ -397,15 +397,44 @@ public class LoginController {
 			return "redirect:" + path;
 		}
 		
+		
+		/** 비밀번호 변경 페이지 이동
+		 * @param loginMember
+		 * @return
+		 */
+		@GetMapping("/member/changePw")
+		public String changePw() {
+			return "member/login/changePw";
+		}
+		
+		/** 비밀번호 변경
+		 * @param paramMap
+		 * @param loginMember
+		 * @param ra
+		 * @return
+		 */
 		@PostMapping("/member/changePw")
-		public String changePw(Map<String, Object> paramMap,
+		public String changePw(Member inputMember,
 				@SessionAttribute("loginMember") Member loginMember,
 				RedirectAttributes ra) {
 			
-			paramMap.put("memberNo", loginMember.getMemberNo());
-			int result = service.changePw(paramMap);
+			inputMember.setMemberNo(loginMember.getMemberNo());
+			int result = service.changePw(inputMember);
 			
-			return null;
+			
+			String message = null;
+			String path = null;
+			
+			if (result > 0) {
+				message = "비밀번호가 변경되었습니다";
+				path = "/";
+
+			} else {
+				message = "비밀번호 변경 실패";
+				path = "changePw";
+			}
+			ra.addFlashAttribute("message", message);
+			return "redirect:" + path;
 		}
 		
 		/**
@@ -413,9 +442,9 @@ public class LoginController {
 		 * 
 		 * @return
 		 */
-		@GetMapping("/secessionPage")
+		@GetMapping("/member/secession")
 		public String secessionPage() {
-			return "member/myPage_secession";
+			return "member/login/secession";
 		}
 
 		/** 회원 탈퇴
@@ -426,20 +455,32 @@ public class LoginController {
 		 * @param ra
 		 * @return
 		 */
-		@PostMapping("/secession")
-		public String secession(@RequestParam Map<String, Object> parMap, @RequestHeader("referer") String referer,
-				@SessionAttribute("loginMember") Member loginMember, SessionStatus status, RedirectAttributes ra) {
+		@PostMapping("/member/secession")
+		public String secession(Member inputMember,
+				@RequestHeader("referer") String referer,
+				@SessionAttribute("loginMember") Member loginMember, 
+				SessionStatus status, 
+				HttpServletResponse resp,
+				RedirectAttributes ra) {
 
 			String path = null;
 			String message = null;
 
 			// 입력받은 값 로그인한 정보 비교 확인 및 탈퇴
-			int result = service.secessionSelect(loginMember.getMemberNo(), parMap);
+			int result = service.secessionSelect(loginMember.getMemberNo(), inputMember);
 
 			if (result > 0) { // 탈퇴 성공
 				
 				path = "/";
 				message = "회원 탈퇴되었습니다.";
+				
+				
+				// 쿠키 삭제
+				Cookie cookie = new Cookie("saveId", "");
+				cookie.setMaxAge(0);
+				cookie.setPath("/");
+				resp.addCookie(cookie);
+				
 				status.setComplete(); 
 
 

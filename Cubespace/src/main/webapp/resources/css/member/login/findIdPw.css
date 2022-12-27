@@ -211,3 +211,19 @@
     color: black !important;
     font-weight: normal !important;
 }
+
+
+
+
+
+/* 회원탈퇴 관련 */
+.secessionTitle{
+    display: flex;
+    justify-content: center;
+    width: 800px;
+    font-size: 25px;
+    font-weight: bold;
+    border-bottom: 3px solid var(--lightMain);
+    margin: 30px auto 80px;
+    padding-bottom: 10px;
+}

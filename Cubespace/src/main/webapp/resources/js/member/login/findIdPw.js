@@ -3,27 +3,58 @@ const checkObj = {
     "memberName" : false,
     "memberTel" : false,
 }
-// 회원 가입 양식이 제출 되었을 때
-document.getElementById("findId-frm").addEventListener("submit",function(event){
+// 아이디찾기 양식이 제출 되었을 때
+const findIdForm = document.getElementById("findId-frm");
+if(findIdForm != null){
 
-    for(let key in checkObj){
-
-        let str;
-
-        if(!checkObj[key]){
-
-            switch(key){
-                case "memberEmail"              : str = "이메일이 유효하지 않습니다.";        break;
-                case "memberName"               : str = "이름이 유효하지 않습니다.";          break;
-                case "memberTel"                : str = "전화번호가 유효하지 않습니다.";      break;
+    findIdForm.addEventListener("submit",function(event){
+    
+        for(let key in checkObj){
+    
+            let str;
+    
+            if(!checkObj[key]){
+    
+                switch(key){
+                    case "memberEmail"              : str = "이메일이 유효하지 않습니다.";        break;
+                    case "memberName"               : str = "이름이 유효하지 않습니다.";          break;
+                    case "memberTel"                : str = "전화번호가 유효하지 않습니다.";      break;
+                }
+                alert(str);
+                document.getElementById(key).focus();
+                event.preventDefault(); // 제출 이벤트 제거
+                return; 
             }
-            alert(str);
-            document.getElementById(key).focus();
-            event.preventDefault(); // 제출 이벤트 제거
-            return; 
         }
-    }
-})
+    })
+}
+
+// 비밀번호 찾기 양식이 제출 되었을 때
+const findPwForm = document.getElementById("findPw-frm");
+if(findPwForm != null){
+
+    findPwForm.addEventListener("submit",function(event){
+    
+        for(let key in checkObj){
+    
+            let str;
+    
+            if(!checkObj[key]){
+    
+                switch(key){
+                    case "memberEmail"              : str = "이메일이 유효하지 않습니다.";        break;
+                    case "memberName"               : str = "이름이 유효하지 않습니다.";          break;
+                    case "memberTel"                : str = "전화번호가 유효하지 않습니다.";      break;
+                }
+                alert(str);
+                document.getElementById(key).focus();
+                event.preventDefault(); // 제출 이벤트 제거
+                return; 
+            }
+        }
+    })
+}
+
 
 /*************************** 이메일 유효성 검사 ***************************/
 const memberEmail = document.getElementById("memberEmail");
@@ -109,6 +140,7 @@ memberTel.addEventListener("input",()=>{
         checkObj.memberTel = false;
     }
 })
+
 
 
 

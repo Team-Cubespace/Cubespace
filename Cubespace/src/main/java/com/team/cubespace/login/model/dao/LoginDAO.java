@@ -36,6 +36,7 @@ public class LoginDAO {
 	 * @return 
 	 */
 	public String infoFindSelect(Map<String, Object> paramMap) {
+		System.out.println(paramMap);
 		return sqlSession.selectOne("loginMapper.infoFindSelect",paramMap);
 	}
 
@@ -81,5 +82,47 @@ public class LoginDAO {
 	public int telDupCheck(String memberTel) {
 		return sqlSession.selectOne("loginMapper.telDupCheck",memberTel);
 	}
+
+	/** 카카오 회원가입
+	 * @param paramMap
+	 * @return
+	 */
+	public int kakaoSignUp(Member inputMember) {
+		
+		return sqlSession.insert("loginMapper.kakaoSignUp", inputMember);
+	}
 	
+	/** 비밀번호 수정
+	 * @param inputMember
+	 * @return
+	 */
+	public int changePw(Member inputMember) {
+		return sqlSession.update("loginMapper.changePw",inputMember);
+	}
+
+	/** 내 회원 정보 수정
+	 * @param inputMember
+	 * @return
+	 */
+	public int updateInfo(Member inputMember) {
+		return sqlSession.update("loginMapper.updateInfo",inputMember);
+	}
+	
+	
+	/** 회원탈퇴 회원 조회
+	 * @param memberNo
+	 * @return 
+	 */
+	public Member getMemberInfo(int memberNo) {
+		return sqlSession.selectOne("loginMapper.getMemberInfo", memberNo);
+	}
+
+	
+	/** 회원 탈퇴
+	 * @param memberNo
+	 * @return
+	 */
+	public int secessionDelete(int memberNo) {
+		return sqlSession.update("loginMapper.secessionDelete",memberNo);
+	}
 }

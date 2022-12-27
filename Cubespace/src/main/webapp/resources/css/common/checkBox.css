@@ -121,4 +121,18 @@
     input[type='radio']:checked {
         --s: 0.5;
    }
+
+   .whiteBtn {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px;
+    height: 30px;
+}
+.whiteBtn:hover {
+    background-color: black;
+    color: white;
+    transition-duration: 0.3s;
+}
 }

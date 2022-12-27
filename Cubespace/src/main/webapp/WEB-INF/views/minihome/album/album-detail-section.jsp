@@ -57,8 +57,8 @@
                 </c:when>
                 <c:otherwise>
                     <%-- 게시글의 작성자번호와 로그인된 회원의 번호가 일치할 때 --%>
-                    <a href="">수정</a>
-                    <a href="">삭제</a>
+                    <a href="/albumUpdate/${album.albumNo}?folderNo=${album.folderNo}&cp=${param.cp}">수정</a>
+                    <a href="/albumDelete/${album.albumNo}?folderNo=${album.folderNo}&cp=${param.cp}">삭제</a>
                 </c:otherwise>
             </c:choose>
         </div>

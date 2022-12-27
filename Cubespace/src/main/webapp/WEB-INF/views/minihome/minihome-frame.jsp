@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,8 +85,7 @@
                     <c:if test="${minihome.memberNo eq loginMember.memberNo}">
                         <li><a href="/manage/font" target="minihomeMenu">관리</a></li>
                     </c:if>
-                </ul>   
-
+                </ul>
             </section>
         </div>
     </div>

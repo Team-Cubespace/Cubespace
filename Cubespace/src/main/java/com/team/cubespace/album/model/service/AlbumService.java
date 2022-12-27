@@ -1,7 +1,10 @@
 package com.team.cubespace.album.model.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.team.cubespace.album.model.vo.Album;
 
@@ -30,5 +33,22 @@ public interface AlbumService {
 	 * @return album
 	 */
 	public Album selectAlbum(int albumNo);
+
+	/** 앨범 작성 서비스
+	 * @param album
+	 * @param imageList
+	 * @param webPath
+	 * @param folderPath
+	 * @return albumNo
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	public int albumWrite(Album album, List<MultipartFile> imageList, String webPath, String folderPath) throws IllegalStateException, IOException;
+
+	/** 앨범 삭제
+	 * @param albumNo
+	 * @return result
+	 */
+	public int albumDelete(int albumNo);
 
 }

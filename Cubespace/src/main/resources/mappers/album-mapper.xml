@@ -25,6 +25,7 @@
 		<id property="albumNo" column="ALBUM_NO"/>
 		
 		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="folderNo" column="FOLDER_NO"/>
 		<result property="albumTitle" column="A_TITLE"/>
 		<result property="albumContent" column="A_CONTENT"/>
 		<result property="thumbnailImage" column="THUMBNAIL_IMG"/>		
@@ -102,4 +103,33 @@
 		WHERE ALBUM_NO = #{albumNo}
 		ORDER BY IMG_ORDER
 	</select>
+	
+	<!-- 앨범 작성(사진 제외) -->
+	<insert id="albumWrite" parameterType="Album" useGeneratedKeys="true">
+		<selectKey keyProperty="albumNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_ALBUM_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO ALBUM (ALBUM_NO, MEMBER_NO, A_TITLE, A_CONTENT, A_CREATE, A_DEL_FL, LATITUDE, LONGITUDE, LOCATION_NAME, FOLDER_NO, A_OPEN_FL ,A_SCRAP_ALLOW_YN)
+		VALUES(#{albumNo}, #{memberNo}, #{albumTitle}, #{albumContent}, DEFAULT, DEFAULT, #{latitude}, #{longitude}, #{locationName}, #{folderNo}, #{albumOpenFlag}, #{albumScrapAllowYN})
+	</insert>
+	
+	<!-- 앨범 작성 사진 업로드 -->
+	<insert id="insertAlbumImageList" parameterType="list">
+		INSERT INTO ALBUM_IMG
+		SELECT SEQ_IMG_NO.NEXTVAL IMG_NO, A.* FROM
+		<foreach collection="list" item="albumImage" open="(" close=") A" separator="UNION ALL">
+			SELECT #{albumImage.albumNo} ALBUM_NO,
+					#{albumImage.imagePath} IMG_PATH,
+					#{albumImage.imageRename} IMG_RENAME,
+					#{albumImage.imageOrder} IMG_ORDER
+					FROM DUAL
+		</foreach>
+	</insert>
+	
+	<!-- 앨범 삭제 -->
+	<update id="albumDelete" parameterType="_int">
+		UPDATE ALBUM SET
+		A_DEL_FL = 'Y'
+		WHERE ALBUM_NO = #{albumNo}
+	</update>
 </mapper>

@@ -216,4 +216,9 @@ public class LoginDAO {
 		return sqlSession.update("loginMapper.updateOwnGoods", loginMember);
 	}
 
+
+
+
+
+
 }

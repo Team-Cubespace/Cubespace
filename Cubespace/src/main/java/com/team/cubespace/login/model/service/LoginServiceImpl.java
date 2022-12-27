@@ -72,7 +72,7 @@ public class LoginServiceImpl implements LoginService{
 			}  else {
 				
 				inputMember.setOwnFontNo(ownResult);
-				result = dao.insertOwnGoods(inputMember);
+				result = dao.updateOwnGoods(inputMember);
 			}
 		}
 		
@@ -244,6 +244,7 @@ public class LoginServiceImpl implements LoginService{
 
 			return dao.deleteMemberBlock();
 		}
+
 
 
 

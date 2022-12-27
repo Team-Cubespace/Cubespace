@@ -56,7 +56,7 @@
 			WHEN (SELECT MEMBER_NO FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = M.MEMBER_NO AND SYSDATE < BLOCK_END) IS NULL  ]]>
 			THEN 'N'
 			ELSE 'Y'
-		END MEMBER_BLOCK_YN,
+		END MEMBER_BLOCK_YN, LOGIN_TYPE,
 		(SELECT FONT_PATH FROM FONT_SHOP
 		JOIN MEMBER_OWN_GOODS MOG ON (OWN_FONT_NO = FONT_NO) WHERE MOG.OWN_NO = M.OWN_FONT_NO ) FONT_PATH,
 		(SELECT COUNT(*) FROM ALARM WHERE RECEIVER_NO = M.MEMBER_NO) ALARM_COUNT,
@@ -85,7 +85,7 @@
 		<if test='birthYear == null and birthDay == null'>
 			NULL, NULL,
 		</if>
-			DEFAULT, DEFAULT)
+			DEFAULT, DEFAULT, 1)
 	</insert>
 
 	
@@ -154,7 +154,7 @@
 		<if test='birthDay == null'>
 			NULL,
 		</if>
-			DEFAULT, DEFAULT)
+			DEFAULT, DEFAULT, 3)
  	 </insert>
  	
  	
@@ -265,6 +265,7 @@
 		DELETE FROM MEMBER_BLOCK mb WHERE BLOCK_END > SYSDATE
 	</delete>
 	
+
 	
 	
 </mapper>

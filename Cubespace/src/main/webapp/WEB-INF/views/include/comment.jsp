@@ -1,11 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="comment-section">
     <div class="comment-header">
-        <span class="comment-count">댓글 29개</span>
+        <span class="comment-count">댓글 ${fn:length(album.commentList)}개</span>
+        <button type="button" onclick="selectCommentList(albumNo)"></button>
     </div>
     <div class="comment-write-row">
         <div class="comment-profile-image-area">
-            <img class="comment-profile-image" src="/resources/images/zz.png" alt="" class="comment-profile-image">
+            <c:choose>
+                <c:when test="${not empty loginMember.profileImage}">
+                    <img class="comment-profile-image" src="${loginMember.profileImage}" alt="" class="comment-profile-image">
+                </c:when>
+                <c:otherwise>
+                    <img class="comment-profile-image" src="/resources/images/common/cubes.png" alt="" class="comment-profile-image">
+                </c:otherwise>
+            </c:choose>
         </div>
         <div class="comment-content">
             <textarea name="" id="" placeholder="댓글 추가.." rows="1" onkeyup="resizeTextarea(this)"></textarea>
@@ -15,8 +25,86 @@
             </div>
         </div>
     </div>
-    <ul class="comment-list">
-        <li class="comment-row">
+    <ul id="commentListArea" class="comment-list">
+        <c:forEach var="comment" items="${album.commentList}">
+            <c:choose>
+                <%-- 부모 댓글이라면 --%>
+                <c:when test="${comment.level == 1}">
+                    <li class="comment-row">
+                        <div class="comment-profile-image-area">
+                            <c:choose>
+                                <c:when test="${not empty comment.profileImage}">
+                                    <img class="comment-profile-image" src="${comment.profileImage}" alt="">
+                                </c:when>
+                                <c:otherwise>
+                                    <img class="comment-profile-image" src="/resources/images/common/cubes.png" alt="">
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                        <div class="comment-content">
+                            <div class="comment-nickname-area">
+                                <span class="member-nickname">${comment.memberNickname}</span>
+                                <!-- 로그인 회원번호와 댓글의 회원번호가 일치할때만 생성 -->
+                                <c:if test="${loginMember.memberNo == comment.memberNo}">
+                                    <button class="comment-drop-down-button fa-solid fa-ellipsis-vertical">
+                                        <ul class="comment-drop-down-menu">
+                                            <li onclick="updateComment(${comment.commentNo})">수정</li>
+                                            <li onclick="deleteComment(${comment.commentNo})">삭제</li>
+                                        </ul>
+                                    </button>
+                                </c:if>
+                            </div>
+                            <p>
+                                ${comment.commentContent}
+                            </p>
+                            <div class="comment-button-area">
+                                <span class="comment-date">${comment.commentCreate}</span><button type="button" onclick="addCommentArea(${comment.commentNo}, this)">답글</button>
+                            </div>
+                        </div>
+                    </li>
+                    <%-- 자식 댓글이 있을 때 --%>
+                    <c:if test="${comment.childCommentCount > 0}">
+                        <button class="child-comment-count" type="button" onclick="toggleChildComment(this)">댓글 ${comment.childCommentCount}개</button>
+                    </c:if>
+                </c:when>
+                <c:otherwise>
+                    <li class="comment-row child-comment">
+                        <div class="comment-profile-image-area">
+                            <c:choose>
+                                <c:when test="${not empty comment.profileImage}">
+                                    <img class="comment-profile-image" src="${comment.profileImage}" alt="">
+                                </c:when>
+                                <c:otherwise>
+                                    <img class="comment-profile-image" src="/resources/images/common/cubes.png" alt="">
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                        <div class="comment-content">
+                            <div class="comment-nickname-area">
+                                <span class="member-nickname">${comment.memberNickname}</span>
+                                <!-- 로그인 회원번호와 댓글의 회원번호가 일치할때만 생성 -->
+                                <c:if test="${loginMember.memberNo == comment.memberNo}">
+                                    <button class="comment-drop-down-button fa-solid fa-ellipsis-vertical">
+                                        <ul class="comment-drop-down-menu">
+                                            <li onclick="updateComment(${comment.commentNo})">수정</li>
+                                            <li onclick="deleteComment(${comment.commentNo})">삭제</li>
+                                        </ul>
+                                    </button>
+                                </c:if>
+                            </div>
+                            <p class="comment-content">
+                                ${comment.commentContent}
+                            </p>
+                            <div class="comment-button-area">
+                                <span class="comment-date">${comment.commentCreate}</span>
+                            </div>
+                        </div>
+                    </li>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+
+        <%-- <li class="comment-row">
             <div class="comment-profile-image-area">
                 <img class="comment-profile-image" src="/resources/images/zz.png" alt="" class="comment-profile-image">
             </div>
@@ -41,7 +129,7 @@
                 </div>
             </div>
         </li>
-        <%-- <div class="comment-write-row child-comment">
+        <div class="comment-write-row child-comment">
             <div class="comment-profile-image-area">
                 <img class="comment-profile-image" src="/resources/images/zz.png" alt="" class="comment-profile-image">
             </div>
@@ -52,7 +140,7 @@
                     <button class="insert-button" type="button">등록</button>
                 </div>
             </div>
-        </div> --%>
+        </div>
         <button class="child-comment-count" type="button" onclick="toggleChildComment(this)">댓글 2개</button>
         <li class="comment-row child-comment">
             <div class="comment-profile-image-area">
@@ -101,6 +189,6 @@
                     <span class="comment-date">1분전</span>
                 </div>
             </div>
-        </li>
+        </li> --%>
     </ul>
 </div>

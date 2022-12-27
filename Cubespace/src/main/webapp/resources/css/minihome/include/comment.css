@@ -9,17 +9,17 @@
     padding: 10px 0px;
 }
 .comment-content {
-    margin: 10px 0px 5px 0px;
+    margin: 5px 0px 5px 0px;
 }
 /* 전체 댓글 갯수 */
 .comment-count {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: bold;
 }
 
 /* 댓글 리스트 */
 .comment-list > li {
-    margin: 20px 0px;
+    margin: 15px 0px;
 }
 .comment-list > li:first-of-type {
     margin: 0px;
@@ -146,7 +146,7 @@
     font-size: 17px;
     border: none;
     cursor: pointer;
-    display: none;
+    /* display: none; */
 }
 .comment-drop-down-menu {
     position: absolute;
@@ -156,6 +156,7 @@
     top: 100%;
     font-size: 13px;
     display: none;
+    z-index: 10;
     background-color: white;
 }
 .comment-drop-down-menu li {
@@ -165,6 +166,6 @@
     background-color: #ddd;
 }
 /* 드랍다운 버튼 오버시 보이기 */
-.comment-row:hover .comment-drop-down-button {
+/* .comment-row:hover .comment-drop-down-button {
     display: block;
-}
+} */

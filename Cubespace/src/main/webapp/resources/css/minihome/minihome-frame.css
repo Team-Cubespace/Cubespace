@@ -145,11 +145,16 @@ html {
     position: absolute;
     top: 20px;
     right: -47px;
+    display: flex;
+    flex-direction: column;
 }
 .minihome-menu li {
-    margin: 5px 0px;
+    margin: 3px 0px;
     font-size: 13px;
     letter-spacing: -1px;
+}
+.minihome-menu li:last-of-type {
+    order: 10;
 }
 .minihome-menu a {
     display: flex;

@@ -25,4 +25,10 @@ public interface MemberSearchService {
 	 */
 	List<MemberSearch> memberAddFriendList(Map<String, Object> paramMap);
 
+	/** 깐부 신청취소 하기
+	 * @param paramMap
+	 * @return
+	 */
+	int memberAddCancel(Map<String, Object> paramMap);
+
 }

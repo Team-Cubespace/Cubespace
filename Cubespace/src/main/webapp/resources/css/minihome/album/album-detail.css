@@ -1,7 +1,10 @@
+header {
+    display: flex;
+}
 .slide-container {
     display: flex;
     justify-content: center;
-    height: 87%;
+    height: 83%;
     position: relative;
 }
 .swiper-container {
@@ -65,14 +68,19 @@
 }
 
 .detail-subtitle {
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     font-size: 15px;
     display: flex;
+}
+.detail-subtitle > span {
+    padding: 7px 0px;
 }
 .detail-open-flag {
     width: 70px;
     display: flex;
     justify-content: center;
+    background-color: #ddd;
+    margin-right: 10px;
 }
 .detail-create-date {
     font-size: 13px;
@@ -107,4 +115,12 @@
     border: none;
     padding: 5px 5px;
     font-weight: bold;
+    cursor: pointer;
+}
+
+#goToList {
+    margin-left: auto;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }

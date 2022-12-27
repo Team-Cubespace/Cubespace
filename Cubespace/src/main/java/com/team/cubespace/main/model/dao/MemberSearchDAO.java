@@ -38,4 +38,12 @@ public class MemberSearchDAO {
 	public List<MemberSearch> memberAddFriendList(Map<String, Object> paramMap) {
 		return sqlSession.selectList("memberSearch.memberAddFriendList",paramMap);
 	}
+
+	/** 깐부 신청취소 하기
+	 * @param paramMap
+	 * @return
+	 */
+	public int memberAddCancel(Map<String, Object> paramMap) {
+		return sqlSession.delete("memberSearch.memberAddCancel",paramMap);
+	}
 }

@@ -15,11 +15,16 @@
     <link rel="stylesheet" href="/resources/css/manage/manage.css">
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
     <title></title>
+    <style>
+        .frame-color {
+            background-color : ${minihome.frameColor};
+        }
+    </style>
 </head>
 <body>
-    <div class="content-area">
+    <div class="content-area frame-color">
         <section class="minihome-rayout">
-                <div><jsp:include page="/WEB-INF/views/include/manageLeftBar.jsp"/></div>
+                <div><jsp:include page="/WEB-INF/views/manage/manageLeftBar.jsp"/></div>
         </section>
 
         <section class="minihome-rayout">

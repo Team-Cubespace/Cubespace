@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.team.cubespace.diary.model.dao.DiaryDAO;
 import com.team.cubespace.diary.model.vo.Diary;
+import com.team.cubespace.diary.model.vo.Emoji;
 
 
 /**
@@ -41,6 +42,24 @@ public class DiaryServiceImpl implements DiaryService {
 		map.put("folderNumber", folderNumber);
 		map.put("openFlag", openFlag);
 		return dao.selectDiaryList(map);
+	}
+
+	//
+	@Override
+	public List<Emoji> selectEmojiList(int diaryNo) {
+		// TODO Auto-generated method stub
+		return dao.selectEmojiList(diaryNo);
+	}
+
+	//
+	@Override
+	public List<Emoji> selectEmojiPeopleList(int diaryNo, int emojiNo) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("diaryNo", diaryNo);
+		map.put("emojiNo", emojiNo);
+		
+		return dao.selectEmojiPeopleList(map);
 	}
 
 }

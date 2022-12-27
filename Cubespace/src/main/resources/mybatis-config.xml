@@ -20,6 +20,7 @@
 		<typeAlias type="com.team.cubespace.main.model.vo.MemberSearch" alias="MemberSearch"/>
 		<typeAlias type="com.team.cubespace.minihome.model.vo.Minihome" alias="Minihome"/>		
 		<typeAlias type="com.team.cubespace.diary.model.vo.Diary" alias="Diary"/>		
+		<typeAlias type="com.team.cubespace.diary.model.vo.Emoji" alias="Emoji"/>		
 	</typeAliases>
 	
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->

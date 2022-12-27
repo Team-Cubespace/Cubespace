@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.team.cubespace.diary.model.vo.Diary;
+import com.team.cubespace.diary.model.vo.Emoji;
 
 /**
  * @author sue
@@ -35,6 +36,24 @@ public class DiaryDAO {
 	public List<Diary> selectDiaryList(Map<String, Object> map) {
 		
 		return sqlSession.selectList("diaryMapper.selectDiaryList",map);
+	}
+
+	/**
+	 * @param diaryNo
+	 * @return
+	 */
+	public List<Emoji> selectEmojiList(int diaryNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("diaryMapper.selectEmojiList",diaryNo);
+	}
+
+	/**
+	 * @param map
+	 * @return
+	 */
+	public List<Emoji> selectEmojiPeopleList(Map<String, Object> map) {
+		
+		return sqlSession.selectList("diaryMapper.selectEmojiPeopleList",map);
 	}
 
 }

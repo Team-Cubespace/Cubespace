@@ -1,5 +1,6 @@
-*{
-    border : 1px solid red;
+* {
+    border: 1px solid black;
+    
 }
 
 /* 맨 위의 폴더 이름 있는 곳 */
@@ -112,7 +113,7 @@
 }
 
 .profile-box > div {
-    padding-left :20px;
+    padding-left :10px;
 }
 
 .profile-image {

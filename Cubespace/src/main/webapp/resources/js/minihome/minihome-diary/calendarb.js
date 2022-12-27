@@ -1,4 +1,3 @@
-let peoplePopContainer;
 
 // 공공데이터 포털 공휴일 조회 함수
 const getRestDeInfo = (date) => {
@@ -256,15 +255,9 @@ const makeCalendar = (date) => {
                                         // div3_1_1_2.classList.add("people-pop-container");
                                         
                                         selectEmojiList(diary.diaryNo,div3_1_1_1,div3_1_1);
-
-                                        const div3_1_1_2 = document.createElement("div");
-                                        div3_1_1_2.classList.add("people-pop-container");
-                                        
-                                        console.log(div3_1_1_2);
-                                        peoplePopContainer = div3_1_1_2;
                                     /* selectEmojiList가서 div3_1_1_2를 beforeend로 넣을 꺼야... */
                                 
-                                    div3_1_1.append(div3_1_1_1,div3_1_1_2);
+                                    div3_1_1.append(div3_1_1_1);
                                     /* mouseover하면, div3_1_1_2에 beforeend로 div3_1_1_2_1를 넣어야될듯?*/
                                     /* mouseout하면  div3_1_1_2.innertext = ""*/
 
@@ -274,8 +267,7 @@ const makeCalendar = (date) => {
                                         const div3_1_2_1 = document.createElement("div");
                                         div3_1_2_1.classList.add("emoji-btn");
                                         div3_1_2_1.innerText="공감하기";
-                                        div3_1_2_1.setAttribute("onclick","chooseEmoji("+diary.diaryNo+",this)")
-                                        
+                                    
                                     /* 아직 미완성조각 */
                                     div3_1_2.append(div3_1_2_1);
                                 
@@ -383,80 +375,18 @@ document.getElementById("nextMonth").addEventListener("click", ()=>{
     }
 })()
 
-function chooseEmoji(diaryNo,btn){
-    /* 이모지 리스트가 만들어짐. */
-    console.log(btn.parentElement);
-    console.log("이게 choose-emoji-section이 맞냐?")
-    const div3_1_2_2 = document.createElement("div");
-    div3_1_2_2.classList.add("choose-emoji");
 
-        /* 똑같이 생긴 놈 6개 */
-        /* 동적 변수 생성.. window 함수 이용해야 되나 싶지만... (eval은 쓰지 말래...) */
-
-        
-
-        const div3_1_2_2_1 = document.createElement("div");
-        div3_1_2_2_1.classList.add("emoji-box");
-
-            const img1 = document.createElement("img");
-            img1.classList.add("emoji");
-            img1.setAttribute("src","/resources/images/diary/like.png");
-        div3_1_2_2_1.append(img1);
-
-        const div3_1_2_2_2 = document.createElement("div");
-        div3_1_2_2_2.classList.add("emoji-box");
-
-            const img2 = document.createElement("img");
-            img2.classList.add("emoji");
-            img2.setAttribute("src","/resources/images/diary/heart.png");
-        div3_1_2_2_2.append(img2);
-
-        const div3_1_2_2_3 = document.createElement("div");
-        div3_1_2_2_3.classList.add("emoji-box");
-
-            const img3 = document.createElement("img");
-            img3.classList.add("emoji");
-            img3.setAttribute("src","/resources/images/diary/smile.png");
-        div3_1_2_2_3.append(img3);
-
-        const div3_1_2_2_4 = document.createElement("div");
-        div3_1_2_2_4.classList.add("emoji-box");
-
-            const img4 = document.createElement("img");
-            img4.classList.add("emoji");
-            img4.setAttribute("src","/resources/images/diary/tears.png");
-        div3_1_2_2_4.append(img4);
-
-        const div3_1_2_2_5 = document.createElement("div");
-        div3_1_2_2_5.classList.add("emoji-box");
-
-            const img5 = document.createElement("img");
-            img5.classList.add("emoji");
-            img5.setAttribute("src","/resources/images/diary/cursing.png");
-        div3_1_2_2_5.append(img5);
-
-        const div3_1_2_2_6 = document.createElement("div");
-        div3_1_2_2_6.classList.add("emoji-box");
-
-            const img6 = document.createElement("img");
-            img6.classList.add("emoji");
-            img6.setAttribute("src","/resources/images/diary/humm.png");
-        div3_1_2_2_6.append(img6);
-
-    div3_1_2_2.append(div3_1_2_2_1,div3_1_2_2_2,div3_1_2_2_3,div3_1_2_2_4,div3_1_2_2_5,div3_1_2_2_6)
-    btn.parentElement.insertAdjacentElement("beforeend",div3_1_2_2);
-
-
-
-}
-
+let peoplePopContainer;
 /* [ 클릭하면 나오는 함수의 기능 ] 
 1. 이모지 목록 비동기로 불러오기 
 2. 이모지를 누른 사람의 목록 비동기로 불러오기
 */
 function selectEmojiList(diaryNo,div3_1_1_1,div3_1_1){
 
-    
+    const div3_1_1_2 = document.createElement("div");
+    div3_1_1_2.classList.add("people-pop-container");
+    div3_1_1.insertAdjacentElement("beforeend",div3_1_1_2);
+
     /*확인용*/console.log("이모지목록 조회하는 함수가 실행됩니다.");
     /*확인용*/console.log("이모지 목록이 조회되는 다이어리 번호" + diaryNo);
     console.log(div3_1_1_1);
@@ -474,8 +404,6 @@ function selectEmojiList(diaryNo,div3_1_1_1,div3_1_1){
 
         /* 누적방지용? 이거 지우니까 첫번째만 됨 장난하냐? */
         // div3_1_1_1.innerText = "";
-        /* 오 이게 필요한 게 맞았음! ㅋㅋ select재활용할 때, 필요함(by강사님) */
-        div3_1_1_1.innerHTML = "";
         for(emoji of emojiList){
             const div3_1_1_1_1 = document.createElement("div");
             div3_1_1_1_1.classList.add("emoji-row");
@@ -487,14 +415,14 @@ function selectEmojiList(diaryNo,div3_1_1_1,div3_1_1){
                 // 안됨...실험해보자...
                 //1)
                 
-                div3_1_1_1_1_1.setAttribute("onmouseenter","selectEmojiPeopleList("+emoji.emojiNo+","+emoji.diaryNo+", this)");
+                div3_1_1_1_1_1.setAttribute("onclick","selectEmojiPeopleList("+emoji.emojiNo+","+emoji.diaryNo+")");
                 //2)
                 // div3_1_1_1_1_1.setAttribute("onclick","selectEmojiPeopleList("+emoji.emojiNo,emoji.diaryNo,div3_1_1_2+")")
                 //3)
                 // div3_1_1_1_1_1.setAttribute("onclick","test("+emoji.emojiNo+","+emoji.diaryNo+")");
                 // div3_1_1_1_1_1.setAttribute("onclick","test("+emoji.emojiNo+","+div3_1_1_2+")");
 
-                div3_1_1_1_1_1.setAttribute("onmouseleave","mouseout(this)")
+                // div3_1_1_1_1_1.setAttribute("onmouseout","mouseout("+div3_1_1_2+")")
                 const img = document.createElement("img");
                     img.classList.add("emoji");
                     img.setAttribute("src",emoji.emojiPath);
@@ -505,9 +433,10 @@ function selectEmojiList(diaryNo,div3_1_1_1,div3_1_1){
 
             div3_1_1_1_1.append(div3_1_1_1_1_1,div3_1_1_1_1_2);    
             // div3_1_1_1.insertAdjacentElement("beforeend",div3_1_1_1_1);
-            
             div3_1_1_1.append(div3_1_1_1_1);
         }
+        console.log(div3_1_1_2);
+        peoplePopContainer = div3_1_1_2;
 
         
 
@@ -519,13 +448,7 @@ function selectEmojiList(diaryNo,div3_1_1_1,div3_1_1){
 
 
 // const selectEmojiPeopleList = (emojiNo,diaryNo,div3_1_1_2)=>{
-function selectEmojiPeopleList(emojiNo,diaryNo,btn){
-    /* div3_1_1_1_1_1 = btn */
-    // btn.parentElement.parentElement.nextSibling
-    console.log("안되냐?인식?")
-    console.log(btn.parentElement.parentElement.nextSibling);
-    peoplePopContainer=btn.parentElement.parentElement.nextSibling;
-    /* div3_1_1_2 = peoplepopcontainer */
+function selectEmojiPeopleList(emojiNo,diaryNo){
     /*확인용*/console.log("이모지를 누른 사람의 목록을 조회하는 함수가 실행됩니다.");
     /*확인용*/console.log("사람 목록이 조회되는 다이어리 번호" + diaryNo);
 
@@ -580,17 +503,6 @@ function selectEmojiPeopleList(emojiNo,diaryNo,btn){
     })
 }
 
-function mouseout(btn){
-    btn.parentElement.parentElement.nextSibling.innerText = "";
+function mouseout(div3_1_1_2){
+    div3_1_1_2.innerText = "";
 }
-
-// document.querySelector(".emoji-btn").addEventListener("click", e=>{
-//     console.log(e.target);
-//     console.log(e.target.parentElement.previousElementSibling);
-//     console.log(e.target.parentElement.previousElementSibling.children[0]);
-
-//     const popup = e.target.parentElement.previousElementSibling;
-//     const section = e.target.parentElement.previousElementSibling.children[0];
-    
-//     selectEmojiList(35, section, popup);
-// })

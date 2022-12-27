@@ -14,6 +14,22 @@
   		<result property="folderNo" column="FOLDER_NO"/>
   	</resultMap>
   	
+  	<resultMap type="Emoji" id="emoji_rm">
+  		<id property="diaryNo" column="DIARY_NO"/>
+  		
+  		<result property="memberNo" column="MEMBER_NO"/>
+  		<result property="emojiNo" column="EMOJI_NO"/>
+  		<result property="emojiCount" column="EMOJI_COUNT"/>
+  		<result property="emojiPath" column="EMOJI_PATH"/>
+  	</resultMap>
+  	
+  		<resultMap type="Member" id="member_rm">
+  		<id property="memberNo" column="MEMBER_NO"/>
+  		
+  		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+  		<result property="profileImage" column="PROFILE_IMG"/>
+  	</resultMap>
+  	
   	<select id="checkFriend" resultType = "_int">
   	SELECT COUNT(*) FROM (
 	SELECT * FROM FRIEND
@@ -41,5 +57,21 @@
 		</otherwise>
 	</choose>
  	</select>
+ 	
+ 	<select id="selectEmojiList" resultMap="emoji_rm">
+ 	SELECT DIARY_NO, COUNT(*) EMOJI_COUNT, E.EMOJI_NO, EMOJI_PATH
+	FROM EMOJI E
+	JOIN EMOJI_IMG I ON (E.EMOJI_NO = I.EMOJI_NO)
+	WHERE DIARY_NO = #{diaryNo}
+	GROUP BY DIARY_NO, E.EMOJI_NO, EMOJI_PATH
+ 	</select>
+ 	
+ 	<select id="selectEmojiPeopleList" resultMap = "member_rm">
+	SELECT MEMBER_NICKNAME, PROFILE_IMG
+	FROM EMOJI E
+	JOIN EMOJI_IMG I ON (E.EMOJI_NO = I.EMOJI_NO)
+	JOIN MEMBER M ON (M.MEMBER_NO = E.MEMBER_NO)
+	WHERE DIARY_NO = #{diaryNo} AND E.EMOJI_NO = #{emojiNo}
+	</select>
  	
 </mapper>

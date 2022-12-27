@@ -3,6 +3,7 @@ package com.team.cubespace.diary.model.service;
 import java.util.List;
 
 import com.team.cubespace.diary.model.vo.Diary;
+import com.team.cubespace.diary.model.vo.Emoji;
 
 /**
  * @author sue
@@ -25,5 +26,18 @@ public interface DiaryService {
 	 * @return
 	 */
 	List<Diary> selectDiaryList(int homepageMemberNo, String diaryDate, int folderNumber, int openFlag);
+
+	/**
+	 * @param diaryNo
+	 * @return
+	 */
+	List<Emoji> selectEmojiList(int diaryNo);
+
+	/**
+	 * @param diaryNo
+	 * @param emojiNo
+	 * @return
+	 */
+	List<Emoji> selectEmojiPeopleList(int diaryNo, int emojiNo);
 
 }

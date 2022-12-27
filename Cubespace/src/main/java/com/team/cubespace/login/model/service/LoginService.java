@@ -12,13 +12,14 @@ public interface LoginService {
 	 * @return loginMember
 	 * @throws Exception 
 	 */
-	Member login(Member inputMember) throws Exception;
+	Member login(Member inputMember);
 	
 	/** 회원가입 입력 정보 제출서비스
 	 * @param inputMember
 	 * @return
+	 * @throws Exception 
 	 */
-	int signUp(Member inputMember);
+	int signUp(Member inputMember) throws Exception;
 
 	/** 회원 ID/PW 찾기 회원조회
 	 * @param paramMap

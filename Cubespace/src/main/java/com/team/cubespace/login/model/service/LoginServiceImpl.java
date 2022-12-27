@@ -27,7 +27,7 @@ public class LoginServiceImpl implements LoginService{
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Member login(Member inputMember) throws Exception {
+	public Member login(Member inputMember)  {
 		
 		Member loginMember = dao.login(inputMember.getMemberEmail());
 		
@@ -35,20 +35,6 @@ public class LoginServiceImpl implements LoginService{
 		if(loginMember != null) {
 			if(bcrypt.matches(inputMember.getMemberPw(), loginMember.getMemberPw())) {
 				loginMember.setMemberPw(null);
-				
-				int ownResult = dao.insertOwnGoods(loginMember.getMemberNo()); // 회원소유품목
-				int minihomeResult = dao.insertMinihome(loginMember.getMemberNo()); // 미니홈
-				int folderResult = dao.insertFolder(loginMember.getMemberNo()); // 폴더
-				int categoryOrderResult = dao.insertCategoryOrder(loginMember.getMemberNo()); // 카테고리순서
-				
-				if(ownResult * minihomeResult * folderResult * categoryOrderResult > 0) {
-					
-					return loginMember;
-					
-				} else {
-					throw new Exception("회원가입 중 오류 발생");
-				}
-
 				
 			} else {
 				loginMember = null;
@@ -60,16 +46,30 @@ public class LoginServiceImpl implements LoginService{
 	
 	/**
 	 * 회원가입 입력 정보 제출 서비스
+	 * @throws Exception 
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public int signUp(Member inputMember) {
+	public int signUp(Member inputMember) throws Exception {
 		
 		// 비밀번호 암호화
 		String encPw = bcrypt.encode(inputMember.getMemberPw());
 		inputMember.setMemberPw(encPw);
 		
 		int result = dao.signUp(inputMember);
+		
+		if(result > 0) {
+			
+			int ownResult = dao.insertOwnGoods(inputMember.getMemberNo()); // 회원소유품목
+			int minihomeResult = dao.insertMinihome(inputMember.getMemberNo()); // 미니홈
+			int folderResult = dao.insertFolder(inputMember.getMemberNo()); // 폴더
+			int categoryOrderResult = dao.insertCategoryOrder(inputMember.getMemberNo()); // 카테고리순서
+			
+			if(ownResult * minihomeResult * folderResult * categoryOrderResult <= 0) {
+				
+				throw new Exception("회원가입 중 오류 발생");
+			} 
+		}
 		
 		return result;
 	}
@@ -119,7 +119,7 @@ public class LoginServiceImpl implements LoginService{
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Member kakaoLogin(Member inputMember) throws Exception {
+	public Member kakaoLogin(Member inputMember) throws Exception  {
 		
 		// paramMap의 email을 기존의 회원과 조회해서 
 		// 있다면 -> 기존의 로그인메서드 호출

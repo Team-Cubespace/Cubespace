@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>header</title>
+    <link rel="stylesheet" href="../../css/common/header.css">
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/variables.css">
+    <!-- <link rel="stylesheet" href="../css/style-web.css"> -->
+    <!-- <link rel="stylesheet" href="../css/common/checkBox.css">  -->
+    
+    <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
+</head>
+<body>
+    
+<header>
+    <!------------------ 헤더 메뉴 ------------------>
+    <ul class="header-menu-nav">
+        <li class="header-menu">
+            <a href="">
+                <i class="fa-solid fa-shop"></i>
+                <span>상점</span>
+            </a>
+        </li>
+        <li class="header-menu" onclick="openModal()">
+            <a>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>깐부 찾기</span>
+            </a>
+        </li>
+        <!-- <jsp:include page="/WEB-INF/views/webmain/main-memberSearch.jsp"/> -->
+        <!-- 로그인 X && 메인 페이지 X -->
+        <!-- <c:choose>
+            <c:when test="${empty loginMember}">
+                <li class="header-menu">
+                    <a href="/member/login">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>로그인</span>
+                    </a>
+                </li>
+            </c:when>
+            <c:otherwise> -->
+            <!-- 로그인 O -->
+                <li class="header-menu">
+                    <a href="">
+                        <div class="notice">
+                            <span class="notice-new"></span>
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+                        <span>알림</span>
+                    </a>
+                </li>
+                <!-- <li class="header-menu">
+                    <button type="button" id="headerDropDownButton">
+                        <c:if test="${empty loginMember.profileImage}">
+                            <img src="../images/common/cubes.png" alt="로그인 회원 프로필 이미지" class="header-profile-image">
+                        </c:if>
+                        <c:if test="${not empty loginMember.profileImage}">
+                            <img src="${loginMember.profileImage}" alt="로그인 회원 프로필 이미지" class="header-profile-image">
+                        </c:if>
+                        <ul class="header-drop-down" id="headerDropDown">
+                            <li><a href="">내 미니홈피</a></li>
+                            <li><a href="/member/login/updateInfo">내 정보 수정</a></li>
+                            <li><a href="/member/logout">로그아웃</a></li>
+                        </ul>
+                        <i class="fa-solid fa-angle-down"></i>
+                    </button>
+                </li> -->
+            </c:otherwise>
+        </c:choose>
+    </ul>
+    <!------------------ 헤더 로고 영역 ------------------>
+    <div class="header-logo">
+        <a href="/">
+            <img src="../../images/common/cubes.png" alt="메인 로고 이미지">
+            <span class="header-logo-title">Cubespace</span>
+        </a>
+    </div>
+</header>
+
+    <script src="../../js/common/temp.js"></script>
+</body>
+</html>

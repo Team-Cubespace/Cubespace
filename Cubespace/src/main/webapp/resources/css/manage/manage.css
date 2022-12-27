@@ -262,7 +262,9 @@ header {
     border-bottom: 3px solid #eee;
 }
 #searchBtn {
-    top: 7px;
+    top: 9px;
+    border: none;
+    background-color: white;
 }
 /* ----------------------------------------------------- */
 /* 배경설정 */

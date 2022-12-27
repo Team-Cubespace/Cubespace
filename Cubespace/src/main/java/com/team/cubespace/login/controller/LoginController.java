@@ -1,30 +1,31 @@
 package com.team.cubespace.login.controller;
 
+import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team.cubespace.email.model.service.EmailService;
 import com.team.cubespace.login.model.service.LoginService;
 import com.team.cubespace.member.model.vo.Member;
-
-import lombok.Getter;
 
 @Controller
 @SessionAttributes({"loginMember", "message"})
@@ -60,63 +61,115 @@ public class LoginController {
 			Model model,
 			RedirectAttributes ra,
 			HttpServletResponse resp,
-			@RequestParam(value="saveId", required=false) String saveId,
-//			@RequestParam(value="profile_image_url", required=false) String profile_image_url,
-//			@RequestParam(value="nickname", required=false) String nickname,
-//			@RequestParam(value="email", required=false) String email,
-//			@RequestParam(value="birthday", required=false) String birthday,
-			@RequestHeader(value="referer") String referer,
-			@RequestParam(value="loginType", required=false, defaultValue = "1") String loginType) {
+			@RequestParam(value="saveId", required=false) String saveId,			
+			@RequestHeader(value="referer") String referer) {
 		
-		
-		Member loginMember = new Member();
-//		
-//
-//		
-//		if(loginType.equals("3")) {
-//			
-//			loginMember.setMemberEmail(kakaoLoginMember.email);
-//			
-//			loginMember = service.kakaoLogin(inputMember);
-//		}
-		
-		
-	loginMember = service.login(inputMember);
-	String path = null;
-	
-	if(loginMember != null) {
-		if(loginMember.getMemberBlockYN().equals("Y")){
-			path = referer;
-			String message = "차단된 회원은 이용할 수 없습니다\n" 
-					+ loginMember.getBlockStart() + "부터" 
-					+ loginMember.getBlockEnd() + "까지 이용할 수 없습니다.\n"
-					+ "자세한 사항은 고객센터를 참고하세요";
-			ra.addFlashAttribute("message", message);
 
+		Member loginMember = service.login(inputMember);
+		String path = null;
+		
+		if(loginMember != null) {
+			if(loginMember.getMemberBlockYN().equals("Y")){
+				path = referer;
+				String message = "차단된 회원은 이용할 수 없습니다\n" 
+						+ loginMember.getBlockStart() + "부터\n" 
+						+ loginMember.getBlockEnd() + "까지 이용할 수 없습니다.\n"
+						+ "자세한 사항은 고객센터를 참고하세요";
+				ra.addFlashAttribute("message", message);
+	
+			} else {
+				
+				path = "/";
+				model.addAttribute("loginMember", loginMember);
+				Cookie cookie = new Cookie("saveId", loginMember.getMemberEmail());
+				
+				if(saveId != null) {
+					cookie.setMaxAge(60*60*24*365);
+				} else {
+					cookie.setMaxAge(0);
+				}
+				cookie.setPath("/");
+				resp.addCookie(cookie);
+			}
+	
 		} else {
 			
-			path = "/";
-			model.addAttribute("loginMember", loginMember);
-			Cookie cookie = new Cookie("saveId", loginMember.getMemberEmail());
-			
-			if(saveId != null) {
-				cookie.setMaxAge(60*60*24*365);
-			} else {
-				cookie.setMaxAge(0);
-			}
-			cookie.setPath("/");
-			resp.addCookie(cookie);
+			path = referer;
+			ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다");
 		}
-
-	} else {
 		
-		path = referer;
-		ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다");
-	}
+		
+		return "redirect:" + path;
+		}
 	
 	
-	return "redirect:" + path;
-	}
+		/** 카카오 로그인
+		 * @param inputMember
+		 * @param model
+		 * @param ra
+		 * @param resp
+		 * @param saveId
+		 * @param referer
+		 * @param loginType
+		 * @return loginMember
+		 */
+		@PostMapping(value="/member/kakaoLogin",  produces = "application/text; charset=utf8")
+		@ResponseBody
+		public String login(Model model,
+				RedirectAttributes ra,
+				@RequestHeader(value="referer") String referer,
+				String kakaoLoginMember) {
+			
+			
+			ObjectMapper objectMapper = new ObjectMapper();
+			Member inputMember = new Member();
+			
+			// JSON String -> Map
+			try {
+				Map<String, Object> jsonMap = objectMapper.readValue(kakaoLoginMember, new TypeReference<Map<String, Object>>() {
+				});
+				Map<String, Object> properties = (Map<String, Object>) jsonMap.get("properties");
+				Map<String, Object> kakao_account = (Map<String, Object>) jsonMap.get("kakao_account");
+				
+				inputMember.setMemberNickname(properties.get("nickname").toString());
+				inputMember.setProfileImage(properties.get("profile_image").toString());
+				if(properties.containsKey("birthday")) {
+					inputMember.setBirthDay(properties.get("birthday").toString());
+				}
+				inputMember.setMemberEmail(kakao_account.get("email").toString());
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+							
+				
+			Member loginMember = service.kakaoLogin(inputMember);
+			
+			
+			
+			if(loginMember.getMemberBlockYN().equals("Y")){
+				String message = "차단된 회원은 이용할 수 없습니다\n" 
+						+ loginMember.getBlockStart() + "부터" 
+						+ loginMember.getBlockEnd() + "까지 이용할 수 없습니다.\n"
+						+ "자세한 사항은 고객센터를 참고하세요";
+				
+				return message;
+				
+			} 
+			
+//			if(loginMember.getMemberTel().equals("01000000000")) { // 처음 카카오 회원가입시
+//				Member tempMember = loginMember;
+//				ra.addFlashAttribute(tempMember);
+//				
+//				return "1"; // 페이지 이동
+//				
+//			} else {
+				model.addAttribute("loginMember", loginMember);
+//			}
+			return "0";
+		}
+		
+
 	
 	/** 로그아웃
 	 * @param status
@@ -163,7 +216,7 @@ public class LoginController {
 		
 		if (result > 0) { //회원가입 성공
 			path = "/";
-			message = "회원가입 성공했습니다.";
+			message = "회원가입 되었습니다!";
 			 
 		} else { //회원가입 실패
 			path = referer;
@@ -179,12 +232,20 @@ public class LoginController {
 	
 	
 	
-	/** 회원 ID/PW 찾기 페이지로 이동
+	/** 회원 ID 찾기 페이지로 이동
 	 * @return
 	 */
 	@GetMapping("/member/findId")
-	public String infoFind() {
+	public String infoFindId() {
 		return "member/login/findId";
+	}
+	
+	/** 회원 PW 찾기 페이지로 이동
+	 * @return
+	 */
+	@GetMapping("/member/findPw")
+	public String infoFindPw() {
+		return "member/login/findPw";
 	}
 	
 	
@@ -266,7 +327,6 @@ public class LoginController {
 	      
 		      int result = service.emailDupCheck(memberEmail);
 		      
-		      System.out.println(result);
 		      return result;
 		   }
 	   
@@ -290,4 +350,148 @@ public class LoginController {
 		   return result;
 	   }
 
+	   
+	   
+	// 내 회원 정보 수정 페이지 이동
+		@GetMapping("/member/updateInfo")
+		public String updateInfo() {
+			return "member/login/updateInfo";
+		}
+
+		// 내 회원 정보 수정
+		@PostMapping("/member/updateInfo")
+		public String updateInfo(Member inputMember, 
+				@SessionAttribute("loginMember") Member loginMember,
+				RedirectAttributes ra) {
+
+			inputMember.setMemberNo(loginMember.getMemberNo());
+
+			
+
+			int result = service.updateInfo(inputMember);
+
+			String message = null;
+			String path = null;
+
+			if (result > 0) {
+				message = "회원 정보가 수정 되었습니다.";
+				path = "/";
+
+				loginMember.setMemberNickname(inputMember.getMemberNickname());
+				loginMember.setMemberTel(inputMember.getMemberTel());
+				loginMember.setMemberName(inputMember.getMemberName());
+				// birthYear가 있다->생년월일 8자리가 다 있으므로 전부 업데이트
+				if(inputMember.getBirthYear() != null) {
+					loginMember.setBirthYear(inputMember.getBirthYear());
+					loginMember.setBirthDay(inputMember.getBirthDay());
+				}
+
+			} else {
+				message = "회원 정보 수정 실패";
+				path = "updateInfo";
+			}
+			ra.addFlashAttribute("message", message);
+			return "redirect:" + path;
+		}
+		
+		
+		/** 비밀번호 변경 페이지 이동
+		 * @param loginMember
+		 * @return
+		 */
+		@GetMapping("/member/changePw")
+		public String changePw() {
+			return "member/login/changePw";
+		}
+		
+		/** 비밀번호 변경
+		 * @param paramMap
+		 * @param loginMember
+		 * @param ra
+		 * @return
+		 */
+		@PostMapping("/member/changePw")
+		public String changePw(Member inputMember,
+				@SessionAttribute("loginMember") Member loginMember,
+				RedirectAttributes ra) {
+			
+			inputMember.setMemberNo(loginMember.getMemberNo());
+			int result = service.changePw(inputMember);
+			
+			
+			String message = null;
+			String path = null;
+			
+			if (result > 0) {
+				message = "비밀번호가 변경되었습니다";
+				path = "/";
+
+			} else {
+				message = "비밀번호 변경 실패";
+				path = "changePw";
+			}
+			ra.addFlashAttribute("message", message);
+			return "redirect:" + path;
+		}
+		
+		/**
+		 * 회원탈퇴 페이지 이동
+		 * 
+		 * @return
+		 */
+		@GetMapping("/member/secession")
+		public String secessionPage() {
+			return "member/login/secession";
+		}
+
+		/** 회원 탈퇴
+		 * @param parMap
+		 * @param referer
+		 * @param loginMember
+		 * @param status
+		 * @param ra
+		 * @return
+		 */
+		@PostMapping("/member/secession")
+		public String secession(Member inputMember,
+				@RequestHeader("referer") String referer,
+				@SessionAttribute("loginMember") Member loginMember, 
+				SessionStatus status, 
+				HttpServletResponse resp,
+				RedirectAttributes ra) {
+
+			String path = null;
+			String message = null;
+
+			// 입력받은 값 로그인한 정보 비교 확인 및 탈퇴
+			int result = service.secessionSelect(loginMember.getMemberNo(), inputMember);
+
+			if (result > 0) { // 탈퇴 성공
+				
+				path = "/";
+				message = "회원 탈퇴되었습니다.";
+				
+				
+				// 쿠키 삭제
+				Cookie cookie = new Cookie("saveId", "");
+				cookie.setMaxAge(0);
+				cookie.setPath("/");
+				resp.addCookie(cookie);
+				
+				status.setComplete(); 
+
+
+			} else { // 탈퇴 실패
+				
+				path = referer;
+				message = "회원정보를 다시 확인해 주세요.";
+			}
+
+			ra.addFlashAttribute("message", message);
+			return "redirect:" + path;
+		}
+		
+		
+
+		
 }

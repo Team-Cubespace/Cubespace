@@ -1,4 +1,4 @@
-function varifySecession(){
+function verifySecession(){
 
     const memberEmail = document.getElementById("memberEmail");
     const memberName = document.getElementById("memberName");

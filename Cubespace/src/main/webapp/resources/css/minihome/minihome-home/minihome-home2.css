@@ -1,73 +1,82 @@
-/* contents container margin-bottom 30px 고정 */
-
-/* 최근 게시물 */
+/* 최근 게시물, 깐부 메시지 */
 .new-post-container, .friend-message-container{
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     padding: 0 7px;
 }
 
+.friend-message-container{
+    margin: 15px 0;
+}
+
 .new-post, .friend-message{
+    height: 13px;
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
 }
 
-.new-post > div:first-child{
+.friend-message{
+    display: none;
+}
+
+.friend-message span:first-child{
+    cursor: pointer;
+}
+
+.new-post > div:first-child, .friend-message > div:first-child{
     display: flex;
 }
 
-.new-post a{
-    /* width: 400px; */
-    display: flex;
-}
-
-.new-post a > div{
-    text-overflow: ellipsis;
-    white-space : nowrap;
-    overflow : hidden;
-}
-
-.post-category{
+.post-category, .friend-name{
     width: 52px;
     margin-right: 10px;
     color: darksalmon;
     font-weight: bold;
 }
 
-.post-title{
-    width: 200px;
+.friend-name{
+    width: auto;
+}
+
+.post-title, .message{
+    width: 400px;
     margin: 0 10px;
-}
-
-.post-time{
-    width: 63px;
-    text-align: right;
+    padding-bottom: 30px;
     display: inline-block;
+    text-overflow: ellipsis;
+    overflow : hidden;
+    white-space : nowrap;
 }
 
-/* 깐부 메시지 */
-.updatefriend{
-    background-color: #2e2e2e;
-    height: 50px;
+.message{
+    width: 350px;
+}
+
+.post-time, .message-time{
+    text-align: right;
+}
+
+/* 깐부 메시지 남기기 */
+.write-message{
     width: 100%;
+    height: 50px;
+    padding: 20px;
+    background-color: var(--ink);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px;
-    margin-bottom: 10px;
 }
 
-.updatefriend > span{
+.write-message > span{
     color: white;
     font-weight: bold;
 }
 
 #dearFriend{
-    background-color: white;
-    border: none;
     width: 420px;
     height: 20px;
+    background-color: white;
+    border: none;
     font-size: 13px;
 }
 
@@ -75,28 +84,28 @@
     outline: none;
 }
 
-.friend-messages{
-    padding: 0 7px;
+#writeBtn{
+    cursor: pointer;
 }
 
+/* 메시지 더보기, 상단으로 가기 */
 #btnArea{
+    display: flex;
+    justify-content: center;
     text-align: center;
 }
 
 #btnArea > span{
-    color: darksalmon;
+    width: 130px;
+    height: 30px;
+    margin: 0 10px;
+    margin-top: 1px;
+    background-color: var(--ink);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
-}
-
-#moreBtn{
-    margin-right: 50px;
-}
-
-.nickname{
-    width: auto;
-    margin: 0;
-}
-
-.fri-message{
-    margin: 0;
 }

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minihome Content Area</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/minihome/minihome-rayout.css">
+    <link rel="stylesheet" href="../../../css/minihome/minihome-home/minihome-home.css">
+    <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="content-area">
+        <section class="minihome-rayout">
+            <div class="profile-area">
+                <img src="../../../images/삐약.gif" class="profile-img">
+        
+                <div class="today-emoji">
+                    <div>
+                        <span>Today is..</span>
+                        <span>슬픔 <i class="fa-regular fa-face-sad-tear"></i></span>
+                    </div>
+                    <!-- <div></div> -->
+                </div>
+        
+                <div class="profile-message">
+                    집에 가고싶다...
+                </div>
+        
+                <!-- 스페이스 주인 번호와 loginMember.memberNo가 같을 경우 -->
+                <span id="profileUpdate">프로필 수정</span>
+        
+                <div class="line"></div>
+        
+                <div class="user-info">
+                    <span>김효동2</span>
+                    <span class="detail-info">(남)</span>
+                    <span class="detail-info">1994.04.26</span>
+                </div>
+        
+                <span class="user-email detail-info">gyehd1230@naver.com</span>
+        
+                <div class="surf-container">
+                    <select id="surf">
+                        <option value="">♥ 깐부 파도타기 ♥</option>
+                        <option value="">기묘동</option>
+                        <option value="">기묘동2</option>
+                        <option value="">기묘동3</option>
+                    </select>
+                </div>
+        
+                <!-- 스페이스 주인 번호와 loginMember.memberNo가 다를 경우 -->
+                <span id="returnMyHome">내 스페이스로 돌아가기</span>
+            </div>
+        </section>
+
+        <section class="minihome-rayout">
+            <div id="homeArea">
+                <header class="miniroom-header">
+                    <span><i class="fa-solid fa-wand-magic-sparkles"></i> 미니룸 꾸미기</span>
+                </header>
+
+                <div class="miniroom-container">
+                    <div class="miniroom">
+                        <div class="left"></div>
+                        <div class="right"></div>
+                        <div class="bottom"></div>
+                    </div>
+                  
+                    <div class="tile-container">
+                        <div class="empty" id="tile1"><div id="tileLocation1"></div></div>
+                        <div class="empty" id="tile2"><div id="tileLocation2"></div></div>
+                        <div class="empty" id="tile3"><div id="tileLocation3"></div></div>
+                        <div class="empty" id="tile4"><div id="tileLocation4"></div></div>
+                        <div class="empty" id="tile5"><div id="tileLocation5"></div></div>
+                        <div class="empty" id="tile6"><div id="tileLocation6"></div></div>
+                        <div class="empty" id="tile7"><div id="tileLocation7"></div></div>
+                        <div class="empty" id="tile8"><div id="tileLocation8"></div></div>
+                        <div class="empty" id="tile9"><div id="tileLocation9"></div></div>
+                        <div class="empty" id="tile10"><div id="tileLocation10"></div></div>
+                    </div>
+
+                    <div class="dropdown">
+                        <a href="#">멋있게 등장하는 법을</a>
+                        <a href="#">보여드리겠습니다</a>
+                    </div>
+                </div>
+
+                <header><i class="fa-solid fa-gift"></i> 미니미 & 소품</header>
+
+                <div class="">
+                    <span>미니미</span> <span>소품</span>
+
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="../../../js/minihome/minihome-home.js"></script>
+<script src="../../../js/minihome/miniroom/miniroom.js"></script>
+<script src="../../../js/common/temp.js"></script>
+</html>

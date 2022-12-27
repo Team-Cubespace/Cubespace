@@ -29,49 +29,47 @@
     overflow: hidden;
 }
 
-.miniroom{
-    perspective: 500px; /* 원근감 */
-}
-
 .miniroom > div{
     border: 1px solid black;
     position: absolute;
-    transform-style: preserve-3d; /* 3d객체로 인식하여 색상을 입체적으로 표현 */
+    transform-style: preserve-3d;
 }
 
 .left{
-    height: 380px;
-    width: 380px;
+    width: 450px;
+    height: 500px;
     background-color: rgb(242, 247, 255);
-    background-image: url("../../../images/help.png");
+    background-image: url("../../../images/wallsample.jpg");
     background-size: 150px;
-    background-repeat: repeat;
-    top: -31px;
-    left: -12px;
-    transform: rotateX(345deg) rotateY(45deg) rotateZ(0deg);
+    /* background-repeat: repeat; */
+    background-size: cover;
+    top: -187px;
+    left: -72px;
+    transform: rotateX(315deg) rotateY(45deg) rotateZ(0deg);
 }
 
 .right{
-    width: 380px;
-    height: 380px;
+    width: 450px;
+    height: 500px;
     background-color: rgb(242, 247, 255);
-    background-image: url("../../../images/help.png");
-    background-size: 150px;
-    background-repeat: repeat;
-    top: -31px;
-    right: -13px;
-    transform: rotateX(345deg) rotateY(-45deg) rotateZ(0deg);
+    background-image: url("../../../images/wallsample.jpg");
+    /* background-size: 150px;
+    background-repeat: repeat; */
+    background-size: cover;
+    top: -187px;
+    right: -72px;
+    transform: rotateX(315deg) rotateY(-45deg) rotateZ(0deg) scaleX(-1);
 }
 
 .bottom{
-    width: 500px;
-    height: 500px;
-    background-color: rgb(223, 236, 255);
-    background-image: url("../../../images/help.png");
+    width: 450px;
+    height: 450px;
+    background-color: rgb(10, 105, 132);
+    /* background-image: url("../../../images/help.png"); */
     background-size: 150px;
     background-repeat: repeat;
-    top: 124px;
-    left: 62px;
+    top: 125px;
+    left: 86px;
     transform: rotateX(45deg) rotateY(0deg) rotateZ(45deg);
 }
 
@@ -83,76 +81,67 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transform: rotateX(45deg) rotateY(0deg) rotateZ(45deg);
 }
 
 /* 1-1 */
 #tile1{
-    top: 143px;
-    left: 269.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 135px;
+    left: 268.5px;
 }
 
 /* 2-1 */
 #tile2{
-    top: 185px;
-    left: 206.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 182px;
+    left: 202.5px;
 }
 
 /* 2-2 */
 #tile3{
-    top: 185px;
-    left: 332.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 182px;
+    left: 334.5px;
 }
 
 /* 3-1 */
 #tile4{
-    top: 227px;
-    left: 143.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 228px;
+    left: 136.5px;
 }
 
 /* 3-2 */
 #tile5{
-    top: 227px;
-    left: 269.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 228px;
+    left: 268.5px;
 }
 
 /* 3-3 */
 #tile6{
-    top: 227px;
-    left: 395.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 228px;
+    left: 400.5px;
 }
 
 /* 4-1 */
 #tile7{
-    top: 269px;
-    left: 80.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 274px;
+    left: 70.5px;
 }
 
 /* 4-2 */
 #tile8{
-    top: 269px;
-    left: 206.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 274px;
+    left: 202.5px;
 }
 
 /* 4-3 */
 #tile9{
-    top: 269px;
-    left: 332.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 274px;
+    left: 334.5px;
 }
 
 /* 4-4 */
 #tile10{
-    top: 269px;
-    left: 458.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 274px;
+    left: 466.5px;
 }
 
 .empty{

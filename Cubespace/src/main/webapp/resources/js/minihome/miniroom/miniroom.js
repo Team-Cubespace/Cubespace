@@ -8,7 +8,7 @@ const miniroomY = window.pageYOffset + miniroomContainer.getBoundingClientRect()
 const tileContainer = document.querySelector(".tile-container");
 
 (() => {
-    let i = 7;
+    let i = 5;
 
     // 해당 요소 아이디로 가져오기
     let tileId = "tile" + i;
@@ -50,3 +50,17 @@ const tileContainer = document.querySelector(".tile-container");
         dropdown.style.top = propY - 50 + "px";
     })
 })();
+
+const testBtn = document.getElementById("testBtn");
+const testArea = document.getElementById("testArea");
+
+$(function(){
+    $("#testBtn").click(function(e){
+        html2canvas(miniroomContainer).then(function(canvas) {
+            var el = document.createElement("a")
+            el.href = canvas.toDataURL("image/png")
+            el.download = 'image.png' //다운로드 할 파일명 설정
+            el.click()
+        })
+    })
+})

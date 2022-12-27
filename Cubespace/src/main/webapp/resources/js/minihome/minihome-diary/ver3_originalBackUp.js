@@ -31,7 +31,7 @@ var defaultEvents = [
   {
     // Just an event
     title: 'Happy Hour',
-    start: '2022-12-12T17:30:00',
+    start: '2022-12-12',
     // className: 'scheduler_basic_event'
   },
   {   

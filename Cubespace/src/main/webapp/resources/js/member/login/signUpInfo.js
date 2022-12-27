@@ -16,7 +16,16 @@ document.getElementById("signUp-frm").addEventListener("submit",function(event){
     const birthDay = document.getElementById("birthDay");
 
 
-    if(memberBirth.value != null){
+    // memberBirth가 비어있거나 꽉 채워져있을 때 유효성검사 통과
+    if(checkObj.memberBirth){
+        birthYear.value = (memberBirth.value).substr(0,4);
+        birthDay.value = (memberBirth.value).substr(4,4);
+    } else if(memberBirth.value.trim().length == 0){
+        checkObj.memberBirth = true;
+    }
+
+
+    if(memberBirth.value != ""){
         birthYear.value = (memberBirth.value).substr(0,4);
         birthDay.value = (memberBirth.value).substr(4,4);
 
@@ -103,15 +112,16 @@ memberEmail.addEventListener("input",()=>{
 /*************************** 비밀번호/비밀번호 확인 유효성 검사 ***************************/
 const memberPw = document.getElementById("memberPw");
 const memberPwConfirm =document.getElementById("memberPwConfirm");
-const pwMessage = document.getElementById("pwMessage");
+const pwMessage1 = document.getElementById("pwMessage1");
+const pwMessage2 = document.getElementById("pwMessage2");
 
 // 비밀번호 유효성 검사
 memberPw.addEventListener("input",()=>{
 
     // 비밀번호 미입력 시
     if(memberPw.value.trim().length == 0){
-        pwMessage.innerText ="영문자/숫자/특수문자 포함 8~16글자 사이로 입력해주세요.";
-        pwMessage.classList.remove("confirm","error");
+        pwMessage1.innerText ="영문자/숫자/특수문자 포함 8~16글자 사이로 입력해주세요.";
+        pwMessage1.classList.remove("confirm","error");
         memberPw.value="";
         checkObj.memberPw = false;
         return;
@@ -125,30 +135,30 @@ memberPw.addEventListener("input",()=>{
 
         // 비밀번호 확인 미 작성시
         if(memberPwConfirm.value.trim().length == 0){
-            pwMessage.innerText="유효한 비밀번호 형식입니다";
-            pwMessage.classList.remove("error");
-            pwMessage.classList.add("confirm");
+            pwMessage1.innerText="유효한 비밀번호 형식입니다";
+            pwMessage1.classList.remove("error");
+            pwMessage1.classList.add("confirm");
 
         } else { // 유효한 비밀번호 == 비밀번호 확인 동일한지 확인
 
             if(memberPw.value == memberPwConfirm.value){ // 동일한 경우
-                pwMessage.innerText ="비밀번호가 일치합니다.";
-                pwMessage.classList.remove("error");
-                pwMessage.classList.add("confirm");
+                pwMessage1.innerText ="비밀번호가 일치합니다.";
+                pwMessage1.classList.remove("error");
+                pwMessage1.classList.add("confirm");
                 checkObj.memberPwConfirm = true;
 
             } else { // 동일하지 않은 경우
-                pwMessage.innerText = "비밀번호가 일치하지 않습니다.";
-                pwMessage.classList.remove("confirm");
-                pwMessage.classList.add("error");
+                pwMessage1.innerText = "비밀번호가 일치하지 않습니다.";
+                pwMessage1.classList.remove("confirm");
+                pwMessage1.classList.add("error");
                 checkObj.memberPwConfirm = false;
             }
         }
 
     } else { // 정규표현식이 일치하지 않을 경우
-        pwMessage.innerText="비밀번호 형식이 유효하지 않습니다.";
-        pwMessage.classList.remove("confirm");
-        pwMessage.classList.add("error");
+        pwMessage1.innerText="비밀번호 형식이 유효하지 않습니다.";
+        pwMessage1.classList.remove("confirm");
+        pwMessage1.classList.add("error");
         checkObj.memberPw = false;
     }
 });
@@ -160,15 +170,15 @@ memberPwConfirm.addEventListener("input",()=>{
     if(checkObj.memberPw){
 
         if(memberPw.value == memberPwConfirm.value){ // 동일한 경우
-            pwMessage.innerText="비밀번호가 일치합니다.";
-            pwMessage.classList.remove("error");
-            pwMessage.classList.add("confirm");
+            pwMessage2.innerText="비밀번호가 일치합니다.";
+            pwMessage2.classList.remove("error");
+            pwMessage2.classList.add("confirm");
             checkObj.memberPwConfirm = true;
 
         } else { // 동일하지 않을 경우
-            pwMessage.innerText="비밀번호가 일치하지 않습니다.";
-            pwMessage.classList.remove("confirm");
-            pwMessage.classList.add("error");
+            pwMessage2.innerText="비밀번호가 일치하지 않습니다.";
+            pwMessage2.classList.remove("confirm");
+            pwMessage2.classList.add("error");
             checkObj.memberPwConfirm = false;
         }
 
@@ -275,13 +285,13 @@ memberBirth.addEventListener("input",()=>{
 
 /*************************** 전화번호 유효성 검사 ***************************/
 const memberTel = document.getElementById("memberTel");
-const temlMessage = document.getElementById("temlMessage");
+const telMessage = document.getElementById("telMessage");
 
 memberTel.addEventListener("input",()=>{
     // 전화번호 미 입력시
     if(memberTel.value.trim().length == 0){
-        temlMessage.innerText="전화번호를 입력해 주세요.(-제외)";
-        temlMessage.classList.remove("confirm","error");
+        telMessage.innerText="전화번호를 입력해 주세요.(-제외)";
+        telMessage.classList.remove("confirm","error");
         checkObj.memberTel = false;
         return;
     } 
@@ -296,15 +306,15 @@ memberTel.addEventListener("input",()=>{
                 data: dbTelCheck,
                 success : (result)=>{
                     if(result == 0){ // 중복된 전화번호가 없다면
-                        temlMessage.innerText="사용 가능한 전화번호 입니다.";
-                        temlMessage.classList.remove("error");
-                        temlMessage.classList.add("confirm")
+                        telMessage.innerText="사용 가능한 전화번호 입니다.";
+                        telMessage.classList.remove("error");
+                        telMessage.classList.add("confirm")
                         checkObj.memberTel = true;
 
                     } else { // 중복된 전화번호가 있다면
-                        temlMessage.innerText="이미 사용중인 전화번호 입니다.";
-                        temlMessage.classList.remove("confirm");
-                        temlMessage.classList.add("error");
+                        telMessage.innerText="이미 사용중인 전화번호 입니다.";
+                        telMessage.classList.remove("confirm");
+                        telMessage.classList.add("error");
                         checkObj.memberTel = false;
                     }
                 },

@@ -1,12 +1,34 @@
 const checkObj = {
-    "memberNickname" : false,
-    "memberName" : false,
-    "memberBirth" : false,
-    "memberTel" : false,
+    "memberNickname" : true,
+    "memberName" : true,
+    "memberBirth" : true,
+    "memberTel" : true,
 }
 // 회원 가입 양식이 제출 되었을 때
 document.getElementById("signUp-frm").addEventListener("submit",function(event){
 
+    const memberBirth = document.getElementById("memberBirth");
+    const birthYear = document.getElementById("birthYear");
+    const birthDay = document.getElementById("birthDay");
+
+
+    // memberBirth가 비어있거나 꽉 채워져있을 때 유효성검사 통과
+    if(checkObj.memberBirth){
+        birthYear.value = (memberBirth.value).substr(0,4);
+        birthDay.value = (memberBirth.value).substr(4,4);
+    } else if(memberBirth.value.trim().length == 0){
+        checkObj.memberBirth = true;
+    }
+
+
+    if(memberBirth.value != ""){
+        birthYear.value = (memberBirth.value).substr(0,4);
+        birthDay.value = (memberBirth.value).substr(4,4);
+
+    } else {
+        checkObj.memberBirth = true;
+    }
+    
     for(let key in checkObj){
 
         let str;
@@ -15,7 +37,7 @@ document.getElementById("signUp-frm").addEventListener("submit",function(event){
 
             switch(key){
                 case "memberNickname"           : str = "닉네임이 유효하지 않습니다.";        break;
-                case "memberName"               : str = "이름이 유효하지 않습니다.";          break;
+                case "memberName"               : str = "이름을 입력해주세요.";          break;
                 case "memberBirth"              : str = "생년월일이 유효하지 않습니다.";      break;
                 case "memberTel"                : str = "전화번호가 유효하지 않습니다.";      break;
             }
@@ -32,6 +54,8 @@ const memberNickname = document.getElementById("memberNickname");
 const nickMessage = document.getElementById("nickMessage");
 
 memberNickname.addEventListener("input",()=>{
+
+    checkObj.memberNickname = false;
 
     // 닉네임 미입력 시
     if(memberNickname.value.trim().length == 0){
@@ -91,6 +115,8 @@ if(memberName.value.trim().length == 0){
 
 memberName.addEventListener("input",()=>{
 
+    checkObj.memberName = false;
+
     // 미입력시
     if(memberName.value.trim().length == 0){
         checkObj.memberName = false;
@@ -106,11 +132,13 @@ const birthMessage = document.getElementById("birthMessage");
 
 memberBirth.addEventListener("input",()=>{
 
+    checkObj.memberBirth = false;
+
     // 생년월일 미 입력시
     if(memberBirth.value.trim().length == 0){
         birthMessage.innerText="숫자로 생년월일 8자리를 입력해주세요.";
         birthMessage.classList.remove("confirm","error");
-        checkObj.memberBirth = false;
+        checkObj.memberBirth = true;
         return;
     }
 
@@ -132,13 +160,15 @@ memberBirth.addEventListener("input",()=>{
 
 /*************************** 전화번호 유효성 검사 ***************************/
 const memberTel = document.getElementById("memberTel");
-const temlMessage = document.getElementById("temlMessage");
+const telMessage = document.getElementById("telMessage");
 
 memberTel.addEventListener("input",()=>{
+
+    checkObj.memberTel = false; 
     // 전화번호 미 입력시
     if(memberTel.value.trim().length == 0){
-        temlMessage.innerText="전화번호를 입력해 주세요.(-제외)";
-        temlMessage.classList.remove("confirm","error");
+        telMessage.innerText="전화번호를 입력해 주세요.(-제외)";
+        telMessage.classList.remove("confirm","error");
         checkObj.memberTel = false;
         return;
     } 
@@ -153,15 +183,15 @@ memberTel.addEventListener("input",()=>{
                 data: dbTelCheck,
                 success : (result)=>{
                     if(result == 0){ // 중복된 전화번호가 없다면
-                        temlMessage.innerText="사용 가능한 전화번호 입니다.";
-                        temlMessage.classList.remove("error");
-                        temlMessage.classList.add("confirm")
+                        telMessage.innerText="사용 가능한 전화번호 입니다.";
+                        telMessage.classList.remove("error");
+                        telMessage.classList.add("confirm")
                         checkObj.memberTel = true;
 
                     } else { // 중복된 전화번호가 있다면
-                        temlMessage.innerText="이미 사용중인 전화번호 입니다.";
-                        temlMessage.classList.remove("confirm");
-                        temlMessage.classList.add("error");
+                        telMessage.innerText="이미 사용중인 전화번호 입니다.";
+                        telMessage.classList.remove("confirm");
+                        telMessage.classList.add("error");
                         checkObj.memberTel = false;
                     }
                 },
@@ -182,125 +212,3 @@ memberTel.addEventListener("input",()=>{
 
 
 
-/*************************** 이메일 인증번호 ***************************/
-// 이메일 인증코드 발송 / 확인
-const sendAuthKeyBtn = document.getElementById("sendAuthKeyBtn");
-const authKeyMessage = document.getElementById("authKeyMessage");
-let authTimer;
-let authMin = 4;
-let authSec = 59;
-sendAuthKeyBtn.addEventListener("click", function(){
-    authMin = 4;
-    authSec = 59;
-    checkObj.memberEmailCertification = false;
-    if(checkObj.memberEmail){ // 중복이 아닌 이메일인 경우
-        $.ajax({
-            url : "/sendEmail/signUp",
-            data : {"email": memberEmail.value},
-            success : (result) => {
-                if(result > 0){
-                    console.log("인증 번호가 발송되었습니다.")
-                }else{
-                    console.log("인증번호 발송 실패")
-                }
-            }, error : () => {
-                console.log("이메일 발송 중 에러 발생");
-            }
-        })
-        alert("인증번호가 발송 되었습니다.");
-        authKeyMessage.innerText = "05:00";
-        authKeyMessage.classList.remove("confirm");
-        authTimer = window.setInterval(()=>{
-
-            authKeyMessage.innerText = "0" + authMin + ":" + (authSec<10 ? "0" + authSec : authSec);
-            
-            // 남은 시간이 0분 0초인 경우
-            if(authMin == 0 && authSec == 0){
-                checkObj.memberEmailCertification = false;
-                clearInterval(authTimer);
-                return;
-            }
-
-            // 0초인 경우
-            if(authSec == 0){
-                authSec = 60;
-                authMin--;
-            }
-            authSec--; // 1초 감소
-        }, 1000)
-
-    } else{
-        alert("중복되지 않은 이메일을 작성해주세요.");
-        memberEmail.focus();
-    }
-});
-
-
-// 인증 확인
-const memberEmailCertification = document.getElementById("memberEmailCertification");
-const checkAuthKeyBtn = document.getElementById("checkAuthKeyBtn");
-
-checkAuthKeyBtn.addEventListener("click", function(){
-    authKeyMessage.classList.remove("confirm");
-
-    if(authMin > 0 || authSec > 0){ // 시간 제한이 지나지 않은 경우에만 인증번호 검사 진행
-
-        $.ajax({
-            url : "/sendEmail/checkAuthKey",
-            data : {"inputKey": memberEmailCertification.value},
-            success : (result) => {
-
-                if(result > 0){
-                    clearInterval(authTimer);
-                    authKeyMessage.innerText = "인증되었습니다.";
-                    authKeyMessage.classList.add("confirm");
-                    checkObj.memberEmailCertification = true;
-
-                } else{
-                    alert("인증번호가 일치하지 않습니다.")
-                    authKeyMessage.classList.remove("confirm");
-                    checkObj.memberEmailCertification = false;
-                }
-            }, 
-            error : () => {
-                console.log("인증코드 확인 오류");
-            }
-        })
-
-    } else{
-        alert("인증 시간이 만료되었습니다. 다시 시도해주세요.")
-    }
-});
-
-
-
-// --------------------------------------------
-// 비밀번호 눈팅
-const seePw = document.getElementById("seePw");
-const seePwConfirm = document.getElementById("seePwConfirm");
-
-seePw.addEventListener("click", e => {
-
-    if(seePw.classList.contains("fa-eye")){
-        seePw.classList.remove("fa-eye");
-        seePw.classList.add("fa-eye-slash");
-        memberPw.removeAttribute("type");
-    } else {
-        seePw.classList.add("fa-eye");
-        seePw.classList.remove("fa-eye-slash");
-        memberPw.setAttribute("type", "password");
-    }
-})
-
-seePwConfirm.addEventListener("click", e => {
-
-    if(seePwConfirm.classList.contains("fa-eye")){
-        seePwConfirm.classList.remove("fa-eye");
-        seePwConfirm.classList.add("fa-eye-slash");
-        memberPwConfirm.removeAttribute("type");
-    } else {
-        seePwConfirm.classList.add("fa-eye");
-        seePwConfirm.classList.remove("fa-eye-slash");
-        memberPwConfirm.setAttribute("type", "password");
-    }
-})

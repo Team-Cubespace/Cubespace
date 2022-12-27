@@ -116,7 +116,7 @@
                     <div class="signUp-input-Name textbox">
                         <i class="fa-regular fa-user"></i>
                         <input type="text" name="memberName" class="inputBox" id="memberName" placeholder="이름을 입력해주세요"
-                            maxlength="10" />
+                            maxlength="10" value="${tempMember.memberName}"/>
                     </div>
                     <div class="firstBox">
                         <span class="signUp-message" id="nameMessage"></span>
@@ -149,7 +149,7 @@
                     <div class="signUp-input-Birth textbox">
                         <i class="fa-solid fa-cake-candles"></i>
                         <input type="text" name="memberBirth" class="inputBox" id="memberBirth"
-                            placeholder="생년월일 ex)19910502" maxlength="8" />
+                            placeholder="생년월일 ex)19910502" maxlength="8" value="${tempMember.memberBirth}"/>
                     </div>
                     <input type="hidden" name="birthYear" id="birthYear">
                     <input type="hidden" name="birthDay" id="birthDay">

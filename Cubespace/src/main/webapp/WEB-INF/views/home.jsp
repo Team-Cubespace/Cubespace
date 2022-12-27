@@ -82,8 +82,8 @@
                                 
                                 <!-- dropdown -->
                                 <div class="dropdown">
-                                    <a href="/member/login/updateInfo">내 정보 수정</a>
-                                    <a href="/member/logout">로그아웃</a>
+                                    <a href="/member/updateInfo">내 정보 수정</a>
+                                    <a href="/member/logout" id="logout">로그아웃</a>
                                 </div>
                             </div>
         

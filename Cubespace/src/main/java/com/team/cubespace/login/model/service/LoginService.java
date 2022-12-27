@@ -7,7 +7,7 @@ import com.team.cubespace.member.model.vo.Member;
 public interface LoginService {
 
 	/** 로그인
-	 * @param inputMember
+	 * @param paramMap
 	 * @return loginMember
 	 */
 	Member login(Member inputMember);
@@ -49,5 +49,29 @@ public interface LoginService {
 	 * @return result
 	 */
 	int telDupCheck(String memberTel);
+
+	/** 카카오로그인
+	 * @param paramMap
+	 * @return loginMember
+	 */
+	Member kakaoLogin(Member inputMember);
+	
+	/** 내 회원 정보 수정
+	 * @param inputMember
+	 * @return
+	 */
+	int updateInfo(Member inputMember);
+	
+	/** 회원 탈퇴
+	 * @param memberNo
+	 * @return result
+	 */
+	int secessionSelect(int memberNo, Member inputMember);
+
+	/** 회원 비밀번호 변경
+	 * @param paramMap
+	 * @return
+	 */
+	int changePw(Member inputMember);
 
 }

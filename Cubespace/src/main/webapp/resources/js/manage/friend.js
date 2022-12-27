@@ -29,21 +29,23 @@ for(let deleteFriendBtn of deleteFriendBtnList){
 
 
 /* 깐부 닉네임 검색 */
-const searchBtn = document.getElementById("searchBtn");
+const searchArea = document.getElementById("searchArea");
 const searchInput = document.getElementById("searchInput");
 
 
-searchBtn.addEventListener("click", e => {
+searchArea.addEventListener("submit", e => {
 
     if(searchInput.value.trim().length > 0){
-        
-        window.href=window.href;
+
+        window.href="/manage/friend?searchInput=" + searchInput.value;
         
     } else {
         alert("검색어를 입력해주세요");
+        e.preventDefault();
     }
 
 })
+
 
 /* 모든깐부 조회(모든깐부 버튼) */
 const allFriend = document.getElementById("allFriend");

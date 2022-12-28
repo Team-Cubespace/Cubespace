@@ -13,4 +13,22 @@ public interface CommentService {
 	 */
 	List<Comment> selectCommentList(Map<String, Integer> paramMap);
 
+	/** 댓글 등록
+	 * @param comment
+	 * @return result
+	 */
+	int insertComment(Comment comment);
+
+	/** 댓글 삭제
+	 * @param commentNo
+	 * @return result
+	 */
+	int deleteComment(int commentNo);
+
+	/** 댓글 수정
+	 * @param comment
+	 * @return result
+	 */
+	int updateComment(Comment comment);
+
 }

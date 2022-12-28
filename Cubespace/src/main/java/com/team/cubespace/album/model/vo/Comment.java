@@ -8,6 +8,7 @@ import lombok.Setter;
 public class Comment {
 	private int level;					// 댓글 계층 레벨
 	private int commentNo;				// 댓글 번호
+	private int boardTypeNo;			// 게시글 타입 번호 (1:다이어리, 2:사진첩, 3:동영상, 4:방명록)
 	private String commentContent;		// 댓글 내용
 	private String commentCreate;		// 댓글 작성일
 	private int boardNo;				// 댓글 작성된 게시글 번호

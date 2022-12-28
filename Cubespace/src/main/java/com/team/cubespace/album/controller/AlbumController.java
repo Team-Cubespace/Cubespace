@@ -183,7 +183,8 @@ public class AlbumController {
 	
 	@GetMapping("/albumUpdate/{albumNo}")
 	public String albumUpdate(@PathVariable("albumNo") int albumNo,
-			Model model) {
+			Model model,
+			@RequestHeader("referer") String referer) {
 		// 앨범 조회
 		Album album = service.selectAlbum(albumNo);
 		
@@ -191,7 +192,35 @@ public class AlbumController {
 			album.setAlbumContent(Util.newLineClear(album.getAlbumContent()));
 		}
 		model.addAttribute("album", album);
-		
+		model.addAttribute("referer", referer);
 		return "/minihome/album/album-update";
+	}
+	
+	@ResponseBody
+	@PostMapping("/albumUpdate")
+	public String albumUpdate(Album album, 
+			@SessionAttribute("loginMember") Member loginMember,
+			@RequestParam(value="deleteImageList", required=false) List<String> deleteImageList,
+			@RequestParam(value="imageList", required=false) List<MultipartFile> imageList,
+			int prevLength,
+			int albumNo,
+			HttpSession session
+			) throws IllegalStateException, IOException {
+		// 앨범 번호 세팅
+		album.setAlbumNo(albumNo);
+		album.setMemberNo(loginMember.getMemberNo());
+		
+		// 웹/서버 경로 지정
+		String webPath = "/resources/images/album/";
+		String folderPath = session.getServletContext().getRealPath(webPath);
+		
+		// 앨범 수정 서비스 호출
+		int result = service.albumUpdate(album, webPath, folderPath, imageList, deleteImageList, prevLength);
+		
+		Map<String, Integer> resultMap = new HashMap<>();
+		resultMap.put("folderNo", album.getFolderNo());
+		resultMap.put("albumNo", albumNo);
+		
+		return new Gson().toJson(resultMap);
 	}
 }

@@ -45,7 +45,13 @@
                 alert("${message}");
         </script>
     </c:if>
-
+    <script>
+        const loginMemberNo = '${loginMember.memberNo}';
+        const boardNo = '${album.albumNo}';
+        const profileImage = '${loginMember.profileImage}';
+        const boardTypeNo = 2;
+    </script>
+    <script src="/resources/js/common/jQuery-core.js"></script>
     <script src="/resources/js/common/swiper.min.js"></script>
     <script src="/resources/js/minihome/album/album-detail.js"></script>
     <script src="/resources/js/minihome/include/comment.js"></script>

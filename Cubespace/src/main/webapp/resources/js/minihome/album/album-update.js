@@ -114,8 +114,11 @@ function submitForm() {
         if (!filesArr[i].is_delete) {
             formData.append("imageList", filesArr[i]);
         }
-        formData.append("deleteImageList", deleteImageList);
+        
     }
+    formData.append("deleteImageList", deleteImageList);
+    formData.append("albumNo", albumNo);
+    formData.append("prevLength", prevLength);
     console.log(filesArr);
     $.ajax({
         method: 'POST',

@@ -86,4 +86,28 @@ public class AlbumDAO {
 	public int albumDelete(int albumNo) {
 		return sqlSession.update("albumMapper.albumDelete", albumNo);
 	}
+
+	/** 앨범 수정
+	 * @param album
+	 * @return result
+	 */
+	public int albumUpdate(Album album) {
+		return sqlSession.update("albumMapper.albumUpdate", album);
+	}
+
+	/** 앨범 이미지 삭제
+	 * @param condition
+	 * @return result
+	 */
+	public int albumImageDelete(String condition) {
+		return sqlSession.delete("albumMapper.albumImageDelete", condition);
+	}
+
+	/** 앨범 이미지 순서 초기화
+	 * @param albumNo
+	 * @return result
+	 */
+	public int initImageOrder(int albumNo) {
+		return sqlSession.update("albumMapper.initImageOrder", albumNo);
+	}
 }

@@ -106,4 +106,15 @@ public class ManageServiceImpl implements ManageService{
 		return dao.getMemberFontNo(memberNo);
 	}
 
+	/**
+	 * 카테고리 중 보여질것 선택
+	 */
+	@Override
+	public int categorySelect(Map<String, Object> paramMap) {
+		
+		return dao.categorySelect(paramMap);
+	}
+
+
+
 }

@@ -33,10 +33,29 @@ menuSelectBtn.addEventListener("click", () => {
         var value = $(this).val();
         checkArr.push(value);        
     })
-    
+
+    console.log(checkArr);
+
+    if(!checkArr.includes("diary")){
+        diaryOrder = -1;
+    }
+    if(!checkArr.includes("album")){
+        albumOrder = -1;
+    }
+    if(!checkArr.includes("video")){
+        videoOrder = -1;
+    }
+    if(!checkArr.includes("guestBook")){
+        guestBookOrder = -1;
+    }
+    console.log(checkArr);
+
+
     $.ajax({
         url : "/manage/menu/categorySelect",
-        data : "checkArr",
+        data : {"diary" : diaryOrder, "album" : albumOrder,
+                "video" : videoOrder, "guestBook" : guestBookOrder,
+                "memberNo" : memberNo},
         type : "get",
         success : result => {
             if(result > 0) {alert("변경사항이 저장되었습니다")}
@@ -60,7 +79,7 @@ menuSelectCancelBtn.addEventListener("click", () => {
     $.ajax({
         url : "/manage/menu/categorySelectCancel",
         type:"get",
-        data : {"memberNo" : loginMember.memberNo},
+        data : {"memberNo" : memberNo},
         success :  result=> {
             if(result > 0) {
                 alert("메뉴설정을 변경 완료했습니다");

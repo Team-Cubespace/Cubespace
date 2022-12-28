@@ -107,4 +107,17 @@ public class ManageDAO {
 		return sqlSession.selectOne("ManageMapper.getMemberFontNo", memberNo);
 	}
 
+	/**  카테고리 중 보여질것 선택
+	 * @param paramMap
+	 * @return
+	 */
+	public int categorySelect(Map<String, Object> paramMap) {
+		
+		return sqlSession.update("ManageMapper.categorySelect", paramMap);
+	}
+
+
+
+
+
 }

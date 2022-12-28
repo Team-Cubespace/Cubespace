@@ -1,5 +1,6 @@
 package com.team.cubespace.manage.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -115,6 +116,16 @@ public class manageController {
 		return service.categorySelectCancel(memberNo);
 	}
 
+	/** 카테고리 중 보여질것 선택
+	 * @param useCategory
+	 * @return
+	 */
+	@GetMapping("/menu/categorySelect")
+	@ResponseBody
+	public int categorySelect(@RequestParam Map<String, Object> paramMap) {
+				
+		return service.categorySelect(paramMap);
+	}
 	
 	
 //	친구(깐부) 관련-------------------------------------------------------------------------------

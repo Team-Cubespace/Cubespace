@@ -66,4 +66,12 @@ public interface ManageService {
 	 */
 	int getMemberFontNo(int memberNo);
 
+	/** 카테고리 중 보여질것 선택
+	 * @param paramMap
+	 * @return result
+	 */
+	int categorySelect(Map<String, Object> paramMap);
+
+
+
 }

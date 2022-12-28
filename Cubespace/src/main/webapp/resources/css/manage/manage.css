@@ -519,7 +519,11 @@ header {
     color: white;
     border-radius: 50%;
 }
-
+#menuSelectCancelBtn{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
 /* ------------------------------------------------------ */
 /* 배경음악 설정 */
 .backgroundHeader, .backgroundMain{

@@ -82,6 +82,13 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
+	<!-- 카테고리에 새 폴더 삽입 -->
+	<insert id="addFolder">
+		INSERT INTO FOLDER VALUES(
+		SEQ_FOLDER_NO.NEXTVAL, #{boardTypeNo},
+		#{folderName}, #{folderOrder}, #{memberNo})
+	</insert>
+	
  <!-- 깐부 ====================================================-->
 
 	<!-- 깐부목록 조회 -->

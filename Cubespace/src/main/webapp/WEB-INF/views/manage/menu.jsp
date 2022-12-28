@@ -167,7 +167,7 @@
                                 <div class="menuListArea" id="sortable1">
 
                                 <c:if test="${categoryOrder.diary != -1}"> 
-                                        <div class="diary" style="order:${categoryORder.diary}">
+                                        <div class="diary" style="order:${categoryOrder.diary}">
                                             <div class="categoryArea" name="1">
                                                 <span class="menuTitle">다이어리</span><i class="fa-solid fa-plus"></i>
                                             </div>
@@ -175,7 +175,7 @@
                                     <c:forEach var="folder" items="${folderList}">
                                         <c:if test="${folder.boardTypeNo == 1}">
                                             <div class="subCategory" name="${folder.folderOrder}">
-                                                <img src="/resources/images/common/folder.png" class="subCategoryImg">&nbsp;
+                                                <img src="/resources/images/common/folder.png" class="subCategoryImg">
                                                 <span class="folderTitle">${folder.folderName}</span>
                                             </div>
                                         </c:if>
@@ -195,7 +195,7 @@
                                         <c:forEach var="folder" items="${folderList}">
                                             <c:if test="${folder.boardTypeNo == 2}">
                                                 <div class="subCategory" name="1">
-                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">&nbsp;
+                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
                                                     <span  class="folderTitle">나의 사진첩</span><i class="fa-solid fa-minus"></i>
                                                 </div>   
                                             </c:if>          
@@ -214,7 +214,7 @@
                                         <c:forEach var="folder" items="${folderList}">
                                             <c:if test="${folder.boardTypeNo == 3}">
                                                 <div class="subCategory" name="1">
-                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">&nbsp;
+                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
                                                     <span  class="folderTitle">나의 동영상</span><i class="fa-solid fa-minus"></i>
                                                 </div>
                                             </c:if>

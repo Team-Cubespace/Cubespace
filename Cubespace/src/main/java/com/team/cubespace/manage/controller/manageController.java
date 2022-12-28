@@ -123,10 +123,22 @@ public class manageController {
 	@GetMapping("/menu/categorySelect")
 	@ResponseBody
 	public int categorySelect(@RequestParam Map<String, Object> paramMap) {
-				
+		
+		// paramMap : diary, album, video, guestBook, memberNo
 		return service.categorySelect(paramMap);
 	}
 	
+	/** 카테고리에 새 폴더 삽입
+	 * @param paramMap
+	 * @return
+	 */
+	@GetMapping("/menu/addFolder")
+	@ResponseBody
+	public int addFolder(@RequestParam Map<String, Object> paramMap) {
+		
+		// paramMap : boardTypeNo, folderName, memberNo
+		return service.addFolder(paramMap);
+	}
 	
 //	친구(깐부) 관련-------------------------------------------------------------------------------
 

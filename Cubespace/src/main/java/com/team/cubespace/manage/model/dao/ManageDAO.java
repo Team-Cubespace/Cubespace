@@ -116,6 +116,15 @@ public class ManageDAO {
 		return sqlSession.update("ManageMapper.categorySelect", paramMap);
 	}
 
+	/** 카테고리에 새 폴더 삽입
+	 * @param paramMap
+	 * @return result
+	 */
+	public int addFolder(Map<String, Object> paramMap) {
+		
+		return sqlSession.insert("ManageMapper.addFolder", paramMap);
+	}
+
 
 
 

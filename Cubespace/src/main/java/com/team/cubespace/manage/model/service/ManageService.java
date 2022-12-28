@@ -72,6 +72,12 @@ public interface ManageService {
 	 */
 	int categorySelect(Map<String, Object> paramMap);
 
+	/** 카테고리에 새 폴더 삽입
+	 * @param paramMap
+	 * @return result
+	 */
+	int addFolder(Map<String, Object> paramMap);
+
 
 
 }

@@ -115,6 +115,15 @@ public class ManageServiceImpl implements ManageService{
 		return dao.categorySelect(paramMap);
 	}
 
+	/**
+	 * 카테고리에 새 폴더 삽입
+	 */
+	@Override
+	public int addFolder(Map<String, Object> paramMap) {
+		
+		return dao.addFolder(paramMap);
+	}
+
 
 
 }

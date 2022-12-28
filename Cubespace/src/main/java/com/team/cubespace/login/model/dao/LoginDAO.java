@@ -207,15 +207,6 @@ public class LoginDAO {
 
 
 
-	/** 회원의 소유폰트번호 업데이트 
-	 * @param loginMember
-	 * @return
-	 */
-	public int updateOwnGoods(Member loginMember) {
-		
-		return sqlSession.update("loginMapper.updateOwnGoods", loginMember);
-	}
-
 
 
 

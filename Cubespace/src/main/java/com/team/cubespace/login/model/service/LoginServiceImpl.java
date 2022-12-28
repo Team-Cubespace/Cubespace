@@ -71,8 +71,7 @@ public class LoginServiceImpl implements LoginService{
 				
 			}  else {
 				
-				inputMember.setOwnFontNo(ownResult);
-				result = dao.updateOwnGoods(inputMember);
+				result = memberNo;
 			}
 		}
 		
@@ -154,21 +153,11 @@ public class LoginServiceImpl implements LoginService{
 					int folderResult = dao.insertFolder(loginMember.getMemberNo()); // 폴더
 					int categoryOrderResult = dao.insertCategoryOrder(loginMember.getMemberNo()); // 카테고리순서
 					
-					if(ownResult * minihomeResult * folderResult * categoryOrderResult > 0) {
+					if(ownResult * minihomeResult * folderResult * categoryOrderResult <= 0) {
 						
-						// 생성된 회원번호를 이용해 회원의 ownFontNo를 member테이블에 넣어줌
-						loginMember.setOwnFontNo(ownResult);
-						int updateResult = dao.updateOwnGoods(loginMember);
-						if(updateResult > 0) {
-							return loginMember;							
-						} else {
-							throw new Exception("회원가입 중 오류 발생");
-						}
-					} else {
 						throw new Exception("회원가입 중 오류 발생");
-					}
-					
-					
+
+					} 
 					
 				}
 			}

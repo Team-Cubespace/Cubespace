@@ -1,6 +1,7 @@
 package com.team.cubespace.login.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -25,10 +26,11 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team.cubespace.email.model.service.EmailService;
 import com.team.cubespace.login.model.service.LoginService;
+import com.team.cubespace.manage.model.service.ManageService;
 import com.team.cubespace.member.model.vo.Member;
 
 @Controller
-@SessionAttributes({ "loginMember", "message" })
+@SessionAttributes({ "loginMember", "message", "fontList" })
 public class LoginController {
 
 	@Autowired
@@ -36,6 +38,9 @@ public class LoginController {
 
 	@Autowired
 	private EmailService eService;
+	
+	@Autowired
+	private ManageService mService;
 
 	/**
 	 * 로그인
@@ -63,7 +68,9 @@ public class LoginController {
 	@PostMapping("/member/login")
 	public String login(Member inputMember, Model model, RedirectAttributes ra, HttpServletResponse resp,
 			@RequestParam(value = "saveId", required = false) String saveId,
-			@RequestHeader(value = "referer") String referer) throws Exception {
+			@RequestHeader(value = "referer") String referer,
+			@RequestParam Map<String, Object> paramMap // fontList 등록을 위함
+			) throws Exception {
 
 		Member loginMember = service.login(inputMember);
 		String path = null;
@@ -93,6 +100,11 @@ public class LoginController {
 				}
 				cookie.setPath("/");
 				resp.addCookie(cookie);
+				
+				
+				// 폰트 리스트 등록
+				List<Map<String, Object>> fontList = mService.getFontList(paramMap);
+				model.addAttribute("fontList", fontList);
 			}
 
 		} else {

@@ -85,7 +85,7 @@ header {
     position: absolute;
     right: 5px;
     top: 3px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .whiteBtn {
@@ -95,6 +95,7 @@ header {
     cursor: pointer;
     padding: 5px;
     height: 30px;
+    font-size: 13px;
 
 }
 

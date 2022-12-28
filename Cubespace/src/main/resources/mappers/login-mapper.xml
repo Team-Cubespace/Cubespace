@@ -28,7 +28,7 @@
    		<result property="memberBlockYN" column="MEMBER_BLOCK_YN"></result>
    		<result property="blockStart" column="BLOCK_START"></result>
    		<result property="blockEnd" column="BLOCK_END"></result>
-   		<result property="fontPath" column="FONT_PATH"></result>
+   		<result property="fontNo" column="FONT_NO"></result>
    		<result property="emotionPath" column="EMOTION_PATH"></result>
    		<result property="emotionName" column="EMOTION_NAME"></result>
    		<result property="alarmCount" column="ALARM_COUNT"></result>
@@ -52,20 +52,18 @@
 		BIRTHDAY , EMOTION_NO , 
 		TO_CHAR(BLOCK_START, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분"') AS BLOCK_START, 
 		TO_CHAR(BLOCK_END, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분"') AS BLOCK_END, 
-		CASE <![CDATA[
-			WHEN (SELECT MEMBER_NO FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = M.MEMBER_NO AND SYSDATE < BLOCK_END) IS NULL  ]]>
+		CASE  <![CDATA[
+			WHEN (SELECT MEMBER_NO FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = M.MEMBER_NO AND SYSDATE < BLOCK_END) IS NULL 
 			THEN 'N'
 			ELSE 'Y'
-		END MEMBER_BLOCK_YN, LOGIN_TYPE,
-		(SELECT FONT_PATH FROM FONT_SHOP
-		JOIN MEMBER_OWN_GOODS MOG ON (OWN_FONT_NO = FONT_NO) WHERE MOG.OWN_NO = M.OWN_FONT_NO ) FONT_PATH,
+		END MEMBER_BLOCK_YN, LOGIN_TYPE, OWN_FONT_NO,  ]]>
 		(SELECT COUNT(*) FROM ALARM WHERE RECEIVER_NO = M.MEMBER_NO) ALARM_COUNT,
 		(SELECT TODAY FROM MINI_HOMEPAGE MH WHERE MH.MEMBER_NO = M.MEMBER_NO) TODAY,
 		(SELECT COUNT(*) FROM FRIEND WHERE FRIEND_ACCEPT_FL = 1 AND M.MEMBER_NO IN (ASKED_MEMBER_NO, ASKING_MEMBER_NO)) FRIEND_COUNT
 		FROM MEMBER M
 		LEFT JOIN MEMBER_BLOCK MB ON(M.MEMBER_NO = MB.MEMBER_NO)
 		WHERE MEMBER_DEL_YN = 'N'
-		AND MEMBER_EMAIL = #{memberEmail}
+		AND MEMBER_EMAIL = #{memberNo}
 	</select>
 
 
@@ -204,12 +202,6 @@
 		#{memberNo}, 1,2,3,4)
  	</insert>
  	
- 	<!-- 회원의 소유폰트번호 업데이트  -->
- 	<update id="updateOwnGoods">
- 		UPDATE MEMBER SET 
- 		OWN_FONT_NO = #{ownFontNo}
- 		WHERE MEMBER_NO = #{memberNo}
- 	</update>
  	
  	
  	

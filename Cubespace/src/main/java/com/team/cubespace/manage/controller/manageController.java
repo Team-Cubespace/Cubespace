@@ -14,20 +14,33 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.team.cubespace.folder.model.vo.Folder;
+import com.team.cubespace.login.model.service.LoginService;
 import com.team.cubespace.manage.model.service.ManageService;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
 import com.team.cubespace.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/manage")
-@SessionAttributes({"folderList", "friendList"})
+@SessionAttributes({ "folderList", "fontList" /* , "friendList", "fontList" */})
 public class manageController {
 	
 	@Autowired
 	private ManageService service;
 	
+	
 	@GetMapping("/font")
-	public String changeFont() {
+	public String changeFont(@SessionAttribute("loginMember") Member inputMember, 
+			@RequestParam Map<String, Object> paramMap, /*searchInput*/
+			Model model) {
+		
+		paramMap.put("memberNo", inputMember.getMemberNo());
+		if(paramMap.containsKey("searchInput")) {
+			model.addAttribute("searchInput", paramMap.get("searchInput"));
+		}
+		
+		List<Map<String, Object>> fontList = service.getFontList(paramMap);
+		model.addAttribute("fontList", fontList);
+		
 		return "manage/font";
 	}
 	@GetMapping("/music")
@@ -47,11 +60,11 @@ public class manageController {
 			Model model) {
 		
 		paramMap.put("memberNo", inputMember.getMemberNo());
-		List<Map<String, String>> friendList = service.getFriendList(paramMap);
-		model.addAttribute(friendList);
 		if(paramMap.containsKey("searchInput")) {
 			model.addAttribute("searchInput", paramMap.get("searchInput"));
 		}
+		List<Map<String, String>> friendList = service.getFriendList(paramMap);
+		model.addAttribute(friendList);
 		
 		return "manage/friend";
 	}
@@ -115,4 +128,29 @@ public class manageController {
 	public int deleteFriend(@RequestParam Map<String, Object> paramMap) {
 		return service.deleteFriend(paramMap);
 	}
+	
+	
+	
+//	폰트 관련-------------------------------------------------------------------------------
+	
+	/** 새 폰트 적용하기
+	 * @param paramMap
+	 * @return
+	 */
+	@GetMapping("/font/useFont")
+	@ResponseBody
+	public int useFont(@RequestParam Map<String, Object> paramMap,
+			@SessionAttribute("loginMember") Member loginMember,
+			Model model) {
+		int result =  service.useFont(paramMap);
+		if(result > 0) {
+			loginMember.setOwnFontNo(Integer.parseInt((String)paramMap.get("fontNo")));
+			model.addAttribute("loginMember", loginMember);
+		}
+		
+		
+		
+		return result;
+	}
+
 }

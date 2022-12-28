@@ -58,11 +58,11 @@ public class ManageDAO {
 	 */
 	public List<Map<String, String>> getFriendList(Map<String, Object> paramMap) {
 		
-		String query = "";
-		if(paramMap.containsKey("searchInput")){
-			query = "AND MEMBER_NICKNAME LIKE '%" + paramMap.get("searchInput") + "%'";
-		}
-		paramMap.put("query", query);
+//		String query = "";
+//		if(paramMap.containsKey("searchInput")){
+//			query = "AND MEMBER_NICKNAME LIKE '%" + paramMap.get("searchInput") + "%'";
+//		}
+//		paramMap.put("query", query);
 		
 		return sqlSession.selectList("ManageMapper.getFriendList", paramMap);
 	}
@@ -74,6 +74,20 @@ public class ManageDAO {
 	public int deleteFriend(Map<String, Object> paramMap) {
 		
 		return sqlSession.delete("ManageMapper.deleteFriend", paramMap);
+	}
+
+	public List<Map<String, Object>> getFontList(Map<String, Object> paramMap) {
+		
+		return sqlSession.selectList("ManageMapper.getFontList", paramMap);
+	}
+
+	/** 새 폰트 적용하기
+	 * @param paramMap
+	 * @return
+	 */
+	public int useFont(Map<String, Object> paramMap) {
+		
+		return sqlSession.update("ManageMapper.useFont", paramMap);
 	}
 
 }

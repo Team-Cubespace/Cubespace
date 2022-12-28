@@ -25,6 +25,9 @@
             color: ${minihome.frameMenuColor};
         }
     </style>
+
+<jsp:include page="/WEB-INF/views/include/font.jsp"/>
+
 </head>
 <body>
     <div class="minihome">
@@ -71,7 +74,7 @@
             <section class="minihome-main">
 
                 <%-- <iframe src="/albumWrite" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
-                <iframe src="/manage/friend" frameborder="0" name="minihomeMenu" scrolling="no">
+                <iframe src="/manage/font" frameborder="0" name="minihomeMenu" scrolling="no">
 
                 </iframe>
                 <ul class="minihome-menu frame-menu-color">

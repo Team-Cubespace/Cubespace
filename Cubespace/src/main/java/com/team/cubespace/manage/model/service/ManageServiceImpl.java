@@ -70,4 +70,22 @@ public class ManageServiceImpl implements ManageService{
 		return dao.deleteFriend(paramMap);
 	}
 
+	/**
+	 * 내 폰트 목록 조회
+	 */
+	@Override
+	public List<Map<String, Object>> getFontList(Map<String, Object> paramMap) {
+		
+		return dao.getFontList(paramMap);
+	}
+
+	/**
+	 * 새 폰트 적용하기
+	 */
+	@Override
+	public int useFont(Map<String, Object> paramMap) {
+		
+		return dao.useFont(paramMap);
+	}
+
 }

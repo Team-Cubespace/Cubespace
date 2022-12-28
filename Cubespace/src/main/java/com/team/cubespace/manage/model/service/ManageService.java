@@ -43,4 +43,16 @@ public interface ManageService {
 	 */
 	int deleteFriend(Map<String, Object> paramMap);
 
+	/** 내 폰트 목록 조회
+	 * @param paramMap
+	 * @return
+	 */
+	List<Map<String, Object>> getFontList(Map<String, Object> paramMap);
+
+	/** 새 폰트 적용하기
+	 * @param paramMap
+	 * @return
+	 */
+	int useFont(Map<String, Object> paramMap);
+
 }

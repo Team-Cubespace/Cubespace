@@ -9,17 +9,17 @@
     padding: 10px 0px;
 }
 .comment-content {
-    margin: 10px 0px 5px 0px;
+    margin: 5px 0px 5px 0px;
 }
 /* 전체 댓글 갯수 */
 .comment-count {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: bold;
 }
 
 /* 댓글 리스트 */
 .comment-list > li {
-    margin: 20px 0px;
+    margin: 15px 0px;
 }
 .comment-list > li:first-of-type {
     margin: 0px;
@@ -39,6 +39,10 @@
     margin-top: 10px;
     overflow: hidden;
 }
+.comment-profile-image-area img {
+    width: 100%;
+    height: 100%;
+}
 .comment-profile-image {
     width: 100%;
     height: 100%;
@@ -47,13 +51,14 @@
 .comment-content {
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 100%;
 }
 .comment-write-row .member-nickname {
     font-size: 20px;
     font-weight: bold;
 }
-.comment-write-row textarea {
+.comment-write-row textarea,
+.update-textarea {
     border: none;
     resize: none;
     border-bottom: 2px solid black;
@@ -63,13 +68,17 @@
     outline: none;
     overflow: hidden;
 }
-
-.comment-write-button-area {
+.update-textarea {
+    width: 100%;
+}
+.comment-write-button-area,
+.update-button-area {
     display: flex;
     justify-content: flex-end;
     padding: 5px;
 }
-.comment-write-row button {
+.comment-write-row button,
+.update-button-area button {
     width: 70px;
     margin-left: 5px;
     /* 색 설정 필요 */
@@ -82,7 +91,8 @@
     border: 1px solid var(--ink);
     color: var(--ink);
 }
-.comment-write-row button:last-child {
+.comment-write-row button:last-child,
+.update-button-area button:last-child {
     color: white;
     background-color: var(--ink);
 }
@@ -146,7 +156,7 @@
     font-size: 17px;
     border: none;
     cursor: pointer;
-    display: none;
+    /* display: none; */
 }
 .comment-drop-down-menu {
     position: absolute;
@@ -156,6 +166,7 @@
     top: 100%;
     font-size: 13px;
     display: none;
+    z-index: 10;
     background-color: white;
 }
 .comment-drop-down-menu li {
@@ -165,6 +176,11 @@
     background-color: #ddd;
 }
 /* 드랍다운 버튼 오버시 보이기 */
-.comment-row:hover .comment-drop-down-button {
+/* .comment-row:hover .comment-drop-down-button {
     display: block;
+} */
+.comment-content-area {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }

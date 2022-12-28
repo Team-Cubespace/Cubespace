@@ -77,7 +77,6 @@
 .modal-choice > a {
     height: 100%;
     width: 350px;
-    /* padding: 30px 0; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -86,7 +85,7 @@
     cursor: pointer;
 }
 
-#leftChoice {
+#leftChoice{
     border-bottom: none;
     color: var(--subColor);
     font-weight: bold;
@@ -100,4 +99,18 @@
 /* 스크롤바 투명 */
 ::-webkit-scrollbar {
     display: none;
+}
+
+/* 알림선택 */
+.alarm-select-css{
+    border-bottom: none !important;
+    color: var(--subColor);
+    font-weight: bold;
+}
+/* 알림선택 삭제 */
+.alarm-delete-css{
+    border-left: none !important;
+    border-right: none!important;
+    border-top: none!important;
+
 }

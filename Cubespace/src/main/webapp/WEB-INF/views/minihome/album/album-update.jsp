@@ -46,6 +46,10 @@
 
 <!-- html에서 파일을 include 할 수 있도록 해주는 js (근데 VSCode Live Server에서만 보임) -->
 <!-- include 방법 : <section class="minihome-rayout"> 안에 <div data-include-path="파일 경로"></div> 작성 -->
+    <script>
+        let albumNo = '${albumNo}';
+        let prevLength = '${fn:length(album.albumImageList)}';
+    </script>
 <script src="/resources/js/common/jQuery-core.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ab8d18a2840806f79cff0f4f1542dde4&libraries=services"></script>
 <script src="/resources/js/minihome/album/album-update.js"></script>

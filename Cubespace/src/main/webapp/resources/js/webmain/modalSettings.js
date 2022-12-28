@@ -1,14 +1,5 @@
 /* 웹사이트 메인 공용 모달 (깐부찾기, 알림) */
 
-/* 모달 열기 */
-function openModal(){
-    document.getElementById("modal").style.display = "block";
-
-}
-/* 모달 닫기 */
-function closeModal(){
-    document.getElementById("modal").style.display = "none";
-}
 
 /* 모달 상단 선택 */
 const leftChoice = document.getElementById("leftChoice");

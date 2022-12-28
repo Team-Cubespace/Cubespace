@@ -41,99 +41,10 @@
                     <input type="text" class="member-search-input" id="leftChoiceInput" maxlength="10" placeholder="검색할 회원을 입력하세요.">
                     <button>검색</button>
                 </div>
-
                 <%-- 검색된 회원 목록 --%>
                 <section class="mebmer-search-profile">
 
-                    <%----------------------------------%>
-                    <%-- 이미 친구일때 --%>
-                    <div class="mebmer-profile"> <%-- div --%>
-                        <div class="profile-head"> <%-- div1 --%>
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif"> <%-- img --%>
-                            <div class="member-nickname">묘동닉네임글자테스트</div> <%-- div1_div --%>
-                        </div>
-
-                        <div class="profile-body"> <%-- div2 --%>
-
-                            <div> <%-- div2_div --%>
-                                <i class="fa-solid fa-check" id="faCheck"></i> <%-- i --%>
-                                <div>깐부</div> <%--div2_divdiv --%>
-                            </div>
-
-                            <div class="member-choice"> <%-- div2_div2 --%>
-                                <img class="minihome-img" src="/resources/images/common/smallCube.png"> <%-- div2_divimg --%>
-                                <a href="/minihome" onclick="return openMinihome(this.href)">미니홈피</a> <%-- a --%>
-                            </div>
-                        </div>
-                    </div>
-                    <%----------------------------------%>
-                    <%-- 친구가 아닐때 --%>
-                    <div class="mebmer-profile">
-                        <div class="profile-head">
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">묘동닉네임글자테스트</div>
-                        </div>
-
-                        <div class="profile-body">
-                            <div class="member-choice">
-                                <i class="fa-regular fa-paper-plane" ></i>
-                                <div onclick="addFriend()">신청</div>
-                            </div>
-
-                            <div class="member-choice">
-                                <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div>미니홈피</div>
-                            </div>
-                        </div>
-                    </div>
-                    <%----------------------------------%>
-                    <%-- 수락대기 일때 --%>
-                    <div class="mebmer-profile">
-                        <div class="profile-head">
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">묘동닉네임글자테스트</div>
-                        </div>
-
-                        <div class="profile-body">
-                            <div>
-                                <i class="fa-regular fa-comment-dots"></i>
-                                <div>수락대기</div>
-                            </div>
-
-                            <div class="member-choice">
-                                <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <div>미니홈피</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <%-- 내가 신청한 깐부일때 --%>
-                    <div class="mebmer-profile">
-                        <div class="profile-head">
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
-                            <div class="member-nickname">묘동닉네임글자테스트</div>
-                        </div>
-
-                        <div class="profile-body">
-                            <div class="member-cancel">
-                                <i class="fa-solid fa-xmark"></i>
-                                <div onclick="addFriendCancel()">신청 취소</div>
-                            </div>
-
-                            <div class="member-choice">
-                                <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <a href="/minihome" onclick="return openMinihome(this.href)">미니홈피</a> <%-- a --%>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
                 </section>
-
             </div>
         </div>
     </div>
@@ -145,7 +56,5 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <%-- 해당 모달 개인 js --%>
     <script src="/resources/js/webmain/main-memberSearch.js"></script>
-    <%-- 웹 메인 모달 공통 js --%>
-    <script src="/resources/js/webmain/modalSettings.js"></script>
 </body>
 </html>

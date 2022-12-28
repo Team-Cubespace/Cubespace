@@ -1,15 +1,93 @@
+/* 모달 열기 */
+function openmodalAlarm(){
+    document.getElementById("modalAlarm").style.display = "block";
+}
+/* 모달 닫기 */
+function closeModalAlarm(){
+    document.getElementById("modalAlarm").style.display = "none";
+}
+
+const alarmLeftChoice =document.getElementById("alarmLeftChoice")
+const alarmRightChoice =document.getElementById("alarmRightChoice")
+const modalChoice = document.querySelectorAll(".modal-choice")[1]
+const alarmSection = document.querySelectorAll(".mebmer-search-profile")[1];
+/* 깐부알림 함수선언  */
+const selectMemeberAlarm=()=>{
+    alarmLeftChoice.classList.add("alarm-select-css")
+    alarmLeftChoice.classList.remove("alarm-delete-css")
+    alarmRightChoice.classList.add("alarm-delete-css")
+    alarmRightChoice.classList.remove("alarm-select-css")
+    modalChoice.setAttribute("id","modalChoiceLeft")
+    alarmSection.innerHTML="";
+    
+    /* 비동기로 깐부알림 DB조회 구문작성*/
+}
+
+/* 모달처음 시작시 깐부알림 함수 즉시 적용 */
+(selectMemeberAlarm)()
+
+/* 깐부알림 클릭 시  함수 호출 */
+alarmLeftChoice.addEventListener("click",selectMemeberAlarm)
+
+/* 활동 알림 마우스 올라갈시 */
+alarmRightChoice.addEventListener("mouseover", () => {
+    alarmLeftChoice.classList.add("alarm-delete-css")
+    alarmLeftChoice.classList.remove("alarm-select-css")
+    alarmRightChoice.classList.add("alarm-select-css")
+    alarmRightChoice.classList.remove("alarm-delete-css")
+})
+
+/* 활동 알림 마우스 나갈시 */
+alarmRightChoice.addEventListener("mouseout", () => {
+    if(document.getElementById("modalChoiceLeft")!=null ){
+        alarmLeftChoice.classList.add("alarm-select-css")
+        alarmLeftChoice.classList.remove("alarm-delete-css")
+        alarmRightChoice.classList.add("alarm-delete-css")
+        alarmRightChoice.classList.remove("alarm-select-css")
+    }
+})
+
+/* 활동 알림 클릭 시 */
+alarmRightChoice.addEventListener("click",()=>{
+    alarmLeftChoice.classList.add("alarm-delete-css")
+    alarmLeftChoice.classList.remove("alarm-select-css")
+    alarmRightChoice.classList.add("alarm-select-css")
+    alarmRightChoice.classList.remove("alarm-delete-css")
+    modalChoice.setAttribute("id","modalChoiceRight") 
+    alarmSection.innerHTML="";
+
+    /* 비동기로 활동알림 DB조회 구문작성 */
+})
+
+/* 깐부알림 마우스 올라갈시 */
+alarmLeftChoice.addEventListener("mouseover", () => {
+    alarmLeftChoice.classList.add("alarm-select-css")
+    alarmLeftChoice.classList.remove("alarm-delete-css")
+    alarmRightChoice.classList.add("alarm-delete-css")
+    alarmRightChoice.classList.remove("alarm-select-css")
+})
+
+/* 깐부알림 마우스 나갈시 */
+alarmLeftChoice.addEventListener("mouseout", () => {
+    if(document.getElementById("modalChoiceRight")!=null ){
+        alarmLeftChoice.classList.add("alarm-delete-css")
+        alarmLeftChoice.classList.remove("alarm-select-css")
+        alarmRightChoice.classList.add("alarm-select-css")
+        alarmRightChoice.classList.remove("alarm-delete-css")
+    }
+})
+
 /* 오른쪽 클릭 시 전체삭제 추가 하기*/
 /* 다른스크립트에서 선언했는데 변수명이 사용됨!!!! */
-rightChoice.addEventListener("click",()=>{
+alarmRightChoice.addEventListener("click",()=>{
     /* 만들위치 지정 */
-    const member_search_input_div = document.querySelector(".member-search-input-div");
     const deleteall = document.createElement("div");
     const delete_all = document.querySelector(".delete-all");
 
     /* 특정위치에 1번만 요소추가하기 */
     if(delete_all==null){
         /* div태그 생성 */
-        member_search_input_div.insertAdjacentElement("afterend",deleteall)
+        modalChoice.insertAdjacentElement("afterend",deleteall)
         deleteall.classList.add("delete-all");
         
         /* 자식 전체삭제버튼 생성 */
@@ -17,25 +95,23 @@ rightChoice.addEventListener("click",()=>{
         deleteAllButton.classList.add("delete-all-button");
         deleteAllButton.innerHTML="전체삭제";
         deleteall.append(deleteAllButton);
+
+        /* 전체삭제 클릭시 전체 삭제 */
+        const deleteButton = document.querySelector(".delete-all-button");
+        if(deleteButton){
+            deleteButton.addEventListener("click",()=>{
+                alarmSection.innerHTML="";
+            })
+        }
     }
 })
 
 /* 왼쪽 클릭시 */
 /* 전체삭제버튼 삭제 */
-leftChoice.addEventListener("click",()=>{
-
+alarmLeftChoice.addEventListener("click",()=>{
         const deleteall = document.querySelector(".delete-all");
         deleteall.remove()
 })
-
-/* 전체삭제 */
-const deleteButton = document.querySelector(".delete-all-button");
-if(deleteButton){
-    deleteButton.addEventListener("click",()=>{
-        const section = document.querySelector(".mebmer-search-profile");
-        section.innerHTML="";
-    })
-}
 
 /* 삭제버튼 */
 const messageDelete = (btn)=>{

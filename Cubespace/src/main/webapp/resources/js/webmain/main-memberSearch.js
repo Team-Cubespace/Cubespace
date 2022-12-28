@@ -1,35 +1,111 @@
 /* 값을 저장할 변수 선언 */
 let memberNo;
 
-/* 강사님께 여쭤보기 1 도와주세요 */
-/* 이건 왜 안되는 것인가? */
-/*  */
-// document.querySelector(".member-search-input").addEventListener("keyup",()=>{
-//     memberSearch()
-// })
-/* 이건 왜 위에 있으면 안되는가 */
-// document.querySelector(".member-search-input").addEventListener("keyup",memberSearch)
+/* 모달 열기 */
+function openModal(){
+    document.getElementById("modal").style.display = "block";
+}
+/* 모달 닫기 */
+function closeModal(){
+    document.getElementById("modal").style.display = "none";
+}
 
-/* 오른쪽 클릭 시 이벤트리스너 제거/추가 */
-document.getElementById("rightChoice").addEventListener("click",()=>{
+/* 상단 선택 마우스이벤트 */
+const leftChoice = document.getElementById("leftChoice");
+const  rightChoice= document.getElementById("rightChoice");
 
+rightChoice.addEventListener("mouseover", () => {
+    leftChoice.style.border = "none";
+    leftChoice.style.borderBottom = "1px solid black";
+    rightChoice.style.border = "1px solid black";
+    rightChoice.style.borderBottom = "none";
+
+    leftChoice.style.color = "black";
+    leftChoice.style.fontWeight = "normal";
+    rightChoice.style.color = "var(--subColor)";
+    rightChoice.style.fontWeight = "bold";
+})
+
+rightChoice.addEventListener("mouseout", () => {
+    if(document.getElementById("leftChoiceInput")!=null ){
+        rightChoice.style.border = "none";
+        rightChoice.style.borderBottom = "1px solid black";
+        leftChoice.style.border = "1px solid black";
+        leftChoice.style.borderBottom = "none";
+
+        rightChoice.style.color = "black";
+        rightChoice.style.fontWeight = "normal";
+        leftChoice.style.color = "var(--subColor)";
+        leftChoice.style.fontWeight = "bold";
+    }
+})
+
+leftChoice.addEventListener("mouseover", () => {
+    rightChoice.style.border = "none";
+    rightChoice.style.borderBottom = "1px solid black";
+    leftChoice.style.border = "1px solid black";
+    leftChoice.style.borderBottom = "none";
+    
+    rightChoice.style.color = "black";
+    rightChoice.style.fontWeight = "normal";
+    leftChoice.style.color = "var(--subColor)";
+    leftChoice.style.fontWeight = "bold";
+})
+
+leftChoice.addEventListener("mouseout", () => {
+    if(document.getElementById("rightChoiceInput")!=null ){
+        leftChoice.style.border = "none";
+        leftChoice.style.borderBottom = "1px solid black";
+        rightChoice.style.border = "1px solid black";
+        rightChoice.style.borderBottom = "none";
+        
+        leftChoice.style.color = "black";
+        leftChoice.style.fontWeight = "normal";
+        rightChoice.style.color = "var(--subColor)";
+        rightChoice.style.fontWeight = "bold";
+    }
+})
+
+/* 내가 신청한 깐부 클릭 시 */
+rightChoice.addEventListener("click",()=>{
+    //검색 id변경 하여 검색시 회원조회가 아닌 내가 신청한 목록조회로 변경
+    const leftChoiceInput = document.getElementById("leftChoiceInput");
+    if(leftChoiceInput){
+        leftChoiceInput.value = null; 
+        leftChoiceInput.setAttribute("id","rightChoiceInput")
+    }
+    //기존 검색 목록 제거
+    const section = document.querySelector(".mebmer-search-profile");
+    section.innerHTML=""; // 이전 내용 제거
+
+    //이벤트리스너 제거/추가
     var reset = document.querySelector(".member-search-input")
     reset.removeEventListener("keyup",memberSearch)
     reset.addEventListener("keyup",memberAddFriendList)
     memberAddFriendList()
 })
 
-/* 왼쪽 클릭 시 이벤트리스너 제거/추가 */
-document.getElementById("leftChoice").addEventListener("click",()=>{
+/* 깐부 찾기 클릭 시 */
+leftChoice.addEventListener("click",()=>{
+    //검색 id변경 하여 검색시 내가 신청한 목록조회가 아닌 회원조회로 변경
+    const rightChoiceInput = document.getElementById("rightChoiceInput");
+    if(rightChoiceInput){
+        rightChoiceInput.value = null;
+        rightChoiceInput.setAttribute("id","leftChoiceInput")
+    }
+    //기존 검색 목록 제거
+    const section = document.querySelector(".mebmer-search-profile");
+    section.innerHTML=""; // 이전 내용 제거
 
+    // 이벤트리스너 제거/추가
     var reset = document.querySelector(".member-search-input")
     reset.removeEventListener("keyup",memberAddFriendList)
     reset.addEventListener("keyup",memberSearch)
 })
 
+
 /* 비동기로 회원 목록 조회 함수  */
 const memberSearch=()=>{
-    
     // input 값 가져오기 
     var leftChoiceInput=$('#leftChoiceInput').val();
     

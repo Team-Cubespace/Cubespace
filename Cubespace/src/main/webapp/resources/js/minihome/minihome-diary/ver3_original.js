@@ -161,6 +161,7 @@ function createCalendar(events){
     // },
     // eventSources: [defaultEvents],
     //어떤 사람이 성공했다는 바로 그 함수!! 시도해보겠어요
+    
     events : function(start, end, timezone, callback){//이벤트 출력부분
       callback(defaultEvents);
       console.log(defaultEvents);

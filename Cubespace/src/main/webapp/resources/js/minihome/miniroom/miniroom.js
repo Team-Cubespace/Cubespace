@@ -6,9 +6,15 @@ const miniroomY = window.pageYOffset + miniroomContainer.getBoundingClientRect()
 /* 자주 쓰이는 요소 */
 const homeArea = document.getElementById("homeArea");
 const tileContainer = document.querySelector(".tile-container");
+const tileList = document.querySelectorAll(".tile-container > div");
 
 /* 움직일 소품 변수 */
 let movedProps;
+
+/* 임시 변수 (자리번호, x좌표, y좌표) */
+let i = 2;
+let locationX = 0;
+let locationY = 0;
 
 /* 소품 배치 O -> 소품 배치 X */
 const afterEmptyTile = tileNumber => {
@@ -34,6 +40,10 @@ const propsLocation = (tile, props) => {
 
     props.style.left = propsX + "px";
     props.style.top = propsY + "px";
+
+    // 임시 변수 좌표 값 변경
+    locationX = propsX;
+    locationY = propsY;
 }
 
 /* dropdown */
@@ -48,15 +58,13 @@ const hideDropdown = () => {
 const dropdownEvent = () => {
     if(toggleFlag){
         dropdown.style.display = "block";
+        dropdown.style.left = locationX + "px";
+        dropdown.style.top = (locationY - 50) + "px";
         toggleFlag = false;
-        
     }else{
         hideDropdown();
     }
 }
-
-/* 임시 변수 (이미 배치된 소품 자리번호) */
-let i = 2;
 
 /* 이미 배치된 소품 가져오기 */
 (() => {
@@ -73,6 +81,7 @@ let i = 2;
     
     // 소품 이미지 추가
     const propsImg = document.createElement("img");
+    propsImg.classList.add("props-img");
     propsImg.src = "../../../images/ribbit.png";
 
     props.appendChild(propsImg);
@@ -89,16 +98,47 @@ const clickProps = () => {
     for(let props of propsList){
         props.addEventListener("click", () => {
             dropdownEvent();
+            movedProps = props;
         })
-        movedProps = props;
     }
 }
 
 clickProps();
 
-// 이동하기 click
+/* dropdown */
+window.addEventListener("click", e => {
+    if(!e.target.matches('.props, .props-img, dorpdown')) hideDropdown();
+})
+
+/* esc and tile click */
+const hideTile = () => {
+    // event off
+    $(tileContainer).off("mousemove");
+    $(homeArea).off("scroll");
+    $(document).off("keydown");
+    
+    // 소품 불투명하게, 포인터 이벤트 O
+    movedProps.style.opacity = "1";
+    movedProps.style.pointerEvents = "auto";
+    
+    // 타일을 안보이게 함
+    tileContainer.style.opacity = "0";
+    
+    for(let oneTile of tileList){
+        oneTile.style.cursor = "default";
+        oneTile.style.pointerEvents = "none";
+    }
+
+    document.getElementById("esc").remove();
+}
+
+/* 이동하기 click */
 document.getElementById("moveBtn").addEventListener("click", () => {
     hideDropdown();
+
+    const miniroomHeader = document.querySelector(".miniroom-header");
+
+    miniroomHeader.innerHTML += "<span id='esc'>esc를 눌러 이동을 취소할 수 있습니다.</span>";
 
     // 소품 투명하게, 포인터 이벤트 X
     movedProps.style.opacity = "0.7";
@@ -116,11 +156,12 @@ document.getElementById("moveBtn").addEventListener("click", () => {
         emptyTile.style.pointerEvents = "auto";
     }
 
-    let clientX=0;
-    let clientY=0;
+    let clientX = 0;
+    let clientY = 0;
 
-    /* 소품 좌표 설정 */
+    // 소품 좌표 설정 
     const mousemoveEvent = (mouseX, mouseY) => {
+        // 위치 값 수정 필요
         if(mouseX > 570) mouseX = 570;
         if(mouseY > 290) mouseY = 290;
     
@@ -147,43 +188,36 @@ document.getElementById("moveBtn").addEventListener("click", () => {
         
         mousemoveEvent(mouseX, mouseY);
     });
+
+    // esc를 눌러서 취소
+    $(document).on("keydown", e => {
+        var code = e.keyCode || e.which;
+     
+        if(code == 27) {
+            hideTile();
+
+            movedProps.style.left = locationX + "px";
+            movedProps.style.top = locationY + "px";
+        }
+    });
 })
 
 /* tile click */
-const tileList = document.querySelectorAll(".tile-container > div");
-
 for(let tile of tileList){
-    if(tile.classList.contains)
     tile.addEventListener("click", e => {
-        $(tileContainer).off("mousemove");
-        $(homeArea).off("scroll");
+        if(tile.classList.contains('empty')) {
+            hideTile();
 
-        const already2 = document.getElementsByClassName("already");
-        for(let alreadyTile2 of already2){
-            afterAlreadyTile($(alreadyTile2).attr('id').substring(4));
-        }
-
-        // 소품 위치 변경
-        propsLocation(tile.firstChild, movedProps);
+            // 소품 좌표 변경
+            propsLocation(tile.firstChild, movedProps);
     
-        console.log($(tile).attr('id').substring(4));
-
-        // 타일 변경
-        afterAlreadyTile($(tile).attr('id').substring(4));
-        afterEmptyTile(i);
-
-        movedProps.style.opacity = "1";
-        movedProps.style.pointerEvents = "auto";
-
-        tileContainer.style.opacity = "0";
-
-        for(let hideTile of tileList){
-            hideTile.style.cursor = "default";
-            hideTile.style.pointerEvents = "none";
+            // 타일 변경
+            afterEmptyTile(i);
+            afterAlreadyTile($(tile).attr('id').substring(4));
+            
+            // 임시 변수 자리번호 값 변경
+            i = $(tile).attr('id').substring(4);
         }
-        
-        // 임시 변수 값 변경
-        i = $(tile).attr('id').substring(4);
     })
 }
 

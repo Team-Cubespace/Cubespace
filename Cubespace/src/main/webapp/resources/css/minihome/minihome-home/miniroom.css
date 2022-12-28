@@ -5,12 +5,16 @@
     position: relative;
 }
 
-.miniroom-deco{
+.miniroom-deco, #esc{
     font-size: 10px;
     font-weight: normal;
     position: absolute;
     right: 0;
     bottom: 10px;
+}
+
+#esc{
+    color: darksalmon;
 }
 
 /* 미니룸 */
@@ -29,53 +33,54 @@
     overflow: hidden;
 }
 
-.miniroom{
-    perspective: 500px; /* 원근감 */
-}
-
 .miniroom > div{
     border: 1px solid black;
     position: absolute;
-    transform-style: preserve-3d; /* 3d객체로 인식하여 색상을 입체적으로 표현 */
+    transform-style: preserve-3d;
 }
 
 .left{
-    height: 380px;
-    width: 380px;
+    width: 450px;
+    height: 500px;
     background-color: rgb(242, 247, 255);
-    background-image: url("../../../images/help.png");
-    background-size: 150px;
-    background-repeat: repeat;
-    top: -31px;
-    left: -12px;
-    transform: rotateX(345deg) rotateY(45deg) rotateZ(0deg);
+    background-image: url("../../../images/wallsample.gif");
+    /* background-size: 150px;
+    background-repeat: repeat; */
+    background-size: cover;
+    top: -187px;
+    left: -72px;
+    transform: rotateX(315deg) rotateY(45deg) rotateZ(0deg);
 }
 
 .right{
-    width: 380px;
-    height: 380px;
+    width: 450px;
+    height: 500px;
     background-color: rgb(242, 247, 255);
-    background-image: url("../../../images/help.png");
-    background-size: 150px;
-    background-repeat: repeat;
-    top: -31px;
-    right: -13px;
-    transform: rotateX(345deg) rotateY(-45deg) rotateZ(0deg);
+    background-image: url("../../../images/wallsample.gif");
+    /* background-size: 150px; */
+    /* background-repeat: repeat; */
+    background-size: cover;
+    top: -187px;
+    right: -72px;
+    transform: rotateX(315deg) rotateY(-45deg) rotateZ(0deg) scaleX(-1);
 }
 
 .bottom{
-    width: 500px;
-    height: 500px;
-    background-color: rgb(223, 236, 255);
-    background-image: url("../../../images/help.png");
-    background-size: 150px;
-    background-repeat: repeat;
-    top: 124px;
-    left: 62px;
+    width: 450px;
+    height: 450px;
+    background-color: rgb(25 108 139);
+    background-size: cover;
+    /* background-repeat: repeat; */
+    top: 125px;
+    left: 86px;
     transform: rotateX(45deg) rotateY(0deg) rotateZ(45deg);
 }
 
 /* tile-container 영역 (좌표) */
+.tile-container{
+    opacity: 0;
+}
+
 .tile-container > div{
     width: 85px;
     height: 85px;
@@ -83,123 +88,119 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transform: rotateX(45deg) rotateY(0deg) rotateZ(45deg);
+    pointer-events: none;
 }
 
 /* 1-1 */
 #tile1{
-    top: 143px;
-    left: 269.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 135px;
+    left: 268.5px;
 }
 
 /* 2-1 */
 #tile2{
-    top: 185px;
-    left: 206.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 182px;
+    left: 202.5px;
 }
 
 /* 2-2 */
 #tile3{
-    top: 185px;
-    left: 332.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 182px;
+    left: 334.5px;
 }
 
 /* 3-1 */
 #tile4{
-    top: 227px;
-    left: 143.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 228px;
+    left: 136.5px;
 }
 
 /* 3-2 */
 #tile5{
-    top: 227px;
-    left: 269.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 228px;
+    left: 268.5px;
 }
 
 /* 3-3 */
 #tile6{
-    top: 227px;
-    left: 395.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 228px;
+    left: 400.5px;
 }
 
 /* 4-1 */
 #tile7{
-    top: 269px;
-    left: 80.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 274px;
+    left: 70.5px;
 }
 
 /* 4-2 */
 #tile8{
-    top: 269px;
-    left: 206.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 274px;
+    left: 202.5px;
 }
 
 /* 4-3 */
 #tile9{
-    top: 269px;
-    left: 332.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 274px;
+    left: 334.5px;
 }
 
 /* 4-4 */
 #tile10{
-    top: 269px;
-    left: 458.5px;
-    transform: rotateX(49deg) rotateY(0deg) rotateZ(45deg);
+    top: 274px;
+    left: 466.5px;
 }
 
 .empty{
-    background-color: rgba(170, 0, 255, 0.097);
+    background-color: rgba(170, 0, 255, 0.3);
     border: 2px dashed rgb(160, 93, 255);
-    cursor: pointer;
+}
+
+.empty:hover{
+    filter: brightness(150%);
 }
 
 .already{
-    background-color: rgba(255, 0, 0, 0.097);
+    background-color: rgba(255, 0, 0, 0.3);
     border: 2px dashed rgb(255, 93, 93);
 }
 
 /* 미니미, 소품 */
-.prop{
+.props{
     width: 100px;
     height: 100px;
     position: absolute;
     z-index: 5;
 }
 
-.prop img{
+.props-img{
     width: 100%;
     height: 100%;
     cursor: pointer;
 }
 
+/* dropdown */
 .dropdown {
     width: 100px;
-    height: 0px;
+    height: 5-px;
     background-color: white;
+    border: 1px solid black;
     position: absolute;
-    top: 113px;
-    right: -85px;
+    display: none;
     overflow:hidden;
-    transition-duration : 0.3s;
     z-index: 20;
 }
 
-.dropdown > a{
+.dropdown > span{
     width: 100%;
     height: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
-.dropdown > a:hover{
+.dropdown > span:hover{
     background-color: #ececff;
 }

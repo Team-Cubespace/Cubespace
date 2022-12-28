@@ -52,3 +52,18 @@ allFriend.addEventListener("click", e => {
     searchInput.value="";
     location.href="/manage/friend?searchInput=" + searchInput.value;
 })
+
+
+
+/* 깐부 미니홈페이지 오픈 */
+const openMinihome = (url) => {
+    console.log(url);
+    let title = "minihome";
+    let name = "_blank";
+    let replace = "false";
+
+    let specs = "resizable=no, status=no, menubar=no, width=1203, height=718, top=50, left=300";
+    window.open(url,name,specs,replace);
+
+    return false;
+}

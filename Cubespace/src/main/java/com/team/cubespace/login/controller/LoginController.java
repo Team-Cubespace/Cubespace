@@ -105,6 +105,7 @@ public class LoginController {
 				// 폰트 리스트 등록
 				List<Map<String, Object>> fontList = mService.getFontList(paramMap);
 				model.addAttribute("fontList", fontList);
+				
 			}
 
 		} else {

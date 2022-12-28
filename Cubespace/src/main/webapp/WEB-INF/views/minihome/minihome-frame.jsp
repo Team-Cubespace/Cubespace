@@ -73,8 +73,8 @@
             </div>
             <section class="minihome-main">
 
-                <%-- <iframe src="/albumWrite" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
-                <iframe src="/manage/font" frameborder="0" name="minihomeMenu" scrolling="no">
+                <iframe src="/albumWrite" frameborder="0" name="minihomeMenu" scrolling="no">
+                <%-- <iframe src="/manage/font" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
 
                 </iframe>
                 <ul class="minihome-menu frame-menu-color">
@@ -83,7 +83,7 @@
                     <li style="order:${minihome.categoryOrder.album}"><a href="/albumList/2" target="minihomeMenu">사진첩</a></li>
                     <li style="order:${minihome.categoryOrder.video}"><a href="">동영상</a></li>
                     <li style="order:${minihome.categoryOrder.guestBook}"><a href="">방명록</a></li>
-                    <c:if test="${minihome.memberNo eq loginMember.memberNo}">
+                    <c:if test="${minihome.memberNo == loginMember.memberNo}">
                         <li><a href="/manage/font" target="minihomeMenu">관리</a></li>
                     </c:if>
                 </ul>

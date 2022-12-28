@@ -64,7 +64,7 @@
                             <div class="member-nickname">묘동닉네임글자테스트</div>
                         </div>
 
-                        <div class="profile-body">
+                        <div class="profile-body"  onclick="return openMinihome(this.href)">
                             <div class="member-choice">
                                 <i class="fa-solid fa-check" id="faCheck"></i>
                                 <div >수락</div>

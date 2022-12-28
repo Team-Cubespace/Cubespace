@@ -1,11 +1,5 @@
-/* 모달 열기 */
-function openmodalAlarm(){
-    document.getElementById("modalAlarm").style.display = "block";
-}
-/* 모달 닫기 */
-function closeModalAlarm(){
-    document.getElementById("modalAlarm").style.display = "none";
-}
+/* 값을 저장할 변수 선언 */
+// let memberNo;
 
 const alarmLeftChoice =document.getElementById("alarmLeftChoice")
 const alarmRightChoice =document.getElementById("alarmRightChoice")
@@ -18,9 +12,31 @@ const selectMemeberAlarm=()=>{
     alarmRightChoice.classList.add("alarm-delete-css")
     alarmRightChoice.classList.remove("alarm-select-css")
     modalChoice.setAttribute("id","modalChoiceLeft")
-    alarmSection.innerHTML="";
+    // alarmSection.innerHTML=""; 임시 주석
+
+    // 전체삭제 버튼 지우기
+    const deleteall = document.querySelector(".delete-all");
+    if(deleteall){
+        deleteall.remove()
+    }
     
-    /* 비동기로 깐부알림 DB조회 구문작성*/
+    /* 비동기로 내가 받은 깐부 신청 알림 목록조회 */
+    $.ajax({
+        url : "/memberNotifications",
+        data: {"loginMemberNo":loginMemberNo},
+        dataType : "JSON",
+        success : memberNotificationsList =>{
+
+            alarmSection.innerHTML="";  // 이전 내용 제거
+
+            for(let alarmProfile of memberNotificationsList){
+                /* 회원번호 전역변수 저장 */
+                memberNo= alarmProfile.memberNo;
+
+
+            }
+        }
+    })
 }
 
 /* 모달처음 시작시 깐부알림 함수 즉시 적용 */
@@ -106,13 +122,6 @@ alarmRightChoice.addEventListener("click",()=>{
     }
 })
 
-/* 왼쪽 클릭시 */
-/* 전체삭제버튼 삭제 */
-alarmLeftChoice.addEventListener("click",()=>{
-        const deleteall = document.querySelector(".delete-all");
-        deleteall.remove()
-})
-
 /* 삭제버튼 */
 const messageDelete = (btn)=>{
     const remove = btn.parentElement.parentElement.parentElement;
@@ -128,3 +137,12 @@ const messageDelete = (btn)=>{
 
 
 // 전체삭제 css 더 수정 
+/* 모달 열기 */
+function openmodalAlarm(){
+    document.getElementById("modalAlarm").style.display = "block";
+    selectMemeberAlarm()
+}
+/* 모달 닫기 */
+function closeModalAlarm(){
+    document.getElementById("modalAlarm").style.display = "none";
+}

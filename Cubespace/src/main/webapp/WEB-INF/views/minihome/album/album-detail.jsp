@@ -11,12 +11,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minihome Content Area</title>
-    <link rel="stylesheet" href="/resources/css/reset.css">
-    <link rel="stylesheet" href="/resources/css/variables.css">
+    <%-- <link rel="stylesheet" href="/resources/css/reset.css">
+    <link rel="stylesheet" href="/resources/css/variables.css"> --%>
+    <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/minihome/minihome-rayout.css">
     <link rel="stylesheet" href="/resources/css/common/swiper.min.css">
     <link rel="stylesheet" href="/resources/css/minihome/album/album-detail.css">
     <link rel="stylesheet" href="/resources/css/minihome/include/comment.css">
+    <link rel="stylesheet" href="/resources/css/minihome/include/scrap.css">
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
     <style>
         .frame-color {
@@ -55,5 +57,6 @@
     <script src="/resources/js/common/swiper.min.js"></script>
     <script src="/resources/js/minihome/album/album-detail.js"></script>
     <script src="/resources/js/minihome/include/comment.js"></script>
+    <script src="/resources/js/minihome/include/board-scrap.js"></script>
 </body>
 </html>

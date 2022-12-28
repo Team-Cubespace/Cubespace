@@ -1,0 +1,91 @@
+/* div {
+    border: 1px solid black;
+} */
+.minihome-rayout:nth-child(2){
+    position: relative;
+}
+#boardScrapModal {
+    z-index: 1000;
+    font-size: 15px;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+}
+#boardScrap {
+    background-color: white;
+    width: 50%;
+    height: 65%;
+}
+
+/* 모달 헤더 */
+.scrap-modal-header {
+    width: 100%;
+    height: 7%;
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+#modalCloseButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* 모달 메인 */
+.scrap-modal-main {
+    padding: 5px;
+}
+.scrap-modal-main > span{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    padding: 10px 0px;
+}
+#scrapForm {
+    padding: 10px;
+}
+#scrapForm .modal-label {
+    font-weight: bold;
+}
+
+/* 모달 스크랩 댓글 남기기 영역 */
+#scrapForm textarea {
+    resize: none;
+    margin: 5px 0px;
+}
+.modal-comment-content {
+    margin: 20px 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 모달 스크랩 허용 범위 영역 */
+.modal-radio-area {
+    margin: 5px 0px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* 모달 버튼 영역 */
+.modal-button-area {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.modal-button-area button {
+    font-size: 15px;
+    width: 35%;
+    background-color: #2e2e2e;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px 0px;
+}

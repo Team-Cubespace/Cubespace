@@ -223,4 +223,10 @@ public class AlbumController {
 		
 		return new Gson().toJson(resultMap);
 	}
+	
+	@ResponseBody
+	@PostMapping("/boardScrap")
+	public int boardScrap() {
+		return 0;
+	}
 }

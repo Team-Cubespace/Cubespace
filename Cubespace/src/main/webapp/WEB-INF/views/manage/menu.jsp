@@ -156,7 +156,8 @@
                        
                         <div class="menuLeftRight">
                             <div class="menuLeftArea" >
-
+${folderList}
+${categoryOrder}
                                 <div class="home" >
                                     <div class=" homeCategoryArea">
                                         <span class="menuTitle">홈</span>
@@ -274,7 +275,10 @@
                                         </div>
                                 </c:if>            
 
-                                <c:if test="${fn:substring(realOrder, 1,2) == 3}"> 
+
+                                <%-- <c:when test="${fn:contains(loginType, 'M')}"> --%>
+
+                                <c:if test="${fn:contains(fn:substring(realOrder, 1,2), '3')}"> 
                                         <div class="video">
                                             <div class="categoryArea" name="3">
                                                 <span class="menuTitle">동영상</span><i class="fa-solid fa-plus"></i>

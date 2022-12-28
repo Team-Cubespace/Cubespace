@@ -15,6 +15,16 @@
         }
     </style>
     </c:forEach>
+
+
+    <c:if test="${myFont == 2 || myFont == 3 || myFont == 4 
+        || myFont == 5 || myFont == 7 || myFont == 8}">
+    <style>
+    body{font-size = 15px;}
+    </style>
+    </c:if> 
+
+
     
     <style>
     *{

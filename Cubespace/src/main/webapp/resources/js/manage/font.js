@@ -27,7 +27,6 @@ allFont.addEventListener("click", e => {
 /* 적용하기 버튼 */
 document.getElementById("useFontBtn").addEventListener("click", e => {
 
-    // const fontNo = document.querySelector('input:radio[name="useFontRadio"]:checked').value();
     const fontNo = $('input[type=radio][name=useFontRadio]:checked').val();
 
     $.ajax({

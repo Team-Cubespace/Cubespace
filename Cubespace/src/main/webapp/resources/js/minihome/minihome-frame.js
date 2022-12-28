@@ -11,5 +11,3 @@ $('#musicVolume').on('input', function(){
 
 
 
-// 폰트 적용 위해 로드되자마자 한번더 실행
-// (() =>{location.href = location.href;})();

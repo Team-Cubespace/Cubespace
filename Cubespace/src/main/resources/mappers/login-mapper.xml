@@ -43,7 +43,6 @@
 
 
 
-
 	<!-- 로그인 기능 -->
 	<select id="login" parameterType="string" resultMap="member_rm">
 		SELECT M.MEMBER_NO, MEMBER_EMAIL, MEMBER_PW, MEMBER_NAME, MEMBER_NICKNAME, 

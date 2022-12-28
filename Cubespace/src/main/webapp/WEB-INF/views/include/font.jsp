@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+
+   
     
-    
-    <c:forEach var="font" items="${fontList}">
-    <c:if test="${font.fontNo == loginMember.ownFontNo}">
+    <c:forEach var="font" items="${allFontList}">
+    <c:if test="${font.fontNo == minihome.fontNo}">
         <c:set var="myFont" value="${font.fontNo}"/>
     </c:if>
 

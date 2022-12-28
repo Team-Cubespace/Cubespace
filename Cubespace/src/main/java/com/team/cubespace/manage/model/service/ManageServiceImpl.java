@@ -88,4 +88,22 @@ public class ManageServiceImpl implements ManageService{
 		return dao.useFont(paramMap);
 	}
 
+	/**
+	 * 상점에 등록된 전체 폰트 리스트 조회
+	 */
+	@Override
+	public List<Map<String, Object>> getAllFontList() {
+		
+		return dao.getAllFontList();
+	}
+
+	/**
+	 * 한 회원의 폰트 가져오기
+	 */
+	@Override
+	public int getMemberFontNo(int memberNo) {
+		
+		return dao.getMemberFontNo(memberNo);
+	}
+
 }

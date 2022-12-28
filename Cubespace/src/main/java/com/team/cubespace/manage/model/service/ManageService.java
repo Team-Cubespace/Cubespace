@@ -55,4 +55,15 @@ public interface ManageService {
 	 */
 	int useFont(Map<String, Object> paramMap);
 
+	/** 상점에 등록된 전체 폰트 리스트 조회
+	 * @return
+	 */
+	List<Map<String, Object>> getAllFontList();
+
+	/** 한 회원의 폰트 가져오기
+	 * @param memberNo
+	 * @return
+	 */
+	int getMemberFontNo(int memberNo);
+
 }

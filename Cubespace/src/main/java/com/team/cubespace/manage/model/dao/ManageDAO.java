@@ -90,4 +90,21 @@ public class ManageDAO {
 		return sqlSession.update("ManageMapper.useFont", paramMap);
 	}
 
+	/** 상점에 등록된 전체 폰트 리스트 조회
+	 * @return allFontList
+	 */
+	public List<Map<String, Object>> getAllFontList() {
+		
+		return sqlSession.selectList("ManageMapper.getAllFontList");
+	}
+
+	/** 한 회원의 폰트 가져오기
+	 * @param memberNo
+	 * @return
+	 */
+	public int getMemberFontNo(int memberNo) {
+		
+		return sqlSession.selectOne("ManageMapper.getMemberFontNo", memberNo);
+	}
+
 }

@@ -30,7 +30,7 @@ import com.team.cubespace.manage.model.service.ManageService;
 import com.team.cubespace.member.model.vo.Member;
 
 @Controller
-@SessionAttributes({ "loginMember", "message", "fontList" })
+@SessionAttributes({ "loginMember", "message"})
 public class LoginController {
 
 	@Autowired
@@ -68,8 +68,7 @@ public class LoginController {
 	@PostMapping("/member/login")
 	public String login(Member inputMember, Model model, RedirectAttributes ra, HttpServletResponse resp,
 			@RequestParam(value = "saveId", required = false) String saveId,
-			@RequestHeader(value = "referer") String referer,
-			@RequestParam Map<String, Object> paramMap // fontList 등록을 위함
+			@RequestHeader(value = "referer") String referer
 			) throws Exception {
 
 		Member loginMember = service.login(inputMember);
@@ -101,10 +100,6 @@ public class LoginController {
 				cookie.setPath("/");
 				resp.addCookie(cookie);
 				
-				
-				// 폰트 리스트 등록
-				List<Map<String, Object>> fontList = mService.getFontList(paramMap);
-				model.addAttribute("fontList", fontList);
 				
 			}
 

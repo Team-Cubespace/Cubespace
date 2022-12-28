@@ -63,7 +63,10 @@
                             </div>
                             <div class="friendBtn">
                                 <span class="deleteFriend"><i class="fa-solid fa-minus"></i> 깐부끊기</span>
-                                <a href="/minihome/${friend.friendNo}"  id="${friend.friendNo}" class="minihomeLink" onclick="return openMinihome(this.href)"><img src="/resources/images/common/smallCube.png" id="minihomeImg"> 미니홈피</a>
+                                <a href="/minihome/${friend.friendNo}"  id="${friend.friendNo}" class="minihomeLink" onclick="return openMinihome(this.href)">
+                                    <img src="/resources/images/common/smallCube.png" id="minihomeImg">
+                                     미니홈피
+                                </a>
                                 <%-- <a href="/minihome/${loginMember.memberNo}" id="homeBtn" onclick="return openMinihome(this.href)"><i class="fa-solid fa-house"></i>&nbsp;My Space</a> --%>
                                 <%-- target="_blank" --%>
                             </div>

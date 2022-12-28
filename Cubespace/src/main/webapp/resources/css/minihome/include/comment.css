@@ -39,6 +39,10 @@
     margin-top: 10px;
     overflow: hidden;
 }
+.comment-profile-image-area img {
+    width: 100%;
+    height: 100%;
+}
 .comment-profile-image {
     width: 100%;
     height: 100%;
@@ -47,13 +51,14 @@
 .comment-content {
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 100%;
 }
 .comment-write-row .member-nickname {
     font-size: 20px;
     font-weight: bold;
 }
-.comment-write-row textarea {
+.comment-write-row textarea,
+.update-textarea {
     border: none;
     resize: none;
     border-bottom: 2px solid black;
@@ -63,13 +68,17 @@
     outline: none;
     overflow: hidden;
 }
-
-.comment-write-button-area {
+.update-textarea {
+    width: 100%;
+}
+.comment-write-button-area,
+.update-button-area {
     display: flex;
     justify-content: flex-end;
     padding: 5px;
 }
-.comment-write-row button {
+.comment-write-row button,
+.update-button-area button {
     width: 70px;
     margin-left: 5px;
     /* 색 설정 필요 */
@@ -82,7 +91,8 @@
     border: 1px solid var(--ink);
     color: var(--ink);
 }
-.comment-write-row button:last-child {
+.comment-write-row button:last-child,
+.update-button-area button:last-child {
     color: white;
     background-color: var(--ink);
 }
@@ -169,3 +179,8 @@
 /* .comment-row:hover .comment-drop-down-button {
     display: block;
 } */
+.comment-content-area {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}

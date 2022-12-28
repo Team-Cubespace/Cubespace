@@ -47,7 +47,9 @@
     </c:if>
     <script>
         const loginMemberNo = '${loginMember.memberNo}';
-        const albumNo = '${album.albumNo}';
+        const boardNo = '${album.albumNo}';
+        const profileImage = '${loginMember.profileImage}';
+        const boardTypeNo = 2;
     </script>
     <script src="/resources/js/common/jQuery-core.js"></script>
     <script src="/resources/js/common/swiper.min.js"></script>

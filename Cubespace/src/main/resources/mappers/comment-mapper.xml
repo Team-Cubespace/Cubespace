@@ -43,7 +43,34 @@
 				AND COMMENT_DEL_YN = 'N') C
 		START WITH PARENT_COMMENT_NO IS NULL
 		CONNECT BY PRIOR COMMENT_NO = PARENT_COMMENT_NO
-		ORDER SIBLINGS BY COMMENT_NO
+		ORDER SIBLINGS BY COMMENT_NO DESC
 		]]>
 	</select>
+	
+	<!-- 댓글 등록 -->
+	<insert id="insertComment">
+		INSERT INTO "COMMENT" (COMMENT_NO, BOARD_TYPE_NO, BOARD_NO, COMMENT_CONTENT, MEMBER_NO, PARENT_COMMENT_NO)
+		VALUES(SEQ_COMMENT_NO.NEXTVAL, #{boardTypeNo}, #{boardNo}, #{commentContent}, #{memberNo}, 
+		<if test='parentCommentNo == 0'>
+			NULL
+		</if>
+		<if test='parentCommentNo != 0'>
+			#{parentCommentNo}
+		</if>
+		)
+	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<update id="deleteComment">
+		UPDATE "COMMENT" SET
+		COMMENT_DEL_YN = 'Y'
+		WHERE COMMENT_NO = #{commentNo}
+	</update>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateComment">
+		UPDATE "COMMENT" SET
+		COMMENT_CONTENT = #{commentContent}
+		WHERE COMMENT_NO = #{commentNo}
+	</update>
 </mapper>

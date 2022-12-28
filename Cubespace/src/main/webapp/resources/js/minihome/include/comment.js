@@ -56,10 +56,11 @@ const createCommentList = (commentList) => {
             // 수정 버튼
             const updateComment = document.createElement("li");
             updateComment.innerText = "수정";
-            /* 함수 설정 */
+            updateComment.setAttribute("onclick", `showUpdateComment(${comment.commentNo}, this)`);
             // 삭제 버튼
             const deleteComment = document.createElement("li");
             deleteComment.innerText = "삭제";
+            deleteComment.setAttribute("onclick", `deleteComment(${comment.commentNo})`);
             // 조립
             commentDropDownMenu.append(updateComment, deleteComment);
             commentDropDownButton.append(commentDropDownMenu);
@@ -68,8 +69,11 @@ const createCommentList = (commentList) => {
         commentContent.append(commentNicknameArea);
 
         // 댓글 내용
+        const commentContentArea = document.createElement("div");
+        commentContentArea.classList.add("comment-content-area");
+
         const commentContentP = document.createElement("P");
-        commentContentP.innerText = comment.commentContent;
+        commentContentP.innerHTML = comment.commentContent;
 
         // 답글 버튼 영역
         const commentButtonArea = document.createElement("div");
@@ -78,11 +82,12 @@ const createCommentList = (commentList) => {
         const commentDate = document.createElement("span");
         commentDate.classList.add("comment-date");
         commentDate.innerText = comment.commentCreate;
-
-        
+        // 부모 댓글이면
+      
         // 조립
         commentButtonArea.append(commentDate);
-        commentContent.append(commentContentP, commentButtonArea);
+        commentContentArea.append(commentContentP);
+        commentContent.append(commentContentArea, commentButtonArea);
         
         commentRow.append(commentProfileImageArea, commentContent);
         
@@ -91,9 +96,10 @@ const createCommentList = (commentList) => {
         if(comment.level == 1) {
             const addCommentArea = document.createElement("button");
             addCommentArea.innerText = "답글";
-            /* 함수 추가 */
+            commentButtonArea.setAttribute("onclick", `addCommentArea(${comment.commentNo}, this)`)
             commentButtonArea.append(addCommentArea);
-
+        }
+        if(comment.childCommentCount > 0) {
             // 자식댓글 펼치기 버튼 추가
             const childCommentCount = document.createElement("button");
             childCommentCount.classList.add("child-comment-count")
@@ -106,12 +112,12 @@ const createCommentList = (commentList) => {
 }
 
 // 댓글 목록 조회
-const selectCommentList = (albumNo) => {
+const selectCommentList = (boardNo) => {
     $.ajax({
-        url: "/selectCommentList",
+        url: "/comment/selectCommentList",
         data: {
-            boardNo: albumNo,
-            boardTypeNo: 2
+            boardNo: boardNo,
+            boardTypeNo: boardTypeNo
         },
         dataType: "JSON",
         success: result => {
@@ -145,11 +151,168 @@ const resizeTextarea = (textarea)=>{
    textarea.style.height = "auto"   // height 초기화
    textarea.style.height = textarea.scrollHeight - 12 + "px";
 }
-/* 댓글 리스트 비동기 조회 및 출력 */
+
+/* 댓글 작성 */
+
+(()=>{
+    // 댓글 textarea
+    const addComment = document.getElementById("addComment");
+    // 취소 버튼
+    const addCommentCancel = document.getElementById("addCommentCencel");
+    // 등록 버튼
+    const addCommentInsert = document.getElementById("addCommentInsert");
+
+    addCommentCancel.addEventListener("click", ()=>{
+        addComment.value = "";
+    });
+    addCommentInsert.addEventListener("click", ()=>{
+        // 로그인상태가 아닐 때 제출 x
+        if(loginMemberNo == "") {
+            alert("로그인 후 이용해주세요")
+            return;
+        }
+
+        // 입력값이 없을 때 제출 x
+        if(addComment.value.trim().length == 0 ) {
+            return;
+        }
+
+        $.ajax({
+            url:"/comment/insert",
+            data: {
+                boardNo: boardNo,
+                memberNo: loginMemberNo,
+                boardTypeNo: boardTypeNo,
+                commentContent : addComment.value.trim()
+            },
+            type: "POST",
+            success:result=>{
+                // 댓글 작성 성공 시
+                if(result > 0) {
+                    // 댓글 작성 인풋 초기화
+                    addComment.value = ""
+                    addComment.style.height = "auto";
+                    // 댓글 목록 재요청
+                    selectCommentList(boardNo);
+                }
+            }
+        })
+    });
+})();
+
+
 
 /* 댓글 수정 함수 */
+// 수정전 원래 행의 상태를 저장할 변수
+let beforeCommentRow;
+
+const showUpdateComment= (commentNo, btn) =>{
+    // 댓글 수정이 한 개만 열릴 수 있도록 함
+    const temp = document.getElementsByClassName("update-textarea");
+
+    if(temp.length > 0) {
+        if(confirm("다른 댓글이 수정 중입니다.\n현재 댓글을 수정하시겠습니까?")) {
+            temp[0].parentElement.innerHTML = beforeCommentRow;
+        } else {
+            return;
+        }
+    }
+
+    // p태그 찾기
+    let currentElement = btn;
+    for(; !currentElement.classList.contains("comment-content"); currentElement = currentElement.parentElement);
+
+    const commentContentArea = currentElement.getElementsByClassName("comment-content-area")[0];
+    console.log(commentContentArea);
+
+    // 수정전 p태그 백업
+    beforeCommentRow = commentContentArea.innerHTML;
+
+    // 수정전 내용 얻어오기
+    let beforeContent = commentContentArea.firstElementChild.innerHTML.trim();
+
+    // 댓글 행 내부 내용 모두 삭제
+    commentContentArea.innerHTML = "";
+
+    const textarea = document.createElement("textarea");
+    textarea.classList.add("update-textarea");
+
+    // XSS 방지 처리 해제
+    beforeContent =  beforeContent.replaceAll("&amp;", "&");
+    beforeContent =  beforeContent.replaceAll("&lt;", "<");
+    beforeContent =  beforeContent.replaceAll("&gt;", ">");
+    beforeContent =  beforeContent.replaceAll("&quot;", "\"");
+    
+    // 개행문자 처리 해제
+    beforeContent =  beforeContent.replaceAll("<br>", "\n").replaceAll("&nbsp;", " ");
+
+    textarea.value = beforeContent;
+    textarea.setAttribute("rows", 1);
+    textarea.setAttribute("onkeyup", "resizeTextarea(this)");
+    commentContentArea.append(textarea);
+    textarea.style.height = textarea.scrollHeight - 12 + "px";
+
+    // 수정 버튼
+    const updateButtonArea = document.createElement("div");
+    updateButtonArea.classList.add("update-button-area");
+
+    const updateButton = document.createElement("button");
+    updateButton.innerText = "수정";
+    updateButton.addEventListener("click", ()=>{
+        if(loginMemberNo == "") {
+            alert("로그인 후 이용해주세요.");
+            return;
+        }
+        if(textarea.value.trim().length == 0) {
+            return;
+        }
+        $.ajax({
+            url:"/comment/update",
+            data: {
+                commentNo:commentNo,
+                commentContent: textarea.value
+            },
+            type:"POST",
+            success: result => {
+                if(result > 0) {
+                    alert("댓글이 수정되었습니다");
+                    selectCommentList(boardNo);
+                }
+            }
+        })
+    });
+
+    const updateCancelButton = document.createElement("button");
+    updateCancelButton.innerText = "취소";
+    updateCancelButton.addEventListener("click", ()=>{
+        if(confirm("작성한 내용은 저장되지 않습니다.\n정말 취소하시겠습니까?")) {
+            commentContentArea.innerHTML = beforeCommentRow;
+        }
+    });
+
+    // 조립
+    updateButtonArea.append(updateCancelButton, updateButton);
+    commentContentArea.append(updateButtonArea);
+}
 
 /* 댓글 삭제 함수 */
+const deleteComment = (commentNo) => {
+    if(confirm("정말 삭제하시겠습니까?")) {
+        $.ajax({
+            url:"/comment/delete",
+            data: {
+                commentNo: commentNo
+            },
+            type:"POST",
+            success: result=>{
+                if(result > 0) {
+                    alert("댓글이 삭제되었습니다.");
+                    selectCommentList(boardNo);
+                }
+            },
+        })
+    }
+}
 
 // 페이지 로딩시 댓글관련 이벤트 초기화
 (()=>{
@@ -171,7 +334,7 @@ const resizeTextarea = (textarea)=>{
 })();
 
 /* 답글 작성 영역 생성 */
-function addCommentArea(commentNo, target) {
+function addCommentArea(parentCommentNo, target) {
     // 현재 눌린 버튼이 속한 li 찾기
     let commentRow = target;
     for(;commentRow.nodeName != "LI"; commentRow = commentRow.parentElement);
@@ -185,12 +348,18 @@ function addCommentArea(commentNo, target) {
     const commentWriteRow = document.createElement("div");
     commentWriteRow.classList.add("comment-write-row", "child-comment");
 
-    // 댓글 프로필 이미지
     const commentProfileImageArea = document.createElement("div");
     commentProfileImageArea.classList.add("comment-profile-image-area")
     const commentProfileImage = document.createElement("img");
     // 이미지 소스 대입
-    commentProfileImage.src = "/resources/images/zz.png";
+    // commentProfileImage.src = "/resources/images/zz.png";
+    // 댓글 프로필 이미지
+    if(profileImage == "") {    // 프로필 이미지가 비어있으면
+        // 기본 이미지 세팅
+        commentProfileImage.src = "/resources/images/common/cubes.png";
+    } else {
+        commentProfileImage.src = profileImage;
+    }
 
     const commentContent = document.createElement("div");
     commentContent.classList.add("comment-content");
@@ -226,7 +395,33 @@ function addCommentArea(commentNo, target) {
     cancelButton.classList.add("insert-button");
     insertButton.setAttribute("type", "button");
     insertButton.innerText = "등록";
-    // 등록버튼 이벤트 등록 필요
+    // 등록버튼 이벤트 등록
+    insertButton.addEventListener("click", ()=>{
+        if(loginMemberNo == "") {
+            alert("로그인 후 이용해주세요.");
+            return;
+        }
+        if(textarea.value.trim().length == 0) {
+            return;
+        }
+
+        $.ajax({
+            url: "/comment/insert",
+            data: {
+                boardNo: boardNo,
+                memberNo: loginMemberNo,
+                boardTypeNo: boardTypeNo,
+                commentContent: textarea.value.trim(),
+                parentCommentNo: parentCommentNo
+            },
+            type: "POST",
+            success: result=>{
+                if(result > 0) {
+                    selectCommentList(boardNo);
+                }
+            }
+        });
+    });
 
     // 요소 조립
     commentWriteButtonArea.append(cancelButton, insertButton);

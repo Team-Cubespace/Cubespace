@@ -18,10 +18,10 @@
             </c:choose>
         </div>
         <div class="comment-content">
-            <textarea name="" id="" placeholder="댓글 추가.." rows="1" onkeyup="resizeTextarea(this)"></textarea>
+            <textarea name="" id="addComment" placeholder="댓글 추가.." rows="1" onkeyup="resizeTextarea(this)"></textarea>
             <div class="comment-write-button-area">
-                <button class="cancel-button" type="button">취소</button>
-                <button class="insert-button" type="button">등록</button>
+                <button id="addCommentCencel" class="cancel-button" type="button">취소</button>
+                <button id="addCommentInsert" class="insert-button" type="button">등록</button>
             </div>
         </div>
     </div>
@@ -48,15 +48,17 @@
                                 <c:if test="${loginMember.memberNo == comment.memberNo}">
                                     <button class="comment-drop-down-button fa-solid fa-ellipsis-vertical">
                                         <ul class="comment-drop-down-menu">
-                                            <li onclick="updateComment(${comment.commentNo})">수정</li>
+                                            <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>
                                             <li onclick="deleteComment(${comment.commentNo})">삭제</li>
                                         </ul>
                                     </button>
                                 </c:if>
                             </div>
-                            <p>
-                                ${comment.commentContent}
-                            </p>
+                            <div class="comment-content-area">
+                                <p>
+                                    ${comment.commentContent}
+                                </p>                            
+                            </div>
                             <div class="comment-button-area">
                                 <span class="comment-date">${comment.commentCreate}</span><button type="button" onclick="addCommentArea(${comment.commentNo}, this)">답글</button>
                             </div>
@@ -86,15 +88,18 @@
                                 <c:if test="${loginMember.memberNo == comment.memberNo}">
                                     <button class="comment-drop-down-button fa-solid fa-ellipsis-vertical">
                                         <ul class="comment-drop-down-menu">
-                                            <li onclick="updateComment(${comment.commentNo})">수정</li>
+                                            <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>
                                             <li onclick="deleteComment(${comment.commentNo})">삭제</li>
                                         </ul>
                                     </button>
                                 </c:if>
                             </div>
-                            <p class="comment-content">
-                                ${comment.commentContent}
-                            </p>
+                            <div class="comment-content-area">
+                                <p class="comment-content">
+                                    ${comment.commentContent}
+                                </p>
+
+                            </div>
                             <div class="comment-button-area">
                                 <span class="comment-date">${comment.commentCreate}</span>
                             </div>

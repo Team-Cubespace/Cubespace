@@ -24,6 +24,9 @@
         .frame-color {
             background-color : ${minihome.frameColor};
         }
+        #searchBtn{
+            cursor: default;
+        }
     </style>
 </head>
 <body>
@@ -39,9 +42,9 @@
                 <header>
                     <span class="rightTitle">깐부 관리</span>
                     <form class="searchArea" id="searchArea">
-                        <button id="allFriend" class="whiteBtn">모든 깐부</button>
-                        <input type="text" id="searchInput" name="searchInput" class="headerSearch" placeholder="깐부 닉네임 검색">
-                        <button class="fa-solid fa-magnifying-glass" id="searchBtn"></button>
+                        <i id="allFriend" class="whiteBtn">모든 깐부</i>
+                        <input type="text" id="searchInput" name="searchInput" class="headerSearch" placeholder="깐부 닉네임 검색" value="${param.searchInput}">
+                        <i class="fa-solid fa-magnifying-glass" id="searchBtn"></i>
                     </form>
                 </header>
                 <div class="FriendArea">

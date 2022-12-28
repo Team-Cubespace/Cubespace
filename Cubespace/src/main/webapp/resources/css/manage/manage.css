@@ -262,7 +262,7 @@ header {
     border-bottom: 3px solid #eee;
 }
 #searchBtn {
-    top: 9px;
+    /* top: 9px; */
     border: none;
     background-color: white;
 }
@@ -378,7 +378,9 @@ header {
     border-radius: 5px;
     border: 1px solid #eee;
 }
-
+#allFriend {
+    font-size: 13px;
+}
 
 /* ----------------------------------------------------- */
 /* 메뉴설정 */

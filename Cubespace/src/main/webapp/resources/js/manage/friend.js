@@ -16,6 +16,7 @@ for(let deleteFriendBtn of deleteFriendBtnList){
                 success : result => {
                     if(result > 0) {
                         alert("깐부끊기가 완료되었습니다");
+                        location.href = location.href;
                     } else {
                         alert("깐부끊기 실패");
                     }
@@ -34,15 +35,13 @@ const searchInput = document.getElementById("searchInput");
 
 
 searchArea.addEventListener("submit", e => {
+    console.log(searchInput.value);
 
     if(searchInput.value.trim().length > 0){
 
-        window.href="/manage/friend?searchInput=" + searchInput.value;
+        location.href="/manage/friend?searchInput=" + searchInput.value;
         
-    } else {
-        alert("검색어를 입력해주세요");
-        e.preventDefault();
-    }
+    } 
 
 })
 
@@ -51,5 +50,5 @@ searchArea.addEventListener("submit", e => {
 const allFriend = document.getElementById("allFriend");
 allFriend.addEventListener("click", e => {
     searchInput.value="";
-    window.href=  window.href;
+    location.href="/manage/friend?searchInput=" + searchInput.value;
 })

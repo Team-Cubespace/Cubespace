@@ -38,7 +38,7 @@
                         <span>알림</span>
                     </a>
                 </li>
-                <%-- <jsp:include page="/WEB-INF/views/webmain/main-notifications.jsp"/> --%>
+                <jsp:include page="/WEB-INF/views/webmain/main-notifications.jsp"/>
 
                 <li class="header-menu">
                     <button type="button" id="headerDropDownButton">

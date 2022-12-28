@@ -30,7 +30,7 @@
     <div class="modal" id="modalAlarm" style="display: none;">
         <!-- <%-- 모달 창 --%> -->
         <div class="modal-box" >
-            <div class="modal-close" id="modalClose" onclick="closeModalAlarm()"><</div>
+            <div class="modal-close" id="modalAlarmClose" onclick="closeModalAlarm()"><</div>
             <!-- <%-- 모달 헤더 --%> -->
             <div class="modal-head">
                 <img class="head-img-bell" src="/resources/images/common/bell.png" alt="알림">
@@ -40,19 +40,19 @@
             <div class="modal-body">
                 <!-- <%-- 모달선택변경 --%> -->
                 <div class="modal-choice">
-                    <a id="leftChoice">깐부 알림</a>
-                    <a id="rightChoice">활동 알림</a>
+                    <a id="alarmLeftChoice">깐부 알림</a>
+                    <a id="alarmRightChoice">활동 알림</a>
                 </div>
                 
                 <!-- <%-- 회원검색이거 없으면 선택기 고장남 히든으로 숨겨둠 --%> -->
-                <div class="member-search-input-div">
-                    <input type="hidden" class="member-search-input" id="leftChoiceInput" maxlength="10" placeholder="검색할 회원을 입력하세요.">
-                </div>
+                <%-- <div class="member-search-input-div">
+                    <input type="hidden" class="member-search-input" id="alarmLeftChoiceInput" maxlength="10" placeholder="검색할 회원을 입력하세요.">
+                </div> --%>
 
                 <!-- 활동 알림 클릭 시 전첵삭제 추가되는 위치 -->
-                <!-- <div class="delete-all">
+                <%-- <div class="delete-all">
                     <div class="delete-all-button">전체삭제</div>
-                </div> -->
+                </div> --%>
 
                 <!-- <%-- 검색된 회원 목록 --%> -->
                 <section class="mebmer-search-profile">
@@ -60,7 +60,7 @@
                     <!-- <%-- 깐부알림 --%> -->
                     <div class="mebmer-profile">
                         <div class="profile-head">
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
+                            <img class="member-img" src="/resources/images/common/Mokoko1.gif" alt="">
                             <div class="member-nickname">묘동닉네임글자테스트</div>
                         </div>
 
@@ -86,7 +86,7 @@
                     <!-- 사진첩 스크랩 -->
                     <div class="mebmer-profile-alarm">
                         <div>
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
+                            <img class="member-img" src="/resources/images/common/Mokoko1.gif" alt="">
                             <div class="contents">
                                 <div class="profile-info-alarm">
                                     <div class="member-nickname">묘동닉네임글자테스트</div>
@@ -106,7 +106,7 @@
                     <!-- 사진첩 댓글 -->
                     <div class="mebmer-profile-alarm">
                         <div>
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
+                            <img class="member-img" src="/resources/images/common/Mokoko1.gif" alt="">
                             <div class="contents">
                                 <div class="profile-info-alarm">
                                     <div class="member-nickname">묘동닉네임글자테스트</div>
@@ -126,7 +126,7 @@
                     <!-- 동영상 스크랩 -->
                     <div class="mebmer-profile-alarm">
                         <div>
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
+                            <img class="member-img" src="/resources/images/common/Mokoko1.gif" alt="">
                             <div class="contents">
                                 <div class="profile-info-alarm">
                                     <div class="member-nickname">묘동닉네임글자테스트</div>
@@ -147,7 +147,7 @@
                     <!-- 동영상 댓글 -->
                     <div class="mebmer-profile-alarm" >
                         <div>
-                            <img class="member-img" src="/resources/images/common/test_user_profile.gif" alt="">
+                            <img class="member-img" src="/resources/images/common/Mokoko1.gif" alt="">
                             <div class="contents">
                                 <div class="profile-info-alarm">
                                     <div class="member-nickname">묘동닉네임글자테스트</div>
@@ -171,8 +171,8 @@
         </div>
     </div>
     <script>
-    // 로그인한 회원 번호
-    const loginMemberNo = "${loginMember.memberNo}";
+    // // 로그인한 회원 번호
+    // const loginMemberNo = "${loginMember.memberNo}";
     </script>
     <!-- jQuery 라이브러리(.js 파일) 추가(CDN 방식) -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>

@@ -177,13 +177,12 @@
 
 .dropdown {
     width: 100px;
-    height: 0px;
+    height: 5-px;
     background-color: white;
+    border: 1px solid black;
     position: absolute;
-    /* top: 113px; */
-    /* right: -85px; */
+    display: none;
     overflow:hidden;
-    transition-duration : 0.3s;
     z-index: 20;
 }
 

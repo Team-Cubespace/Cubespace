@@ -158,6 +158,7 @@
 .empty{
     background-color: rgba(170, 0, 255, 0.097);
     border: 2px dashed rgb(160, 93, 255);
+    cursor: pointer;
 }
 
 .already{

@@ -72,7 +72,7 @@ const selectMemeberAlarm=()=>{
                         /* 거절 생성 */
                         const member_cancel = document.createElement("div");
                         member_cancel.classList.add("member-cancel");
-                        member_cancel.setAttribute("onclick","return 거절함수호출"); //거절함수호출하기
+                        member_cancel.setAttribute("onclick","return notificationsCancel("+alarmProfile.memberNo+", this)"); //거절함수호출하기
 
                             const fa_xmark = document.createElement("i");
                             fa_xmark.classList.add("fa-xmark","fa-solid");
@@ -215,7 +215,22 @@ const notificationsAccept =(memberNo, btn) =>{
 }
 /* 거절(비동기) */
 // 거절 시 알림 삭제 하고 DB깐부상태 삭제
+const notificationsCancel =(memberNo, btn) =>{
+    $.ajax ({
+        url : "/memberCancelBtn",
+        data : {"loginMemberNo":loginMemberNo,"memberNo":memberNo},
+        success : memberCancel =>{
 
+            if(memberCancel==1){// 깐부신청거절 성공
+                //프로필 삭제 
+                const mebmerProfile = btn.parentElement.parentElement;
+                mebmerProfile.remove()
+            }else{
+                alert("깐부신청거절 실패")
+            }
+        }
+    })
+}
 
 // 전체삭제 css 더 수정 
 /* 모달 열기 */

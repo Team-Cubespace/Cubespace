@@ -19,4 +19,10 @@ public interface NotificationsService {
 	 */
 	int memberAcceptBtn(Map<String, Object> paramMap);
 
+	/** 신청받은 깐부 요청 거절
+	 * @param paramMap
+	 * @return
+	 */
+	int memberCancelBtn(Map<String, Object> paramMap);
+
 }

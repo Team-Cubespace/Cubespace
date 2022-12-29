@@ -79,8 +79,8 @@
 		AND FRIEND_ACCEPT_FL = 0   
    </update>
    
-  		<!-- 깐부신청 취소 -->
-	<delete id="">
+	<!-- 깐부신청 취소 -->
+	<delete id="memberCancelBtn">
 		DELETE FROM FRIEND 
 		WHERE  ASKED_MEMBER_NO =#{loginMemberNo}
 		AND ASKING_MEMBER_NO= #{memberNo}

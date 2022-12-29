@@ -34,8 +34,7 @@ public class NotificationsController {
 		return new Gson().toJson(memberNotificationsList); 
 	}
 	
-	
-	/** 요청받은 깐부신청 수락
+	/** 신청받은 깐부 요청 수락
 	 * @param paramMap
 	 * @return
 	 */
@@ -43,6 +42,17 @@ public class NotificationsController {
 	@ResponseBody
 	public int memberAcceptBtn(@RequestParam Map<String, Object> paramMap) {
 		int result = service.memberAcceptBtn(paramMap);
+		return result;
+	}
+	
+	/** 신청받은 깐부 요청 거절
+	 * @param paramMap
+	 * @return
+	 */
+	@GetMapping("/memberCancelBtn")
+	@ResponseBody
+	public int memberCancelBtn(@RequestParam Map<String, Object> paramMap) {
+		int result = service.memberCancelBtn(paramMap);
 		return result;
 	}
 	

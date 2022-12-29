@@ -10,6 +10,10 @@ import org.springframework.stereotype.Repository;
 import com.team.cubespace.main.model.vo.MemberSearch;
 import com.team.cubespace.main.model.vo.Notifications;
 
+/**
+ * @author gyehd
+ *
+ */
 @Repository
 public class MemberSearchDAO {
 
@@ -63,5 +67,13 @@ public class MemberSearchDAO {
 	public int memberAcceptBtn(Map<String, Object> paramMap) {
 		return sqlSession.update("memberSearch.memberAcceptBtn",paramMap);
 
+	}
+
+	/** 신청받은 깐부 요청 거절
+	 * @param paramMap
+	 * @return
+	 */
+	public int memberCancelBtn(Map<String, Object> paramMap) {
+		return sqlSession.delete("memberSearch.memberCancelBtn",paramMap);
 	}
 }

@@ -67,21 +67,21 @@
             <label>공개설정</label>
             <ul class="radio-list">
                 <li>
-                    <input type="radio" id="scope1" name="albumOpenFlag" <c:if test="${album.albumOpenFlag == 1}">checked</c:if> value="1">
+                    <input type="radio" id="scope1" name="openFlag" <c:if test="${album.openFlag == 1}">checked</c:if> value="1">
                     <%-- <label class="radio" for="scope1">
                         <i class="fa-solid fa-check"></i>
                     </label> --%>
                     <label for="scope1">공개</label>
                 </li>
                 <li>
-                    <input type="radio" id="scope2" name="albumOpenFlag" <c:if test="${album.albumOpenFlag == 2}">checked</c:if> value="2">
+                    <input type="radio" id="scope2" name="openFlag" <c:if test="${album.openFlag == 2}">checked</c:if> value="2">
                     <%-- <label class="radio" for="scope2">
                         <i class="fa-solid fa-check"></i>
                     </label> --%>
                     <label for="scope2">깐부공개</label>
                 </li>
                 <li>
-                    <input type="radio" id="scope3" name="albumOpenFlag" <c:if test="${album.albumOpenFlag == 3}">checked</c:if> value="3">
+                    <input type="radio" id="scope3" name="openFlag" <c:if test="${album.openFlag == 3}">checked</c:if> value="3">
                     <%-- <label class="radio" for="scope3">
                         <i class="fa-solid fa-check"></i>
                     </label> --%>

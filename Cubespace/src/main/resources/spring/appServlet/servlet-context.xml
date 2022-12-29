@@ -43,6 +43,10 @@
 			<mapping path="/albumList/*"/>
 			<beans:bean id="folderInterceptor" class="com.team.cubespace.common.interceptor.FolderInterceptor"></beans:bean>
 		</interceptor>
+		<interceptor>
+			<mapping path="/minihome/*"/>
+			<beans:bean id="minihomeInterceptor" class="com.team.cubespace.common.interceptor.MinihomeInterceptor"></beans:bean>
+		</interceptor>
 	</interceptors>
 	
 	

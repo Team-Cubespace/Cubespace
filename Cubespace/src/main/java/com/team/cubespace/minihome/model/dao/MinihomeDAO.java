@@ -13,11 +13,35 @@ public class MinihomeDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	/** 미니홈 조회
+	 * @param memberNo
+	 * @return minihome
+	 */
 	public Minihome selectMinihome(int memberNo) {
 		return sqlSession.selectOne("minihomeMapper.selectMinihome", memberNo);
 	}
 
+	/** 미니홈 이름 수정
+	 * @param paramMap
+	 * @return result
+	 */
 	public int updateMinihomeName(Map<String, Object> paramMap) {
 		return sqlSession.update("minihomeMapper.updateMinihomeName", paramMap);
+	}
+
+	/** 미니홈 today, total 증가
+	 * 
+	 * @param memberNo
+	 * @return result
+	 */
+	public int updateTodayTotal(int memberNo) {
+		return sqlSession.update("minihomeMapper.updateTodayTotal", memberNo);
+	}
+
+	/** 미니홈 Today 초기화
+	 * @return result
+	 */
+	public int initToday() {
+		return sqlSession.update("minihomeMapper.initToday");
 	}
 }

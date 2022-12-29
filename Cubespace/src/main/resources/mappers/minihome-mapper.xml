@@ -46,4 +46,10 @@
  		UPDATE MINI_HOMEPAGE SET
  		TODAY = 0
  	</update>
+ 	
+ 	<!-- 특정 음악 조회 (이름, 경로) -->
+ 	<select id="selectMusic" parameterType="_int" resultType="map">
+ 		SELECT MUSIC_PATH, MUSIC_NAME FROM MUSIC_SHOP
+		WHERE MUSIC_NO = #{musicNo}
+ 	</select>
 </mapper>

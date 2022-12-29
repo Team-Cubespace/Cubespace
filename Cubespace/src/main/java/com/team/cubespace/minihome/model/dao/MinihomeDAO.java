@@ -44,4 +44,12 @@ public class MinihomeDAO {
 	public int initToday() {
 		return sqlSession.update("minihomeMapper.initToday");
 	}
+
+	/** 특정 음악 조회 (이름, 경로)
+	 * @param musicNo
+	 * @return result
+	 */
+	public Map<String, String> selectMusic(int musicNo) {
+		return sqlSession.selectOne("minihomeMapper.selectMusic", musicNo);
+	}	
 }

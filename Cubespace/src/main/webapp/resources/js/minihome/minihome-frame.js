@@ -83,12 +83,28 @@ $('#musicVolume').on('input', function(){
     $(this).css('background', 'linear-gradient(to right, #2e2e2e 0%, #2e2e2e '+ val +'%, #d5d4d3 ' + val + '%, #d5d4d3 100%)');
 });
 
-let minihomeMusic;
 // 오디오 플레이어 기능
 const musicDuration = document.getElementById("duration");
+
+let minihomeMusic;
+
 // 재생 시간 출력 함수
 const printCurrentTime = () => {
     musicDuration.innerText = moment(minihomeMusic.currentTime * 1000).format("mm:ss");
+}
+
+const initMinihomeMusic = music => {
+    // 플레이버튼 가져와서 아이콘 변경
+    document.getElementById("playButton").className = "fa-solid fa-circle-play";
+    // 제목 슬라이드 멈추기
+    document.getElementById("minihomeMusicName").classList.remove("music-play-marquee");
+    document.getElementById("minihomeMusicName").innerText = music.MUSIC_NAME;
+    // 재생시간 초기화 00:00
+    musicDuration.innerText = "00:00";
+    
+    // 뮤직플레이어 소스 변경
+    minihomeMusic.src = music.MUSIC_PATH;
+
 }
 
 (()=>{
@@ -127,7 +143,7 @@ const printCurrentTime = () => {
 
         // 볼륨 조절
         const musicVolume = document.getElementById("musicVolume");
-        let prevIcon;
+
         musicVolume.addEventListener("input", ()=>{
             
             let volume = musicVolume.value;
@@ -144,4 +160,17 @@ const printCurrentTime = () => {
             }
         });
     }
+    window.addEventListener("message", e=>{
+        $.ajax({
+            url:"/selectMusic",
+            data: {
+                musicNo:e.data
+            },
+            dataType:"JSON",
+            type:"GET",
+            success: music=>{
+                initMinihomeMusic(music);
+            }
+        });
+    });
 })();

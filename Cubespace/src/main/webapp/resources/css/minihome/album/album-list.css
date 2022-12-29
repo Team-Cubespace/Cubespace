@@ -63,6 +63,7 @@ main::-webkit-scrollbar {
 
 .current-page {
     background-color: var(--mainColor);
+    color: white;
 }
 
 /* 비어있는 영역 */

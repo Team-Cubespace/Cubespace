@@ -110,20 +110,22 @@ const createMusic = (musicPath, autoplay) => {
 }
 
 const initMinihomeMusic = music => {
-    let autoplay = false;
-    if(minihomeMusic.playing()){    // 재생중이었다면
-        minihomeMusic.pause();
-        autoplay = true;
+    if(minihomeMusic != null) {
+        let autoplay = false;
+        if(minihomeMusic.playing()){    // 재생중이었다면
+            minihomeMusic.pause();
+            autoplay = true;
+        }
+        
+        
+        // 플레이버튼 가져와서 아이콘 변경
+        // 제목 슬라이드 멈추기
+        // document.getElementById("minihomeMusicName").classList.remove("music-play-marquee");
+        document.getElementById("minihomeMusicName").innerText = music.MUSIC_NAME;
+        // 재생시간 초기화 00:00
+        musicDuration.innerText = "00:00";
+        createMusic(music.MUSIC_PATH, autoplay);
     }
-    
-    
-    // 플레이버튼 가져와서 아이콘 변경
-    // 제목 슬라이드 멈추기
-    // document.getElementById("minihomeMusicName").classList.remove("music-play-marquee");
-    document.getElementById("minihomeMusicName").innerText = music.MUSIC_NAME;
-    // 재생시간 초기화 00:00
-    musicDuration.innerText = "00:00";
-    createMusic(music.MUSIC_PATH, autoplay);
 }
 
 
@@ -189,17 +191,19 @@ const initMinihomeMusic = music => {
             }
         });
         window.addEventListener("message", e=>{
-            $.ajax({
-                url:"/selectMusic",
-                data: {
-                    musicNo:e.data
-                },
-                dataType:"JSON",
-                type:"GET",
-                success: music=>{
-                    initMinihomeMusic(music);
-                }
-            });
+            if(minihomeMusic != null) {
+                $.ajax({
+                    url:"/selectMusic",
+                    data: {
+                        musicNo:e.data
+                    },
+                    dataType:"JSON",
+                    type:"GET",
+                    success: music=>{
+                        initMinihomeMusic(music);
+                    }
+                });
+            }
         });
     }
 })();

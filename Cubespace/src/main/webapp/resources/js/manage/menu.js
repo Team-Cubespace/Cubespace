@@ -38,15 +38,26 @@ menuSelectBtn.addEventListener("click", () => {
 
     if (!checkArr.includes("diary")) {
         diaryOrder = -1;
+    } else if(diaryOrder == -1){ // 해제->체크시 원래의 order값 부여
+        diaryOrder = 1;
     }
+
     if (!checkArr.includes("album")) {
         albumOrder = -1;
+    }else if(albumOrder == -1){ // 해제->체크시 원래의 order값 부여
+        albumOrder = 1;
     }
+
     if (!checkArr.includes("video")) {
         videoOrder = -1;
+    }else if(videoOrder == -1){ // 해제->체크시 원래의 order값 부여
+        videoOrder = 1;
     }
+
     if (!checkArr.includes("guestBook")) {
         guestBookOrder = -1;
+    }else if(guestBookOrder == -1){ // 해제->체크시 원래의 order값 부여
+        guestBookOrder = 1;
     }
     console.log(checkArr);
 
@@ -97,7 +108,6 @@ menuSelectCancelBtn.addEventListener("click", () => {
 
 
 
-
 /* ---------------------------------------- */
 /* 메뉴설정 변경*/
 const orderCategory = () => {
@@ -108,13 +118,75 @@ const orderCategory = () => {
     for (let category of categoryArea) {
         orderString += category.getAttribute("name");
     }
+    // ['1', '4', '2']라면 다이어리-방명록-사진첩
     const orderArr = Array.from(orderString);
 
-    document.getElementById("newDiaryOrder").value = orderArr[0];
-    document.getElementById("newAlbumOrder").value = orderArr[1];
-    document.getElementById("newVideoOrder").value = orderArr[2];
-    document.getElementById("newGuestBookOrder").value = orderArr[3];
+
+
+
+    document.getElementById("newDiaryOrder").value = -1;
+    document.getElementById("newAlbumOrder").value = -1;
+    document.getElementById("newVideoOrder").value = -1;
+    document.getElementById("newGuestBookOrder").value = -1;
+
+    for(let i = 0; i < orderArr.length; i++){
+        if(orderArr[i] == 1){
+            document.getElementById("newDiaryOrder").value = i+1;
+        }
+        if(orderArr[i] == 2){
+            document.getElementById("newAlbumOrder").value = i+1;
+        }
+        if(orderArr[i] == 3){
+            document.getElementById("newVideoOrder").value = i+1;
+        }
+        if(orderArr[i] == 4){
+            document.getElementById("newGuestBookOrder").value = i+1;
+        }
+    }
+
+
     document.getElementById("memberNo").value = memberNo;
+
+
+
+    /* 폴더 정렬 */
+    if(diaryOrder != -1){ // 다이어리 카테고리 존재시
+    // list에서 하나씩 꺼내서 getAttribute("name")으로 <<folderNo를>>빈 orderString에 하나씩 더함
+    // input type=hidden, name="diaryFolderOrder"을 만들고 value값에 orderString을 더함
+
+        const diaryFolderList = document.querySelectorAll(".diary .subCategory"); //  .diary 밑의 .subCategory
+        let diaryOrderString = "";
+        for(let diaryFolder of diaryFolderList){
+            diaryOrderString += diaryFolder.getAttribute("id") + ",";
+        }
+        diaryOrderString += "0"; // 마지막이 콤마로 끝나지 않기 위해
+        document.getElementById("diaryFolderOrder").value = diaryOrderString; // 61,1,129,131,132,134,137,
+    }
+
+
+    if(albumOrder != -1){ 
+
+        const albumFolderList = document.querySelectorAll(".album .subCategory"); 
+        let albumOrderString = "";
+        for(let albumFolder of albumFolderList){
+            albumOrderString += albumFolder.getAttribute("id") + ",";
+        }
+        albumOrderString += "0";
+        document.getElementById("albumFolderOrder").value = albumOrderString; 
+    }
+
+    if(videoOrder != -1){ 
+
+        const videoFolderList = document.querySelectorAll(".video .subCategory"); 
+        let videoOrderString = "";
+        for(let videoFolder of videoFolderList){
+            videoOrderString += videoFolder.getAttribute("id") + ",";
+        }
+        videoOrderString += "0";
+        document.getElementById("videoFolderOrder").value = videoOrderString; 
+    }
+
+
 
     return true;
 }
@@ -138,7 +210,7 @@ for (let plusBtn of plusBtnList) {
 
         // 다이어리, 사진첩, 동영상
         const categoryName = e.target.parentElement.firstElementChild.innerText;
-        console.log(categoryName);
+
 
         // 카테고리 이름에 따른 boardType 설정
         let boardTypeNo = 0;
@@ -163,9 +235,7 @@ for (let plusBtn of plusBtnList) {
         // 해당 카테고리의 마지막 폴더
         const lastSubCath = category.firstElementChild.nextElementSibling.lastElementChild;
 
-        console.log(category);
-        console.log(subCategoryLength);
-        console.log(lastSubCath);
+
 
 
         const img = document.createElement("img");
@@ -203,6 +273,7 @@ for (let plusBtn of plusBtnList) {
                 if (result > 0) { 
                     console.log("폴더 삽입 성공");
                     input.setAttribute("name", result);
+                    div.setAttribute("name", result);
                 }
                 else { console.log("폴더 삽입 실패"); }
             },

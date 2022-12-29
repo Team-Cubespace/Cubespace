@@ -144,13 +144,15 @@ public class ManageDAO {
 		return sqlSession.delete("ManageMapper.updateFolderOrder", paramMap);
 	}
 
-	/** 폴더 이름 변경
+
+
+	/** 폴더 순서 변경
 	 * @param folder
 	 * @return
 	 */
-	public int updateFolderName(Folder folder) {
+	public int updateAllFolderOrder(Folder folder) {
 		
-		return sqlSession.update("ManageMapper.updateFolderName", folder);
+		return sqlSession.update("ManageMapper.updateAllFolderOrder", folder);
 	}
 
 

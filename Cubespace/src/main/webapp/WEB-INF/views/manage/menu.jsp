@@ -80,6 +80,7 @@
                                 <div class="backgroundExplain">
                                     <p> 내 미니홈피 메뉴를 구성할수 있으며 최소 1개의 메뉴가 존재해야 합니다</p>
                                 </div>
+                                ${folderList}
                             </div>
                             <div class="fontArea">
                                 <div class="fontHeader menuHeader">
@@ -189,13 +190,13 @@
                                             <c:if test="${folder.folderOrder == 1}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10">
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20">
                                                 </div>
                                             </c:if>
                                             <c:if test="${folder.folderOrder != 1}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
                                                 </div>
                                             </c:if>
 
@@ -218,7 +219,7 @@
                                             <c:if test="${folder.boardTypeNo == 2}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input  class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                    <input  class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
                                                 </div>   
                                             </c:if>          
                                         </c:forEach>
@@ -273,13 +274,13 @@
                                             <c:if test="${folder.folderOrder == 1}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10">
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20">
                                                 </div>
                                             </c:if>
                                             <c:if test="${folder.folderOrder != 1}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
                                                 </div>
                                             </c:if>
 
@@ -302,7 +303,7 @@
                                             <c:if test="${folder.boardTypeNo == 2}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input  class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                    <input  class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
                                                 </div>   
                                             </c:if>          
                                         </c:forEach>
@@ -357,13 +358,13 @@
                                             <c:if test="${folder.folderOrder == 1}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10">
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20">
                                                 </div>
                                             </c:if>
                                             <c:if test="${folder.folderOrder != 1}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
                                                 </div>
                                             </c:if>
 
@@ -386,7 +387,7 @@
                                             <c:if test="${folder.boardTypeNo == 2}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input  class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                    <input  class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
                                                 </div>   
                                             </c:if>          
                                         </c:forEach>
@@ -441,13 +442,13 @@
                                             <c:if test="${folder.folderOrder == 1}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10">
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20">
                                                 </div>
                                             </c:if>
                                             <c:if test="${folder.folderOrder != 1}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
                                                 </div>
                                             </c:if>
 
@@ -470,7 +471,7 @@
                                             <c:if test="${folder.boardTypeNo == 2}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input  class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                    <input  class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
                                                 </div>   
                                             </c:if>          
                                         </c:forEach>
@@ -532,11 +533,18 @@
                             <button class="whiteBtn" id="menuSaveBtn">변경사항 저장</button>
                             <span class="whiteBtn" id="menuCancelBtn">취소</span>
                         </div>
+
+                        <%-- 카테고리 순서 정하는 input (value=정렬순서(숫자))--%>
                         <input type="hidden" name="diary" id="newDiaryOrder">
                         <input type="hidden" name="album" id="newAlbumOrder">
                         <input type="hidden" name="video" id="newVideoOrder">
                         <input type="hidden" name="guestBook" id="newGuestBookOrder">
                         <input type="hidden" name="memberNo" id="memberNo">
+
+                        <%-- 폴더 순서 정하는 input(value로 폴더no + 구분자(,) String) --%>
+                        <input type="hidden" name="diaryFolderOrder" id="diaryFolderOrder">
+                        <input type="hidden" name="albumFolderOrder" id="albumFolderOrder">
+                        <input type="hidden" name="videoFolderOrder" id="videoFolderOrder">
                     </form>
 
 
@@ -553,6 +561,7 @@
     let albumOrder = "${categoryOrder.album}";
     let videoOrder = "${categoryOrder.video}";
     let guestBookOrder = "${categoryOrder.guestBook}";
+    const categoryOrder = "${categoryOrder}";
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script> <%-- jquery --%>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> <%-- jquery ui --%>

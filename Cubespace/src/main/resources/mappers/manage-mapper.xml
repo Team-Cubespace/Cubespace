@@ -61,10 +61,18 @@
 	<!-- 카테고리 순서 변경 -->
 	<update id="changeCategory">
 		UPDATE CATEGORY_ORDER SET
-		DIARY = #{diary},
-		ALBUM = #{album},
-		VIDEO = #{video},
-		GUEST_BOOK = #{guestBook}
+		<if test='diary != null'>
+			DIARY = #{diary},
+		</if>
+		<if test='album != null'>
+			ALBUM = #{album},
+		</if>
+		<if test='video != null'>
+			VIDEO = #{video},
+		</if>
+		<if test='guestBook != null'>
+			GUEST_BOOK = #{guestBook}
+		</if>
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
@@ -81,10 +89,18 @@
 	<!-- 카테고리 중 보여질것 선택 -->
 	<update id="categorySelect">
 		UPDATE CATEGORY_ORDER SET
-		DIARY = #{diary},
-		ALBUM = #{album},
-		VIDEO = #{video},
-		GUEST_BOOK = #{guestBook}
+		<if test='diary != null'>
+			DIARY = #{diary},
+		</if>
+		<if test='album != null'>
+			ALBUM = #{album},
+		</if>
+		<if test='video != null'>
+			VIDEO = #{video},
+		</if>
+		<if test='guestBook != null'>
+			GUEST_BOOK = #{guestBook}
+		</if>
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
@@ -117,11 +133,16 @@
 	</update>
 	
 	
-	<!-- 폴더 이름 변경 -->
-	<update id="updateFolderName">
+
+
+	
+	<!-- 전체 폴더 순서 변경 -->
+	<update id="updateAllFolderOrder">
 		UPDATE FOLDER SET
-		FOLDER_NAME = #{folderName}
-		WHERE FOLDER_NO = #{folderNo}
+		FOLDER_ORDER = #{folderOrder}
+		WHERE MEMBER_NO = #{memberNo}
+		AND FOLDER_NO = #{folderNo}
+		AND BOARD_TYPE_NO = #{boardTypeNo}
 	</update>
 	
  <!-- 깐부 ====================================================-->

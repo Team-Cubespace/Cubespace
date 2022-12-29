@@ -107,16 +107,17 @@ public class manageController {
 	@PostMapping("/menu/changeCategory")
 	public String changeMenu(CategoryOrder categoryOrder,
 			@RequestParam Map<String, Object> paramMap,
-			@SessionAttribute("folderList") List<Folder> folderList,
+//			@SessionAttribute("folderList") List<Folder> folderList,
 			RedirectAttributes ra) throws Exception {
 		
 		
 		int categoryOrderResult= service.changeCategory(categoryOrder); // 카테고리 순서 변경
-		int folderNameResult = service.updateFolderName(paramMap, folderList); // 폴더이름 변경
+		int folderNameResult = service.updateFolderName(paramMap); // 폴더이름 변경
+		int folderOrderResult = service.updateAllFolderOrder(paramMap); // 폴더 순서 변경
 		
 		String message = null;
 		
-		if(categoryOrderResult * folderNameResult > 0) {
+		if(categoryOrderResult * folderNameResult * folderOrderResult> 0) {
 			message = "카테고리, 폴더 설정 변경 성공";
 		} else {
 			message = "카테고리, 폴더 설정 변경 실패";

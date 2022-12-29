@@ -1,5 +1,6 @@
 package com.team.cubespace.manage.model.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -171,31 +172,87 @@ public class ManageServiceImpl implements ManageService{
 		return result;
 	}
 
+
+
 	/**
-	 * 폴더 이름 변경
+	 * 전체 폴더 순서 변경
 	 * @throws Exception 
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public int updateFolderName(Map<String, Object> paramMap, List<Folder> folderList) throws Exception {
+	public int updateAllFolderOrder(Map<String, Object> paramMap) throws Exception {
 		
-		int result = 0;
+		String diaryFolderOrder = (String)paramMap.get("diaryFolderOrder");
+		String albumFolderOrder = (String)paramMap.get("albumFolderOrder");
+		String videoFolderOrder = (String)paramMap.get("videoFolderOrder");
 		
-		// folderName에 xssHandling 후 다시 넣어줌
-		for(Folder folder : folderList) {
-			int folderNo = folder.getFolderNo();
+		List<String>  diaryFolderOrderList = Arrays.asList(diaryFolderOrder.split(","));
+		List<String>  albumFolderOrderList = Arrays.asList(albumFolderOrder.split(","));
+		List<String>  videoFolderOrderList = Arrays.asList(videoFolderOrder.split(","));
+		
+		int result = 1;
+		
+		
+		for(int i = 0; i < diaryFolderOrderList.size()-1; i++) {
+			// memberNo, folderNo, folderOrder(folder객체)
+			
+			Folder folder = new Folder();
+			// memberNo
+			folder.setMemberNo((Integer)paramMap.get("memberNo"));
+			int folderNo = Integer.parseInt(diaryFolderOrderList.get(i));
+			
+			// folderName
 			String folderName = (String) paramMap.get(Integer.toString(folderNo));
 			folderName = Util.XSSHandling(folderName);
 			folder.setFolderName(folderName);
 			
+			folder.setFolderNo(folderNo); // folderNo
+			folder.setFolderOrder(i); // folderOrder
+			folder.setBoardTypeNo(1); // boardTypeNo
+			result *= dao.updateAllFolderOrder(folder);
+		}
+		
+		
+		for(int i = 0; i < albumFolderOrderList.size()-1; i++) {
 			
-			result += dao.updateFolderName(folder); // folderNo, folderName
+			Folder folder = new Folder();
+			// memberNo
+			folder.setMemberNo((Integer)paramMap.get("memberNo"));
+			int folderNo = Integer.parseInt(albumFolderOrderList.get(i));
+			
+			// folderName
+			String folderName = (String) paramMap.get(Integer.toString(folderNo));
+			folderName = Util.XSSHandling(folderName);
+			folder.setFolderName(folderName);
+			
+			folder.setFolderNo(folderNo); // folderNo
+			folder.setFolderOrder(i); // folderOrder
+			folder.setBoardTypeNo(2); // boardTypeNo
+			result *= dao.updateAllFolderOrder(folder);
 		}
 		
-		if(result != folderList.size()) {
-			throw new Exception("폴더 이름 변경 중 오류 발생");
+		
+		for(int i = 0; i < videoFolderOrderList.size()-1; i++) {
+			
+			Folder folder = new Folder();
+			// memberNo
+			folder.setMemberNo((Integer)paramMap.get("memberNo"));
+			int folderNo = Integer.parseInt(videoFolderOrderList.get(i));
+			
+			// folderName
+			String folderName = (String) paramMap.get(Integer.toString(folderNo));
+			folderName = Util.XSSHandling(folderName);
+			folder.setFolderName(folderName);
+			
+			folder.setFolderNo(folderNo); // folderNo
+			folder.setFolderOrder(i); // folderOrder
+			folder.setBoardTypeNo(3); // boardTypeNo
+			result *= dao.updateAllFolderOrder(folder);
 		}
 		
+		if(result == 0) { // 하나라도 업데이트가 되지 않으면
+			throw new Exception("폴더 순서 변경 중 오류 발생");
+		}
 		
 		return result;
 	}

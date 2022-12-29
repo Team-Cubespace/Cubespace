@@ -38,12 +38,12 @@
 	<resources mapping="/favicon.ico" location="/resources/images/favicon.ico" />
 	
 	<!-- 인터셉터 등록 -->
-<!-- 	<interceptors>
+ 	<interceptors>
 		<interceptor>
 			<mapping path="/albumList/*"/>
 			<beans:bean id="folderInterceptor" class="com.team.cubespace.common.interceptor.FolderInterceptor"></beans:bean>
 		</interceptor>
-	</interceptors> -->
+	</interceptors>
 	
 	
 	<!-- View Resolver 설정 -->

@@ -26,7 +26,8 @@
 		<typeAlias type="com.team.cubespace.manage.model.vo.CategoryOrder" alias="CategoryOrder"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.Friend" alias="Friend"/>		
 		<typeAlias type="com.team.cubespace.album.model.vo.Album" alias="Album"/>		
-		<typeAlias type="com.team.cubespace.album.model.vo.AlbumImage" alias="AlbumImage"/>		
+		<typeAlias type="com.team.cubespace.album.model.vo.AlbumImage" alias="AlbumImage"/>
+		<typeAlias type="com.team.cubespace.album.model.vo.Comment" alias="Comment"/>
 
 	</typeAliases>
 	
@@ -38,6 +39,6 @@
 		<mapper resource="/mappers/diary-mapper.xml"/>
 		<mapper resource="/mappers/manage-mapper.xml"/>
 		<mapper resource="/mappers/album-mapper.xml"/>
-
+		<mapper resource="/mappers/comment-mapper.xml"/>	
 	</mappers>
 </configuration>

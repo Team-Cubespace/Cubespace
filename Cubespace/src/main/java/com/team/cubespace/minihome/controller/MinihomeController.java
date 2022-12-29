@@ -1,12 +1,16 @@
 package com.team.cubespace.minihome.controller;
 
-import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.team.cubespace.manage.model.service.ManageService;
@@ -40,5 +44,13 @@ public class MinihomeController {
 		model.addAttribute("minihome", minihome);
 		
 		return "minihome/minihome-frame";
+	}
+	
+	@PostMapping("/updateMinihomeTitle")
+	@ResponseBody
+	public int updateMinihomeName(@RequestParam Map<String, Object> paramMap,
+			@SessionAttribute("minihome") Minihome minihome) {
+		paramMap.put("memberNo", minihome.getMemberNo());
+		return minihomeService.updateMinihomeName(paramMap);
 	}
 }

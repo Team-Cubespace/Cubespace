@@ -43,7 +43,7 @@
 }
 
 /* 회원 정보 */
-.profile-info{
+.profile-info-alarm{
     display: flex;
     align-items: baseline;
     width: 100%;
@@ -88,3 +88,4 @@
     cursor: pointer;
 }
 
+/************************************************/

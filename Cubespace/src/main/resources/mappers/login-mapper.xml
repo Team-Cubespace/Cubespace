@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="loginMapper">
+	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
+
+	<resultMap type="Member" id="member_rm">
+   
+   		<id property="memberNo" column="MEMBER_NO"/>
+   		
+   		<result property="memberEmail" column="MEMBER_EMAIL"></result>
+   		<result property="memberPw" column="MEMBER_PW"></result>
+   		<result property="memberName" column="MEMBER_NAME"></result>
+   		<result property="memberNickname" column="MEMBER_NICKNAME"></result>
+   		<result property="memberTel" column="MEMBER_TEL"></result>
+   		<result property="memberAddress" column="MEMBER_ADDRESS"></result>
+   		<result property="profileImage" column="PROFILE_IMG"></result>
+   		<result property="enrollDate" column="ENROLL_DATE"></result>
+   		<result property="memberDeleteYN" column="MEMBER_DEL_YN"></result>
+   		<result property="authority" column="AUTHORITY"></result>
+   		<result property="birthYear" column="BIRTHYEAR"></result>
+   		<result property="birthDay" column="BIRTHDAY"></result>
+   		<result property="loginType" column="LOGIN_TYPE"></result>
+   		<result property="emotion" column="EMOTION"></result>
+   		<result property="fontNo" column="FONT_NO"></result>
+   		
+   		<result property="memberBlockYN" column="MEMBER_BLOCK_YN"></result>
+   		<result property="blockStart" column="BLOCK_START"></result>
+   		<result property="blockEnd" column="BLOCK_END"></result>
+   		<result property="fontPath" column="FONT_PATH"></result>
+   		<result property="emotionPath" column="EMOTION_PATH"></result>
+   		<result property="emotionName" column="EMOTION_NAME"></result>
+   		<result property="alarmCount" column="ALARM_COUNT"></result>
+   		<result property="today" column="TODAY"></result>
+   		<result property="friendCount" column="FRIEND_COUNT"></result>
+ 	 </resultMap>
+ 	 
+
+
+ 	 
+
+
+
+
+	<!-- 로그인 기능 -->
+	<select id="login" parameterType="string" resultMap="member_rm">
+		SELECT M.MEMBER_NO, MEMBER_EMAIL, MEMBER_PW, MEMBER_NAME, MEMBER_NICKNAME, 
+		MEMBER_TEL, PROFILE_IMG , AUTHORITY,
+		TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS ENROLL_DATE, BIRTHYEAR , 
+		BIRTHDAY , EMOTION_NO , 
+		TO_CHAR(BLOCK_START, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분"') AS BLOCK_START, 
+		TO_CHAR(BLOCK_END, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분"') AS BLOCK_END, 
+		CASE <![CDATA[
+			WHEN (SELECT MEMBER_NO FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = M.MEMBER_NO AND SYSDATE < BLOCK_END) IS NULL  ]]>
+			THEN 'N'
+			ELSE 'Y'
+		END MEMBER_BLOCK_YN,
+		(SELECT FONT_PATH FROM FONT_SHOP
+		JOIN MEMBER_OWN_GOODS MOG ON (OWN_FONT_NO = FONT_NO) WHERE MOG.OWN_NO = M.OWN_FONT_NO ) FONT_PATH,
+		(SELECT COUNT(*) FROM ALARM WHERE RECEIVER_NO = M.MEMBER_NO) ALARM_COUNT,
+		(SELECT TODAY FROM MINI_HOMEPAGE MH WHERE MH.MEMBER_NO = M.MEMBER_NO) TODAY,
+		(SELECT COUNT(*) FROM FRIEND WHERE FRIEND_ACCEPT_FL = 1 AND M.MEMBER_NO IN (ASKED_MEMBER_NO, ASKING_MEMBER_NO)) FRIEND_COUNT
+		FROM MEMBER M
+		LEFT JOIN MEMBER_BLOCK MB ON(M.MEMBER_NO = MB.MEMBER_NO)
+		WHERE MEMBER_DEL_YN = 'N'
+		AND MEMBER_EMAIL = #{memberEmail}
+	</select>
+
+
+
+	<!-- 회원가입 입력 정보 제출 서비스 -->
+	<insert id="signUp" parameterType="Member">
+		INSERT INTO MEMBER VALUES(
+			SEQ_MEMBER_NO.NEXTVAL, #{memberEmail}, #{memberPw}, #{memberName}, #{memberNickname},  #{memberTel}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, 
+		<if test='birthYear != null and birthDay != null'>
+			#{birthYear}, #{birthDay}, 
+		</if>
+		<if test='birthYear == null and birthDay == null'>
+			NULL, NULL,
+		</if>
+			DEFAULT, DEFAULT)
+	</insert>
+
+	
+
+	<!-- 회원 ID/PW 찾기 회원조회 -->
+	<select id="infoFindSelect" resultType="string">
+		SELECT MEMBER_EMAIL
+		FROM "MEMBER" M
+		WHERE MEMBER_NAME = '${memberName}'
+		AND MEMBER_TEL = '${memberTel}'
+		AND (SELECT COUNT(*) FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = M.MEMBER_NO) = 0
+		AND MEMBER_DEL_YN = 'N'
+ 	 </select>
+ 	 
+ 	 <update id="findEmailPw">
+		UPDATE "MEMBER" M SET
+		MEMBER_PW = #{encPw}
+		WHERE MEMBER_EMAIL = #{result}
+		AND (SELECT COUNT(*) FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = M.MEMBER_NO) = 0
+		AND MEMBER_DEL_YN = 'N'
+ 	 </update>
+ 	 
+ 	 
+ 	<!-- 이메일 중복 검사 -->
+	<select id="emailDupCheck" parameterType = "string" resultType = "_int">
+		SELECT COUNT(*)
+	   FROM "MEMBER"
+	   WHERE MEMBER_EMAIL = #{memberEmail}
+	   AND MEMBER_DEL_YN  = 'N'
+	</select>
+	
+	<!-- 닉네임 중복 검사 -->
+	<select id="nicknameDupCheck" resultType = "_int">
+		SELECT  COUNT(*)
+		FROM "MEMBER"
+		WHERE MEMBER_NICKNAME = #{memberNickname}
+		AND MEMBER_DEL_YN  = 'N'
+	</select>
+	 
+	 	<!-- 전화번호 중복 검사 -->
+	<select id="telDupCheck" resultType = "_int">
+		SELECT  COUNT(*)
+		FROM "MEMBER"
+		WHERE MEMBER_TEL = #{memberTel}
+		AND MEMBER_DEL_YN  = 'N'
+	</select>
+ 	 
+ 	 
+ 	 <!-- 카카오 회원가입 -->
+ 	 <insert id="kakaoSignUp" parameterType="Member">
+ 	 			INSERT INTO MEMBER VALUES(
+			SEQ_MEMBER_NO.NEXTVAL, #{memberEmail}, #{memberPw}, #{memberNickname}, #{memberNickname}, '01000000000', 
+		
+		<if test='profileImage != null'>
+			#{profileImage},
+		</if>
+		<if test='profileImage == null'>
+			DEFAULT,
+		</if>
+		
+			DEFAULT, DEFAULT, DEFAULT, NULL,
+			
+		<if test='birthDay != null'>
+			#{birthDay}, 
+		</if>
+		<if test='birthDay == null'>
+			NULL,
+		</if>
+			DEFAULT, DEFAULT)
+ 	 </insert>
+ 	
+ 	
+ 	<!-- 회원소유품목 테이블에 값 삽입 -->
+ 	<insert id="insertOwnGoods">
+ 		INSERT INTO MEMBER_OWN_GOODS VALUES(SEQ_OWN_NO.NEXTVAL, #{memberNo}, 1, 1)
+ 	</insert>
+ 	
+ 	
+ 	<!--  미니홈 테이블에 값 삽입 -->
+ 	<insert id="insertMinihome">
+ 		INSERT INTO MINI_HOMEPAGE VALUES(
+		#{memberNo}, '나의 미니홈피', 'rgb(128,128,128)', 
+		NULL, DEFAULT, DEFAULT, NULL, '#82C9E8', '#1A8DBF', 'WHITE')
+ 	</insert>
+ 	
+ 	
+ 	<!--폴더 테이블에 값 삽입 -->
+ 	<insert id="insertFolder1">
+ 		INSERT INTO FOLDER VALUES(
+		SEQ_FOLDER_NO.NEXTVAL, 1, '나의 월간달력', 1, #{memberNo})
+ 	</insert>
+ 	<!--폴더 테이블에 값 삽입 -->
+ 	<insert id="insertFolder2">
+ 		INSERT INTO FOLDER VALUES(
+		SEQ_FOLDER_NO.NEXTVAL, 1, '나의 다이어리', 2, #{memberNo})
+ 	</insert>
+ 	<!--폴더 테이블에 값 삽입 -->
+ 	<insert id="insertFolder3">
+ 		INSERT INTO FOLDER VALUES(
+		SEQ_FOLDER_NO.NEXTVAL, 2, '나의 사진첩', 1, #{memberNo})
+ 	</insert>
+ 	<!--폴더 테이블에 값 삽입 -->
+ 	<insert id="insertFolder4">
+ 		INSERT INTO FOLDER VALUES(
+		SEQ_FOLDER_NO.NEXTVAL, 3, '나의 동영상', 1, #{memberNo})
+ 	</insert>
+ 	
+ 	
+ 	<!-- 카테고리순서 테이블에 값 삽입 -->
+ 	<insert id="insertCategoryOrder">
+	 	INSERT INTO CATEGORY_ORDER VALUES(
+		#{memberNo}, 1,2,3,4)
+ 	</insert>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	 <!-- 내 회원 정보 수정 -->
+	 <update id="updateInfo" parameterType="Member">
+		 	UPDATE "MEMBER" SET
+			MEMBER_NICKNAME = #{memberNickname},
+			MEMBER_TEL= #{memberTel},
+			MEMBER_NAME = #{memberName}
+			<if test='birthYear != null'>
+				,BIRTHYEAR = #{birthYear},
+				BIRTHDAY = #{birthDay}
+			</if>
+			WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	
+	
+	
+	
+	<!-- 비밀번호 변경 -->
+	<update id="changePw" parameterType="Member">
+		UPDATE "MEMBER" SET
+		MEMBER_PW = #{memberPw}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+  
+  
+  	<!-- 회원탈퇴 회원 조회 -->
+	<select id="getMemberInfo" parameterType="_int"
+		resultMap="member_rm">
+		SELECT MEMBER_EMAIL, MEMBER_PW, MEMBER_NAME
+		FROM "MEMBER"
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+
+	<!-- 회원 탈퇴 -->
+	<update id="secessionDelete">
+		UPDATE "MEMBER" SET
+		MEMBER_DEL_YN = 'Y'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	
+	
+	<!-- 차단기한이 지난 회원의 정보 리스트 -->
+	<select id="selectMemberBlockList" resultMap = "member_rm">
+		SELECT * FROM MEMBER_BLOCK mb WHERE BLOCK_END > SYSDATE
+	</select>
+	
+	<!-- 차단기한이 지난 회원의 정보 삭제 -->
+	<delete id="deleteMemberBlock">
+		DELETE FROM MEMBER_BLOCK mb WHERE BLOCK_END > SYSDATE
+	</delete>
+	
+	
+	
+</mapper>

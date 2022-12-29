@@ -1,7 +1,7 @@
 #loginForm {
     height: 800px;
     width: 820px;
-    border: 1px solid black;
+    border: 2px solid var(--mainColor);
     margin: 100px auto;
     border-radius: 20px;
 
@@ -30,12 +30,12 @@
 }
 
 .inputBox:hover {
-    border-bottom: 2px solid var(--subColor);
+    border-bottom: 2px solid var(--mainColor);
     transition-duration: 0.3s;
 }
 
 .inputBox:active {
-    border-bottom: 2px solid var(--subColor);
+    border-bottom: 2px solid var(--mainColor);
     transition-duration: 0.3s;
 }
 
@@ -52,6 +52,7 @@
 
 .bigCube {
     height: 200px;
+    cursor: pointer;
 }
 
 
@@ -97,8 +98,8 @@
 /* 체크박스 체크 시 아이콘 스타일 지정 */
 #saveId:checked+label>i {
     background-color: white;
-    border-color: var(--subColor);
-    color: var(--subColor);
+    border-color: var(--mainColor);
+    color: var(--mainColor);
 }
 
 
@@ -125,15 +126,17 @@
 /* 네이버, 카카오 */
 .simpleLogin {
     display: flex;
-    margin-bottom: 10px;
     border-radius: 5px;
     cursor: pointer;
+    width: 250px;
+}
+.naver{
+    margin-right: 50px;
 }
 
 .simpleLogin div {
     display: flex;
     align-items: center;
-    padding: 0 50px;
     font-size: 20px;
     color: white;
 }
@@ -152,4 +155,14 @@
 
 #startKakao {
     color: black;
+}
+.socialLogin {
+    display: flex;
+}
+.loginIntroduce {
+    color: #aaa;
+}
+#loginBtn {
+    border: none;
+    background-color: white;
 }

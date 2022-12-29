@@ -9,6 +9,7 @@
 		<param-value>
 			classPath:spring/root-context.xml
 			classPath:spring/spring-security.xml
+			classPath:spring/email-context.xml
 		</param-value>
 	</context-param>
 	
@@ -47,4 +48,9 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+<!-- 	 	<filter-mapping>
+		<filter-name>adminFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>  -->
 </web-app>

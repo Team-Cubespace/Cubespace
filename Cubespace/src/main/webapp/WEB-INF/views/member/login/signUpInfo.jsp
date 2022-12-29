@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cubespace</title>
     <link rel="stylesheet" href="/resources/css/reset.css">
     <link rel="stylesheet" href="/resources/css/variables.css">
     <link rel="stylesheet" href="/resources/css/style.css">
@@ -84,7 +88,6 @@
                             <input type="password" name="memberPw" class="inputBox" id="memberPw" placeholder="비밀번호"
                                 maxlength="16" />
                         </div>
-                        <!-- <i class="fa-regular fa-eye-slash"></i> -->
                         <i class="fa-regular fa-eye" id="seePw"></i>
                     </div>
                     <div class="firstBox">
@@ -100,7 +103,6 @@
                             <input type="password" name="memberPwConfirm" class="inputBox" id="memberPwConfirm"
                                 placeholder="비밀번호 확인" maxlength="16" />
                         </div>
-                        <!-- <i class="fa-regular fa-eye-slash"></i> -->
                         <i class="fa-regular fa-eye" id="seePwConfirm"></i>
                     </div>
                     <div class="firstBox">
@@ -114,7 +116,7 @@
                     <div class="signUp-input-Name textbox">
                         <i class="fa-regular fa-user"></i>
                         <input type="text" name="memberName" class="inputBox" id="memberName" placeholder="이름을 입력해주세요"
-                            maxlength="10" />
+                            maxlength="10" value="${tempMember.memberName}"/>
                     </div>
                     <div class="firstBox">
                         <span class="signUp-message" id="nameMessage"></span>
@@ -147,11 +149,13 @@
                     <div class="signUp-input-Birth textbox">
                         <i class="fa-solid fa-cake-candles"></i>
                         <input type="text" name="memberBirth" class="inputBox" id="memberBirth"
-                            placeholder="생년월일 ex)19910502" maxlength="8" />
+                            placeholder="생년월일 ex)19910502" maxlength="8" value="${tempMember.memberBirth}"/>
                     </div>
+                    <input type="hidden" name="birthYear" id="birthYear">
+                    <input type="hidden" name="birthDay" id="birthDay">
                     <div class="firstBox" id="selectText">
                         <span>선택사항입니다</span>
-                        <span class="signUp-message" id="birthMessage">6자리의 숫자로 입력해주세요(ex-940210)</span>
+                        <span class="signUp-message" id="birthMessage">8자리의 숫자로 입력해주세요(ex-19940210)</span>
                     </div>
                 </div>
 
@@ -174,7 +178,7 @@
     <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 
 
-
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="/resources/js/member/login/signUpInfo.js"></script>
 </body>
 

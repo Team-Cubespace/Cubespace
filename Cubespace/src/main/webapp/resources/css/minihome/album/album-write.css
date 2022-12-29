@@ -17,7 +17,7 @@
     /* font-size: 13px; */
     letter-spacing: -1px;
 }
-.input-row input {
+.input-row input[type='text'] {
     border: none;
     outline: none;
     /* font-size: 15px; */
@@ -35,10 +35,17 @@
 .radio-list {
     display: flex;
 }
+
 .radio-list li{
     margin-right: 10px;
     display: flex;
+    font-size: 13px;
 }
+input[type='radio'] {
+    /* width: 10px;
+    height: 10px; */
+}
+/*
 .radio-list label {
     cursor: pointer;
 }
@@ -49,7 +56,7 @@
     background-color: var(--subColor);
     color: white;
 }
-/* 라디오 레이블 */
+라디오 레이블
 .radio {
     width: 17px;
     height: 17px;
@@ -61,7 +68,7 @@
     font-size: 10px;
     margin-right: 10px;
     color: var(--subColor);
-}
+} */
 
 /* 이미지 등록 버튼 영역 */
 .add-image {
@@ -236,5 +243,3 @@ input[type='file'] {
     background-color: var(--ink);
     color: white;
 }
-
-/* 취소 버튼 */

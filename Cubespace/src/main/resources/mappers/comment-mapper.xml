@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="commentMapper">
+	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
+	
+	<resultMap type="Comment" id="comment_rm">
+		<id property="commentNo" column="COMMENT_NO"/>
+		
+		<result property="level" column="LEVEL"/>
+		<result property="commentContent" column="COMMENT_CONTENT"/>
+		<result property="commentCreate" column="COMMENT_CREATE"/>
+		<result property="boardNo" column="BOARD_NO"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="memberName" column="MEMBER_NAME"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>		
+		<result property="profileImage" column="PROFILE_IMG"/>
+		<result property="parentCommentNo" column="PARENT_COMMENT_NO"/>
+		<result property="childCommentCount" column="CHILD_COMMENT_COUNT"/>
+		<result property="fontPath" column="FONT_PATH"/>
+	</resultMap>
+	
+	<select id="selectCommentList" parameterType="map" resultMap="comment_rm">
+		SELECT LEVEL, C.* FROM
+		<![CDATA[
+			(SELECT COMMENT_NO, COMMENT_CONTENT,
+				CASE  
+				  WHEN SYSDATE - COMMENT_CREATE < 1/24/60
+				  THEN FLOOR( (SYSDATE - COMMENT_CREATE) * 24 * 60 * 60 ) || '초 전'
+				  WHEN SYSDATE - COMMENT_CREATE < 1/24
+				  THEN FLOOR( (SYSDATE - COMMENT_CREATE) * 24 * 60) || '분 전'
+				  WHEN SYSDATE - COMMENT_CREATE < 1
+				  THEN FLOOR( (SYSDATE - COMMENT_CREATE) * 24) || '시간 전'
+				  ELSE TO_CHAR(COMMENT_CREATE, 'YYYY-MM-DD')
+				END COMMENT_CREATE,
+				BOARD_NO, MEMBER_NO, PARENT_COMMENT_NO, MEMBER_NAME, PROFILE_IMG, MEMBER_NICKNAME,
+				(SELECT COUNT(*) FROM "COMMENT" WHERE PARENT_COMMENT_NO = MAIN.COMMENT_NO AND COMMENT_DEL_YN='N') CHILD_COMMENT_COUNT,
+				(SELECT FONT_PATH FROM FONT_SHOP WHERE FONT_NO = (
+					SELECT GOODS_NO FROM MEMBER_OWN_GOODS WHERE OWN_NO = OWN_FONT_NO)) FONT_PATH
+				FROM "COMMENT" MAIN
+				JOIN "MEMBER" USING(MEMBER_NO)
+				WHERE BOARD_NO = ${boardNo}
+				AND BOARD_TYPE_NO = #{boardTypeNo}
+				AND COMMENT_DEL_YN = 'N') C
+		START WITH PARENT_COMMENT_NO IS NULL
+		CONNECT BY PRIOR COMMENT_NO = PARENT_COMMENT_NO
+		ORDER SIBLINGS BY COMMENT_NO DESC
+		]]>
+	</select>
+	
+	<!-- 댓글 등록 -->
+	<insert id="insertComment">
+		INSERT INTO "COMMENT" (COMMENT_NO, BOARD_TYPE_NO, BOARD_NO, COMMENT_CONTENT, MEMBER_NO, PARENT_COMMENT_NO)
+		VALUES(SEQ_COMMENT_NO.NEXTVAL, #{boardTypeNo}, #{boardNo}, #{commentContent}, #{memberNo}, 
+		<if test='parentCommentNo == 0'>
+			NULL
+		</if>
+		<if test='parentCommentNo != 0'>
+			#{parentCommentNo}
+		</if>
+		)
+	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<update id="deleteComment">
+		UPDATE "COMMENT" SET
+		COMMENT_DEL_YN = 'Y'
+		WHERE COMMENT_NO = #{commentNo}
+	</update>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateComment">
+		UPDATE "COMMENT" SET
+		COMMENT_CONTENT = #{commentContent}
+		WHERE COMMENT_NO = #{commentNo}
+	</update>
+</mapper>

@@ -97,31 +97,39 @@ function deleteFile(num) {
 /* 폼 전송 */
 function submitForm() {
     // 폼데이터 담기
-    var form = document.querySelector("form");
+    var form = document.getElementById("writeAlbumForm");
     var formData = new FormData(form);
     for (var i = 0; i < filesArr.length; i++) {
         // 삭제되지 않은 파일만 폼데이터에 담기
         if (!filesArr[i].is_delete) {
-            formData.append("attach_file", filesArr[i]);
+            formData.append("imageList", filesArr[i]);
         }
     }
     console.log(filesArr);
-    // $.ajax({
-    //     method: 'POST',
-    //     url: '/formDataTest',
-    //     // dataType: 'json',
-    //     data: formData,
-    //     // async: true,
-    //     // timeout: 30000,
-    //     processData: false,
-    //     contentType: false,
-    //     // cache: false,
-    //     // headers: {'cache-control': 'no-cache', 'pragma': 'no-cache'},
-    //     success: result => {
-    //         console.log(result);
-    //         alert("파일업로드 성공");
-    //     }
-    // })
+    $.ajax({
+        method: 'POST',
+        url: '/albumWrite',
+        dataType: 'json',
+        enctype: 'multipart/form-data',
+        data: formData,
+        // async: true,
+        // timeout: 30000,
+        processData: false,
+        contentType: false,
+        // cache: false,
+        // headers: {'cache-control': 'no-cache', 'pragma': 'no-cache'},
+        success: result => {
+            console.log(result);
+            if(result.albumNo > 0) {
+                location.href=`/albumDetail/${result.albumNo}?folderNo=${result.folderNo}&cp=1`;
+            }
+        },
+        error: result => {
+            console.log(result);
+            alert("파일업로드 실패");
+        }
+
+    })
 }
 
 // 카카오 좌표찍기 모달 생성
@@ -179,21 +187,21 @@ let bounds;
     document.getElementById("writeAlbumForm").addEventListener("submit", e=>{
         const albumTitle = document.querySelector("input[name='albumTitle']");
         // 제목 입력 검사
+        e.preventDefault();
         if(albumTitle.value.trim().length == 0) {       // 제목이 비어있으면
             alert("제목을 입력해주세요.")
             albumTitle.focus();
-            e.preventDefault();
             return;
         }
         
         // 이미지 등록 검사
         if(document.querySelectorAll(".file-item").length == 0) {   // 등록된 이미지가 한개도 없다면
             alert("이미지를 등록해주세요.");
-            e.preventDefault()
             return;
         }
 
         // 제출 함수 (ajax) 작성 필요
+        submitForm();
     });
 
     // 글작성 취소 버튼 이벤트 달기
@@ -264,9 +272,14 @@ const selectPlace = (y, x) => {
     // 위도 Latitude
     // 경도 LONGITUDE
 
+    // 위치 검색 인풋
+    const searchPlaceInput = document.getElementById("searchPlaceInput");
+
     // 값 저장
-    document.querySelector("input[name='latitude']").value = y;
-    document.querySelector("input[name='longitude']").value = x;
+    document.getElementById("latitude").value = y;
+    document.getElementById("longitude").value = x;
+    document.getElementById("locationName").value = searchPlaceInput.value.trim();
+
     console.log(document.querySelector("input[name='latitude']").value);
     console.log(document.querySelector("input[name='longitude']").value);
     // 모달 삭제
@@ -274,14 +287,12 @@ const selectPlace = (y, x) => {
 
     // 위치 입력 영역
     const locationArea = document.getElementById("locationArea");
-    // 위치 검색 인풋
-    const searchPlaceInput = document.getElementById("searchPlaceInput");
 
     // 지도 펼치기 버튼 숨기기
     document.getElementById("addLocationButton").style.display = "none";
 
     // 설정한 위치 블럭 생성
-    const location = document.createElement("location");
+    const location = document.createElement("div");
     location.classList.add("location")
 
     const a = document.createElement("a");

@@ -194,7 +194,6 @@ for (let plusBtn of plusBtnList) {
         input.classList.add("folderTitle");
         const folderName = "나의 " + categoryName; // ajax에 사용
         input.value = folderName;
-        input.setAttribute("disabled", true);
         input.setAttribute("maxlength", "20");
 
         const i = document.createElement("i");
@@ -305,11 +304,3 @@ for (let minusBtn of minusBtnList) {
 }
 
 
-/* 폴더명 변경 */
-const subCategoryList = document.getElementsByClassName("subCategory");
-for(let subCategory of subCategoryList){
-    subCategory.addEventListener("click", e=> {
-        console.log(e.target);
-        e.target.removeAttribute("disabled");
-    })
-}

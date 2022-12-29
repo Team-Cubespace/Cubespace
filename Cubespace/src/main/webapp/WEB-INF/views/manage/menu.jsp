@@ -38,7 +38,7 @@
             outline: none;
             border: none;
         }
-        input:disabled{
+        input{
             background-color: white;
             color: var(--ink);
         }
@@ -160,7 +160,7 @@
                             <span class="backgroundTitle">메뉴설정 변경</span>
                             <div class="backgroundExplain">
                                 <p>메뉴 구성을 변경할 수 있으며 메뉴 하단에 폴더를 생성할 수 있습니다</p>
-                                <p>폴더명 더블클릭시 폴더명 변경 가능</p>
+                                <p>폴더명 클릭시 폴더명 변경 가능</p>
                             </div>
                         </div>
                        
@@ -185,13 +185,13 @@
                                             <c:if test="${folder.folderOrder == 1}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}" disabled maxlength="10">
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10">
                                                 </div>
                                             </c:if>
                                             <c:if test="${folder.folderOrder != 1}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}" disabled maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
                                                 </div>
                                             </c:if>
 
@@ -211,7 +211,7 @@
                                             <c:if test="${folder.boardTypeNo == 2}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input  class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}" disabled maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                    <input  class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
                                                 </div>   
                                             </c:if>          
                                         </c:forEach>
@@ -230,7 +230,7 @@
                                             <c:if test="${folder.boardTypeNo == 3}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input  class="folderTitle" value='${folder.folderName}' name="${folder.folderNo}" disabled maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                    <input  class="folderTitle" value='${folder.folderName}' name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
                                                 </div>
                                             </c:if>
                                         </c:forEach>

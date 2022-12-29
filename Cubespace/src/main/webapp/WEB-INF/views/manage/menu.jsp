@@ -160,7 +160,6 @@
                             <span class="backgroundTitle">메뉴설정 변경</span>
                             <div class="backgroundExplain">
                                 <p>메뉴 구성을 변경할 수 있으며 메뉴 하단에 폴더를 생성할 수 있습니다</p>
-                                <p>폴더명 클릭시 폴더명 변경 가능</p>
                             </div>
                         </div>
                        
@@ -172,10 +171,15 @@
                                     </div>
                                     <div>--------------------------------------</div>
                                 </div>
+                                ${fn:split(realOrder, ',')[0]}
+                                ${fn:split(realOrder, ',')[1]}
+                                ${fn:split(realOrder, ',')[2]}
+                                ${fn:split(realOrder, ',')[3]}
                                 <div class="menuListArea" id="sortable1">
 
-                                
-                                        <div class="diary">
+                                    <c:if test="${fn:split(realOrder, ',')[0] == 1}"> 
+                                    <c:if test="${categoryOrder.diary != -1}"> 
+                                        <div class="diary" >
                                             <div class="categoryArea" name="1">
                                                 <span class="menuTitle">다이어리</span><i class="fa-solid fa-plus"></i>
                                             </div>
@@ -200,8 +204,11 @@
                                         </div>
                                         <div>--------------------------------------</div>
                                     </div>
+                                    </c:if>
+                                    </c:if>
                                              
-                                
+                                    <c:if test="${fn:split(realOrder, ',')[1] == 1}"> 
+                                    <c:if test="${categoryOrder.album != -1}"> 
                                         <div class="album">
                                             <div class="categoryArea" name="2">
                                                 <span class="menuTitle">사진첩</span><i class="fa-solid fa-plus"></i>
@@ -218,7 +225,11 @@
                                             </div>
                                             <div>--------------------------------------</div>
                                         </div>
+                                    </c:if> 
+                                    </c:if> 
 
+                                   <c:if test="${fn:split(realOrder, ',')[2] == 1}"> 
+                                    <c:if test="${categoryOrder.video != -1}">
                                         <div class="video">
                                             <div class="categoryArea" name="3">
                                                 <span class="menuTitle">동영상</span><i class="fa-solid fa-plus"></i>
@@ -235,15 +246,273 @@
                                             </div>
                                             <div>--------------------------------------</div>
                                         </div>
+                                    </c:if>
+                                    </c:if>
 
+                                    <c:if test="${fn:split(realOrder, ',')[3] == 1}"> 
+                                    <c:if test="${categoryOrder.guestBook != -1}"> 
                                         <div class="guestBook">
                                             <div class="categoryArea" name="4">
                                                 <span class="menuTitle">방명록</span>
                                             </div>
                                             <div>--------------------------------------</div>
                                         </div>
-                                                
+                                    </c:if>            
+                                    </c:if>            
 
+<%-- ---------------------------------------------------------------------------------------------------- --%>
+                                    <c:if test="${fn:split(realOrder, ',')[0] == 2}"> 
+                                    <c:if test="${categoryOrder.diary != -1}"> 
+                                        <div class="diary" >
+                                            <div class="categoryArea" name="1">
+                                                <span class="menuTitle">다이어리</span><i class="fa-solid fa-plus"></i>
+                                            </div>
+                                            <div class="subCategoryArea" id="sortable2">
+                                    <c:forEach var="folder" items="${folderList}">
+                                        <c:if test="${folder.boardTypeNo == 1}">
+                                            <c:if test="${folder.folderOrder == 1}">
+                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
+                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10">
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${folder.folderOrder != 1}">
+                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
+                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                </div>
+                                            </c:if>
+
+                                        </c:if>
+                                    </c:forEach>
+                                        </div>
+                                        <div>--------------------------------------</div>
+                                    </div>
+                                    </c:if>
+                                    </c:if>
+                                             
+                                     <c:if test="${fn:split(realOrder, ',')[1] == 2}"> 
+                                    <c:if test="${categoryOrder.album != -1}"> 
+                                        <div class="album">
+                                            <div class="categoryArea" name="2">
+                                                <span class="menuTitle">사진첩</span><i class="fa-solid fa-plus"></i>
+                                            </div>
+                                            <div class="subCategoryArea" id="sortable3">
+                                        <c:forEach var="folder" items="${folderList}">
+                                            <c:if test="${folder.boardTypeNo == 2}">
+                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
+                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
+                                                    <input  class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                </div>   
+                                            </c:if>          
+                                        </c:forEach>
+                                            </div>
+                                            <div>--------------------------------------</div>
+                                        </div>
+                                    </c:if> 
+                                    </c:if> 
+
+                                     <c:if test="${fn:split(realOrder, ',')[2] == 2}"> 
+                                    <c:if test="${categoryOrder.video != -1}">
+                                        <div class="video">
+                                            <div class="categoryArea" name="3">
+                                                <span class="menuTitle">동영상</span><i class="fa-solid fa-plus"></i>
+                                            </div>
+                                            <div class="subCategoryArea" id="sortable4">
+                                        <c:forEach var="folder" items="${folderList}">
+                                            <c:if test="${folder.boardTypeNo == 3}">
+                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
+                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
+                                                    <input  class="folderTitle" value='${folder.folderName}' name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                </div>
+                                            </c:if>
+                                        </c:forEach>
+                                            </div>
+                                            <div>--------------------------------------</div>
+                                        </div>
+                                    </c:if>
+                                    </c:if>
+
+                                     <c:if test="${fn:split(realOrder, ',')[3] == 2}"> 
+                                    <c:if test="${categoryOrder.guestBook != -1}"> 
+                                        <div class="guestBook">
+                                            <div class="categoryArea" name="4">
+                                                <span class="menuTitle">방명록</span>
+                                            </div>
+                                            <div>--------------------------------------</div>
+                                        </div>
+                                    </c:if>            
+                                    </c:if>            
+
+<%-- ---------------------------------------------------------------------------------------------------- --%>
+                                    <c:if test="${fn:split(realOrder, ',')[0] == 3}"> 
+                                    <c:if test="${categoryOrder.diary != -1}"> 
+                                        <div class="diary" >
+                                            <div class="categoryArea" name="1">
+                                                <span class="menuTitle">다이어리</span><i class="fa-solid fa-plus"></i>
+                                            </div>
+                                            <div class="subCategoryArea" id="sortable2">
+                                    <c:forEach var="folder" items="${folderList}">
+                                        <c:if test="${folder.boardTypeNo == 1}">
+                                            <c:if test="${folder.folderOrder == 1}">
+                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
+                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10">
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${folder.folderOrder != 1}">
+                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
+                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                </div>
+                                            </c:if>
+
+                                        </c:if>
+                                    </c:forEach>
+                                        </div>
+                                        <div>--------------------------------------</div>
+                                    </div>
+                                    </c:if>
+                                    </c:if>
+                                             
+                                    <c:if test="${fn:split(realOrder, ',')[1] == 3}"> 
+                                    <c:if test="${categoryOrder.album != -1}"> 
+                                        <div class="album">
+                                            <div class="categoryArea" name="2">
+                                                <span class="menuTitle">사진첩</span><i class="fa-solid fa-plus"></i>
+                                            </div>
+                                            <div class="subCategoryArea" id="sortable3">
+                                        <c:forEach var="folder" items="${folderList}">
+                                            <c:if test="${folder.boardTypeNo == 2}">
+                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
+                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
+                                                    <input  class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                </div>   
+                                            </c:if>          
+                                        </c:forEach>
+                                            </div>
+                                            <div>--------------------------------------</div>
+                                        </div>
+                                    </c:if> 
+                                    </c:if> 
+
+                                    <c:if test="${fn:split(realOrder, ',')[2] == 3}"> 
+                                    <c:if test="${categoryOrder.video != -1}">
+                                        <div class="video">
+                                            <div class="categoryArea" name="3">
+                                                <span class="menuTitle">동영상</span><i class="fa-solid fa-plus"></i>
+                                            </div>
+                                            <div class="subCategoryArea" id="sortable4">
+                                        <c:forEach var="folder" items="${folderList}">
+                                            <c:if test="${folder.boardTypeNo == 3}">
+                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
+                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
+                                                    <input  class="folderTitle" value='${folder.folderName}' name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                </div>
+                                            </c:if>
+                                        </c:forEach>
+                                            </div>
+                                            <div>--------------------------------------</div>
+                                        </div>
+                                    </c:if>
+                                    </c:if>
+
+                                    <c:if test="${fn:split(realOrder, ',')[3] == 3}"> 
+                                    <c:if test="${categoryOrder.guestBook != -1}"> 
+                                        <div class="guestBook">
+                                            <div class="categoryArea" name="4">
+                                                <span class="menuTitle">방명록</span>
+                                            </div>
+                                            <div>--------------------------------------</div>
+                                        </div>
+                                    </c:if>            
+                                    </c:if>            
+
+<%-- ---------------------------------------------------------------------------------------------------- --%>
+                                    <c:if test="${fn:split(realOrder, ',')[0] == 4}"> 
+                                    <c:if test="${categoryOrder.diary != -1}"> 
+                                        <div class="diary" >
+                                            <div class="categoryArea" name="1">
+                                                <span class="menuTitle">다이어리</span><i class="fa-solid fa-plus"></i>
+                                            </div>
+                                            <div class="subCategoryArea" id="sortable2">
+                                    <c:forEach var="folder" items="${folderList}">
+                                        <c:if test="${folder.boardTypeNo == 1}">
+                                            <c:if test="${folder.folderOrder == 1}">
+                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
+                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10">
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${folder.folderOrder != 1}">
+                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
+                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                </div>
+                                            </c:if>
+
+                                        </c:if>
+                                    </c:forEach>
+                                        </div>
+                                        <div>--------------------------------------</div>
+                                    </div>
+                                    </c:if>
+                                    </c:if>
+                                             
+                                    <c:if test="${fn:split(realOrder, ',')[1] == 4}"> 
+                                    <c:if test="${categoryOrder.album != -1}"> 
+                                        <div class="album">
+                                            <div class="categoryArea" name="2">
+                                                <span class="menuTitle">사진첩</span><i class="fa-solid fa-plus"></i>
+                                            </div>
+                                            <div class="subCategoryArea" id="sortable3">
+                                        <c:forEach var="folder" items="${folderList}">
+                                            <c:if test="${folder.boardTypeNo == 2}">
+                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
+                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
+                                                    <input  class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                </div>   
+                                            </c:if>          
+                                        </c:forEach>
+                                            </div>
+                                            <div>--------------------------------------</div>
+                                        </div>
+                                    </c:if> 
+                                    </c:if> 
+
+                                    <c:if test="${fn:split(realOrder, ',')[2] == 4}"> 
+                                    <c:if test="${categoryOrder.video != -1}">
+                                        <div class="video">
+                                            <div class="categoryArea" name="3">
+                                                <span class="menuTitle">동영상</span><i class="fa-solid fa-plus"></i>
+                                            </div>
+                                            <div class="subCategoryArea" id="sortable4">
+                                        <c:forEach var="folder" items="${folderList}">
+                                            <c:if test="${folder.boardTypeNo == 3}">
+                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
+                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
+                                                    <input  class="folderTitle" value='${folder.folderName}' name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                </div>
+                                            </c:if>
+                                        </c:forEach>
+                                            </div>
+                                            <div>--------------------------------------</div>
+                                        </div>
+                                    </c:if>
+                                    </c:if>
+
+                                    <c:if test="${fn:split(realOrder, ',')[3] == 4}"> 
+                                    <c:if test="${categoryOrder.guestBook != -1}"> 
+                                        <div class="guestBook">
+                                            <div class="categoryArea" name="4">
+                                                <span class="menuTitle">방명록</span>
+                                            </div>
+                                            <div>--------------------------------------</div>
+                                        </div>
+                                    </c:if>            
+                                    </c:if>            
+
+<%-- ---------------------------------------------------------------------------------------------------- --%>
                                
                                 </div>
                                 <div class="home" >

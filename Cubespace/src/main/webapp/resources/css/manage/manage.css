@@ -529,6 +529,19 @@ header {
     display: flex;
     flex-direction: column;
 }
+
+.menuOrder1{
+    order : 1;
+}
+.menuOrder2{
+    order : 2;
+}
+.menuOrder3{
+    order : 3;
+}
+.menuOrder4{
+    order : 4;
+}
 /* ------------------------------------------------------ */
 /* 배경음악 설정 */
 .backgroundHeader, .backgroundMain{

@@ -42,6 +42,8 @@ public class ManageServiceImpl implements ManageService{
 	@Override
 	public int changeCategory(CategoryOrder categoryOrder) {
 		
+		
+		
 		return dao.changeCategory(categoryOrder);
 	}
 

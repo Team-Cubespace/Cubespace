@@ -20,4 +20,10 @@ public interface MinihomeService {
 	 * @return result
 	 */
 	public int updateMinihomeName(Map<String, Object> paramMap);
+
+	/** 미니홈 today, total 증가
+	 * @param memberNo
+	 * @return result
+	 */
+	public int updateTodayTotal(int memberNo);
 }

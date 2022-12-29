@@ -32,4 +32,12 @@
  		HOMEPAGE_NAME = #{homepageName}
  		WHERE MEMBER_NO = #{memberNo}
  	</update>
+ 	
+ 	<!-- 미니홈 today, total 증가 -->
+ 	<update id="updateTodayTotal">
+ 		UPDATE MINI_HOMEPAGE SET
+		TODAY = TODAY + 1,
+		TOTAL = TOTAL + 1
+		WHERE MEMBER_NO = #{memberNo}	
+ 	</update>
 </mapper>

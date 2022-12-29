@@ -27,5 +27,11 @@ public class MinihomeServiceImpl implements MinihomeService{
 	public int updateMinihomeName(Map<String, Object> paramMap) {
 		return dao.updateMinihomeName(paramMap);
 	}
+
+	// 미니홈 today, total 증가
+	@Override
+	public int updateTodayTotal(int memberNo) {
+		return dao.updateTodayTotal(memberNo);
+	}
 	
 }

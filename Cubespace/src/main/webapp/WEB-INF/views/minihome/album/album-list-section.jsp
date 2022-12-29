@@ -9,7 +9,7 @@
         <span> > </span>
         <span>${folderName}</span>
     </header>
-    <a href="/albumWrite" id="writeButton" type="button">글쓰기</a>
+    <a href="/albumWrite?folderNo=${folderNo}&cp=${pagination.currentPage}" id="writeButton" type="button">글쓰기</a>
 
     <c:choose>
         <c:when test="${fn:length(albumList) == 0}">
@@ -36,7 +36,7 @@
                             <li><a class="current-page">${i}</a></li>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="/albumList/2?folderNo=${folderNo}&cp=${i}"></a></li>
+                            <li><a href="/albumList/2?folderNo=${folderNo}&cp=${i}">${i}</a></li>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>

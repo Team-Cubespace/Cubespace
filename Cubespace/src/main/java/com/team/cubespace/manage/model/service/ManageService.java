@@ -78,6 +78,13 @@ public interface ManageService {
 	 */
 	int addFolder(Map<String, Object> paramMap);
 
+	/** 카테고리에서 폴더 삭제
+	 * @param paramMap
+	 * @return result
+	 * @throws Exception 
+	 */
+	int deleteFolder(Map<String, Object> paramMap) throws Exception;
+
 
 
 }

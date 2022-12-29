@@ -161,7 +161,7 @@
                                     <div class=" homeCategoryArea">
                                         <span class="menuTitle">홈</span>
                                     </div>
-                                    <div>---------------------------------------</div>
+                                    <div>--------------------------------------</div>
                                 </div>
 
                                 <div class="menuListArea" id="sortable1">
@@ -174,18 +174,25 @@
                                             <div class="subCategoryArea" id="sortable2">
                                     <c:forEach var="folder" items="${folderList}">
                                         <c:if test="${folder.boardTypeNo == 1}">
-                                            <div class="subCategory" name="${folder.folderOrder}">
-                                                <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                <span class="folderTitle">${folder.folderName}</span>
-                                            </div>
+                                            <c:if test="${folder.folderOrder == 1}">
+                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
+                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
+                                                    <span class="folderTitle">${folder.folderName}(${folder.fileCount})</span>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${folder.folderOrder != 1}">
+                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
+                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
+                                                    <span class="folderTitle">${folder.folderName}(${folder.fileCount})</span><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                </div>
+                                            </c:if>
+
                                         </c:if>
                                     </c:forEach>
                                         </div>
-                                        <div>---------------------------------------</div>
+                                        <div>--------------------------------------</div>
                                     </div>
                                 </c:if>               
-
-
                                 <c:if test="${categoryOrder.album != -1}"> 
                                         <div class="album" style="order:${categoryOrder.album}">
                                             <div class="categoryArea" name="2">
@@ -194,14 +201,14 @@
                                             <div class="subCategoryArea" id="sortable3">
                                         <c:forEach var="folder" items="${folderList}">
                                             <c:if test="${folder.boardTypeNo == 2}">
-                                                <div class="subCategory" name="1">
+                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <span  class="folderTitle">나의 사진첩</span><i class="fa-solid fa-minus"></i>
+                                                    <span  class="folderTitle">${folder.folderName}(${folder.fileCount})</span><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
                                                 </div>   
                                             </c:if>          
                                         </c:forEach>
                                             </div>
-                                            <div>---------------------------------------</div>
+                                            <div>--------------------------------------</div>
                                         </div>
                                 </c:if>            
 
@@ -213,14 +220,14 @@
                                             <div class="subCategoryArea" id="sortable4">
                                         <c:forEach var="folder" items="${folderList}">
                                             <c:if test="${folder.boardTypeNo == 3}">
-                                                <div class="subCategory" name="1">
+                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <span  class="folderTitle">나의 동영상</span><i class="fa-solid fa-minus"></i>
+                                                    <span  class="folderTitle">${folder.folderName}(${folder.fileCount})</span><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
                                                 </div>
                                             </c:if>
                                         </c:forEach>
                                             </div>
-                                            <div>---------------------------------------</div>
+                                            <div>--------------------------------------</div>
                                         </div>
                                 </c:if>            
 
@@ -229,7 +236,7 @@
                                             <div class="categoryArea" name="4">
                                                 <span class="menuTitle">방명록</span>
                                             </div>
-                                            <div>---------------------------------------</div>
+                                            <div>--------------------------------------</div>
                                         </div>
                                 </c:if>                 
 

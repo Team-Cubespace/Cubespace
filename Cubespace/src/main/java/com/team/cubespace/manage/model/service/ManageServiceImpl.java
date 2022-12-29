@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.manage.model.dao.ManageDAO;
@@ -122,6 +123,43 @@ public class ManageServiceImpl implements ManageService{
 	public int addFolder(Map<String, Object> paramMap) {
 		
 		return dao.addFolder(paramMap);
+	}
+
+	/**
+	 * 카테고리에서 폴더 삭제
+	 * @throws Exception 
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public int deleteFolder(Map<String, Object> paramMap) throws Exception {
+		
+		int result = dao.deleteFolder(paramMap);
+		
+		if(result > 0) {
+			
+			int subCategoryLength = Integer.parseInt((String)paramMap.get("subCategoryLength"));
+			int folderOrder = Integer.parseInt((String)paramMap.get("folderOrder"));
+;			
+			for(int i = 0; i < (subCategoryLength - folderOrder); i++) {
+				
+				// 새로바뀔 폴더의 순서
+				paramMap.put("folderNewOrder", folderOrder + i);
+				
+				// boardTypeNo, memberNo, folderNewOrder+1(원래 순서), folderNewOrder(바꿀 순서)
+				result += dao.updateFolderOrder(paramMap);
+			}
+			
+			// result가 폴더삭제 + 업데이트 갯수와 동일할경우
+			if(result != (subCategoryLength - folderOrder) + 1) {
+				throw new Exception("폴더 삭제 중 오류 발생");
+			}
+			
+		// 폴더가 삭제되지 않은 경우
+		} else { 
+			throw new Exception("폴더 삭제 중 오류 발생");
+		}
+		
+		return result;
 	}
 
 

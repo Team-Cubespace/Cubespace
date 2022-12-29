@@ -36,7 +36,7 @@ document.getElementById("useFontBtn").addEventListener("click", e => {
         success : result => {
             if(result > 0) {
                 alert("폰트가 적용되었습니다");
-                location.href = location.href;
+                window.parent.location.reload();
             } else {
                 console.log("폰트 적용 실패");
             }

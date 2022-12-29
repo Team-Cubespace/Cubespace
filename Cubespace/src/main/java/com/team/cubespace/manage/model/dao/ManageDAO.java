@@ -125,6 +125,24 @@ public class ManageDAO {
 		return sqlSession.insert("ManageMapper.addFolder", paramMap);
 	}
 
+	/** 카테고리에서 폴더 삭제
+	 * @param paramMap
+	 * @return result
+	 */
+	public int deleteFolder(Map<String, Object> paramMap) {
+		
+		return sqlSession.delete("ManageMapper.deleteFolder", paramMap);
+	}
+
+	/** 폴더삭제 후 나머지 폴더순서 새로 정렬
+	 * @param paramMap
+	 * @return result
+	 */
+	public int updateFolderOrder(Map<String, Object> paramMap) {
+		
+		return sqlSession.delete("ManageMapper.updateFolderOrder", paramMap);
+	}
+
 
 
 

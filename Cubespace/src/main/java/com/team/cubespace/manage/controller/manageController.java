@@ -140,6 +140,21 @@ public class manageController {
 		return service.addFolder(paramMap);
 	}
 	
+	/** 카테고리에서 폴더 삭제
+	 * @param folderList
+	 * @param paramMap
+	 * @return
+	 * @throws Exception 
+	 */
+	@GetMapping("/menu/deleteFolder")
+	@ResponseBody
+	public int deleteFolder(@SessionAttribute("folderList") List<Folder> folderList,
+			@RequestParam Map<String, Object> paramMap) throws Exception {
+		
+		// paramMap : boardTypeNo, folderOrder, folderNo, subCategoryLength, memberNo
+		return service.deleteFolder(paramMap);
+	}
+	
 //	친구(깐부) 관련-------------------------------------------------------------------------------
 
 	/** 깐부끊기

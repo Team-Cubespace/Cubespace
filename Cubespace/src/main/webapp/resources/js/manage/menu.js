@@ -60,7 +60,10 @@ menuSelectBtn.addEventListener("click", () => {
         },
         type: "get",
         success: result => {
-            if (result > 0) { alert("변경사항이 저장되었습니다") }
+            if (result > 0) { 
+                alert("변경사항이 저장되었습니다")
+                window.parent.location.reload();
+            }
             else { alert("변경사항 저장 실패") }
         },
         error: () => { console.log("변경사항 저장 중 오류 발생"); }
@@ -85,7 +88,7 @@ menuSelectCancelBtn.addEventListener("click", () => {
         success: result => {
             if (result > 0) {
                 alert("메뉴설정을 변경 완료했습니다");
-                location.reload(true);
+                window.parent.location.reload();
             }
             else { console.log("메뉴설정 변경 실패"); }
         }
@@ -128,6 +131,7 @@ document.getElementById("menuSaveBtn").addEventListener("click", () => {
         success: result => {
             if (result > 0) {
                 alert("변경사항이 저장되었습니다");
+                window.parent.location.reload();
             } else {
                 alert("변경사항 저장 실패");
             }
@@ -213,7 +217,10 @@ for (let plusBtn of plusBtnList) {
             },
             type: "get",
             success: result => {
-                if (result > 0) { console.log("폴더 삽입 성공"); }
+                if (result > 0) { 
+                    console.log("폴더 삽입 성공");
+                    // window.parent.location.reload();
+                }
                 else { console.log("폴더 삽입 실패"); }
             },
             error: () => { alert("폴더 삽입 중 오류 발생") }
@@ -226,4 +233,71 @@ for (let plusBtn of plusBtnList) {
 
 
 /* "-"버튼 클릭시 */
+const minusBtnList = document.getElementsByClassName("fa-minus");
+for (let minusBtn of minusBtnList) {
+    minusBtn.addEventListener("click", e => {
 
+        const categoryName = e.target.parentElement.parentElement.parentElement; // diary, album, video
+        const folderOrder = e.target.parentElement.getAttribute("name"); //해당 폴더의 folderOrder
+        const folderNo = e.target.parentElement.getAttribute("id"); //해당 폴더의 folderNo
+        const subCategoryLength = e.target.parentElement.parentElement.childElementCount; // 해당 카테고리의 폴더 갯수
+        const fileCount = e.target.getAttribute("name"); // 해당 폴더의 파일갯수
+        // 카테고리 이름에 따른 boardType 설정
+        
+        let boardTypeNo = 0;
+        if (categoryName.classList.contains("diary")) {
+            boardTypeNo = 1;
+        }
+        if (categoryName.classList.contains("album")) {
+            boardTypeNo = 2;
+        }
+        if (categoryName.classList.contains("video")) {
+            boardTypeNo = 3;
+        }
+
+
+
+        // subCategoryLength가 1일때(diary카테고리는 2일때) 삭제 불가능하도록
+        if(categoryName.classList.contains("diary")){
+            if(subCategoryLength == 2){
+                alert("적어도 한 개의 폴더가 존재해야 합니다");
+                return;
+            }
+        } else {
+            if(subCategoryLength == 1){
+                alert("적어도 한 개의 폴더가 존재해야 합니다");
+                return;
+            }
+        }
+
+        
+        // 폴더에 게시글이 존재할 경우 삭제가 불가능
+        if(fileCount > 0) {
+            alert("폴더에 글이 존재할 경우 삭제가 불가능합니다");
+            return;
+        }
+
+
+        // 4번째 폴더를 삭제했으면 그 뒤 폴더들의 순서도 하나씩 밀기
+        // 전체 폴더가 6개고, 4번째를 삭제했으면 
+        // 1) n번째 폴더 delete
+        // 2) for문 돌려서(5번째->4번째 / 6번째->5번째로 update)
+        $.ajax({
+            url : "/manage/menu/deleteFolder",
+            type : "get",
+            data : {"boardTypeNo" : boardTypeNo, "folderOrder" : folderOrder,
+                    "folderNo" : folderNo, "subCategoryLength": subCategoryLength,
+                    "memberNo" : memberNo},
+            success : result => {
+                if(result > 0){
+                    alert("폴더가 삭제되었습니다");
+                    window.href = window.href;
+                } else{
+                    console.log("폴더 삭제 실패");
+                }
+            },
+            error : e => {console.log("폴더 삭제 중 오류 발생");}
+        // })
+        })
+    })
+}

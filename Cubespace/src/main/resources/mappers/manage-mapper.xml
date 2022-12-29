@@ -8,6 +8,7 @@
    		<result property="boardTypeNo" column="BOARD_TYPE_NO"></result>
    		<result property="folderName" column="FOLDER_NAME"></result>
    		<result property="folderOrder" column="FOLDER_ORDER"></result>
+   		<result property="fileCount" column="FILE_COUNT"></result>
  	 </resultMap>
  	 
  	 
@@ -42,7 +43,12 @@
 
 	<!-- 폴더 리스트 조회 -->
 	<select id="getFolderList" resultMap="folder_rm">
-		SELECT * FROM FOLDER   WHERE MEMBER_NO  = #{memberNo}
+		SELECT F.FOLDER_NO, BOARD_TYPE_NO, FOLDER_NAME, FOLDER_ORDER, MEMBER_NO, 
+		(SELECT COUNT(*) FROM DIARY D WHERE D.MEMBER_NO = 1 AND D.FOLDER_NO = F.FOLDER_NO)  + 
+		(SELECT COUNT(*) FROM ALBUM A WHERE A.MEMBER_NO = 1 AND A.FOLDER_NO = F.FOLDER_NO) + 
+		(SELECT COUNT(*) FROM VIDEO V WHERE V.MEMBER_NO = 1 AND V.FOLDER_NO = F.FOLDER_NO)  FILE_COUNT
+		FROM FOLDER  F 
+		WHERE MEMBER_NO  = #{memberNo}
 		ORDER BY BOARD_TYPE_NO, FOLDER_ORDER
 	</select>
  	 
@@ -88,6 +94,22 @@
 		SEQ_FOLDER_NO.NEXTVAL, #{boardTypeNo},
 		#{folderName}, #{folderOrder}, #{memberNo})
 	</insert>
+	
+	<!-- 카테고리에서 폴더 삭제 -->
+	<delete id="deleteFolder">
+		DELETE FROM FOLDER 
+		WHERE MEMBER_NO = #{memberNo}
+		AND FOLDER_NO = #{folderNo}
+	</delete>
+	
+	<!-- 폴더삭제 후 나머지 폴더순서 새로 정렬 -->
+	<update id="updateFolderOrder">
+		UPDATE FOLDER SET
+		FOLDER_ORDER = #{folderNewOrder}
+		WHERE MEMBER_NO = #{memberNo}
+		AND FOLDER_ORDER = #{folderNewOrder} -1
+		AND BOARD_TYPE_NO = #{boardTypeNo}
+	</update>
 	
  <!-- 깐부 ====================================================-->
 

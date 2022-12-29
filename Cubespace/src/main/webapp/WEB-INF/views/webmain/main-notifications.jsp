@@ -65,7 +65,7 @@
                         </div>
 
                         <div class="profile-body">
-                            <div class="member-accept" onclick="return notificationsAccept(this.href)">
+                            <div class="member-accept" onclick="return openMinihome(this.href)">
                                 <i class="fa-solid fa-check" id="faCheck"></i>
                                 <div >수락</div>
                             </div>
@@ -75,7 +75,7 @@
                                 <div >거절</div>
                             </div>
 
-                            <a href="/minihome/3"class="member-minihome">
+                            <a class="member-minihome" onclick="return openMinihome(this.href)">
                                 <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
                                 <div >미니홈피</div><!--  <%-- a --%> -->
                             </a>
@@ -170,10 +170,6 @@
             </div>
         </div>
     </div>
-    <script>
-    // // 로그인한 회원 번호
-    // const loginMemberNo = "${loginMember.memberNo}";
-    </script>
     <!-- jQuery 라이브러리(.js 파일) 추가(CDN 방식) -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <!-- <%-- 해당 모달 개인 js --%> -->

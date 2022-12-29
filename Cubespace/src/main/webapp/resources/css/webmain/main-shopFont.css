@@ -7,7 +7,7 @@ body *{
     /* border-top: 2px solid #e53095; */
     border-top: 2px solid var(--subColor);
     width: 100%;
-    height: 500px;
+    /* height: 500px; */
 }   
 /**********************************************************/
 /* 카테고리/검색 창 설정 */
@@ -226,6 +226,7 @@ body *{
     justify-content: center;
     align-items: center;
     padding: 0;
+    margin-bottom: 20px;
 }
 
 .pagination li{

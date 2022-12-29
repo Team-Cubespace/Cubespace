@@ -1,11 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%-- <c:if test="${not empty sessionScope.loginMember}">
+    <c:set var="loginMember" value="${sessionScope.loginMember}"/>
+</c:if> --%>
+    <script>
+        // 로그인한 회원 번호
+		const loginMemberNo = "${loginMember.memberNo}";
+    </script>
+    <script>
+        const loginMember = "${loginMember}";
+    </script>
 <header>
     <!------------------ 헤더 메뉴 ------------------>
     <ul class="header-menu-nav">
         <li class="header-menu">
-            <a href="">
+            <a href="/cubespace/shop">
                 <i class="fa-solid fa-shop"></i>
                 <span>상점</span>
             </a>

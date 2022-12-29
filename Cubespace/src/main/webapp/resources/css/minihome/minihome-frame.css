@@ -95,8 +95,10 @@ html {
 /* 미니홈 헤더 오른쪽 */
 .minihome-header-right {
     width: 72%;
+    height: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .minihome-header-right .logo {
     background-color: white;
@@ -197,13 +199,23 @@ iframe {
 
 /* 오디오 플레이어 */
 .audio-container {
+    width: 30%;
+    height: 65%;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: space-evenly;
     background-color: white;
     border-radius: 5px;
     font-size: 13px;
+    padding: 0px 5px;
 }
-
+.music-controller {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 /* 재생 버튼 */
 #playButton {
     background-color: transparent;
@@ -213,11 +225,11 @@ iframe {
 }
 
 /* 노래 이름 */
-#musicName {
+/* #musicName {
     width: 100px;
     display: flex;
     justify-content: center;
-}
+} */
 
 /* 볼륨 */
 .music-volume-area {
@@ -226,6 +238,11 @@ iframe {
 }
 .music-volume-area i {
     font-size: 17px;
+}
+
+#volumeIcon {
+    width: 20px;
+    text-align: start;
 }
 #musicVolume {
     -webkit-appearance: none;
@@ -261,3 +278,81 @@ iframe {
     border-radius:50%;
     cursor: pointer;
 }
+
+/* 노래 이름 슬라이드 */
+.music-name-box {
+    width: 100%;
+    /* margin: 60px auto; */
+    text-align: center;
+}
+  
+.marquee {
+    width:100%;
+    /* padding:0.5em 0; */
+    overflow:hidden;
+    /* background-color:#e1e1e1; */
+    /* margin-bottom:10px; */
+    position:relative;
+    /* display: flex;
+    align-items: center; */
+}
+
+.music-name {
+    margin:0;
+    color: var(--ink);
+    font-weight: bold;
+    display:inline-block;
+    white-space:nowrap;
+}
+
+.marquee .music-play-marquee:after {
+  content:"";
+  white-space:nowrap;
+  padding-right:50px;
+}
+
+.marquee .music-play-marquee {
+
+    padding-left:205px;
+    
+      -webkit-animation-name:marquee;
+      -webkit-animation-timing-function:linear;
+      -webkit-animation-duration:10s;
+      -webkit-animation-iteration-count:infinite;
+      -moz-animation-name:marquee;
+      -moz-animation-timing-function:linear;
+      -moz-animation-duration:10s;
+      -moz-animation-iteration-count:infinite;
+      -ms-animation-name:marquee;
+      -ms-animation-timing-function:linear;
+      -ms-animation-duration:10s;
+      -ms-animation-iteration-count:infinite;
+      -o-animation-name:marquee;
+      -o-animation-timing-function:linear;
+      -o-animation-duration:10s;
+      -o-animation-iteration-count:infinite;
+      animation-name:marquee;
+      animation-timing-function:linear;
+      animation-duration:10s;
+      animation-iteration-count:infinite;
+  }
+  @-webkit-keyframes marquee {
+    from   { -webkit-transform: translate(0%);}
+    99%,to { -webkit-transform: translate(-100%);}
+  }
+  @-moz-keyframes marquee {
+    from   { -moz-transform: translate(0%);}
+    99%,to { -moz-transform: translate(-100%);}
+  }
+  @-ms-keyframes marquee {
+    from   { -ms-transform: translate(0%);}
+    99%,to { -ms-transform: translate(-100%);}
+  }
+  @-o-keyframes marquee {
+    from   { -o-transform: translate(0%);}
+    99%,to { -o-transform: translate(-100%);}
+  }
+  @keyframes marquee {
+    from   { transform: translate(0%);}
+    99%,to { transform: translate(-100%);}
+  }

@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.login.model.service.LoginService;
@@ -97,14 +99,31 @@ public class manageController {
 		return "manage/background";
 	}
 	
-	/** 카테고리 순서 변경
+	/** 카테고리 순서 변경, 폴더순서 변경, 폴더이름 변경
 	 * @param categoryOrder
 	 * @return
+	 * @throws Exception 
 	 */
-	@GetMapping("/menu/changeCategory")
-	@ResponseBody
-	public int changeMenu(CategoryOrder categoryOrder) {
-		return service.changeCategory(categoryOrder);
+	@PostMapping("/menu/changeCategory")
+	public String changeMenu(CategoryOrder categoryOrder,
+			@RequestParam Map<String, Object> paramMap,
+			@SessionAttribute("folderList") List<Folder> folderList,
+			RedirectAttributes ra) throws Exception {
+		
+		
+		int categoryOrderResult= service.changeCategory(categoryOrder); // 카테고리 순서 변경
+		int folderNameResult = service.updateFolderName(paramMap, folderList); // 폴더이름 변경
+		
+		String message = null;
+		
+		if(categoryOrderResult * folderNameResult > 0) {
+			message = "카테고리, 폴더 설정 변경 성공";
+		} else {
+			message = "카테고리, 폴더 설정 변경 실패";
+		}
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:/manage/menu";
 	}
 	
 	/** 카테고리 종류 원래대로

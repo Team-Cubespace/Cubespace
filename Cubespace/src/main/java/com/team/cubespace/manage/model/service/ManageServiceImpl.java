@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.team.cubespace.common.Util;
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.manage.model.dao.ManageDAO;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
@@ -164,6 +165,35 @@ public class ManageServiceImpl implements ManageService{
 		} else { 
 			throw new Exception("폴더 삭제 중 오류 발생");
 		}
+		
+		return result;
+	}
+
+	/**
+	 * 폴더 이름 변경
+	 * @throws Exception 
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public int updateFolderName(Map<String, Object> paramMap, List<Folder> folderList) throws Exception {
+		
+		int result = 0;
+		
+		// folderName에 xssHandling 후 다시 넣어줌
+		for(Folder folder : folderList) {
+			int folderNo = folder.getFolderNo();
+			String folderName = (String) paramMap.get(Integer.toString(folderNo));
+			folderName = Util.XSSHandling(folderName);
+			folder.setFolderName(folderName);
+			
+			
+			result += dao.updateFolderName(folder); // folderNo, folderName
+		}
+		
+		if(result != folderList.size()) {
+			throw new Exception("폴더 이름 변경 중 오류 발생");
+		}
+		
 		
 		return result;
 	}

@@ -99,46 +99,28 @@ menuSelectCancelBtn.addEventListener("click", () => {
 
 
 /* ---------------------------------------- */
-/* 메뉴설정 변경
+/* 메뉴설정 변경*/
+const orderCategory = () => {
 
-*/
-/* 카테고리 정렬 */
-document.getElementById("menuSaveBtn").addEventListener("click", () => {
-
+    /* 카테고리 정렬 */
     const categoryArea = document.getElementsByClassName("categoryArea");
     let orderString = "";
     for (let category of categoryArea) {
         orderString += category.getAttribute("name");
-        console.log(orderString);
     }
     const orderArr = Array.from(orderString);
-    console.log(orderArr[0]);
-    console.log(orderArr[1]);
-    console.log(orderArr[2]);
-    console.log(orderArr[3]);
-    console.log(memberNo);
 
-    $.ajax({
-        url: "/manage/menu/changeCategory",
-        type: "get",
-        data: {
-            "diary": orderArr[0],
-            "album": orderArr[1],
-            "video": orderArr[2],
-            "guestBook": orderArr[3],
-            "memberNo": memberNo
-        },
-        success: result => {
-            if (result > 0) {
-                alert("변경사항이 저장되었습니다");
-                window.parent.location.reload();
-            } else {
-                alert("변경사항 저장 실패");
-            }
-        },
-        error: () => { console.log("변경사항 저장 중 오류 발생"); }
-    })
-})
+    document.getElementById("newDiaryOrder").value = orderArr[0];
+    document.getElementById("newAlbumOrder").value = orderArr[1];
+    document.getElementById("newVideoOrder").value = orderArr[2];
+    document.getElementById("newGuestBookOrder").value = orderArr[3];
+    document.getElementById("memberNo").value = memberNo;
+
+    return true;
+}
+
+
+
 
 /* ------------------------------------------- */
 /* 폴더 추가 */

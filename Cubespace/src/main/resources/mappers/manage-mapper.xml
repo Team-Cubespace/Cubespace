@@ -116,6 +116,14 @@
 		AND BOARD_TYPE_NO = #{boardTypeNo}
 	</update>
 	
+	
+	<!-- 폴더 이름 변경 -->
+	<update id="updateFolderName">
+		UPDATE FOLDER SET
+		FOLDER_NAME = #{folderName}
+		WHERE FOLDER_NO = #{folderNo}
+	</update>
+	
  <!-- 깐부 ====================================================-->
 
 	<!-- 깐부목록 조회 -->

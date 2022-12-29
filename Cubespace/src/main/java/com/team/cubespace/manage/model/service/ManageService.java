@@ -85,6 +85,14 @@ public interface ManageService {
 	 */
 	int deleteFolder(Map<String, Object> paramMap) throws Exception;
 
+	/** 폴더 이름 변경
+	 * @param paramMap
+	 * @param folderList 
+	 * @return
+	 * @throws Exception 
+	 */
+	int updateFolderName(Map<String, Object> paramMap, List<Folder> folderList) throws Exception;
+
 
 
 }

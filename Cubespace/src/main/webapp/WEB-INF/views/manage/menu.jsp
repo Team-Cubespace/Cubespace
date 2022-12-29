@@ -155,7 +155,7 @@
                             <p class="whiteBtn" id="menuSelectCancelBtn">원래대로</p>
                         </div>
                     </div>
-                    <div>
+                    <form action="/manage/menu/changeCategory" method="post" onclick="return orderCategory()">
                         <div class="listTitle backgroundTitleArea">
                             <span class="backgroundTitle">메뉴설정 변경</span>
                             <div class="backgroundExplain">
@@ -172,10 +172,10 @@
                                     </div>
                                     <div>--------------------------------------</div>
                                 </div>
-                                <form action="/manage/menu/saveMenuDetail" method="post" class="menuListArea" id="sortable1">
+                                <div class="menuListArea" id="sortable1">
 
-                                <c:if test="${categoryOrder.diary != -1}"> 
-                                        <div class="diary" style="order:${categoryOrder.diary}">
+                                
+                                        <div class="diary">
                                             <div class="categoryArea" name="1">
                                                 <span class="menuTitle">다이어리</span><i class="fa-solid fa-plus"></i>
                                             </div>
@@ -200,9 +200,9 @@
                                         </div>
                                         <div>--------------------------------------</div>
                                     </div>
-                                </c:if>               
-                                <c:if test="${categoryOrder.album != -1}"> 
-                                        <div class="album" style="order:${categoryOrder.album}">
+                                             
+                                
+                                        <div class="album">
                                             <div class="categoryArea" name="2">
                                                 <span class="menuTitle">사진첩</span><i class="fa-solid fa-plus"></i>
                                             </div>
@@ -218,10 +218,8 @@
                                             </div>
                                             <div>--------------------------------------</div>
                                         </div>
-                                </c:if>            
 
-                                <c:if test="${categoryOrder.video != -1}"> 
-                                        <div class="video" style="order:${categoryOrder.video}">
+                                        <div class="video">
                                             <div class="categoryArea" name="3">
                                                 <span class="menuTitle">동영상</span><i class="fa-solid fa-plus"></i>
                                             </div>
@@ -237,19 +235,17 @@
                                             </div>
                                             <div>--------------------------------------</div>
                                         </div>
-                                </c:if>            
 
-                                <c:if test="${categoryOrder.guestBook != -1}"> 
                                         <div class="guestBook">
                                             <div class="categoryArea" name="4">
                                                 <span class="menuTitle">방명록</span>
                                             </div>
                                             <div>--------------------------------------</div>
                                         </div>
-                                </c:if>                 
+                                                
 
                                
-                                </form>
+                                </div>
                                 <div class="home" >
                                     <div class="homeCategoryArea">
                                         <span class="menuTitle">관리</span>
@@ -267,7 +263,12 @@
                             <button class="whiteBtn" id="menuSaveBtn">변경사항 저장</button>
                             <span class="whiteBtn" id="menuCancelBtn">취소</span>
                         </div>
-                    </div>
+                        <input type="hidden" name="diary" id="newDiaryOrder">
+                        <input type="hidden" name="album" id="newAlbumOrder">
+                        <input type="hidden" name="video" id="newVideoOrder">
+                        <input type="hidden" name="guestBook" id="newGuestBookOrder">
+                        <input type="hidden" name="memberNo" id="memberNo">
+                    </form>
 
 
                     

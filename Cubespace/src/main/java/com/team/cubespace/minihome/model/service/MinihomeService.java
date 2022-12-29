@@ -1,5 +1,7 @@
 package com.team.cubespace.minihome.model.service;
 
+import java.util.Map;
+
 import com.team.cubespace.minihome.model.vo.Minihome;
 
 /**
@@ -12,4 +14,21 @@ public interface MinihomeService {
 	 * @return minihome
 	 */
 	public Minihome selectMinihome(int memberNo);
+
+	/** 미니홈 이름 수정
+	 * @param paramMap
+	 * @return result
+	 */
+	public int updateMinihomeName(Map<String, Object> paramMap);
+
+	/** 미니홈 today, total 증가
+	 * @param memberNo
+	 * @return result
+	 */
+	public int updateTodayTotal(int memberNo);
+
+	/** 미니홈 today 초기화
+	 * @return result
+	 */
+	public int initToday();
 }

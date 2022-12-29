@@ -50,8 +50,11 @@
                 </div>
                 <div class="minihome-header-right">
                     <div class="minihome-title-area">
-                        <input class="minihome-title" value="${minihome.homepageName}">
-                        <button id="updateMinihomeTitleButton" type="button" class="fa-solid fa-gear"></button>
+                        <input class="minihome-title" value="${minihome.homepageName}" id="minihomeTitle" readOnly maxLength="10">
+                        <button id="updateMinihomeTitleButton" type="button" class="fa-solid fa-gear header-hover"></button>
+                        <button type="button" id="confirmUpdateButton">수정</button>
+                        <button type="button" id="cancelUpdateButton">
+                        취소</button>
                     </div>
                     <c:if test="${not empty minihome.musicPath}">
                         <div class="audio-container">
@@ -70,7 +73,7 @@
             </div>
             <section class="minihome-main">
 
-                <iframe src="/albumWrite" frameborder="0" name="minihomeMenu" scrolling="no">
+                <iframe src="/albumList/2" frameborder="0" name="minihomeMenu" scrolling="no">
                 <%-- <iframe src="/manage/friend" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
 
                 </iframe>

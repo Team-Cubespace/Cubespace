@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.team.cubespace.album.model.vo.Album;
+import com.team.cubespace.album.model.vo.Comment;
 
 /**
  * @author Tonic
@@ -63,5 +64,11 @@ public interface AlbumService {
 	 */
 	public int albumUpdate(Album album, String webPath, String folderPath, List<MultipartFile> imageList,
 			List<String> deleteImageList, int prevLength) throws IllegalStateException, IOException;
+
+	/** 게시글 스크랩 서비스
+	 * @param paramMap
+	 * @return result
+	 */
+	public int albumScrap(Album album, Comment comment);
 
 }

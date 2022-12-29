@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.gson.Gson;
 import com.team.cubespace.album.model.service.AlbumService;
 import com.team.cubespace.album.model.vo.Album;
+import com.team.cubespace.album.model.vo.Comment;
 import com.team.cubespace.common.Util;
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.member.model.vo.Member;
@@ -222,5 +223,14 @@ public class AlbumController {
 		resultMap.put("albumNo", albumNo);
 		
 		return new Gson().toJson(resultMap);
+	}
+	
+	@ResponseBody
+	@PostMapping("/boardScrap")
+	public int boardScrap(Album album, Comment comment) {
+		
+		album.setScrapAlbumNo(comment.getBoardNo());
+		int result = service.albumScrap(album, comment);
+		return 0;
 	}
 }

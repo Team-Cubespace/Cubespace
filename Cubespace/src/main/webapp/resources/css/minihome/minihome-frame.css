@@ -129,7 +129,20 @@ html {
     cursor: pointer;
     display: none;
 }
-.minihome-header-right:hover #updateMinihomeTitleButton{
+
+#confirmUpdateButton,
+#cancelUpdateButton {
+    padding: 5px;
+    border-radius: 5px;
+    display: none;
+}
+#confirmUpdateButton {
+    margin-right: 5px;
+    background-color: var(--ink);
+    color: white;
+}
+
+.minihome-header-right:hover #updateMinihomeTitleButton.header-hover{
     display: block;
 }
 

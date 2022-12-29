@@ -104,7 +104,7 @@ public class manageController {
 	@GetMapping("/menu/changeCategory")
 	@ResponseBody
 	public int changeMenu(CategoryOrder categoryOrder) {
-		return service.changeCategory(categoryOrder.getMemberNo());
+		return service.changeCategory(categoryOrder);
 	}
 	
 	/** 카테고리 종류 원래대로

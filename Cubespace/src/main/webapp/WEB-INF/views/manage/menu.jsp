@@ -34,6 +34,14 @@
         .frame-color {
             background-color : ${minihome.frameColor};
         }
+        .folderTitle {
+            outline: none;
+            border: none;
+        }
+        input:disabled{
+            background-color: white;
+            color: var(--ink);
+        }
     </style>
     <jsp:include page="/WEB-INF/views/include/font.jsp"/>
 </head>
@@ -152,6 +160,7 @@
                             <span class="backgroundTitle">메뉴설정 변경</span>
                             <div class="backgroundExplain">
                                 <p>메뉴 구성을 변경할 수 있으며 메뉴 하단에 폴더를 생성할 수 있습니다</p>
+                                <p>폴더명 더블클릭시 폴더명 변경 가능</p>
                             </div>
                         </div>
                        
@@ -163,8 +172,7 @@
                                     </div>
                                     <div>--------------------------------------</div>
                                 </div>
-
-                                <div class="menuListArea" id="sortable1">
+                                <form action="/manage/menu/saveMenuDetail" method="post" class="menuListArea" id="sortable1">
 
                                 <c:if test="${categoryOrder.diary != -1}"> 
                                         <div class="diary" style="order:${categoryOrder.diary}">
@@ -177,13 +185,13 @@
                                             <c:if test="${folder.folderOrder == 1}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <span class="folderTitle">${folder.folderName}(${folder.fileCount})</span>
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}" disabled maxlength="10">
                                                 </div>
                                             </c:if>
                                             <c:if test="${folder.folderOrder != 1}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <span class="folderTitle">${folder.folderName}(${folder.fileCount})</span><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}" disabled maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
                                                 </div>
                                             </c:if>
 
@@ -203,7 +211,7 @@
                                             <c:if test="${folder.boardTypeNo == 2}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <span  class="folderTitle">${folder.folderName}(${folder.fileCount})</span><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                    <input  class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}" disabled maxlength="10"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
                                                 </div>   
                                             </c:if>          
                                         </c:forEach>
@@ -222,7 +230,7 @@
                                             <c:if test="${folder.boardTypeNo == 3}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <span  class="folderTitle">${folder.folderName}(${folder.fileCount})</span><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                    <input  class="folderTitle" value='${folder.folderName}' name="${folder.folderNo}" disabled maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
                                                 </div>
                                             </c:if>
                                         </c:forEach>
@@ -241,7 +249,7 @@
                                 </c:if>                 
 
                                
-                                </div>
+                                </form>
                                 <div class="home" >
                                     <div class="homeCategoryArea">
                                         <span class="menuTitle">관리</span>
@@ -257,7 +265,7 @@
                         </div>
                         <div class="menuSaveArea">
                             <button class="whiteBtn" id="menuSaveBtn">변경사항 저장</button>
-                            <button class="whiteBtn" id="menuCancelBtn">취소</button>
+                            <span class="whiteBtn" id="menuCancelBtn">취소</span>
                         </div>
                     </div>
 

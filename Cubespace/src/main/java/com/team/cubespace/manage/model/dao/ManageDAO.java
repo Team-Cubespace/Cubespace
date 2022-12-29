@@ -38,9 +38,10 @@ public class ManageDAO {
 	 * @param memberNo
 	 * @return result
 	 */
-	public int changeCategory(int memberNo) {
+	public int changeCategory(CategoryOrder categoryOrder) {
 		
-		return sqlSession.update("ManageMapper.changeCategory", memberNo);
+		int result =  sqlSession.update("ManageMapper.changeCategory", categoryOrder);
+		return result;
 	}
 
 	/** 카테고리 종류 원래대로

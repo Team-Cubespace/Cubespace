@@ -525,6 +525,10 @@ header {
     align-content: center;
     justify-content: center;
 }
+.menuListArea {
+    display: flex;
+    flex-direction: column;
+}
 /* ------------------------------------------------------ */
 /* 배경음악 설정 */
 .backgroundHeader, .backgroundMain{

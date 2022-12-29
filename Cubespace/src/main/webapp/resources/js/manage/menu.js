@@ -190,10 +190,12 @@ for (let plusBtn of plusBtnList) {
         img.src = "/resources/images/common/folder.png";
         img.classList.add("subCategoryImg");
 
-        const span = document.createElement("span");
-        span.classList.add("folderTitle");
+        const input = document.createElement("input");
+        input.classList.add("folderTitle");
         const folderName = "나의 " + categoryName; // ajax에 사용
-        span.innerText = folderName;
+        input.value = folderName;
+        input.setAttribute("disabled", true);
+        input.setAttribute("maxlength", "20");
 
         const i = document.createElement("i");
         i.classList.add("fa-solid");
@@ -203,7 +205,7 @@ for (let plusBtn of plusBtnList) {
         div.classList.add("subCategory");
         div.setAttribute("name", Number(subCategoryLength) + 1); // ajax에 사용
 
-        div.append(img, span, i);
+        div.append(img, input, i);
         lastSubCath.after(div);
 
 
@@ -219,7 +221,7 @@ for (let plusBtn of plusBtnList) {
             success: result => {
                 if (result > 0) { 
                     console.log("폴더 삽입 성공");
-                    // window.parent.location.reload();
+                    input.setAttribute("name", result);
                 }
                 else { console.log("폴더 삽입 실패"); }
             },
@@ -291,7 +293,7 @@ for (let minusBtn of minusBtnList) {
             success : result => {
                 if(result > 0){
                     alert("폴더가 삭제되었습니다");
-                    window.href = window.href;
+                    location.href = location.href;
                 } else{
                     console.log("폴더 삭제 실패");
                 }
@@ -299,5 +301,15 @@ for (let minusBtn of minusBtnList) {
             error : e => {console.log("폴더 삭제 중 오류 발생");}
         // })
         })
+    })
+}
+
+
+/* 폴더명 변경 */
+const subCategoryList = document.getElementsByClassName("subCategory");
+for(let subCategory of subCategoryList){
+    subCategory.addEventListener("click", e=> {
+        console.log(e.target);
+        e.target.removeAttribute("disabled");
     })
 }

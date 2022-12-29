@@ -89,9 +89,14 @@
 	</update>
 	
 	<!-- 카테고리에 새 폴더 삽입 -->
-	<insert id="addFolder">
+	<insert id="addFolder" parameterType="map" useGeneratedKeys="true">
+	
+		<selectKey keyProperty="folderNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_FOLDER_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		
 		INSERT INTO FOLDER VALUES(
-		SEQ_FOLDER_NO.NEXTVAL, #{boardTypeNo},
+		#{folderNo}, #{boardTypeNo},
 		#{folderName}, #{folderOrder}, #{memberNo})
 	</insert>
 	
@@ -107,7 +112,7 @@
 		UPDATE FOLDER SET
 		FOLDER_ORDER = #{folderNewOrder}
 		WHERE MEMBER_NO = #{memberNo}
-		AND FOLDER_ORDER = #{folderNewOrder} -1
+		AND FOLDER_ORDER = #{folderNewOrder} + 1
 		AND BOARD_TYPE_NO = #{boardTypeNo}
 	</update>
 	

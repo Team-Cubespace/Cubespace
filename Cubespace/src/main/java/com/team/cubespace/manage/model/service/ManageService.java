@@ -24,7 +24,7 @@ public interface ManageService {
 	 * @param memberNo
 	 * @return result
 	 */
-	int changeCategory(int memberNo);
+	int changeCategory(CategoryOrder categoryOrder);
 
 	/** 카테고리 종류 원래대로
 	 * @return result

@@ -39,9 +39,9 @@ public class ManageServiceImpl implements ManageService{
 	 * 카테고리 순서 변경
 	 */
 	@Override
-	public int changeCategory(int memberNo) {
+	public int changeCategory(CategoryOrder categoryOrder) {
 		
-		return dao.changeCategory(memberNo);
+		return dao.changeCategory(categoryOrder);
 	}
 
 	/**
@@ -122,7 +122,13 @@ public class ManageServiceImpl implements ManageService{
 	@Override
 	public int addFolder(Map<String, Object> paramMap) {
 		
-		return dao.addFolder(paramMap);
+
+		
+		int result= dao.addFolder(paramMap);
+		if(result > 0) {
+			result = (int) paramMap.get("folderNo");
+		}
+		return result;
 	}
 
 	/**

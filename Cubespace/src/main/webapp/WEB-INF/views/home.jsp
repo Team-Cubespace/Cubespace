@@ -215,5 +215,6 @@
         const loginMember = "${loginMember}";
     </script>
     <script src="/resources/js/common/home.js"></script>
+    <script src="/resources/js/common/header.js"></script>
 </body>
 </html>

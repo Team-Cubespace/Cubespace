@@ -4,18 +4,7 @@
 <header>
     <!------------------ 헤더 메뉴 ------------------>
     <ul class="header-menu-nav">
-        <li class="header-menu">
-            <a href="">
-                <i class="fa-solid fa-shop"></i>
-                <span>상점</span>
-            </a>
-        </li>
-        <li class="header-menu" onclick="openModal()">
-            <a>
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <span>깐부 찾기</span>
-            </a>
-        </li>
+        
         <jsp:include page="/WEB-INF/views/webmain/main-memberSearch.jsp"/>
         <!-- 로그인 X && 메인 페이지 X -->
         <c:choose>
@@ -28,6 +17,18 @@
                 </li>
             </c:when>
             <c:otherwise>
+            <li class="header-menu">
+                <a href="">
+                    <i class="fa-solid fa-shop"></i>
+                    <span>상점</span>
+                </a>
+            </li>
+            <li class="header-menu" onclick="openModal()">
+                <a>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>깐부 찾기</span>
+                </a>
+            </li>
             <!-- 로그인 O -->
                 <li class="header-menu" onclick="openmodalAlarm()">
                     <a>

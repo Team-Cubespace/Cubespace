@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="notifications">
+	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
+
+	<resultMap type="notifications" id="notifications_rm">
+   
+		<id property="memberNo" column="MEMBER_NO"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"></result>
+		<result property="profileImage" column="PROFILE_IMG"></result>
+		<result property="friendAcceptFl" column="FRIEND_ACCEPT_FL"></result>
+		
+	</resultMap>
+ 	 
+
+
+ 		
+
+ 		
+  
+</mapper>

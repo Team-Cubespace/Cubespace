@@ -52,11 +52,10 @@
                 <%-- 게시글의 작성자번호와 로그인된 회원의 번호가 일치하지 않을 때 --%>
                 <c:when test="${minihome.memberNo != loginMember.memberNo}">
                     <c:if test="${album.albumScrapAllowYN == 'Y'}">
-                           
+                           <button id="showScrapModal" type="button">스크랩</button> 
                     </c:if>
                 </c:when>
                 <c:otherwise>
-                    <button id="showScrapModal" type="button">스크랩</button> 
                     <%-- 게시글의 작성자번호와 로그인된 회원의 번호가 일치할 때 --%>
                     <a href="/albumUpdate/${album.albumNo}?folderNo=${album.folderNo}&cp=${param.cp}">수정</a>
                     <a href="/albumDelete/${album.albumNo}?folderNo=${album.folderNo}&cp=${param.cp}">삭제</a>
@@ -103,7 +102,7 @@
                     </div>
 
                     <div class="modal-button-area">
-                        <button type="button" id="ScrapButton">
+                        <button type="submit" id="ScrapButton">
                             확인
                         </button>
                         <button type="button" id="scrapCancelButton">

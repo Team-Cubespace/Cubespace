@@ -86,3 +86,45 @@ const createFolderList = (folderList) => {
     });
 })();
 
+// 스크랩 모달 제출
+(()=>{
+    // 폼 가져오기
+    const scrapForm = document.getElementById("scrapForm");
+    scrapForm.addEventListener("submit", e=>{
+        e.preventDefault();
+
+        const scrapFormData = new FormData(scrapForm);
+        scrapFormData.append("memberNo", loginMemberNo);
+        scrapFormData.append("boardNo", boardNo);
+        scrapFormData.append("boardTypeNo", boardTypeNo);
+
+        // 폴더 번호
+        const folderNo = document.getElementById("folderSelectBox").value;
+        console.log(folderNo);
+
+        // 남길 댓글 내용
+        const modalCommentContent = document.getElementById("modalCommentContent").value;
+        console.log(modalCommentContent);
+
+        // 공개 범위
+        const openFlag = document.querySelector("input[name='openFlag']:checked").value;
+        console.log(openFlag);
+        $.ajax({
+            url:"/boardScrap",
+            data: {
+                memberNo: loginMemberNo,
+                boardNo: boardNo,
+                boardTypeNo: boardTypeNo,
+                folderNo: folderNo,
+                commentContent: modalCommentContent,
+                openFlag: openFlag,
+            },
+            type:"POST",
+            success: result =>{
+                if(result > 0) {
+                    alert("스크랩 성공");
+                }
+            }
+        })
+    });
+})();

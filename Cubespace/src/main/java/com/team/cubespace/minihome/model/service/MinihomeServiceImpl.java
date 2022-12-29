@@ -39,5 +39,11 @@ public class MinihomeServiceImpl implements MinihomeService{
 	public int initToday() {
 		return dao.initToday();
 	}
+
+	// 특정 음악 조회 (경로, 이름)
+	@Override
+	public Map<String, String> selectMusic(int musicNo) {
+		return dao.selectMusic(musicNo);
+	}
 	
 }

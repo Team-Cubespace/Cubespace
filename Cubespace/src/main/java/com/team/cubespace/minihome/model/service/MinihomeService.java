@@ -31,4 +31,10 @@ public interface MinihomeService {
 	 * @return result
 	 */
 	public int initToday();
+
+	/** 특정 음악 조회 (경로, 이름)
+	 * @param musicNo
+	 * @return resultMap
+	 */
+	public Map<String, String> selectMusic(int musicNo);
 }

@@ -1,6 +1,7 @@
 package com.team.cubespace.main.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,5 +23,11 @@ public class NotificationsServiceImpl implements NotificationsService {
 	@Override
 	public List<Notifications> memberNotifications(int loginMemberNo) {
 		return daoMemberSear.memberNotifications(loginMemberNo);
+	}
+
+	// 요청받은 깐부신청 수락
+	@Override
+	public int memberAcceptBtn(Map<String, Object> paramMap) {
+		return daoMemberSear.memberAcceptBtn(paramMap);
 	}
 }

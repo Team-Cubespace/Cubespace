@@ -64,21 +64,21 @@
                             <div class="member-nickname">묘동닉네임글자테스트</div>
                         </div>
 
-                        <div class="profile-body"  onclick="return openMinihome(this.href)">
-                            <div class="member-choice">
+                        <div class="profile-body">
+                            <div class="member-accept" onclick="return notificationsAccept(this.href)">
                                 <i class="fa-solid fa-check" id="faCheck"></i>
                                 <div >수락</div>
                             </div>
 
-                            <div class="member-cancel">
+                            <div class="member-cancel" onclick="return openMinihome(this.href)">
                                 <i class="fa-solid fa-xmark"></i>
                                 <div >거절</div>
                             </div>
 
-                            <div class="member-choice">
+                            <a href="/minihome/3"class="member-minihome">
                                 <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <a href="/minihome" onclick="return openMinihome(this.href)">미니홈피</a><!--  <%-- a --%> -->
-                            </div>
+                                <div >미니홈피</div><!--  <%-- a --%> -->
+                            </a>
                         </div>
                     </div>
 

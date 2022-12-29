@@ -61,14 +61,32 @@
  		
  		<!-- 내가 받은 깐부 신청 알림 목록조회 -->
  		<select id="memberNotifications" resultMap="memberSearch_rm">
-			SELECT DISTINCT  ASKING_MEMBER_NO MEMBER_NO, FRIEND_ACCEPT_FL, FRIEND_ACCEPT_DATE
+			SELECT DISTINCT ASKING_MEMBER_NO MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, FRIEND_ACCEPT_FL, FRIEND_ACCEPT_DATE
 			FROM FRIEND 
 			JOIN "MEMBER" ON (MEMBER_NO   IN (ASKED_MEMBER_NO, ASKING_MEMBER_NO))
 			WHERE FRIEND_ACCEPT_FL = 0
 			AND ASKED_MEMBER_NO = #{loginMemberNo}
+			AND MEMBER_NO  != #{loginMemberNo}
 			AND MEMBER_DEL_YN = 'N'
 			ORDER BY FRIEND_ACCEPT_DATE
  		</select>
  		
-  
+ 		<!-- 요청받은 깐부신청 수락 -->
+   <update id="memberAcceptBtn">
+		UPDATE FRIEND SET FRIEND_ACCEPT_FL = 1	
+		WHERE  ASKED_MEMBER_NO =#{loginMemberNo}
+		AND ASKING_MEMBER_NO= #{memberNo}
+		AND FRIEND_ACCEPT_FL = 0   
+   </update>
+   
+  		<!-- 깐부신청 취소 -->
+	<delete id="">
+		DELETE FROM FRIEND 
+		WHERE  ASKED_MEMBER_NO =#{loginMemberNo}
+		AND ASKING_MEMBER_NO= #{memberNo}
+		AND FRIEND_ACCEPT_FL = 0
+	</delete>
+   
+   
+   
 </mapper>

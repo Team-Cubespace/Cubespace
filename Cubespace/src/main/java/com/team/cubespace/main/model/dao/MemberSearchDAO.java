@@ -55,4 +55,13 @@ public class MemberSearchDAO {
 	public List<Notifications> memberNotifications(int loginMemberNo) {
 		return sqlSession.selectList("memberSearch.memberNotifications", loginMemberNo);
 	}
+
+	/** 요청받은 깐부신청 수락
+	 * @param paramMap
+	 * @return
+	 */
+	public int memberAcceptBtn(Map<String, Object> paramMap) {
+		return sqlSession.update("memberSearch.memberAcceptBtn",paramMap);
+
+	}
 }

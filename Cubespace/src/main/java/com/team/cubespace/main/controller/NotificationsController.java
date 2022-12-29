@@ -1,10 +1,12 @@
 package com.team.cubespace.main.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -31,4 +33,21 @@ public class NotificationsController {
 		
 		return new Gson().toJson(memberNotificationsList); 
 	}
+	
+	
+	/** 요청받은 깐부신청 수락
+	 * @param paramMap
+	 * @return
+	 */
+	@GetMapping("/memberAcceptBtn")
+	@ResponseBody
+	public int memberAcceptBtn(@RequestParam Map<String, Object> paramMap) {
+		int result = service.memberAcceptBtn(paramMap);
+		return result;
+	}
+	
+	
+	
+	
+	
 }

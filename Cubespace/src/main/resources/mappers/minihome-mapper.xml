@@ -40,4 +40,9 @@
 		TOTAL = TOTAL + 1
 		WHERE MEMBER_NO = #{memberNo}	
  	</update>
+ 	
+ 	<update id="initToday">
+ 		UPDATE MINI_HOMEPAGE SET
+ 		TODAY = 0
+ 	</update>
 </mapper>

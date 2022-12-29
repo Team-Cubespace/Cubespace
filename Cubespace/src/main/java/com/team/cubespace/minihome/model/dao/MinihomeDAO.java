@@ -37,4 +37,11 @@ public class MinihomeDAO {
 	public int updateTodayTotal(int memberNo) {
 		return sqlSession.update("minihomeMapper.updateTodayTotal", memberNo);
 	}
+
+	/** 미니홈 Today 초기화
+	 * @return result
+	 */
+	public int initToday() {
+		return sqlSession.update("minihomeMapper.initToday");
+	}
 }

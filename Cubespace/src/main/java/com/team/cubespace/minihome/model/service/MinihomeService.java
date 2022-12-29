@@ -26,4 +26,9 @@ public interface MinihomeService {
 	 * @return result
 	 */
 	public int updateTodayTotal(int memberNo);
+
+	/** 미니홈 today 초기화
+	 * @return result
+	 */
+	public int initToday();
 }

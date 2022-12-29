@@ -60,12 +60,12 @@
                         <div class="audio-container">
                             <div class="music-name-box">
                                 <div class="marquee">
-                                    <p id="minihomeMusicName" class="music-name">${minihome.musicName}</p>
+                                    <p id="minihomeMusicName" class="music-name music-play-marquee">${minihome.musicName}</p>
                                 </div>
                             </div>
                             <div class="music-controller">
                                 <div>
-                                    <button id="playButton" class="fa-solid fa-circle-play"></button>
+                                    <button id="playButton" class="fa-solid fa-circle-pause"></button>
                                     <%-- <i class="fa-solid fa-circle-pause"></i> --%>
                                     <%-- <i class="fa-solid fa-circle-play"></i> --%>
                                     <span id="duration">00:00</span>
@@ -105,6 +105,7 @@
     <script>
         let minihomeMusicPath = '${minihome.musicPath}';
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/resources/js/common/jQuery-core.js"></script>
     <script src="/resources/js/common/moment.js"></script>
     <script src="/resources/js/minihome/minihome-frame.js"></script>

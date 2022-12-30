@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="/resources/css/variables.css">
     <link rel="stylesheet" href="/resources/css/minihome/minihome-frame.css">
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
+    <script>
+        console.log("${request.getContextPath()}");
+    </script>
     <style>
         .frame-color {
             background-color : ${minihome.frameColor};
@@ -101,7 +104,7 @@
                         <li style="order:${minihome.categoryOrder.album}"><a href="/albumList/2" target="minihomeMenu">사진첩</a></li>
                     </c:if>
                     <c:if test="${minihome.categoryOrder.video != -1}">
-                        <li style="order:${minihome.categoryOrder.video}"><a href="">동영상</a></li>
+                        <li style="order:${minihome.categoryOrder.video}"><a href="/videoList/3" target="minihomeMenu">동영상</a></li>
                     </c:if>
                     <c:if test="${minihome.categoryOrder.guestBook != -1}">
                         <li style="order:${minihome.categoryOrder.guestBook}"><a href="">방명록</a></li>

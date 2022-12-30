@@ -7,6 +7,7 @@
 		<id property="folderNo" column="FOLDER_NO"/>
 		
 		<result property="boardTypeNo" column="BOARD_TYPE_NO"/>
+		<result property="boardTypeName" column="BOARD_TYPE_NAME"/>		
 		<result property="folderName" column="FOLDER_NAME"/>
 		<result property="memberNo" column="MEMBER_NO"/>
 	</resultMap>
@@ -76,7 +77,8 @@
 	
 	<!-- 폴더 목록 조회 -->
 	<select id="selectFolderList" parameterType="map" resultMap="folder_rm">
-		SELECT * FROM FOLDER
+		SELECT F.*, (SELECT BOARD_TYPE_NAME FROM BOARD_TYPE WHERE BOARD_TYPE_NO = #{boardTypeNo}) BOARD_TYPE_NAME
+		FROM FOLDER F
 		WHERE MEMBER_NO = #{hostMemberNo}	-- 미니홈 주인 회원 번호
 		AND BOARD_TYPE_NO = #{boardTypeNo}
 		ORDER BY FOLDER_ORDER

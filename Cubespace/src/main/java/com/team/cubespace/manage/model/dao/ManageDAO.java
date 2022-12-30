@@ -38,9 +38,10 @@ public class ManageDAO {
 	 * @param memberNo
 	 * @return result
 	 */
-	public int changeCategory(int memberNo) {
+	public int changeCategory(CategoryOrder categoryOrder) {
 		
-		return sqlSession.update("ManageMapper.changeCategory", memberNo);
+		int result =  sqlSession.update("ManageMapper.changeCategory", categoryOrder);
+		return result;
 	}
 
 	/** 카테고리 종류 원래대로
@@ -75,5 +76,87 @@ public class ManageDAO {
 		
 		return sqlSession.delete("ManageMapper.deleteFriend", paramMap);
 	}
+
+	public List<Map<String, Object>> getFontList(Map<String, Object> paramMap) {
+		
+		return sqlSession.selectList("ManageMapper.getFontList", paramMap);
+	}
+
+	/** 새 폰트 적용하기
+	 * @param paramMap
+	 * @return
+	 */
+	public int useFont(Map<String, Object> paramMap) {
+		
+		return sqlSession.update("ManageMapper.useFont", paramMap);
+	}
+
+	/** 상점에 등록된 전체 폰트 리스트 조회
+	 * @return allFontList
+	 */
+	public List<Map<String, Object>> getAllFontList() {
+		
+		return sqlSession.selectList("ManageMapper.getAllFontList");
+	}
+
+	/** 한 회원의 폰트 가져오기
+	 * @param memberNo
+	 * @return
+	 */
+	public int getMemberFontNo(int memberNo) {
+		
+		return sqlSession.selectOne("ManageMapper.getMemberFontNo", memberNo);
+	}
+
+	/**  카테고리 중 보여질것 선택
+	 * @param paramMap
+	 * @return
+	 */
+	public int categorySelect(Map<String, Object> paramMap) {
+		
+		return sqlSession.update("ManageMapper.categorySelect", paramMap);
+	}
+
+	/** 카테고리에 새 폴더 삽입
+	 * @param paramMap
+	 * @return result
+	 */
+	public int addFolder(Map<String, Object> paramMap) {
+		
+		return sqlSession.insert("ManageMapper.addFolder", paramMap);
+	}
+
+	/** 카테고리에서 폴더 삭제
+	 * @param paramMap
+	 * @return result
+	 */
+	public int deleteFolder(Map<String, Object> paramMap) {
+		
+		return sqlSession.delete("ManageMapper.deleteFolder", paramMap);
+	}
+
+	/** 폴더삭제 후 나머지 폴더순서 새로 정렬
+	 * @param paramMap
+	 * @return result
+	 */
+	public int updateFolderOrder(Map<String, Object> paramMap) {
+		
+		return sqlSession.delete("ManageMapper.updateFolderOrder", paramMap);
+	}
+
+
+
+	/** 폴더 순서, 이름 변경
+	 * @param folder
+	 * @return
+	 */
+	public int updateFolder(Folder folder) {
+		
+		return sqlSession.update("ManageMapper.updateFolder", folder);
+	}
+
+
+
+
 
 }

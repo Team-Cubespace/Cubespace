@@ -15,11 +15,29 @@
     <link rel="stylesheet" href="/resources/css/manage/manage.css">
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
     <title></title>
+
+
+
     <style>
     .frame-color {
         background-color : ${minihome.frameColor};
     }
+    header{
+        flex-direction: column;
+        height: 100px;
+    }
+    header>*:nth-child(1){
+        justify-content: flex-end;
+    }
+    header>*:nth-child(2){
+        justify-content: space-between;
+    }
+
     </style>
+
+    <jsp:include page="/WEB-INF/views/include/font.jsp"/>
+    
+
 </head>
 <body>
     <div class="content-area frame-color">
@@ -30,73 +48,53 @@
         <section class="minihome-rayout">
             <div class="main">
                 <header>
-                    <div class="rightFontTitleArea">
-                        <span class="rightTitle">폰트 관리</span>
-                        <div class="searchArea">
-                            <input type="text" id="searchInput" class="headerSearch" placeholder="폰트 이름 검색">
-                            <i class="fa-solid fa-magnifying-glass" id="searchBtn"></i>
-                        </div>
-                    </div>
                     <a href="" class="storeLinkArea"> <%-- 상점 이동 링크 --%>
                         <i class="fa-solid fa-store"></i> 상점이동
                     </a>
+                    <div class="rightFontTitleArea">
+                        <span class="rightTitle">폰트 관리</span>
+                        <form class="searchArea" id="searchArea">
+                            <i id="allFont" class="whiteBtn">모든 폰트</i>
+                            <input type="text" id="searchInput" class="headerSearch" name="searchInput" placeholder="폰트 이름 검색" value="${param.searchInput}">
+                            <i class="fa-solid fa-magnifying-glass" id="searchBtn"></i>
+                        </form>
+                    </div>
                 </header>
                 <div class="fontArea">
                     <div class="fontHeader">
                         <div class="fontTitle">폰트 이름</div>
                         <div class="fontExample">예시 문구</div>
                         <div class="fontUse">
-                            <button class="useFontBtn whiteBtn">적용하기</button>
+                            <button class="useFontBtn whiteBtn" id="useFontBtn">적용하기</button>
                         </div>
                     </div>
 
+                    <c:if test="${empty fontList}">
                     <div class="fontMain">
-                        <div class="fontTitle">나눔고딕</div>
-                        <div class="fontExample">우리들의 작은 공간 큐브스페이스에서 시작하세요</div>
+                        폰트가 없습니다
+                    </div>
+                    </c:if>
+
+                    <c:if test="${not empty fontList}">
+                    <c:forEach var="font" items="${fontList}">
+                    <div class="fontMain">
+                        <div class="fontTitle" style="font-family:'${font.fontNo}'">${font.fontName}</div>
+                        <div class="fontExample" style="font-family:'${font.fontNo}'">우리들의 작은 공간 큐브스페이스에서 시작하세요</div>
                         <div class="fontUse">
-                            <input type="radio" name="useFontRadio" class="useFontRadio" id="">
+                            <input type="radio" name="useFontRadio" class="useFontRadio" value="${font.fontNo}">
                         </div>
                     </div>
-                    <div class="fontMain">
-                        <div class="fontTitle">나눔고딕</div>
-                        <div class="fontExample">우리들의 작은 공간 큐브스페이스에서 시작하세요</div>
-                        <div class="fontUse">
-                            <input type="radio" name="useFontRadio" class="useFontRadio" id="">
-                        </div>
-                    </div>
-                    <div class="fontMain">
-                        <div class="fontTitle">나눔고딕</div>
-                        <div class="fontExample">우리들의 작은 공간 큐브스페이스에서 시작하세요</div>
-                        <div class="fontUse">
-                            <input type="radio" name="useFontRadio" class="useFontRadio" id="">
-                        </div>
-                    </div>
-                    <div class="fontMain">
-                        <div class="fontTitle">나눔고딕</div>
-                        <div class="fontExample">우리들의 작은 공간 큐브스페이스에서 시작하세요</div>
-                        <div class="fontUse">
-                        <input type="radio" name="useFontRadio" class="useFontRadio" id="">
-                        </div>
-                    </div>
-                    <div class="fontMain">
-                        <div class="fontTitle">나눔고딕</div>
-                        <div class="fontExample">우리들의 작은 공간 큐브스페이스에서 시작하세요</div>
-                        <div class="fontUse">
-                            <input type="radio" name="useFontRadio" class="useFontRadio" id="">
-                        </div>
-                    </div>
-                    <div class="fontMain">
-                        <div class="fontTitle">나눔고딕</div>
-                        <div class="fontExample">우리들의 작은 공간 큐브스페이스에서 시작하세요</div>
-                        <div class="fontUse">
-                            <input type="radio" name="useFontRadio" class="useFontRadio" id="">
-                        </div>
-                    </div>
+                    </c:forEach>
+                    </c:if>
+                    
                 </div>
             </main>  
         </section>
     </div>
 </body>
+    <script>
+        const memberNo = "${loginMember.memberNo}";
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script> <%-- jquery --%>
     <script src="/resources/js/manage/font.js"></script>
 </html>

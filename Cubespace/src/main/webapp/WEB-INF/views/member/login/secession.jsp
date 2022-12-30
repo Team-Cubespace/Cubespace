@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/resources/css/common/header.css">
     <link rel="stylesheet" href="/resources/css/common/footer.css">
     <link rel="stylesheet" href="/resources//css/member/login/findIdPw.css">
+    <link rel="stylesheet" href="/resources//css/member/login/secession.css">
 
 
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>

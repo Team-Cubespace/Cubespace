@@ -12,6 +12,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,11 +37,12 @@
 
             <section class="category-lists">
                 <a href = "/admin/member" class="detail link-member activate">회원</a>
+                <a href = "/admin/block" class="detail link-member">신고</a>
             </section>
 
             <section class="main-class">
                 <div class="member-title">
-                    <h3>회원 리스트</h3>
+                    <h3>신고 리스트</h3>
                     <div>
                         <button id="memberAddBtn">+ 회원 등록</button>
                         <button id="goodsAddBtn">+ 상품 등록</button>
@@ -66,8 +68,8 @@
                                     <c:set var="nicknameChk" value="selected"></c:set>
                                 </c:if>
                                     
-                                <option value="email" ${emailChk} >이메일</option>
-                                <option value="nickname" ${nicknameChk}>닉네임</option>
+                                <option value="email" ${emailChk}>닉네임</option>
+                                <option value="nickname" ${nicknameChk}>회원번호</option>
                                         
                                         
                                 </select>

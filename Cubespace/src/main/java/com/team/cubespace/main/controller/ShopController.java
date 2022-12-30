@@ -55,6 +55,16 @@ public class ShopController {
 		return result;
 	}
 	
-	
+	/** 상점 인기폰트 목록 조회
+	 * @return
+	 */
+	@GetMapping("/shopPopularFont")
+	@ResponseBody
+	public String shopPopularFont(int loginMemberNo) {
+		
+		List<Shop> popularFontList = service.shopPopularFont(loginMemberNo);
+		
+		return new Gson().toJson(popularFontList); 
+	}
 }
 

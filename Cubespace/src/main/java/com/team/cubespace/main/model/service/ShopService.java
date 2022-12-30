@@ -19,4 +19,10 @@ public interface ShopService {
 	 */
 	int goodsAddButton(Map<String, Object> paramMap);
 
+	/** 상점 인기폰트 목록 조회
+	 * @param loginMemberNo
+	 * @return
+	 */
+	List<Shop> shopPopularFont(int loginMemberNo);
+
 }

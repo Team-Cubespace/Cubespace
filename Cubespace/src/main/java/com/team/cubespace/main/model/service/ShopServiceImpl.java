@@ -28,4 +28,10 @@ public class ShopServiceImpl  implements ShopService{
 	public int goodsAddButton(Map<String, Object> paramMap) {
 		return dao.goodsAddButton(paramMap);
 	}
+
+	// 상점 인기폰트 목록 조회
+	@Override
+	public List<Shop> shopPopularFont(int loginMemberNo) {
+		return dao.shopPopularFont(loginMemberNo);
+	}
 }

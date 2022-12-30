@@ -127,8 +127,74 @@ newGoodsBox.addEventListener("click", () => {
 })
 /* 인기랭킹 클릭 시 */
 shopRankBox.addEventListener("click", () => {
-    // 여기에 ajax로 리스트를 가져오는 코드 작성
     shopRankBox.classList.add("select");
     newGoodsBox.classList.remove("select");
+
+    $.ajax({
+        url:"/shopPopularFont",
+        data: {"loginMemberNo":loginMemberNo},
+        dataType : "JSON",
+        success : popularFontList =>{
+
+            const shopRankLsit =document.querySelector(".shop-rank-lsit")
+            shopRankLsit.innerHTML=""; // 이전 내용 제거
+
+            for(let popularFont of popularFontList){
+
+                /* 회원번호 저장 */
+                fontNo= popularFont.fontNo;
+                
+                const goods = document.createElement("div")
+                goods.classList.add("goods")
+
+                    /* new이미지 생성 */
+                    const new_img = document.createElement("img")
+                    new_img.classList.add("rank-img")
+                    new_img.setAttribute("src","/resources/images/crown.png")
+                    
+                    /* 예시용 폰트화면 생성 */
+                    const goods_example = document.createElement("div")
+                    goods_example.classList.add("goods-example")
+                    goods_example.style.fontFamily= "'"+popularFont.fontNo+"'";
+                    goods_example.innerText="우리들의 작은 공간 큐브스페이스에서 시작하세요"
+                    
+                    const goods_info = document.createElement("div")
+                    goods_info.classList.add("goods-info")
+
+                        /* 폰트 이름 생성 */
+                        const goods_title = document.createElement("div")
+                        goods_title.classList.add("goods-title")
+                        goods_title.innerText=popularFont.fontName;
+
+                        /* 폰트 제작자 생성 */
+                        const goods_producer = document.createElement("div")
+                        goods_producer.classList.add("goods-producer")
+                        goods_producer.innerText=popularFont.fontProducer;
+
+                        const goods_info_div = document.createElement("div")
+
+                            /* 사용횟수 생성 */
+                            const goods_count =document.createElement("div")
+                            goods_count.classList.add("goods-count")
+                            goods_count.innerText="사용횟수 : "+popularFont.fontCount;
+
+                            /* 사용하기 or 보유중버튼 생성*/
+                            const goods_btn =document.createElement("div")
+                            if(popularFont.fontNo==popularFont.goodsNo){// 보유중
+                                goods_btn.classList.add("goods-holding")
+                                goods_btn.innerText="보유중"
+                                
+                            }else{ // 사용가능
+                                goods_btn.classList.add("goods-btn")
+                                goods_btn.innerText="사용하기"
+                                goods_btn.setAttribute("onclick","goodsAdd("+fontNo+","+shopCathNo+",this)");
+                            }
+                shopRankLsit.append(goods);
+                    goods.append(new_img,goods_example,goods_info);
+                        goods_info.append(goods_title,goods_producer,goods_info_div);
+                            goods_info_div.append(goods_count,goods_btn);
+            }
+        }
+    })
 })
 

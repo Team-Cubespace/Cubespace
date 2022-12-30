@@ -30,4 +30,12 @@ public class ShopDAO {
 	public int goodsAddButton(Map<String, Object> paramMap) {
 		return sqlSession.insert("shop.goodsAddButton",paramMap);
 	}
+
+	/** 상점 인기폰트 목록 조회
+	 * @param loginMemberNo
+	 * @return
+	 */
+	public List<Shop> shopPopularFont(int loginMemberNo) {
+		return sqlSession.selectList("shop.shopPopularFont",loginMemberNo);
+	}
 }

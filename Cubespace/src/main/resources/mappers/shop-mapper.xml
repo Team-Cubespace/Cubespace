@@ -36,11 +36,34 @@
 		<![CDATA[WHERE ROWNUM <= 3]]>
 	</select>
    
+   <!-- 상점 상품 추가(폰트,배경음악,소품) -->
 	<insert id="goodsAddButton">
 		INSERT INTO MEMBER_OWN_GOODS 
 		VALUES(SEQ_OWN_NO.NEXTVAL,#{loginMemberNo},#{shopCathNo},#{fontNo})
 	</insert>
    
+	<!-- 상점 인기폰트 목록 조회 -->
+	<select id="shopPopularFont"  resultMap="shop_rm">
+		SELECT * FROM (
+		SELECT FONT_NO, FONT_NAME ,FONT_PATH ,FONT_CREATER , NVL(COUNT_NO,0) FONT_COUNT_NO ,
+		   CASE
+		   WHEN FONT_NO IN (SELECT GOODS_NO 
+		   FROM MEMBER_OWN_GOODS
+		   WHERE MEMBER_NO = #{loginMemberNo} AND SHOP_CATH_NO = 1) THEN FONT_NO
+		   ELSE 0 
+		   END AS GOODS_NO
+		FROM FONT_SHOP F
+		LEFT JOIN (
+		   SELECT COUNT(*) COUNT_NO, GOODS_NO
+		   FROM MEMBER_OWN_GOODS
+		   WHERE SHOP_CATH_NO = 1
+		   GROUP BY GOODS_NO
+		   ORDER BY COUNT_NO DESC
+		) S ON (F.FONT_NO = S.GOODS_NO)
+		WHERE FONT_NO != 1
+		ORDER BY FONT_COUNT_NO DESC, FONT_NO DESC) 
+		<![CDATA[WHERE ROWNUM <= 3]]>
+	</select>
    
    
 </mapper>

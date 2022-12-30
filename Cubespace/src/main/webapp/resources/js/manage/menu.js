@@ -191,7 +191,6 @@ const orderCategory = () => {
 
     /* '나의 월간달력' input disabled -> 활성화 */
     const myCalendar = document.querySelector(':disabled');
-    console.log(myCalendar);
     myCalendar.removeAttribute("disabled");
 
     return true;
@@ -434,7 +433,7 @@ for(let dropDownBtn of dropDownBtnList){
 
             for(let item of dropdown){
                 item.addEventListener("click", e => {
-                    // item.innerText
+                    console.log(item);
                 })
             }
 

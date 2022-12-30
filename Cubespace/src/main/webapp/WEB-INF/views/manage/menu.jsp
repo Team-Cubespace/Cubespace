@@ -155,7 +155,7 @@
                             <p class="whiteBtn" id="menuSelectCancelBtn">원래대로</p>
                         </div>
                     </div>
-                    <form action="/manage/menu/changeCategory" method="post" onclick="return orderCategory()">
+                    <form action="/manage/menu/changeCategory" method="post" onsubmit="return orderCategory()">
                         <div class="listTitle backgroundTitleArea">
                             <span class="backgroundTitle">메뉴설정 변경</span>
                             <div class="backgroundExplain">
@@ -186,13 +186,13 @@
                                             <div class="subCategoryArea" id="sortable2">
                                     <c:forEach var="folder" items="${folderList}">
                                         <c:if test="${folder.boardTypeNo == 1}">
-                                            <c:if test="${folder.folderOrder == 1}">
-                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
+                                            <c:if test="${folder.folderName == '나의 월간달력'}">
+                                                <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}" >
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
                                                     <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20" disabled>
                                                 </div>
                                             </c:if>
-                                            <c:if test="${folder.folderOrder != 1}">
+                                            <c:if test="${folder.folderName != '나의 월간달력'}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
                                                     <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
@@ -270,13 +270,13 @@
                                             <div class="subCategoryArea" id="sortable2">
                                     <c:forEach var="folder" items="${folderList}">
                                         <c:if test="${folder.boardTypeNo == 1}">
-                                            <c:if test="${folder.folderOrder == 1}">
+                                            <c:if test="${folder.folderName == '나의 월간달력'}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
                                                     <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20" disabled>
                                                 </div>
                                             </c:if>
-                                            <c:if test="${folder.folderOrder != 1}">
+                                            <c:if test="${folder.folderName != '나의 월간달력'}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
                                                     <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
@@ -354,13 +354,13 @@
                                             <div class="subCategoryArea" id="sortable2">
                                     <c:forEach var="folder" items="${folderList}">
                                         <c:if test="${folder.boardTypeNo == 1}">
-                                            <c:if test="${folder.folderOrder == 1}">
+                                            <c:if test="${folder.folderName == '나의 월간달력'}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
                                                     <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20" disabled>
                                                 </div>
                                             </c:if>
-                                            <c:if test="${folder.folderOrder != 1}">
+                                            <c:if test="${folder.folderName != '나의 월간달력'}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
                                                     <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
@@ -438,13 +438,13 @@
                                             <div class="subCategoryArea" id="sortable2">
                                     <c:forEach var="folder" items="${folderList}">
                                         <c:if test="${folder.boardTypeNo == 1}">
-                                            <c:if test="${folder.folderOrder == 1}">
+                                            <c:if test="${folder.folderName == '나의 월간달력'}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
                                                     <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20" disabled>
                                                 </div>
                                             </c:if>
-                                            <c:if test="${folder.folderOrder != 1}">
+                                            <c:if test="${folder.folderName != '나의 월간달력'}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
                                                     <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
@@ -527,7 +527,7 @@
                                     <p>--------------------------------------------</p>
                                 </div>
                             <%-- <c:if test="${not empty folderBoardList}"> --%>
-                                
+                                <%-- <c:forEach var="board" items="${folderBoardList}"> --%>
                                 
                                 <div class="menuRightContent">
                                     <div class="folderNameArea">
@@ -593,6 +593,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <%-- </c:forEach> --%>
                             <%-- </c:if> --%>
                             </div> 
                         </div>

@@ -372,3 +372,29 @@ for (let minusBtn of minusBtnList) {
 }
 
 
+/* 폴더 내부 게시글 설정변경 */
+const folderImageList = document.getElementsByClassName("subCategoryImg");
+for(let folderImage of folderImageList){
+    folderImage.addEventListener("dblclick", e => {
+
+        // 폴더 번호
+        const folderNo = e.target.parentElement.getAttribute("id");
+
+        // 카테고리 이름(DIARY, ALBUM, VIDEO)
+        const temp = e.target.parentElement.parentElement.parentElement;
+        let categoryName = "";
+        if(temp.classList.contains("diary")){categoryName = "DIARY";}
+        if(temp.classList.contains("album")){categoryName = "ALBUM";}
+        if(temp.classList.contains("video")){categoryName = "VIDEO";}
+
+
+        // $.ajax({
+        //     url : "/manage/menu/selectFileList",
+        //     type : "get",
+        //     data : {"folderNo" : folderNo, "memberNo" : memberNo, "categoryName" : categoryName},
+        //     success : result => {
+
+        //     }
+        // })
+    })
+}

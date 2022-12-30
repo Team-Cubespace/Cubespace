@@ -522,9 +522,17 @@
                                 </div>
                             </div>
                             <div class="menuRightArea">
-                                <div class="menuRightTitle">폴더 추가, 삭제</div>
+                                <div class="menuRightTitle">폴더 내 게시글 조회</div>
                                 <div class="menuRightContent">
-
+                                    <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
+                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
+                                                    <input  class="folderTitle" value='${folder.folderName}' name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
+                                                </div>
+                                    <div class="folderName">
+                                        <img src="/resources/images/common/folder.png" class="folderImg">
+                                        <p></p>
+                                    </div>
+                                    <div class="fileList">폴더이름</div>
                                 </div>
                             </div> 
                         </div>

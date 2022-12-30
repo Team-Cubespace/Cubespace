@@ -27,6 +27,7 @@
 		<typeAlias type="com.team.cubespace.album.model.vo.AlbumImage" alias="AlbumImage"/>
 		<typeAlias type="com.team.cubespace.album.model.vo.Comment" alias="Comment"/>
 		<typeAlias type="com.team.cubespace.main.model.vo.Notifications" alias="Notifications"/>
+		<typeAlias type="com.team.cubespace.main.model.vo.Shop" alias="Shop"/>
 	</typeAliases>
 	
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->
@@ -38,5 +39,6 @@
 		<mapper resource="/mappers/album-mapper.xml"/>
 		<mapper resource="/mappers/comment-mapper.xml"/>	
 		<mapper resource="/mappers/notifications-mapper.xml"/>	
+		<mapper resource="/mappers/shop-mapper.xml"/>	
 	</mappers>
 </configuration>

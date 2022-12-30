@@ -20,6 +20,7 @@
 
 </head>
 <body>
+    <jsp:include page="/WEB-INF/views/include/font.jsp"/>
     <jsp:include page="/WEB-INF/views/include/header.jsp"/>
     <main>
         <div class="shop-main-frame">
@@ -61,13 +62,13 @@
                     <%-- 최신폰트/인기랭킹 --%>
                     <div class="goods">
                         <img class="new-img" src="/resources/images/common/shopNew2.png" alt="">
-                        <div class="goods-example">우리들의 작은 공간 큐브스</div>
+                        <div class="goods-example" style="font-family:'10'">우리들의 작은 공간 큐브스페이스에서 시작하세요</div>
                         <div class="goods-info">
-                            <div class="goods-title">테스트용 폰트이름</div>
+                            <div class="goods-title">${font.fontName}테스트용 폰트이dddddddddddddddddddd름</div>
                             <div class="goods-producer">(주)KH_E조</div>
                             <div>
                                 <div class="goods-count">사용횟수 : 1,000,000</div>
-                                <button class="goods-holding">보유중</button>
+                                <div class="goods-holding">보유중</div>
                             </div>
                         </div>
                     </div>
@@ -80,7 +81,7 @@
                             <div class="goods-producer">(주)KH_E조</div>
                             <div>
                                 <div class="goods-count">사용횟수 : 1,000,000</div>
-                                <button class="goods-btn">사용하기</button>
+                                <div class="goods-btn"onclick="return openMinihome(폰트번호,this)>사용하기</div>
                             </div>
                         </div>
                     </div>
@@ -310,6 +311,9 @@
         </div>
 
     </main>
+    <script>
+        let shopCathNo=1;
+    </script>
     <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
     <script src="/resources/js/webmain/main-shopFont.js"></script>
 </body>

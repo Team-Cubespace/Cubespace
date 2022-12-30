@@ -178,9 +178,14 @@ body *{
 
 /* 상품명 */
 .goods-title{
+    display: block;
     font-weight: bold;
-    height: 35px;
-    text-overflow: ellipsis;
+    height: 20px;
+    width: 230px;
+    margin: 10px 5px 5px 10px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
 }
 /* 제작자 */
 .goods-producer{
@@ -198,6 +203,7 @@ body *{
     border: 1px solid var(--subColor);
     color: white;
     height: 20px;
+    width: 65px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -219,6 +225,7 @@ body *{
     border: 1px solid  #e53095;
     color: white;
     height: 20px;
+    width: 65px;
     display: flex;
     justify-content: center;
     align-items: center;

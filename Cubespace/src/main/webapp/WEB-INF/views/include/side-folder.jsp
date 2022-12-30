@@ -3,17 +3,7 @@
 <link rel="stylesheet" href="/resources/css/minihome/include/side-folder.css">
 <div class="side-folder" id="sideFolder">
     <header>
-        <c:choose>
-            <c:when test="${boardTypeNo == 1}">
-                다이어리
-            </c:when>
-            <c:when test="${boardTypeNo == 2}">
-                사진첩
-            </c:when>
-            <c:when test="${boardTypeNo == 3}">
-                동영상
-            </c:when>
-        </c:choose>        
+        ${folderList[0].boardTypeName}   
     </header>
 
     <ul class="folder-list">

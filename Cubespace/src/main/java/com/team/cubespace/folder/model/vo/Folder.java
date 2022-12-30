@@ -14,7 +14,7 @@ public class Folder {
 	private int folderOrder;		// 폴더 순서
 	private int memberNo;			// 회원 번호
 	private String memberNickname;	// 회원 닉네임
-	
+	private String boardTypeName;	// 게시판 타입 이름 
 	private int fileCount; // 폴더 안의 게시글 수
 
 }

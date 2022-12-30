@@ -88,7 +88,7 @@
                             </div>
                         </div>
 
-                        <a href="/minihome/4" id="homeBtn" onclick="return openMinihome(this.href)"><i class="fa-solid fa-house"></i>&nbsp;My Space</a>
+                        <a href="/minihome/${loginMember.memberNo}" id="homeBtn" onclick="return openMinihome(this.href)"><i class="fa-solid fa-house"></i>&nbsp;My Space</a>
                     </c:otherwise>
                 </c:choose>
             </div>
@@ -205,5 +205,6 @@
     <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 
     <script src="/resources/js/common/home.js"></script>
+    <script src="/resources/js/common/header.js"></script>
 </body>
 </html>

@@ -31,11 +31,33 @@ public class AdminController {
 		return "admin/admin-member";
 	}
 	
+	/** 회원 차단, 신고관리 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/block")
+	public String adminBlock() {
+		return "admin/admin-block";
+	}
+	
 	/** 회원 신고/정지 페이지 이동
 	 * @return
 	 */
-	@GetMapping("/goods")
-	public String adminGoods() {
+	@GetMapping("/goods/font")
+	public String adminGoods_font() {
+		return "admin/admin-font";
+	}
+	/** 배경음악 등록 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/goods/music")
+	public String adminGoods_music() {
+		return "admin/admin-music";
+	}
+	/** 소품등록 이동
+	 * @return
+	 */
+	@GetMapping("/goods/goods")
+	public String adminGoods_goods() {
 		return "admin/admin-goods";
 	}
 }

@@ -113,5 +113,8 @@
             </div>
         </div>
     </div>
-    <jsp:include page="/WEB-INF/views/include/comment.jsp" />
+    <script>
+        window.parent.postMessage("3", "*");
+    </script>
+    <jsp:include page="/WEB-INF/views/include/comment.jsp"/>
 </div>

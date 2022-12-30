@@ -49,5 +49,4 @@
 <script src="/resources/js/common/jQuery-core.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ab8d18a2840806f79cff0f4f1542dde4&libraries=services"></script>
 <script src="/resources/js/minihome/album/album-write.js"></script>
-<script src="../../js/common/temp.js"></script>
 </html>

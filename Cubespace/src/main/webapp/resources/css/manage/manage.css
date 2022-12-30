@@ -85,7 +85,7 @@ header {
     position: absolute;
     right: 5px;
     top: 3px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .whiteBtn {
@@ -95,6 +95,7 @@ header {
     cursor: pointer;
     padding: 5px;
     height: 30px;
+    font-size: 13px;
 
 }
 
@@ -262,7 +263,7 @@ header {
     border-bottom: 3px solid #eee;
 }
 #searchBtn {
-    top: 9px;
+    /* top: 9px; */
     border: none;
     background-color: white;
 }
@@ -378,7 +379,9 @@ header {
     border-radius: 5px;
     border: 1px solid #eee;
 }
-
+#allFriend {
+    font-size: 13px;
+}
 
 /* ----------------------------------------------------- */
 /* 메뉴설정 */
@@ -459,6 +462,7 @@ header {
 .subCategoryImg {
     width: 15px;
     height: 15px;
+    margin-right: 5px;
 }
 
 
@@ -516,7 +520,28 @@ header {
     color: white;
     border-radius: 50%;
 }
+#menuSelectCancelBtn{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.menuListArea {
+    display: flex;
+    flex-direction: column;
+}
 
+.menuOrder1{
+    order : 1;
+}
+.menuOrder2{
+    order : 2;
+}
+.menuOrder3{
+    order : 3;
+}
+.menuOrder4{
+    order : 4;
+}
 /* ------------------------------------------------------ */
 /* 배경음악 설정 */
 .backgroundHeader, .backgroundMain{

@@ -3,6 +3,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<c:set var="pagination" value = "${shopFontMap.pagination}"/>
+<c:set var="shopFontList" value = "${shopFontMap.shopFontList}"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,171 +117,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="goods">
-                    <div class="goods-example">우리들의 작은 공간 큐브스</div>
-                    <div class="goods-info">
-                        <div class="goods-title">테스트용 폰트이름</div>
-                        <div class="goods-producer">(주)KH_E조</div>
-                        <div>
-                            <div class="goods-count">사용횟수 : 1,000,000</div>
-                            <button class="goods-btn">사용하기</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="goods">
-                    <div class="goods-example">우리들의 작은 공간 큐브스</div>
-                    <div class="goods-info">
-                        <div class="goods-title">테스트용 폰트이름</div>
-                        <div class="goods-producer">(주)KH_E조</div>
-                        <div>
-                            <div class="goods-count">사용횟수 : 1,000,000</div>
-                            <button class="goods-btn">사용하기</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="goods">
-                    <div class="goods-example">우리들의 작은 공간 큐브스</div>
-                    <div class="goods-info">
-                        <div class="goods-title">테스트용 폰트이름</div>
-                        <div class="goods-producer">(주)KH_E조</div>
-                        <div>
-                            <div class="goods-count">사용횟수 : 1,000,000</div>
-                            <button class="goods-btn">사용하기</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="goods">
-                    <div class="goods-example">우리들의 작은 공간 큐브스</div>
-                    <div class="goods-info">
-                        <div class="goods-title">테스트용 폰트이름</div>
-                        <div class="goods-producer">(주)KH_E조</div>
-                        <div>
-                            <div class="goods-count">사용횟수 : 1,000,000</div>
-                            <button class="goods-btn">사용하기</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="goods">
-                    <div class="goods-example">우리들의 작은 공간 큐브스</div>
-                    <div class="goods-info">
-                        <div class="goods-title">테스트용 폰트이름</div>
-                        <div class="goods-producer">(주)KH_E조</div>
-                        <div>
-                            <div class="goods-count">사용횟수 : 1,000,000</div>
-                            <button class="goods-btn">사용하기</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="goods">
-                    <div class="goods-example">우리들의 작은 공간 큐브스</div>
-                    <div class="goods-info">
-                        <div class="goods-title">테스트용 폰트이름</div>
-                        <div class="goods-producer">(주)KH_E조</div>
-                        <div>
-                            <div class="goods-count">사용횟수 : 1,000,000</div>
-                            <button class="goods-btn">사용하기</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="goods">
-                    <div class="goods-example">우리들의 작은 공간 큐브스</div>
-                    <div class="goods-info">
-                        <div class="goods-title">테스트용 폰트이름</div>
-                        <div class="goods-producer">(주)KH_E조</div>
-                        <div>
-                            <div class="goods-count">사용횟수 : 1,000,000</div>
-                            <button class="goods-btn">사용하기</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="goods">
-                    <div class="goods-example">우리들의 작은 공간 큐브스</div>
-                    <div class="goods-info">
-                        <div class="goods-title">테스트용 폰트이름</div>
-                        <div class="goods-producer">(주)KH_E조</div>
-                        <div>
-                            <div class="goods-count">사용횟수 : 1,000,000</div>
-                            <button class="goods-btn">사용하기</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="goods">
-                    <div class="goods-example">우리들의 작은 공간 큐브스</div>
-                    <div class="goods-info">
-                        <div class="goods-title">테스트용 폰트이름</div>
-                        <div class="goods-producer">(주)KH_E조</div>
-                        <div>
-                            <div class="goods-count">사용횟수 : 1,000,000</div>
-                            <button class="goods-btn">사용하기</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="goods">
-                    <div class="goods-example">우리들의 작은 공간 큐브스</div>
-                    <div class="goods-info">
-                        <div class="goods-title">테스트용 폰트이름</div>
-                        <div class="goods-producer">(주)KH_E조</div>
-                        <div>
-                            <div class="goods-count">사용횟수 : 1,000,000</div>
-                            <button class="goods-btn">사용하기</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="goods">
-                    <div class="goods-example">우리들의 작은 공간 큐브스</div>
-                    <div class="goods-info">
-                        <div class="goods-title">테스트용 폰트이름</div>
-                        <div class="goods-producer">(주)KH_E조</div>
-                        <div>
-                            <div class="goods-count">사용횟수 : 1,000,000</div>
-                            <button class="goods-btn">사용하기</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="goods">
-                    <div class="goods-example">우리들의 작은 공간 큐브스</div>
-                    <div class="goods-info">
-                        <div class="goods-title">테스트용 폰트이름</div>
-                        <div class="goods-producer">(주)KH_E조</div>
-                        <div>
-                            <div class="goods-count">사용횟수 : 1,000,000</div>
-                            <button class="goods-btn">사용하기</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="goods">
-                    <div class="goods-example">우리들의 작은 공간 큐브스</div>
-                    <div class="goods-info">
-                        <div class="goods-title">테스트용 폰트이름</div>
-                        <div class="goods-producer">(주)KH_E조</div>
-                        <div>
-                            <div class="goods-count">사용횟수 : 1,000,000</div>
-                            <button class="goods-btn">사용하기</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="goods">
-                    <div class="goods-example">우리들의 작은 공간 큐브스</div>
-                    <div class="goods-info">
-                        <div class="goods-title">테스트용 폰트이름</div>
-                        <div class="goods-producer">(주)KH_E조</div>
-                        <div>
-                            <div class="goods-count">사용횟수 : 1,000,000</div>
-                            <button class="goods-btn">사용하기</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="goods">
-                    <div class="goods-example">우리들의 작은 공간 큐브스</div>
-                    <div class="goods-info">
-                        <div class="goods-title">테스트용 폰트이름</div>
-                        <div class="goods-producer">(주)KH_E조</div>
-                        <div>
-                            <div class="goods-count">사용횟수 : 1,000,000</div>
-                            <button class="goods-btn">사용하기</button>
-                        </div>
-                    </div>
-                </div>
+
 
 <!--------------------------------------------->
             </div>
@@ -286,9 +125,9 @@
             <div class="pagination-area">
                 <ul class="pagination">
                     <!-- 첫 페이지로 이동( <<) -->
-                    <li><a href="/board/${boardCode}">&lt;&lt;</a></li>
+                    <li><a href="/cubespace/shop?cp=1">&lt;&lt;</a></li>
                     <!-- 이전 목록 마지막 번호로 이동 ( < ) -->
-                    <li><a href="/board/${boardCode}?cp=${pagination.prevPage}">&lt;</a></li>
+                    <li><a href="/cubespace/shop?cp=${pagination.prevPage}">&lt;</a></li>
                     <!-- 특정 페이지로 이동 -->
                     <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
                         <c:choose>
@@ -298,14 +137,14 @@
                             </c:when>
                             <c:otherwise>
                                 <!-- <%-- 현재 페이지를 제외한 나머지 --%> -->
-                                <li><a href="/board/${boardCode}?cp=${i}">${i}</a></li>
+                                <li><a href="/cubespace/shop?cp=${i}">${i}</a></li>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
                     <!-- 다음 목록 시작 번호로 이동 ( > )-->
-                    <li><a href="/board/${boardCode}?cp=${pagination.nextPage}">&gt;</a></li>
+                    <li><a href="/cubespace/shop?cp=${pagination.nextPage}">&gt;</a></li>
                     <!-- 끝 페이지로 이동 ( >> ) -->
-                    <li><a href="/board/${boardCode}?cp=${pagination.maxPage}">&gt;&gt;</a></li>
+                    <li><a href="/cubespace/shop?cp=${pagination.maxPage}">&gt;&gt;</a></li>
                 </ul>
             </div>
         </div>

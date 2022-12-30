@@ -25,4 +25,11 @@ public interface ShopService {
 	 */
 	List<Shop> shopPopularFont(int loginMemberNo);
 
+	/** 상점 폰트 목록 조회
+	 * @param loginMemberNo
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectFontList(int loginMemberNo, int cp);
+
 }

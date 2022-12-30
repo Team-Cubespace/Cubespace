@@ -5,13 +5,16 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.google.gson.Gson;
 import com.team.cubespace.main.model.service.ShopService;
 import com.team.cubespace.main.model.vo.Shop;
+import com.team.cubespace.member.model.vo.Member;
 
 @Controller
 public class ShopController {
@@ -20,11 +23,24 @@ public class ShopController {
 	private ShopService service;
 	
 	
-	/** 상점페이지 이동(기본 폰트상점)
+	/** 상점페이지 이동(기본 폰트상점) + 상품 목록조회
 	 * @return
 	 */
 	@GetMapping("/cubespace/shop")
-	public String shopFontMove() {
+	public String shopFontMove(Model model,
+			@RequestParam(value="cp", required=false, defaultValue="1") int cp,
+			@SessionAttribute(value="loginMember", required=false) Member loginMember
+) {
+		int loginMemberNo = loginMember.getMemberNo();
+		
+		// 상점 폰트 목록 조회 서비스 호출
+		Map<String, Object> shopFontMap = service.selectFontList(loginMemberNo, cp); 
+		
+		
+		model.addAttribute("cp", cp);
+//		model.addAttribute("shopFontMap", shopFontMap);
+		model.addAttribute("shopFontMap", shopFontMap);
+
 		return "/webmain/main-shopFont";
 	}
 	
@@ -66,5 +82,9 @@ public class ShopController {
 		
 		return new Gson().toJson(popularFontList); 
 	}
+	
+	
+	
+	
 }
 

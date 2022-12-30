@@ -37,7 +37,6 @@ public class Pagination {
    
    
    
-   
    public int getCurrentPage() {
       return currentPage;
    }

@@ -169,7 +169,11 @@
                                 
 
                                 <div class = "modal-footer">
-                                    <button id = "mainBtn">등록</button>
+                                    <button id = "mainBtn" onClick = "addEvent()">등록</button>
+
+                                    <button id = "updateBtn" >수정</button>
+                                    <button id = "deleteBtn">삭제</button>
+
                                     <button id = "cancleBtn">취소</button>
                                 </div>
                             </div>

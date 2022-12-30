@@ -40,6 +40,7 @@
   		<result property="planCategory" column="PLAN_CATEGORY"/>
   		<result property="allDayFlag" column="PLAN_ALLDAY_FL"/>
   		<result property="color" column="COLOR"/>
+  		<result property="planDescription" column="PLAN_DESCRIPTION"/>
   	</resultMap>
   	
   	<select id="checkFriend" resultType = "_int">
@@ -88,7 +89,7 @@
 	
 	<!-- 월간 달력 -->
 	<select id="selectscheduleList" resultMap = "plan_rm">
-	SELECT START_DATE, NVL(END_DATE,START_DATE) END_DATE , PLAN_TITLE , PLAN_CATEGORY, PLAN_ALLDAY_FL,
+	SELECT START_DATE, NVL(END_DATE,START_DATE) END_DATE , PLAN_TITLE , PLAN_CATEGORY, PLAN_ALLDAY_FL,PLAN_DESCRIPTION,
 	CASE	
 		WHEN PLAN_CATEGORY = 1 THEN '#E0FFFF'
 		WHEN PLAN_CATEGORY = 2 THEN '#E6E6FA'

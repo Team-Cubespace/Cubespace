@@ -17,5 +17,6 @@ public class Plan {
 	int planCategory;
 	String allDayFlag;
 	String color;
+	String planDescription;
 
 }

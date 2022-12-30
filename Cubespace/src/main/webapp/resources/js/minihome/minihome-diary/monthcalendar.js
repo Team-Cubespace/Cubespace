@@ -175,9 +175,15 @@ function popup(arg){
     document.getElementById("endTime").value = endHour+":"+endMinute;
     //8. 종일 여부
 
-    commonInPop();
+    console.log("팝업 열렸을 때 가져오는 값1" + arg.event.allDay);
+    console.log("팝업 열렸을 때 가져오는 값2" + arg.event.extendedProps.allDay);
 
-   
+    if(arg.event.allDay){
+      $("#allDay1").prop("checked", true); 
+    }else{
+      $("#allDay2").prop("checked", true); 
+    }
+    commonInPop();
     
     /* ajax로 이제 수정한 값을 보내줘야지!!!![update] */
     /* 그와 동시에, event도 addEvent되어야 하는데... */
@@ -201,8 +207,7 @@ function popup(arg){
     //7. 종료 시간
     document.getElementById("endTime").value = "00:00";
     //8. 종일 여부 (이거 '아니오'를 택하도록 하고 싶은데 못하겠넴)
-    // document.querySelector("input[name='allDay']:checked").value = "false";
-    // document.querySelectorAll("input[name='allDay']")[0].attr("checked",checked);
+    $("#allDay2").prop("checked", true); 
     commonInPop();
 
   
@@ -285,10 +290,11 @@ function addEvent(){
   console.log(startDate.value);
   console.log(startTime.value);
   console.log(startDate.value+"T"+startTime.value+":00");
-  console.log(allDay.value);
+  console.log("allDAY값"+allDay.value);
   
 
   /* calendar를 전역변수로 선언해줬기 떄문에 가져올 수 있었다... */
+
   if(allDay.value =="true"){
 
     calendar.addEvent({
@@ -337,30 +343,46 @@ function addEvent(){
   
 }
 
- /* 수정하고 싶어.... */
- document.getElementById("updateBtn").addEventListener("click",function(){
+/* 수정하고 싶어.... */
+document.getElementById("updateBtn").addEventListener("click",function(){
   console.log(selectEvent);
   alert("수정..?");
-   //1. 카테고리
-   selectEvent.event.extendedProps.category = document.getElementById("category").value;
+    //1. 카테고리
+  selectEvent.event.setExtendedProp("category", document.getElementById("category").value)
+  console.log("카테고리실험1"+selectEvent.event.category);
+  console.log("카테고리실험2"+selectEvent.event.extendedProps.category);
   //2. 제목
-  selectEvent.event.title = document.getElementById("title").value;
- selectEvent.event.setProp("title", document.getElementById("title").value)
+  selectEvent.event.setProp("title", document.getElementById("title").value)
   //3. 내용
   if(document.getElementById("description").value = ""){
-    selectEvent.event.extendedProps.description = undefined;
+    selectEvent.event.setExtendedProp("description", undefined)
   } else {
-    selectEvent.event.extendedProps.description = document.getElementById("description").value;
+    selectEvent.event.setExtendedProp("description", document.getElementById("description").value);
   }
-  //4. 시작 날짜
-  selectEvent.event.start = document.getElementById("startDate").value+"T"+document.getElementById("startTime").value+":00"
-  //6. 종료 날짜
-  selectEvent.event.end = document.getElementById("endDate").value+"T"+document.getElementById("endTime").value+":00"
-  //7. 종료 시간
+  //4.5.6.7 시작 & 종료 날짜 & 시간
+  selectEvent.event.setDates(document.getElementById("startDate").value+"T"+document.getElementById("startTime").value+":00",
+                            document.getElementById("endDate").value+"T"+document.getElementById("endTime").value+":00")
   //8. 종일 여부
+  // console.log("팝업 열렸을 때 가져오는 값" + selectEvent.event.allDay);
 
-  console.log(selectEvent.event.start);
-  
+    // if(arg.event.allDay){
+    //   $("#allDay1").prop("checked", true); 
+    // }else{
+    //   $("#allDay2").prop("checked", true); 
+    // }
+
+  console.log("얘랑"+document.querySelector("input[name='allDay']:checked").value);
+    if(document.querySelector("input[name='allDay']:checked").value =="true"){
+      selectEvent.event.setAllDay(true);
+      // selectEvent.event.setExtendedProp("allDay","true");
+      console.log("true임");
+    } else {
+      electEvent.event.setAllDay(false);
+    // selectEvent.event.setExtendedProp("allDay","false");
+      console.log("false임");
+    }
+  // console.log("같아야해"+selectEvent.event.extendedProps.allDay);
+  console.log("같아야해"+selectEvent.event.allDay);
   document.getElementById("popup_layer").style.display = "none";
-  
+
 })

@@ -148,6 +148,14 @@ public class DiaryController {
 		return new Gson().toJson(scheduleList);
 	}
 	
+//	@GetMapping("/diary/addCalendar")
+//	@ResponseBody
+//	public int addCalendar() {
+//		
+//	}
+	
+	
+	
 	
 
 }

@@ -131,10 +131,10 @@
                                 <div class = "input-row">
                                     <label for="category">카테고리</label>
                                     <select class="selectBox" id="category" >
-                                        <option value="1" style = "background-color: #fbc2eb;" >없음</option>
-                                        <option value="2" style = "background-color: #b12a5b;" >직장</option>
-                                        <option value="3" style = "background-color: #8ec5fc;">집</option>
-                                        <option value="3" style = "background-color: #8ec5fc;">기념일</option>
+                                        <option value="1" style = "background-color: #fbc2eb;" >없음1</option>
+                                        <option value="2" style = "background-color: #b12a5b;" >직장2</option>
+                                        <option value="3" style = "background-color: #8ec5fc;">집3</option>
+                                        <option value="4" style = "background-color: #8ec5fc;">기념일4</option>
                                     </select>
                                 </div>
                                 <div class = "input-row">
@@ -162,8 +162,8 @@
                                 </div>
                                 <div class = "input-row">
                                     <label for="allDay">종일 여부</label>
-                                        <input type="radio"  id = "allDay" value="true" name="allDay">예
-                                        <input type="radio" id = "allDay"  value="false" name="allDay">아니오
+                                        <input type="radio"  id = "allDay1" value="true" name="allDay">예
+                                        <input type="radio" id = "allDay2"  value="false" name="allDay">아니오
                                     </div>
                                 </div>
                                 

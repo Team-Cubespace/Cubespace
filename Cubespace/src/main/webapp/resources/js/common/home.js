@@ -107,41 +107,41 @@ newShorts.addEventListener("click", () => {
     popularShorts.classList.remove("select");
 })
 
-/* dropdown */
-const dropDownBtn = document.querySelector(".dropdown-btn");
-const dropDownBtnIcon = document.querySelector(".dropdown-btn-icon");
-const dropdown = document.querySelector(".dropdown");
+/* profile dropdown */
+const profileDropdownBtn = document.querySelector(".profile-dropdown-btn");
+const profileDropdownBtnIcon = document.querySelector(".profile-dropdown-btn-icon");
+const profileDropdown = document.querySelector(".profile-dropdown");
 let toggleFlag = true;
 
-const hideDropdown = () => {
-    dropdown.style.height = "0px";
-    dropdown.style.border = "none";
-    dropDownBtnIcon.classList.add("fa-caret-down");
-    dropDownBtnIcon.classList.remove("fa-caret-up");
+const hideProfileDropdown = () => {
+    profileDropdown.style.height = "0px";
+    profileDropdown.style.border = "none";
+    profileDropdownBtnIcon.classList.add("fa-caret-down");
+    profileDropdownBtnIcon.classList.remove("fa-caret-up");
     toggleFlag = true;
 }
 
-const dropdownEvent = () => {
+const profileDropdownEvent = () => {
     if(toggleFlag){
-        dropdown.style.height = "50px";
-        dropdown.style.border = "1px solid black";
-        dropDownBtnIcon.classList.add("fa-caret-up");
-        dropDownBtnIcon.classList.remove("fa-caret-down");
+        profileDropdown.style.height = "50px";
+        profileDropdown.style.border = "1px solid black";
+        profileDropdownBtnIcon.classList.add("fa-caret-up");
+        profileDropdownBtnIcon.classList.remove("fa-caret-down");
         toggleFlag = false;
         
     }else{
-        hideDropdown();
+        hideProfileDropdown();
     }
 }
 
 if(loginMember != '') {
-    dropDownBtn.addEventListener("click", () => {
-        dropdownEvent();
+    profileDropdownBtn.addEventListener("click", () => {
+        profileDropdownEvent();
     })
     
     window.addEventListener("click", e => {
-        if(!e.target.matches('.dropdown, .dropdown-btn, .dropdown-btn-icon')){
-            hideDropdown();
+        if(!e.target.matches('.profile-dropdown, .profile-dropdown-btn, .profile-dropdown-btn-icon')){
+            hideProfileDropdown();
         }
     })
 }
@@ -156,7 +156,6 @@ const openMinihome = (url) => {
 
     return false;
 }
-
 
 /* 로그아웃 */
 const logout = document.getElementById("logout");
@@ -187,9 +186,6 @@ if(logout != null){
             }
         })();
         
-        
-          
-    
         location.href = "/member/logout";
     })
 }

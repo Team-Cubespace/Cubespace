@@ -8,8 +8,6 @@
     <c:set var="loginMember" value="${sessionScope.loginMember}"/>
 </c:if>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,10 +76,10 @@
                         <div class="profile">
                             <div class="profile-img">
                                 <img src="/resources/images/zz.png">
-                                <div class="dropdown-btn"><i class="fa-solid fa-caret-down dropdown-btn-icon"></i></div>
+                                <div class="profile-dropdown-btn"><i class="fa-solid fa-caret-down profile-dropdown-btn-icon"></i></div>
                                 
-                                <!-- dropdown -->
-                                <div class="dropdown">
+                                <!-- profile dropdown -->
+                                <div class="profile-dropdown">
                                     <a href="/member/updateInfo">내 정보 수정</a>
                                     <a href="/member/logout" id="logout">로그아웃</a>
                                 </div>

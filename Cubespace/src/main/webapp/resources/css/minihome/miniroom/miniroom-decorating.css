@@ -1,7 +1,4 @@
-/* 좌측 section */
-@import "../minihome-home/minihome-profile.css";
-
-/* 우측 section */
+/* miniroom main content */
 @import "miniroom-content.css";
 
 /* miniroom */

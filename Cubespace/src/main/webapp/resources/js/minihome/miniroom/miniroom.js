@@ -218,7 +218,7 @@ for(let tile of tileList){
 
 /* dropdown */
 window.addEventListener("click", e => {
-    if(!e.target.matches('.props, .props-img, dorpdown')) hideDropdown();
+    if(!e.target.matches('.props, .props-img, .dorpdown')) hideDropdown();
 })
 
 /* 미니룸 사진 저장 */

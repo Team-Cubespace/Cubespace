@@ -1,4 +1,4 @@
-/* 최근 게시물, 깐부 메시지 */
+/* 최근 게시물, 깐부 메시지 컨테이너 */
 .new-post-container, .friend-message-container{
     margin-bottom: 35px;
     padding: 0 7px;
@@ -8,6 +8,7 @@
     margin: 15px 0;
 }
 
+/* 최근 게시물, 깐부 메시지 한 행 */
 .new-post, .friend-message{
     height: 13px;
     margin-bottom: 10px;
@@ -23,13 +24,25 @@
     cursor: pointer;
 }
 
-.new-post > div:first-child, .friend-message > div:first-child{
+/* 최근 게시물, 깐부 메시지 내용 부분 */
+.post-content, .message-content{
     display: flex;
 }
 
-.post-category, .friend-name{
+.post-content > span, .message-content > span{
+    display: inline-block;
+}
+
+.post-content > span:nth-child(2), .message-content > span:nth-child(2){
+    margin: 0 10px;
+}
+
+/* 카테고리 이름, 깐부 이름 */
+.post-category{
     width: 52px;
-    margin-right: 10px;
+}
+
+.post-category a, .friend-name span{
     color: darksalmon;
     font-weight: bold;
 }
@@ -38,11 +51,10 @@
     width: auto;
 }
 
+/* 게시물 제목, 깐부 메시지 */
 .post-title, .message{
     width: 400px;
-    margin: 0 10px;
     padding-bottom: 30px;
-    display: inline-block;
     text-overflow: ellipsis;
     overflow : hidden;
     white-space : nowrap;
@@ -52,8 +64,10 @@
     width: 350px;
 }
 
+/* 작성 시간 */
 .post-time, .message-time{
     text-align: right;
+    margin-left: 10px;
 }
 
 /* 깐부 메시지 남기기 */

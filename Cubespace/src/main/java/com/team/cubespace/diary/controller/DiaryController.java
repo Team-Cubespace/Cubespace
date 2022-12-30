@@ -36,7 +36,7 @@ public class DiaryController {
 		//다이어리part
 //		return "/minihome/minihome-diary/minihome-rayout-copy";
 		//월간달력part
-		return "/minihome/minihome-diary/minihome-calendarV3";
+		return "/minihome/minihome-diary/monthcalendar";
 	}
 	
 	
@@ -133,6 +133,10 @@ public class DiaryController {
 //	@PostMapping("/calenderInput")
 //	@ResponseBody
 	
+	/**
+	 * @param loginMember
+	 * @return
+	 */
 	@GetMapping("/diary/calendar")
 	@ResponseBody
 	public String selectSchedule(@SessionAttribute("loginMember") Member loginMember) {

@@ -1,5 +1,12 @@
 package com.team.cubespace.diary.model.vo;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Setter
+@Getter
+@ToString
 public class Emoji {
 	
 	int diaryNo;

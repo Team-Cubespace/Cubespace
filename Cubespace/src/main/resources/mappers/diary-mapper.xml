@@ -37,6 +37,9 @@
   		<result property="startDate" column="START_DATE"/>
   		<result property="endDate" column="END_DATE"/>
   		<result property="planTitle" column="PLAN_TITLE"/>
+  		<result property="planCategory" column="PLAN_CATEGORY"/>
+  		<result property="allDayFlag" column="PLAN_ALLDAY_FL"/>
+  		<result property="color" column="COLOR"/>
   	</resultMap>
   	
   	<select id="checkFriend" resultType = "_int">
@@ -83,10 +86,16 @@
 	WHERE DIARY_NO = #{diaryNo} AND E.EMOJI_NO = #{emojiNo}
 	</select>
 	
+	<!-- 월간 달력 -->
 	<select id="selectscheduleList" resultMap = "plan_rm">
-	SELECT START_DATE , PLAN_TITLE 
-	FROM PLAN 
-	JOIN MEMBER USING (MEMBER_NO)
+	SELECT START_DATE, NVL(END_DATE,START_DATE) END_DATE , PLAN_TITLE , PLAN_CATEGORY, PLAN_ALLDAY_FL,
+	CASE	
+		WHEN PLAN_CATEGORY = 1 THEN '#E0FFFF'
+		WHEN PLAN_CATEGORY = 2 THEN '#E6E6FA'
+		WHEN PLAN_CATEGORY = 3 THEN '#FFF0F5'
+		ELSE '#000000'
+	END AS COLOR
+	FROM PLAN  
 	WHERE MEMBER_NO = #{memberNo}
 	</select>
  	

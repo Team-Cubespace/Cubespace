@@ -2,9 +2,11 @@ package com.team.cubespace.diary.model.vo;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
+@ToString
 public class Diary {
 	
 	private int diaryNo; 				// 다이어리 번호

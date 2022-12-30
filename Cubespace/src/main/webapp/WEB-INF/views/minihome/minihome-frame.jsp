@@ -53,19 +53,34 @@
                 </div>
                 <div class="minihome-header-right">
                     <div class="minihome-title-area">
-                        <input class="minihome-title" value="${minihome.homepageName}">
-                        <button id="updateMinihomeTitleButton" type="button" class="fa-solid fa-gear"></button>
+                        <input class="minihome-title" value="${minihome.homepageName}" id="minihomeTitle" readOnly maxLength="10">
+                        <button id="updateMinihomeTitleButton" type="button" class="fa-solid fa-gear header-hover"></button>
+                        <button type="button" id="confirmUpdateButton">수정</button>
+                        <button type="button" id="cancelUpdateButton">
+                        취소</button>
                     </div>
                     <c:if test="${not empty minihome.musicPath}">
                         <div class="audio-container">
-                            <button id="playButton" class="fa-solid fa-circle-play"></button>
-                            <%-- <i class="fa-solid fa-circle-pause"></i> --%>
-                            <%-- <i class="fa-solid fa-circle-play"></i> --%>
-                            <span id="duration">00:00</span>
-                            <span id="musicName">${minihome.musicName}</span>
-                            <div class="music-volume-area">
-                                <i class="fa-solid fa-volume-high"></i>
-                                <input id="musicVolume" type="range">
+                            <div class="music-name-box">
+                                <div class="marquee">
+                                    <p id="minihomeMusicName" class="music-name music-play-marquee">${minihome.musicName}</p>
+                                </div>
+                            </div>
+                            <div class="music-controller">
+                                <div>
+                                    <button id="playButton" class="fa-solid fa-circle-pause"></button>
+                                    <%-- <i class="fa-solid fa-circle-pause"></i> --%>
+                                    <%-- <i class="fa-solid fa-circle-play"></i> --%>
+                                    <span id="duration">00:00</span>
+                                </div>
+                                <div class="music-volume-area">
+                                    <i id="volumeIcon" class="fa-solid fa-volume-high"></i>
+                                    <%-- <i class="fa-solid fa-volume-xmark"></i> --%>
+                                    <%-- <i class="fa-solid fa-volume-low"></i> --%>
+                                    <%-- <i class="fa-solid fa-volume"></i>     --%>
+                                    <%-- <i class="fa-solid fa-volume-high"></i> --%>
+                                    <input id="musicVolume" type="range" max="99" step="1" value="50">
+                                </div>
                             </div>
                         </div>
                     </c:if>
@@ -73,8 +88,8 @@
             </div>
             <section class="minihome-main">
 
-                <%-- <iframe src="/albumWrite" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
-                <iframe src="/manage/menu" frameborder="0" name="minihomeMenu" scrolling="no">
+                <iframe src="/albumList/2" frameborder="0" name="minihomeMenu" scrolling="no">
+                <%-- <iframe src="/manage/friend" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
 
                 </iframe>
                 <ul class="minihome-menu frame-menu-color">
@@ -99,7 +114,12 @@
             </section>
         </div>
     </div>
+    <script>
+        let minihomeMusicPath = '${minihome.musicPath}';
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/resources/js/common/jQuery-core.js"></script>
+    <script src="/resources/js/common/moment.js"></script>
     <script src="/resources/js/minihome/minihome-frame.js"></script>
 </body>
 </html>

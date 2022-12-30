@@ -110,4 +110,24 @@ public class AlbumDAO {
 	public int initImageOrder(int albumNo) {
 		return sqlSession.update("albumMapper.initImageOrder", albumNo);
 	}
+
+	/** 게시글 스크랩
+	 * @param paramMap
+	 * @return result
+	 */
+	public int albumScrap(Album album) {
+		int result = sqlSession.insert("albumMapper.albumScrap", album);
+		if(result > 0) {
+			result = album.getAlbumNo();
+		}
+		return result;
+	}
+
+	/** 앨범 이미지 스크랩
+	 * @param album
+	 * @return
+	 */
+	public int albumImageScrap(Album album) {
+		return sqlSession.insert("albumMapper.albumImageScrap", album);
+	}
 }

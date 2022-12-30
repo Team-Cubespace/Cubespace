@@ -45,21 +45,21 @@
             <label>공개설정</label>
             <ul class="radio-list">
                 <li>
-                    <input type="radio" id="scope1" name="albumOpenFlag" checked value="1">
+                    <input type="radio" id="scope1" name="openFlag" checked value="1">
                     <%-- <label class="radio" for="scope1">
                         <i class="fa-solid fa-check"></i>
                     </label> --%>
                     <label for="scope1">공개</label>
                 </li>
                 <li>
-                    <input type="radio" id="scope2" name="albumOpenFlag" value="2">
+                    <input type="radio" id="scope2" name="openFlag" value="2">
                     <%-- <label class="radio" for="scope2">
                         <i class="fa-solid fa-check"></i>
                     </label> --%>
                     <label for="scope2">깐부공개</label>
                 </li>
                 <li>
-                    <input type="radio" id="scope3" name="albumOpenFlag" value="3">
+                    <input type="radio" id="scope3" name="openFlag" value="3">
                     <%-- <label class="radio" for="scope3">
                         <i class="fa-solid fa-check"></i>
                     </label> --%>

@@ -153,7 +153,6 @@ const resizeTextarea = (textarea)=>{
 }
 
 /* 댓글 작성 */
-
 (()=>{
     // 댓글 textarea
     const addComment = document.getElementById("addComment");

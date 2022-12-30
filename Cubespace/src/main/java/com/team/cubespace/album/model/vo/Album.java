@@ -18,8 +18,10 @@ public class Album {
 	private String latitude;		// 위도
 	private String longitude;		// 경도
 	private String locationName;	// 위치 이름
+	private String albumScrapYN;	// 사진첩 스크랩 여부
 	private String albumScrapAllowYN;	// 스크랩 가능 여부
-	private int albumOpenFlag;		// 사진첩 공개 여부 (1:모두공개, 2:일촌공개, 3:비공개)
+	private int scrapAlbumNo;	// 스크랩할 사진첩 번호 
+	private int openFlag;		// 사진첩 공개 여부 (1:모두공개, 2:일촌공개, 3:비공개)
 	
 	private List<Comment> commentList;			// 댓글 목록
 	private List<AlbumImage> albumImageList;	// 앨범 이미지 목록

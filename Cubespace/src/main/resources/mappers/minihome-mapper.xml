@@ -12,17 +12,44 @@
   		<result property="today" column="TODAY"/>
   		<result property="total" column="TOTAL"/>
   		<result property="ownMusicNo" column="OWN_MUSIC_NO"/>
+  		<result property="musicPath" column="MUSIC_PATH"/>
+  		<result property="musicName" column="MUSIC_NAME"/>
   		<result property="frameColor" column="FRAME_COLOR"/>
   		<result property="frameMenuColor" column="FRAME_MENU_COLOR"/>
   		<result property="frameFontColor" column="FRAME_FONT_COLOR"/>
  	</resultMap>
  	  
- 	  
+ 	<!-- 미니홈 정보 조회 -->  
  	<select id="selectMinihome" parameterType="_int" resultMap="minihome_rm">
  		SELECT MH.MEMBER_NO, HOMEPAGE_NAME, BACKGROUND_SKIN, "COMMENT", TODAY, TOTAL, FRAME_COLOR, FRAME_MENU_COLOR, FRAME_FONT_COLOR, MUSIC_PATH, MUSIC_NAME
 		FROM MINI_HOMEPAGE MH
-		LEFT JOIN MEMBER_OWN_GOODS ON(OWN_NO = OWN_MUSIC_NO)
-		LEFT JOIN MUSIC_SHOP ON(GOODS_NO = MUSIC_NO)
+		LEFT JOIN MUSIC_SHOP ON(OWN_MUSIC_NO = MUSIC_NO)
 		WHERE MH.MEMBER_NO = #{memberNo}
+ 	</select>
+ 	
+ 	<!-- 미니홈 이름 수정 -->
+ 	<update id="updateMinihomeName">
+ 		UPDATE MINI_HOMEPAGE SET
+ 		HOMEPAGE_NAME = #{homepageName}
+ 		WHERE MEMBER_NO = #{memberNo}
+ 	</update>
+ 	
+ 	<!-- 미니홈 today, total 증가 -->
+ 	<update id="updateTodayTotal">
+ 		UPDATE MINI_HOMEPAGE SET
+		TODAY = TODAY + 1,
+		TOTAL = TOTAL + 1
+		WHERE MEMBER_NO = #{memberNo}	
+ 	</update>
+ 	
+ 	<update id="initToday">
+ 		UPDATE MINI_HOMEPAGE SET
+ 		TODAY = 0
+ 	</update>
+ 	
+ 	<!-- 특정 음악 조회 (이름, 경로) -->
+ 	<select id="selectMusic" parameterType="_int" resultType="map">
+ 		SELECT MUSIC_PATH, MUSIC_NAME FROM MUSIC_SHOP
+		WHERE MUSIC_NO = #{musicNo}
  	</select>
 </mapper>

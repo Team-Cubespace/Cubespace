@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.team.cubespace.album.model.dao.AlbumDAO;
 import com.team.cubespace.album.model.vo.Album;
 import com.team.cubespace.album.model.vo.AlbumImage;
+import com.team.cubespace.album.model.vo.Comment;
 import com.team.cubespace.common.Pagination;
 import com.team.cubespace.common.Util;
 
@@ -26,6 +27,7 @@ import com.team.cubespace.common.Util;
 public class AlbumServiceImpl implements AlbumService{
 	@Autowired
 	private AlbumDAO dao; 
+	@Autowired CommentService cService;
 
 	// 친구 상태 확인 서비스
 	@Override
@@ -40,7 +42,7 @@ public class AlbumServiceImpl implements AlbumService{
 		int listCount  = dao.getListCount(paramMap);
 		
 		// 페이징 처리 객체 생성
-		Pagination pagination = new Pagination(listCount, cp, 12, 10);
+		Pagination pagination = new Pagination(listCount, cp, 9, 10);
 		
 		// 페이징 처리객체 사용하여 앨범 게시글 목록 조회
 		List<Album> albumList = dao.selectAlbumList(pagination, paramMap);
@@ -218,6 +220,29 @@ public class AlbumServiceImpl implements AlbumService{
 						}
 					}
 				}
+			}
+		}
+		return result;
+	}
+
+	// 게시글 스크랩
+	@Transactional
+	@Override
+	public int albumScrap(Album album, Comment comment) {
+		
+		// 게시글 스크랩 dao 호출
+		int result = dao.albumScrap(album);
+		// 게시글이 스크랩 되고 흔적남기기 값이 비어있지 않을 때
+		if(result > 0) {	// 게시글 스크랩 성공 시
+			// 이미지 정보 복사해오기
+			result = dao.albumImageScrap(album);
+			
+			if(result > 0 && comment.getCommentContent() != null) {	// 댓글 작성 시
+				comment.setCommentContent(Util.XSSHandling(comment.getCommentContent()));
+				comment.setCommentContent(Util.newLineHandling(comment.getCommentContent()));
+				result = cService.insertComment(comment);
+			} else {
+				// 예외 발생 시켜 롤백
 			}
 		}
 		return result;

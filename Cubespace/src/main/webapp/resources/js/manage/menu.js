@@ -1,3 +1,5 @@
+
+
 /* ---------------------------------------- */
 /* 정렬 함수 */
 $(function () {
@@ -187,6 +189,10 @@ const orderCategory = () => {
     }
 
 
+    /* '나의 월간달력' input disabled -> 활성화 */
+    const myCalendar = document.querySelector(':disabled');
+    console.log(myCalendar);
+    myCalendar.removeAttribute("disabled");
 
     return true;
 }
@@ -388,13 +394,81 @@ for(let folderImage of folderImageList){
         if(temp.classList.contains("video")){categoryName = "VIDEO";}
 
 
-        // $.ajax({
-        //     url : "/manage/menu/selectFileList",
-        //     type : "get",
-        //     data : {"folderNo" : folderNo, "memberNo" : memberNo, "categoryName" : categoryName},
-        //     success : result => {
-
-        //     }
-        // })
+        $.ajax({
+            url : "/manage/menu/selectFileList",
+            type : "get",
+            data : {"folderNo" : folderNo, "memberNo" : memberNo, "categoryName" : categoryName},
+            success : result => {
+                if(result > 0){
+                    window.href = window.href;
+                } else {
+                    console.log("폴더 내 글목록 조회 실패");
+                }
+            },
+            error : e => {
+                console.log("폴더 내 글목록 조회 중 오류 발생");
+            }
+        })
     })
 }
+
+
+
+/* 게시글 공개여부 설정 dropdown */
+const dropDownBtnList = document.querySelectorAll(".dropdown-btn-icon");
+let toggleFlag = true;
+
+for(let dropDownBtn of dropDownBtnList){
+    dropDownBtn.addEventListener("click", e => {
+
+        // console.log(e.target);
+
+        const dropdown = e.target.parentElement.lastElementChild;
+        if(toggleFlag){
+            dropdown.style.height = "80px";
+            dropdown.style.border = "1px solid black";
+            toggleFlag = false;
+
+            console.log(dropdown);
+
+
+            for(let item of dropdown){
+                item.addEventListener("click", e => {
+                    // item.innerText
+                })
+            }
+
+            // const allOpen = e.target.parentElement.lastElementChild.firstElementChild.innerText; // 전체공개
+            // const friendOpen = e.target.parentElement.lastElementChild.firstElementChild.nextElementSibling.innerText; // 깐부공개
+            // const noOpen = e.target.parentElement.lastElementChild.firstElementChild.nextElementSibling.nextElementSibling.innerText; // 비공개
+
+            // 전체공개
+            // allOpen.addEventListener("click", e=> {
+
+            //     $.ajax({})
+            // })
+            
+        }else{
+            dropdown.style.height = "0px";
+            dropdown.style.border = "none";
+            dropdown.style.zindex = "10";
+            toggleFlag = true;
+        }
+
+
+        window.addEventListener("click", e => {
+            if(!e.target.matches('.dropdown, .dropdown-btn, .dropdown-btn-icon')){
+                dropdown.style.height = "0px";
+                dropdown.style.border = "none";
+                dropdown.style.zIndex = "10";
+                toggleFlag = true;
+            }
+        })
+    })
+}
+
+
+
+
+
+

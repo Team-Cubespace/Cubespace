@@ -522,18 +522,78 @@
                                 </div>
                             </div>
                             <div class="menuRightArea">
-                                <div class="menuRightTitle">폴더 내 게시글 조회</div>
-                                <div class="menuRightContent">
-                                    <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
-                                                    <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input  class="folderTitle" value='${folder.folderName}' name="${folder.folderNo}"  maxlength="20"><i class="fa-solid fa-minus" name="${folder.fileCount}"></i>
-                                                </div>
-                                    <div class="folderName">
-                                        <img src="/resources/images/common/folder.png" class="folderImg">
-                                        <p></p>
-                                    </div>
-                                    <div class="fileList">폴더이름</div>
+                                <div class="menuRightTitle">
+                                    <p>폴더 내 게시글 조회</p>
+                                    <p>--------------------------------------------</p>
                                 </div>
+                            <%-- <c:if test="${not empty folderBoardList}"> --%>
+                                
+                                
+                                <div class="menuRightContent">
+                                    <div class="folderNameArea">
+                                        <img src="/resources/images/common/folder.png" class="folderImg">
+                                        <p class="folderName">나의 다이어리(3)</p>
+                                    </div>
+                                    <div class="fileList">
+                                        <div class="myFile">
+                                            <div class="myFileNameArea">
+                                                <i class="fa-solid fa-file"></i>
+                                                <p class="fileName">글이름1</p>
+                                            </div>
+                                            <div class="fileUpdateBtnArea">
+                                                <span class="whiteBtn">삭제</span>
+                                                <div  class="dropdown-btn">
+                                                    <span class="whiteBtn dropdown-btn-icon">공개</span>
+                                                    <%-- dropdown --%>
+                                                    <div class="dropdown">
+                                                        <div>전체공개</div>
+                                                        <div>깐부공개</div>
+                                                        <div>비공개</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="myFile">
+                                            <div class="myFileNameArea">
+                                                <i class="fa-solid fa-file"></i>
+                                                <p class="fileName">글이름1</p>
+                                            </div>
+                                            <div class="fileUpdateBtnArea">
+                                                <span class="whiteBtn">삭제</span>
+                                                <div  class="dropdown-btn">
+                                                    <span class="whiteBtn dropdown-btn-icon">공개</span>
+                                                    <%-- dropdown --%>
+                                                    <div class="dropdown">
+                                                        <div>전체공개</div>
+                                                        <div>깐부공개</div>
+                                                        <div>비공개</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="myFile">
+                                            <div class="myFileNameArea">
+                                                <i class="fa-solid fa-file"></i>
+                                                <p class="fileName">글이름1</p>
+                                            </div>
+                                            <div class="fileUpdateBtnArea">
+                                                <span class="whiteBtn">삭제</span>
+                                                <div  class="dropdown-btn">
+                                                    <span class="whiteBtn dropdown-btn-icon">공개</span>
+                                                    <%-- dropdown --%>
+                                                    <div class="dropdown">
+                                                        <div>전체공개</div>
+                                                        <div>깐부공개</div>
+                                                        <div>비공개</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <%-- </c:if> --%>
                             </div> 
                         </div>
                         <div class="menuSaveArea">

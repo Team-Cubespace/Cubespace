@@ -143,7 +143,6 @@
 		FOLDER_NAME = #{folderName}
 		WHERE MEMBER_NO = #{memberNo}
 		AND FOLDER_NO = #{folderNo}
-		AND BOARD_TYPE_NO = #{boardTypeNo}
 	</update>
 	
  <!-- 깐부 ====================================================-->

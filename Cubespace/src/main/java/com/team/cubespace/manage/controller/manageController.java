@@ -1,8 +1,11 @@
 package com.team.cubespace.manage.controller;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -107,7 +110,7 @@ public class manageController {
 	@PostMapping("/menu/changeCategory")
 	public String changeMenu(CategoryOrder categoryOrder,
 			@RequestParam Map<String, Object> paramMap,
-			RedirectAttributes ra) throws Exception {
+			RedirectAttributes ra, HttpServletResponse resp) throws Exception {
 		
 		
 		int categoryOrderResult= service.changeCategory(categoryOrder); // 카테고리 순서 변경
@@ -122,7 +125,14 @@ public class manageController {
 		}
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect:/manage/menu";
+		
+		resp.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = resp.getWriter();
+		out.print("<script>window.parent.location.reload();</script>");
+		out.flush();
+		
+//		return "redirect:/manage/menu";
+		return null;
 	}
 	
 	/** 카테고리 종류 원래대로
@@ -172,6 +182,10 @@ public class manageController {
 		// paramMap : boardTypeNo, folderOrder, folderNo, subCategoryLength, memberNo
 		return service.deleteFolder(paramMap);
 	}
+	
+//	@GetMapping("/menu/selectFileList")
+//	@ResponseBody
+//	public int selectFileList
 	
 //	친구(깐부) 관련-------------------------------------------------------------------------------
 

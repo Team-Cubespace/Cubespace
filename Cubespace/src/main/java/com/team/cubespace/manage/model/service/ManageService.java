@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
+import com.team.cubespace.manage.model.vo.File;
 
 public interface ManageService {
 
@@ -93,6 +94,12 @@ public interface ManageService {
 	 * @throws Exception 
 	 */
 	int updateFolder(Map<String, Object> paramMap) throws Exception;
+
+	/** 해당 파일의 폴더목록 조회
+	 * @param paramMap
+	 * @return
+	 */
+	List<File> selectFileList(Map<String, Object> paramMap);
 
 
 

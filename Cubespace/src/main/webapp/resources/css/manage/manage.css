@@ -538,6 +538,9 @@ header {
     padding: 10px;
     display: flex;
     flex-direction: column;
+
+    height: 500px;
+    overflow-y: scroll;
 }
 
 .clicked{
@@ -662,6 +665,19 @@ header {
 .dropdown > a:hover{
     background-color: #ececff;
 }
+
+
+.openStatus{
+    background-color: #eee;
+    border: 1px solid black;
+    cursor: pointer;
+    padding: 5px;
+    height: 30px;
+    width: 65px;
+    font-size: 13px;
+    text-align: center;
+}
+
 
 /* ------------------------------------------------------ */
 /* 배경음악 설정 */

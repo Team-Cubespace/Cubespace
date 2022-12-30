@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
+import com.team.cubespace.manage.model.vo.File;
 
 @Repository
 public class ManageDAO {
@@ -154,6 +155,35 @@ public class ManageDAO {
 		
 		return sqlSession.update("ManageMapper.updateFolder", folder);
 	}
+
+	/** (다이어리)해당 파일의 폴더목록 조회
+	 * @param paramMap
+	 * @return
+	 */
+	public List<File> selectDiaryFileList(Map<String, Object> paramMap) {
+		
+		return sqlSession.selectList("ManageMapper.selectDiaryFileList", paramMap);	
+	}
+	
+	
+	/** (앨범)해당 파일의 폴더목록 조회
+	 * @param paramMap
+	 * @return
+	 */
+	public List<File> selectAlbumFileList(Map<String, Object> paramMap) {
+		
+		return sqlSession.selectList("ManageMapper.selectAlbumFileList", paramMap);	
+	}
+
+	/** (비디오)해당 파일의 폴더목록 조회
+	 * @param paramMap
+	 * @return
+	 */
+	public List<File> selectVideoFileList(Map<String, Object> paramMap) {
+
+		return sqlSession.selectList("ManageMapper.selectVideoFileList", paramMap);	
+	}
+
 
 
 

@@ -12,6 +12,7 @@ import com.team.cubespace.common.Util;
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.manage.model.dao.ManageDAO;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
+import com.team.cubespace.manage.model.vo.File;
 
 @Service
 public class ManageServiceImpl implements ManageService{
@@ -255,6 +256,27 @@ public class ManageServiceImpl implements ManageService{
 		}
 		
 		return result;
+	}
+
+	/**
+	 * 해당 파일의 폴더목록 조회
+	 */
+	@Override
+	public List<File> selectFileList(Map<String, Object> paramMap) {
+		
+		String categoryNo = (String)paramMap.get("categoryNo");
+		
+		if(categoryNo.equals("1")) {
+			return dao.selectDiaryFileList(paramMap);
+		}
+		if(categoryNo.equals("2")) {
+			return dao.selectAlbumFileList(paramMap);
+		}
+		if(categoryNo.equals("3")) {
+			return dao.selectVideoFileList(paramMap);
+		}
+		
+		return null;
 	}
 
 

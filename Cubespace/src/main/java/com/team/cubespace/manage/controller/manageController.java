@@ -23,11 +23,12 @@ import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.login.model.service.LoginService;
 import com.team.cubespace.manage.model.service.ManageService;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
+import com.team.cubespace.manage.model.vo.File;
 import com.team.cubespace.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/manage")
-@SessionAttributes({ "folderList", "fontList" /* , "friendList", "fontList" */})
+@SessionAttributes({ "folderList", "fontList", "fileList" /* , "friendList", "fontList" */})
 public class manageController {
 	
 	@Autowired
@@ -183,9 +184,25 @@ public class manageController {
 		return service.deleteFolder(paramMap);
 	}
 	
-//	@GetMapping("/menu/selectFileList")
-//	@ResponseBody
-//	public int selectFileList
+	/** 해당 파일의 폴더목록 조회
+	 * @param paramMap
+	 * @return
+	 */
+	@GetMapping("/menu/selectFileList")
+	@ResponseBody
+	public int selectFileList(@RequestParam Map<String, Object> paramMap,
+			Model model) {
+		
+		// paramMap : folderNo, memberNo, categoryNo(1/2/3)
+		List<File> fileList = service.selectFileList(paramMap);
+		model.addAttribute("fileList", fileList);
+		
+		if(fileList != null) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
 	
 //	친구(깐부) 관련-------------------------------------------------------------------------------
 

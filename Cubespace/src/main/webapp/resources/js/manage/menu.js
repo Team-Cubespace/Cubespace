@@ -384,22 +384,25 @@ for(let folderImage of folderImageList){
 
         // 폴더 번호
         const folderNo = e.target.parentElement.getAttribute("id");
+        // const folderName = e.target.parentElement.firstElementChild.nextElementSibling.value;
 
         // 카테고리 이름(DIARY, ALBUM, VIDEO)
         const temp = e.target.parentElement.parentElement.parentElement;
-        let categoryName = "";
-        if(temp.classList.contains("diary")){categoryName = "DIARY";}
-        if(temp.classList.contains("album")){categoryName = "ALBUM";}
-        if(temp.classList.contains("video")){categoryName = "VIDEO";}
+        let categoryNo = 0;
+        if(temp.classList.contains("diary")){categoryNo = 1;}
+        if(temp.classList.contains("album")){categoryNo = 2;}
+        if(temp.classList.contains("video")){categoryNo = 3;}
+        console.log(categoryNo);
 
 
         $.ajax({
             url : "/manage/menu/selectFileList",
             type : "get",
-            data : {"folderNo" : folderNo, "memberNo" : memberNo, "categoryName" : categoryName},
+            data : {"folderNo" : folderNo, "memberNo" : memberNo, "categoryNo" : categoryNo},
             success : result => {
                 if(result > 0){
-                    window.href = window.href;
+
+                    location.href = location.href;
                 } else {
                     console.log("폴더 내 글목록 조회 실패");
                 }
@@ -420,7 +423,7 @@ let toggleFlag = true;
 for(let dropDownBtn of dropDownBtnList){
     dropDownBtn.addEventListener("click", e => {
 
-        // console.log(e.target);
+        const fileNo = e.target.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.getAttribute("id");
 
         const dropdown = e.target.parentElement.lastElementChild;
         if(toggleFlag){
@@ -428,24 +431,30 @@ for(let dropDownBtn of dropDownBtnList){
             dropdown.style.border = "1px solid black";
             toggleFlag = false;
 
-            console.log(dropdown);
 
+            var openList = dropdown.childNodes;
+            for(let i = 1; i < openList.length; i +=2){ // 전체공개, 깐부공개, 비공개
 
-            for(let item of dropdown){
-                item.addEventListener("click", e => {
-                    console.log(item);
+                let openFlag = 0;
+                if(openList[i].innerText == '전체공개'){
+                    openFlag = 1;
+                }
+                if(openList[i].innerText == '깐부공개'){
+                    openFlag = 2;
+                }
+                if(openList[i].innerText == '비공개'){
+                    openFlag = 3;
+                }
+
+                openList[i].addEventListener("click", e=>{
+                    $.ajax({
+                        url: "/manage/menu/updateOpenFlag",
+                        type : "get",
+                        data : {"memberNo" : memberNo, "fileNo" : fileNo}
+                    })
                 })
             }
 
-            // const allOpen = e.target.parentElement.lastElementChild.firstElementChild.innerText; // 전체공개
-            // const friendOpen = e.target.parentElement.lastElementChild.firstElementChild.nextElementSibling.innerText; // 깐부공개
-            // const noOpen = e.target.parentElement.lastElementChild.firstElementChild.nextElementSibling.nextElementSibling.innerText; // 비공개
-
-            // 전체공개
-            // allOpen.addEventListener("click", e=> {
-
-            //     $.ajax({})
-            // })
             
         }else{
             dropdown.style.height = "0px";

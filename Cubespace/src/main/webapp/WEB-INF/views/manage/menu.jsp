@@ -524,26 +524,40 @@
                             <div class="menuRightArea">
                                 <div class="menuRightTitle">
                                     <p>폴더 내 게시글 조회</p>
-                                    <p>--------------------------------------------</p>
+                                    <p>-----------------------------------------</p>
                                 </div>
-                            <%-- <c:if test="${not empty folderBoardList}"> --%>
-                                <%-- <c:forEach var="board" items="${folderBoardList}"> --%>
-                                
+                            <c:if test="${not empty fileList}"> 
                                 <div class="menuRightContent">
                                     <div class="folderNameArea">
                                         <img src="/resources/images/common/folder.png" class="folderImg">
-                                        <p class="folderName">나의 다이어리(3)</p>
+                                        <p class="folderName" id="folderName">${fileList[0].folderName}(${fn:length(fileList)})</p>
                                     </div>
                                     <div class="fileList">
+                                    <c:forEach var="file" items="${fileList}">
                                         <div class="myFile">
                                             <div class="myFileNameArea">
                                                 <i class="fa-solid fa-file"></i>
-                                                <p class="fileName">글이름1</p>
+                                                <c:if test="${fn:length(file.fileTitle) > 13}">
+                                                    <p class="fileName" id="${file.fileNo}">${fn:substring(file.fileTitle, 0,13)}...</p>
+                                                </c:if>
+                                                <c:if test="${fn:length(file.fileTitle) <= 13}">
+                                                    <p class="fileName" id="${file.fileNo}">${file.fileTitle}</p>
+                                                </c:if>
                                             </div>
                                             <div class="fileUpdateBtnArea">
                                                 <span class="whiteBtn">삭제</span>
                                                 <div  class="dropdown-btn">
-                                                    <span class="whiteBtn dropdown-btn-icon">공개</span>
+                                                    <c:choose>
+                                                        <c:when test="${file.openFlag == 1}">
+                                                            <span class=" dropdown-btn-icon openStatus">전체공개</span>
+                                                        </c:when>
+                                                        <c:when test="${file.openFlag == 2}">
+                                                            <span class=" dropdown-btn-icon openStatus">깐부공개</span>
+                                                        </c:when>
+                                                        <c:when test="${file.openFlag == 3}">
+                                                            <span class=" dropdown-btn-icon openStatus">비공개</span>
+                                                        </c:when>
+                                                    </c:choose>
                                                     <%-- dropdown --%>
                                                     <div class="dropdown">
                                                         <div>전체공개</div>
@@ -553,48 +567,11 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="myFile">
-                                            <div class="myFileNameArea">
-                                                <i class="fa-solid fa-file"></i>
-                                                <p class="fileName">글이름1</p>
-                                            </div>
-                                            <div class="fileUpdateBtnArea">
-                                                <span class="whiteBtn">삭제</span>
-                                                <div  class="dropdown-btn">
-                                                    <span class="whiteBtn dropdown-btn-icon">공개</span>
-                                                    <%-- dropdown --%>
-                                                    <div class="dropdown">
-                                                        <div>전체공개</div>
-                                                        <div>깐부공개</div>
-                                                        <div>비공개</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="myFile">
-                                            <div class="myFileNameArea">
-                                                <i class="fa-solid fa-file"></i>
-                                                <p class="fileName">글이름1</p>
-                                            </div>
-                                            <div class="fileUpdateBtnArea">
-                                                <span class="whiteBtn">삭제</span>
-                                                <div  class="dropdown-btn">
-                                                    <span class="whiteBtn dropdown-btn-icon">공개</span>
-                                                    <%-- dropdown --%>
-                                                    <div class="dropdown">
-                                                        <div>전체공개</div>
-                                                        <div>깐부공개</div>
-                                                        <div>비공개</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    </c:forEach>    
                                     </div>
                                 </div>
-                                <%-- </c:forEach> --%>
-                            <%-- </c:if> --%>
+                            </c:if>
+                            <c:if test="${empty fileList}"></c:if>
                             </div> 
                         </div>
                         <div class="menuSaveArea">

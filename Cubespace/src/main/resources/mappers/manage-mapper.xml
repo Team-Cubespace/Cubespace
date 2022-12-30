@@ -37,6 +37,15 @@
  	 </resultMap>
  	 
  	 
+	<resultMap type="File" id="file_rm">
+   		<id property="fileNo" column="FILE_NO"/>
+   		<result property="fileTitle" column="FILE_TITLE"></result>
+   		<result property="openFlag" column="OPEN_FL"></result>
+   		<result property="folderNo" column="FOLDER_NO"></result>
+   		<result property="folderName" column="FOLDER_NAME"></result>
+ 	 </resultMap>
+ 	 
+ 	 
  	 
  	 
  <!-- 폴더 ====================================================-->
@@ -144,6 +153,36 @@
 		WHERE MEMBER_NO = #{memberNo}
 		AND FOLDER_NO = #{folderNo}
 	</update>
+	
+	
+	
+	<!-- 해당 파일의 폴더목록 조회(DIARY) -->
+	<select id="selectDiaryFileList" resultMap="file_rm">
+		SELECT DIARY_NO FILE_NO, D_TITLE FILE_TITLE, D_OPEN_FL OPEN_FL, 
+		FOLDER_NO, FOLDER_NAME
+		FROM DIARY
+		JOIN FOLDER USING(FOLDER_NO)
+		WHERE FOLDER_NO = #{folderNo}
+	</select>
+	
+	<!-- 해당 파일의 폴더목록 조회(ALBUM) -->
+	<select id="selectAlbumFileList" resultMap="file_rm">
+		SELECT ALBUM_NO FILE_NO, A_TITLE FILE_TITLE, A_OPEN_FL OPEN_FL, 
+		FOLDER_NO, FOLDER_NAME
+		FROM ALBUM 
+		JOIN FOLDER USING(FOLDER_NO)
+		WHERE FOLDER_NO = #{folderNo}
+	</select>
+	
+	
+	<!-- 해당 파일의 폴더목록 조회(VIDEO) -->
+	<select id="selectVideoFileList" resultMap="file_rm">
+		SELECT VIDEO_NO FILE_NO, V_TITLE FILE_TITLE, V_OPEN_FL OPEN_FL, 
+		FOLDER_NO, FOLDER_NAME
+		FROM VIDEO
+		JOIN FOLDER USING(FOLDER_NO)
+		WHERE FOLDER_NO = #{folderNo}
+	</select>
 	
  <!-- 깐부 ====================================================-->
 

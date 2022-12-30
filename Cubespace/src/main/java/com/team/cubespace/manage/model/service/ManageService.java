@@ -92,7 +92,7 @@ public interface ManageService {
 	 * @return result
 	 * @throws Exception 
 	 */
-	int updateAllFolderOrder(Map<String, Object> paramMap) throws Exception;
+	int updateFolder(Map<String, Object> paramMap) throws Exception;
 
 
 

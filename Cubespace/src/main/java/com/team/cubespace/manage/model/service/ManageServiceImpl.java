@@ -180,7 +180,7 @@ public class ManageServiceImpl implements ManageService{
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public int updateAllFolderOrder(Map<String, Object> paramMap) throws Exception {
+	public int updateFolder(Map<String, Object> paramMap) throws Exception {
 		
 		String diaryFolderOrder = (String)paramMap.get("diaryFolderOrder");
 		String albumFolderOrder = (String)paramMap.get("albumFolderOrder");
@@ -193,13 +193,13 @@ public class ManageServiceImpl implements ManageService{
 		int result = 1;
 		
 		
-		for(int i = 0; i < diaryFolderOrderList.size()-1; i++) {
+		for(int i = 1; i <= diaryFolderOrderList.size()-1; i++) {
 			// memberNo, folderNo, folderOrder(folder객체)
 			
 			Folder folder = new Folder();
 			// memberNo
-			folder.setMemberNo((Integer)paramMap.get("memberNo"));
-			int folderNo = Integer.parseInt(diaryFolderOrderList.get(i));
+			folder.setMemberNo(Integer.parseInt((String)paramMap.get("memberNo")));
+			int folderNo = Integer.parseInt(diaryFolderOrderList.get(i-1));
 			
 			// folderName
 			String folderName = (String) paramMap.get(Integer.toString(folderNo));
@@ -209,16 +209,16 @@ public class ManageServiceImpl implements ManageService{
 			folder.setFolderNo(folderNo); // folderNo
 			folder.setFolderOrder(i); // folderOrder
 			folder.setBoardTypeNo(1); // boardTypeNo
-			result *= dao.updateAllFolderOrder(folder);
+			result *= dao.updateFolder(folder);
 		}
 		
 		
-		for(int i = 0; i < albumFolderOrderList.size()-1; i++) {
+		for(int i = 1; i <= albumFolderOrderList.size()-1; i++) {
 			
 			Folder folder = new Folder();
 			// memberNo
-			folder.setMemberNo((Integer)paramMap.get("memberNo"));
-			int folderNo = Integer.parseInt(albumFolderOrderList.get(i));
+			folder.setMemberNo(Integer.parseInt((String)paramMap.get("memberNo")));
+			int folderNo = Integer.parseInt(albumFolderOrderList.get(i-1));
 			
 			// folderName
 			String folderName = (String) paramMap.get(Integer.toString(folderNo));
@@ -228,16 +228,16 @@ public class ManageServiceImpl implements ManageService{
 			folder.setFolderNo(folderNo); // folderNo
 			folder.setFolderOrder(i); // folderOrder
 			folder.setBoardTypeNo(2); // boardTypeNo
-			result *= dao.updateAllFolderOrder(folder);
+			result *= dao.updateFolder(folder);
 		}
 		
 		
-		for(int i = 0; i < videoFolderOrderList.size()-1; i++) {
+		for(int i = 1; i <= videoFolderOrderList.size()-1; i++) {
 			
 			Folder folder = new Folder();
 			// memberNo
-			folder.setMemberNo((Integer)paramMap.get("memberNo"));
-			int folderNo = Integer.parseInt(videoFolderOrderList.get(i));
+			folder.setMemberNo(Integer.parseInt((String)paramMap.get("memberNo")));
+			int folderNo = Integer.parseInt(videoFolderOrderList.get(i-1));
 			
 			// folderName
 			String folderName = (String) paramMap.get(Integer.toString(folderNo));
@@ -247,7 +247,7 @@ public class ManageServiceImpl implements ManageService{
 			folder.setFolderNo(folderNo); // folderNo
 			folder.setFolderOrder(i); // folderOrder
 			folder.setBoardTypeNo(3); // boardTypeNo
-			result *= dao.updateAllFolderOrder(folder);
+			result *= dao.updateFolder(folder);
 		}
 		
 		if(result == 0) { // 하나라도 업데이트가 되지 않으면

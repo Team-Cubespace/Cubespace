@@ -146,13 +146,13 @@ public class ManageDAO {
 
 
 
-	/** 폴더 순서 변경
+	/** 폴더 순서, 이름 변경
 	 * @param folder
 	 * @return
 	 */
-	public int updateAllFolderOrder(Folder folder) {
+	public int updateFolder(Folder folder) {
 		
-		return sqlSession.update("ManageMapper.updateAllFolderOrder", folder);
+		return sqlSession.update("ManageMapper.updateFolder", folder);
 	}
 
 

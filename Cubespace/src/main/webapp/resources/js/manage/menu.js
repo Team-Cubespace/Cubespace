@@ -230,7 +230,19 @@ for (let plusBtn of plusBtnList) {
         // <div class="diary" style="order:${categoryOrder.diary}"> 등등..
 
         // 해당 카테고리 폴더의 수
-        const subCategoryLength = document.querySelectorAll(".diary  .subCategory").length;
+        let subCategoryLength = 0;
+        if(category.classList.contains("diary")){
+            subCategoryLength = document.querySelectorAll(".diary  .subCategory").length;
+        }
+        if(category.classList.contains("album")){
+            subCategoryLength = document.querySelectorAll(".album  .subCategory").length;
+        }
+        if(category.classList.contains("video")){
+            subCategoryLength = document.querySelectorAll(".video  .subCategory").length;
+        }
+
+
+
 
         // 해당 카테고리의 마지막 폴더
         const lastSubCath = category.firstElementChild.nextElementSibling.lastElementChild;
@@ -255,6 +267,7 @@ for (let plusBtn of plusBtnList) {
         const div = document.createElement("div");
         div.classList.add("subCategory");
         div.setAttribute("name", Number(subCategoryLength) + 1); // ajax에 사용
+        console.log(subCategoryLength);
 
         div.append(img, input, i);
         lastSubCath.after(div);
@@ -271,9 +284,9 @@ for (let plusBtn of plusBtnList) {
             type: "get",
             success: result => {
                 if (result > 0) { 
-                    console.log("폴더 삽입 성공");
+                    alert("폴더가 새로 추가되었습니다");
                     input.setAttribute("name", result);
-                    div.setAttribute("name", result);
+                    div.setAttribute("id", result);
                 }
                 else { console.log("폴더 삽입 실패"); }
             },
@@ -331,6 +344,8 @@ for (let minusBtn of minusBtnList) {
             return;
         }
 
+        
+
 
         // 4번째 폴더를 삭제했으면 그 뒤 폴더들의 순서도 하나씩 밀기
         // 전체 폴더가 6개고, 4번째를 삭제했으면 
@@ -345,7 +360,7 @@ for (let minusBtn of minusBtnList) {
             success : result => {
                 if(result > 0){
                     alert("폴더가 삭제되었습니다");
-                    location.href = location.href;
+                    e.target.parentElement.remove();
                 } else{
                     console.log("폴더 삭제 실패");
                 }

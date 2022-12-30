@@ -80,7 +80,6 @@
                                 <div class="backgroundExplain">
                                     <p> 내 미니홈피 메뉴를 구성할수 있으며 최소 1개의 메뉴가 존재해야 합니다</p>
                                 </div>
-                                ${folderList}
                             </div>
                             <div class="fontArea">
                                 <div class="fontHeader menuHeader">
@@ -190,7 +189,7 @@
                                             <c:if test="${folder.folderOrder == 1}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20">
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20" disabled>
                                                 </div>
                                             </c:if>
                                             <c:if test="${folder.folderOrder != 1}">
@@ -274,7 +273,7 @@
                                             <c:if test="${folder.folderOrder == 1}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20">
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20" disabled>
                                                 </div>
                                             </c:if>
                                             <c:if test="${folder.folderOrder != 1}">
@@ -358,7 +357,7 @@
                                             <c:if test="${folder.folderOrder == 1}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20">
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20" disabled>
                                                 </div>
                                             </c:if>
                                             <c:if test="${folder.folderOrder != 1}">
@@ -442,7 +441,7 @@
                                             <c:if test="${folder.folderOrder == 1}">
                                                 <div class="subCategory" name="${folder.folderOrder}" id="${folder.folderNo}">
                                                     <img src="/resources/images/common/folder.png" class="subCategoryImg">
-                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20">
+                                                    <input class="folderTitle" value='${folder.folderName}'  name="${folder.folderNo}"  maxlength="20" disabled>
                                                 </div>
                                             </c:if>
                                             <c:if test="${folder.folderOrder != 1}">
@@ -547,11 +546,18 @@
                         <input type="hidden" name="videoFolderOrder" id="videoFolderOrder">
                     </form>
 
-
-                    
-
                 </div>
             </div>
+
+            <c:if test="${!empty message}">
+                <script>
+                    alert("${message}")
+                </script>
+                <c:remove var="message"></c:remove>
+                <script>
+                    window.parent.location.reload(); 
+                </script>
+            </c:if>
         </section>
     </div>
 </body>

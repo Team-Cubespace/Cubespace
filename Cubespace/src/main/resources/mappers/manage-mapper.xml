@@ -136,10 +136,11 @@
 
 
 	
-	<!-- 전체 폴더 순서 변경 -->
-	<update id="updateAllFolderOrder">
+	<!-- 전체 폴더 순서, 이름 변경 -->
+	<update id="updateFolder">
 		UPDATE FOLDER SET
-		FOLDER_ORDER = #{folderOrder}
+		FOLDER_ORDER = #{folderOrder},
+		FOLDER_NAME = #{folderName}
 		WHERE MEMBER_NO = #{memberNo}
 		AND FOLDER_NO = #{folderNo}
 		AND BOARD_TYPE_NO = #{boardTypeNo}

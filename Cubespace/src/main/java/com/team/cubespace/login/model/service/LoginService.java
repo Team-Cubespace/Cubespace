@@ -88,4 +88,6 @@ public interface LoginService {
 	 */
 	int deleteMemberBlock();
 
+
+
 }

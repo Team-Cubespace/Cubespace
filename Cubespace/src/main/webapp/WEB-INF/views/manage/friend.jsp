@@ -24,7 +24,11 @@
         .frame-color {
             background-color : ${minihome.frameColor};
         }
+        #searchBtn{
+            cursor: default;
+        }
     </style>
+    <jsp:include page="/WEB-INF/views/include/font.jsp"/>
 </head>
 <body>
     <div class="content-area frame-color">
@@ -39,9 +43,9 @@
                 <header>
                     <span class="rightTitle">깐부 관리</span>
                     <form class="searchArea" id="searchArea">
-                        <button id="allFriend" class="whiteBtn">모든 깐부</button>
-                        <input type="text" id="searchInput" name="searchInput" class="headerSearch" placeholder="깐부 닉네임 검색">
-                        <button class="fa-solid fa-magnifying-glass" id="searchBtn"></button>
+                        <i id="allFriend" class="whiteBtn">모든 깐부</i>
+                        <input type="text" id="searchInput" name="searchInput" class="headerSearch" placeholder="깐부 닉네임 검색" value="${param.searchInput}">
+                        <i class="fa-solid fa-magnifying-glass" id="searchBtn"></i>
                     </form>
                 </header>
                 <div class="FriendArea">
@@ -59,7 +63,12 @@
                             </div>
                             <div class="friendBtn">
                                 <span class="deleteFriend"><i class="fa-solid fa-minus"></i> 깐부끊기</span>
-                                <a href="" id="${friend.friendNo}" class="minihomeLink"><img src="/resources/images/common/smallCube.png" id="minihomeImg"> 미니홈피</a>
+                                <a href="/minihome/${friend.friendNo}"  id="${friend.friendNo}" class="minihomeLink" onclick="return openMinihome(this.href)">
+                                    <img src="/resources/images/common/smallCube.png" id="minihomeImg">
+                                     미니홈피
+                                </a>
+                                <%-- <a href="/minihome/${loginMember.memberNo}" id="homeBtn" onclick="return openMinihome(this.href)"><i class="fa-solid fa-house"></i>&nbsp;My Space</a> --%>
+                                <%-- target="_blank" --%>
                             </div>
                         </div>
                     </c:forEach>

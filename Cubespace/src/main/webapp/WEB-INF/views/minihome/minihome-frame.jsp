@@ -28,6 +28,9 @@
             color: ${minihome.frameMenuColor};
         }
     </style>
+
+<jsp:include page="/WEB-INF/views/include/font.jsp"/>
+
 </head>
 <body>
     <div class="minihome">
@@ -94,12 +97,20 @@
                 </iframe>
                 <ul class="minihome-menu frame-menu-color">
                     <li><a href="">홈</a></li>
-                    <li style="order:${minihome.categoryOrder.diary}"><a href="">다이어리</a></li>
-                    <li style="order:${minihome.categoryOrder.album}"><a href="/albumList/2" target="minihomeMenu">사진첩</a></li>
+                    <c:if test="${minihome.categoryOrder.diary != -1}">
+                        <li style="order:${minihome.categoryOrder.diary}"><a href="">다이어리</a></li>
+                    </c:if>
+                    <c:if test="${minihome.categoryOrder.album != -1}">
+                        <li style="order:${minihome.categoryOrder.album}"><a href="/albumList/2" target="minihomeMenu">사진첩</a></li>
+                    </c:if>
+                    <c:if test="${minihome.categoryOrder.video != -1}">
+                        <li style="order:${minihome.categoryOrder.video}"><a href="/videoList/3" target="minihomeMenu">동영상</a></li>
+                    </c:if>
+                    <c:if test="${minihome.categoryOrder.guestBook != -1}">
+                        <li style="order:${minihome.categoryOrder.guestBook}"><a href="">방명록</a></li>
+                    </c:if>
 
-                    <li style="order:${minihome.categoryOrder.video}"><a href="/videoList/3" target="minihomeMenu">동영상</a></li>
-                    <li style="order:${minihome.categoryOrder.guestBook}"><a href="">방명록</a></li>
-                    <c:if test="${minihome.memberNo eq loginMember.memberNo}">
+                    <c:if test="${minihome.memberNo == loginMember.memberNo}">
                         <li><a href="/manage/font" target="minihomeMenu">관리</a></li>
                     </c:if>
                 </ul>

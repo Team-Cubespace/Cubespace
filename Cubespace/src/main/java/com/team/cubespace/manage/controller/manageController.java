@@ -1,5 +1,6 @@
 package com.team.cubespace.manage.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,27 +8,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.cubespace.folder.model.vo.Folder;
+import com.team.cubespace.login.model.service.LoginService;
 import com.team.cubespace.manage.model.service.ManageService;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
 import com.team.cubespace.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/manage")
-@SessionAttributes({"folderList", "friendList"})
+@SessionAttributes({ "folderList", "fontList" /* , "friendList", "fontList" */})
 public class manageController {
 	
 	@Autowired
 	private ManageService service;
 	
+	
 	@GetMapping("/font")
-	public String changeFont() {
+	public String changeFont(@SessionAttribute("loginMember") Member inputMember, 
+			@RequestParam Map<String, Object> paramMap, /*searchInput*/
+			Model model) {
+		
+		paramMap.put("memberNo", inputMember.getMemberNo());
+		if(paramMap.containsKey("searchInput")) {
+			model.addAttribute("searchInput", paramMap.get("searchInput"));
+		}
+		
+		List<Map<String, Object>> fontList = service.getFontList(paramMap);
+		model.addAttribute("fontList", fontList);
+		
 		return "manage/font";
 	}
 	@GetMapping("/music")
@@ -47,11 +63,11 @@ public class manageController {
 			Model model) {
 		
 		paramMap.put("memberNo", inputMember.getMemberNo());
-		List<Map<String, String>> friendList = service.getFriendList(paramMap);
-		model.addAttribute(friendList);
 		if(paramMap.containsKey("searchInput")) {
 			model.addAttribute("searchInput", paramMap.get("searchInput"));
 		}
+		List<Map<String, String>> friendList = service.getFriendList(paramMap);
+		model.addAttribute(friendList);
 		
 		return "manage/friend";
 	}
@@ -83,14 +99,30 @@ public class manageController {
 		return "manage/background";
 	}
 	
-	/** 카테고리 순서 변경
+	/** 카테고리 순서 변경, 폴더순서 변경, 폴더이름 변경
 	 * @param categoryOrder
 	 * @return
+	 * @throws Exception 
 	 */
-	@GetMapping("/menu/changeCategory")
-	@ResponseBody
-	public int changeMenu(CategoryOrder categoryOrder) {
-		return service.changeCategory(categoryOrder.getMemberNo());
+	@PostMapping("/menu/changeCategory")
+	public String changeMenu(CategoryOrder categoryOrder,
+			@RequestParam Map<String, Object> paramMap,
+			RedirectAttributes ra) throws Exception {
+		
+		
+		int categoryOrderResult= service.changeCategory(categoryOrder); // 카테고리 순서 변경
+		int updateFolderResult = service.updateFolder(paramMap); // 폴더 순서 변경
+		
+		String message = null;
+		
+		if(categoryOrderResult * updateFolderResult > 0) {
+			message = "카테고리, 폴더 설정 변경 성공";
+		} else {
+			message = "카테고리, 폴더 설정 변경 실패";
+		}
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:/manage/menu";
 	}
 	
 	/** 카테고리 종류 원래대로
@@ -102,7 +134,44 @@ public class manageController {
 		return service.categorySelectCancel(memberNo);
 	}
 
+	/** 카테고리 중 보여질것 선택
+	 * @param useCategory
+	 * @return
+	 */
+	@GetMapping("/menu/categorySelect")
+	@ResponseBody
+	public int categorySelect(@RequestParam Map<String, Object> paramMap) {
+		
+		// paramMap : diary, album, video, guestBook, memberNo
+		return service.categorySelect(paramMap);
+	}
 	
+	/** 카테고리에 새 폴더 삽입
+	 * @param paramMap
+	 * @return
+	 */
+	@GetMapping("/menu/addFolder")
+	@ResponseBody
+	public int addFolder(@RequestParam Map<String, Object> paramMap) {
+		
+		// paramMap : boardTypeNo, folderName, memberNo
+		return service.addFolder(paramMap);
+	}
+	
+	/** 카테고리에서 폴더 삭제
+	 * @param folderList
+	 * @param paramMap
+	 * @return
+	 * @throws Exception 
+	 */
+	@GetMapping("/menu/deleteFolder")
+	@ResponseBody
+	public int deleteFolder(@SessionAttribute("folderList") List<Folder> folderList,
+			@RequestParam Map<String, Object> paramMap) throws Exception {
+		
+		// paramMap : boardTypeNo, folderOrder, folderNo, subCategoryLength, memberNo
+		return service.deleteFolder(paramMap);
+	}
 	
 //	친구(깐부) 관련-------------------------------------------------------------------------------
 
@@ -115,4 +184,29 @@ public class manageController {
 	public int deleteFriend(@RequestParam Map<String, Object> paramMap) {
 		return service.deleteFriend(paramMap);
 	}
+	
+	
+	
+//	폰트 관련-------------------------------------------------------------------------------
+	
+	/** 새 폰트 적용하기
+	 * @param paramMap
+	 * @return
+	 */
+	@GetMapping("/font/useFont")
+	@ResponseBody
+	public int useFont(@RequestParam Map<String, Object> paramMap,
+			@SessionAttribute("loginMember") Member loginMember,
+			Model model) {
+		int result =  service.useFont(paramMap);
+		if(result > 0) {
+			loginMember.setOwnFontNo(Integer.parseInt((String)paramMap.get("fontNo")));
+			model.addAttribute("loginMember", loginMember);
+		}
+		
+		
+		
+		return result;
+	}
+
 }

@@ -330,5 +330,5 @@ document.getElementById("signUpBtn").addEventListener("click", () => {
 
 /* 상품등록 페이지 이동 */
 document.getElementById("goodsAddBtn").addEventListener("click", e=>{
-    location.href = "/admin/goods";
+    location.href = "/admin/goods/font";
 })

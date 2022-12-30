@@ -7,11 +7,14 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CategoryOrder {
-
+public class Font {
+	
+	private int fontNo;
+	private String fontName;
+	private String fontPath;
+	private String fontCreater;
+	
 	private int memberNo;
-	private String diary;
-	private String album;
-	private String video;
-	private String guestBook;
+	private String memberNickname;
+
 }

@@ -1,10 +1,12 @@
 package com.team.cubespace.main.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -39,6 +41,19 @@ public class ShopController {
 		return new Gson().toJson(shopNewFontList); 
 	}
 	
+	
+	/** 상점 상품 추가(폰트,배경음악,소품)
+	 * @param paramMap
+	 * @return
+	 */
+	@GetMapping("/goodsAddButton")
+	@ResponseBody
+	public int goodsAddButton(@RequestParam Map<String, Object> paramMap) {
+		
+		int result = service.goodsAddButton(paramMap);
+		
+		return result;
+	}
 	
 	
 }

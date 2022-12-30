@@ -81,7 +81,7 @@
                             <div class="goods-producer">(주)KH_E조</div>
                             <div>
                                 <div class="goods-count">사용횟수 : 1,000,000</div>
-                                <div class="goods-btn"onclick="return openMinihome(폰트번호,this)>사용하기</div>
+                                <div class="goods-btn"onclick="goodsAdd(fontNo,shopCathNo,this)">사용하기</div>
                             </div>
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                         <div class="goods-producer">(주)KH_E조</div>
                         <div>
                             <div class="goods-count">사용횟수 : 1,000,000</div>
-                            <button class="goods-btn">사용하기</button>
+                            <div class="goods-btn"onclick="goodsAdd(fontNo,shopCathNo,this)">사용하기</div>
                         </div>
                     </div>
                 </div>
@@ -316,5 +316,6 @@
     </script>
     <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
     <script src="/resources/js/webmain/main-shopFont.js"></script>
+    <script src="/resources/js/webmain/shop-common.js"></script>
 </body>
 </html>

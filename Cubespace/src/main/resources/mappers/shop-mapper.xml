@@ -36,5 +36,11 @@
 		<![CDATA[WHERE ROWNUM <= 3]]>
 	</select>
    
+	<insert id="goodsAddButton">
+		INSERT INTO MEMBER_OWN_GOODS 
+		VALUES(SEQ_OWN_NO.NEXTVAL,#{loginMemberNo},#{shopCathNo},#{fontNo})
+	</insert>
+   
+   
    
 </mapper>

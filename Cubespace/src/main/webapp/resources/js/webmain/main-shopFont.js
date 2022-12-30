@@ -101,15 +101,14 @@ const rankSelect = () => {
                             /* 사용하기 or 보유중버튼 생성*/
                             const goods_btn =document.createElement("div")
                             if(newFont.fontNo==newFont.goodsNo){// 보유중
-                                goods_btn.classList.add("holding")
+                                goods_btn.classList.add("goods-holding")
                                 goods_btn.innerText="보유중"
                                 
                             }else{ // 사용가능
                                 goods_btn.classList.add("goods-btn")
                                 goods_btn.innerText="사용하기"
-                                goods_btn.setAttribute("onclick","return goodsAdd("+newFont.fontNo,shopCathNo+", this)");
+                                goods_btn.setAttribute("onclick","goodsAdd("+fontNo+","+shopCathNo+",this)");
                             }
-
                 shopRankLsit.append(goods);
                     goods.append(new_img,goods_example,goods_info);
                         goods_info.append(goods_title,goods_producer,goods_info_div);
@@ -133,7 +132,3 @@ shopRankBox.addEventListener("click", () => {
     newGoodsBox.classList.remove("select");
 })
 
-
-// 사용하기 클릭시
-// 폰트번호, 카테고리를 가져와서 비동기로 인설트
-// 버튼 변경

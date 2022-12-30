@@ -58,9 +58,9 @@
                     </div>
                 </div>
                 <div class="shop-rank-lsit">
-                    
+                    <%-- 최신폰트/인기랭킹 --%>
                     <div class="goods">
-                        <img class="rank-img" src="/resources/images/crown.png" alt="">
+                        <img class="new-img" src="/resources/images/common/shopNew2.png" alt="">
                         <div class="goods-example">우리들의 작은 공간 큐브스</div>
                         <div class="goods-info">
                             <div class="goods-title">테스트용 폰트이름</div>
@@ -71,6 +71,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="goods">
                         <img class="rank-img" src="/resources/images/crown.png" alt="">
                         <div class="goods-example">우리들의 작은 공간 큐브스</div>

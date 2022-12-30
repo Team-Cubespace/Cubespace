@@ -117,6 +117,15 @@ body *{
     left: -45px;
     width: 100px;
 }
+.new-img{
+    position: absolute;
+    transform: rotate(-8deg);
+    top: -35px;
+    left: -43px;
+    width: 112px;
+    height: 90px;
+}
+
 /* 랭크 or 최신상품 클릭시  */
 .select {
     color: var(--subColor);

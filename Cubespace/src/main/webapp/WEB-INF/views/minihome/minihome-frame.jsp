@@ -26,6 +26,15 @@
         }
     </style>
 
+    <script>
+        originalFrameColor = "${minihome.frameColor}";
+        originalFrameMenuColor = "${minihome.frameMenuColor}";
+        originalFrameFontColor = "${minihome.frameFontColor}";
+        originalBackgroundSkin = "${minihome.backgroundSkin}";
+    </script>
+
+
+
 <jsp:include page="/WEB-INF/views/include/font.jsp"/>
 
 </head>
@@ -89,7 +98,7 @@
             <section class="minihome-main">
 
                 <%-- <iframe src="/albumList/2" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
-                <iframe src="/manage/menu" frameborder="0" name="minihomeMenu" scrolling="no">
+                <iframe src="/manage/background" frameborder="0" name="minihomeMenu" scrolling="no">
 
                 </iframe>
                 <ul class="minihome-menu frame-menu-color">

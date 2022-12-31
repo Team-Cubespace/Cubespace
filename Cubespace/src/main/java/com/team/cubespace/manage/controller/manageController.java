@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.login.model.service.LoginService;
 import com.team.cubespace.manage.model.service.ManageService;
+import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
 import com.team.cubespace.manage.model.vo.File;
 import com.team.cubespace.member.model.vo.Member;
@@ -33,6 +36,10 @@ public class manageController {
 	
 	@Autowired
 	private ManageService service;
+	
+	// application scope에 배경색/프레임정보를 담기 위한 객체 생성
+	@Autowired
+	ServletContext application;
 	
 	
 	@GetMapping("/font")
@@ -100,7 +107,17 @@ public class manageController {
 		return "manage/menu";
 	}
 	@GetMapping("/background")
-	public String changeBackground() {
+	public String changeBackground(HttpServletRequest req) {
+		
+		// 모두가 공용으로 사용할 배경색 정보를 application scope에 올려놓음
+		Background backgroundColorInfo = new Background();
+		backgroundColorInfo.setBackgroundSkin("RGB(128,128,128)");
+		backgroundColorInfo.setFrameColor("#82C9E8");
+		backgroundColorInfo.setFrameMenuColor("#1A8DBF");
+		backgroundColorInfo.setFrameFontColor("WHITE");
+		
+		application.setAttribute("backgroundColorInfo", backgroundColorInfo);
+		
 		return "manage/background";
 	}
 	
@@ -283,4 +300,35 @@ public class manageController {
 		return result;
 	}
 
+	
+//	배경색/이미지 관련-------------------------------------------------------------------------------
+	
+	/** 배경색/이미지 초기화하기
+	 * @param loginMember
+	 * @return
+	 */
+	@GetMapping("/background/resetBGColor")
+	@ResponseBody
+	public int resetBGColor(@SessionAttribute("loginMember") Member loginMember) {
+		
+		Background backgroundInfo = (Background) application.getAttribute("backgroundColorInfo");
+		backgroundInfo.setMemberNo(loginMember.getMemberNo());
+		
+		return service.resetBGColor(backgroundInfo);
+	}
+	
+	/** 프레임 초기화하기
+	 * @param loginMember
+	 * @return
+	 */
+	@GetMapping("/background/resetFrameColor")
+	@ResponseBody
+	public int resetFrameColor(@SessionAttribute("loginMember") Member loginMember) {
+		
+		Background backgroundInfo = (Background) application.getAttribute("backgroundColorInfo");
+		backgroundInfo.setMemberNo(loginMember.getMemberNo());
+		
+		return service.resetFrameColor(backgroundInfo);
+	}
+	
 }

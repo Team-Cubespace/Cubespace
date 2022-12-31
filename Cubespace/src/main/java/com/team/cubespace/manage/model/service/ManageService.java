@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.team.cubespace.folder.model.vo.Folder;
+import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
 import com.team.cubespace.manage.model.vo.File;
 
@@ -112,6 +113,19 @@ public interface ManageService {
 	 * @return
 	 */
 	int updateOpenFlag(File file);
+
+	
+	/** 배경색/이미지 초기화하기
+	 * @param backgroundInfo
+	 * @return
+	 */
+	int resetBGColor(Background backgroundInfo);
+
+	/** 프레임 초기화하기
+	 * @param backgroundInfo
+	 * @return
+	 */
+	int resetFrameColor(Background backgroundInfo);
 
 
 

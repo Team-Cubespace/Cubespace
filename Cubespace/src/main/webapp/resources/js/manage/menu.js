@@ -200,10 +200,6 @@ const orderCategory = () => {
 
 
 /* ------------------------------------------- */
-/* 폴더 추가 */
-
-
-/* ------------------------------------------- */
 /* 폴더 관리 */
 
 
@@ -459,8 +455,6 @@ let toggleFlag = true;
 for (let dropDownBtn of dropDownBtnList) {
     dropDownBtn.addEventListener("click", e => {
 
-        console.log(e.target);
-
         const fileNo = e.target.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.getAttribute("id");
         const categoryNo = e.target.parentElement.parentElement.firstElementChild.getAttribute("id");
 
@@ -571,11 +565,6 @@ for (let fileDelBtn of fileDelBtnList) {
 
                         // 1. 요소 삭제 2. 전체 폴더갯수에서 -1
                         e.target.parentElement.parentElement.remove();
-
-                        // 만약 폴더에 글이 하나도 없을 경우 리로드(폴더삭제를 가능하게 하기위해)
-                        // if(Number(fileCount) - 1 == 0) {
-                        //     location.href = location.href;
-                        // }
 
                         // folderNo으로 해당폴더를 찾아 fileCount를 1 감소시킴
                         const targetFolderNo = document.getElementsByClassName("folderName")[0].getAttribute("id");

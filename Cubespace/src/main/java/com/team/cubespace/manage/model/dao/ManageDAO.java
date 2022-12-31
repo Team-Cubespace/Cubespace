@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.team.cubespace.folder.model.vo.Folder;
+import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
 import com.team.cubespace.manage.model.vo.File;
 
@@ -236,6 +237,24 @@ public class ManageDAO {
 	public int updateVideoOpenFlag(File file) {
 		
 		return sqlSession.update("ManageMapper.updateVideoOpenFlag", file);	
+	}
+
+	/** 배경색/이미지 초기화하기
+	 * @param backgroundInfo
+	 * @return
+	 */
+	public int resetBGColor(Background backgroundInfo) {
+		
+		return sqlSession.update("ManageMapper.resetBGColor", backgroundInfo);	
+	}
+
+	/** 프레임 초기화하기
+	 * @param backgroundInfo
+	 * @return
+	 */
+	public int resetFrameColor(Background backgroundInfo) {
+		
+		return sqlSession.update("ManageMapper.resetFrameColor", backgroundInfo);	
 	}
 
 

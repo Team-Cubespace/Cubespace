@@ -99,7 +99,7 @@ header {
     padding: 5px;
     height: 30px;
     font-size: 13px;
-
+    font-style: normal;
 }
 
 .whiteBtn:hover {
@@ -381,8 +381,6 @@ header {
     height: 30px;
     cursor: pointer;
     /* border: 1px solid black; */
-    background-color: var(--subColor);
-    color: white;
     padding: 5px;
     border-radius: 3px;
 
@@ -392,10 +390,7 @@ header {
 
 }
 
-.changeColorTitle:hover {
-    transition-duration: 0.3s;
-    background-color: var(--mainColor);
-}
+
 
 #chooseBGColor {
     display: none;

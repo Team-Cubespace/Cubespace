@@ -1,13 +1,12 @@
 
 /* 깐부 끊기 */
-const deleteFriendBtnList = document.getElementsByClassName("fa-minus");
+const deleteFriendBtnList = document.getElementsByClassName("deleteFriend");
 
 for(let deleteFriendBtn of deleteFriendBtnList){
     deleteFriendBtn.addEventListener("click", e => {
 
-        console.log(deleteFriendBtn);
+        const friendNo = e.target.parentElement.lastElementChild.getAttribute("id");
 
-        const friendNo = e.target.parentElement.parentElement.lastElementChild.getAttribute("id");
         if(confirm("정말 깐부를 끊겠습니까?")){
             $.ajax({
                 url : "/manage/friend/deleteFriend",

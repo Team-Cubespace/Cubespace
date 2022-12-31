@@ -254,6 +254,7 @@
 			FROM friend 
 			JOIN MEMBER ON(ASKING_MEMBER_NO = MEMBER_NO)
 			WHERE ASKED_MEMBER_NO = #{memberNo} AND FRIEND_ACCEPT_FL = 1 AND MEMBER_NICKNAME LIKE '%${searchInput}%')
+		ORDER BY MEMBER_NICKNAME
 	</select>
 	
  	 <!-- 깐부끊기 -->
@@ -298,6 +299,22 @@
  	</select>
  	
  	
- 
+   <!-- 배경색/이미지 ====================================================-->
+ 	
+ 	<!-- 배경색/이미지 초기화하기 -->
+ 	<update id="resetBGColor">
+ 		UPDATE MINI_HOMEPAGE SET
+		BACKGROUND_SKIN = #{backgroundSkin}
+		WHERE MEMBER_NO = #{memberNo}
+ 	</update>
+  
+ 	<!-- 프레임 초기화하기 -->
+ 	<update id="resetFrameColor">
+ 		UPDATE MINI_HOMEPAGE SET
+		FRAME_COLOR = #{frameColor},
+		FRAME_MENU_COLOR =#{frameMenuColor},
+		FRAME_FONT_COLOR = #{frameFontColor}
+		WHERE MEMBER_NO = #{memberNo}
+ 	</update>
   
 </mapper>

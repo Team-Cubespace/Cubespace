@@ -217,6 +217,29 @@
 		AND MEMBER_NO = #{memberNo}
 	</update>
 	
+	<!-- 게시글 공개여부 설정(다이어리) -->
+	<update id="updateDiaryOpenFlag">
+		UPDATE DIARY SET D_OPEN_FL = #{openFlag}
+		WHERE MEMBER_NO = #{memberNo}
+		AND DIARY_NO = #{fileNo}
+	</update>
+	
+	<!-- 게시글 공개여부 설정(앨범) -->
+	<update id="updateAlbumOpenFlag">
+		UPDATE ALBUM SET
+		A_OPEN_FL = #{openFlag}
+		WHERE MEMBER_NO = #{memberNo}
+		AND ALBUM_NO = #{fileNo}
+	</update>
+	
+	<!-- 게시글 공개여부 설정(비디오) -->
+	<update id="updateVideoOpenFlag">
+		UPDATE VIDEO SET
+		V_OPEN_FL = #{openFlag}
+		WHERE MEMBER_NO = #{memberNo}
+		AND VIDEO_NO = #{fileNo}
+	</update>
+	
  <!-- 깐부 ====================================================-->
 
 	<!-- 깐부목록 조회 -->

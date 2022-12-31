@@ -298,6 +298,24 @@ public class ManageServiceImpl implements ManageService{
 		return 0;
 	}
 
+	/**
+	 * 게시글 공개여부 설정
+	 */
+	@Override
+	public int updateOpenFlag(File file) {
+
+		if(file.getCategoryNo() == 1) {
+			return dao.updateDiaryOpenFlag(file);
+		}
+		if(file.getCategoryNo() == 2) {
+			return dao.updateAlbumOpenFlag(file);
+		}
+		if(file.getCategoryNo() == 3) {
+			return dao.updateVideoOpenFlag(file);
+		}
+		return 0;
+	}
+
 
 
 }

@@ -107,6 +107,12 @@ public interface ManageService {
 	 */
 	int deleteFile(File file);
 
+	/** 게시글 공개여부 설정
+	 * @param file
+	 * @return
+	 */
+	int updateOpenFlag(File file);
+
 
 
 }

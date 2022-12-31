@@ -211,6 +211,33 @@ public class ManageDAO {
 		return sqlSession.update("ManageMapper.deleteVideoFile", file);	
 	}
 
+	/** 게시글 공개여부 설정(다이어리)
+	 * @param file
+	 * @return
+	 */
+	public int updateDiaryOpenFlag(File file) {
+		
+		return sqlSession.update("ManageMapper.updateDiaryOpenFlag", file);	
+	}
+
+	/** 게시글 공개여부 설정(앨범)
+	 * @param file
+	 * @return
+	 */
+	public int updateAlbumOpenFlag(File file) {
+		
+		return sqlSession.update("ManageMapper.updateAlbumOpenFlag", file);	
+	}
+
+	/** 게시글 공개여부 설정(비디오)
+	 * @param file
+	 * @return
+	 */
+	public int updateVideoOpenFlag(File file) {
+		
+		return sqlSession.update("ManageMapper.updateVideoOpenFlag", file);	
+	}
+
 
 
 

@@ -422,6 +422,11 @@ for (let folderImage of folderImageList) {
 /* 폴더내 게시글이 하나도 없을때 표시하는 요소 생성 */
 const emptyFolder = folderName => {
 
+    const menuRightContentList = document.getElementsByClassName("menuRightContent");
+    for(let menuRightContent of menuRightContentList){
+        menuRightContent.remove();
+    }
+
     const fileList = document.createElement("div");
     fileList.classList.add("fileList");
     fileList.innerText = "폴더 내 게시글이 없습니다";
@@ -443,7 +448,6 @@ const emptyFolder = folderName => {
     menuRightContent.append(folderNameArea, fileList);
 
     const menuRightArea = document.getElementsByClassName("menuRightArea")[0];
-    document.getElementsByClassName("menuRightContent")[0].remove();
     menuRightArea.append(menuRightContent);
 }
 
@@ -455,7 +459,10 @@ let toggleFlag = true;
 for (let dropDownBtn of dropDownBtnList) {
     dropDownBtn.addEventListener("click", e => {
 
+        console.log(e.target);
+
         const fileNo = e.target.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.getAttribute("id");
+        const categoryNo = e.target.parentElement.parentElement.firstElementChild.getAttribute("id");
 
         const dropdown = e.target.parentElement.lastElementChild;
         if (toggleFlag) {
@@ -478,11 +485,31 @@ for (let dropDownBtn of dropDownBtnList) {
                     openFlag = 3;
                 }
 
-                openList[i].addEventListener("click", e => {
+                openList[i].addEventListener("click", () => {
                     $.ajax({
                         url: "/manage/menu/updateOpenFlag",
                         type: "get",
-                        data: { "memberNo": memberNo, "fileNo": fileNo }
+                        data: { "categoryNo": categoryNo, "fileNo": fileNo, "openFlag" : openFlag},
+                        success : result => {
+                            if(result > 0) {
+
+                                alert("공개설정이 변경되었습니다");
+
+                                // openFlag(전체공개, 깐부공개, 비공개)에 따라 버튼 innerText 바꾸기
+                                if(openFlag == 1){
+                                    e.target.innerText = "전체공개"
+                                }
+                                if(openFlag == 2){
+                                    e.target.innerText = "깐부공개"
+                                }
+                                if(openFlag == 3){
+                                    e.target.innerText = "비공개"
+                                }
+                            } else {
+                                console.log("공개설정 변경 실패");
+                            }
+                        },
+                        error : e => {console.log("공개설정 변경 중 오류 발생");}
                     })
                 })
             }
@@ -577,4 +604,3 @@ for (let fileDelBtn of fileDelBtnList) {
 
 
 
-/*  */

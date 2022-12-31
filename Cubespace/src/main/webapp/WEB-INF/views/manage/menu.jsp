@@ -554,13 +554,13 @@
                                                 <div  class="dropdown-btn">
                                                     <c:choose>
                                                         <c:when test="${file.openFlag == 1}">
-                                                            <span class=" dropdown-btn-icon openStatus">전체공개</span>
+                                                            <span class=" dropdown-btn-icon openStatus allOpen">전체공개</span>
                                                         </c:when>
                                                         <c:when test="${file.openFlag == 2}">
-                                                            <span class=" dropdown-btn-icon openStatus">깐부공개</span>
+                                                            <span class=" dropdown-btn-icon openStatus friendOpen">깐부공개</span>
                                                         </c:when>
                                                         <c:when test="${file.openFlag == 3}">
-                                                            <span class=" dropdown-btn-icon openStatus">비공개</span>
+                                                            <span class=" dropdown-btn-icon openStatus noOpen">비공개</span>
                                                         </c:when>
                                                     </c:choose>
                                                     <%-- dropdown --%>
@@ -576,17 +576,11 @@
                                     </div>
                                 </div>
                             </c:if>
-                            <%-- <c:if test="${empty fileList}">
-                                <div class="menuRightContent">
-                                    <div class="folderNameArea">
-                                        <img src="/resources/images/common/folder.png" class="folderImg">
-                                        <p class="folderName"></p>
-                                    </div>
-                                    <div class="fileList">
-                                        폴더 내 게시글이 없습니다
-                                    </div>
-                                </div>
-                            </c:if> --%>
+                            <c:if test="${empty fileList}"> 
+                            <div class="menuRightContent">
+                                폴더 아이콘을 더블클릭하면 게시글을 조회할 수 있습니다
+                            </div>
+                            </c:if>
                             </div> 
                         </div>
                         <div class="menuSaveArea">

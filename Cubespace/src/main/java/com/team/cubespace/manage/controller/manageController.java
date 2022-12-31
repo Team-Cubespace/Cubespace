@@ -130,6 +130,7 @@ public class manageController {
 		
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
+//		out.print("<script>alert(" + message +");</script>");
 		out.print("<script>window.parent.location.reload();</script>");
 		out.flush();
 		
@@ -228,6 +229,22 @@ public class manageController {
 		model.addAttribute("fileList", fileList);
 		
 		return service.deleteFile(file);
+	}
+	
+	
+	/** 게시글 공개여부 설정
+	 * @param file
+	 * @param loginMember
+	 * @return
+	 */
+	@GetMapping("/menu/updateOpenFlag")
+	@ResponseBody
+	public int updateOpenFlag(File file,
+			@SessionAttribute("loginMember") Member loginMember) {
+		
+		// file : fileNo, memberNo, categoryNo, openFlag
+		file.setMemberNo(loginMember.getMemberNo());
+		return service.updateOpenFlag(file);
 	}
 	
 //	친구(깐부) 관련-------------------------------------------------------------------------------

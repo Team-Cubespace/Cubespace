@@ -173,22 +173,22 @@
  	<!--폴더 테이블에 값 삽입 -->
  	<insert id="insertFolder1">
  		INSERT INTO FOLDER VALUES(
-		SEQ_FOLDER_NO.NEXTVAL, 1, '나의 월간달력', 1, #{memberNo})
+		SEQ_FOLDER_NO.NEXTVAL, 1, '나의 월간달력', 1, #{memberNo}, DEFAULT)
  	</insert>
  	<!--폴더 테이블에 값 삽입 -->
  	<insert id="insertFolder2">
  		INSERT INTO FOLDER VALUES(
-		SEQ_FOLDER_NO.NEXTVAL, 1, '나의 다이어리', 2, #{memberNo})
+		SEQ_FOLDER_NO.NEXTVAL, 1, '나의 다이어리', 2, #{memberNo}, DEFAULT)
  	</insert>
  	<!--폴더 테이블에 값 삽입 -->
  	<insert id="insertFolder3">
  		INSERT INTO FOLDER VALUES(
-		SEQ_FOLDER_NO.NEXTVAL, 2, '나의 사진첩', 1, #{memberNo})
+		SEQ_FOLDER_NO.NEXTVAL, 2, '나의 사진첩', 1, #{memberNo}, DEFAULT)
  	</insert>
  	<!--폴더 테이블에 값 삽입 -->
  	<insert id="insertFolder4">
  		INSERT INTO FOLDER VALUES(
-		SEQ_FOLDER_NO.NEXTVAL, 3, '나의 동영상', 1, #{memberNo})
+		SEQ_FOLDER_NO.NEXTVAL, 3, '나의 동영상', 1, #{memberNo}, DEFAULT)
  	</insert>
  	
  	

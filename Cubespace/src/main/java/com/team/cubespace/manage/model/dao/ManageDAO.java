@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.team.cubespace.folder.model.vo.Folder;
+import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
+import com.team.cubespace.manage.model.vo.File;
 
 @Repository
 public class ManageDAO {
@@ -132,7 +134,7 @@ public class ManageDAO {
 	 */
 	public int deleteFolder(Map<String, Object> paramMap) {
 		
-		return sqlSession.delete("ManageMapper.deleteFolder", paramMap);
+		return sqlSession.update("ManageMapper.deleteFolder", paramMap);
 	}
 
 	/** 폴더삭제 후 나머지 폴더순서 새로 정렬
@@ -154,6 +156,107 @@ public class ManageDAO {
 		
 		return sqlSession.update("ManageMapper.updateFolder", folder);
 	}
+
+	/** (다이어리)해당 파일의 폴더목록 조회
+	 * @param file
+	 * @return
+	 */
+	public List<File> selectDiaryFileList(File file) {
+		
+		return sqlSession.selectList("ManageMapper.selectDiaryFileList", file);	
+	}
+	
+	
+	/** (앨범)해당 파일의 폴더목록 조회
+	 * @param file
+	 * @return
+	 */
+	public List<File> selectAlbumFileList(File file) {
+		
+		return sqlSession.selectList("ManageMapper.selectAlbumFileList", file);	
+	}
+
+	/** (비디오)해당 파일의 폴더목록 조회
+	 * @param file
+	 * @return
+	 */
+	public List<File> selectVideoFileList(File file) {
+
+		return sqlSession.selectList("ManageMapper.selectVideoFileList", file);	
+	}
+
+	/** (다이어리)내 폴더의 파일 한개 삭제하기
+	 * @param file
+	 * @return
+	 */
+	public int deleteDiaryFile(File file) {
+		
+		return sqlSession.update("ManageMapper.deleteDiaryFile", file);	
+	}
+	
+	/** (앨범)내 폴더의 파일 한개 삭제하기
+	 * @param file
+	 * @return
+	 */
+	public int deleteAlbumFile(File file) {
+		
+		return sqlSession.update("ManageMapper.deleteAlbumFile", file);	
+	}
+	
+	/** (비디오)내 폴더의 파일 한개 삭제하기
+	 * @param file
+	 * @return
+	 */
+	public int deleteVideoFile(File file) {
+		
+		return sqlSession.update("ManageMapper.deleteVideoFile", file);	
+	}
+
+	/** 게시글 공개여부 설정(다이어리)
+	 * @param file
+	 * @return
+	 */
+	public int updateDiaryOpenFlag(File file) {
+		
+		return sqlSession.update("ManageMapper.updateDiaryOpenFlag", file);	
+	}
+
+	/** 게시글 공개여부 설정(앨범)
+	 * @param file
+	 * @return
+	 */
+	public int updateAlbumOpenFlag(File file) {
+		
+		return sqlSession.update("ManageMapper.updateAlbumOpenFlag", file);	
+	}
+
+	/** 게시글 공개여부 설정(비디오)
+	 * @param file
+	 * @return
+	 */
+	public int updateVideoOpenFlag(File file) {
+		
+		return sqlSession.update("ManageMapper.updateVideoOpenFlag", file);	
+	}
+
+	/** 배경색/이미지 초기화하기
+	 * @param backgroundInfo
+	 * @return
+	 */
+	public int resetBGColor(Background backgroundInfo) {
+		
+		return sqlSession.update("ManageMapper.resetBGColor", backgroundInfo);	
+	}
+
+	/** 프레임 초기화하기
+	 * @param backgroundInfo
+	 * @return
+	 */
+	public int resetFrameColor(Background backgroundInfo) {
+		
+		return sqlSession.update("ManageMapper.resetFrameColor", backgroundInfo);	
+	}
+
 
 
 

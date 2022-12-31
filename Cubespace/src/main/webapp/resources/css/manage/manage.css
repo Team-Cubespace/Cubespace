@@ -1,3 +1,6 @@
+
+
+
 /* 헤더(경로 부분) */
 div,
 span,
@@ -96,7 +99,7 @@ header {
     padding: 5px;
     height: 30px;
     font-size: 13px;
-
+    font-style: normal;
 }
 
 .whiteBtn:hover {
@@ -112,6 +115,43 @@ header {
 .storeLinkArea {
     display: flex;
     align-items: center;
+}
+.fa-caret-down {
+    margin-right: 5px;
+}
+
+.dropdown-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    /* z-index: 5; */
+    margin-left: 5px;
+}
+
+
+.dropdown {
+    width: 80px;
+    height: 0px;
+    background-color: white;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    overflow:hidden;
+    transition-duration : 0.3s;
+    z-index: 100;
+}
+
+.dropdown > div{
+    width: 100%;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown > div:hover{
+    background-color: #ececff;
 }
 
 /* ------------------------------------------ */
@@ -341,8 +381,6 @@ header {
     height: 30px;
     cursor: pointer;
     /* border: 1px solid black; */
-    background-color: var(--subColor);
-    color: white;
     padding: 5px;
     border-radius: 3px;
 
@@ -352,10 +390,7 @@ header {
 
 }
 
-.changeColorTitle:hover {
-    transition-duration: 0.3s;
-    background-color: var(--mainColor);
-}
+
 
 #chooseBGColor {
     display: none;
@@ -498,6 +533,9 @@ header {
     padding: 10px;
     display: flex;
     flex-direction: column;
+
+    height: 500px;
+    overflow-y: scroll;
 }
 
 .clicked{
@@ -542,6 +580,101 @@ header {
 .menuOrder4{
     order : 4;
 }
+
+
+/* 폴더 내 게시글 조회 */
+.menuRightArea {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuRightTitle {
+    font-size: 17px;
+    width: 100%;
+    padding: 5px auto;
+
+    display: flex;
+    flex-direction: column;
+}
+.folderNameArea{
+    display: flex;
+    font-size: 17px;
+    margin-bottom: 20px;
+}
+.folderImg{
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+.myFile {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    z-index: 5;
+}
+.myFile:hover{
+    background-color: #eee;
+}
+.myFileNameArea {
+    display: flex;
+}
+.fa-file {
+    margin: 0 5px;
+}
+.dropdown-btn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.fileUpdateBtnArea{
+    display: flex;
+}
+
+
+
+/* dropdown */
+.dropdown {
+    width: 100px;
+    height: 0px;
+    background-color: white;
+    position: absolute;
+    /* top: 113px;
+    right: -85px; */
+    overflow:hidden;
+    transition-duration : 0.3s;
+    z-index: 20;
+}
+
+.dropdown > a{
+    width: 100%;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown > a:hover{
+    background-color: #ececff;
+}
+
+
+.openStatus{
+    background-color: #eee;
+    border: 1px solid black;
+    cursor: pointer;
+    padding: 5px;
+    height: 30px;
+    width: 65px;
+    font-size: 13px;
+    text-align: center;
+}
+
+
+
 /* ------------------------------------------------------ */
 /* 배경음악 설정 */
 .backgroundHeader, .backgroundMain{

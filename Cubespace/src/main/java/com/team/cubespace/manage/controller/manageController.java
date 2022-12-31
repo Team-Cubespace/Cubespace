@@ -1,8 +1,13 @@
 package com.team.cubespace.manage.controller;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,16 +24,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.login.model.service.LoginService;
 import com.team.cubespace.manage.model.service.ManageService;
+import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
+import com.team.cubespace.manage.model.vo.File;
 import com.team.cubespace.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/manage")
-@SessionAttributes({ "folderList", "fontList" /* , "friendList", "fontList" */})
+@SessionAttributes({ "folderList", "fontList", "fileList" /* , "friendList", "fontList" */})
 public class manageController {
 	
 	@Autowired
 	private ManageService service;
+	
+	// application scope에 배경색/프레임정보를 담기 위한 객체 생성
+	@Autowired
+	ServletContext application;
 	
 	
 	@GetMapping("/font")
@@ -91,11 +102,22 @@ public class manageController {
 		model.addAttribute("folderList", folderList);
 		model.addAttribute("realOrder", realOrder);
 		model.addAttribute("categoryOrder", categoryOrder);
+		model.addAttribute("fileList", null); // 새로 메뉴탭 열때 fileList 초기화
 		
 		return "manage/menu";
 	}
 	@GetMapping("/background")
-	public String changeBackground() {
+	public String changeBackground(HttpServletRequest req) {
+		
+		// 모두가 공용으로 사용할 배경색 정보를 application scope에 올려놓음
+		Background backgroundColorInfo = new Background();
+		backgroundColorInfo.setBackgroundSkin("RGB(128,128,128)");
+		backgroundColorInfo.setFrameColor("#82C9E8");
+		backgroundColorInfo.setFrameMenuColor("#1A8DBF");
+		backgroundColorInfo.setFrameFontColor("WHITE");
+		
+		application.setAttribute("backgroundColorInfo", backgroundColorInfo);
+		
 		return "manage/background";
 	}
 	
@@ -107,7 +129,7 @@ public class manageController {
 	@PostMapping("/menu/changeCategory")
 	public String changeMenu(CategoryOrder categoryOrder,
 			@RequestParam Map<String, Object> paramMap,
-			RedirectAttributes ra) throws Exception {
+			RedirectAttributes ra, HttpServletResponse resp) throws Exception {
 		
 		
 		int categoryOrderResult= service.changeCategory(categoryOrder); // 카테고리 순서 변경
@@ -122,7 +144,15 @@ public class manageController {
 		}
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect:/manage/menu";
+		
+		resp.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = resp.getWriter();
+//		out.print("<script>alert(" + message +");</script>");
+		out.print("<script>window.parent.location.reload();</script>");
+		out.flush();
+		
+//		return "redirect:/manage/menu";
+		return null;
 	}
 	
 	/** 카테고리 종류 원래대로
@@ -173,6 +203,67 @@ public class manageController {
 		return service.deleteFolder(paramMap);
 	}
 	
+	/** 해당 파일의 폴더목록 조회
+	 * @param paramMap
+	 * @return
+	 */
+	@GetMapping("/menu/selectFileList")
+	@ResponseBody
+	public int selectFileList(File file,
+			Model model) {
+		
+		// file : folderNo, categoryNo(1/2/3)
+		List<File> fileList = service.selectFileList(file);
+		model.addAttribute("fileList", fileList);
+		
+		if(fileList.size() != 0) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	
+	
+	/** 내 폴더의 파일 한개 삭제하기
+	 * @param fileNo
+	 * @param loginMember
+	 * @return
+	 */
+	@PostMapping("/menu/deleteFile")
+	@ResponseBody
+	public int deleteFile(@RequestParam("fileNo") String fileNo,
+			@RequestParam("categoryNo") String categoryNo,
+			@SessionAttribute("loginMember") Member loginMember,
+			Model model) {
+		File file = new File();
+		file.setFileNo(Integer.parseInt(fileNo));
+		file.setMemberNo(loginMember.getMemberNo()); //  혹시 남이 파일 삭제할것을 대비
+		file.setCategoryNo(Integer.parseInt(categoryNo));
+		
+		
+		// 삭제 성공 후 세션의 fileList 업데이트를 위해 다시 조회
+		List<File> fileList = service.selectFileList(file);
+		model.addAttribute("fileList", fileList);
+		
+		return service.deleteFile(file);
+	}
+	
+	
+	/** 게시글 공개여부 설정
+	 * @param file
+	 * @param loginMember
+	 * @return
+	 */
+	@GetMapping("/menu/updateOpenFlag")
+	@ResponseBody
+	public int updateOpenFlag(File file,
+			@SessionAttribute("loginMember") Member loginMember) {
+		
+		// file : fileNo, memberNo, categoryNo, openFlag
+		file.setMemberNo(loginMember.getMemberNo());
+		return service.updateOpenFlag(file);
+	}
+	
 //	친구(깐부) 관련-------------------------------------------------------------------------------
 
 	/** 깐부끊기
@@ -209,4 +300,35 @@ public class manageController {
 		return result;
 	}
 
+	
+//	배경색/이미지 관련-------------------------------------------------------------------------------
+	
+	/** 배경색/이미지 초기화하기
+	 * @param loginMember
+	 * @return
+	 */
+	@GetMapping("/background/resetBGColor")
+	@ResponseBody
+	public int resetBGColor(@SessionAttribute("loginMember") Member loginMember) {
+		
+		Background backgroundInfo = (Background) application.getAttribute("backgroundColorInfo");
+		backgroundInfo.setMemberNo(loginMember.getMemberNo());
+		
+		return service.resetBGColor(backgroundInfo);
+	}
+	
+	/** 프레임 초기화하기
+	 * @param loginMember
+	 * @return
+	 */
+	@GetMapping("/background/resetFrameColor")
+	@ResponseBody
+	public int resetFrameColor(@SessionAttribute("loginMember") Member loginMember) {
+		
+		Background backgroundInfo = (Background) application.getAttribute("backgroundColorInfo");
+		backgroundInfo.setMemberNo(loginMember.getMemberNo());
+		
+		return service.resetFrameColor(backgroundInfo);
+	}
+	
 }

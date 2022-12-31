@@ -3,26 +3,31 @@
 // 2. 해당 카테고리 일 시 INSERT 구문으로 넘어감 
 // 3. 업데이트 성공시 버튼 보유중으로 변경
 /* 사용하기 버튼 클릭 시 */
-const goodsAdd=(goodstNo,shopCathNo,btn)=>{
+const goodsAdd=(goodsNo,shopCathNo,btn)=>{
     $.ajax({
         url:"/goodsAddButton",
-        data: {"loginMemberNo":loginMemberNo,"goodstNo":goodstNo,"shopCathNo":shopCathNo},
+        data: {"loginMemberNo":loginMemberNo,"goodsNo":goodsNo,"shopCathNo":shopCathNo},
         success : goodsAddBtn =>{
 
             if(goodsAddBtn==1){// 상품추가 성공
                 const goodsBtn = btn
-                const goodsBtnGoodsNo = document.querySelector(".goods_"+goodstNo+"")
+                const goodsBtnGoodsNo0 = document.querySelectorAll(".goods_"+goodsNo+"")[0]
+                const goodsBtnGoodsNo1 = document.querySelectorAll(".goods_"+goodsNo+"")[1]
 
                 goodsBtn.removeAttribute("onclick");
                 goodsBtn.classList.add("goods-holding")
                 goodsBtn.classList.remove("goods-btn")
                 goodsBtn.innerText="보유중"
 
-                goodsBtnGoodsNo.removeAttribute("onclick");
-                goodsBtnGoodsNo.classList.add("goods-holding")
-                goodsBtnGoodsNo.classList.remove("goods-btn")
-                goodsBtnGoodsNo.innerText="보유중"
-                
+                goodsBtnGoodsNo0.removeAttribute("onclick");
+                goodsBtnGoodsNo0.classList.add("goods-holding")
+                goodsBtnGoodsNo0.classList.remove("goods-btn")
+                goodsBtnGoodsNo0.innerText="보유중"
+
+                goodsBtnGoodsNo1.removeAttribute("onclick");
+                goodsBtnGoodsNo1.classList.add("goods-holding")
+                goodsBtnGoodsNo1.classList.remove("goods-btn")
+                goodsBtnGoodsNo1.innerText="보유중"
             }else{ 
                 alert("상품추가 실패")
             }

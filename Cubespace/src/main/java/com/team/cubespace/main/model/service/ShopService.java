@@ -13,23 +13,24 @@ public interface ShopService {
 	 */
 	List<ShopFont> shopNewGoods(int loginMemberNo);
 
+	/** 상점 인기상품 목록 조회
+	 * @param loginMemberNo
+	 * @return
+	 */
+	List<ShopFont> shopPopularGoods(int loginMemberNo);
+	
 	/** 상점 상품 추가(폰트,배경음악,소품)
 	 * @param paramMap
 	 * @return
 	 */
 	int goodsAddButton(Map<String, Object> paramMap);
 
-	/** 상점 인기상품 목록 조회
-	 * @param loginMemberNo
-	 * @return
-	 */
-	List<ShopFont> shopPopularGoods(int loginMemberNo);
-
 	/** 상점 상품 목록 조회
 	 * @param loginMemberNo
 	 * @param cp
+	 * @param shopCt 
 	 * @return
 	 */
-	Map<String, Object> selectGoodsList(int loginMemberNo, int cp);
+	Map<String, Object> selectGoodsList(int loginMemberNo, int cp, int shopCt);
 
 }

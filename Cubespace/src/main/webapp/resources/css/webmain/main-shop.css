@@ -157,11 +157,21 @@ body *{
 .goods-example{
     display: flex;
     align-items: center;
+    justify-content: center;
+
     height: 60%;
+    width: 100%;
     font-size: 20px;
     padding: 5px;
     /* border-bottom: 1px solid black; */
     border-bottom: 1px solid black;
+}
+
+.goods-exampleimg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 /* 상품 정보 최상위 부모 */

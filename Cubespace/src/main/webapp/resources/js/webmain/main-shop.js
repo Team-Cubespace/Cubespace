@@ -42,7 +42,7 @@ shopMiniroom.addEventListener("click", () => {
 })
 
 
-/* 최신폰트 / 인기랭크 선택 */
+/* 최신상품 / 인기랭크 선택 */
 const newGoodsBox =document.getElementById("newGoodsBox")
 const shopRankBox =document.getElementById("shopRankBox")
 /* 최신상품목록 조회 함수 선언 */
@@ -105,7 +105,7 @@ const newGoodsSelect = () => {
                                 goods_btn.innerText="보유중"
                                 
                             }else{ // 사용가능
-                                goods_btn.classList.add("goods-btn")
+                                goods_btn.classList.add("goods-btn","goods_"+newGoods.goodsNo+"")
                                 goods_btn.innerText="사용하기"
                                 goods_btn.setAttribute("onclick","goodsAdd("+goodsNo+","+shopCathNo+",this)");
                             }
@@ -185,7 +185,7 @@ shopRankBox.addEventListener("click", () => {
                                 goods_btn.innerText="보유중"
                                 
                             }else{ // 사용가능
-                                goods_btn.classList.add("goods-btn")
+                                goods_btn.classList.add("goods-btn","goods_"+popularGoods.goodsNo+"")
                                 goods_btn.innerText="사용하기"
                                 goods_btn.setAttribute("onclick","goodsAdd("+goodsNo+","+shopCathNo+",this)");
                             }

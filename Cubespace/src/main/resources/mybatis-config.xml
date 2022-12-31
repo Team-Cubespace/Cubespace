@@ -30,6 +30,8 @@
 		<typeAlias type="com.team.cubespace.album.model.vo.Comment" alias="Comment"/>
 		<typeAlias type="com.team.cubespace.main.model.vo.Notifications" alias="Notifications"/>
 		<typeAlias type="com.team.cubespace.main.model.vo.ShopFont" alias="ShopFont"/>
+		<typeAlias type="com.team.cubespace.main.model.vo.ShopMiniroom" alias="ShopMiniroom"/>
+		<typeAlias type="com.team.cubespace.main.model.vo.ShopMusic" alias="ShopMusic"/>
 		<typeAlias type="com.team.cubespace.video.model.vo.Video" alias="Video"/>
 	</typeAliases>
 	

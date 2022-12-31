@@ -28,23 +28,19 @@ public class ShopController {
 	 */
 	@GetMapping("/cubespace/shop")
 	public String shopMove(Model model,
+			@RequestParam(value="shopCt", required=false, defaultValue="1") int shopCt,
 			@RequestParam(value="cp", required=false, defaultValue="1") int cp,
 			@SessionAttribute(value="loginMember", required=false) Member loginMember
 ) {
 		int loginMemberNo = loginMember.getMemberNo();
 		
-		//어느 상점인지 상점 번호 추가하기
-		
-		
 		// 상점 목록 조회 서비스 호출
-		Map<String, Object> shopMap = service.selectGoodsList(loginMemberNo, cp); 
-		
+		Map<String, Object> shopMap = service.selectGoodsList(loginMemberNo, cp, shopCt); 
 		
 		model.addAttribute("shopMap", shopMap);
 
 		return "/webmain/main-shop";
 	}
-	
 	
 	/** 상점 최신상품 목록 조회
 	 * @return
@@ -58,20 +54,6 @@ public class ShopController {
 		return new Gson().toJson(shopNewGoodsList); 
 	}
 	
-	
-	/** 상점 상품 추가(폰트,배경음악,소품)
-	 * @param paramMap
-	 * @return
-	 */
-	@GetMapping("/goodsAddButton")
-	@ResponseBody
-	public int goodsAddButton(@RequestParam Map<String, Object> paramMap) {
-		
-		int result = service.goodsAddButton(paramMap);
-		
-		return result;
-	}
-	
 	/** 상점 인기상품 목록 조회
 	 * @return
 	 */
@@ -82,6 +64,22 @@ public class ShopController {
 		List<ShopFont> popularFontList = service.shopPopularGoods(loginMemberNo);
 		
 		return new Gson().toJson(popularFontList); 
+	}
+	
+	
+	/** 상점 상품 추가(폰트,배경음악,소품)
+	 * @param paramMap
+	 * @return
+	 */
+	@GetMapping("/goodsAddButton")
+	@ResponseBody
+	public int goodsAddButton(@RequestParam Map<String, Object> paramMap) {
+		
+		System.out.println(paramMap);
+		
+		int result = service.goodsAddButton(paramMap);
+		
+		return result;
 	}
 	
 	

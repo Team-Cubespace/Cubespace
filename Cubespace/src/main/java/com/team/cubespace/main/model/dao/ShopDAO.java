@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import com.team.cubespace.common.Pagination;
 import com.team.cubespace.main.model.vo.ShopFont;
+import com.team.cubespace.main.model.vo.ShopMiniroom;
+import com.team.cubespace.main.model.vo.ShopMusic;
 
 @Repository
 public class ShopDAO {
@@ -48,7 +50,21 @@ public class ShopDAO {
 		return sqlSession.selectOne("shop.shopFontCount");
 	}
 
-	/** 페이징 처리객체 사용하여 폰트 상점 상품 목록 조회
+	/** 배경음악 상점 상품 갯수 구하기
+	 * @return
+	 */
+	public int shopMusicCount() {
+		return sqlSession.selectOne("shop.shopMusicCount");
+	}
+	
+	/** 미니룸소품 상점 상품 갯수 구하기
+	 * @return
+	 */
+	public int shopMiniroomCount() {
+		return sqlSession.selectOne("shop.shopMiniroomCount");
+	}
+	
+	/** 페이징 처리객체 사용하여 폰트 상점 상품 상품 목록 조회
 	 * @param pagination
 	 * @param loginMemberNo
 	 * @return
@@ -58,4 +74,29 @@ public class ShopDAO {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		return sqlSession.selectList("shop.selectFontList",loginMemberNo,rowBounds);
 	}
+
+	/** 페이징 처리객체 사용하여 배경음악 상점 상품 상품 목록 조회
+	 * @param pagination
+	 * @param loginMemberNo
+	 * @return
+	 */
+	public List<ShopMusic> selectShopMusicList(Pagination pagination, int loginMemberNo) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		return sqlSession.selectList("shop.selectShopMusicList",loginMemberNo,rowBounds);
+	}
+
+	/** 페이징 처리객체 사용하여 미니룸소품 상점 상품 상품 목록 조회
+	 * @param pagination
+	 * @param loginMemberNo
+	 * @return
+	 */
+	public List<ShopMiniroom> selectShopMiniroomList(Pagination pagination, int loginMemberNo) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		return sqlSession.selectList("shop.selectShopMiniroomList",loginMemberNo,rowBounds);
+	}
+
+
+	
 }

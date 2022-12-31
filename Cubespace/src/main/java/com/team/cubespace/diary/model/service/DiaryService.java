@@ -41,10 +41,17 @@ public interface DiaryService {
 	 */
 	List<Emoji> selectEmojiPeopleList(int diaryNo, int emojiNo);
 
+	/**다이어리 작성
+	 * @param diary
+	 * @return
+	 */
+	int diaryWrite(Diary diary);
+	
 	/**
 	 * @param memberNo
 	 * @return
 	 */
 	List<Plan> selectSchedule(int memberNo);
+
 
 }

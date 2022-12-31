@@ -61,7 +61,24 @@ const getRestDeInfo = (date) => {
 
 
 // ---------------------------------------------------------
+//[나의 코드]
+    /* 작성일 / 폴더 넘버 / 미니홈피 주인장 넘버 */
+    const folderNumber = 1; /* 폴더 */
+    const homepageMemberNo = 1; /* 이슬이 다이어리를 조회해보겠다. */
+    const loginMemberNo = 7; 
 
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    var day = ('0' + today.getDate()).slice(-2);
+    const diaryDate = year + '-' + month  + '-' + day;
+
+    selectDiary(diaryDate,folderNumber,homepageMemberNo,loginMemberNo);
+    writeBtn(diaryDate);
+
+function writeBtn(diaryDate){
+    console.log(diaryDate);
+}
 
 // 달력 생성 함수
 const makeCalendar = (date) => {
@@ -120,7 +137,7 @@ const makeCalendar = (date) => {
 
         // 날짜 클릭 이벤트
         li.addEventListener("click", e => {
-
+            
             // 클릭한 날짜가 10일 미만이면 앞에 "0" 추가
             const temp = i >= 10 ? i : "0" + i;
 
@@ -176,167 +193,28 @@ const makeCalendar = (date) => {
             const folderNumber = 1; /* 폴더 */
             const homepageMemberNo = 1; /* 이슬이 다이어리를 조회해보겠다. */
             const loginMemberNo = 7; 
+            writeBtn(diaryDate);
+            selectDiary(diaryDate,folderNumber,homepageMemberNo,loginMemberNo);
 
-            
-            /* 일기 목록 조회하는 ajax */
-            $.ajax({
-                url : "/diary/selectDiary",
-                data : {"diaryDate":diaryDate,"folderNumber":folderNumber,"homepageMemberNo":homepageMemberNo,"loginMemberNo":loginMemberNo},
-                dataType : "JSON",
-                success :  (diaryList)  => {
+            // ------- 여긴 ajax success 코드로 활용 -------------
+            // 기존에 클릭된 날짜가 있을 경우 기존 날짜를 클릭 해제
+            if(document.querySelector(".day-click") != null){
+                document.querySelector(".day-click").classList.remove("day-click");
+            }
 
-                    /*확인용*/console.log("해당 날짜의 다이어리 목록 받기 성공")
-                    /*확인용*/console.log(diaryList);
-                    /* diaryNo, diaryTitle, diaryContent, diaryCreateDate, diaryOpenFlag 가지고 옴. */
-                    
-                    /* 각각의 diary-section의 위치를 잡아주는 기준(부모) */
-                    const diarySectionContainer = document.querySelector(".diary-section-container");
-                    /* 기존에 목록 불러온거 지워주는 거..? 누적방지용? */
-                    diarySectionContainer.innerText = "";
-                    
-                    for(diary of diaryList){
+            e.target.classList.add("day-click");
 
-                        /*확인용*/console.log("각각의 다이어리");
-                        /*확인용*/console.log(diary);
-
-                        const div = document.createElement("div");
-                        div.classList.add("diary-section");
-                        
-                            const div1 = document.createElement("div");
-                            div1.classList.add("title-section");
-
-                                const div1_1 = document.createElement("div");
-                                div1_1.classList.add("title");
-                                div1_1.innerText = diary.diaryTitle;
-                                
-                                const div1_2 = document.createElement("div");
-
-                                    const div1_2_1 = document.createElement("div");
-                                    div1_2_1.classList.add("disclosure-option")
-                                    if(diary.diaryOpenFlag == 1){
-                                        div1_2_1.innerText = "공개";
-                                    }
-                                    if(diary.diaryOpenFlag == 2){
-                                        div1_2_1.innerText = "깐부공개";
-                                    }
-                                    if(diary.diaryOpenFlag == 3){
-                                        div1_2_1.innerText = "비공개";
-                                    }
-                                    const div1_2_2 = document.createElement("div");
-                                    div1_2_2.classList.add("create-time")
-                                    div1_2_2.innerText = diary.diaryCreateDate;
-
-                                div1_2.append(div1_2_1,div1_2_2);
-                            
-                            div1.append(div1_1,div1_2);
-
-                            const div2 = document.createElement("div");
-                            div2.classList.add("content");
-                            div2.innerText = diary.diaryContent;
-
-                            const div3 = document.createElement("div");
-                            div3.classList.add("under-section");
-
-                                const div3_1 = document.createElement("div");
-                                div3_1.classList.add("under1");
-
-                                    const div3_1_1 = document.createElement("div");
-                                    div3_1_1.classList.add("emoji-and-pop");
-
-                                        const div3_1_1_1 = document.createElement("div");
-                                        div3_1_1_1.classList.add("emoji-section");   
-                                        /* 클릭하면 나오는 함수의 기능 1. 이모지 목록 비동기로 불러오기 
-                                        2. 이모지를 누른 사람의 목록 비동기로 불러오기*/
-                                        //div3_1_1_1.setAttribute("onclick","selectEmojiPeopleList("+diary.diaryNo+")") 
-                                        // const input3_1_1_1_1 = document.createElement("input");
-                                        // input3_1_1_1_1.setAttribute("type","hidden");
-                                        
-                                        /* 얘가 원래 이 자리였는데 selectEmojiList함수 안에서 만들거야... */
-                                        // const div3_1_1_2 = document.createElement("div");
-                                        // div3_1_1_2.classList.add("people-pop-container");
-                                        
-                                        selectEmojiList(diary.diaryNo,div3_1_1_1,div3_1_1);
-
-                                        const div3_1_1_2 = document.createElement("div");
-                                        div3_1_1_2.classList.add("people-pop-container");
-                                        
-                                        console.log(div3_1_1_2);
-                                        peoplePopContainer = div3_1_1_2;
-                                    /* selectEmojiList가서 div3_1_1_2를 beforeend로 넣을 꺼야... */
-                                
-                                    div3_1_1.append(div3_1_1_1,div3_1_1_2);
-                                    /* mouseover하면, div3_1_1_2에 beforeend로 div3_1_1_2_1를 넣어야될듯?*/
-                                    /* mouseout하면  div3_1_1_2.innertext = ""*/
-
-                                    const div3_1_2 = document.createElement("div");
-                                    div3_1_2.classList.add("choose-emoji-section");
-
-                                        const div3_1_2_1 = document.createElement("div");
-                                        div3_1_2_1.classList.add("emoji-btn");
-                                        div3_1_2_1.innerText="공감하기";
-                                        div3_1_2_1.setAttribute("onclick","chooseEmoji("+diary.diaryNo+",this)")
-                                        
-                                    /* 아직 미완성조각 */
-                                    div3_1_2.append(div3_1_2_1);
-                                
-                                div3_1.append(div3_1_1,div3_1_2);
-
-
-                                const div3_2 = document.createElement("div");
-                                div3_2.classList.add("under2");
-
-                                    const div3_2_1 = document.createElement("div");
-                                    div3_2_1.setAttribute("onclick","updateDiary("+diary.diaryNo+")")
-                                    div3_2_1.innerText = "수정";
-                                    
-                                    const div3_2_2 = document.createElement("div");
-                                    div3_2_2.setAttribute("onclick","deleteDiary("+diary.diaryNo+")")
-                                    div3_2_2.innerText = "삭제";
-
-                                div3_2.append(div3_2_1,div3_2_2);
-
-                            div3.append(div3_1,div3_2);
-                        
-                        div.append(div1,div2,div3);
-
-                        diarySectionContainer.insertAdjacentElement("beforeend",div);
-                    }
-                    // ------- 여긴 ajax success 코드로 활용 -------------
-                    // 기존에 클릭된 날짜가 있을 경우 기존 날짜를 클릭 해제
-                    if(document.querySelector(".day-click") != null){
-                        document.querySelector(".day-click").classList.remove("day-click");
-                    }
-        
-                    e.target.classList.add("day-click");
-        
-                    // 새로 클릭한 날짜에 클릭 표시
-                    document.querySelector(".today").innerText = `${currentMonth}.${temp}`;
-                    document.querySelector(".today-day").innerText = weekDay[new Date(`${currentYear}-${currentMonth}-${i}`).getDay()];
-                    // ------- 여긴 ajax success 코드로 활용 -------------
-
-
-
-
-                }, error : () => { 
-                    
-                }
-                
-            });
-
-
+            // 새로 클릭한 날짜에 클릭 표시
+            document.querySelector(".today").innerText = `${currentMonth}.${temp}`;
+            document.querySelector(".today-day").innerText = weekDay[new Date(`${currentYear}-${currentMonth}-${i}`).getDay()];
+            // ------- 여긴 ajax success 코드로 활용 -------------
 
         })
-
 
         if(i == sunday){
             li.classList.add("holiday");
             sunday +=7;
         }
-
-    
-
-
-
 
         if(i <= 13){
             calendarDay[0].append(li);
@@ -344,9 +222,11 @@ const makeCalendar = (date) => {
             calendarDay[1].append(li);
         }
     }
-
 }
 
+
+
+/* 이 위치 바로 위였음.... */
 
 
 // 이전 달

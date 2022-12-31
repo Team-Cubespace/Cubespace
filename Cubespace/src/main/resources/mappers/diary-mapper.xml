@@ -87,6 +87,22 @@
 	WHERE DIARY_NO = #{diaryNo} AND E.EMOJI_NO = #{emojiNo}
 	</select>
 	
+	<insert id="diaryWrite" parameterType = "Diary" useGeneratedKeys="true">
+		<selectKey keyProperty = "diaryNo" resultType = "_int" order = "BEFORE">
+		SELECT SEQ_DIARY_NO.NEXTVAL FROM DUAL
+		</selectKey>
+	INSERT INTO DIARY
+	VALUES(#{diaryNo},
+	    #{memberNo},
+	    #{diaryTitle},
+	    #{diaryContent},
+	    #{diaryCreateDate},
+	    DEFAULT,  
+	    #{diaryOpenFlag},
+	    #{folderNo} )
+	</insert>
+	
+	
 	<!-- 월간 달력 -->
 	<select id="selectscheduleList" resultMap = "plan_rm">
 	SELECT START_DATE, NVL(END_DATE,START_DATE) END_DATE , PLAN_TITLE , PLAN_CATEGORY, PLAN_ALLDAY_FL,PLAN_DESCRIPTION,

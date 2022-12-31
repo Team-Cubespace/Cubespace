@@ -1,15 +1,22 @@
 package com.team.cubespace.diary.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -34,9 +41,12 @@ public class DiaryController {
 	public String move() {
 		
 		//다이어리part
-//		return "/minihome/minihome-diary/minihome-rayout-copy";
+		return "minihome/minihome-diary/minihome-rayout-copy";
+		
 		//월간달력part
-		return "/minihome/minihome-diary/monthcalendar";
+//		return "minihome/minihome-diary/monthcalendar";
+		//다이어리 작성 part
+//		return "minihome/minihome-diary/diary-write";
 	}
 	
 	/** 클릭한 날짜의 다이어리 목록 조회하기
@@ -87,6 +97,61 @@ public class DiaryController {
 		
 		return new Gson().toJson(emojiPeopleList);
 	}
+	
+	/*[ 작성 페이지 ]*/
+	
+	//게시글 작성 페이지 이동
+   @GetMapping("/diary/write")
+   public String diaryWrite() {
+	   return "minihome/minihome-diary/diary-write";
+	   ///prefix :WEB-INF/views/
+	   // suffix : .jsp
+   }
+   //게시글 작성
+   @PostMapping("/diary/write")
+   public String diaryWrite(
+		   Diary diary,
+		   @SessionAttribute("loginMember") Member loginMember,
+		   // 필요한가?
+		   RedirectAttributes ra, 
+		   @RequestHeader("referer") String referer
+		   ) throws IOException {
+	   
+	   	//INSERT -> 회원번호/제목/내용/작성일/삭제여부/공개여부/폴더번호
+	   	//folderNo, loginMember의 memberNo 필요해
+	   
+	   	//회원번호 -> loginMember의 memberNo 필요해
+	   	//제목 (o)
+	   	//내용 (o)
+	   	//작성일 (o)
+	   	//삭제여부 DEFAULT
+	   	//공개여부 (o)
+	   	//폴더번호 -> folderNo 어케 불러와...?
+	   	System.out.println("다이어리 객체 :"+ diary);
+	   	System.out.println("이슬이니...? :"+loginMember.getMemberNo());
+	   	diary.setMemberNo(loginMember.getMemberNo());
+	   	diary.setFolderNo(1);
+	   	// 4. 게시글 삽입 서비스를 호출한다.
+	   	int diaryNo = service.diaryWrite(diary);
+	   
+	    String message = null;
+	    String path = null;
+	    
+	    if(diaryNo > 0) {
+	    	message = "게시글이 등록되었습니다.";
+	    	
+	    	//path = "/board/" + boardCode + "/" + diaryNo;
+	    			// /board/1/2003 (상세조회 요청 주소)
+	    } else {
+	    	message = "게시글 작성 실패";
+	    	path = referer;
+	    	
+	    }
+	    
+	    ra.addFlashAttribute("message",message);
+	    
+		return "redirect:" + path;
+   }
 	 
 //    /**일정 목록 조회하기
 //     * @return
@@ -120,6 +185,8 @@ public class DiaryController {
 	
 //	@PostMapping("/calenderInput")
 //	@ResponseBody
+	   
+	/*[ 월간 달력 ]*/
 	
 	/**
 	 * @param loginMember

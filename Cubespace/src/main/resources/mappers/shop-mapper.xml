@@ -8,6 +8,7 @@
 		<id property="fontNo" column="FONT_NO"/>
 		<result property="fontName" column="FONT_NAME"></result>
 		<result property="fontPath" column="FONT_PATH"></result>
+		<result property="fontCreater" column="FONT_CREATER"></result>
 		<result property="fontCount" column="FONT_COUNT_NO"></result>
 		<result property="goodsNo" column="GOODS_NO"></result>
 		

@@ -37,11 +37,9 @@ public class ShopController {
 		Map<String, Object> shopFontMap = service.selectFontList(loginMemberNo, cp); 
 		
 		
-		model.addAttribute("cp", cp);
-//		model.addAttribute("shopFontMap", shopFontMap);
 		model.addAttribute("shopFontMap", shopFontMap);
 
-		return "/webmain/main-shopFont";
+		return "/webmain/main-shop";
 	}
 	
 	

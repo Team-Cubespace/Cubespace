@@ -46,7 +46,7 @@ public class ShopServiceImpl  implements ShopService{
 		int listCount  = dao.shopFontCount();
 		
 		// 페이징 처리 객체 생성
-		Pagination pagination = new Pagination(listCount, cp, 4, 5);
+		Pagination pagination = new Pagination(listCount, cp, 16, 5);
 		
 		// 페이징 처리객체 사용하여 폰트 상점 상품 목록 조회
 		List<Shop> shopFontList = dao.selectFontList(pagination, loginMemberNo);

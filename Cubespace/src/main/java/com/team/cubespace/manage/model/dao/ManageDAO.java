@@ -157,31 +157,58 @@ public class ManageDAO {
 	}
 
 	/** (다이어리)해당 파일의 폴더목록 조회
-	 * @param paramMap
+	 * @param file
 	 * @return
 	 */
-	public List<File> selectDiaryFileList(Map<String, Object> paramMap) {
+	public List<File> selectDiaryFileList(File file) {
 		
-		return sqlSession.selectList("ManageMapper.selectDiaryFileList", paramMap);	
+		return sqlSession.selectList("ManageMapper.selectDiaryFileList", file);	
 	}
 	
 	
 	/** (앨범)해당 파일의 폴더목록 조회
-	 * @param paramMap
+	 * @param file
 	 * @return
 	 */
-	public List<File> selectAlbumFileList(Map<String, Object> paramMap) {
+	public List<File> selectAlbumFileList(File file) {
 		
-		return sqlSession.selectList("ManageMapper.selectAlbumFileList", paramMap);	
+		return sqlSession.selectList("ManageMapper.selectAlbumFileList", file);	
 	}
 
 	/** (비디오)해당 파일의 폴더목록 조회
-	 * @param paramMap
+	 * @param file
 	 * @return
 	 */
-	public List<File> selectVideoFileList(Map<String, Object> paramMap) {
+	public List<File> selectVideoFileList(File file) {
 
-		return sqlSession.selectList("ManageMapper.selectVideoFileList", paramMap);	
+		return sqlSession.selectList("ManageMapper.selectVideoFileList", file);	
+	}
+
+	/** (다이어리)내 폴더의 파일 한개 삭제하기
+	 * @param file
+	 * @return
+	 */
+	public int deleteDiaryFile(File file) {
+		
+		return sqlSession.update("ManageMapper.deleteDiaryFile", file);	
+	}
+	
+	/** (앨범)내 폴더의 파일 한개 삭제하기
+	 * @param file
+	 * @return
+	 */
+	public int deleteAlbumFile(File file) {
+		
+		return sqlSession.update("ManageMapper.deleteAlbumFile", file);	
+	}
+	
+	/** (비디오)내 폴더의 파일 한개 삭제하기
+	 * @param file
+	 * @return
+	 */
+	public int deleteVideoFile(File file) {
+		
+		return sqlSession.update("ManageMapper.deleteVideoFile", file);	
 	}
 
 

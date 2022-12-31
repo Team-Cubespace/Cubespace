@@ -262,21 +262,40 @@ public class ManageServiceImpl implements ManageService{
 	 * 해당 파일의 폴더목록 조회
 	 */
 	@Override
-	public List<File> selectFileList(Map<String, Object> paramMap) {
+	public List<File> selectFileList(File file) {
 		
-		String categoryNo = (String)paramMap.get("categoryNo");
+		int categoryNo = file.getCategoryNo();
 		
-		if(categoryNo.equals("1")) {
-			return dao.selectDiaryFileList(paramMap);
+		if(categoryNo == 1) {
+			return dao.selectDiaryFileList(file);
 		}
-		if(categoryNo.equals("2")) {
-			return dao.selectAlbumFileList(paramMap);
+		if(categoryNo == 2) {
+			return dao.selectAlbumFileList(file);
 		}
-		if(categoryNo.equals("3")) {
-			return dao.selectVideoFileList(paramMap);
+		if(categoryNo == 3) {
+			return dao.selectVideoFileList(file);
 		}
 		
 		return null;
+	}
+
+	/**
+	 * 내 폴더의 파일 한개 삭제하기
+	 */
+	@Override
+	public int deleteFile(File file) {
+		
+		if(file.getCategoryNo() == 1) {
+			return dao.deleteDiaryFile(file);
+		}
+		if(file.getCategoryNo() == 2) {
+			return dao.deleteAlbumFile(file);
+		}
+		if(file.getCategoryNo() == 3) {
+			return dao.deleteVideoFile(file);
+		}
+		
+		return 0;
 	}
 
 

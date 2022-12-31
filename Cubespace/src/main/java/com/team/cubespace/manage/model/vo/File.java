@@ -15,6 +15,7 @@ public class File { // manage-menu에서 한 폴더의 파일들을 읽어오기
 	private int openFlag;
 	private int folderNo; // 해당 파일이 위치하는 폴더의 번호
 	private String folderName; // 해당 파일이 위치하는 폴더의 이름
+	private int categoryNo; // 해당파일의 카테고리(1,2,3 : 다이어리/앨범/비디오)
 	
 
 }

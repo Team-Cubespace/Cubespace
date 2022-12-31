@@ -96,10 +96,16 @@ public interface ManageService {
 	int updateFolder(Map<String, Object> paramMap) throws Exception;
 
 	/** 해당 파일의 폴더목록 조회
-	 * @param paramMap
+	 * @param file
 	 * @return
 	 */
-	List<File> selectFileList(Map<String, Object> paramMap);
+	List<File> selectFileList(File file);
+
+	/** 내 폴더의 파일 한개 삭제하기
+	 * @param file
+	 * @return
+	 */
+	int deleteFile(File file);
 
 
 

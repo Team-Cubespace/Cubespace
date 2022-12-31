@@ -36,7 +36,7 @@ menuSelectBtn.addEventListener("click", () => {
         checkArr.push(value);
     })
 
-    console.log(checkArr);
+
 
     if (!checkArr.includes("diary")) {
         diaryOrder = -1;
@@ -61,7 +61,7 @@ menuSelectBtn.addEventListener("click", () => {
     }else if(guestBookOrder == -1){ // 해제->체크시 원래의 order값 부여
         guestBookOrder = 1;
     }
-    console.log(checkArr);
+
 
 
     $.ajax({
@@ -272,7 +272,7 @@ for (let plusBtn of plusBtnList) {
         const div = document.createElement("div");
         div.classList.add("subCategory");
         div.setAttribute("name", Number(subCategoryLength) + 1); // ajax에 사용
-        console.log(subCategoryLength);
+
 
         div.append(img, input, i);
         lastSubCath.after(div);
@@ -392,7 +392,7 @@ for(let folderImage of folderImageList){
         if(temp.classList.contains("diary")){categoryNo = 1;}
         if(temp.classList.contains("album")){categoryNo = 2;}
         if(temp.classList.contains("video")){categoryNo = 3;}
-        console.log(categoryNo);
+
 
 
         $.ajax({
@@ -477,6 +477,50 @@ for(let dropDownBtn of dropDownBtnList){
 
 
 
+/* 파일삭제버튼 */
+const fileDelBtnList = document.getElementsByClassName("fileDelBtn");
+for(let fileDelBtn of fileDelBtnList){
+    fileDelBtn.addEventListener("click", e => {
+
+        // ex) 나의 다이어리(13)
+        const originalFolderTitle = e.target.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.innerText;
+
+        // ex) 나의 다이어리
+        // 글 제목, 폴더의 파일 갯수 추출
+        const folderTitle = originalFolderTitle.substr(0, originalFolderTitle.lastIndexOf("(")); // ex) 나의 다이어리
+        const fileCount = originalFolderTitle.substring(originalFolderTitle.lastIndexOf("(") + 1, originalFolderTitle.lastIndexOf(")")); // ex)13
+
+        // fileCount에서 1뺀 값을 계산해서 다시 넣어주기
+        e.target.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.innerText = folderTitle + "(" + (Number(fileCount) - 1) + ")";
+        
+
+        if(confirm("정말 삭제하시겠습니까?")){
+            
+            const fileNo = e.target.parentElement.previousElementSibling.firstElementChild.nextElementSibling.getAttribute("id");
+            const categoryNo = e.target.parentElement.firstElementChild.getAttribute("id");
+
+            $.ajax({
+                url : "/manage/menu/deleteFile",
+                type : "post",
+                data : {"fileNo" : fileNo, "categoryNo" : categoryNo},
+                success : result => {
+                    if(result > 0) {
+                        alert("파일이 삭제되었습니다");
+                        
+                        // 1. 요소 삭제 2. 전체 폴더갯수에서 -1
+                        e.target.parentElement.parentElement.remove();
+
+
+                    } else {
+                        console.log("파일 삭제 실패");
+                    }
+                },
+                error : e => {console.log("파일 삭제 중 오류 발생");}
+            })
+        }
+    
+    })
+}
 
 
 

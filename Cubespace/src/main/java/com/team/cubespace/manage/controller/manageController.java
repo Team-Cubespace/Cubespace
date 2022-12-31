@@ -190,11 +190,11 @@ public class manageController {
 	 */
 	@GetMapping("/menu/selectFileList")
 	@ResponseBody
-	public int selectFileList(@RequestParam Map<String, Object> paramMap,
+	public int selectFileList(File file,
 			Model model) {
 		
-		// paramMap : folderNo, memberNo, categoryNo(1/2/3)
-		List<File> fileList = service.selectFileList(paramMap);
+		// file : folderNo, categoryNo(1/2/3)
+		List<File> fileList = service.selectFileList(file);
 		model.addAttribute("fileList", fileList);
 		
 		if(fileList != null) {
@@ -202,6 +202,31 @@ public class manageController {
 		} else {
 			return 0;
 		}
+	}
+	
+	
+	/** 내 폴더의 파일 한개 삭제하기
+	 * @param fileNo
+	 * @param loginMember
+	 * @return
+	 */
+	@PostMapping("/menu/deleteFile")
+	@ResponseBody
+	public int deleteFile(@RequestParam("fileNo") String fileNo,
+			@RequestParam("categoryNo") String categoryNo,
+			@SessionAttribute("loginMember") Member loginMember,
+			Model model) {
+		File file = new File();
+		file.setFileNo(Integer.parseInt(fileNo));
+		file.setMemberNo(loginMember.getMemberNo()); //  혹시 남이 파일 삭제할것을 대비
+		file.setCategoryNo(Integer.parseInt(categoryNo));
+		
+		
+		// 삭제 성공 후 세션의 fileList 업데이트를 위해 다시 조회
+		List<File> fileList = service.selectFileList(file);
+		model.addAttribute("fileList", fileList);
+		
+		return service.deleteFile(file);
 	}
 	
 //	친구(깐부) 관련-------------------------------------------------------------------------------

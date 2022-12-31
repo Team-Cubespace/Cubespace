@@ -545,7 +545,7 @@
                                                 </c:if>
                                             </div>
                                             <div class="fileUpdateBtnArea">
-                                                <span class="whiteBtn">삭제</span>
+                                                <span class="whiteBtn fileDelBtn" id="${file.categoryNo}">삭제</span>
                                                 <div  class="dropdown-btn">
                                                     <c:choose>
                                                         <c:when test="${file.openFlag == 1}">

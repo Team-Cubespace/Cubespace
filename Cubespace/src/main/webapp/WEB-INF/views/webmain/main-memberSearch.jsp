@@ -23,7 +23,9 @@
     <div class="modal" id="modal" style="display: none;">
         <%-- 모달 창 --%>
         <div class="modal-box" >
-            <div class="modal-close" id="modalClose" onclick="closeModal()"><</div>
+            <div class="modal-close-box">
+                <div class="modal-close" id="modalClose" onclick="closeModal()"><</div>
+            </div>
             <%-- 모달 헤더 --%>
             <div class="modal-head">
                 <img class="head-img" src="/resources/images/common/memberSearch.png" alt="깐부찾기이미지">

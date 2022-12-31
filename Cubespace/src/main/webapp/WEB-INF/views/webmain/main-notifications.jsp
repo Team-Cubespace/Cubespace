@@ -30,7 +30,9 @@
     <div class="modal" id="modalAlarm" style="display: none;">
         <!-- <%-- 모달 창 --%> -->
         <div class="modal-box" >
-            <div class="modal-close" id="modalAlarmClose" onclick="closeModalAlarm()"><</div>
+            <div class="modal-close-box">
+                <div class="modal-close" id="modalAlarmClose" onclick="closeModalAlarm()"><</div>
+            </div>
             <!-- <%-- 모달 헤더 --%> -->
             <div class="modal-head">
                 <img class="head-img-bell" src="/resources/images/common/bell.png" alt="알림">

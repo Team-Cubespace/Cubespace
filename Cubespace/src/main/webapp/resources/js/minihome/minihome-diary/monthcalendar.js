@@ -1,7 +1,7 @@
-
-/* 이벤트를 DB에서 조회해서 캘린더에 뿌려주기 */
 let loginMember = 1;
 let defaultEvents =[] ;
+
+/* [ajax] 캘린더 오픈 시 :  이벤트를 DB에서 조회해서 캘린더에 뿌려주기 */
 $.ajax({
   url: "/diary/calendar",
   type:'GET',
@@ -15,82 +15,77 @@ $.ajax({
     var events=[];
         $(data).each(function(index){
           if(data[index].allDayFlag == "Y"){
-              /* 시발 */
-              // console.log("끝날짜"+ data[index].endDate);
-              // const oldEndDate = new Date(data[index].endDate.substr(0,4),data[index].endDate.substr(5,2),data[index].endDate(8,2))
-              // const newEndDate = new Date();
-              // newEndDate.setDate = oldEndDate.getDate() + 1;
-              // console.log("끝날짜 변형" + newEndDate);
-
-              events.push({
+            events.push({
+            title: data[index].planTitle, //내 vo에서 넘어온 이름이 이거임
+            /* subSting(0,10): 날짜 subString(11,19) */
+            //start: data[index].startDate.substring(0,10), //내 vo에서 넘어온 이름이 이거임
+            start : data[index].startDate,
+            end : data[index].endDate,
+            allDay : true,
+            category : data[index].planCategory,
+            color : data[index].color,
+            description : data[index].planDescription,
+            textColor : 'black'
+            });
+          } else {
+            events.push({
               title: data[index].planTitle, //내 vo에서 넘어온 이름이 이거임
               /* subSting(0,10): 날짜 subString(11,19) */
               //start: data[index].startDate.substring(0,10), //내 vo에서 넘어온 이름이 이거임
               start : data[index].startDate,
               end : data[index].endDate,
-              allDay : true,
+              allDay : false,
               category : data[index].planCategory,
               color : data[index].color,
-              description : data[index].planDescription,
               textColor : 'black'
-              // repeat : 2
-              // end: data[index].end,
-              // textColor:'white',
-              // backgroundColor:'#'+data[index].css,
-              // url:'day_md_popup/'+data[index].day_pk
               });
-            } else {
-              events.push({
-                title: data[index].planTitle, //내 vo에서 넘어온 이름이 이거임
-                /* subSting(0,10): 날짜 subString(11,19) */
-                //start: data[index].startDate.substring(0,10), //내 vo에서 넘어온 이름이 이거임
-                start : data[index].startDate,
-                end : data[index].endDate,
-                allDay : false,
-                category : data[index].planCategory,
-                color : data[index].color,
-                textColor : 'black'
-                // repeat : 2
-                // end: data[index].end,
-                // textColor:'white',
-                // backgroundColor:'#'+data[index].css,
-                // url:'day_md_popup/'+data[index].day_pk
-                });
-            }
-
+          }
         });
     console.log("이벤트 목록입니다.");
-    // console.log(events);
     defaultEvents = events;
     console.log(defaultEvents);
+
+    /* ■ DB값을 defaultEvents라는 변수에 담아서 calendar에 넣어야 되기 때문에 캘린더 만드는 걸 createCalendar() 함수에 넣음 ■  */
     createCalendar();
   },
   error:function(status, request, error){
   alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error"+error);
   }
-});//ajax
+});//[ajax]: db조회 끝
+
+/* [함수] allDay 예/아니오에 따라 달라지는 세팅 */
+
+function allDayTrue(){ //alDay == true 일 때
+  $("#startTime").attr("disabled",true);
+  $("#endTime").attr("disabled",true);
+  $("#endDate").attr("disabled",true);
+  $("#startTime").val("00:00");
+  $("#endTime").val("00:00");
+  /* 하루 종일이니까 날짜도 동일!!!! */
+  $("#endDate").val($("#startDate").val());
+}
+function allDayFalse(){ //alDay == false 일 때
+  $("#startTime").attr("disabled",false)
+  $("#endTime").attr("disabled",false)
+  $("#endDate").attr("disabled",false);
+}
 
 
+
+/* [함수] 팝업 2개 (등록 or 수정) 공통 */
 function commonInPop(){
   /* 공통되니까 함수로 묶으면 안 돼? */
 
-    //만약 allDay가 true면 시간 선택X
+    //allDay = true 일 때의 세팅 : 하루종일이기 때문에, [(1)시작날짜 = 끝날짜 & (2) 시간은 없음]
     //redio버튼 클릭 이벤트
+    //$("#allDay2").prop("checked", true); 
     document.querySelectorAll("input[name='allDay']")[0].addEventListener("click",function(){
-      if(document.querySelector("input[name='allDay']:checked").value == "true"){
-        console.log("적용1");
-        $("#startTime").attr("disabled",true)
-        $("#endTime").attr("disabled",true)
-        $("#startTime").val("00:00");
-        $("#endTime").val("00:00");
-      }
+      console.log("allDay에 '예'를 클릭하셨나요...?");  
+      allDayTrue()
     });
     document.querySelectorAll("input[name='allDay']")[1].addEventListener("click",function(){
-      console.log("적용2");
-      if(document.querySelector("input[name='allDay']:checked").value == "false"){
-        $("#startTime").attr("disabled",false)
-        $("#endTime").attr("disabled",false)
-      }
+      console.log("allDay에 '아니오'를 클릭하셨나요...?");  
+      allDayFalse()
     });
     /* 제목값 세팅 */
     let oldTitle = document.getElementById("title").value;
@@ -106,44 +101,40 @@ function commonInPop(){
     //종료<시작이라면...
     //제목이 ㅇㅇ자 이상이라면...
     //내용이 oo자 이상이라면....
-}
-/* 모달창 내에서 취소버튼 눌렀을 때 팝업 닫기 */
+
+}//[함수] 팝업 2개 (등록 or 수정) 공통 끝
+
+/* [이벤트] :모달창 내에서 취소버튼 눌렀을 때 팝업 닫기 */
 document.getElementById("cancleBtn").addEventListener("click",function(){
   // popDisplayNone();
   document.getElementById("popup_layer").style.display = "none";
 })
 
-/* 팝업(모달창) 열기 */
+/* [함수] : 팝업 모달창 = (1) 이벤트 수정  & (2) 신규 이벤트 등록 */
 function popup(arg){
-
 
   document.getElementById("popup_layer").style.display = "block";
 
-  console.log(arg);
   /* (1)이벤트 값이 있는 경우(수정) */
   if(arg.event != undefined){
+    /* 등록버튼 숨기기 */
+    document.getElementById("mainBtn").style.display = "none";
     /* 날짜 세팅 =  (월은 1 더해줘야 하고 / 월&일 둘다 1자리수일 경우 세팅 필요함.*/
     let startFullYear = arg.event.start.getFullYear();
     let startMonth = ("0" + (arg.event.start.getMonth() + 1)).slice(-2);
     let startDate= ("0" + arg.event.start.getDate()).slice(-2);
     let startHour = ("0" + arg.event.start.getHours()).slice(-2);
     let startMinute = ("0" + arg.event.start.getMinutes()).slice(-2);
-    /* 시작 = 끝이 완전 똑같을 경우 end가 null이 되기 때문에....세팅을 해줘야해..... */
     let endFullYear;
     let endMonth; 
     let endDate;
     let endHour;
     let endMinute;
+    /* 시작 = 끝이 완전 똑같을 경우 NVL처리를 해줘도...캘린더 자체에서...end가 null이 되기 때문에....세팅을 해줘야해..... */
       if(arg.event.end != null){
         endFullYear = arg.event.end.getFullYear();
         endMonth = ("0" + (arg.event.end.getMonth() + 1)).slice(-2);
         endDate = ("0" + arg.event.end.getDate()).slice(-2);
-        /* allDay = false인 경우, 원상태로 돌려놔야 됨... */
-        // if(arg.event.allDay){
-        //   endDate = ("0" + arg.event.end.getDate()).slice(-2);
-        // }{
-        //   endDate = ("0" + arg.event.end.getDate()-1).slice(-2);
-        // }
         endHour = ("0" + arg.event.end.getHours()).slice(-2);
         endMinute  = ("0" + arg.event.end.getMinutes()).slice(-2);
       } else {
@@ -159,14 +150,13 @@ function popup(arg){
     //2. 제목
     document.getElementById("title").value = arg.event.title;
     //3. 내용
-    if(arg.event.extendedProps.description != undefined){
-      document.getElementById("description").value = arg.event.extendedProps.description;
-    } else {
-      document.getElementById("description").value = "";
-    }
+      if(arg.event.extendedProps.description != undefined){
+        document.getElementById("description").value = arg.event.extendedProps.description;
+      } else {
+        document.getElementById("description").value = "";
+      }
     //4. 시작 날짜
     document.getElementById("startDate").value = startFullYear +"-"+startMonth+"-"+startDate;
-
     //5. 시작 시간
     document.getElementById("startTime").value = startHour+":"+startMinute;
     //6. 종료 날짜
@@ -174,24 +164,23 @@ function popup(arg){
     //7. 종료 시간
     document.getElementById("endTime").value = endHour+":"+endMinute;
     //8. 종일 여부
-
-    console.log("팝업 열렸을 때 가져오는 값1" + arg.event.allDay);
-    console.log("팝업 열렸을 때 가져오는 값2" + arg.event.extendedProps.allDay);
-
-    if(arg.event.allDay){
-      $("#allDay1").prop("checked", true); 
-    }else{
-      $("#allDay2").prop("checked", true); 
-    }
+      if(arg.event.allDay){
+        $("#allDay1").prop("checked", true);
+        /* 클릭했을 때 바뀌는 거 말고도 여기도 세팅해줘야 됨... */
+        allDayTrue();
+      }else{
+        $("#allDay2").prop("checked", true);
+        allDayFalse();
+      }
     commonInPop();
     
     /* ajax로 이제 수정한 값을 보내줘야지!!!![update] */
     /* 그와 동시에, event도 addEvent되어야 하는데... */
 
   }else{ /* (2)이벤트 값이 없는 경우(생성) */
-
-    //버튼 이름 변경
-    document.getElementById("mainBtn").innerText = "등록";
+    /* 등록,삭제버튼 숨기기 */
+    document.getElementById("mainBtn").style.display = "none";
+    document.getElementById("deleteBtn").style.display = "none";
     //1. 카테고리
     document.getElementById("category").value = "1";
     //2. 제목
@@ -208,22 +197,17 @@ function popup(arg){
     document.getElementById("endTime").value = "00:00";
     //8. 종일 여부 (이거 '아니오'를 택하도록 하고 싶은데 못하겠넴)
     $("#allDay2").prop("checked", true); 
+    allDayFalse();
     commonInPop();
-
-  
-    
-    
   }
-  
-  
-  
-}
+}/* [함수] : 팝업 모달창 = (1) 이벤트 수정  & (2) 신규 이벤트 등록 끝 */
 
-
-console.log("test");
-console.log(defaultEvents);
+/* ● calendar자체의 addEvent함수를 쓰고 싶어서 전역변수를 먼저 만든 다음, fullCalendar 값을 넣고 걔의 함수를 씀. ● */
 var calendar;
+/* ▲ 이벤트 수정 시 사용 */
 var selectEvent;
+
+/* ■ DB값을 defaultEvents라는 변수에 담아서 calendar에 넣어야 되기 때문에 캘린더 만드는 걸 createCalendar() 함수에 넣음 ■  */
 // document.addEventListener('DOMContentLoaded', function() {
 function createCalendar(){
 
@@ -245,75 +229,52 @@ function createCalendar(){
 
         /* 일자 클릭 시 모달 호출 */
         select : function (arg){  
-          console.log("날짜 클릭")
           popup(arg);
-
-          
-          // calendar.addEvent({
-          //   title : "실험용",
-          //   start: arg.start,
-          //   allDay : true,
-          //   color : "#E6E6FA",
-          //   eventTextColor : "white"
-          // });
         },
 
         /* 이벤트 클릭 시 모달 호출 */
+        /* arg = 클릭한 그 이벤트의 내용임. 얘를 모달에 담고, 수정버튼을 눌렀을 때, 수정되도록... */
         eventClick : function (arg){ 
-          console.log("이벤트클릭");
           popup(arg);
           selectEvent = arg;
         },
-
-        
-        
         events : defaultEvents
-       
     });
-
     calendar.render();
 }
-  // });
 
-/* 모달창에 있는 값을 화면에 뿌리기 & DB에 저장하기 */
+/* [함수] 일정 등록 = 모달창에 있는 값을 화면에 뿌리기 & DB에 저장하기 */
 function addEvent(){
-  const category = document.getElementById("category");
-  const title = document.getElementById("title");
-  const description = document.getElementById("description");
-  const startDate = document.getElementById("startDate");
-  const startTime = document.getElementById("startTime");
-  const endDate = document.getElementById("endDate");
-  const endTime = document.getElementById("endTime");
-  const allDay =  document.querySelector("input[name='allDay']:checked");
+  alert("일정이 등록되었습니다.");
+  const category = document.getElementById("category").value;
+  const title = document.getElementById("title").value;
+  const description = document.getElementById("description").value;
+  const startDate = document.getElementById("startDate").value;
+  const startTime = document.getElementById("startTime").value;
+  const endDate = document.getElementById("endDate").value;
+  const endTime = document.getElementById("endTime").value;
+  const allDay =  document.querySelector("input[name='allDay']:checked").value;
 
-
-  console.log(startDate.value);
-  console.log(startTime.value);
-  console.log(startDate.value+"T"+startTime.value+":00");
-  console.log("allDAY값"+allDay.value);
-  
-
-  /* calendar를 전역변수로 선언해줬기 떄문에 가져올 수 있었다... */
-
-  if(allDay.value =="true"){
-
+  /* ● calendar자체의 addEvent함수를 쓰고 싶어서 전역변수를 먼저 만든 다음, fullCalendar 값을 넣고 걔의 함수를 씀. ● */
+  if(allDay =="true"){
+    console.log("allday가 trueㅋ")
     calendar.addEvent({
-      category: category.value,
-      title : title.value,
-      description : description.value,
-      start: startDate.value+"T"+startTime.value+":00",
-      end: endDate.value+"T"+endTime.value+":00",
+      category: category,
+      title : title,
+      description : description,
+      start: startDate+"T"+startTime+":00",
+      end: endDate+"T"+endTime+":00",
       allDay : true,
       color : "red",
       eventTextColor : "white"
     });
   } else {
     calendar.addEvent({
-      category: category.value,
-      title : title.value,
-      description : description.value,
-      start: startDate.value+"T"+startTime.value+":00",
-      end: endDate.value+"T"+endTime.value+":00",
+      category: category,
+      title : title,
+      description : description,
+      start: startDate+"T"+startTime+":00",
+      end: endDate+"T"+endTime+":00",
       allDay : false,
       color : "blue",
       eventTextColor : "white"
@@ -341,12 +302,12 @@ function addEvent(){
   // });
 
   
-}
+} /* [함수] 일정 등록  끝*/
 
-/* 수정하고 싶어.... */
-document.getElementById("updateBtn").addEventListener("click",function(){
+/* [함수] 수정하기 */
+function updateEvent(){
+  alert("일정이 수정되었습니다.");
   console.log(selectEvent);
-  alert("수정..?");
     //1. 카테고리
   selectEvent.event.setExtendedProp("category", document.getElementById("category").value)
   console.log("카테고리실험1"+selectEvent.event.category);
@@ -363,26 +324,16 @@ document.getElementById("updateBtn").addEventListener("click",function(){
   selectEvent.event.setDates(document.getElementById("startDate").value+"T"+document.getElementById("startTime").value+":00",
                             document.getElementById("endDate").value+"T"+document.getElementById("endTime").value+":00")
   //8. 종일 여부
-  // console.log("팝업 열렸을 때 가져오는 값" + selectEvent.event.allDay);
-
-    // if(arg.event.allDay){
-    //   $("#allDay1").prop("checked", true); 
-    // }else{
-    //   $("#allDay2").prop("checked", true); 
-    // }
-
-  console.log("얘랑"+document.querySelector("input[name='allDay']:checked").value);
     if(document.querySelector("input[name='allDay']:checked").value =="true"){
       selectEvent.event.setAllDay(true);
       // selectEvent.event.setExtendedProp("allDay","true");
       console.log("true임");
     } else {
-      electEvent.event.setAllDay(false);
+      selectEvent.event.setAllDay(false);
     // selectEvent.event.setExtendedProp("allDay","false");
       console.log("false임");
     }
-  // console.log("같아야해"+selectEvent.event.extendedProps.allDay);
-  console.log("같아야해"+selectEvent.event.allDay);
+  //팝업 닫기
   document.getElementById("popup_layer").style.display = "none";
-
-})
+  
+}/* [함수] 수정하기 끝*/

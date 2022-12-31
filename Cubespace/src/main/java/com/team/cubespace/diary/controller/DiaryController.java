@@ -39,8 +39,6 @@ public class DiaryController {
 		return "/minihome/minihome-diary/monthcalendar";
 	}
 	
-	
-	
 	/** 클릭한 날짜의 다이어리 목록 조회하기
 	 * @return diaryList
 	 */
@@ -50,15 +48,11 @@ public class DiaryController {
 			String diaryDate, int folderNumber,
 			int homepageMemberNo,int loginMemberNo
 			)  {
-		
 		int openFlag = 2;
-		
 		// 내 미니홈피라면, 전체 공개한다. (1,2,3)
 		if (homepageMemberNo == loginMemberNo) {
-			
 		} else {
 			int checkFreind = service.checkFriend(homepageMemberNo,loginMemberNo);
-			
 			// 깐부관계라면,( 조회하는 값 : 1,2 )
 			if( checkFreind == 1) {
 				openFlag = 0;
@@ -66,12 +60,9 @@ public class DiaryController {
 				openFlag = 1;
 			}
 		}
-		
 		List<Diary> diaryList = service.selectDiaryList(homepageMemberNo,diaryDate,folderNumber,openFlag);
-		
 		return new Gson().toJson(diaryList);
 	}
-	
 	/** 일기의 공감 목록 조회하기
 	 * @param diaryNo
 	 * @return
@@ -84,7 +75,6 @@ public class DiaryController {
 		
 		return new Gson().toJson(emojiList);
 	}
-	
 	/** 각각의 공감을 한 회원 목록 조회하기
 	 * @param diaryNo
 	 * @return
@@ -97,8 +87,6 @@ public class DiaryController {
 		
 		return new Gson().toJson(emojiPeopleList);
 	}
-	
-
 	 
 //    /**일정 목록 조회하기
 //     * @return

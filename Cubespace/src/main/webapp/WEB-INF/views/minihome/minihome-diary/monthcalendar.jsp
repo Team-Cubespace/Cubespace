@@ -161,7 +161,8 @@
                                     <input type="time" id = "endTime" value = "00:00">
                                 </div>
                                 <div class = "input-row">
-                                    <label for="allDay">종일 여부</label>
+                                    <label for="allDay">하루 종일</label>
+                                    <%-- 이거 라벨 잘못 붙인 듯.... 먼가 css할때 조정 필요할 듯? --%>
                                         <input type="radio"  id = "allDay1" value="true" name="allDay">예
                                         <input type="radio" id = "allDay2"  value="false" name="allDay">아니오
                                     </div>
@@ -171,7 +172,7 @@
                                 <div class = "modal-footer">
                                     <button id = "mainBtn" onClick = "addEvent()">등록</button>
 
-                                    <button id = "updateBtn" >수정</button>
+                                    <button id = "updateBtn" onClick = "updateEvent()" >수정</button>
                                     <button id = "deleteBtn">삭제</button>
 
                                     <button id = "cancleBtn">취소</button>

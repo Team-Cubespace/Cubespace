@@ -331,4 +331,38 @@ public class manageController {
 		return service.resetFrameColor(backgroundInfo);
 	}
 	
+	
+	/** 배경색 변경
+	 * @param loginMember
+	 * @param newBGColor
+	 * @return
+	 */
+	@GetMapping("/background/updateBGColor")
+	@ResponseBody
+	public int updateBGColor(@SessionAttribute("loginMember") Member loginMember,
+			String newBGColor) {
+		
+		Background backgroundInfo = new Background();
+		backgroundInfo.setBackgroundSkin(newBGColor);
+		backgroundInfo.setMemberNo(loginMember.getMemberNo());
+		
+		return service.updateBGColor(backgroundInfo);
+	}
+	
+//	/** 배경이미지 변경
+//	 * @param loginMember
+//	 * @param newBGColor
+//	 * @return
+//	 */
+//	@GetMapping("/background/updateBGInfo")
+//	@ResponseBody
+//	public int updateBGColor(@SessionAttribute("loginMember") Member loginMember,
+//			String newBGSkin) {
+//		
+//		Background backgroundInfo = new Background();
+//		backgroundInfo.setMemberNo(loginMember.getMemberNo());
+//		backgroundInfo.setBackgroundSkin(newBGSkin);
+//		
+//		return service.updateBGColor(backgroundInfo);
+//	}
 }

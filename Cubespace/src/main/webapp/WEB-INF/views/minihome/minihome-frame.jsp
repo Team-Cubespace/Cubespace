@@ -27,6 +27,9 @@
             background-color: ${minihome.frameFontColor};
             color: ${minihome.frameMenuColor};
         }
+        .minihome {
+            background-color : ${minihome.backgroundSkin};
+        }
     </style>
 
     <script>

@@ -51,12 +51,12 @@ function getTextColorByBackgroundColor(hexColor) {
 /* 전체-색상변경 */
 
 
-const chooseBGColorInput = document.getElementById("chooseBGColor");
+const BGColorInput = document.getElementById("BGColorInput");
 const bgColorShow = document.getElementById("bgColorShow");
 
-chooseBGColor.addEventListener("change", () => {
+BGColorInput.addEventListener("change", () => {
     // 미리보기 색상 변경
-    bgColorShow.style.backgroundColor = chooseBGColorInput.value;
+    bgColorShow.style.backgroundColor = BGColorInput.value;
 
 });
 
@@ -65,23 +65,111 @@ chooseBGColor.addEventListener("change", () => {
 const bgColorPreview = document.getElementById("bgColorPreview");
 bgColorPreview.addEventListener("click", e=> {
 
-    let hexColor = chooseBGColorInput.value; // #102142 형태
+    let hexColor = BGColorInput.value; // #102142 형태
     let frameFontColor = getTextColorByBackgroundColor(hexColor); // 배경색 따라 글자색결정
 
-    console.log(frameFontColor);
 
     // window.parent.postMessage(rgbList, '*');
+    // 구현중--------------------------------------------------------------------
+    // 구현중--------------------------------------------------------------------
+    // 구현중--------------------------------------------------------------------
+    // 구현중--------------------------------------------------------------------
+    // 구현중--------------------------------------------------------------------
+    // 구현중--------------------------------------------------------------------
+    // 구현중--------------------------------------------------------------------
+    // 구현중--------------------------------------------------------------------
+    // 구현중--------------------------------------------------------------------
+    // 구현중--------------------------------------------------------------------
+    // 구현중--------------------------------------------------------------------
+    // 구현중--------------------------------------------------------------------
+})
+
+
+
+/* 배경색 적용하기 버튼 */
+const bgColorUse = document.getElementById("bgColorUse");
+bgColorUse.addEventListener("click", e => {
+
+    const newBGColor = BGColorInput.value;
+    $.ajax({
+        url : "/manage/background/updateBGColor",
+        type : "get",
+        data : {"newBGColor" : newBGColor},
+        success : result => {
+            if(result > 0) {
+                alert("배경색이 변경되었습니다");
+                window.parent.location.reload();
+
+            } else {
+                console.log("배경색 변경 실패");
+            }
+        },
+        error : e => {console.log("배경색 변경 중 오류 발생");}
+    })
+
 })
 
 
 
 
 
+/* 배경이미지 적용하기 버튼 */
+const bgImageUse = document.getElementById("bgImageUse");
+bgImageUse.addEventListener("click", e => {
+
+    
+    if(imageInput.files[0] != undefined) {
+        
+        const newBGImage = new FormData();
+        const file = imageInput.files[0];
+        newBGImage.append("uploadFile", file);
+
+
+    }
+})
+
+
+
+// 배경색/이미지 변경 메서드
+// const updateBGImage = newBGImage => {
+
+//     // processData: false : Jquery 내부적으로 쿼리 스트링을 만들어 data 파라미터를 전송 -> 파일전송은 XX
+//     // contentType: false : default 값이 앞서 이야기한 application/x-www-form-urlencoded이므로 false
+
+//     $.ajax({
+//         url : "/manage/background/updateBGImage",
+//         type : "post",
+//         enctype: 'multipart/form-data',
+//         data : {"newBGSkin" : newBGSkin},
+//         processData: false,
+//         contentType: false,
+//         dataType: 'json',
+//         success : result => {
+//             if(result > 0) {
+//                 alert("배경이 변경되었습니다");
+//                 window.parent.location.reload();
+
+//             } else {
+//                 console.log("배경 변경 실패");
+//             }
+//         },
+//         error : e => {console.log("배경 변경 증 오류 발생");}
+//     })
+// }
+
+
 //----------------------------------------------------------------------- 
 /* 전체-이미지 변경 */
 
-/* 전체-이미지변경시 미리보기 바꾸기 */
-const allImageShow = () => {
+
+
+
+/* 전체-이미지변경 */
+const imageInput = document.getElementById("imageInput");
+const imageShow = document.getElementById("imageShow");
+
+imageInput.addEventListener("change", e => {
+
     if(e.target.files[0] != undefined) {
         const reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
@@ -95,17 +183,6 @@ const allImageShow = () => {
 
         }
     }
-}
-
-
-
-/* 전체-이미지변경 */
-const chooseImg = document.getElementById("chooseImg");
-const imageShow = document.getElementById("imageShow");
-
-chooseImg.addEventListener("change", e => {
-
-    allImageShow();
 })
 
 
@@ -113,11 +190,11 @@ chooseImg.addEventListener("change", e => {
 
 //----------------------------------------------------------------------- 
 /* 전체-프레임변경 */
-const chooseFrameColor = document.getElementById("chooseFrameColor");
+const frameColorInput = document.getElementById("frameColorInput");
 const frameColorShow = document.getElementById("frameColorShow");
 
-chooseFrameColor.addEventListener("change", () => {
-    frameColorShow.style.backgroundColor = chooseFrameColor.value;
+frameColorInput.addEventListener("change", () => {
+    frameColorShow.style.backgroundColor = frameColorInput.value;
 });
 
 

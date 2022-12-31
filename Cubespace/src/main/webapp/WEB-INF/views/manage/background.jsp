@@ -45,8 +45,8 @@
                 
                         <div class="changeColorArea">
                             <div>
-                                <label for="chooseBGColor" class="changeColorTitle whiteBtn">색상변경</label>
-                                <input type="color" id="chooseBGColor" name="chooseBGColor" />
+                                <label for="BGColorInput" class="changeColorTitle whiteBtn">색상변경</label>
+                                <input type="color" id="BGColorInput" name="BGColorInput" />
                                 <span class="colorShow" id="bgColorShow"></span>
                             </div>
                             <div class="backgroundBtnArea">
@@ -57,8 +57,8 @@
                         </div>
                         <div class="changeImgArea">
                             <div>
-                                <label for="chooseImg" class="changeColorTitle whiteBtn">이미지 변경</label>
-                                <input type="file" id="chooseImg" name="chooseImg" accept="image/*" multiple/>
+                                <label for="imageInput" class="changeColorTitle whiteBtn">이미지 변경</label>
+                                <input type="file" id="imageInput" name="imageInput" accept="image/*" multiple/>
                             </div>
                             <div class="backgroundBtnArea">
                                 <span class="whiteBtn" id="bgImagePreview">미리보기</span>
@@ -78,8 +78,8 @@
                         </div>
                         <div class="changeColorArea">
                             <div>
-                                <label for="chooseFrameColor" class="changeColorTitle whiteBtn">색상변경</label>
-                                <input type="color" id="chooseFrameColor" name="chooseFrameColor" />
+                                <label for="frameColorInput" class="changeColorTitle whiteBtn">색상변경</label>
+                                <input type="color" id="frameColorInput" name="frameColorInput" />
                                 <p class="colorShow" id="frameColorShow"></p>
                             </div>
                             <div class="backgroundBtnArea">

@@ -339,7 +339,7 @@ header {
     cursor: pointer;
 }
 
-#chooseImg {
+#imageInput {
     display: none;
 }
 
@@ -392,11 +392,11 @@ header {
 
 
 
-#chooseBGColor {
+#BGColorInput {
     display: none;
 }
 
-#chooseFrameColor {
+#frameColorInput {
     display: none;
 }
 

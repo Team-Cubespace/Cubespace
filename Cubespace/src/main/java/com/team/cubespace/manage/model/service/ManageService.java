@@ -127,6 +127,12 @@ public interface ManageService {
 	 */
 	int resetFrameColor(Background backgroundInfo);
 
+	/** 배경색 변경
+	 * @param backgroundInfo
+	 * @return
+	 */
+	int updateBGColor(Background backgroundInfo);
+
 
 
 }

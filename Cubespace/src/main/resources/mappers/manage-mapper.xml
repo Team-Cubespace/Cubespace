@@ -301,8 +301,8 @@
  	
    <!-- 배경색/이미지 ====================================================-->
  	
- 	<!-- 배경색/이미지 초기화하기 -->
- 	<update id="resetBGColor">
+ 	<!-- 배경색/이미지 초기화/변경하기 -->
+ 	<update id="updateBGColor">
  		UPDATE MINI_HOMEPAGE SET
 		BACKGROUND_SKIN = #{backgroundSkin}
 		WHERE MEMBER_NO = #{memberNo}
@@ -316,5 +316,7 @@
 		FRAME_FONT_COLOR = #{frameFontColor}
 		WHERE MEMBER_NO = #{memberNo}
  	</update>
+ 	
+ 	
   
 </mapper>

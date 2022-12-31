@@ -335,6 +335,15 @@ public class ManageServiceImpl implements ManageService{
 		return dao.resetFrameColor(backgroundInfo);
 	}
 
+	/**
+	 * 배경색 변경
+	 */
+	@Override
+	public int updateBGColor(Background backgroundInfo) {
+		
+		return dao.updateBGColor(backgroundInfo);
+	}
+
 
 
 }

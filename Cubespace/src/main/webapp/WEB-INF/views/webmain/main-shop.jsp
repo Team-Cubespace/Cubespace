@@ -3,8 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<c:set var="pagination" value = "${shopFontMap.pagination}"/>
-<c:set var="shopFontList" value = "${shopFontMap.shopFontList}"/>
+<c:set var="pagination" value = "${shopMap.pagination}"/>
+<c:set var="shopGoodsList" value = "${shopMap.shopFontList}"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/resources/css/variables.css">
     <link rel="stylesheet" href="/resources/css/style-web.css">
     <link rel="stylesheet" href="/resources/css/common/checkBox.css">
-    <link rel="stylesheet" href="/resources/css/webmain/main-shopFont.css">
+    <link rel="stylesheet" href="/resources/css/webmain/main-shop.css">
 
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
 
@@ -63,7 +63,7 @@
 
                 <div class="shop-rank-lsit"> <%-- 최신/ 인기 목록 --%>
                     <%-- 생성되는 모양 --%>
-                <%--<div class="goods">
+                <div class="goods">
                         <img class="new-img" src="/resources/images/common/shopNew2.png">
                         <div class="goods-example" style="font-family:'10'">우리들의 작은 공간 큐브스페이스에서 시작하세요</div>
                         <div class="goods-info">
@@ -74,26 +74,30 @@
                                 <div class="goods-holding">보유중</div>
                             </div>
                         </div>
-                    </div> --%>
+                    </div>
                 </div>
             </div>
             <%----------------------------%>
             <div class="goods-list"> <%-- 상품 전체 목록 --%>
 
-                <c:forEach var="shopList" items="${shopFontList}">
+                <c:forEach var="shopList" items="${shopGoodsList}">
                 
                     <div class="goods">
-                        <div class="goods-example">우리들의 작은 공간 큐브스</div>
+                        <div class="goods-example" style="font-family:'${shopList.goodsNo}'">우리들의 작은 공간 큐브스</div>
                         <div class="goods-info">
-                            <div class="goods-title">${shopList.fontName}</div><%-- 상품이름 --%>
-                            <div class="goods-producer">${shopList.fontCreater}</div><%-- 상품제작자 --%>
+                            <div class="goods-title">${shopList.goodsName}</div><%-- 상품이름 --%>
+                            <div class="goods-producer">${shopList.goodsCreater}</div><%-- 상품제작자 --%>
                             <div>
-                                <div class="goods-count">사용횟수 : ${shopList.fontCount}</div> <%-- 사용횟수 --%>
+                                <div class="goods-count">사용횟수 : ${shopList.goodsCount}</div> <%-- 사용횟수 --%>
                                 
-                                
-                                
-                                <div class="goods-btn" onclick="goodsAdd(${shopList.fontNo},shopCathNo,this)">사용하기</div>
-
+                                <c:choose>
+                                    <c:when test="${shopList.useGoodsNo!=shopList.goodsNo}">
+                                        <div class="goods-btn goods_'${shopList.goodsNo}'" onclick="goodsAdd('${shopList.goodsNo}',shopCathNo,this)">사용하기</div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="goods-holding">보유중</div>
+                                    </c:otherwise>
+                                </c:choose>
                                 
                                 
                             </div>
@@ -137,7 +141,7 @@
         let shopCathNo=1; // 상점 번호
     </script>
     <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
-    <script src="/resources/js/webmain/main-shopFont.js"></script>
+    <script src="/resources/js/webmain/main-shop.js"></script>
     <script src="/resources/js/webmain/shop-common.js"></script>
 </body>
 </html>

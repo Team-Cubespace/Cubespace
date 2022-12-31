@@ -3,22 +3,22 @@
 <mapper namespace="shop">
 	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
 
-	<resultMap type="shop" id="shop_rm">
+	<resultMap type="ShopFont" id="shopFont_rm">
    
-		<id property="fontNo" column="FONT_NO"/>
-		<result property="fontName" column="FONT_NAME"></result>
-		<result property="fontPath" column="FONT_PATH"></result>
-		<result property="fontCreater" column="FONT_CREATER"></result>
-		<result property="fontCount" column="FONT_COUNT_NO"></result>
-		<result property="goodsNo" column="GOODS_NO"></result>
+		<id property="goodsNo" column="FONT_NO"/>
+		<result property="goodsName" column="FONT_NAME"></result>
+		<result property="goodsPath" column="FONT_PATH"></result>
+		<result property="goodsCreater" column="FONT_CREATER"></result>
+		<result property="goodsCount" column="GOODS_COUNT_NO"></result>
+		<result property="useGoodsNo" column="GOODS_NO"></result>
 		
 	</resultMap>
- 	 
+
 
  	 <!-- 상점 최신폰트 목록 조회 -->
-	<select id="shopNewFont"  resultMap="shop_rm">
+	<select id="shopNewFont"  resultMap="shopFont_rm">
 		SELECT * FROM (
-		SELECT FONT_NO, FONT_NAME ,FONT_PATH ,FONT_CREATER , NVL(COUNT_NO,0) FONT_COUNT_NO ,
+		SELECT FONT_NO, FONT_NAME ,FONT_PATH ,FONT_CREATER , NVL(COUNT_NO,0) GOODS_COUNT_NO ,
 		   CASE
 		   WHEN FONT_NO IN (SELECT GOODS_NO 
 		   FROM MEMBER_OWN_GOODS
@@ -44,9 +44,9 @@
 	</insert>
    
 	<!-- 상점 인기폰트 목록 조회 -->
-	<select id="shopPopularFont"  resultMap="shop_rm">
+	<select id="shopPopularFont"  resultMap="shopFont_rm">
 		SELECT * FROM (
-		SELECT FONT_NO, FONT_NAME ,FONT_PATH ,FONT_CREATER , NVL(COUNT_NO,0) FONT_COUNT_NO ,
+		SELECT FONT_NO, FONT_NAME ,FONT_PATH ,FONT_CREATER , NVL(COUNT_NO,0) GOODS_COUNT_NO ,
 		   CASE
 		   WHEN FONT_NO IN (SELECT GOODS_NO 
 		   FROM MEMBER_OWN_GOODS
@@ -62,7 +62,7 @@
 		   ORDER BY COUNT_NO DESC
 		) S ON (F.FONT_NO = S.GOODS_NO)
 		WHERE FONT_NO != 1
-		ORDER BY FONT_COUNT_NO DESC, FONT_NO DESC) 
+		ORDER BY GOODS_COUNT_NO DESC, FONT_NO DESC) 
 		<![CDATA[WHERE ROWNUM <= 3]]>
 	</select>
 	
@@ -73,8 +73,8 @@
 	</select>
 	
 	<!-- 페이징 처리객체 사용하여 폰트 상점 상품 목록 조회 -->
-	<select id="selectFontList" resultMap="shop_rm">
-		SELECT FONT_NO, FONT_NAME ,FONT_PATH ,FONT_CREATER , NVL(COUNT_NO,0) FONT_COUNT_NO ,
+	<select id="selectFontList" resultMap="shopFont_rm">
+		SELECT FONT_NO, FONT_NAME ,FONT_PATH ,FONT_CREATER , NVL(COUNT_NO,0) GOODS_COUNT_NO ,
 		   CASE
 		   WHEN FONT_NO IN (SELECT GOODS_NO 
 		   FROM MEMBER_OWN_GOODS

@@ -3,15 +3,15 @@ package com.team.cubespace.main.model.service;
 import java.util.List;
 import java.util.Map;
 
-import com.team.cubespace.main.model.vo.Shop;
+import com.team.cubespace.main.model.vo.ShopFont;
 
 public interface ShopService {
 
-	/** 상점 최신폰트 목록 조회
+	/** 상점 최신상품 목록 조회
 	 * @param loginMemberNo
 	 * @return
 	 */
-	List<Shop> shopNewFont(int loginMemberNo);
+	List<ShopFont> shopNewGoods(int loginMemberNo);
 
 	/** 상점 상품 추가(폰트,배경음악,소품)
 	 * @param paramMap
@@ -19,17 +19,17 @@ public interface ShopService {
 	 */
 	int goodsAddButton(Map<String, Object> paramMap);
 
-	/** 상점 인기폰트 목록 조회
+	/** 상점 인기상품 목록 조회
 	 * @param loginMemberNo
 	 * @return
 	 */
-	List<Shop> shopPopularFont(int loginMemberNo);
+	List<ShopFont> shopPopularGoods(int loginMemberNo);
 
-	/** 상점 폰트 목록 조회
+	/** 상점 상품 목록 조회
 	 * @param loginMemberNo
 	 * @param cp
 	 * @return
 	 */
-	Map<String, Object> selectFontList(int loginMemberNo, int cp);
+	Map<String, Object> selectGoodsList(int loginMemberNo, int cp);
 
 }

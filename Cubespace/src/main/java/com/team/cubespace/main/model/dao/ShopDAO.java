@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.team.cubespace.common.Pagination;
-import com.team.cubespace.main.model.vo.Shop;
+import com.team.cubespace.main.model.vo.ShopFont;
 
 @Repository
 public class ShopDAO {
@@ -21,7 +21,7 @@ public class ShopDAO {
 	 * @param loginMemberNo
 	 * @return
 	 */
-	public List<Shop> shopNewFont(int loginMemberNo) {
+	public List<ShopFont> shopNewFont(int loginMemberNo) {
 		return sqlSession.selectList("shop.shopNewFont",loginMemberNo);
 	}
 
@@ -37,7 +37,7 @@ public class ShopDAO {
 	 * @param loginMemberNo
 	 * @return
 	 */
-	public List<Shop> shopPopularFont(int loginMemberNo) {
+	public List<ShopFont> shopPopularFont(int loginMemberNo) {
 		return sqlSession.selectList("shop.shopPopularFont",loginMemberNo);
 	}
 
@@ -53,7 +53,7 @@ public class ShopDAO {
 	 * @param loginMemberNo
 	 * @return
 	 */
-	public List<Shop> selectFontList(Pagination pagination, int loginMemberNo) {
+	public List<ShopFont> selectFontList(Pagination pagination, int loginMemberNo) {
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		return sqlSession.selectList("shop.selectFontList",loginMemberNo,rowBounds);

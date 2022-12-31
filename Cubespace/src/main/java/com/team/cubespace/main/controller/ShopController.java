@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.google.gson.Gson;
 import com.team.cubespace.main.model.service.ShopService;
-import com.team.cubespace.main.model.vo.Shop;
+import com.team.cubespace.main.model.vo.ShopFont;
 import com.team.cubespace.member.model.vo.Member;
 
 @Controller
@@ -27,32 +27,35 @@ public class ShopController {
 	 * @return
 	 */
 	@GetMapping("/cubespace/shop")
-	public String shopFontMove(Model model,
+	public String shopMove(Model model,
 			@RequestParam(value="cp", required=false, defaultValue="1") int cp,
 			@SessionAttribute(value="loginMember", required=false) Member loginMember
 ) {
 		int loginMemberNo = loginMember.getMemberNo();
 		
-		// 상점 폰트 목록 조회 서비스 호출
-		Map<String, Object> shopFontMap = service.selectFontList(loginMemberNo, cp); 
+		//어느 상점인지 상점 번호 추가하기
 		
 		
-		model.addAttribute("shopFontMap", shopFontMap);
+		// 상점 목록 조회 서비스 호출
+		Map<String, Object> shopMap = service.selectGoodsList(loginMemberNo, cp); 
+		
+		
+		model.addAttribute("shopMap", shopMap);
 
 		return "/webmain/main-shop";
 	}
 	
 	
-	/** 상점 최신폰트 목록 조회
+	/** 상점 최신상품 목록 조회
 	 * @return
 	 */
-	@GetMapping("/shopNewFont")
+	@GetMapping("/shopNewGoods")
 	@ResponseBody
-	public String shopNewFont(int loginMemberNo) {
+	public String shopNewGoods(int loginMemberNo) {
+		// 어떤상점 인지 번호 매개변수로 가져와야함 
+		List<ShopFont> shopNewGoodsList = service.shopNewGoods(loginMemberNo);
 		
-		List<Shop> shopNewFontList = service.shopNewFont(loginMemberNo);
-		
-		return new Gson().toJson(shopNewFontList); 
+		return new Gson().toJson(shopNewGoodsList); 
 	}
 	
 	
@@ -69,14 +72,14 @@ public class ShopController {
 		return result;
 	}
 	
-	/** 상점 인기폰트 목록 조회
+	/** 상점 인기상품 목록 조회
 	 * @return
 	 */
-	@GetMapping("/shopPopularFont")
+	@GetMapping("/shopPopularGoods")
 	@ResponseBody
-	public String shopPopularFont(int loginMemberNo) {
+	public String shopPopularGoods(int loginMemberNo) {
 		
-		List<Shop> popularFontList = service.shopPopularFont(loginMemberNo);
+		List<ShopFont> popularFontList = service.shopPopularGoods(loginMemberNo);
 		
 		return new Gson().toJson(popularFontList); 
 	}

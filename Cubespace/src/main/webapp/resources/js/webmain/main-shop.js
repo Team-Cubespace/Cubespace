@@ -52,7 +52,7 @@ const newGoodsSelect = () => {
 
     $.ajax({
         url:"/shopNewGoods",
-        data: {"loginMemberNo":loginMemberNo},
+        data: {"loginMemberNo":loginMemberNo,"shopCathNo":shopCathNo},
         dataType : "JSON",
         success : newGoodsList =>{
 
@@ -75,8 +75,25 @@ const newGoodsSelect = () => {
                     /* 예시용 화면 생성 */
                     const goods_example = document.createElement("div")
                     goods_example.classList.add("goods-example")
-                    goods_example.style.fontFamily= "'"+newGoods.goodsNo+"'";
-                    goods_example.innerText="우리들의 작은 공간 큐브스페이스에서 시작하세요"
+
+                    if(shopCathNo==1){ // 폰트 예시화면 생성
+                        goods_example.style.fontFamily= "'"+newGoods.goodsNo+"'";
+                        goods_example.innerText="우리들의 작은 공간 큐브스페이스에서 시작하세요"
+
+                    }else if(shopCathNo==2){ // 배경음악 예시화면 생성
+                        const goods_exampleimg = document.createElement("img")
+                        goods_exampleimg.classList.add("goods-exampleimg")
+                        goods_exampleimg.setAttribute("src",""+newGoods.goodsImagePath+"")
+
+                        goods_example.append(goods_exampleimg)
+
+                    }else{ // 미니룸 소품 예시화면 생성
+                        const goods_exampleimg = document.createElement("img")
+                        goods_exampleimg.classList.add("goods-exampleimg")
+                        goods_exampleimg.setAttribute("src",""+newGoods.goodsPath+"")
+
+                        goods_example.append(goods_exampleimg)
+                    }
                     
                     const goods_info = document.createElement("div")
                     goods_info.classList.add("goods-info")

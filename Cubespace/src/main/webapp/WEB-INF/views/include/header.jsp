@@ -26,7 +26,7 @@
             </c:when>
             <c:otherwise>
             <li class="header-menu">
-                <a href="/cubespace/shop">
+                <a href="/cubespace/shop?shopCt=1">
                     <i class="fa-solid fa-shop"></i>
                 <span>상점</span>
             </a>

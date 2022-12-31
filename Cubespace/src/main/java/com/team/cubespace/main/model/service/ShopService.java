@@ -9,9 +9,10 @@ public interface ShopService {
 
 	/** 상점 최신상품 목록 조회
 	 * @param loginMemberNo
+	 * @param shopCt 
 	 * @return
 	 */
-	List<ShopFont> shopNewGoods(int loginMemberNo);
+	List<ShopFont> shopNewGoods(int loginMemberNo, int shopCathNo);
 
 	/** 상점 인기상품 목록 조회
 	 * @param loginMemberNo

@@ -23,17 +23,21 @@ public class ShopServiceImpl  implements ShopService{
 
 	// 상점 최신상품 목록 조회
 	@Override
-	public List<ShopFont> shopNewGoods(int loginMemberNo) {
+	public List<ShopFont> shopNewGoods(int loginMemberNo, int shopCathNo) {
 		
 		
-		// 1 폰트 상점 일때
-//		if()
-		return dao.shopNewFont(loginMemberNo);
+		if(shopCathNo==1){ // 1 최신 폰트 상품 목록 조회 
+			return dao.shopNewFont(loginMemberNo);
 		
-		// 2 배경음윽 상점 일때
 		
-		// 3 미니룸 소품 상점 일때
+		}else if (shopCathNo==2) { // 2 최신 배경음악 상품 목록 조회
+			return dao.shopNewMusic(loginMemberNo);
+
 		
+		}else { // 3 최신 미니룸소품 상품 목록 조회
+			return dao.shopNewMiniroom(loginMemberNo);
+
+		}
 	}
 
 

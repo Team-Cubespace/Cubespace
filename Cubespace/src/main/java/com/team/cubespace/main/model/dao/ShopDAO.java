@@ -19,12 +19,28 @@ public class ShopDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	/** 상점 최신폰트 목록 조회
+	/** 최신 폰트 상품 목록 조회 
 	 * @param loginMemberNo
 	 * @return
 	 */
 	public List<ShopFont> shopNewFont(int loginMemberNo) {
 		return sqlSession.selectList("shop.shopNewFont",loginMemberNo);
+	}
+	
+	/** 최신 배경음악 상품 목록 조회
+	 * @param loginMemberNo
+	 * @return
+	 */
+	public List<ShopFont> shopNewMusic(int loginMemberNo) {
+		return sqlSession.selectList("shop.shopNewMusic",loginMemberNo);
+	}
+
+	/** 최신 미니룸소품 상품 목록 조회
+	 * @param loginMemberNo
+	 * @return
+	 */
+	public List<ShopFont> shopNewMiniroom(int loginMemberNo) {
+		return sqlSession.selectList("shop.shopNewMiniroom",loginMemberNo);
 	}
 
 	/** 상점 상품 추가(폰트,배경음악,소품)
@@ -96,6 +112,9 @@ public class ShopDAO {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		return sqlSession.selectList("shop.selectShopMiniroomList",loginMemberNo,rowBounds);
 	}
+
+
+
 
 
 	

@@ -30,8 +30,7 @@ public class ShopController {
 	public String shopMove(Model model,
 			@RequestParam(value="shopCt", required=false, defaultValue="1") int shopCt,
 			@RequestParam(value="cp", required=false, defaultValue="1") int cp,
-			@SessionAttribute(value="loginMember", required=false) Member loginMember
-) {
+			@SessionAttribute(value="loginMember", required=false) Member loginMember) {
 		int loginMemberNo = loginMember.getMemberNo();
 		
 		// 상점 목록 조회 서비스 호출
@@ -47,9 +46,9 @@ public class ShopController {
 	 */
 	@GetMapping("/shopNewGoods")
 	@ResponseBody
-	public String shopNewGoods(int loginMemberNo) {
-		// 어떤상점 인지 번호 매개변수로 가져와야함 
-		List<ShopFont> shopNewGoodsList = service.shopNewGoods(loginMemberNo);
+	public String shopNewGoods(int loginMemberNo,int shopCathNo) {
+		
+		List<ShopFont> shopNewGoodsList = service.shopNewGoods(loginMemberNo,shopCathNo);
 		
 		return new Gson().toJson(shopNewGoodsList); 
 	}

@@ -162,7 +162,7 @@ body *{
     height: 60%;
     width: 100%;
     font-size: 20px;
-    padding: 5px;
+    padding: 5px 10px;
     /* border-bottom: 1px solid black; */
     border-bottom: 1px solid black;
 }

@@ -29,18 +29,18 @@
         <div class="shop-main-frame">
             <div class="shop-header">
                 <div class="shop-move">
-                    <div class="shop-font"> 
+                    <a href="/cubespace/shop?shopCt=1" class="shop-font"> 
                         <img class="cube-img" src="/resources/images/common/smallCube.png"> 
-                        <a href="/cubespace/shop?shopCt=1" >폰트</a> 
-                    </div>
-                    <div class="shop-music"> 
+                        <div>폰트</div> 
+                    </a>
+                    <a href="/cubespace/shop?shopCt=2" class="shop-music"> 
                         <img class="cube-img" src="/resources/images/common/smallCube.png"> 
-                        <a href="/cubespace/shop?shopCt=2">배경음악</a> 
-                    </div>
-                    <div class="shop-miniroom"> 
+                        <div >배경음악</div> 
+                    </a>
+                    <a href="/cubespace/shop?shopCt=3" class="shop-miniroom"> 
                         <img class="cube-img" src="/resources/images/common/smallCube.png"> 
-                        <a href="/cubespace/shop?shopCt=3" >미니룸 소품</a> 
-                    </div>
+                        <div>미니룸 소품</div> 
+                    </a>
                 </div>
 
                 <div class="shop-search">
@@ -63,7 +63,7 @@
 
                 <div class="shop-rank-lsit"> <%-- 최신/ 인기 목록 --%>
                     <%-- 생성되는 모양 --%>
-                <div class="goods">
+                    <%-- <div class="goods">
                         <img class="new-img" src="/resources/images/common/shopNew2.png">
                         <div class="goods-example" style="font-family:'10'">우리들의 작은 공간 큐브스페이스에서 시작하세요</div>
                         <div class="goods-info">
@@ -74,42 +74,37 @@
                                 <div class="goods-holding">보유중</div>
                             </div>
                         </div>
-                    </div>
+                    </div> --%>
                 </div>
             </div>
             <%----------------------------%>
             <div class="goods-list"> <%-- 상품 전체 목록 --%>
 
                 <c:forEach var="shopList" items="${shopGoodsList}">
-                
                     <div class="goods">
                         <c:choose>
                             <%-- 폰트 페이지 예시화면 --%>
                             <c:when test="${param.shopCt==1}">
                                 <div class="goods-example" style="font-family:'${shopList.goodsNo}'">우리들의 작은 공간 큐브스페이스에서 시작하세요</div>
                             </c:when>
-
                             <%-- 배경음악 페이지 예시화면 --%>
                             <c:when test="${param.shopCt==2}">
                                 <div class="goods-example" >
                                     <img class="goods-exampleimg" src="${shopList.goodsImagePath}">
                                 </div>    
                             </c:when>
-
                             <%-- 소품 페이지 예시화면 --%>
                             <c:otherwise>
                                 <div class="goods-example" >
                                     <img class="goods-exampleimg" src="${shopList.goodsPath}">
                                 </div>   
                             </c:otherwise>
-
                         </c:choose>
                         <div class="goods-info">
                             <div class="goods-title">${shopList.goodsName}</div><%-- 상품이름 --%>
                             <div class="goods-producer">${shopList.goodsCreater}</div><%-- 상품제작자 --%>
                             <div>
                                 <div class="goods-count">사용횟수 : ${shopList.goodsCount}</div> <%-- 사용횟수 --%>
-                                
                                 <c:choose>
                                     <c:when test="${shopList.useGoodsNo!=shopList.goodsNo}">
                                         <div class="goods-btn goods_${shopList.goodsNo}" onclick="goodsAdd(${shopList.goodsNo},shopCathNo,this)">사용하기</div>
@@ -118,14 +113,10 @@
                                         <div class="goods-holding">보유중</div>
                                     </c:otherwise>
                                 </c:choose>
-                                
-                                
                             </div>
                         </div>
                     </div>
-
                 </c:forEach>
-
 
             </div>
             <%----------------------------%>
@@ -155,11 +146,8 @@
                 </ul>
             </div>
         </div>
-
     </main>
     <script>
-        // let shopCathNo=1; // 상점 번호
-
         let shopCathNo;
 
         if(${param.shopCt != null}){

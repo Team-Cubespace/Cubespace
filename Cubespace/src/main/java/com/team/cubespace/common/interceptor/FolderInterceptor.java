@@ -42,8 +42,10 @@ public class FolderInterceptor implements HandlerInterceptor{
 		
 		// 폴더 목록 조회 서비스 호출
 		List<Folder> folderList = fService.selectFolderList(paramMap);
+		String folderRequestURI = request.getRequestURI();
 		
 		session.setAttribute("folderList", folderList);
+		session.setAttribute("folderRequestURI", folderRequestURI);
 		
 		return HandlerInterceptor.super.preHandle(request, response, handler);
 	}

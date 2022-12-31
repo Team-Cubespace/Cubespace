@@ -41,6 +41,7 @@
  	<interceptors>
 		<interceptor>
 			<mapping path="/albumList/*"/>
+			<mapping path="/videoList/*"/>
 			<beans:bean id="folderInterceptor" class="com.team.cubespace.common.interceptor.FolderInterceptor"></beans:bean>
 		</interceptor>
 		<interceptor>

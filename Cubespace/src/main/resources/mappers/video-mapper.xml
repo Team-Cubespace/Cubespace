@@ -2,6 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="videoMapper">
 	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
+	<resultMap type="Video" id="videoList_rm">
+		<id property="videoNo" column="VIDEO_NO"/>
+		
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="videoThumbnail" column="V_THUMNAIL"/>
+		<result property="videoTitle" column="V_TITLE"/>
+		<result property="videoReadCount" column="V_READ_COUNT"/>
+		<result property="videoCreate" column="V_CREATE"/>
+	</resultMap>
 	
+	<!-- 특정 폴더의 동영상 갯수 조회 -->
+	<select id="getListCount" parameterType="map" resultType="_int">
+		SELECT COUNT(*)
+		<![CDATA[
+			FROM VIDEO
+			WHERE FOLDER_NO = #{folderNo}
+			AND V_OPEN_FL <= #{flag}
+			AND V_DEL_YN = 'N'
+		]]>
+	</select>
 	
+	<select id="selectVideoList" parameterType="map" resultMap="videoList_rm">
+		SELECT VIDEO_NO, MEMBER_NO, V_THUMNAIL, V_TITLE, V_READ_COUNT,
+			TO_CHAR(V_CREATE, 'YYYY.MM.DD') V_CREATE
+		<![CDATA[
+			FROM VIDEO
+			WHERE FOLDER_NO = #{folderNo}
+			AND V_DEL_YN = 'N'
+			AND V_OPEN_FL <= #{flag}
+			ORDER BY VIDEO_NO
+		]]>
+	</select>
 </mapper>

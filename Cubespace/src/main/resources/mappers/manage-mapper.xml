@@ -37,6 +37,16 @@
  	 </resultMap>
  	 
  	 
+	<resultMap type="File" id="file_rm">
+   		<id property="fileNo" column="FILE_NO"/>
+   		<result property="fileTitle" column="FILE_TITLE"></result>
+   		<result property="openFlag" column="OPEN_FL"></result>
+   		<result property="folderNo" column="FOLDER_NO"></result>
+   		<result property="folderName" column="FOLDER_NAME"></result>
+   		<result property="categoryNo" column="CATEGORY_NO"></result>
+ 	 </resultMap>
+ 	 
+ 	 
  	 
  	 
  <!-- 폴더 ====================================================-->
@@ -44,11 +54,12 @@
 	<!-- 폴더 리스트 조회 -->
 	<select id="getFolderList" resultMap="folder_rm">
 		SELECT F.FOLDER_NO, BOARD_TYPE_NO, FOLDER_NAME, FOLDER_ORDER, MEMBER_NO, 
-		(SELECT COUNT(*) FROM DIARY D WHERE D.MEMBER_NO = 1 AND D.FOLDER_NO = F.FOLDER_NO)  + 
-		(SELECT COUNT(*) FROM ALBUM A WHERE A.MEMBER_NO = 1 AND A.FOLDER_NO = F.FOLDER_NO) + 
-		(SELECT COUNT(*) FROM VIDEO V WHERE V.MEMBER_NO = 1 AND V.FOLDER_NO = F.FOLDER_NO)  FILE_COUNT
+		(SELECT COUNT(*) FROM DIARY D WHERE D.MEMBER_NO = 1 AND D.FOLDER_NO = F.FOLDER_NO AND D_DEL_YN = 'N')  + 
+		(SELECT COUNT(*) FROM ALBUM A WHERE A.MEMBER_NO = 1 AND A.FOLDER_NO = F.FOLDER_NO AND A_DEL_FL = 'N') + 
+		(SELECT COUNT(*) FROM VIDEO V WHERE V.MEMBER_NO = 1 AND V.FOLDER_NO = F.FOLDER_NO AND V_DEL_YN = 'N')  FILE_COUNT
 		FROM FOLDER  F 
 		WHERE MEMBER_NO  = #{memberNo}
+		AND FOLDER_DEL_YN = 'N'
 		ORDER BY BOARD_TYPE_NO, FOLDER_ORDER
 	</select>
  	 
@@ -113,15 +124,16 @@
 		
 		INSERT INTO FOLDER VALUES(
 		#{folderNo}, #{boardTypeNo},
-		#{folderName}, #{folderOrder}, #{memberNo})
+		#{folderName}, #{folderOrder}, #{memberNo}, DEFAULT)
 	</insert>
 	
 	<!-- 카테고리에서 폴더 삭제 -->
-	<delete id="deleteFolder">
-		DELETE FROM FOLDER 
+	<update id="deleteFolder">
+		UPDATE FOLDER SET
+		FOLDER_DEL_YN = 'Y'
 		WHERE MEMBER_NO = #{memberNo}
 		AND FOLDER_NO = #{folderNo}
-	</delete>
+	</update>
 	
 	<!-- 폴더삭제 후 나머지 폴더순서 새로 정렬 -->
 	<update id="updateFolderOrder">
@@ -143,7 +155,89 @@
 		FOLDER_NAME = #{folderName}
 		WHERE MEMBER_NO = #{memberNo}
 		AND FOLDER_NO = #{folderNo}
-		AND BOARD_TYPE_NO = #{boardTypeNo}
+	</update>
+	
+	
+	
+	<!-- 해당 파일의 폴더목록 조회(DIARY) -->
+	<select id="selectDiaryFileList" resultMap="file_rm">
+		SELECT DIARY_NO FILE_NO, D_TITLE FILE_TITLE, D_OPEN_FL OPEN_FL, 
+		FOLDER_NO, FOLDER_NAME, 1 CATEGORY_NO
+		FROM DIARY
+		JOIN FOLDER USING(FOLDER_NO)
+		WHERE FOLDER_NO = #{folderNo}
+		AND D_DEL_YN = 'N'
+		AND FOLDER_DEL_YN = 'N'
+	</select>
+	
+	<!-- 해당 파일의 폴더목록 조회(ALBUM) -->
+	<select id="selectAlbumFileList" resultMap="file_rm">
+		SELECT ALBUM_NO FILE_NO, A_TITLE FILE_TITLE, A_OPEN_FL OPEN_FL, 
+		FOLDER_NO, FOLDER_NAME, 2 CATEGORY_NO
+		FROM ALBUM 
+		JOIN FOLDER USING(FOLDER_NO)
+		WHERE FOLDER_NO = #{folderNo}
+		AND A_DEL_FL = 'N'
+		AND FOLDER_DEL_YN = 'N'
+	</select>
+	
+	
+	<!-- 해당 파일의 폴더목록 조회(VIDEO) -->
+	<select id="selectVideoFileList" resultMap="file_rm">
+		SELECT VIDEO_NO FILE_NO, V_TITLE FILE_TITLE, V_OPEN_FL OPEN_FL, 
+		FOLDER_NO, FOLDER_NAME, 3 CATEGORY_NO
+		FROM VIDEO
+		JOIN FOLDER USING(FOLDER_NO)
+		WHERE FOLDER_NO = #{folderNo}
+		AND V_DEL_YN = 'N'
+		AND FOLDER_DEL_YN = 'N'
+	</select>
+	
+	<!-- (다이어리)내 폴더의 파일 한개 삭제하기 -->
+	<update id="deleteDiaryFile">
+		UPDATE DIARY SET
+		D_DEL_YN = 'Y'
+		WHERE DIARY_NO = #{fileNo}
+		AND MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- (앨범)내 폴더의 파일 한개 삭제하기 -->
+	<update id="deleteAlbumFile">
+		UPDATE ALBUM SET
+		A_DEL_FL = 'Y'
+		WHERE ALBUM_NO = #{fileNo}
+		AND MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- (비디오)내 폴더의 파일 한개 삭제하기 -->
+	<update id="deleteVideoFile">
+		UPDATE VIDEO SET
+		V_DEL_YN = 'Y'
+		WHERE VIDEO_NO = #{fileNo}
+		AND MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 게시글 공개여부 설정(다이어리) -->
+	<update id="updateDiaryOpenFlag">
+		UPDATE DIARY SET D_OPEN_FL = #{openFlag}
+		WHERE MEMBER_NO = #{memberNo}
+		AND DIARY_NO = #{fileNo}
+	</update>
+	
+	<!-- 게시글 공개여부 설정(앨범) -->
+	<update id="updateAlbumOpenFlag">
+		UPDATE ALBUM SET
+		A_OPEN_FL = #{openFlag}
+		WHERE MEMBER_NO = #{memberNo}
+		AND ALBUM_NO = #{fileNo}
+	</update>
+	
+	<!-- 게시글 공개여부 설정(비디오) -->
+	<update id="updateVideoOpenFlag">
+		UPDATE VIDEO SET
+		V_OPEN_FL = #{openFlag}
+		WHERE MEMBER_NO = #{memberNo}
+		AND VIDEO_NO = #{fileNo}
 	</update>
 	
  <!-- 깐부 ====================================================-->
@@ -160,6 +254,7 @@
 			FROM friend 
 			JOIN MEMBER ON(ASKING_MEMBER_NO = MEMBER_NO)
 			WHERE ASKED_MEMBER_NO = #{memberNo} AND FRIEND_ACCEPT_FL = 1 AND MEMBER_NICKNAME LIKE '%${searchInput}%')
+		ORDER BY MEMBER_NICKNAME
 	</select>
 	
  	 <!-- 깐부끊기 -->
@@ -202,5 +297,24 @@
  		SELECT OWN_FONT_NO FROM MEMBER 
  		WHERE MEMBER_NO = #{memberNo}
  	</select>
+ 	
+ 	
+   <!-- 배경색/이미지 ====================================================-->
+ 	
+ 	<!-- 배경색/이미지 초기화하기 -->
+ 	<update id="resetBGColor">
+ 		UPDATE MINI_HOMEPAGE SET
+		BACKGROUND_SKIN = #{backgroundSkin}
+		WHERE MEMBER_NO = #{memberNo}
+ 	</update>
+  
+ 	<!-- 프레임 초기화하기 -->
+ 	<update id="resetFrameColor">
+ 		UPDATE MINI_HOMEPAGE SET
+		FRAME_COLOR = #{frameColor},
+		FRAME_MENU_COLOR =#{frameMenuColor},
+		FRAME_FONT_COLOR = #{frameFontColor}
+		WHERE MEMBER_NO = #{memberNo}
+ 	</update>
   
 </mapper>

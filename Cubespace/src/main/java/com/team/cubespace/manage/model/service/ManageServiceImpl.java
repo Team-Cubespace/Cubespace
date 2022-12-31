@@ -11,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.team.cubespace.common.Util;
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.manage.model.dao.ManageDAO;
+import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
+import com.team.cubespace.manage.model.vo.File;
 
 @Service
 public class ManageServiceImpl implements ManageService{
@@ -255,6 +257,82 @@ public class ManageServiceImpl implements ManageService{
 		}
 		
 		return result;
+	}
+
+	/**
+	 * 해당 파일의 폴더목록 조회
+	 */
+	@Override
+	public List<File> selectFileList(File file) {
+		
+		int categoryNo = file.getCategoryNo();
+		
+		if(categoryNo == 1) {
+			return dao.selectDiaryFileList(file);
+		}
+		if(categoryNo == 2) {
+			return dao.selectAlbumFileList(file);
+		}
+		if(categoryNo == 3) {
+			return dao.selectVideoFileList(file);
+		}
+		
+		return null;
+	}
+
+	/**
+	 * 내 폴더의 파일 한개 삭제하기
+	 */
+	@Override
+	public int deleteFile(File file) {
+		
+		if(file.getCategoryNo() == 1) {
+			return dao.deleteDiaryFile(file);
+		}
+		if(file.getCategoryNo() == 2) {
+			return dao.deleteAlbumFile(file);
+		}
+		if(file.getCategoryNo() == 3) {
+			return dao.deleteVideoFile(file);
+		}
+		
+		return 0;
+	}
+
+	/**
+	 * 게시글 공개여부 설정
+	 */
+	@Override
+	public int updateOpenFlag(File file) {
+
+		if(file.getCategoryNo() == 1) {
+			return dao.updateDiaryOpenFlag(file);
+		}
+		if(file.getCategoryNo() == 2) {
+			return dao.updateAlbumOpenFlag(file);
+		}
+		if(file.getCategoryNo() == 3) {
+			return dao.updateVideoOpenFlag(file);
+		}
+		return 0;
+	}
+
+	/**
+	 * 배경색/이미지 초기화하기
+	 */
+	@Override
+	public int resetBGColor(Background backgroundInfo) {
+		
+		return dao.resetBGColor(backgroundInfo);
+	}
+	
+	/**
+	 * 프레임 초기화하기
+	 */
+	@Override
+	public int resetFrameColor(Background backgroundInfo) {
+		
+		return dao.resetFrameColor(backgroundInfo);
 	}
 
 

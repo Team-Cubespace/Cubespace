@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.team.cubespace.folder.model.vo.Folder;
+import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
+import com.team.cubespace.manage.model.vo.File;
 
 public interface ManageService {
 
@@ -93,6 +95,37 @@ public interface ManageService {
 	 * @throws Exception 
 	 */
 	int updateFolder(Map<String, Object> paramMap) throws Exception;
+
+	/** 해당 파일의 폴더목록 조회
+	 * @param file
+	 * @return
+	 */
+	List<File> selectFileList(File file);
+
+	/** 내 폴더의 파일 한개 삭제하기
+	 * @param file
+	 * @return
+	 */
+	int deleteFile(File file);
+
+	/** 게시글 공개여부 설정
+	 * @param file
+	 * @return
+	 */
+	int updateOpenFlag(File file);
+
+	
+	/** 배경색/이미지 초기화하기
+	 * @param backgroundInfo
+	 * @return
+	 */
+	int resetBGColor(Background backgroundInfo);
+
+	/** 프레임 초기화하기
+	 * @param backgroundInfo
+	 * @return
+	 */
+	int resetFrameColor(Background backgroundInfo);
 
 
 

@@ -158,16 +158,13 @@ body *{
     display: flex;
     align-items: center;
     justify-content: center;
+
     height: 60%;
     width: 100%;
     font-size: 20px;
     padding: 5px 10px;
     /* border-bottom: 1px solid black; */
     border-bottom: 1px solid black;
-
-    background-image: url(/resources/images/common/LP.png);
-    background-size: 130px;
-    background-repeat: no-repeat;
 }
 
 .goods-exampleimg{

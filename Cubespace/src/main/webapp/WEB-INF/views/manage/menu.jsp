@@ -576,7 +576,17 @@
                                     </div>
                                 </div>
                             </c:if>
-                            <%-- <c:if test="${empty fileList}"> </c:if> --%>
+                            <%-- <c:if test="${empty fileList}">
+                                <div class="menuRightContent">
+                                    <div class="folderNameArea">
+                                        <img src="/resources/images/common/folder.png" class="folderImg">
+                                        <p class="folderName"></p>
+                                    </div>
+                                    <div class="fileList">
+                                        폴더 내 게시글이 없습니다
+                                    </div>
+                                </div>
+                            </c:if> --%>
                             </div> 
                         </div>
                         <div class="menuSaveArea">

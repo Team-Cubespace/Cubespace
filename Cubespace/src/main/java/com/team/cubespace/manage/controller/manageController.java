@@ -95,6 +95,7 @@ public class manageController {
 		model.addAttribute("folderList", folderList);
 		model.addAttribute("realOrder", realOrder);
 		model.addAttribute("categoryOrder", categoryOrder);
+		model.addAttribute("fileList", null); // 새로 메뉴탭 열때 fileList 초기화
 		
 		return "manage/menu";
 	}
@@ -197,7 +198,7 @@ public class manageController {
 		List<File> fileList = service.selectFileList(file);
 		model.addAttribute("fileList", fileList);
 		
-		if(fileList != null) {
+		if(fileList.size() != 0) {
 			return 1;
 		} else {
 			return 0;

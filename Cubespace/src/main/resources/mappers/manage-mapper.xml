@@ -54,11 +54,12 @@
 	<!-- 폴더 리스트 조회 -->
 	<select id="getFolderList" resultMap="folder_rm">
 		SELECT F.FOLDER_NO, BOARD_TYPE_NO, FOLDER_NAME, FOLDER_ORDER, MEMBER_NO, 
-		(SELECT COUNT(*) FROM DIARY D WHERE D.MEMBER_NO = 1 AND D.FOLDER_NO = F.FOLDER_NO)  + 
-		(SELECT COUNT(*) FROM ALBUM A WHERE A.MEMBER_NO = 1 AND A.FOLDER_NO = F.FOLDER_NO) + 
-		(SELECT COUNT(*) FROM VIDEO V WHERE V.MEMBER_NO = 1 AND V.FOLDER_NO = F.FOLDER_NO)  FILE_COUNT
+		(SELECT COUNT(*) FROM DIARY D WHERE D.MEMBER_NO = 1 AND D.FOLDER_NO = F.FOLDER_NO AND D_DEL_YN = 'N')  + 
+		(SELECT COUNT(*) FROM ALBUM A WHERE A.MEMBER_NO = 1 AND A.FOLDER_NO = F.FOLDER_NO AND A_DEL_FL = 'N') + 
+		(SELECT COUNT(*) FROM VIDEO V WHERE V.MEMBER_NO = 1 AND V.FOLDER_NO = F.FOLDER_NO AND V_DEL_YN = 'N')  FILE_COUNT
 		FROM FOLDER  F 
 		WHERE MEMBER_NO  = #{memberNo}
+		AND FOLDER_DEL_YN = 'N'
 		ORDER BY BOARD_TYPE_NO, FOLDER_ORDER
 	</select>
  	 
@@ -123,15 +124,16 @@
 		
 		INSERT INTO FOLDER VALUES(
 		#{folderNo}, #{boardTypeNo},
-		#{folderName}, #{folderOrder}, #{memberNo})
+		#{folderName}, #{folderOrder}, #{memberNo}, DEFAULT)
 	</insert>
 	
 	<!-- 카테고리에서 폴더 삭제 -->
-	<delete id="deleteFolder">
-		DELETE FROM FOLDER 
+	<update id="deleteFolder">
+		UPDATE FOLDER SET
+		FOLDER_DEL_YN = 'Y'
 		WHERE MEMBER_NO = #{memberNo}
 		AND FOLDER_NO = #{folderNo}
-	</delete>
+	</update>
 	
 	<!-- 폴더삭제 후 나머지 폴더순서 새로 정렬 -->
 	<update id="updateFolderOrder">
@@ -165,6 +167,7 @@
 		JOIN FOLDER USING(FOLDER_NO)
 		WHERE FOLDER_NO = #{folderNo}
 		AND D_DEL_YN = 'N'
+		AND FOLDER_DEL_YN = 'N'
 	</select>
 	
 	<!-- 해당 파일의 폴더목록 조회(ALBUM) -->
@@ -175,6 +178,7 @@
 		JOIN FOLDER USING(FOLDER_NO)
 		WHERE FOLDER_NO = #{folderNo}
 		AND A_DEL_FL = 'N'
+		AND FOLDER_DEL_YN = 'N'
 	</select>
 	
 	
@@ -186,6 +190,7 @@
 		JOIN FOLDER USING(FOLDER_NO)
 		WHERE FOLDER_NO = #{folderNo}
 		AND V_DEL_YN = 'N'
+		AND FOLDER_DEL_YN = 'N'
 	</select>
 	
 	<!-- (다이어리)내 폴더의 파일 한개 삭제하기 -->

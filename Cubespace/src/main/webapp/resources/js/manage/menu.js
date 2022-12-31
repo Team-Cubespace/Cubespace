@@ -313,7 +313,9 @@ for (let minusBtn of minusBtnList) {
         const folderOrder = e.target.parentElement.getAttribute("name"); //해당 폴더의 folderOrder
         const folderNo = e.target.parentElement.getAttribute("id"); //해당 폴더의 folderNo
         const subCategoryLength = e.target.parentElement.parentElement.childElementCount; // 해당 카테고리의 폴더 갯수
-        const fileCount = e.target.getAttribute("name"); // 해당 폴더의 파일갯수
+        
+        
+        const fileCount = e.target.previousElementSibling.getAttribute("id") // 해당 폴더의 파일갯수
         // 카테고리 이름에 따른 boardType 설정
         
         let boardTypeNo = 0;
@@ -401,7 +403,6 @@ for(let folderImage of folderImageList){
             data : {"folderNo" : folderNo, "memberNo" : memberNo, "categoryNo" : categoryNo},
             success : result => {
                 if(result > 0){
-
                     location.href = location.href;
                 } else {
                     console.log("폴더 내 글목록 조회 실패");
@@ -482,20 +483,23 @@ const fileDelBtnList = document.getElementsByClassName("fileDelBtn");
 for(let fileDelBtn of fileDelBtnList){
     fileDelBtn.addEventListener("click", e => {
 
-        // ex) 나의 다이어리(13)
-        const originalFolderTitle = e.target.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.innerText;
-
-        // ex) 나의 다이어리
-        // 글 제목, 폴더의 파일 갯수 추출
-        const folderTitle = originalFolderTitle.substr(0, originalFolderTitle.lastIndexOf("(")); // ex) 나의 다이어리
-        const fileCount = originalFolderTitle.substring(originalFolderTitle.lastIndexOf("(") + 1, originalFolderTitle.lastIndexOf(")")); // ex)13
-
-        // fileCount에서 1뺀 값을 계산해서 다시 넣어주기
-        e.target.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.innerText = folderTitle + "(" + (Number(fileCount) - 1) + ")";
         
-
+        
         if(confirm("정말 삭제하시겠습니까?")){
+
+            // ex) 나의 다이어리(13)
+            const originalFolderTitle = e.target.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.innerText;
+    
+            // ex) 나의 다이어리
+            // 글 제목, 폴더의 파일 갯수 추출
+            const folderTitle = originalFolderTitle.substr(0, originalFolderTitle.lastIndexOf("(")); // ex) 나의 다이어리
+            const fileCount = originalFolderTitle.substring(originalFolderTitle.lastIndexOf("(") + 1, originalFolderTitle.lastIndexOf(")")); // ex)13
+    
+            // fileCount에서 1뺀 값을 계산해서 다시 넣어주기
+            e.target.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.innerText = folderTitle + "(" + (Number(fileCount) - 1) + ")";
             
+
+
             const fileNo = e.target.parentElement.previousElementSibling.firstElementChild.nextElementSibling.getAttribute("id");
             const categoryNo = e.target.parentElement.firstElementChild.getAttribute("id");
 
@@ -510,6 +514,25 @@ for(let fileDelBtn of fileDelBtnList){
                         // 1. 요소 삭제 2. 전체 폴더갯수에서 -1
                         e.target.parentElement.parentElement.remove();
 
+                        // 만약 폴더에 글이 하나도 없을 경우 리로드(폴더삭제를 가능하게 하기위해)
+                        // if(Number(fileCount) - 1 == 0) {
+                        //     location.href = location.href;
+                        // }
+
+                        // folderNo으로 해당폴더를 찾아 fileCount를 1 감소시킴
+                        const targetFolderNo = document.getElementsByClassName("folderName")[0].getAttribute("id");
+                        console.log(targetFolderNo); // 164
+
+                        
+                        const folderTitleList = document.getElementsByClassName("folderTitle");
+                        for(let i = 0; i < folderTitleList.length; i++){
+                            let item = folderTitleList[i];
+                            console.log(item.getAttribute("name")); // 164
+                            if(item.getAttribute("name") == targetFolderNo){
+                                item.setAttribute("id", Number(item.getAttribute("id")) -1);
+                                return;
+                            }
+                        }
 
                     } else {
                         console.log("파일 삭제 실패");

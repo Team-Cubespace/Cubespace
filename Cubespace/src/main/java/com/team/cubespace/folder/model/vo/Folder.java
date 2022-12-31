@@ -16,5 +16,6 @@ public class Folder {
 	private String memberNickname;	// 회원 닉네임
 	
 	private int fileCount; // 폴더 안의 게시글 수
+	private String folderDelYN; // 폴더 삭제 여부
 
 }

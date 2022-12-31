@@ -133,7 +133,7 @@ public class ManageDAO {
 	 */
 	public int deleteFolder(Map<String, Object> paramMap) {
 		
-		return sqlSession.delete("ManageMapper.deleteFolder", paramMap);
+		return sqlSession.update("ManageMapper.deleteFolder", paramMap);
 	}
 
 	/** 폴더삭제 후 나머지 폴더순서 새로 정렬

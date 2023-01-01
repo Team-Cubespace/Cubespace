@@ -24,33 +24,31 @@
 
 </head>
 <body>
-    <jsp:include page="/WEB-INF/views/include/font.jsp"/>
+    <jsp:include page="/WEB-INF/views/include/allFontMusic.jsp"/>
     <jsp:include page="/WEB-INF/views/include/header.jsp"/>
+    <jsp:include page="/WEB-INF/views/webmain/MiniMusicPlayer.jsp"/>
+
     <main>
         <div class="shop-main-frame">
             <div class="shop-header">
                 <div class="shop-move">
-                    <%-- <a href="/cubespace/shop?shopCt=1" class="shop-font">  --%>
                     <a href="/cubespace/shop/1" class="shop-font"> 
                         <img class="cube-img" src="/resources/images/common/smallCube.png"> 
                         <div>폰트</div> 
                     </a>
-                    <%-- <a href="/cubespace/shop?shopCt=2" class="shop-music">  --%>
                     <a href="/cubespace/shop/2" class="shop-music"> 
                         <img class="cube-img" src="/resources/images/common/smallCube.png"> 
                         <div >배경음악</div> 
                     </a>
-                    <%-- <a href="/cubespace/shop?shopCt=3" class="shop-miniroom">  --%>
                     <a href="/cubespace/shop/3" class="shop-miniroom"> 
                         <img class="cube-img" src="/resources/images/common/smallCube.png"> 
                         <div>미니룸 소품</div> 
                     </a>
                 </div>
-
+                <%-- 검색기능 --%>
                 <form class="shop-search" onsubmit="return true">
                     <img class="search-img" src="/resources/images/common/Magnifying Glass.png">
                     <input class="goods-search" type="text" name="shopSearch" id="shopSearch">
-                    <%-- <div>검색</div> --%>
                     <button>검색</button>
                 </form>
             </div>
@@ -97,7 +95,7 @@
                                     </c:when>
                                     <%-- 배경음악 페이지 예시화면 --%>
                                     <c:when test="${shopCt==2}">
-                                        <div class="goods-example goods-lpimg" >
+                                        <div class="goods-example goods-lpimg" onclick="MusicPlayerOpen()">
                                             <img class="goods-exampleimg-music" src="${shopList.goodsImagePath}">
                                         </div>    
                                     </c:when>

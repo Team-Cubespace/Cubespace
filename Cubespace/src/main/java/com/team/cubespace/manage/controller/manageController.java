@@ -107,16 +107,7 @@ public class manageController {
 		return "manage/menu";
 	}
 	@GetMapping("/background")
-	public String changeBackground(HttpServletRequest req) {
-		
-		// 모두가 공용으로 사용할 배경색 정보를 application scope에 올려놓음
-		Background backgroundColorInfo = new Background();
-		backgroundColorInfo.setBackgroundSkin("RGB(128,128,128)");
-		backgroundColorInfo.setFrameColor("#82C9E8");
-		backgroundColorInfo.setFrameMenuColor("#1A8DBF");
-		backgroundColorInfo.setFrameFontColor("WHITE");
-		
-		application.setAttribute("backgroundColorInfo", backgroundColorInfo);
+	public String changeBackground() {
 		
 		return "manage/background";
 	}

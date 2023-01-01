@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.team.cubespace.login.model.dao.LoginDAO;
+import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.member.model.vo.Member;
 
 @Service
@@ -50,7 +51,7 @@ public class LoginServiceImpl implements LoginService{
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public int signUp(Member inputMember) throws Exception {
+	public int signUp(Member inputMember, Background backgroundInfo) throws Exception {
 		
 		// 비밀번호 암호화
 		String encPw = bcrypt.encode(inputMember.getMemberPw());
@@ -61,8 +62,10 @@ public class LoginServiceImpl implements LoginService{
 		
 		if(memberNo > 0) {
 			
+			backgroundInfo.setMemberNo(memberNo);
+			
 			int ownResult = dao.insertOwnGoods(inputMember); // 회원소유품목
-			int minihomeResult = dao.insertMinihome(memberNo); // 미니홈
+			int minihomeResult = dao.insertMinihome(backgroundInfo); // 미니홈
 			int folderResult = dao.insertFolder(memberNo); // 폴더
 			int categoryOrderResult = dao.insertCategoryOrder(memberNo); // 카테고리순서
 			if(ownResult * minihomeResult * folderResult * categoryOrderResult <= 0) {
@@ -124,7 +127,7 @@ public class LoginServiceImpl implements LoginService{
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Member kakaoLogin(Member inputMember) throws Exception  {
+	public Member kakaoLogin(Member inputMember, Background backgroundInfo) throws Exception  {
 		
 		// paramMap의 email을 기존의 회원과 조회해서 
 		// 있다면 -> 기존의 로그인메서드 호출
@@ -147,9 +150,11 @@ public class LoginServiceImpl implements LoginService{
 				if(loginMember != null) {
 					loginMember.setMemberPw(null);
 					
+					backgroundInfo.setMemberNo(loginMember.getMemberNo());
+					
 					
 					int ownResult = dao.insertOwnGoods(loginMember); // 회원소유품목
-					int minihomeResult = dao.insertMinihome(loginMember.getMemberNo()); // 미니홈
+					int minihomeResult = dao.insertMinihome(backgroundInfo); // 미니홈
 					int folderResult = dao.insertFolder(loginMember.getMemberNo()); // 폴더
 					int categoryOrderResult = dao.insertCategoryOrder(loginMember.getMemberNo()); // 카테고리순서
 					

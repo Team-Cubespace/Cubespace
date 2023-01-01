@@ -165,8 +165,8 @@
  	<!--  미니홈 테이블에 값 삽입 -->
  	<insert id="insertMinihome">
  		INSERT INTO MINI_HOMEPAGE VALUES(
-		#{memberNo}, '나의 미니홈피', 'rgb(128,128,128)', 
-		NULL, DEFAULT, DEFAULT, NULL, '#82C9E8', '#1A8DBF', 'WHITE')
+		#{memberNo}, '나의 미니홈피', #{backgroundSkin}, 
+		NULL, DEFAULT, DEFAULT, NULL, #{frameColor}, #{frameMenuColor}, #{frameFontColor})
  	</insert>
  	
  	

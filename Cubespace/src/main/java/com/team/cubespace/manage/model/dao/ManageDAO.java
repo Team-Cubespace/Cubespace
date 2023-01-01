@@ -17,6 +17,24 @@ public class ManageDAO {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+	
+	
+	/** 상점에 등록된 전체 폰트 리스트 조회
+	 * @return allFontList
+	 */
+	public List<Map<String, Object>> getAllFontList() {
+		
+		return sqlSession.selectList("ManageMapper.getAllFontList");
+	}
+	
+	
+	/** 상점에 등록된 전체 배경음악 조회
+	 * @return
+	 */
+	public List<Map<String, Object>> getAllMusicList() {
+
+		return sqlSession.selectList("ManageMapper.getAllMusicList");
+	}
 
 	/** 폴더 리스트 조회
 	 * @param memberNo
@@ -93,13 +111,7 @@ public class ManageDAO {
 		return sqlSession.update("ManageMapper.useFont", paramMap);
 	}
 
-	/** 상점에 등록된 전체 폰트 리스트 조회
-	 * @return allFontList
-	 */
-	public List<Map<String, Object>> getAllFontList() {
-		
-		return sqlSession.selectList("ManageMapper.getAllFontList");
-	}
+
 
 	/** 한 회원의 폰트 가져오기
 	 * @param memberNo
@@ -245,7 +257,7 @@ public class ManageDAO {
 	 */
 	public int resetBGColor(Background backgroundInfo) {
 		
-		return sqlSession.update("ManageMapper.resetBGColor", backgroundInfo);	
+		return sqlSession.update("ManageMapper.updateBGColor", backgroundInfo);	
 	}
 
 	/** 프레임 초기화하기
@@ -254,10 +266,80 @@ public class ManageDAO {
 	 */
 	public int resetFrameColor(Background backgroundInfo) {
 		
-		return sqlSession.update("ManageMapper.resetFrameColor", backgroundInfo);	
+		return sqlSession.update("ManageMapper.updateFrameColor", backgroundInfo);	
+	}
+	
+	/** 프레임 메뉴 색 초기화하기
+	 * @param backgroundInfo
+	 * @return
+	 */
+	public int resetFrameMenuColor(Background backgroundInfo) {
+		
+		return sqlSession.update("ManageMapper.updateFrameMenuColor", backgroundInfo);	
+	}
+
+	/** 배경색 변경
+	 * @param backgroundInfo
+	 * @return
+	 */
+	public int updateBGColor(Background backgroundInfo) {
+		
+		return sqlSession.update("ManageMapper.updateBGColor", backgroundInfo);	
 	}
 
 
+	
+	/** 프레임색 변경
+	 * @param backgroundInfo
+	 * @return
+	 */
+	public int updateFrameColor(Background backgroundInfo) {
+		
+		return sqlSession.update("ManageMapper.updateFrameColor", backgroundInfo);	
+	}
+	
+	
+	
+	/** 프레임 메뉴색 변경
+	 * @param backgroundInfo
+	 * @return
+	 */
+	public int updateFrameMenuColor(Background backgroundInfo) {
+		
+		return sqlSession.update("ManageMapper.updateFrameMenuColor", backgroundInfo);	
+	}
+
+	/** 내 배경음악 목록 조회
+	 * @param paramMap
+	 * @return
+	 */
+	public List<Map<String, Object>> getMusicList(Map<String, Object> paramMap) {
+		
+		return sqlSession.selectList("ManageMapper.getMusicList", paramMap);	
+	}
+
+	/** 내 배경음악 설정하기
+	 * @param paramMap
+	 * @return
+	 */
+	public int useMusic(Map<String, Object> paramMap) {
+
+		return sqlSession.update("ManageMapper.useMusic", paramMap);	
+	}
+
+
+	/** 내 배경음악 없애기
+	 * @param memberNo
+	 * @return
+	 */
+	public int deleteMusic(int memberNo) {
+		
+		return sqlSession.update("ManageMapper.deleteMusic", memberNo);	
+	}
+
+
+	
+	
 
 
 

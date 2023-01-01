@@ -47,6 +47,16 @@
  	 </resultMap>
  	 
  	 
+	<resultMap type="Music" id="music_rm">
+   		<id property="musicNo" column="MUSIC_NO"/>
+   		<result property="musicName" column="MUSIC_NAME"></result>
+   		<result property="musicPath" column="MUSIC_PATH"></result>
+   		<result property="musicThumnail" column="MUSIC_THUMNAIL"></result>
+   		<result property="musicCreater" column="MUSIC_CREATER"></result>
+   		<result property="memberNo" column="MEMBER_NO"></result>
+ 	 </resultMap>
+ 	 
+ 	 
  	 
  	 
  <!-- 폴더 ====================================================-->
@@ -282,6 +292,7 @@
 		JOIN FONT_SHOP  ON(GOODS_NO = FONT_NO)
 		WHERE MEMBER_NO = #{memberNo}
 		AND FONT_NAME LIKE '%${searchInput}%'
+		AND SHOP_CATH_NO = 1
  	</select>
  	
  	
@@ -301,20 +312,59 @@
  	
    <!-- 배경색/이미지 ====================================================-->
  	
- 	<!-- 배경색/이미지 초기화하기 -->
- 	<update id="resetBGColor">
+ 	<!-- 배경색/이미지 초기화/변경하기 -->
+ 	<update id="updateBGColor">
  		UPDATE MINI_HOMEPAGE SET
 		BACKGROUND_SKIN = #{backgroundSkin}
 		WHERE MEMBER_NO = #{memberNo}
  	</update>
   
  	<!-- 프레임 초기화하기 -->
- 	<update id="resetFrameColor">
+ 	<update id="updateFrameColor">
  		UPDATE MINI_HOMEPAGE SET
-		FRAME_COLOR = #{frameColor},
+		FRAME_COLOR = #{frameColor}
+		WHERE MEMBER_NO = #{memberNo}
+ 	</update>
+ 	
+ 	<!-- 프레임 메뉴 색 초기화하기 -->
+ 	<update id="updateFrameMenuColor">
+ 		UPDATE MINI_HOMEPAGE SET
 		FRAME_MENU_COLOR =#{frameMenuColor},
 		FRAME_FONT_COLOR = #{frameFontColor}
 		WHERE MEMBER_NO = #{memberNo}
  	</update>
+ 	
+ 	
+ 	 <!-- 배경음악 ====================================================-->
+ 	
+ 	<!-- 내 배경음악 목록 조회 -->
+ 	<select id="getMusicList" resultMap="music_rm">
+	 	SELECT MEMBER_NO, MUSIC_NO, MUSIC_NAME, MUSIC_PATH, MUSIC_THUMNAIL ,MUSIC_CREATER 
+		FROM MEMBER_OWN_GOODS 
+		JOIN MUSIC_SHOP  ON(GOODS_NO = MUSIC_NO)
+		WHERE MEMBER_NO = #{memberNo}
+		AND MUSIC_NAME LIKE '%${searchInput}%'
+		AND SHOP_CATH_NO = 2
+ 	</select>
+ 	
+ 	 <!-- 내 배경음악 설정하기 -->
+ 	<update id="useMusic">
+ 		UPDATE MINI_HOMEPAGE SET
+		OWN_MUSIC_NO = #{musicNo}
+		WHERE MEMBER_NO = #{memberNo}
+ 	</update>
+ 	
+ 	<!-- 상점에 등록된 전체 배경음악 리스트 조회 -->
+ 	<select id="getAllMusicList" resultMap="music_rm">
+ 		SELECT * FROM MUSIC_SHOP ms ORDER BY MUSIC_NO
+ 	</select>
+ 	
+ 	 <!-- 내 배경음악 없애기 -->
+ 	<update id="deleteMusic">
+ 		UPDATE MINI_HOMEPAGE SET
+		OWN_MUSIC_NO = 0
+		WHERE MEMBER_NO = #{memberNo}
+ 	</update>
+ 	
   
 </mapper>

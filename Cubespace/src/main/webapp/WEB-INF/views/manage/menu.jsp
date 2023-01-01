@@ -43,7 +43,7 @@
             color: var(--ink);
         }
     </style>
-    <jsp:include page="/WEB-INF/views/include/font.jsp"/>
+    
 </head>
 <body>
 

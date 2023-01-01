@@ -339,7 +339,7 @@ header {
     cursor: pointer;
 }
 
-#chooseImg {
+#imageInput {
     display: none;
 }
 
@@ -392,11 +392,11 @@ header {
 
 
 
-#chooseBGColor {
+#BGColorInput {
     display: none;
 }
 
-#chooseFrameColor {
+#frameColorInput, #frameMenuColorInput {
     display: none;
 }
 
@@ -418,6 +418,9 @@ header {
     font-size: 13px;
 }
 
+.frameMenuColorArea {
+    margin-bottom: 20px;
+}
 /* ----------------------------------------------------- */
 /* 메뉴설정 */
 .menuHeader,
@@ -675,14 +678,3 @@ header {
 
 
 
-/* ------------------------------------------------------ */
-/* 배경음악 설정 */
-.backgroundHeader, .backgroundMain{
-    display: flex;
-}
-.backgroundHeader>div:nth-child(1), .backgroundMain>div:nth-child(1){
-    flex-basis: 60% !important;
-}
-.backgroundHeader>div:nth-child(1), .backgroundMain>div:nth-child(1){
-    flex-basis: 25% !important;
-}

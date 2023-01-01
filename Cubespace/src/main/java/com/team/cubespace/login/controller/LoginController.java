@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,6 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team.cubespace.email.model.service.EmailService;
 import com.team.cubespace.login.model.service.LoginService;
 import com.team.cubespace.manage.model.service.ManageService;
+import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.member.model.vo.Member;
 
 @Controller
@@ -41,6 +43,10 @@ public class LoginController {
 	
 	@Autowired
 	private ManageService mService;
+	
+	// application scope에 배경색/프레임정보를 가져오기 위한 객체 생성
+	@Autowired
+	ServletContext application;
 
 	/**
 	 * 로그인
@@ -132,6 +138,10 @@ public class LoginController {
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		Member inputMember = new Member();
+		
+		// 배경색, 프레임색 정보를 담고 있는 객체
+		Background backgroundInfo = (Background) application.getAttribute("backgroundColorInfo");
+
 
 		// JSON String -> Map
 		try {
@@ -152,7 +162,7 @@ public class LoginController {
 			e.printStackTrace();
 		}
 
-		Member loginMember = service.kakaoLogin(inputMember);
+		Member loginMember = service.kakaoLogin(inputMember, backgroundInfo);
 
 		if (loginMember.getMemberBlockYN().equals("Y")) {
 			String message = "차단된 회원은 이용할 수 없습니다\n" + loginMember.getBlockStart() + "부터" + loginMember.getBlockEnd()
@@ -216,7 +226,11 @@ public class LoginController {
 	public String signUp(/* @ModelAttribute */ Member inputMember, RedirectAttributes ra,
 			@RequestHeader("referer") String referer) throws Exception {
 
-		int result = service.signUp(inputMember);
+		// 배경색, 프레임색 정보를 담고 있는 객체
+		Background backgroundInfo = (Background) application.getAttribute("backgroundColorInfo");
+
+		
+		int result = service.signUp(inputMember, backgroundInfo);
 
 		String path = null;
 		String message = null;

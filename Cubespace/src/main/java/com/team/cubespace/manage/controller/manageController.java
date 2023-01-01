@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.cubespace.folder.model.vo.Folder;
@@ -28,10 +31,11 @@ import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
 import com.team.cubespace.manage.model.vo.File;
 import com.team.cubespace.member.model.vo.Member;
+import com.team.cubespace.minihome.model.vo.Minihome;
 
 @Controller
 @RequestMapping("/manage")
-@SessionAttributes({ "folderList", "fontList", "fileList" /* , "friendList", "fontList" */})
+@SessionAttributes({ "folderList",  "fileList" /* , "friendList", "fontList" */})
 public class manageController {
 	
 	@Autowired
@@ -43,11 +47,11 @@ public class manageController {
 	
 	
 	@GetMapping("/font")
-	public String changeFont(@SessionAttribute("loginMember") Member inputMember, 
+	public String changeFont(@SessionAttribute("loginMember") Member loginMember, 
 			@RequestParam Map<String, Object> paramMap, /*searchInput*/
 			Model model) {
 		
-		paramMap.put("memberNo", inputMember.getMemberNo());
+		paramMap.put("memberNo", loginMember.getMemberNo());
 		if(paramMap.containsKey("searchInput")) {
 			model.addAttribute("searchInput", paramMap.get("searchInput"));
 		}
@@ -57,8 +61,20 @@ public class manageController {
 		
 		return "manage/font";
 	}
+	
+	
 	@GetMapping("/music")
-	public String changeMusic() {
+	public String changeMusic(@SessionAttribute("loginMember") Member loginMember, 
+			@RequestParam Map<String, Object> paramMap, /*searchInput*/
+			Model model) {
+		
+		paramMap.put("memberNo", loginMember.getMemberNo());
+		if(paramMap.containsKey("searchInput")) {
+			model.addAttribute("searchInput", paramMap.get("searchInput"));
+		}
+		List<Map<String, Object>> musicList = service.getMusicList(paramMap);
+		model.addAttribute("musicList", musicList);
+		
 		return "manage/music";
 	}
 	
@@ -107,16 +123,7 @@ public class manageController {
 		return "manage/menu";
 	}
 	@GetMapping("/background")
-	public String changeBackground(HttpServletRequest req) {
-		
-		// 모두가 공용으로 사용할 배경색 정보를 application scope에 올려놓음
-		Background backgroundColorInfo = new Background();
-		backgroundColorInfo.setBackgroundSkin("RGB(128,128,128)");
-		backgroundColorInfo.setFrameColor("#82C9E8");
-		backgroundColorInfo.setFrameMenuColor("#1A8DBF");
-		backgroundColorInfo.setFrameFontColor("WHITE");
-		
-		application.setAttribute("backgroundColorInfo", backgroundColorInfo);
+	public String changeBackground() {
 		
 		return "manage/background";
 	}
@@ -331,4 +338,139 @@ public class manageController {
 		return service.resetFrameColor(backgroundInfo);
 	}
 	
+	
+	/** 프레임 메뉴색 초기화하기
+	 * @param loginMember
+	 * @return
+	 */
+	@GetMapping("/background/resetFrameMenuColor")
+	@ResponseBody
+	public int resetFrameMenuColor(@SessionAttribute("loginMember") Member loginMember) {
+		
+		Background backgroundInfo = (Background) application.getAttribute("backgroundColorInfo");
+		backgroundInfo.setMemberNo(loginMember.getMemberNo());
+		
+		return service.resetFrameMenuColor(backgroundInfo);
+	}
+	
+	
+	/** 배경색 변경
+	 * @param loginMember
+	 * @param newBGColor
+	 * @return
+	 */
+	@GetMapping("/background/updateBGColor")
+	@ResponseBody
+	public int updateBGColor(@SessionAttribute("loginMember") Member loginMember,
+			String newBGColor) {
+		
+		Background backgroundInfo = new Background();
+		backgroundInfo.setBackgroundSkin(newBGColor);
+		backgroundInfo.setMemberNo(loginMember.getMemberNo());
+		
+		return service.updateBGColor(backgroundInfo);
+	}
+	
+	/** 배경이미지 변경
+	 * @param loginMember
+	 * @param newBGColor
+	 * @return
+	 * @throws Exception 
+	 */
+	@PostMapping("/background/updateBGImage")
+	@ResponseBody
+	public int updateBGImage(@SessionAttribute("loginMember") Member loginMember,
+		MultipartHttpServletRequest request,
+		HttpSession session) throws Exception{ 
+		
+		
+		List<MultipartFile> newImgList = request.getFiles("newBGImage");
+		
+		String webPath = "/resources/images/frameImage/";
+		String folderPath = session.getServletContext().getRealPath(webPath);
+		
+		Background backgroundInfo = new Background();
+		backgroundInfo.setMemberNo(loginMember.getMemberNo());
+		
+		
+		return service.updateBGImage(webPath, folderPath, backgroundInfo, newImgList.get(0));
+	}
+	
+	/** 프레임색 변경
+	 * @param loginMember
+	 * @param newFrameColor
+	 * @return
+	 */
+	@GetMapping("/background/updateFrameColor")
+	@ResponseBody
+	public int updateFrameColor(@SessionAttribute("loginMember") Member loginMember,
+			String newFrameColor) {
+		
+		Background backgroundInfo = new Background();
+		backgroundInfo.setFrameColor(newFrameColor);
+		backgroundInfo.setMemberNo(loginMember.getMemberNo());
+		
+		return service.updateFrameColor(backgroundInfo);
+	}
+	
+	/** 프레임 메뉴색 변경
+	 * @param loginMember
+	 * @param newFrameMenuColor, newFrameFontColor
+	 * @return
+	 */
+	@GetMapping("/background/updateFrameMenuColor")
+	@ResponseBody
+	public int updateFrameMenuColor(@SessionAttribute("loginMember") Member loginMember,
+			String newFrameMenuColor, String newFrameFontColor) {
+		
+		Background backgroundInfo = new Background();
+		backgroundInfo.setFrameMenuColor(newFrameMenuColor);
+		backgroundInfo.setFrameFontColor(newFrameFontColor);
+		backgroundInfo.setMemberNo(loginMember.getMemberNo());
+		
+		return service.updateFrameMenuColor(backgroundInfo);
+	}
+	
+	
+//	배경음악 관련-------------------------------------------------------------------------------
+
+	/** 내 배경음악 설정하기
+	 * @param paramMap
+	 * @param minihome
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/music/useMusic")
+	@ResponseBody
+	public int useMusic(@RequestParam Map<String, Object> paramMap,
+			@SessionAttribute("minihome") Minihome minihome,
+			Model model) {
+		int result =  service.useMusic(paramMap);
+		if(result > 0) {
+			minihome.setMusicNo(Integer.parseInt((String)paramMap.get("musicNo")));
+			model.addAttribute("minihome", minihome);
+		}
+	
+		return result;
+	}
+	
+	/** 내 배경음악 없애기
+	 * @param paramMap
+	 * @param minihome
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/music/deleteMusic")
+	@ResponseBody
+	public int useMusic(int memberNo,
+			@SessionAttribute("minihome") Minihome minihome,
+			Model model) {
+		int result =  service.deleteMusic(memberNo);
+		if(result > 0) {
+			minihome.setMusicNo(0);
+			model.addAttribute("minihome", minihome);
+		}
+		
+		return result;
+	}
 }

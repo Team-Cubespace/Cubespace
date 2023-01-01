@@ -3,6 +3,8 @@ package com.team.cubespace.manage.model.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
@@ -126,7 +128,68 @@ public interface ManageService {
 	 * @return
 	 */
 	int resetFrameColor(Background backgroundInfo);
+	
+	/** 프레임 메뉴 색 초기화하기
+	 * @param backgroundInfo
+	 * @return
+	 */
+	int resetFrameMenuColor(Background backgroundInfo);
 
+	/** 배경색 변경
+	 * @param backgroundInfo
+	 * @return
+	 */
+	int updateBGColor(Background backgroundInfo);
+	
+	/** 배경 이미지 변경
+	 * @param webPath
+	 * @param folderPath
+	 * @param memberNo
+	 * @param multipartFile
+	 * @return
+	 * @throws Exception 
+	 */
+	int updateBGImage(String webPath, String folderPath, Background backgroundInfo, MultipartFile multipartFile) throws Exception;
+
+
+	/** 프레임색 변경
+	 * @param backgroundInfo
+	 * @return
+	 */
+	int updateFrameColor(Background backgroundInfo);
+	
+	/** 프레임 메뉴색 변경
+	 * @param backgroundInfo
+	 * @return
+	 */
+	int updateFrameMenuColor(Background backgroundInfo);
+
+	
+	/** 내 배경음악 목록 조회
+	 * @param paramMap
+	 * @return
+	 */
+	List<Map<String, Object>> getMusicList(Map<String, Object> paramMap);
+
+	/** 내 배경음악 설정하기
+	 * @param paramMap
+	 * @return
+	 */
+	int useMusic(Map<String, Object> paramMap);
+
+	
+	/** 상점에 등록된 전체 배경음악 조회
+	 * @return
+	 */
+	List<Map<String, Object>> getAllMusicList();
+
+	/** 내 배경음악 없애기
+	 * @param memberNo
+	 * @return
+	 */
+	int deleteMusic(int memberNo);
+
+	
 
 
 }

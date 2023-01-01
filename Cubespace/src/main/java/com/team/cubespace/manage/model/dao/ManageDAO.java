@@ -254,7 +254,16 @@ public class ManageDAO {
 	 */
 	public int resetFrameColor(Background backgroundInfo) {
 		
-		return sqlSession.update("ManageMapper.resetFrameColor", backgroundInfo);	
+		return sqlSession.update("ManageMapper.updateFrameColor", backgroundInfo);	
+	}
+	
+	/** 프레임 메뉴 색 초기화하기
+	 * @param backgroundInfo
+	 * @return
+	 */
+	public int resetFrameMenuColor(Background backgroundInfo) {
+		
+		return sqlSession.update("ManageMapper.updateFrameMenuColor", backgroundInfo);	
 	}
 
 	/** 배경색 변경
@@ -267,6 +276,28 @@ public class ManageDAO {
 	}
 
 
+	
+	/** 프레임색 변경
+	 * @param backgroundInfo
+	 * @return
+	 */
+	public int updateFrameColor(Background backgroundInfo) {
+		
+		return sqlSession.update("ManageMapper.updateFrameColor", backgroundInfo);	
+	}
+	
+	
+	
+	/** 프레임 메뉴색 변경
+	 * @param backgroundInfo
+	 * @return
+	 */
+	public int updateFrameMenuColor(Background backgroundInfo) {
+		
+		return sqlSession.update("ManageMapper.updateFrameMenuColor", backgroundInfo);	
+	}
+	
+	
 
 
 

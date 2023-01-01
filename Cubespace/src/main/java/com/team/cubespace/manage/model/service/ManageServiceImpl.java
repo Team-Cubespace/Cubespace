@@ -334,6 +334,14 @@ public class ManageServiceImpl implements ManageService{
 		
 		return dao.resetFrameColor(backgroundInfo);
 	}
+	/**
+	 * 프레임 메뉴 색 초기화하기
+	 */
+	@Override
+	public int resetFrameMenuColor(Background backgroundInfo) {
+		
+		return dao.resetFrameMenuColor(backgroundInfo);
+	}
 
 	/**
 	 * 배경색 변경
@@ -342,6 +350,24 @@ public class ManageServiceImpl implements ManageService{
 	public int updateBGColor(Background backgroundInfo) {
 		
 		return dao.updateBGColor(backgroundInfo);
+	}
+	
+	/**
+	 * 프레임색 변경
+	 */
+	@Override
+	public int updateFrameColor(Background backgroundInfo) {
+		
+		return dao.updateFrameColor(backgroundInfo);
+	}
+	
+	/**
+	 * 프레임 메뉴색 변경
+	 */
+	@Override
+	public int updateFrameMenuColor(Background backgroundInfo) {
+		
+		return dao.updateFrameMenuColor(backgroundInfo);
 	}
 
 

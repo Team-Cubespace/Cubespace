@@ -29,7 +29,7 @@
         </section>
 
         <section class="minihome-rayout">
-            <main>
+            <div class="main">
                 <header>
                     <span class="rightTitle">배경 설정</span>
                 </header>
@@ -50,7 +50,7 @@
                                 <span class="colorShow" id="bgColorShow"></span>
                             </div>
                             <div class="backgroundBtnArea">
-                                <span class="whiteBtn" id="bgColorPreview">미리보기</span>
+                                <%-- <span class="whiteBtn" id="bgColorPreview">미리보기</span> --%>
                                 <span class="whiteBtn" id="bgColorUse">적용하기</span>
                                 <span class="whiteBtn" id="bgColorReturn">초기화하기</span>
                             </div>
@@ -61,7 +61,7 @@
                                 <input type="file" id="imageInput" name="imageInput" accept="image/*" multiple/>
                             </div>
                             <div class="backgroundBtnArea">
-                                <span class="whiteBtn" id="bgImagePreview">미리보기</span>
+                                <%-- <span class="whiteBtn" id="bgImagePreview">미리보기</span> --%>
                                 <span class="whiteBtn" id="bgImageUse">적용하기</span>
                                 <span class="whiteBtn" id="bgImageReturn">초기화하기</span>
                             </div>
@@ -83,14 +83,35 @@
                                 <p class="colorShow" id="frameColorShow"></p>
                             </div>
                             <div class="backgroundBtnArea">
-                                <span class="whiteBtn" id="framePreview">미리보기</span>
+                                <%-- <span class="whiteBtn" id="framePreview">미리보기</span> --%>
                                 <span class="whiteBtn" id="frameUse">적용하기</span>
                                 <span class="whiteBtn" id="frameReturn">초기화하기</span>
                             </div>
                         </div>
                     </div>
+
+                    <div class="frameMenuColorArea">
+                        <div class="listTitle backgroundTitleArea">
+                            <span class="backgroundTitle">프레임 메뉴 색상 설정</span>
+                            <div class="backgroundExplain">
+                                <p>미니홈피 우측의 프레임 메뉴 색상을 바꿀 수 있습니다</p>
+                            </div>
+                        </div>
+                        <div class="changeColorArea">
+                            <div>
+                                <label for="frameMenuColorInput" class="changeColorTitle whiteBtn">색상변경</label>
+                                <input type="color" id="frameMenuColorInput" name="frameColorInput" />
+                                <p class="colorShow" id="frameMenuColorShow"></p>
+                            </div>
+                            <div class="backgroundBtnArea">
+                                <%-- <span class="whiteBtn" id="frameMenuPreview">미리보기</span> --%>
+                                <span class="whiteBtn" id="frameMenuUse">적용하기</span>
+                                <span class="whiteBtn" id="frameMenuReturn">초기화하기</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </main>
+            </div>
         </section>
     </div>
 </body>

@@ -1,22 +1,7 @@
-/* 헥사값 방식 -> RGB 방식 */
-function hexToRgb ( hexType ){ 
-    //  맨 앞의 "#" 기호를 삭제하기. 
-    var hex = hexType.trim().replace( "#", "" ); 
-    
-    //  rgb로 각각 분리해서 배열에 담기. 
-    var rgb = ( 3 === hex.length ) ? 
-		hex.match( /[a-f\d]/gi ) : hex.match( /[a-f\d]{2}/gi );     
-    
-    rgb.forEach(function (str, x, arr){     
-        //  rgb 각각의 헥사값이 한자리일 경우, 두자리로 변경하기. 
-        if ( str.length == 1 ) str = str + str; 
-        
-        //  10진수로 변환하기.  
-        arr[ x ] = parseInt( str, 16 ); 
-    }); 
-    
-    return "rgb(" + rgb.join(", ") + ")"; 
-} 
+/* 색, 이미지가 변경되었는지 여부를 확인하는 flag */
+let BGColorFlag = false; // 배경색
+let frameColorFlag = false; // 프레임색
+let frameMenuColorFlag = false; // 프레임메뉴색
 
 
 
@@ -43,69 +28,107 @@ function getTextColorByBackgroundColor(hexColor) {
     const originalFrameMenuColor = parent.originalFrameMenuColor;
     const originalFrameFontColor = parent.originalFrameFontColor;
     const originalBackgroundSkin = parent.originalBackgroundSkin;
+
+    
 })(); // 페이지 로딩시 즉시 실행
 
 
 
 //-----------------------------------------------------------------------  
-/* 전체-색상변경 */
+/* 적용하기 버튼 */
 
 
-const BGColorInput = document.getElementById("BGColorInput");
-const bgColorShow = document.getElementById("bgColorShow");
-
-BGColorInput.addEventListener("change", () => {
-    // 미리보기 색상 변경
-    bgColorShow.style.backgroundColor = BGColorInput.value;
-
-});
-
-
-/* 미리보기 버튼 */
-const bgColorPreview = document.getElementById("bgColorPreview");
-bgColorPreview.addEventListener("click", e=> {
-
-    let hexColor = BGColorInput.value; // #102142 형태
-    let frameFontColor = getTextColorByBackgroundColor(hexColor); // 배경색 따라 글자색결정
-
-
-    // window.parent.postMessage(rgbList, '*');
-    // 구현중--------------------------------------------------------------------
-    // 구현중--------------------------------------------------------------------
-    // 구현중--------------------------------------------------------------------
-    // 구현중--------------------------------------------------------------------
-    // 구현중--------------------------------------------------------------------
-    // 구현중--------------------------------------------------------------------
-    // 구현중--------------------------------------------------------------------
-    // 구현중--------------------------------------------------------------------
-    // 구현중--------------------------------------------------------------------
-    // 구현중--------------------------------------------------------------------
-    // 구현중--------------------------------------------------------------------
-    // 구현중--------------------------------------------------------------------
-})
-
-
-
-/* 배경색 적용하기 버튼 */
+// 배경색 적용하기 버튼
 const bgColorUse = document.getElementById("bgColorUse");
 bgColorUse.addEventListener("click", e => {
 
     const newBGColor = BGColorInput.value;
-    $.ajax({
-        url : "/manage/background/updateBGColor",
-        type : "get",
-        data : {"newBGColor" : newBGColor},
-        success : result => {
-            if(result > 0) {
-                alert("배경색이 변경되었습니다");
-                window.parent.location.reload();
 
-            } else {
-                console.log("배경색 변경 실패");
-            }
-        },
-        error : e => {console.log("배경색 변경 중 오류 발생");}
-    })
+    if(BGColorFlag) { // 배경색이 선택되었다면
+
+        $.ajax({
+            url : "/manage/background/updateBGColor",
+            type : "get",
+            data : {"newBGColor" : newBGColor},
+            success : result => {
+                if(result > 0) {
+                    alert("배경색이 변경되었습니다");
+                    window.parent.location.reload();
+    
+                } else {
+                    console.log("배경색 변경 실패");
+                }
+            },
+            error : e => {console.log("배경색 변경 중 오류 발생");}
+        })
+    } else {
+        alert("배경색을 선택한 후 적용하기 버튼을 눌러주세요");
+    }
+
+})
+
+
+// 프레임색 적용하기 버튼 
+const frameUse = document.getElementById("frameUse");
+frameUse.addEventListener("click", e => {
+
+    if(frameColorFlag){
+
+        const newFrameColor = frameColorInput.value;
+        $.ajax({
+            url : "/manage/background/updateFrameColor",
+            type : "get",
+            data : {"newFrameColor" : newFrameColor},
+            success : result => {
+                if(result > 0) {
+                    alert("프레임색이 변경되었습니다");
+                    window.parent.location.reload();
+    
+                } else {
+                    console.log("프레임색 변경 실패");
+                }
+            },
+            error : e => {console.log("프레임색 변경 중 오류 발생");}
+        })
+    } else {
+        alert("프레임색을 선택한 후 적용하기 버튼을 눌러주세요");
+    }
+
+
+})
+
+
+// 프레임 메뉴색 적용하기 버튼 
+const frameMenuUse = document.getElementById("frameMenuUse");
+frameMenuUse.addEventListener("click", e => {
+
+    if(frameMenuColorFlag){
+        
+        const newFrameMenuColor = frameMenuColorInput.value;
+    
+        // 프레임 메뉴색에 따라 폰트색(black/white) 결정
+        const newFrameFontColor = getTextColorByBackgroundColor(newFrameMenuColor);
+    
+    
+        $.ajax({
+            url : "/manage/background/updateFrameMenuColor",
+            type : "get",
+            data : {"newFrameMenuColor" : newFrameMenuColor, "newFrameFontColor" : newFrameFontColor},
+            success : result => {
+                if(result > 0) {
+                    alert("프레임 메뉴색이 변경되었습니다");
+                    window.parent.location.reload();
+    
+                } else {
+                    console.log("프레임 메뉴색 변경 실패");
+                }
+            },
+            error : e => {console.log("프레임 메뉴색 변경 중 오류 발생");}
+        })
+    } else {
+        alert("프레임 메뉴색을 선택한 후 적용하기 버튼을 눌러주세요");
+    }
+
 
 })
 
@@ -113,7 +136,7 @@ bgColorUse.addEventListener("click", e => {
 
 
 
-/* 배경이미지 적용하기 버튼 */
+// 배경이미지 적용하기 버튼
 const bgImageUse = document.getElementById("bgImageUse");
 bgImageUse.addEventListener("click", e => {
 
@@ -158,19 +181,30 @@ bgImageUse.addEventListener("click", e => {
 // }
 
 
+
+
 //----------------------------------------------------------------------- 
-/* 전체-이미지 변경 */
+/* 색상, 이미지 표현 */
 
 
+// 전체 -색
+const BGColorInput = document.getElementById("BGColorInput");
+const bgColorShow = document.getElementById("bgColorShow");
 
+BGColorInput.addEventListener("change", () => {
 
-/* 전체-이미지변경 */
+    BGColorFlag = true; // 배경색이 바뀌었음을 표시하는 flag
+    bgColorShow.style.backgroundColor = BGColorInput.value;
+});
+
+/* 전체-이미지 */
 const imageInput = document.getElementById("imageInput");
 const imageShow = document.getElementById("imageShow");
 
 imageInput.addEventListener("change", e => {
 
     if(e.target.files[0] != undefined) {
+
         const reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
 
@@ -185,27 +219,35 @@ imageInput.addEventListener("change", e => {
     }
 })
 
-
-
-
-//----------------------------------------------------------------------- 
-/* 전체-프레임변경 */
+// 전체-프레임 색
 const frameColorInput = document.getElementById("frameColorInput");
 const frameColorShow = document.getElementById("frameColorShow");
 
 frameColorInput.addEventListener("change", () => {
+
+    frameColorFlag = true; // 프레임색이 바뀌었음을 표시하는 flag
     frameColorShow.style.backgroundColor = frameColorInput.value;
 });
 
 
 
+//전체-프레임 메뉴색
+const frameMenuColorInput = document.getElementById("frameMenuColorInput");
+const frameMenuColorShow = document.getElementById("frameMenuColorShow");
 
+frameMenuColorInput.addEventListener("change", () => {
+
+    frameMenuColorFlag = true; // 프레임 메뉴색이 바뀌었음을 표시하는 flag
+    frameMenuColorShow.style.backgroundColor = frameMenuColorInput.value;
+});
 
 
 
 
 //----------------------------------------------------------------------- 
-/* 배경색, 배경이미지 초기화 */
+/* 초기화 */
+
+// 배경색, 배경이미지 초기화
 const bgColorReturn = document.getElementById("bgColorReturn"); // 배경색
 const bgImageReturn = document.getElementById("bgImageReturn"); // 배경색
 bgColorReturn.addEventListener("click", e => {resetBGColor();});
@@ -232,7 +274,7 @@ const resetBGColor = () => {
     }
 }
 
-/* 프레임 초기화 */
+// 프레임 초기화
 const frameReturn = document.getElementById("frameReturn");
 frameReturn.addEventListener("click", e => {
 
@@ -250,6 +292,29 @@ frameReturn.addEventListener("click", e => {
                 }
             },
             error : e => {console.log("프레임 초기화 중 오류 발생");}
+        })
+    }
+})
+
+
+// 프레임 메뉴색 초기화
+const frameMenuReturn = document.getElementById("frameMenuReturn");
+frameMenuReturn.addEventListener("click", e => {
+
+    if(confirm("정말 초기화하시겠습니까?")){
+        $.ajax({
+            url : "/manage/background/resetFrameMenuColor",
+            type : "get",
+            success : result => {
+                if(result > 0) {
+                    alert("프레임 메뉴색이 초기화되었습니다");
+                    window.parent.location.reload();
+
+                } else {
+                    console.log("프레임 메뉴 색 초기화 실패");
+                }
+            },
+            error : e => {console.log("프레임 메뉴 색 초기화 중 오류 발생");}
         })
     }
 })

@@ -309,9 +309,15 @@
  	</update>
   
  	<!-- 프레임 초기화하기 -->
- 	<update id="resetFrameColor">
+ 	<update id="updateFrameColor">
  		UPDATE MINI_HOMEPAGE SET
-		FRAME_COLOR = #{frameColor},
+		FRAME_COLOR = #{frameColor}
+		WHERE MEMBER_NO = #{memberNo}
+ 	</update>
+ 	
+ 	<!-- 프레임 메뉴 색 초기화하기 -->
+ 	<update id="updateFrameMenuColor">
+ 		UPDATE MINI_HOMEPAGE SET
 		FRAME_MENU_COLOR =#{frameMenuColor},
 		FRAME_FONT_COLOR = #{frameFontColor}
 		WHERE MEMBER_NO = #{memberNo}

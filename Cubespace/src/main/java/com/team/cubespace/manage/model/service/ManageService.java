@@ -126,6 +126,12 @@ public interface ManageService {
 	 * @return
 	 */
 	int resetFrameColor(Background backgroundInfo);
+	
+	/** 프레임 메뉴 색 초기화하기
+	 * @param backgroundInfo
+	 * @return
+	 */
+	int resetFrameMenuColor(Background backgroundInfo);
 
 	/** 배경색 변경
 	 * @param backgroundInfo
@@ -133,6 +139,18 @@ public interface ManageService {
 	 */
 	int updateBGColor(Background backgroundInfo);
 
+	/** 프레임색 변경
+	 * @param backgroundInfo
+	 * @return
+	 */
+	int updateFrameColor(Background backgroundInfo);
+	
+	/** 프레임 메뉴색 변경
+	 * @param backgroundInfo
+	 * @return
+	 */
+	int updateFrameMenuColor(Background backgroundInfo);
+	
 
 
 }

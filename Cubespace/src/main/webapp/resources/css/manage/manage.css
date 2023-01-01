@@ -396,7 +396,7 @@ header {
     display: none;
 }
 
-#frameColorInput {
+#frameColorInput, #frameMenuColorInput {
     display: none;
 }
 
@@ -418,6 +418,9 @@ header {
     font-size: 13px;
 }
 
+.frameMenuColorArea {
+    margin-bottom: 20px;
+}
 /* ----------------------------------------------------- */
 /* 메뉴설정 */
 .menuHeader,

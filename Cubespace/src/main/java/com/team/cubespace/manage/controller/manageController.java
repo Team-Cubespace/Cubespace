@@ -323,6 +323,21 @@ public class manageController {
 	}
 	
 	
+	/** 프레임 메뉴색 초기화하기
+	 * @param loginMember
+	 * @return
+	 */
+	@GetMapping("/background/resetFrameMenuColor")
+	@ResponseBody
+	public int resetFrameMenuColor(@SessionAttribute("loginMember") Member loginMember) {
+		
+		Background backgroundInfo = (Background) application.getAttribute("backgroundColorInfo");
+		backgroundInfo.setMemberNo(loginMember.getMemberNo());
+		
+		return service.resetFrameMenuColor(backgroundInfo);
+	}
+	
+	
 	/** 배경색 변경
 	 * @param loginMember
 	 * @param newBGColor
@@ -356,4 +371,39 @@ public class manageController {
 //		
 //		return service.updateBGColor(backgroundInfo);
 //	}
+	
+	/** 프레임색 변경
+	 * @param loginMember
+	 * @param newFrameColor
+	 * @return
+	 */
+	@GetMapping("/background/updateFrameColor")
+	@ResponseBody
+	public int updateFrameColor(@SessionAttribute("loginMember") Member loginMember,
+			String newFrameColor) {
+		
+		Background backgroundInfo = new Background();
+		backgroundInfo.setFrameColor(newFrameColor);
+		backgroundInfo.setMemberNo(loginMember.getMemberNo());
+		
+		return service.updateFrameColor(backgroundInfo);
+	}
+	
+	/** 프레임 메뉴색 변경
+	 * @param loginMember
+	 * @param newFrameMenuColor, newFrameFontColor
+	 * @return
+	 */
+	@GetMapping("/background/updateFrameMenuColor")
+	@ResponseBody
+	public int updateFrameMenuColor(@SessionAttribute("loginMember") Member loginMember,
+			String newFrameMenuColor, String newFrameFontColor) {
+		
+		Background backgroundInfo = new Background();
+		backgroundInfo.setFrameMenuColor(newFrameMenuColor);
+		backgroundInfo.setFrameFontColor(newFrameFontColor);
+		backgroundInfo.setMemberNo(loginMember.getMemberNo());
+		
+		return service.updateFrameMenuColor(backgroundInfo);
+	}
 }

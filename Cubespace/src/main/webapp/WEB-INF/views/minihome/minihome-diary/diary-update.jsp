@@ -59,7 +59,7 @@
                     <header>
                         <span>다이어리 작성</span>
                     </header>
-                    <form id="writediaryForm" action="/diary/write" method="POST" encType="" onsubmit="return false;">
+                    <form id="writediaryForm" action="/diary/update/${diary.diaryNo}" method="POST" encType="">
                         <div class="input-row">
                             <label for="">폴더</label>
                             <select name="folderNo" id="">
@@ -70,41 +70,40 @@
                         </div>
                         <div class="input-row">
                             <label for="diaryDate">날짜</label>
-                            <input id="diaryDate" name="diaryCreateDate" type="datetime-local" value = "2023-01-01">
+                            <input id="diaryDate" name="diaryCreateDate" type="datetime-local" value = "${diary.diaryCreateDate}">
                         </div>
                         <div class="input-row">
                             <label for="diaryTitle">제목</label>
-                            <input id="diaryTitle" name="diaryTitle" type="text" placeholder="제목을 입력하세요">
+                            <input id="diaryTitle" name="diaryTitle" type="text" placeholder="제목을 입력하세요" value = "${diary.diaryTitle}">
                         </div>
                         <div class="input-row">
                             <%-- <label for="diaryContent">내용</label> --%>
-                            <textarea id="summernote" name = "diaryContent"><p>Hello Summernote</p></textarea>
                             <%-- <div id="summernote" name = "diaryContent"><p>Hello Summernote</p></div>
                             <script>
                             const summmernote = document.getElementById("summernote");
                             </script>
                             <input type="hidden" > --%>
-                            <%-- <textarea name="diaryContent" id="diaryContent" rows="6" placeholder="내용을 입력하세요"></textarea> --%>
+                            <textarea id="summernote" name = "diaryContent">${diary.diaryContent}</textarea>
                         </div>
                         <div class="input-row">
                             <label>공개설정</label>
                             <ul class="radio-list">
                                 <li>
-                                    <input type="radio" id="scope1" name="diaryOpenFlag" checked value="1">
+                                    <input type="radio" id="scope1" name="diaryOpenFlag" value="1" <c:if test="${diary.diaryOpenFlag == 1}">checked</c:if> >
                                     <%-- <label class="radio" for="scope1">
                                         <i class="fa-solid fa-check"></i>
                                     </label> --%>
                                     <label for="scope1">공개</label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="scope2" name="diaryOpenFlag" value="2">
+                                    <input type="radio" id="scope2" name="diaryOpenFlag" value="2" <c:if test="${diary.diaryOpenFlag == 2}">checked</c:if> >
                                     <%-- <label class="radio" for="scope2">
                                         <i class="fa-solid fa-check"></i>
                                     </label> --%>
                                     <label for="scope2">깐부공개</label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="scope3" name="diaryOpenFlag" value="3">
+                                    <input type="radio" id="scope3" name="diaryOpenFlag" value="3" <c:if test="${diary.diaryOpenFlag == 3}">checked</c:if> >
                                     <%-- <label class="radio" for="scope3">
                                         <i class="fa-solid fa-check"></i>
                                     </label> --%>
@@ -113,8 +112,7 @@
                             </ul>
                         </div>
                         <div class="form-button-area">
-                            <button id="submitButton" onclick = "submit()">작성</button>
-                            <%-- <button id="submitButton" type="submit">작성</button> --%>
+                            <button id="submitButton" type="submit">작성</button>
                             <a id="cancelWrite">취소</a>
                         </div>
                     </form>

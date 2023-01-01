@@ -76,6 +76,31 @@ public class DiaryDAO {
 		return result; // 0 또는 삽입된 게시글 번호
 	}
 	
+	/**다이어리 수정 페이지 이동
+	 * @param diaryNo
+	 * @return
+	 */
+	public Diary selectDiaryDetail(int diaryNo) {
+		
+		return sqlSession.selectOne("diaryMapper.selectDiaryDetail",diaryNo);
+	}
+	
+	/**다이어리 수정
+	 * @param diary
+	 * @return
+	 */
+	public int diaryUpdate(Diary diary) {
+		int result = sqlSession.update("diaryMapper.diaryUpdate",diary);
+		
+		//update 성공 시..
+		if(result > 0) {
+			result = 1;
+			System.out.println("update성공했다면...result 1이란다...");
+		}
+		
+		return result;
+	}
+
 	/**
 	 * @param memberNo
 	 * @return
@@ -84,5 +109,7 @@ public class DiaryDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("diaryMapper.selectscheduleList",memberNo);
 	}
+
+
 
 }

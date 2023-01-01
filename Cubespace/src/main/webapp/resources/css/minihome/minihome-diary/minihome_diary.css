@@ -1,17 +1,8 @@
-* {
+/* * {
     border: 1px solid black;
     
-}
+} */
 
-/* 맨 위의 폴더 이름 있는 곳 */
-.category{
-    background-color: red;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    font-size: 17px;
-    border-bottom: 1px solid black;
-}
 
 
 /* 강사님의 은총_달력 section */
@@ -45,6 +36,7 @@
     margin-bottom: 150px;
 }
 
+
 /* 제목 밑에 공개여부 & 시간 */
 .title-section > div:nth-child(2) {
     display: flex;
@@ -64,7 +56,9 @@
 /* 내용이 있는 공간 */
 .content{
     /* background-color: aquamarine; */
-    height: 200px;
+    min-height: 200px;
+    max-height: 1000px;
+    overflow: auto;
     border-top: 1px solid black;
     border-bottom:  1px solid black;
     padding-top: 20px;

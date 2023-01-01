@@ -47,11 +47,25 @@ public interface DiaryService {
 	 */
 	int diaryWrite(Diary diary);
 	
+	/** 다이어리 수정 페이지 이동
+	 * @param diaryNo
+	 * @return
+	 */
+	Diary selectDiaryDetail(int diaryNo);
+	
+	/** 다이어리 수정
+	 * @param diary
+	 * @return
+	 */
+	int diaryUpdate(Diary diary);
+
 	/**
 	 * @param memberNo
 	 * @return
 	 */
 	List<Plan> selectSchedule(int memberNo);
+
+
 
 
 }

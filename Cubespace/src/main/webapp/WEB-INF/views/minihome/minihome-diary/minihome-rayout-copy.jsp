@@ -94,7 +94,8 @@
                         </div>
                     </div>
                     <div class = "write-section">
-                        <div class = "writeBtn" onclick = "writeBtn()">글쓰기</div>
+                        <div class = "writeBtn" onclick = "writeBtn()"><a href="/diary/write">글쓰기</a>
+                        </div>
                     </div>
                     <div class = "diary-section-container">
                         <%-- cut.jsp에 잘라냄 --%>
@@ -111,149 +112,7 @@
 <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
 <script script type="text/javascript" th:inline="javascript">
     
-    function selectDiary(diaryDate,folderNumber,homepageMemberNo,loginMemberNo){
-    
-    /* 일기 목록 조회하는 ajax */
-    $.ajax({
-        url : "/diary/selectDiary",
-        data : {"diaryDate":diaryDate,"folderNumber":folderNumber,"homepageMemberNo":homepageMemberNo,"loginMemberNo":loginMemberNo},
-        dataType : "JSON",
-        success :  (diaryList)  => {
 
-            /*확인용*/console.log("해당 날짜의 다이어리 목록 받기 성공")
-            /*확인용*/console.log(diaryList);
-            /* diaryNo, diaryTitle, diaryContent, diaryCreateDate, diaryOpenFlag 가지고 옴. */
-            
-            /* 각각의 diary-section의 위치를 잡아주는 기준(부모) */
-            const diarySectionContainer = document.querySelector(".diary-section-container");
-            /* 기존에 목록 불러온거 지워주는 거..? 누적방지용? */
-            diarySectionContainer.innerText = "";
-            
-            for(diary of diaryList){
-
-                /*확인용*/console.log("각각의 다이어리");
-                /*확인용*/console.log(diary);
-
-                const div = document.createElement("div");
-                div.classList.add("diary-section");
-                
-                    const div1 = document.createElement("div");
-                    div1.classList.add("title-section");
-
-                        const div1_1 = document.createElement("div");
-                        div1_1.classList.add("title");
-                        div1_1.innerText = diary.diaryTitle;
-                        
-                        const div1_2 = document.createElement("div");
-
-                            const div1_2_1 = document.createElement("div");
-                            div1_2_1.classList.add("disclosure-option")
-                            if(diary.diaryOpenFlag == 1){
-                                div1_2_1.innerText = "공개";
-                            }
-                            if(diary.diaryOpenFlag == 2){
-                                div1_2_1.innerText = "깐부공개";
-                            }
-                            if(diary.diaryOpenFlag == 3){
-                                div1_2_1.innerText = "비공개";
-                            }
-                            const div1_2_2 = document.createElement("div");
-                            div1_2_2.classList.add("create-time")
-                            div1_2_2.innerText = diary.diaryCreateDate;
-
-                        div1_2.append(div1_2_1,div1_2_2);
-                    
-                    div1.append(div1_1,div1_2);
-
-                    const div2 = document.createElement("div");
-                    div2.classList.add("content");
-                    // let diaryContentSetting = diary.diaryContent;
-
-                    /*<![CDATA[*/
-                    
-                        var current = "[[ ${diary.diaryContent} ]]"
-
-                        console.log("야 제발 돼" +current);
-                    
-                    /*]]>*/
-                    
-                    div2.innerText =current;
-                    
-                    const div3 = document.createElement("div");
-                    div3.classList.add("under-section");
-
-                        const div3_1 = document.createElement("div");
-                        div3_1.classList.add("under1");
-
-                            const div3_1_1 = document.createElement("div");
-                            div3_1_1.classList.add("emoji-and-pop");
-
-                                const div3_1_1_1 = document.createElement("div");
-                                div3_1_1_1.classList.add("emoji-section");   
-                                /* 클릭하면 나오는 함수의 기능 1. 이모지 목록 비동기로 불러오기 
-                                2. 이모지를 누른 사람의 목록 비동기로 불러오기*/
-                                //div3_1_1_1.setAttribute("onclick","selectEmojiPeopleList("+diary.diaryNo+")") 
-                                // const input3_1_1_1_1 = document.createElement("input");
-                                // input3_1_1_1_1.setAttribute("type","hidden");
-                                
-                                /* 얘가 원래 이 자리였는데 selectEmojiList함수 안에서 만들거야... */
-                                // const div3_1_1_2 = document.createElement("div");
-                                // div3_1_1_2.classList.add("people-pop-container");
-                                
-                                selectEmojiList(diary.diaryNo,div3_1_1_1,div3_1_1);
-
-                                const div3_1_1_2 = document.createElement("div");
-                                div3_1_1_2.classList.add("people-pop-container");
-                                
-                                console.log(div3_1_1_2);
-                                peoplePopContainer = div3_1_1_2;
-                            /* selectEmojiList가서 div3_1_1_2를 beforeend로 넣을 꺼야... */
-                        
-                            div3_1_1.append(div3_1_1_1,div3_1_1_2);
-                            /* mouseover하면, div3_1_1_2에 beforeend로 div3_1_1_2_1를 넣어야될듯?*/
-                            /* mouseout하면  div3_1_1_2.innertext = ""*/
-
-                            const div3_1_2 = document.createElement("div");
-                            div3_1_2.classList.add("choose-emoji-section");
-
-                                const div3_1_2_1 = document.createElement("div");
-                                div3_1_2_1.classList.add("emoji-btn");
-                                div3_1_2_1.innerText="공감하기";
-                                div3_1_2_1.setAttribute("onclick","chooseEmoji("+diary.diaryNo+",this)")
-                                
-                            /* 아직 미완성조각 */
-                            div3_1_2.append(div3_1_2_1);
-                        
-                        div3_1.append(div3_1_1,div3_1_2);
-
-
-                        const div3_2 = document.createElement("div");
-                        div3_2.classList.add("under2");
-
-                            const div3_2_1 = document.createElement("div");
-                            div3_2_1.setAttribute("onclick","updateDiary("+diary.diaryNo+")")
-                            div3_2_1.innerText = "수정";
-                            
-                            const div3_2_2 = document.createElement("div");
-                            div3_2_2.setAttribute("onclick","deleteDiary("+diary.diaryNo+")")
-                            div3_2_2.innerText = "삭제";
-
-                        div3_2.append(div3_2_1,div3_2_2);
-
-                    div3.append(div3_1,div3_2);
-                
-                div.append(div1,div2,div3);
-
-                diarySectionContainer.insertAdjacentElement("beforeend",div);
-            }
-            
-
-        }, error : () => { 
-            
-        }
-        
-    });
-}
     
     </script>
 <script src="/resources/js/minihome/minihome-diary/calendar.js"></script>

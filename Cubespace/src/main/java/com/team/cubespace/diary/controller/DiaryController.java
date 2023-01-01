@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,8 +46,8 @@ public class DiaryController {
 		
 		//월간달력part
 //		return "minihome/minihome-diary/monthcalendar";
-		//다이어리 작성 part
-//		return "minihome/minihome-diary/diary-write";
+		
+		
 	}
 	
 	/** 클릭한 날짜의 다이어리 목록 조회하기
@@ -130,7 +131,16 @@ public class DiaryController {
 	   	System.out.println("다이어리 객체 :"+ diary);
 	   	System.out.println("이슬이니...? :"+loginMember.getMemberNo());
 	   	diary.setMemberNo(loginMember.getMemberNo());
+	   	// [임시 설정]
 	   	diary.setFolderNo(1);
+	   	diary.setDiaryCreateDate(
+	   			diary.getDiaryCreateDate().substring(0, 10) + " "+
+	   			diary.getDiaryCreateDate().substring(11, 16) 
+	   			);
+	   	System.out.println(diary.getDiaryCreateDate());
+	   	//System.out.println(diary.getDiaryCreateDate().substring(0, 10));
+	   	//System.out.println(diary.getDiaryCreateDate().substring(11, 16));
+	   	
 	   	// 4. 게시글 삽입 서비스를 호출한다.
 	   	int diaryNo = service.diaryWrite(diary);
 	   
@@ -139,6 +149,8 @@ public class DiaryController {
 	    
 	    if(diaryNo > 0) {
 	    	message = "게시글이 등록되었습니다.";
+	    	
+	    	path = "/miniroom";
 	    	
 	    	//path = "/board/" + boardCode + "/" + diaryNo;
 	    			// /board/1/2003 (상세조회 요청 주소)
@@ -152,39 +164,78 @@ public class DiaryController {
 	    
 		return "redirect:" + path;
    }
-	 
-//    /**일정 목록 조회하기
-//     * @return
-//     */
-//    @GetMapping("/calendar")
-//    @ResponseBody
-//    public List<Map<String, Object>> monthPlan(@SessionAttribute("loginMember") Member loginMember) {
-//    	
-//        List<Plan> scheduleList = service.monthPlan(loginMember.getMemberNo());
-// 
-//        System.out.println(scheduleList);
-//        
-//        JsonObject jsonObj = new JsonObject();
-//        JsonArray jsonArr = new JsonArray();
-// 
-//        HashMap<String, Object> hash = new HashMap<>();
-// 
-//        scheduleList.get(1).getClass()
-//        for (int i = 0; i < scheduleList.size(); i++) {
-//            hash.put("title", scheduleList.get(i).getPlanTitle);
-//            hash.put("start", scheduleList.get(i).getStartDate());
-////	            hash.put("time", listAll.get(i).getScheduleTime());
-// 
-//            jsonObj = new JsonObject(hash);
-//            jsonArr.add(jsonObj);
-//        }
-//        log.info("jsonArrCheck: {}", jsonArr);
-//        return jsonArr;
-//    }
-//	
-	
-//	@PostMapping("/calenderInput")
-//	@ResponseBody
+   
+    /*[수정 페이지]*/
+
+   	//다이어리 수정 페이지 이동
+   	@GetMapping("/diary/update/{diaryNo}")
+   	public String diaryUpdate(
+   			@PathVariable("diaryNo") int diaryNo,
+		   Model model
+		   ) {
+   		System.out.println("수정 페이지로 넘어왔니?");
+   		Diary diary = service.selectDiaryDetail(diaryNo);
+	   
+//   		//개행문자 처리 해제 
+//   		board.setBoardContent(Util.newLineClear(board.getBoardContent()));
+	   
+   		model.addAttribute("diary", diary);
+   		return "minihome/minihome-diary/diary-update";
+   	}
+   
+   	//다이어리 수정
+   	@PostMapping("/diary/update/{diaryNo}")
+    public String diaryUpdate(
+ 		   Diary diary,
+ 		   @SessionAttribute("loginMember") Member loginMember,
+ 		   // 필요한가?
+ 		   RedirectAttributes ra, 
+ 		   @RequestHeader("referer") String referer
+ 		   ) throws IOException {
+ 	   
+ 	   	//INSERT -> 회원번호/제목/내용/작성일/삭제여부/공개여부/폴더번호
+ 	   	//folderNo, loginMember의 memberNo 필요해
+ 	   
+ 	   	//회원번호 -> loginMember의 memberNo 필요해
+ 	   	//제목 (o)
+ 	   	//내용 (o)
+ 	   	//작성일 (o)
+ 	   	//삭제여부 DEFAULT
+ 	   	//공개여부 (o)
+ 	   	//폴더번호 -> folderNo 어케 불러와...?
+ 	   	System.out.println("수정 다이어리 객체 :"+ diary);
+ 	   	System.out.println("이슬이니...? :"+loginMember.getMemberNo());
+ 	   	diary.setMemberNo(loginMember.getMemberNo());
+ 	   	diary.setDiaryCreateDate(
+	   			diary.getDiaryCreateDate().substring(0, 10) + " "+
+	   			diary.getDiaryCreateDate().substring(11, 16) 
+	   			);
+ 	   	//[임시 설정]
+ 	   	diary.setFolderNo(1);
+ 	   	// 4. 게시글 삽입 서비스를 호출한다.
+ 	   	int result = service.diaryUpdate(diary);
+ 	   
+ 	    String message = null;
+ 	    String path = null;
+ 	    
+ 	    if(result > 0) {
+ 	    	message = "게시글이 수정되었습니다.";
+ 	    	
+ 	    	path = "/miniroom";
+ 	    	
+ 	    	//path = "/board/" + boardCode + "/" + diaryNo;
+ 	    			// /board/1/2003 (상세조회 요청 주소)
+ 	    } else {
+ 	    	message = "게시글 수정 실패";
+ 	    	path = referer;
+ 	    	
+ 	    }
+ 	    
+ 	    ra.addFlashAttribute("message",message);
+ 	    
+ 		return "redirect:" + path;
+    }
+
 	   
 	/*[ 월간 달력 ]*/
 	

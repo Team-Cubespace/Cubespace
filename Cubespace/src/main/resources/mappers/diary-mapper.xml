@@ -52,7 +52,7 @@
   	</select>
  	  
  	<select id="selectDiaryList" resultMap="diary_rm">
- 	SELECT DIARY_NO, D_TITLE, D_CONTENT, TO_CHAR(D_CREATE,'AM HH24"시 "MM"분"') D_CREATE, D_OPEN_FL, FOLDER_NO  
+ 	SELECT DIARY_NO, D_TITLE, D_CONTENT, TO_CHAR(D_CREATE,'AM HH24"시 "MI"분"') D_CREATE, D_OPEN_FL, FOLDER_NO  
 	FROM DIARY
 	WHERE MEMBER_NO = #{homepageMemberNo}
 	AND TO_CHAR (D_CREATE,'YYYY-MM-DD') = #{diaryDate}
@@ -87,6 +87,7 @@
 	WHERE DIARY_NO = #{diaryNo} AND E.EMOJI_NO = #{emojiNo}
 	</select>
 	
+	<!-- 다이어리 작성  -->
 	<insert id="diaryWrite" parameterType = "Diary" useGeneratedKeys="true">
 		<selectKey keyProperty = "diaryNo" resultType = "_int" order = "BEFORE">
 		SELECT SEQ_DIARY_NO.NEXTVAL FROM DUAL
@@ -96,12 +97,31 @@
 	    #{memberNo},
 	    #{diaryTitle},
 	    #{diaryContent},
-	    #{diaryCreateDate},
+	    TO_DATE('${diaryCreateDate}','YYYY-MM-DD HH24:MI:SS'),
 	    DEFAULT,  
 	    #{diaryOpenFlag},
 	    #{folderNo} )
 	</insert>
 	
+	<!-- 다이어리 수정 페이지 조회 -->
+	<select id="selectDiaryDetail" resultMap = "diary_rm">
+	SELECT DIARY_NO , MEMBER_NO , D_TITLE,D_CONTENT,D_CREATE,D_OPEN_FL,FOLDER_NO
+	FROM DIARY
+	WHERE DIARY_NO = #{diaryNo}
+	</select>
+	
+	<!-- 다이어리 수정 -->
+	<update id="diaryUpdate">
+	UPDATE DIARY
+	SET 
+	D_TITLE = #{diaryTitle},
+	D_CONTENT = #{diaryContent},
+	D_CREATE = TO_DATE('${diaryCreateDate}','YYYY-MM-DD HH24:MI:SS'),
+	D_OPEN_FL = #{diaryOpenFlag},
+	FOLDER_NO = #{folderNo}
+	WHERE
+	DIARY_NO = #{diaryNo}
+	</update>
 	
 	<!-- 월간 달력 -->
 	<select id="selectscheduleList" resultMap = "plan_rm">

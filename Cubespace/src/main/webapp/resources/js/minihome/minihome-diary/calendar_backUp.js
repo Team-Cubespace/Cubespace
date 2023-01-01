@@ -232,7 +232,7 @@ const makeCalendar = (date) => {
 
                             const div2 = document.createElement("div");
                             div2.classList.add("content");
-                            div2.innerText = diary.diaryContent;
+                            div2.innerHTML = diary.diaryContent;
 
                             const div3 = document.createElement("div");
                             div3.classList.add("under-section");
@@ -286,9 +286,13 @@ const makeCalendar = (date) => {
                                 div3_2.classList.add("under2");
 
                                     const div3_2_1 = document.createElement("div");
-                                    div3_2_1.setAttribute("onclick","updateDiary("+diary.diaryNo+")")
-                                    div3_2_1.innerText = "수정";
-                                    
+                                    // div3_2_1.setAttribute("onclick","updateDiary("+diary.diaryNo+")")
+                                    // div3_2_1.innerText = "ㄴㄷㄹ";
+                                        const div3_2_1_a = document.createElement("a");
+                                        div3_2_1_a.setAttribute("href","/diary/update/"+diary.diaryNo+"");
+                                        div3_2_1_a.innerText = "수정";
+                                    div3_2_1.append(div3_2_1_a);
+
                                     const div3_2_2 = document.createElement("div");
                                     div3_2_2.setAttribute("onclick","deleteDiary("+diary.diaryNo+")")
                                     div3_2_2.innerText = "삭제";
@@ -584,13 +588,13 @@ function mouseout(btn){
     btn.parentElement.parentElement.nextSibling.innerText = "";
 }
 
-// document.querySelector(".emoji-btn").addEventListener("click", e=>{
-//     console.log(e.target);
-//     console.log(e.target.parentElement.previousElementSibling);
-//     console.log(e.target.parentElement.previousElementSibling.children[0]);
+document.querySelector(".emoji-btn").addEventListener("click", e=>{
+    console.log(e.target);
+    console.log(e.target.parentElement.previousElementSibling);
+    console.log(e.target.parentElement.previousElementSibling.children[0]);
 
-//     const popup = e.target.parentElement.previousElementSibling;
-//     const section = e.target.parentElement.previousElementSibling.children[0];
+    const popup = e.target.parentElement.previousElementSibling;
+    const section = e.target.parentElement.previousElementSibling.children[0];
     
-//     selectEmojiList(35, section, popup);
-// })
+    selectEmojiList(35, section, popup);
+})

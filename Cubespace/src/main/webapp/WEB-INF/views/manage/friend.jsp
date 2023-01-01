@@ -28,7 +28,7 @@
             cursor: default;
         }
     </style>
-    <jsp:include page="/WEB-INF/views/include/font.jsp"/>
+
 </head>
 <body>
     <div class="content-area frame-color">

@@ -347,5 +347,24 @@
 		AND SHOP_CATH_NO = 2
  	</select>
  	
+ 	 <!-- 내 배경음악 설정하기 -->
+ 	<update id="useMusic">
+ 		UPDATE MINI_HOMEPAGE SET
+		OWN_MUSIC_NO = #{musicNo}
+		WHERE MEMBER_NO = #{memberNo}
+ 	</update>
+ 	
+ 	<!-- 상점에 등록된 전체 배경음악 리스트 조회 -->
+ 	<select id="getAllMusicList" resultMap="music_rm">
+ 		SELECT * FROM MUSIC_SHOP ms ORDER BY MUSIC_NO
+ 	</select>
+ 	
+ 	 <!-- 내 배경음악 없애기 -->
+ 	<update id="deleteMusic">
+ 		UPDATE MINI_HOMEPAGE SET
+		OWN_MUSIC_NO = 0
+		WHERE MEMBER_NO = #{memberNo}
+ 	</update>
+ 	
   
 </mapper>

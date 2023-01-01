@@ -17,7 +17,7 @@
 }
 .backgroundMain>div:nth-child(1) {
     justify-content: flex-start;
-    padding-left: 10px;
+    padding: 5px 10px;
 }
 
 
@@ -63,4 +63,39 @@
 }
 .fa-music {
     margin-right: 5px;
+}
+.musicThumbnail {
+    height: 40px;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+.fa-play {
+    margin-right: 20px;
+}
+.fa-play, .fa-stop{
+    font-size: 17px;
+    cursor: pointer;
+}
+.rightTitle{
+    margin-right: 20px;
+}
+#searchInput {
+    padding: 5px;
+    width: 250px;
+}
+.fa-magnifying-glass{
+    top: 5px;
+    cursor: pointer;
+    font-size: 17px;
+}
+.emptyMusicArea {
+    margin: 20px auto;
+}
+.musicHeader {
+    margin-top: 5px;
+}
+.musicArea >div:nth-child(1){
+    display: flex;
+    justify-content: flex-end;
 }

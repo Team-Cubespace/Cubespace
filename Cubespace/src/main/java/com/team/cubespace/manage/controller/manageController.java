@@ -430,4 +430,47 @@ public class manageController {
 		
 		return service.updateFrameMenuColor(backgroundInfo);
 	}
+	
+	
+//	배경음악 관련-------------------------------------------------------------------------------
+
+	/** 내 배경음악 설정하기
+	 * @param paramMap
+	 * @param minihome
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/music/useMusic")
+	@ResponseBody
+	public int useMusic(@RequestParam Map<String, Object> paramMap,
+			@SessionAttribute("minihome") Minihome minihome,
+			Model model) {
+		int result =  service.useMusic(paramMap);
+		if(result > 0) {
+			minihome.setMusicNo(Integer.parseInt((String)paramMap.get("musicNo")));
+			model.addAttribute("minihome", minihome);
+		}
+	
+		return result;
+	}
+	
+	/** 내 배경음악 없애기
+	 * @param paramMap
+	 * @param minihome
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/music/deleteMusic")
+	@ResponseBody
+	public int useMusic(int memberNo,
+			@SessionAttribute("minihome") Minihome minihome,
+			Model model) {
+		int result =  service.deleteMusic(memberNo);
+		if(result > 0) {
+			minihome.setMusicNo(0);
+			model.addAttribute("minihome", minihome);
+		}
+		
+		return result;
+	}
 }

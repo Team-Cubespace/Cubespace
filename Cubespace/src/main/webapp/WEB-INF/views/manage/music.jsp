@@ -21,7 +21,7 @@
             background-color : ${minihome.frameColor};
         }
     </style>
-    <jsp:include page="/WEB-INF/views/include/font.jsp"/>
+    
 </head>
 <body>
     <div class="content-area frame-color">
@@ -35,9 +35,9 @@
                     <div class="rightMusicTitleArea">
                         <span class="rightTitle">배경음악 관리</span>
                         <form class="searchArea">
-                            <i id="allFont" class="whiteBtn">모든 배경음악</i>
-                            <input type="text" id="searchInput" class="headerSearch" placeholder="배경음악 검색" value="${param.searchInput}">
-                            <i class="fa-solid fa-magnifying-glass" id="searchBtn"></i>
+                            <i id="allMusic" class="whiteBtn">모든 배경음악</i>
+                            <input type="text" id="searchInput" name="searchInput" class="headerSearch" placeholder="배경음악 검색" value="${param.searchInput}">
+                            <button class="fa-solid fa-magnifying-glass" id="searchBtn"></button>
                         </form>
                     </div>
                     <a href="" class="storeLinkArea"> <%-- 상점 이동 링크 --%>
@@ -45,6 +45,9 @@
                     </a>
                 </header>
                 <div class="musicArea">
+                    <div>
+                        <button class="whiteBtn deleteMusic">배경음악 없애기</button>
+                    </div>
                     <div class="fontHeader backgroundHeader musicHeader">
                         <div class="musicTitle">노래 제목</div>
                         <div class="musicExample">제작자</div>
@@ -53,39 +56,53 @@
                             <button class="useMusicBtn whiteBtn">적용하기</button>
                         </div>
                     </div>
-
                     <%-- 작성자가 unknown이라면 넣을 문구 추가 --%>
-
+                <c:if test="${not empty musicList}">
+                <c:forEach var="music" items="${musicList}">
                     <div class="fontMain backgroundMain musicMain">
                         <div class="musicTitleArea">
-                            <img src="" class="musicThumbnail">
-                            <span class="musicTitle">노래1</span>
+                            <img src="${music.musicThumnail}" class="musicThumbnail">
+                        <c:choose>
+                            <c:when test="${fn:length(music.musicName) > 70}">
+                                <div class="musicTitle">${fn:substring(music.musicName, 0, 69)}...</div>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="musicTitle">${music.musicName}</span>
+                            </c:otherwise>
+                        </c:choose>
+                            
                         </div>
-                        <div class="musicExample"></div>
-                        <div class="musicListen"></div>
+                        <c:choose>
+                            <c:when test="${fn:length(music.musicCreater) > 20}">
+                                <div class="musicExample">${fn:substring(music.musicCreater, 0, 19)}...</div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="musicExample">${music.musicCreater}</div>
+                            </c:otherwise>
+                        </c:choose>
+                        <div class="musicListen">
+                            <i class="fa-solid fa-play" id="${music.musicPath}"></i>
+                            <i class="fa-solid fa-stop"></i>
+                        </div>
                         <div class="musicUse">
-                            <input type="radio" name="useMusicRadio" class="useMusicRadio" id="">
+                            <input type="radio" name="useMusicRadio" class="useMusicRadio" value="${music.musicNo}">
                         </div>
                     </div>
-
-                    <div class="fontMain backgroundMain musicMain">
-                        <div class="musicTitleArea">
-                            <img src="" class="musicThumbnail">
-                            <span class="musicTitle">노래1</span>
-                        </div>
-                        <div class="musicExample"></div>
-                        <div class="musicListen"></div>
-                        <div class="musicUse">
-                            <input type="radio" name="useMusicRadio" class="useMusicRadio" id="">
-                        </div>
-                    </div>
-                    
-                    
+                </c:forEach>
+                </c:if>
+                <c:if test="${empty musicList}">
+                    <p class="emptyMusicArea">
+                        내가 보유한 노래가 없습니다. 상점에서 노래를 추가해주세요
+                    </p>
+                </c:if>
                 </div>
             </main>  
         </section>
     </div>
 </body>
+    <script>
+        const memberNo = "${loginMember.memberNo}"
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script> <%-- jquery --%>
     <script src="/resources/js/manage/music.js"></script>
 </html>

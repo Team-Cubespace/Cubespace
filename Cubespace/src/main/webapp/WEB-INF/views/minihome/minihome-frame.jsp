@@ -41,7 +41,7 @@
 
 
 
-<jsp:include page="/WEB-INF/views/include/font.jsp"/>
+<jsp:include page="/WEB-INF/views/include/allFontMusic.jsp"/>
 
 </head>
 <body>

@@ -171,6 +171,24 @@ public interface ManageService {
 	 */
 	List<Map<String, Object>> getMusicList(Map<String, Object> paramMap);
 
+	/** 내 배경음악 설정하기
+	 * @param paramMap
+	 * @return
+	 */
+	int useMusic(Map<String, Object> paramMap);
+
+	
+	/** 상점에 등록된 전체 배경음악 조회
+	 * @return
+	 */
+	List<Map<String, Object>> getAllMusicList();
+
+	/** 내 배경음악 없애기
+	 * @param memberNo
+	 * @return
+	 */
+	int deleteMusic(int memberNo);
+
 	
 
 

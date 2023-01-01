@@ -17,7 +17,7 @@ import com.team.cubespace.manage.model.vo.Background;
 
 
 @Controller
-@SessionAttributes("allFontList")
+@SessionAttributes({"allFontList", "allMusicList"})
 public class HomeController {
 	
 	@Autowired
@@ -33,6 +33,12 @@ public class HomeController {
 		// 상점에 등록된 전체 폰트 리스트 조회
 		List<Map<String, Object>> allFontList = mService.getAllFontList();
 		model.addAttribute("allFontList", allFontList); // 모두의 사용을 위해 세션에 등록
+		
+		// 상점에 등록된 전체 배경음악 리스트 조회
+		List<Map<String, Object>> allMusicList = mService.getAllMusicList();
+		model.addAttribute("allMusicList", allMusicList); // 모두의 사용을 위해 세션에 등록
+		
+		
 		
 		// 모두가 공용으로 사용할 배경색 정보를 application scope에 올려놓음
 		Background backgroundColorInfo = new Background();

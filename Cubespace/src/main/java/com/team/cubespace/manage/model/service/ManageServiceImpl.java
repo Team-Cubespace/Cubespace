@@ -22,6 +22,26 @@ public class ManageServiceImpl implements ManageService{
 	
 	@Autowired
 	private ManageDAO dao;
+	
+	/**
+	 * 상점에 등록된 전체 폰트 리스트 조회
+	 */
+	@Override
+	public List<Map<String, Object>> getAllFontList() {
+		
+		return dao.getAllFontList();
+	}
+	
+	/**
+	 * 상점에 등록된 전체 배경음악 조회
+	 */
+	@Override
+	public List<Map<String, Object>> getAllMusicList() {
+
+		return dao.getAllMusicList();
+	}
+
+	
 
 	/**
 	 * 폴더 리스트 조회
@@ -97,14 +117,7 @@ public class ManageServiceImpl implements ManageService{
 		return dao.useFont(paramMap);
 	}
 
-	/**
-	 * 상점에 등록된 전체 폰트 리스트 조회
-	 */
-	@Override
-	public List<Map<String, Object>> getAllFontList() {
-		
-		return dao.getAllFontList();
-	}
+
 
 	/**
 	 * 한 회원의 폰트 가져오기
@@ -400,6 +413,25 @@ public class ManageServiceImpl implements ManageService{
 		
 		return dao.getMusicList(paramMap);
 	}
+
+	/** 
+	 * 내 배경음악 설정하기
+	 */
+	@Override
+	public int useMusic(Map<String, Object> paramMap) {
+		
+		return dao.useMusic(paramMap);
+	}
+
+	/**
+	 * 내 배경음악 없애기
+	 */
+	@Override
+	public int deleteMusic(int memberNo) {
+
+		return dao.deleteMusic(memberNo);
+	}
+
 
 
 

@@ -1,5 +1,6 @@
 package com.team.cubespace.manage.model.service;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.team.cubespace.common.Util;
 import com.team.cubespace.folder.model.vo.Folder;
@@ -20,6 +22,26 @@ public class ManageServiceImpl implements ManageService{
 	
 	@Autowired
 	private ManageDAO dao;
+	
+	/**
+	 * 상점에 등록된 전체 폰트 리스트 조회
+	 */
+	@Override
+	public List<Map<String, Object>> getAllFontList() {
+		
+		return dao.getAllFontList();
+	}
+	
+	/**
+	 * 상점에 등록된 전체 배경음악 조회
+	 */
+	@Override
+	public List<Map<String, Object>> getAllMusicList() {
+
+		return dao.getAllMusicList();
+	}
+
+	
 
 	/**
 	 * 폴더 리스트 조회
@@ -95,14 +117,7 @@ public class ManageServiceImpl implements ManageService{
 		return dao.useFont(paramMap);
 	}
 
-	/**
-	 * 상점에 등록된 전체 폰트 리스트 조회
-	 */
-	@Override
-	public List<Map<String, Object>> getAllFontList() {
-		
-		return dao.getAllFontList();
-	}
+
 
 	/**
 	 * 한 회원의 폰트 가져오기
@@ -334,6 +349,89 @@ public class ManageServiceImpl implements ManageService{
 		
 		return dao.resetFrameColor(backgroundInfo);
 	}
+	/**
+	 * 프레임 메뉴 색 초기화하기
+	 */
+	@Override
+	public int resetFrameMenuColor(Background backgroundInfo) {
+		
+		return dao.resetFrameMenuColor(backgroundInfo);
+	}
+
+	/**
+	 * 배경색 변경
+	 */
+	@Override
+	public int updateBGColor(Background backgroundInfo) {
+		
+		return dao.updateBGColor(backgroundInfo);
+	}
+	
+	/**
+	 * 프레임색 변경
+	 */
+	@Override
+	public int updateFrameColor(Background backgroundInfo) {
+		
+		return dao.updateFrameColor(backgroundInfo);
+	}
+	
+	/**
+	 * 프레임 메뉴색 변경
+	 */
+	@Override
+	public int updateFrameMenuColor(Background backgroundInfo) {
+		
+		return dao.updateFrameMenuColor(backgroundInfo);
+	}
+
+	/**
+	 * 배경 이미지 변경
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	@Override
+	public int updateBGImage(String webPath, String folderPath, Background backgroundInfo, MultipartFile multipartFile) throws Exception {
+		
+		String rename = Util.fileRename(multipartFile.getOriginalFilename());
+		backgroundInfo.setBackgroundSkin(webPath + rename);
+		
+		int result = dao.updateBGColor(backgroundInfo);
+		
+		if(result > 0) {
+			multipartFile.transferTo(new java.io.File(folderPath + rename));
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 내 배경음악 목록 조회
+	 */
+	@Override
+	public List<Map<String, Object>> getMusicList(Map<String, Object> paramMap) {
+		
+		return dao.getMusicList(paramMap);
+	}
+
+	/** 
+	 * 내 배경음악 설정하기
+	 */
+	@Override
+	public int useMusic(Map<String, Object> paramMap) {
+		
+		return dao.useMusic(paramMap);
+	}
+
+	/**
+	 * 내 배경음악 없애기
+	 */
+	@Override
+	public int deleteMusic(int memberNo) {
+
+		return dao.deleteMusic(memberNo);
+	}
+
 
 
 

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.member.model.vo.Member;
 
 @Repository
@@ -81,12 +82,12 @@ public class LoginDAO {
 	}
 	
 	/** 미니홈 테이블에 값 삽입
-	 * @param memberNo
+	 * @param backgroundInfo
 	 * @return
 	 */
-	public int insertMinihome(int memberNo) {
+	public int insertMinihome(Background backgroundInfo) {
 		
-		return sqlSession.insert("loginMapper.insertMinihome", memberNo);
+		return sqlSession.insert("loginMapper.insertMinihome", backgroundInfo);
 	}
 	
 	/** 폴더 테이블에 값 삽입

@@ -27,6 +27,9 @@
             background-color: ${minihome.frameFontColor};
             color: ${minihome.frameMenuColor};
         }
+        .minihome {
+            background-color : ${minihome.backgroundSkin};
+        }
     </style>
 
     <script>
@@ -38,7 +41,7 @@
 
 
 
-<jsp:include page="/WEB-INF/views/include/font.jsp"/>
+<jsp:include page="/WEB-INF/views/include/allFontMusic.jsp"/>
 
 </head>
 <body>
@@ -101,7 +104,7 @@
             <section class="minihome-main">
 
                 <%-- <iframe src="/albumList/2" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
-                <iframe src="/manage/background" frameborder="0" name="minihomeMenu" scrolling="no">
+                <iframe src="/manage/music" frameborder="0" name="minihomeMenu" scrolling="no">
 
                 </iframe>
                 <ul class="minihome-menu frame-menu-color">

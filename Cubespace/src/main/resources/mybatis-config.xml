@@ -25,6 +25,7 @@
 		<typeAlias type="com.team.cubespace.manage.model.vo.Friend" alias="Friend"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.File" alias="File"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.Background" alias="Background"/>		
+		<typeAlias type="com.team.cubespace.manage.model.vo.Music" alias="Music"/>		
 		<typeAlias type="com.team.cubespace.album.model.vo.Album" alias="Album"/>		
 		<typeAlias type="com.team.cubespace.album.model.vo.AlbumImage" alias="AlbumImage"/>
 		<typeAlias type="com.team.cubespace.album.model.vo.Comment" alias="Comment"/>

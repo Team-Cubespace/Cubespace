@@ -16,9 +16,10 @@ public interface ShopService {
 
 	/** 상점 인기상품 목록 조회
 	 * @param loginMemberNo
+	 * @param shopCathNo 
 	 * @return
 	 */
-	List<ShopFont> shopPopularGoods(int loginMemberNo);
+	List<ShopFont> shopPopularGoods(int loginMemberNo, int shopCathNo);
 	
 	/** 상점 상품 추가(폰트,배경음악,소품)
 	 * @param paramMap
@@ -30,8 +31,10 @@ public interface ShopService {
 	 * @param loginMemberNo
 	 * @param cp
 	 * @param shopCt 
+	 * @param shopCt 
 	 * @return
 	 */
-	Map<String, Object> selectGoodsList(int loginMemberNo, int cp, int shopCt);
+	Map<String, Object> selectGoodsList(int cp, Map<String, Object> pm, int shopCt);
+
 
 }

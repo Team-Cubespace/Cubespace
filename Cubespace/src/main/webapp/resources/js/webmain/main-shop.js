@@ -1,10 +1,22 @@
 /* 값을 저장할 변수 선언 */
 let goodsNo; //상품 번호
 
+
+(()=>{
+    const shopSearchInput = document.getElementById("shopSearch")
+    if(shopSearchInput != null){ // 검색창 존재 여부 확인
+        // 주소에서 쿼리스트링만 분리한 객체
+        const params = new URL(location.href).searchParams;
+        const shopSearch= params.get("shopSearch");
+
+        // input에 이전 검색어를 값으로 추가
+        shopSearchInput.value=shopSearch;
+    }
+})();
+
 /* 검색 클릭 시 돋보기 색변경 */
 const goodsSearch = document.querySelector(".goods-search")
 const searchImg=document.querySelector(".search-img")
-
 goodsSearch.addEventListener("focus",()=>{
     searchImg.style.filter="invert(15%) sepia(77%) saturate(6158%) hue-rotate(267deg) brightness(110%) contrast(108%)";
 })
@@ -12,33 +24,47 @@ goodsSearch.addEventListener("blur",()=>{
     searchImg.style.filter="";
 })
 
+
 /* 상점 카테고리 */
 const shopFont = document.querySelector(".shop-font")
 const shopMusic = document.querySelector(".shop-music")
 const shopMiniroom = document.querySelector(".shop-miniroom")
-
-const shopName = ()=>{
+const shopFontMove = ()=>{
     shopFont.classList.add("select1");
     shopMusic.classList.remove("select1");
     shopMiniroom.classList.remove("select1");
 }
-/* 페이지 실행시 즉시 실행 함수 */
-(shopName)();
-/* 폰트상점 클릭 시 */
-shopFont.addEventListener("click", () => {
-    shopName();
-})
-/* 배경음악 상점 클릭 시 */
-shopMusic.addEventListener("click", () => {
+const shopMusicMove = ()=>{
     shopFont.classList.remove("select1");
     shopMusic.classList.add("select1");
     shopMiniroom.classList.remove("select1");
-})
-/* 미니룸 소품 상점 클릭 시 */
-shopMiniroom.addEventListener("click", () => {
+}
+const shopMiniroomMove = ()=>{
     shopFont.classList.remove("select1");
     shopMusic.classList.remove("select1");
     shopMiniroom.classList.add("select1");
+}
+/* 페이지 실행시 즉시 실행 함수 */
+if(shopCathNo==1){
+    (shopFontMove)();
+
+}else if(shopCathNo==2){
+    (shopMusicMove)();
+
+}else{
+    (shopMiniroomMove)();
+}
+/* 폰트상점 클릭 시 */
+shopFont.addEventListener("click", () => {
+    shopFontMove();
+})
+/* 배경음악 상점 클릭 시 */
+shopMusic.addEventListener("click", () => {
+    shopMusicMove();
+})
+/* 미니룸 소품 상점 클릭 시 */
+shopMiniroom.addEventListener("click", () => {
+    shopMiniroomMove();
 })
 
 
@@ -60,8 +86,7 @@ const newGoodsSelect = () => {
             shopRankLsit.innerHTML=""; // 이전 내용 제거
 
             for(let newGoods of newGoodsList){
-
-                /* 폰트번호 저장 */
+                /* 상품번호 저장 */
                 goodsNo= newGoods.goodsNo;
                 
                 const goods = document.createElement("div")
@@ -81,15 +106,17 @@ const newGoodsSelect = () => {
                         goods_example.innerText="우리들의 작은 공간 큐브스페이스에서 시작하세요"
 
                     }else if(shopCathNo==2){ // 배경음악 예시화면 생성
+                        goods_example.classList.add("goods-lpimg")
+
                         const goods_exampleimg = document.createElement("img")
-                        goods_exampleimg.classList.add("goods-exampleimg")
+                        goods_exampleimg.classList.add("goods-exampleimg-music")
                         goods_exampleimg.setAttribute("src",""+newGoods.goodsImagePath+"")
 
                         goods_example.append(goods_exampleimg)
 
                     }else{ // 미니룸 소품 예시화면 생성
                         const goods_exampleimg = document.createElement("img")
-                        goods_exampleimg.classList.add("goods-exampleimg")
+                        goods_exampleimg.classList.add("goods-exampleimg-miniroom")
                         goods_exampleimg.setAttribute("src",""+newGoods.goodsPath+"")
 
                         goods_example.append(goods_exampleimg)
@@ -117,7 +144,7 @@ const newGoodsSelect = () => {
 
                             /* 사용하기 or 보유중버튼 생성*/
                             const goods_btn =document.createElement("div")
-                            if(newGoods.goodsNo==newGoods.useGoodsNo){// 보유중
+                            if(newGoods.goodsNo==newGoods.useGoodsNo ){// 보유중
                                 goods_btn.classList.add("goods-holding")
                                 goods_btn.innerText="보유중"
                                 
@@ -149,7 +176,7 @@ shopRankBox.addEventListener("click", () => {
 
     $.ajax({
         url:"/shopPopularGoods",
-        data: {"loginMemberNo":loginMemberNo},
+        data: {"loginMemberNo":loginMemberNo,"shopCathNo":shopCathNo},
         dataType : "JSON",
         success : popularGoodsList =>{
 
@@ -158,7 +185,7 @@ shopRankBox.addEventListener("click", () => {
 
             for(let popularGoods of popularGoodsList){
 
-                /* 폰트번호 저장 */
+                /* 상품번호 저장 */
                 goodsNo= popularGoods.goodsNo;
                 
                 const goods = document.createElement("div")
@@ -172,9 +199,28 @@ shopRankBox.addEventListener("click", () => {
                     /* 예시용 화면 생성 */
                     const goods_example = document.createElement("div")
                     goods_example.classList.add("goods-example")
+
+                    if(shopCathNo==1){ // 폰트 예시화면 생성
                     goods_example.style.fontFamily= "'"+popularGoods.goodsNo+"'";
                     goods_example.innerText="우리들의 작은 공간 큐브스페이스에서 시작하세요"
                     
+                }else if(shopCathNo==2){ // 배경음악 예시화면 생성
+                    goods_example.classList.add("goods-lpimg")
+
+                    const goods_exampleimg = document.createElement("img")
+                    goods_exampleimg.classList.add("goods-exampleimg-music")
+                    goods_exampleimg.setAttribute("src",""+popularGoods.goodsImagePath+"")
+
+                    goods_example.append(goods_exampleimg)
+
+                }else{ // 미니룸 소품 예시화면 생성
+                    const goods_exampleimg = document.createElement("img")
+                    goods_exampleimg.classList.add("goods-exampleimg-miniroom")
+                    goods_exampleimg.setAttribute("src",""+popularGoods.goodsPath+"")
+
+                    goods_example.append(goods_exampleimg)
+                }
+
                     const goods_info = document.createElement("div")
                     goods_info.classList.add("goods-info")
 

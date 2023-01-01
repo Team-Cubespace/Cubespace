@@ -49,7 +49,7 @@
 
                 <form class="shop-search" onsubmit="return true">
                     <img class="search-img" src="/resources/images/common/Magnifying Glass.png">
-                    <input class="goods-search" type="text" name="shopSearch" id="shopSearch">
+                    <input class="goods-search" type="text" name="shopSearch">
                     <%-- <div>검색</div> --%>
                     <button>검색</button>
                 </form>
@@ -83,59 +83,53 @@
             </div>
             <%----------------------------%>
             <div class="goods-list"> <%-- 상품 전체 목록 --%>
-                <c:choose>
-                    <c:when test="${empty shopGoodsList}">
-                        <div class="not-search">검색결과가 존재하지 않습니다.</div>
-                    </c:when>
-                    <c:otherwise>
-                        <c:forEach var="shopList" items="${shopGoodsList}">
-                            <div class="goods">
+
+                <c:forEach var="shopList" items="${shopGoodsList}">
+                    <div class="goods">
+                        <c:choose>
+                            <%-- 폰트 페이지 예시화면 --%>
+                            <c:when test="${param.shopCt==1}">
+                                <div class="goods-example" style="font-family:'${shopList.goodsNo}'">우리들의 작은 공간 큐브스페이스에서 시작하세요</div>
+                            </c:when>
+                            <%-- 배경음악 페이지 예시화면 --%>
+                            <c:when test="${param.shopCt==2}">
+                                <div class="goods-example goods-lpimg" >
+                                    <img class="goods-exampleimg-music" src="${shopList.goodsImagePath}">
+                                </div>    
+                            </c:when>
+                            <%-- 소품 페이지 예시화면 --%>
+                            <c:otherwise>
+                                <div class="goods-example" >
+                                    <img class="goods-exampleimg-miniroom" src="${shopList.goodsPath}">
+                                </div>   
+                            </c:otherwise>
+                        </c:choose>
+                        <div class="goods-info">
+                            <div class="goods-title">${shopList.goodsName}</div><%-- 상품이름 --%>
+                            <div class="goods-producer">${shopList.goodsCreater}</div><%-- 상품제작자 --%>
+                            <div>
+                                <div class="goods-count">사용횟수 : ${shopList.goodsCount}</div> <%-- 사용횟수 --%>
                                 <c:choose>
-                                    <%-- 폰트 페이지 예시화면 --%>
-                                    <c:when test="${shopCt==1}">
-                                        <div class="goods-example" style="font-family:'${shopList.goodsNo}'">우리들의 작은 공간 큐브스페이스에서 시작하세요</div>
+                                    <c:when test="${shopList.useGoodsNo!=shopList.goodsNo}">
+                                        <div class="goods-btn goods_${shopList.goodsNo}" onclick="goodsAdd(${shopList.goodsNo},shopCathNo,this)">사용하기</div>
                                     </c:when>
-                                    <%-- 배경음악 페이지 예시화면 --%>
-                                    <c:when test="${shopCt==2}">
-                                        <div class="goods-example goods-lpimg" >
-                                            <img class="goods-exampleimg-music" src="${shopList.goodsImagePath}">
-                                        </div>    
-                                    </c:when>
-                                    <%-- 소품 페이지 예시화면 --%>
                                     <c:otherwise>
-                                        <div class="goods-example" >
-                                            <img class="goods-exampleimg-miniroom" src="${shopList.goodsPath}">
-                                        </div>   
+                                        <div class="goods-holding">보유중</div>
                                     </c:otherwise>
                                 </c:choose>
-                                <div class="goods-info">
-                                    <div class="goods-title">${shopList.goodsName}</div><%-- 상품이름 --%>
-                                    <div class="goods-producer">${shopList.goodsCreater}</div><%-- 상품제작자 --%>
-                                    <div>
-                                        <div class="goods-count">사용횟수 : ${shopList.goodsCount}</div> <%-- 사용횟수 --%>
-                                        <c:choose>
-                                            <c:when test="${shopList.useGoodsNo!=shopList.goodsNo}">
-                                                <div class="goods-btn goods_${shopList.goodsNo}" onclick="goodsAdd(${shopList.goodsNo},shopCathNo,this)">사용하기</div>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <div class="goods-holding">보유중</div>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </div>
-                                </div>
                             </div>
-                        </c:forEach>
-                    </c:otherwise>
-                </c:choose>
+                        </div>
+                    </div>
+                </c:forEach>
 
             </div>
             <%----------------------------%>
             <div class="pagination-area"> <%-- 페이징네이션 --%>
                 <ul class="pagination">
                     <!-- 첫 페이지로 이동( <<) -->
-                    <li><a href="/cubespace/shop/1">&lt;&lt;</a></li>
+                    <li><a href="/cubespace/shop?shopCt=1">&lt;&lt;</a></li>
                     <!-- 이전 목록 마지막 번호로 이동 ( < ) -->
-                    <li><a href="/cubespace/shop/${shopCt}?cp=${pagination.prevPage}">&lt;</a></li>
+                    <li><a href="/cubespace/shop?shopCt=${param.shopCt}&cp=${pagination.prevPage}">&lt;</a></li>
                     <!-- 특정 페이지로 이동 -->
                     <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
                         <c:choose>
@@ -145,14 +139,14 @@
                             </c:when>
                             <c:otherwise>
                                 <!-- <%-- 현재 페이지를 제외한 나머지 --%> -->
-                                <li><a href="/cubespace/shop/${shopCt}?cp=${i}">${i}</a></li>
+                                <li><a href="/cubespace/shop?shopCt=${param.shopCt}&cp=${i}">${i}</a></li>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
                     <!-- 다음 목록 시작 번호로 이동 ( > )-->
-                    <li><a href="/cubespace/shop/${shopCt}?cp=${pagination.nextPage}">&gt;</a></li>
+                    <li><a href="/cubespace/shop?shopCt=${param.shopCt}&cp=${pagination.nextPage}">&gt;</a></li>
                     <!-- 끝 페이지로 이동 ( >> ) -->
-                    <li><a href="/cubespace/shop/${shopCt}?cp=${pagination.maxPage}">&gt;&gt;</a></li>
+                    <li><a href="/cubespace/shop?shopCt=${param.shopCt}&cp=${pagination.maxPage}">&gt;&gt;</a></li>
                 </ul>
             </div>
         </div>
@@ -160,8 +154,8 @@
     <script>
         let shopCathNo;
 
-        if(${shopCt != null}){
-        shopCathNo=  ${shopCt};
+        if(${param.shopCt != null}){
+        shopCathNo=  ${param.shopCt};
         } else {
             shopCathNo = 1; 
         }

@@ -43,14 +43,18 @@ public class ShopServiceImpl  implements ShopService{
 
 	// 상점 인기상품 목록 조회
 	@Override
-	public List<ShopFont> shopPopularGoods(int loginMemberNo) {
+	public List<ShopFont> shopPopularGoods(int loginMemberNo, int shopCathNo) {
 		
-		// 1 폰트 상점 일때
-		return dao.shopPopularFont(loginMemberNo);
+		if(shopCathNo==1){ // 1 인기 폰트 상품 목록 조회 
+			return dao.shopPopularFont(loginMemberNo);
 		
-		// 2 배경음윽 상점 일때
+		}else if (shopCathNo==2) { // 2 인기 배경음악 상품 목록 조회
+			return dao.shopPopularMusic(loginMemberNo);
+
 		
-		// 3 미니룸 소품 상점 일때
+		}else { // 3 인기 미니룸소품 상품 목록 조회
+			return dao.shopPopularMiniroom(loginMemberNo);
+		}
 	}
 
 	// 상점 상품 추가(폰트,배경음악,소품)
@@ -62,7 +66,7 @@ public class ShopServiceImpl  implements ShopService{
 	
 	// 상점 상품 목록 조회
 	@Override
-	public Map<String, Object> selectGoodsList(int loginMemberNo, int cp, int shopCt) {
+	public Map<String, Object> selectGoodsList(int cp, Map<String, Object> pm,int shopCt) {
 		
 		int listCount;
 		
@@ -85,15 +89,15 @@ public class ShopServiceImpl  implements ShopService{
 		
 		// 페이징 처리객체 사용하여 상점 상품 목록 조회
 		if(shopCt==1){ // 폰트 상점 상품 상품 목록 조회
-			List<ShopFont> shopGoodsList = dao.selectFontList(pagination, loginMemberNo);
+			List<ShopFont> shopGoodsList = dao.selectFontList(pagination, pm);
 			resultMap.put("shopGoodsList", shopGoodsList);
 			
 		}else if (shopCt==2) { // 배경음악 상점 상품 상품 목록 조회
-			List<ShopMusic> shopGoodsList = dao.selectShopMusicList(pagination, loginMemberNo);
+			List<ShopMusic> shopGoodsList = dao.selectShopMusicList(pagination, pm);
 			resultMap.put("shopGoodsList", shopGoodsList);
 			
 		}else { // 미니룸소품 상점 상품 상품 목록 조회
-			List<ShopMiniroom> shopGoodsList = dao.selectShopMiniroomList(pagination, loginMemberNo);
+			List<ShopMiniroom> shopGoodsList = dao.selectShopMiniroomList(pagination, pm);
 			resultMap.put("shopGoodsList", shopGoodsList);
 		}
 		

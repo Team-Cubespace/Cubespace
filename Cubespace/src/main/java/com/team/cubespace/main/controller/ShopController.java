@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -26,18 +27,23 @@ public class ShopController {
 	/** 상점페이지 이동(기본 폰트상점) + 상품 목록조회
 	 * @return
 	 */
-	@GetMapping("/cubespace/shop")
+	@GetMapping("/cubespace/shop/{shopCt}")
 	public String shopMove(Model model,
-			@RequestParam(value="shopCt", required=false, defaultValue="1") int shopCt,
+			@PathVariable("shopCt") int shopCt,
+			//@RequestParam(value="shopCt", required=false, defaultValue="1") int shopCt,
 			@RequestParam(value="cp", required=false, defaultValue="1") int cp,
-			@SessionAttribute(value="loginMember", required=false) Member loginMember) {
+			@SessionAttribute(value="loginMember", required=false) Member loginMember,
+			@RequestParam Map<String,Object> pm) {
 		int loginMemberNo = loginMember.getMemberNo();
 		
-		// 상점 목록 조회 서비스 호출
-		Map<String, Object> shopMap = service.selectGoodsList(loginMemberNo, cp, shopCt); 
+		System.out.println("pm = "+ pm);
+		pm.put("loginMemberNo", loginMemberNo);
 		
+		// 상점 목록 조회 서비스 호출
+		Map<String, Object> shopMap = service.selectGoodsList(cp ,pm,shopCt); 
+		shopMap.put("shopCt", shopCt);
 		model.addAttribute("shopMap", shopMap);
-
+		
 		return "/webmain/main-shop";
 	}
 	
@@ -50,6 +56,7 @@ public class ShopController {
 		
 		List<ShopFont> shopNewGoodsList = service.shopNewGoods(loginMemberNo,shopCathNo);
 		
+		
 		return new Gson().toJson(shopNewGoodsList); 
 	}
 	
@@ -58,13 +65,12 @@ public class ShopController {
 	 */
 	@GetMapping("/shopPopularGoods")
 	@ResponseBody
-	public String shopPopularGoods(int loginMemberNo) {
+	public String shopPopularGoods(int loginMemberNo,int shopCathNo) {
 		
-		List<ShopFont> popularFontList = service.shopPopularGoods(loginMemberNo);
+		List<ShopFont> popularFontList = service.shopPopularGoods(loginMemberNo,shopCathNo);
 		
 		return new Gson().toJson(popularFontList); 
 	}
-	
 	
 	/** 상점 상품 추가(폰트,배경음악,소품)
 	 * @param paramMap
@@ -73,8 +79,6 @@ public class ShopController {
 	@GetMapping("/goodsAddButton")
 	@ResponseBody
 	public int goodsAddButton(@RequestParam Map<String, Object> paramMap) {
-		
-		System.out.println(paramMap);
 		
 		int result = service.goodsAddButton(paramMap);
 		

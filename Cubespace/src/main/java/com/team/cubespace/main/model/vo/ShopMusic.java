@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class ShopMusic {
 	private int goodsCount;				// 상품 사용횟수
-	private int useGoodsNo;				// 사용중인 폰트번호
+	private int useGoodsNo;				// 사용중인 상품번호
 	
 	//배경음악 테이블
 	private int goodsNo;				// 배경음악 번호

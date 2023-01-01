@@ -54,10 +54,17 @@ body *{
     width: 40%;
     border-radius: 5px;
     box-shadow: 1px 6px 3px 0px rgba(192, 192, 192, 0.934); /* 박스그림자 */
+    border-top: none;
+}
+
+.shop-search > button{
+    font-weight: bold;
     color: var(--subColor);
     font-size: 20px;
-    font-weight: bold;
-    border-top: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+
 }
 /* 돋보기 설정 */
 .search-img{
@@ -164,18 +171,44 @@ body *{
     padding: 5px 10px;
     /* border-bottom: 1px solid black; */
     border-bottom: 1px solid black;
-
+}
+/* lp배경이미지 */
+.goods-lpimg{
     background-image: url(/resources/images/common/LP.png);
     background-size: 130px;
     background-repeat: no-repeat;
+    background-position: center;
 }
-
-.goods-exampleimg{
+.goods-example > img{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+/* 배경음악 이미지 */
+.goods-exampleimg-music{
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: white;
+    height: 65%;
+
+}
+.goods-exampleimg-music:hover{
+    cursor: pointer;
+    animation-name: goods-exampleimg-music;
+    animation: goods-exampleimg-music 1s linear infinite;
+    transform-origin: 50% 50%;
+}
+@keyframes goods-exampleimg-music{
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* 소품이미지 */
+.goods-exampleimg-miniroom{
     height: 100%;
 }
+
 
 /* 상품 정보 최상위 부모 */
 .goods-info{
@@ -315,4 +348,15 @@ body *{
     border: none;
     color: white;
     cursor: pointer;
+}
+
+/* 검색 결과 없을 시 */
+.not-search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-weight: bold;
+    font-size: 30px;
 }

@@ -678,14 +678,3 @@ header {
 
 
 
-/* ------------------------------------------------------ */
-/* 배경음악 설정 */
-.backgroundHeader, .backgroundMain{
-    display: flex;
-}
-.backgroundHeader>div:nth-child(1), .backgroundMain>div:nth-child(1){
-    flex-basis: 60% !important;
-}
-.backgroundHeader>div:nth-child(1), .backgroundMain>div:nth-child(1){
-    flex-basis: 25% !important;
-}

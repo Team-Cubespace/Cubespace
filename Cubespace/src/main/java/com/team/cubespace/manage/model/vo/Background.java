@@ -1,5 +1,7 @@
 package com.team.cubespace.manage.model.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.ToString;
 import lombok.Setter;
@@ -17,4 +19,5 @@ public class Background {
 	// 배경/프레임색 설정을 위한 정보.
 	// application scope에 올라갈땐 포함되지 않음
 	private int memberNo; 
+	
 	}

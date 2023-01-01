@@ -1,5 +1,6 @@
 package com.team.cubespace.manage.model.service;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.team.cubespace.common.Util;
 import com.team.cubespace.folder.model.vo.Folder;
@@ -368,6 +370,35 @@ public class ManageServiceImpl implements ManageService{
 	public int updateFrameMenuColor(Background backgroundInfo) {
 		
 		return dao.updateFrameMenuColor(backgroundInfo);
+	}
+
+	/**
+	 * 배경 이미지 변경
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	@Override
+	public int updateBGImage(String webPath, String folderPath, Background backgroundInfo, MultipartFile multipartFile) throws Exception {
+		
+		String rename = Util.fileRename(multipartFile.getOriginalFilename());
+		backgroundInfo.setBackgroundSkin(webPath + rename);
+		
+		int result = dao.updateBGColor(backgroundInfo);
+		
+		if(result > 0) {
+			multipartFile.transferTo(new java.io.File(folderPath + rename));
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 내 배경음악 목록 조회
+	 */
+	@Override
+	public List<Map<String, Object>> getMusicList(Map<String, Object> paramMap) {
+		
+		return dao.getMusicList(paramMap);
 	}
 
 

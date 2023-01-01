@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/resources/css/common/checkBox.css">
     <link rel="stylesheet" href="/resources/css/minihome/minihome-rayout.css">
     <link rel="stylesheet" href="/resources/css/manage/manage.css">
+    <link rel="stylesheet" href="/resources/css/manage/music.css">
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
     <title></title>
     <style>
@@ -29,73 +30,57 @@
         </section>
 
         <section class="minihome-rayout">
-            <main>
+            <div class="main">
                 <header>
-                    <div class="rightFontTitleArea">
+                    <div class="rightMusicTitleArea">
                         <span class="rightTitle">배경음악 관리</span>
-                        <div class="searchArea">
-                            <input type="text" id="searchInput" class="headerSearch" placeholder="배경음악 검색">
+                        <form class="searchArea">
+                            <i id="allFont" class="whiteBtn">모든 배경음악</i>
+                            <input type="text" id="searchInput" class="headerSearch" placeholder="배경음악 검색" value="${param.searchInput}">
                             <i class="fa-solid fa-magnifying-glass" id="searchBtn"></i>
-                        </div>
+                        </form>
                     </div>
                     <a href="" class="storeLinkArea"> <%-- 상점 이동 링크 --%>
                         <i class="fa-solid fa-store"></i> 상점이동
                     </a>
                 </header>
-                <div class="fontArea">
-                    <div class="fontHeader backgroundHeader">
-                        <div class="fontTitle">노래 제목</div>
-                        <div class="fontExample">제작자</div>
-                        <div class="fontUse">
-                            <button class="useFontBtn whiteBtn">적용하기</button>
+                <div class="musicArea">
+                    <div class="fontHeader backgroundHeader musicHeader">
+                        <div class="musicTitle">노래 제목</div>
+                        <div class="musicExample">제작자</div>
+                        <div class="musicListen">듣기</div>
+                        <div class="musicUse">
+                            <button class="useMusicBtn whiteBtn">적용하기</button>
                         </div>
                     </div>
 
                     <%-- 작성자가 unknown이라면 넣을 문구 추가 --%>
 
-                    <div class="fontMain backgroundMain">
+                    <div class="fontMain backgroundMain musicMain">
+                        <div class="musicTitleArea">
+                            <img src="" class="musicThumbnail">
+                            <span class="musicTitle">노래1</span>
+                        </div>
+                        <div class="musicExample"></div>
+                        <div class="musicListen"></div>
+                        <div class="musicUse">
+                            <input type="radio" name="useMusicRadio" class="useMusicRadio" id="">
+                        </div>
+                    </div>
 
-                        <div class="fontTitle"><i class="fa-solid fa-music"></i>&nbsp;&nbsp;노래1</div>
-                        <div class="fontExample"></div>
-                        <div class="fontUse">
-                            <input type="radio" name="useFontRadio" class="useFontRadio" id="">
+                    <div class="fontMain backgroundMain musicMain">
+                        <div class="musicTitleArea">
+                            <img src="" class="musicThumbnail">
+                            <span class="musicTitle">노래1</span>
+                        </div>
+                        <div class="musicExample"></div>
+                        <div class="musicListen"></div>
+                        <div class="musicUse">
+                            <input type="radio" name="useMusicRadio" class="useMusicRadio" id="">
                         </div>
                     </div>
-                    <div class="fontMain">
-                        <div class="fontTitle"><i class="fa-solid fa-music"></i>&nbsp;&nbsp;노래1</div>
-                        <div class="fontExample"></div>
-                        <div class="fontUse">
-                            <input type="radio" name="useFontRadio" class="useFontRadio" id="">
-                        </div>
-                    </div>
-                    <div class="fontMain">
-                        <div class="fontTitle"><i class="fa-solid fa-music"></i>&nbsp;&nbsp;노래1</div>
-                        <div class="fontExample"></div>
-                        <div class="fontUse">
-                            <input type="radio" name="useFontRadio" class="useFontRadio" id="">
-                        </div>
-                    </div>
-                    <div class="fontMain">
-                        <div class="fontTitle"><i class="fa-solid fa-music"></i>&nbsp;&nbsp;노래1</div>
-                        <div class="fontExample"></div>
-                        <div class="fontUse">
-                        <input type="radio" name="useFontRadio" class="useFontRadio" id="">
-                        </div>
-                    </div>
-                    <div class="fontMain">
-                        <div class="fontTitle"><i class="fa-solid fa-music"></i>&nbsp;&nbsp;노래1</div>
-                        <div class="fontExample"></div>
-                        <div class="fontUse">
-                            <input type="radio" name="useFontRadio" class="useFontRadio" id="">
-                        </div>
-                    </div>
-                    <div class="fontMain">
-                        <div class="fontTitle"><i class="fa-solid fa-music"></i>&nbsp;&nbsp;노래1</div>
-                        <div class="fontExample"></div>
-                        <div class="fontUse">
-                            <input type="radio" name="useFontRadio" class="useFontRadio" id="">
-                        </div>
-                    </div>
+                    
+                    
                 </div>
             </main>  
         </section>

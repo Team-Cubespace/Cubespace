@@ -12,8 +12,8 @@ function getTextColorByBackgroundColor(hexColor) {
     const c = hexColor.substring(1)      // 색상 앞의 # 제거
     const rgb = parseInt(c, 16)   // rrggbb를 10진수로 변환
     const r = (rgb >> 16) & 0xff  // red 추출
-    const g = (rgb >>  8) & 0xff  // green 추출
-    const b = (rgb >>  0) & 0xff  // blue 추출
+    const g = (rgb >> 8) & 0xff  // green 추출
+    const b = (rgb >> 0) & 0xff  // blue 추출
 
     const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b // per ITU-R BT.709
 
@@ -23,13 +23,13 @@ function getTextColorByBackgroundColor(hexColor) {
 
 
 /* 부모창(minihome-frame.jsp에 저장된 색 가져오기) */
-(()=>{
+(() => {
     const originalFrameColor = parent.originalFrameColor;
     const originalFrameMenuColor = parent.originalFrameMenuColor;
     const originalFrameFontColor = parent.originalFrameFontColor;
     const originalBackgroundSkin = parent.originalBackgroundSkin;
 
-    
+
 })(); // 페이지 로딩시 즉시 실행
 
 
@@ -44,22 +44,22 @@ bgColorUse.addEventListener("click", e => {
 
     const newBGColor = BGColorInput.value;
 
-    if(BGColorFlag) { // 배경색이 선택되었다면
+    if (BGColorFlag) { // 배경색이 선택되었다면
 
         $.ajax({
-            url : "/manage/background/updateBGColor",
-            type : "get",
-            data : {"newBGColor" : newBGColor},
-            success : result => {
-                if(result > 0) {
+            url: "/manage/background/updateBGColor",
+            type: "get",
+            data: { "newBGColor": newBGColor },
+            success: result => {
+                if (result > 0) {
                     alert("배경색이 변경되었습니다");
                     window.parent.location.reload();
-    
+
                 } else {
                     console.log("배경색 변경 실패");
                 }
             },
-            error : e => {console.log("배경색 변경 중 오류 발생");}
+            error: e => { console.log("배경색 변경 중 오류 발생"); }
         })
     } else {
         alert("배경색을 선택한 후 적용하기 버튼을 눌러주세요");
@@ -72,23 +72,23 @@ bgColorUse.addEventListener("click", e => {
 const frameUse = document.getElementById("frameUse");
 frameUse.addEventListener("click", e => {
 
-    if(frameColorFlag){
+    if (frameColorFlag) {
 
         const newFrameColor = frameColorInput.value;
         $.ajax({
-            url : "/manage/background/updateFrameColor",
-            type : "get",
-            data : {"newFrameColor" : newFrameColor},
-            success : result => {
-                if(result > 0) {
+            url: "/manage/background/updateFrameColor",
+            type: "get",
+            data: { "newFrameColor": newFrameColor },
+            success: result => {
+                if (result > 0) {
                     alert("프레임색이 변경되었습니다");
                     window.parent.location.reload();
-    
+
                 } else {
                     console.log("프레임색 변경 실패");
                 }
             },
-            error : e => {console.log("프레임색 변경 중 오류 발생");}
+            error: e => { console.log("프레임색 변경 중 오류 발생"); }
         })
     } else {
         alert("프레임색을 선택한 후 적용하기 버튼을 눌러주세요");
@@ -102,28 +102,28 @@ frameUse.addEventListener("click", e => {
 const frameMenuUse = document.getElementById("frameMenuUse");
 frameMenuUse.addEventListener("click", e => {
 
-    if(frameMenuColorFlag){
-        
+    if (frameMenuColorFlag) {
+
         const newFrameMenuColor = frameMenuColorInput.value;
-    
+
         // 프레임 메뉴색에 따라 폰트색(black/white) 결정
         const newFrameFontColor = getTextColorByBackgroundColor(newFrameMenuColor);
-    
-    
+
+
         $.ajax({
-            url : "/manage/background/updateFrameMenuColor",
-            type : "get",
-            data : {"newFrameMenuColor" : newFrameMenuColor, "newFrameFontColor" : newFrameFontColor},
-            success : result => {
-                if(result > 0) {
+            url: "/manage/background/updateFrameMenuColor",
+            type: "get",
+            data: { "newFrameMenuColor": newFrameMenuColor, "newFrameFontColor": newFrameFontColor },
+            success: result => {
+                if (result > 0) {
                     alert("프레임 메뉴색이 변경되었습니다");
                     window.parent.location.reload();
-    
+
                 } else {
                     console.log("프레임 메뉴색 변경 실패");
                 }
             },
-            error : e => {console.log("프레임 메뉴색 변경 중 오류 발생");}
+            error: e => { console.log("프레임 메뉴색 변경 중 오류 발생"); }
         })
     } else {
         alert("프레임 메뉴색을 선택한 후 적용하기 버튼을 눌러주세요");
@@ -140,45 +140,53 @@ frameMenuUse.addEventListener("click", e => {
 const bgImageUse = document.getElementById("bgImageUse");
 bgImageUse.addEventListener("click", e => {
 
-    
-    if(imageInput.files[0] != undefined) {
-        
-        const newBGImage = new FormData();
-        const file = imageInput.files[0];
-        newBGImage.append("uploadFile", file);
 
+    if (imageInput.files[0] != undefined) {
+
+        const formData = new FormData();
+        formData.append("image", imageInput.files[0]);
+
+        for (var key of formData.keys()) {
+            console.log(key);
+        }
+        for (var value of formData.values()) {
+            console.log(value);
+        }
+
+        updateBGImage(formData);
 
     }
 })
 
-
-
 // 배경색/이미지 변경 메서드
-// const updateBGImage = newBGImage => {
+const updateBGImage = formData => {
 
-//     // processData: false : Jquery 내부적으로 쿼리 스트링을 만들어 data 파라미터를 전송 -> 파일전송은 XX
-//     // contentType: false : default 값이 앞서 이야기한 application/x-www-form-urlencoded이므로 false
+    // processData: false : Jquery 내부적으로 쿼리 스트링을 만들어 data 파라미터를 전송 -> 파일전송은 XX
+    //    false로 선언 시 formData를 string으로 변환하지 않음
 
-//     $.ajax({
-//         url : "/manage/background/updateBGImage",
-//         type : "post",
-//         enctype: 'multipart/form-data',
-//         data : {"newBGSkin" : newBGSkin},
-//         processData: false,
-//         contentType: false,
-//         dataType: 'json',
-//         success : result => {
-//             if(result > 0) {
-//                 alert("배경이 변경되었습니다");
-//                 window.parent.location.reload();
+    // contentType: false : default 값이 앞서 이야기한 application/x-www-form-urlencoded이므로 false
+    //    false 로 선언 시 content-type 헤더가 multipart/form-data로 전송되게 함
 
-//             } else {
-//                 console.log("배경 변경 실패");
-//             }
-//         },
-//         error : e => {console.log("배경 변경 증 오류 발생");}
-//     })
-// }
+    $.ajax({
+        url : "/manage/background/updateBGImage",
+        type : "post",
+        enctype: 'multipart/form-data',
+        data : {"newBGImage" : formData},
+        processData: false,
+        contentType: false,
+        // dataType: 'json',
+        success : result => {
+            if(result > 0) {
+                alert("배경이 변경되었습니다");
+                window.parent.location.reload();
+
+            } else {
+                console.log("배경 변경 실패");
+            }
+        },
+        error : e => {console.log("배경 변경 증 오류 발생");}
+    })
+}
 
 
 
@@ -203,7 +211,7 @@ const imageShow = document.getElementById("imageShow");
 
 imageInput.addEventListener("change", e => {
 
-    if(e.target.files[0] != undefined) {
+    if (e.target.files[0] != undefined) {
 
         const reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
@@ -211,7 +219,7 @@ imageInput.addEventListener("change", e => {
         reader.onload = e => {
 
             imageShow.src = e.target.result;
-            if(!imageShow.classList.contains("bgImage")){
+            if (!imageShow.classList.contains("bgImage")) {
                 imageShow.classList.add("bgImage");
             }
 
@@ -250,26 +258,26 @@ frameMenuColorInput.addEventListener("change", () => {
 // 배경색, 배경이미지 초기화
 const bgColorReturn = document.getElementById("bgColorReturn"); // 배경색
 const bgImageReturn = document.getElementById("bgImageReturn"); // 배경색
-bgColorReturn.addEventListener("click", e => {resetBGColor();});
-bgImageReturn.addEventListener("click", e => {resetBGColor();});
+bgColorReturn.addEventListener("click", e => { resetBGColor(); });
+bgImageReturn.addEventListener("click", e => { resetBGColor(); });
 
 const resetBGColor = () => {
 
-    if(confirm("정말 초기화하시겠습니까?")){
-        
+    if (confirm("정말 초기화하시겠습니까?")) {
+
         $.ajax({
-            url : "/manage/background/resetBGColor",
-            type : "get",
-            success : result => {
-                if(result > 0) {
+            url: "/manage/background/resetBGColor",
+            type: "get",
+            success: result => {
+                if (result > 0) {
                     alert("배경이 초기화되었습니다");
                     window.parent.location.reload();
-    
+
                 } else {
                     console.log("배경 초기화 실패");
                 }
             },
-            error : e => {console.log("배경 초기화 중 오류 발생");}
+            error: e => { console.log("배경 초기화 중 오류 발생"); }
         })
     }
 }
@@ -278,12 +286,12 @@ const resetBGColor = () => {
 const frameReturn = document.getElementById("frameReturn");
 frameReturn.addEventListener("click", e => {
 
-    if(confirm("정말 초기화하시겠습니까?")){
+    if (confirm("정말 초기화하시겠습니까?")) {
         $.ajax({
-            url : "/manage/background/resetFrameColor",
-            type : "get",
-            success : result => {
-                if(result > 0) {
+            url: "/manage/background/resetFrameColor",
+            type: "get",
+            success: result => {
+                if (result > 0) {
                     alert("프레임이 초기화되었습니다");
                     window.parent.location.reload();
 
@@ -291,7 +299,7 @@ frameReturn.addEventListener("click", e => {
                     console.log("프레임 초기화 실패");
                 }
             },
-            error : e => {console.log("프레임 초기화 중 오류 발생");}
+            error: e => { console.log("프레임 초기화 중 오류 발생"); }
         })
     }
 })
@@ -301,12 +309,12 @@ frameReturn.addEventListener("click", e => {
 const frameMenuReturn = document.getElementById("frameMenuReturn");
 frameMenuReturn.addEventListener("click", e => {
 
-    if(confirm("정말 초기화하시겠습니까?")){
+    if (confirm("정말 초기화하시겠습니까?")) {
         $.ajax({
-            url : "/manage/background/resetFrameMenuColor",
-            type : "get",
-            success : result => {
-                if(result > 0) {
+            url: "/manage/background/resetFrameMenuColor",
+            type: "get",
+            success: result => {
+                if (result > 0) {
                     alert("프레임 메뉴색이 초기화되었습니다");
                     window.parent.location.reload();
 
@@ -314,7 +322,7 @@ frameMenuReturn.addEventListener("click", e => {
                     console.log("프레임 메뉴 색 초기화 실패");
                 }
             },
-            error : e => {console.log("프레임 메뉴 색 초기화 중 오류 발생");}
+            error: e => { console.log("프레임 메뉴 색 초기화 중 오류 발생"); }
         })
     }
 })

@@ -1,0 +1,66 @@
+/* ------------------------------------------------------ */
+/* 배경음악 설정 */
+.backgroundHeader, .backgroundMain{
+    display: flex;
+}
+.backgroundHeader>div:nth-child(1), .backgroundMain>div:nth-child(1){
+    flex-basis: 45%;
+}
+.backgroundHeader>div:nth-child(2), .backgroundMain>div:nth-child(2){
+    flex-basis: 25%;
+}
+.backgroundHeader>div:nth-child(3), .backgroundMain>div:nth-child(3){
+    flex-basis: 15%;
+}
+.backgroundHeader>div:nth-child(4), .backgroundMain>div:nth-child(4){
+    flex-basis: 15%;
+}
+.backgroundMain>div:nth-child(1) {
+    justify-content: flex-start;
+    padding-left: 10px;
+}
+
+
+
+.rightMusicTitleArea {
+    display: flex;
+}
+.musicArea {
+    display: flex;
+    flex-direction: column;
+}
+
+.musicTitleArea {
+    border-bottom: 1px solid #eee;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.musicExample {
+    border-bottom: 1px solid #eee;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.musicListen {
+    border-bottom: 1px solid #eee;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.musicUse {
+    border-bottom: 1px solid #eee;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.fontMain > div:nth-child(3){
+    border-right: 3px solid #eee;
+}
+.fa-music {
+    margin-right: 5px;
+}

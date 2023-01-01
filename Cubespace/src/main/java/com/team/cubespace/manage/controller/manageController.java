@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.cubespace.folder.model.vo.Folder;
@@ -28,10 +31,11 @@ import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
 import com.team.cubespace.manage.model.vo.File;
 import com.team.cubespace.member.model.vo.Member;
+import com.team.cubespace.minihome.model.vo.Minihome;
 
 @Controller
 @RequestMapping("/manage")
-@SessionAttributes({ "folderList", "fontList", "fileList" /* , "friendList", "fontList" */})
+@SessionAttributes({ "folderList",  "fileList" /* , "friendList", "fontList" */})
 public class manageController {
 	
 	@Autowired
@@ -43,11 +47,11 @@ public class manageController {
 	
 	
 	@GetMapping("/font")
-	public String changeFont(@SessionAttribute("loginMember") Member inputMember, 
+	public String changeFont(@SessionAttribute("loginMember") Member loginMember, 
 			@RequestParam Map<String, Object> paramMap, /*searchInput*/
 			Model model) {
 		
-		paramMap.put("memberNo", inputMember.getMemberNo());
+		paramMap.put("memberNo", loginMember.getMemberNo());
 		if(paramMap.containsKey("searchInput")) {
 			model.addAttribute("searchInput", paramMap.get("searchInput"));
 		}
@@ -57,8 +61,20 @@ public class manageController {
 		
 		return "manage/font";
 	}
+	
+	
 	@GetMapping("/music")
-	public String changeMusic() {
+	public String changeMusic(@SessionAttribute("loginMember") Member loginMember, 
+			@RequestParam Map<String, Object> paramMap, /*searchInput*/
+			Model model) {
+		
+		paramMap.put("memberNo", loginMember.getMemberNo());
+		if(paramMap.containsKey("searchInput")) {
+			model.addAttribute("searchInput", paramMap.get("searchInput"));
+		}
+		List<Map<String, Object>> musicList = service.getMusicList(paramMap);
+		model.addAttribute("musicList", musicList);
+		
 		return "manage/music";
 	}
 	
@@ -355,22 +371,30 @@ public class manageController {
 		return service.updateBGColor(backgroundInfo);
 	}
 	
-//	/** 배경이미지 변경
-//	 * @param loginMember
-//	 * @param newBGColor
-//	 * @return
-//	 */
-//	@GetMapping("/background/updateBGInfo")
-//	@ResponseBody
-//	public int updateBGColor(@SessionAttribute("loginMember") Member loginMember,
-//			String newBGSkin) {
-//		
-//		Background backgroundInfo = new Background();
-//		backgroundInfo.setMemberNo(loginMember.getMemberNo());
-//		backgroundInfo.setBackgroundSkin(newBGSkin);
-//		
-//		return service.updateBGColor(backgroundInfo);
-//	}
+	/** 배경이미지 변경
+	 * @param loginMember
+	 * @param newBGColor
+	 * @return
+	 * @throws Exception 
+	 */
+	@PostMapping("/background/updateBGImage")
+	@ResponseBody
+	public int updateBGImage(@SessionAttribute("loginMember") Member loginMember,
+		MultipartHttpServletRequest request,
+		HttpSession session) throws Exception{ 
+		
+		
+		List<MultipartFile> newImgList = request.getFiles("newBGImage");
+		
+		String webPath = "/resources/images/frameImage/";
+		String folderPath = session.getServletContext().getRealPath(webPath);
+		
+		Background backgroundInfo = new Background();
+		backgroundInfo.setMemberNo(loginMember.getMemberNo());
+		
+		
+		return service.updateBGImage(webPath, folderPath, backgroundInfo, newImgList.get(0));
+	}
 	
 	/** 프레임색 변경
 	 * @param loginMember

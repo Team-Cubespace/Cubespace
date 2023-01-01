@@ -296,6 +296,15 @@ public class ManageDAO {
 		
 		return sqlSession.update("ManageMapper.updateFrameMenuColor", backgroundInfo);	
 	}
+
+	/** 내 배경음악 목록 조회
+	 * @param paramMap
+	 * @return
+	 */
+	public List<Map<String, Object>> getMusicList(Map<String, Object> paramMap) {
+		
+		return sqlSession.selectList("ManageMapper.getMusicList", paramMap);	
+	}
 	
 	
 

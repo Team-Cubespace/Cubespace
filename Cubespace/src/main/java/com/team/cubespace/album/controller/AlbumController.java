@@ -151,8 +151,7 @@ public class AlbumController {
 		// 앨범 서비스 호출
 		Album album = service.selectAlbum(albumNo);
 		model.addAttribute("folderName", folderName);
-		model.addAttribute("album", album);
-		
+		model.addAttribute("board", album);
 		return "minihome/album/album-detail";
 	}
 	

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.team.cubespace.album.model.vo.Album;
 import com.team.cubespace.common.Pagination;
 import com.team.cubespace.video.model.dao.VideoDAO;
+import com.team.cubespace.video.model.vo.Video;
 
 @Service
 public class VideoServiceImpl implements VideoService{
@@ -33,5 +34,10 @@ public class VideoServiceImpl implements VideoService{
 		resultMap.put("videoList", videoList);
 		
 		return resultMap;
+	}
+
+	@Override
+	public Video selectVideo(int videoNo) {
+		return dao.selectVideo(videoNo);
 	}
 }

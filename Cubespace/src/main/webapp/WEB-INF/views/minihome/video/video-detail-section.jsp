@@ -4,7 +4,7 @@
 
 <div class="detail-main">
     <header>
-        동영상 > <c:if test="${board.videoScrapYN == 'Y'}">[스크랩] </c:if>${folderName}
+        동영상 > ${folderName}
         <button id="goToList">목록으로</button>
     </header>
     <div class="detail-subtitle">
@@ -21,7 +21,7 @@
                 </c:when>
             </c:choose>
         </span>
-        <span class="detail-title-area">${board.videoTitle}</span>
+        <span class="detail-title-area"><c:if test="${board.videoScrapYN == 'Y'}">[스크랩] </c:if>${board.videoTitle}</span>
         <span class="detail-create-date">${board.videoCreate}</span>
     </div>
     <div class="slide-container">

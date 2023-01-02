@@ -53,7 +53,7 @@ public class VideoServiceImpl implements VideoService{
 	// 비디오 글 작성
 	@Override
 	public int videoWrite(Video video, MultipartFile inputVideo, String videoWebPath, String videoFolderPath,
-			String ffmpegPath, String thumbnailWebPath, String thumbnailFolderPath) throws IOException {
+			String ffmpegPath, String thumbnailWebPath, String thumbnailFolderPath) throws Exception {
 		// 비디오 글 내용 XSS, Line 처리
 		video.setVideoTitle(Util.XSSHandling(video.getVideoTitle()));
 		if(video.getVideoContent() != null) {
@@ -75,37 +75,49 @@ public class VideoServiceImpl implements VideoService{
 		if(videoNo > 0) { 	// DB에 video 정보 등록 성공 시
 			
 			// 영상 인코딩 후 서버에 저장
-			File tempFile = new File(videoFolderPath + tempRename);
-			inputVideo.transferTo(tempFile);
-			
-			FFmpeg ffmpeg = new FFmpeg(ffmpegPath+ "/ffmpeg");
-			FFprobe ffprobe = new FFprobe(ffmpegPath + "/ffprobe");
-			FFmpegBuilder builder = new FFmpegBuilder().setInput(videoFolderPath + tempRename)	// 파일 경로
-					.overrideOutputFiles(true)	// 오버라이드
-					.addOutput(videoFolderPath + fileRename)	// 저장경로
-					.setFormat("mp4")								// 포맷(확장자)
-					.setVideoCodec("libx264")
-					.setAudioChannels(2)						// 오디오 채널(1ㅣ모노, 2:스테레오)
-					.setVideoResolution(1280, 720)					// 동영상 해상도
-					.setVideoBitRate(1464800)						// 동영상 비트레이트 (프레임)
-					.setStrict(FFmpegBuilder.Strict.EXPERIMENTAL)	// ffmpeg 빌더 실행 허용
-					.done();
-			
-			FFmpegExecutor executor = new FFmpegExecutor(ffmpeg, ffprobe);
-			executor.createJob(builder).run();
-			tempFile.delete();
-			
-			// 썸네일 이미지 추출 후 서버에 저장
-			FFmpegBuilder thumbnailBuilder = new FFmpegBuilder()
-						.overrideOutputFiles(true)
-						.setInput(videoFolderPath + fileRename)
-						.addExtraArgs("-ss", "00:00:01")
-						.addOutput(thumbnailFolderPath + thumbnailRename)
-						.setFrames(1)
-						.done();
-			FFmpegExecutor thumbnailExecutor = new FFmpegExecutor(ffmpeg, ffprobe);
-			thumbnailExecutor.createJob(thumbnailBuilder).run();
+			try {
+				Util.uploadVideo(ffmpegPath, videoFolderPath, tempRename, fileRename, thumbnailFolderPath, thumbnailRename, inputVideo);				
+			}catch(Exception e) {
+				throw new Exception();
+			}
 		}
 		return videoNo;
+	}
+
+	@Override
+	public int videoUpdate(Video video, MultipartFile inputVideo, String videoWebPath, String videoFolderPath,
+			String ffmpegPath, String thumbnailWebPath, String thumbnailFolderPath) throws Exception {
+		
+		video.setVideoTitle(Util.XSSHandling(video.getVideoTitle()));
+		if(video.getVideoContent() != null) {
+			video.setVideoContent(Util.XSSHandling(video.getVideoContent()));
+			video.setVideoContent(Util.newLineHandling(video.getVideoContent()));
+		}
+		
+		int result = dao.videoUpdate(video);	// 제목, 내용, 공개여부, 폴더번호, 스크랩 허용 여부
+		
+		if(result > 0 && inputVideo.getSize() != 0) {
+			// 임시 파일 
+			String tempRename = Util.fileRename(inputVideo.getOriginalFilename());
+			String fileRename = Util.fileRename(inputVideo.getOriginalFilename().substring(0, inputVideo.getOriginalFilename().lastIndexOf("."))+".mp4");
+			String thumbnailRename = Util.fileRename("1.png");
+			
+			video.setVideoPath(videoWebPath);
+			video.setVideoOriginalName(inputVideo.getOriginalFilename());
+			video.setVideoRename(fileRename);
+			video.setVideoThumbnail(thumbnailWebPath + thumbnailRename);
+			
+			result = dao.videoUpdateFile(video);
+			
+			if(result > 0) {
+				// 영상 인코딩 후 서버에 저장
+				try {
+					Util.uploadVideo(ffmpegPath, videoFolderPath, tempRename, fileRename, thumbnailFolderPath, thumbnailRename, inputVideo);				
+				}catch(Exception e) {
+					throw new Exception();
+				}
+			}
+		}
+		return result;
 	}
 }

@@ -13,7 +13,6 @@ function MusicPlayerOpen(){
 function MusicPlayerClose(){
     document.getElementById("modalPlayer").style.display = "none";
 }
-
 new Vue({
     el: "#app",
     data() {
@@ -25,6 +24,14 @@ new Vue({
             currentTime: null,
             isTimerPlaying: false,
             tracks: [
+            {
+                name: "테스트제목",
+                artist: "테스트 가수이름",
+                cover: "/resources/images/common/cubes-logo.png",
+                source: "/resources/music/mp3/[로스트아크｜OST] 쿠크세이튼 테마 - 한밤중의 서커스(Midnight Circus).mp3",
+                url: "https://www.youtube.com/watch?v=z3wAjJXbYzA",
+                favorited: false
+            },
             {
                 name: "Mekanın Sahibi",
                 artist: "Norm Ender",
@@ -39,7 +46,7 @@ new Vue({
                 cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/2.jpg",
                 source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/2.mp3",
                 url: "https://www.youtube.com/watch?v=Lin-a2lTelg",
-                favorited: true
+                favorited: false
             },
             {
                 name: "Extreme Ways",
@@ -63,7 +70,7 @@ new Vue({
                 cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/5.jpg",
                 source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/5.mp3",
                 url: "https://www.youtube.com/watch?v=0WlpALnQdN8",
-                favorited: true
+                favorited: false
             },
             {
                 name: "Genius ft. Sia, Diplo, Labrinth",
@@ -79,7 +86,7 @@ new Vue({
                 cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/7.jpg",
                 source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/7.mp3",
                 url: "https://www.youtube.com/watch?v=me6aoX0wCV8",
-                favorited: true
+                favorited: false
             },
             {
                 name: "Overdose",
@@ -185,18 +192,18 @@ new Vue({
             this.audio.currentTime = 0;
             this.audio.src = this.currentTrack.source;
             setTimeout(() => {
-            if(this.isTimerPlaying) {
-                this.audio.play();
-            } else {
-                this.audio.pause();
-            }
+                if(this.isTimerPlaying) {
+                    this.audio.play();
+                } else {
+                    this.audio.pause();
+                }
             }, 300);
         },
         favorite() {
             this.tracks[this.currentTrackIndex].favorited = !this.tracks[
             this.currentTrackIndex
             ].favorited;
-        }
+            }
     },
     created() {
         let vm = this;
@@ -213,7 +220,7 @@ new Vue({
             vm.nextTrack();
             this.isTimerPlaying = true;
         };
-
+    
         // this is optional (for preload covers)
         for (let index = 0; index < this.tracks.length; index++) {
             const element = this.tracks[index];

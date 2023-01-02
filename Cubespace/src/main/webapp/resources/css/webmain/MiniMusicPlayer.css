@@ -16,20 +16,26 @@
     left: 50%;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
-    background: #fff;
+    /* background: #fff; */
+    background: #dfe7ef;
+
     box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
     -webkit-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
-    -moz-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
-    width: 700px;
-    height: 800px;
+    width: 550px;
+    height: 600px;
     /* background-color: red; */
+    /* background-color:transparent; */
 }
 
+.player-close{
+    margin: 0 0 0 20px;
+    font-weight: bold;
+    color: #acb8cc;
+}
 /* body {
     background: #dfe7ef;
     font-family: "Bitter", serif;
 } */
-
 * {
     box-sizing: border-box;
 }
@@ -48,7 +54,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    min-height: 90%;
     background-size: cover;
 }
 
@@ -456,3 +462,5 @@
     pointer-events: none;
     opacity: 0;
 }
+
+/*# sourceMappingURL=main.css.map */

@@ -380,7 +380,7 @@ public class manageController {
 	@PostMapping("/background/updateBGImage")
 	@ResponseBody
 	public int updateBGImage(@SessionAttribute("loginMember") Member loginMember,
-		MultipartFile image,
+		MultipartFile imageInput,
 		HttpSession session) throws Exception{ 
 		
 		
@@ -392,7 +392,7 @@ public class manageController {
 		backgroundInfo.setMemberNo(loginMember.getMemberNo());
 		
 		
-		return service.updateBGImage(webPath, folderPath, backgroundInfo, image);
+		return service.updateBGImage(webPath, folderPath, backgroundInfo, imageInput);
 	}
 	
 	/** 프레임색 변경

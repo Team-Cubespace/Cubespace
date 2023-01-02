@@ -1,15 +1,17 @@
 /* 미니홈 전체 크기 */
-html {
+/* html {
     background-color: #ddd;
-}
+} */
 .minihome {
     width: 1200px;
-    height: 715px;
+    height: 725px;
     background-color: #ddd;
     padding-left: 15px;
+    margin-top: 3px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
 }
 
 /* 미니홈 프레임 */

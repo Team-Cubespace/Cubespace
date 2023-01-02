@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div class = "diary-section-container">
-                        <%-- cut.jsp에 잘라냄 --%>
+                        <%-- cut.jsp에 잘라냄 /어차피 js로 다 만드는 거라서...ㅋ --%>
                     </div>
         
                 </div>

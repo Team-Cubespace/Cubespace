@@ -42,7 +42,7 @@ public class DiaryController {
 	public String move() {
 		
 		//다이어리part
-		return "minihome/minihome-diary/minihome-rayout-copy";
+		return "minihome/minihome-diary/minihome-diary";
 		
 		//월간달력part
 //		return "minihome/minihome-diary/monthcalendar";

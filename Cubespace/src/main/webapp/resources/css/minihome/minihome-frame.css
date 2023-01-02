@@ -164,6 +164,7 @@ html {
     flex-direction: column;
 }
 .minihome-menu li {
+    display: block;
     margin: 3px 0px;
     font-size: 13px;
     letter-spacing: -1px;
@@ -173,10 +174,13 @@ html {
 }
 .minihome-menu a {
     display: flex;
-    padding: 10px 9px;
+    width: 67px;
+    height: 35px;
+    /* padding: 10px 9px; */
     border: 1px solid black;
     border-left: none;
     justify-content: center;
+    align-items: center;
     background-color: #1A8DBF;
     color: white;
     border-top-right-radius: 5px;

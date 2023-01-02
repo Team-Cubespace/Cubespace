@@ -137,7 +137,8 @@ public class AlbumController {
 	public String albumDetail(@PathVariable("albumNo") int albumNo,
 			Model model,
 			int folderNo,
-			@SessionAttribute("folderList") List<Folder> folderList) {
+			@SessionAttribute
+			("folderList") List<Folder> folderList) {
 		
 		// 폴더 이름 찾기
 		String folderName = "";
@@ -151,8 +152,7 @@ public class AlbumController {
 		// 앨범 서비스 호출
 		Album album = service.selectAlbum(albumNo);
 		model.addAttribute("folderName", folderName);
-		model.addAttribute("album", album);
-		
+		model.addAttribute("board", album);
 		return "minihome/album/album-detail";
 	}
 	

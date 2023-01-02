@@ -1,0 +1,60 @@
+header {
+    display: flex;
+}
+.slide-container {
+    display: flex;
+    width: 90%;
+    height: 92%;
+    position: relative;
+    margin: auto;
+}
+
+.detail-subtitle {
+    margin-bottom: 8px;
+    font-size: 15px;
+    display: flex;
+}
+.detail-subtitle > span {
+    padding: 7px 0px;
+}
+.detail-open-flag {
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    background-color: #ddd;
+    margin-right: 10px;
+}
+.detail-create-date {
+    font-size: 13px;
+    color: grey;
+    margin-left: auto;
+}
+
+/* 앨범 내용 영역 */
+.video-content {
+    margin: 10px 0px;
+}
+
+/* 앨범 내용 푸터 */
+.video-detail-footer {
+    display: flex;
+    align-items: center;
+}
+
+.video-button-area {
+    margin-left: auto;
+}
+.video-button-area > * {
+    background-color: transparent;
+    border: none;
+    padding: 5px 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#goToList {
+    margin-left: auto;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}

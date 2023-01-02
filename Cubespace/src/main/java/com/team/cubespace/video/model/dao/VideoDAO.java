@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.team.cubespace.album.model.vo.Album;
 import com.team.cubespace.common.Pagination;
+import com.team.cubespace.video.model.vo.Video;
 
 @Repository
 public class VideoDAO {
@@ -33,5 +34,25 @@ public class VideoDAO {
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		return sqlSession.selectList("videoMapper.selectVideoList", paramMap, rowBounds);
+	}
+
+	/** 동영상 상세 조회
+	 * @param videoNo
+	 * @return video
+	 */
+	public Video selectVideo(int videoNo) {
+		return sqlSession.selectOne("videoMapper.selectVideo", videoNo);
+	}
+
+	/** 동영상 글 작성
+	 * @param video
+	 * @return videoNo
+	 */
+	public int albumWrite(Video video) {
+		int result = sqlSession.insert("videoMapper.insertVideo", video);
+		if(result > 0) {
+			result = video.getVideoNo();
+		}
+		return result;
 	}
 }

@@ -3,7 +3,7 @@ let defaultEvents =[] ;
 
 /* [ajax] 캘린더 오픈 시 :  이벤트를 DB에서 조회해서 캘린더에 뿌려주기 */
 $.ajax({
-  url: "/diary/selectSchedule",
+  url: "/diary/calendar/selectSchedule",
   type:'POST',
   dataType: 'json',
   data:{"loginMember":loginMember},
@@ -303,7 +303,7 @@ function addEvent(){
     }
   }
   $.ajax({
-    url: "/diary/addSchedule",
+    url: "/diary/calendar/addSchedule",
     contentType: 'application/json',
     type:'POST',
     data: JSON.stringify(addEventdata),
@@ -387,7 +387,7 @@ function updateEvent(){
     }
   }
   $.ajax({
-    url: "/diary/updateSchedule",
+    url: "/diary/calendar/updateSchedule",
     contentType: 'application/json',
     type:'POST',
     data: JSON.stringify(updateData),

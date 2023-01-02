@@ -60,7 +60,7 @@
                     <header>
                         <span>다이어리 작성</span>
                     </header>
-                    <form id="writediaryForm" action="/diary/write" method="POST" encType="" onsubmit="return false;">
+                    <form id="writediaryForm" action="/diaryWrite" method="POST" encType="" onsubmit="return false;">
                         <div class="input-row">
                             <label for="">폴더</label>
                             <select name="folderNo" id="">

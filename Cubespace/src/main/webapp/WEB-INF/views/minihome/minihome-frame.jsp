@@ -115,7 +115,7 @@
                 <ul class="minihome-menu frame-menu-color">
                     <li><a href="">홈</a></li>
                     <c:if test="${minihome.categoryOrder.diary != -1}">
-                        <li style="order:${minihome.categoryOrder.diary}"><a href="">다이어리</a></li>
+                        <li style="order:${minihome.categoryOrder.diary}"><a href="/diary/1">다이어리</a></li>
                     </c:if>
                     <c:if test="${minihome.categoryOrder.album != -1}">
                         <li style="order:${minihome.categoryOrder.album}"><a href="/albumList/2" target="minihomeMenu">사진첩</a></li>

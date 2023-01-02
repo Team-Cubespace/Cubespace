@@ -25,6 +25,7 @@ import com.team.cubespace.diary.model.vo.Emoji;
 import com.team.cubespace.diary.model.vo.Plan;
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.member.model.vo.Member;
+import com.team.cubespace.minihome.model.vo.Minihome;
 
 /** 다이어리 컨트롤러
  * @author sue
@@ -47,17 +48,26 @@ public class DiaryController {
 			// 폴더리스트를 가져와
 			// 폴더리스트의 0번째 인덱스의 폴더번호를
 			// folderNo로 지정
-			folderNo = folderList.get(0).getFolderNo();
+			if(folderList.get(0).getFolderName().equals("나의 월간달력")) {
+				folderNo = folderList.get(1).getFolderNo();
+			} else {
+				folderNo = folderList.get(0).getFolderNo();
+			}
 		}
-		
-		
+		model.addAttribute("folderNo", folderNo);
 		//다이어리part
 		return "minihome/minihome-diary/minihome-diary";
-		
 		//월간달력part
 //		return "minihome/minihome-diary/monthcalendar";
-		
-		
+	}
+	
+	@GetMapping("/monthCalendar")
+	public String calendarMove(
+			@SessionAttribute("minihome") Minihome minihome,
+			Model model
+			) {
+		model.addAttribute("hostMemberNo", minihome.getMemberNo());
+		return "minihome/minihome-diary/monthcalendar";
 	}
 	
 	/*[ 다이어리 메인 페이지 ]*/
@@ -65,13 +75,17 @@ public class DiaryController {
 	/** 클릭한 날짜의 다이어리 목록 조회하기
 	 * @return diaryList
 	 */
-	@GetMapping("/diary/selectDiary")
+	@GetMapping("/selectDiary")
 	@ResponseBody
 	public String selectDiaryList(
-			String diaryDate, int folderNumber,
-			int homepageMemberNo,int loginMemberNo
+			@SessionAttribute("minihome") Minihome minihome,
+			@SessionAttribute("loginMember") Member loginMember,
+			String diaryDate, int folderNo
 			)  {
 		int openFlag = 2;
+		int loginMemberNo = loginMember.getMemberNo();
+		int homepageMemberNo = minihome.getMemberNo();
+		
 		// 내 미니홈피라면, 전체 공개한다. (1,2,3)
 		if (homepageMemberNo == loginMemberNo) {
 		} else {
@@ -83,14 +97,14 @@ public class DiaryController {
 				openFlag = 1;
 			}
 		}
-		List<Diary> diaryList = service.selectDiaryList(homepageMemberNo,diaryDate,folderNumber,openFlag);
+		List<Diary> diaryList = service.selectDiaryList(homepageMemberNo,diaryDate,folderNo,openFlag);
 		return new Gson().toJson(diaryList);
 	}
 	/** 일기의 공감 목록 조회하기
 	 * @param diaryNo
 	 * @return
 	 */
-	@GetMapping("/diary/selectEmojiList")
+	@GetMapping("/selectEmojiList")
 	@ResponseBody
 	public String selectEmojiList(int diaryNo) {
 		
@@ -102,7 +116,7 @@ public class DiaryController {
 	 * @param diaryNo
 	 * @return
 	 */
-	@GetMapping("/diary/selectEmojiPeopleList")
+	@GetMapping("/selectEmojiPeopleList")
 	@ResponseBody
 	public String selectEmojiPeopleList(int diaryNo, int emojiNo) {
 		System.out.println("이게 컨트롤러까지 오나요?");
@@ -114,14 +128,14 @@ public class DiaryController {
 	/*[ 작성 페이지 ]*/
 	
 	//게시글 작성 페이지 이동
-   @GetMapping("/diary/write")
+   @GetMapping("/diaryWrite")
    public String diaryWrite() {
 	   return "minihome/minihome-diary/diary-write";
 	   ///prefix :WEB-INF/views/
 	   // suffix : .jsp
    }
    //게시글 작성
-   @PostMapping("/diary/write")
+   @PostMapping("/diaryWrite")
    public String diaryWrite(
 		   Diary diary,
 		   @SessionAttribute("loginMember") Member loginMember,
@@ -180,7 +194,7 @@ public class DiaryController {
     /*[수정 페이지]*/
 
    	//다이어리 수정 페이지 이동
-   	@GetMapping("/diary/update/{diaryNo}")
+   	@GetMapping("/diaryUpdate/{diaryNo}")
    	public String diaryUpdate(
    			@PathVariable("diaryNo") int diaryNo,
 		   Model model
@@ -196,7 +210,7 @@ public class DiaryController {
    	}
    
    	//다이어리 수정
-   	@PostMapping("/diary/update/{diaryNo}")
+   	@PostMapping("/diaryUpdate/{diaryNo}")
     public String diaryUpdate(
  		   Diary diary,
  		   @SessionAttribute("loginMember") Member loginMember,
@@ -255,7 +269,7 @@ public class DiaryController {
 	 * @param loginMember
 	 * @return
 	 */
-	@PostMapping("/diary/selectSchedule")
+	@PostMapping("/diary/calendar/selectSchedule")
 	@ResponseBody
 	public String selectSchedule(@SessionAttribute("loginMember") Member loginMember) {
 		System.out.println("로그인한 멤버 넘버가 잘 넘어왔니? " +loginMember.getMemberNo());
@@ -271,7 +285,7 @@ public class DiaryController {
 	 * @param params
 	 * @return
 	 */
-	@PostMapping("/diary/addSchedule")
+	@PostMapping("/diary/calendar/addSchedule")
 	@ResponseBody
 	public int addSchedule(
 			@SessionAttribute("loginMember") Member loginMember,
@@ -289,7 +303,7 @@ public class DiaryController {
 	 * @param params
 	 * @return
 	 */
-	@PostMapping("/diary/updateSchedule")
+	@PostMapping("/diary/calendar/updateSchedule")
 	@ResponseBody
 	public int updateSchedule(
 			@SessionAttribute("loginMember") Member loginMember,

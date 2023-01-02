@@ -73,7 +73,7 @@ const getRestDeInfo = (date) => {
     var day = ('0' + today.getDate()).slice(-2);
     const diaryDate = year + '-' + month  + '-' + day;
 
-    selectDiary(diaryDate,folderNumber,homepageMemberNo,loginMemberNo);
+    selectDiary(diaryDate);
     
 
 function writeBtn(diaryDate){
@@ -190,11 +190,11 @@ const makeCalendar = (date) => {
             //[나의 코드]
             /* 작성일 / 폴더 넘버 / 미니홈피 주인장 넘버 */
             const diaryDate = `${currentYear}-${currentMonth}-${temp}`;
-            const folderNumber = 1; /* 폴더 */
-            const homepageMemberNo = 1; /* 이슬이 다이어리를 조회해보겠다. */
-            const loginMemberNo = 7; 
+            // const folderNumber = 1; /* 폴더 */
+            // const homepageMemberNo = 1; /* 이슬이 다이어리를 조회해보겠다. */
+            // const loginMemberNo = 7; 
             
-            selectDiary(diaryDate,folderNumber,homepageMemberNo,loginMemberNo);
+            selectDiary(diaryDate);
 
             // ------- 여긴 ajax success 코드로 활용 -------------
             // 기존에 클릭된 날짜가 있을 경우 기존 날짜를 클릭 해제
@@ -224,12 +224,13 @@ const makeCalendar = (date) => {
     }
 }
 
-function selectDiary(diaryDate,folderNumber,homepageMemberNo,loginMemberNo){
+function selectDiary(diaryDate){
     
     /* 일기 목록 조회하는 ajax */
     $.ajax({
-        url : "/diary/selectDiary",
-        data : {"diaryDate":diaryDate,"folderNumber":folderNumber,"homepageMemberNo":homepageMemberNo,"loginMemberNo":loginMemberNo},
+        url : "/selectDiary",
+        // data : {"diaryDate":diaryDate,"folderNumber":folderNumber,"homepageMemberNo":homepageMemberNo,"loginMemberNo":loginMemberNo},
+        data : {"diaryDate":diaryDate,"folderNo":folderNo},
         dataType : "JSON",
         success :  (diaryList)  => {
 
@@ -347,7 +348,7 @@ function selectDiary(diaryDate,folderNumber,homepageMemberNo,loginMemberNo){
                             // div3_2_1.setAttribute("onclick","updateDiary("+diary.diaryNo+")")
                             // div3_2_1.innerText = "ㄴㄷㄹ";
                                 const div3_2_1_a = document.createElement("a");
-                                div3_2_1_a.setAttribute("href","/diary/update/"+diary.diaryNo+"");
+                                div3_2_1_a.setAttribute("href","/diaryUpdate/"+diary.diaryNo+"");
                                 div3_2_1_a.innerText = "수정";
                             div3_2_1.append(div3_2_1_a);
                             
@@ -489,7 +490,7 @@ function selectEmojiList(diaryNo,div3_1_1_1,div3_1_1){
     console.log(div3_1_1);
     
     $.ajax({
-        url : "/diary/selectEmojiList",
+        url : "/selectEmojiList",
         data : {"diaryNo":diaryNo},
         dataType : "JSON",
         success :  (emojiList)  => {
@@ -556,7 +557,7 @@ function selectEmojiPeopleList(emojiNo,diaryNo,btn){
     /*확인용*/console.log("사람 목록이 조회되는 다이어리 번호" + diaryNo);
 
     $.ajax({
-        url : "/diary/selectEmojiPeopleList",
+        url : "/selectEmojiPeopleList",
         data : {"diaryNo":diaryNo,"emojiNo":emojiNo},
         dataType : "JSON",
         success :  (emojiPeopleList)  => {

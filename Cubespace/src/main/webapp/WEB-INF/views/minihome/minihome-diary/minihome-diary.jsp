@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class = "write-section">
-                        <div class = "writeBtn" onclick = "writeBtn()"><a href="/diary/write">글쓰기</a>
+                        <div class = "writeBtn" onclick = "writeBtn()"><a href="/diaryWrite">글쓰기</a>
                         </div>
                     </div>
                     <div class = "diary-section-container">
@@ -111,11 +111,9 @@
 <!-- include 방법 : <section class="minihome-rayout"> 안에 <div data-include-path="파일 경로"></div> 작성 -->
 <script src="/resources/js/common/temp.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
-<script script type="text/javascript" th:inline="javascript">
-    
-
-    
-    </script>
+<script>
+const folderNo = "${folderNo}";
+</script>
 <script src="/resources/js/minihome/minihome-diary/diary-main.js"></script>
 <%-- <script src = "/resources/js/minihome/minihome-diary/minihome-diary.js"></script> --%>
 

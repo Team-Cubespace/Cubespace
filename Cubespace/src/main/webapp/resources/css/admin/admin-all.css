@@ -6,7 +6,9 @@
     min-width: 970px;
     /* flex-direction: column; */
 }
-
+#frmSearchBase{
+    height: 100px;
+}
 
 #mSearchBase {
     height: 500px;

@@ -25,6 +25,9 @@ header {
     height: 100%;
     align-items: center;
 }
+.header-menu a:hover {
+    cursor: pointer;
+}
 .header-menu i {
     font-size: 25px;
 }

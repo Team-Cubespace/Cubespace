@@ -20,4 +20,7 @@ public class Minihome {
 	private String frameMenuColor;	// 프레임 메뉴 색
 	private String frameFontColor;	// 프레임 글자 색
 	private CategoryOrder categoryOrder;	// 메뉴 카테고리 순서
+	
+	private int fontNo; // "내" 폰트번호
+	private int musicNo; // "내" 배경음악 번호
 }

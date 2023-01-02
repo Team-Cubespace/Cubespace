@@ -6,7 +6,7 @@
 input:focus {outline:none;}
 
 /* 마우스 올리면 색상 변경 (폰트,이미지) */
-.member-choice:hover {
+.member-choice:hover,.member-accept:hover,.member-minihome:hover {
     /* color: var(--mainColor); */
     cursor: pointer;
     filter: invert(15%) sepia(77%) saturate(6158%) hue-rotate(267deg) brightness(110%) contrast(108%);
@@ -116,7 +116,7 @@ input:focus {outline:none;}
     margin-right: 20px;
 }
 
-.profile-body > div{
+.profile-body > div,.profile-body > a{
     display: flex;
     align-items: center;
 }
@@ -133,7 +133,7 @@ input:focus {outline:none;}
 }
 
 /* 깐부, 신청, 수락대기 폰트이미지 */
-.fa-solid, .fa-regular{
+.fa-xmark,.fa-paper-plane,.fa-comment-dots,.fa-check, .fa-regular{
     font-size: 20px;
     margin-right: 5px;
 }

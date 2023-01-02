@@ -10,8 +10,8 @@ import lombok.ToString;
 public class CategoryOrder {
 
 	private int memberNo;
-	private int diary;
-	private int album;
-	private int video;
-	private int guestBook;
+	private String diary;
+	private String album;
+	private String video;
+	private String guestBook;
 }

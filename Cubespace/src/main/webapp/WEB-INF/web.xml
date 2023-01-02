@@ -49,6 +49,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
+	
 <!-- 	 	<filter-mapping>
 		<filter-name>adminFilter</filter-name>
 		<url-pattern>/admin/*</url-pattern>

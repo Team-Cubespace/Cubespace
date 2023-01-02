@@ -15,3 +15,10 @@ if(swiperSlid.length > 1) {
         }
     })
 }
+// 목록으로 버튼
+(()=>{
+    const goToList = document.getElementById("goToList");
+    goToList.addEventListener("click", ()=>{
+        location.href = "/albumList/2" + location.search;
+    });
+})()

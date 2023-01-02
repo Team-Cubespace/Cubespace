@@ -21,12 +21,12 @@
    		<result property="birthDay" column="BIRTHDAY"></result>
    		<result property="loginType" column="LOGIN_TYPE"></result>
    		<result property="emotion" column="EMOTION"></result>
-   		<result property="fontNo" column="FONT_NO"></result>
+   		<result property="ownFontNo" column="OWN_FONT_NO"></result>
    		
    		<result property="memberBlockYN" column="MEMBER_BLOCK_YN"></result>
    		<result property="blockStart" column="BLOCK_START"></result>
    		<result property="blockEnd" column="BLOCK_END"></result>
-   		<result property="fontPath" column="FONT_PATH"></result>
+   		<result property="fontNo" column="FONT_NO"></result>
    		<result property="emotionPath" column="EMOTION_PATH"></result>
    		<result property="emotionName" column="EMOTION_NAME"></result>
    		<result property="alarmCount" column="ALARM_COUNT"></result>
@@ -40,7 +40,6 @@
 
 
 
-
 	<!-- 로그인 기능 -->
 	<select id="login" parameterType="string" resultMap="member_rm">
 		SELECT M.MEMBER_NO, MEMBER_EMAIL, MEMBER_PW, MEMBER_NAME, MEMBER_NICKNAME, 
@@ -49,35 +48,38 @@
 		BIRTHDAY , EMOTION_NO , 
 		TO_CHAR(BLOCK_START, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분"') AS BLOCK_START, 
 		TO_CHAR(BLOCK_END, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분"') AS BLOCK_END, 
-		CASE <![CDATA[
-			WHEN (SELECT MEMBER_NO FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = M.MEMBER_NO AND SYSDATE < BLOCK_END) IS NULL  ]]>
+		CASE  <![CDATA[
+			WHEN (SELECT MEMBER_NO FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = M.MEMBER_NO AND SYSDATE < BLOCK_END) IS NULL 
 			THEN 'N'
 			ELSE 'Y'
-		END MEMBER_BLOCK_YN,
-		(SELECT FONT_PATH FROM FONT_SHOP
-		JOIN MEMBER_OWN_GOODS MOG ON (OWN_FONT_NO = FONT_NO) WHERE MOG.OWN_NO = M.OWN_FONT_NO ) FONT_PATH,
+		END MEMBER_BLOCK_YN, LOGIN_TYPE, OWN_FONT_NO,  ]]>
 		(SELECT COUNT(*) FROM ALARM WHERE RECEIVER_NO = M.MEMBER_NO) ALARM_COUNT,
 		(SELECT TODAY FROM MINI_HOMEPAGE MH WHERE MH.MEMBER_NO = M.MEMBER_NO) TODAY,
 		(SELECT COUNT(*) FROM FRIEND WHERE FRIEND_ACCEPT_FL = 1 AND M.MEMBER_NO IN (ASKED_MEMBER_NO, ASKING_MEMBER_NO)) FRIEND_COUNT
 		FROM MEMBER M
 		LEFT JOIN MEMBER_BLOCK MB ON(M.MEMBER_NO = MB.MEMBER_NO)
 		WHERE MEMBER_DEL_YN = 'N'
-		AND MEMBER_EMAIL = #{memberEmail}
+		AND MEMBER_EMAIL = #{memberNo}
 	</select>
 
 
 
 	<!-- 회원가입 입력 정보 제출 서비스 -->
-	<insert id="signUp" parameterType="Member">
+	<insert id="signUp" parameterType="Member" useGeneratedKeys = "true">
+		
+		<selectKey keyProperty = "memberNo" resultType="_int" order="BEFORE">
+ 			SELECT SEQ_MEMBER_NO.NEXTVAL FROM DUAL
+ 		</selectKey>
+ 		
 		INSERT INTO MEMBER VALUES(
-			SEQ_MEMBER_NO.NEXTVAL, #{memberEmail}, #{memberPw}, #{memberName}, #{memberNickname},  #{memberTel}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, 
+			#{memberNo}, #{memberEmail}, #{memberPw}, #{memberName}, #{memberNickname},  #{memberTel}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, 
 		<if test='birthYear != null and birthDay != null'>
 			#{birthYear}, #{birthDay}, 
 		</if>
 		<if test='birthYear == null and birthDay == null'>
 			NULL, NULL,
 		</if>
-			DEFAULT, DEFAULT)
+			DEFAULT, DEFAULT, 1)
 	</insert>
 
 	
@@ -146,43 +148,47 @@
 		<if test='birthDay == null'>
 			NULL,
 		</if>
-			DEFAULT, DEFAULT)
+			DEFAULT, DEFAULT, 3)
  	 </insert>
  	
  	
  	<!-- 회원소유품목 테이블에 값 삽입 -->
- 	<insert id="insertOwnGoods">
- 		INSERT INTO MEMBER_OWN_GOODS VALUES(SEQ_OWN_NO.NEXTVAL, #{memberNo}, 1, 1)
+ 	<insert id="insertOwnGoods" parameterType="Member" useGeneratedKeys = "true">
+ 	
+ 		<selectKey keyProperty = "ownFontNo" resultType="_int" order="BEFORE">
+ 			SELECT SEQ_OWN_NO.NEXTVAL FROM DUAL
+ 		</selectKey>
+ 		INSERT INTO MEMBER_OWN_GOODS VALUES(#{ownFontNo}, #{memberNo}, 1, 1)
  	</insert>
  	
  	
  	<!--  미니홈 테이블에 값 삽입 -->
  	<insert id="insertMinihome">
  		INSERT INTO MINI_HOMEPAGE VALUES(
-		#{memberNo}, '나의 미니홈피', 'rgb(128,128,128)', 
-		NULL, DEFAULT, DEFAULT, NULL, '#82C9E8', '#1A8DBF', 'WHITE')
+		#{memberNo}, '나의 미니홈피', #{backgroundSkin}, 
+		NULL, DEFAULT, DEFAULT, NULL, #{frameColor}, #{frameMenuColor}, #{frameFontColor})
  	</insert>
  	
  	
  	<!--폴더 테이블에 값 삽입 -->
  	<insert id="insertFolder1">
  		INSERT INTO FOLDER VALUES(
-		SEQ_FOLDER_NO.NEXTVAL, 1, '나의 월간달력', 1, #{memberNo})
+		SEQ_FOLDER_NO.NEXTVAL, 1, '나의 월간달력', 1, #{memberNo}, DEFAULT)
  	</insert>
  	<!--폴더 테이블에 값 삽입 -->
  	<insert id="insertFolder2">
  		INSERT INTO FOLDER VALUES(
-		SEQ_FOLDER_NO.NEXTVAL, 1, '나의 다이어리', 2, #{memberNo})
+		SEQ_FOLDER_NO.NEXTVAL, 1, '나의 다이어리', 2, #{memberNo}, DEFAULT)
  	</insert>
  	<!--폴더 테이블에 값 삽입 -->
  	<insert id="insertFolder3">
  		INSERT INTO FOLDER VALUES(
-		SEQ_FOLDER_NO.NEXTVAL, 2, '나의 사진첩', 1, #{memberNo})
+		SEQ_FOLDER_NO.NEXTVAL, 2, '나의 사진첩', 1, #{memberNo}, DEFAULT)
  	</insert>
  	<!--폴더 테이블에 값 삽입 -->
  	<insert id="insertFolder4">
  		INSERT INTO FOLDER VALUES(
-		SEQ_FOLDER_NO.NEXTVAL, 3, '나의 동영상', 1, #{memberNo})
+		SEQ_FOLDER_NO.NEXTVAL, 3, '나의 동영상', 1, #{memberNo}, DEFAULT)
  	</insert>
  	
  	
@@ -191,7 +197,6 @@
 	 	INSERT INTO CATEGORY_ORDER VALUES(
 		#{memberNo}, 1,2,3,4)
  	</insert>
- 	
  	
  	
  	
@@ -248,6 +253,7 @@
 		DELETE FROM MEMBER_BLOCK mb WHERE BLOCK_END > SYSDATE
 	</delete>
 	
+
 	
 	
 </mapper>

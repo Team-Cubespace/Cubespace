@@ -23,12 +23,17 @@
 		<typeAlias type="com.team.cubespace.diary.model.vo.Emoji" alias="Emoji"/>		
 		<typeAlias type="com.team.cubespace.diary.model.vo.Plan" alias="Plan"/>		
 		<typeAlias type="com.team.cubespace.folder.model.vo.Folder" alias="Folder"/>		
+		<typeAlias type="com.team.cubespace.manage.model.vo.Font" alias="Font"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.CategoryOrder" alias="CategoryOrder"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.Friend" alias="Friend"/>		
+		<typeAlias type="com.team.cubespace.manage.model.vo.File" alias="File"/>		
+		<typeAlias type="com.team.cubespace.manage.model.vo.Background" alias="Background"/>		
+		<typeAlias type="com.team.cubespace.manage.model.vo.Music" alias="Music"/>		
 		<typeAlias type="com.team.cubespace.album.model.vo.Album" alias="Album"/>		
 		<typeAlias type="com.team.cubespace.album.model.vo.AlbumImage" alias="AlbumImage"/>
 		<typeAlias type="com.team.cubespace.album.model.vo.Comment" alias="Comment"/>
-
+		<typeAlias type="com.team.cubespace.main.model.vo.Notifications" alias="Notifications"/>
+		<typeAlias type="com.team.cubespace.video.model.vo.Video" alias="Video"/>
 	</typeAliases>
 	
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->
@@ -40,5 +45,7 @@
 		<mapper resource="/mappers/manage-mapper.xml"/>
 		<mapper resource="/mappers/album-mapper.xml"/>
 		<mapper resource="/mappers/comment-mapper.xml"/>	
+		<mapper resource="/mappers/notifications-mapper.xml"/>	
+		<mapper resource="/mappers/video-mapper.xml"/>	
 	</mappers>
 </configuration>

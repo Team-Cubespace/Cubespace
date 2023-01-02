@@ -1,3 +1,4 @@
+/* 모달설정 */
 .modal{
     position: fixed;
     top: 0;
@@ -26,9 +27,9 @@
     /* background-color: red; */
     /* background-color:transparent; */
 }
-
+/* 모달 닫기 버튼 설정 */
 .player-close{
-    margin: 0 0 0 20px;
+    margin: 5px 0 0 20px;
     font-weight: bold;
     color: #acb8cc;
 }
@@ -191,7 +192,19 @@
         flex: unset;
     }
 }
-
+.plyer-goods-holding{
+    display: inline-flex;
+    font-size: 30px;
+    padding: 5px;
+    margin-bottom: 10px;
+    color: #acb8cc;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
 .player-controls__item {
     display: inline-flex;
     font-size: 30px;
@@ -287,6 +300,9 @@
 }
 
 .player-controls__item.-favorite.active {
+    color: red;
+}
+.plyer-goods-holding.-favorite.active {
     color: red;
 }
 

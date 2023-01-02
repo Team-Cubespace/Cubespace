@@ -8,6 +8,8 @@ You can fork on github: https://github.com/muhammederdem/mini-player
 /* 모달 열기 */
 function MusicPlayerOpen(){
     document.getElementById("modalPlayer").style.display = "block";
+
+
 }
 /* 모달 닫기 */
 function MusicPlayerClose(){
@@ -25,12 +27,15 @@ new Vue({
             isTimerPlaying: false,
             tracks: [
             {
-                name: "테스트제목",
-                artist: "테스트 가수이름",
+                name: "Y",
+                artist: "프리스타일",
                 cover: "/resources/images/common/cubes-logo.png",
-                source: "/resources/music/mp3/[로스트아크｜OST] 쿠크세이튼 테마 - 한밤중의 서커스(Midnight Circus).mp3",
+                source: "/resources/music/mp3/프리스타일-Y.mp3",
                 url: "https://www.youtube.com/watch?v=z3wAjJXbYzA",
-                favorited: false
+                favorited: false    
+                // 하트 (상품보유 여부)
+                // goodsNo == useGoodsNo 보유중 변경
+                // favorited: 보유중이면 true로 변경
             },
             {
                 name: "Mekanın Sahibi",

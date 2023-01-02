@@ -1,6 +1,7 @@
 package com.team.cubespace.diary.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -124,6 +125,34 @@ public class DiaryController {
 		
 		return new Gson().toJson(emojiPeopleList);
 	}
+	
+	@GetMapping("/like")
+	@ResponseBody
+	public int like(int diaryNo, int emojiNo,
+			@SessionAttribute("loginMember") Member loginMember
+			) {
+		int result = 0;
+		int memberNo = loginMember.getMemberNo();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("diaryNo", diaryNo);
+		map.put("memberNo", memberNo);
+		map.put("emojiNo", emojiNo);
+		Emoji emoji = service.selectLike(map);
+		System.out.println(emoji);
+		if (emoji == null) {
+			result = service.insertLike(map);
+		} else {
+			if (emoji.getEmojiNo() == emojiNo) {
+				result = service.deleteLike(map);
+			} else {
+				result = service.updateLike(map);
+			}
+		}
+		
+		
+		return result;
+	}
+	
 	
 	/*[ 작성 페이지 ]*/
 	

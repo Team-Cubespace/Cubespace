@@ -41,6 +41,18 @@ public interface DiaryService {
 	 * @return
 	 */
 	List<Emoji> selectEmojiPeopleList(int diaryNo, int emojiNo);
+	
+	/**
+	 * @param map
+	 * @return
+	 */
+	Emoji selectLike(Map<String, Object> map);
+	
+	int insertLike(Map<String, Object> map);
+
+	int deleteLike(Map<String, Object> map);
+
+	int updateLike(Map<String, Object> map);
 
 	/**다이어리 작성
 	 * @param diary
@@ -77,6 +89,10 @@ public interface DiaryService {
 	 * @return
 	 */
 	int updateSchedule(Map<String, Object> params);
+
+	
+
+	
 
 
 

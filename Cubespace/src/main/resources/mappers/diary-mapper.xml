@@ -87,6 +87,30 @@
 	WHERE DIARY_NO = #{diaryNo} AND E.EMOJI_NO = #{emojiNo}
 	</select>
 	
+	<select id="selectLike" resultMap = "emoji_rm">
+	SELECT MEMBER_NO, EMOJI_NO
+	FROM EMOJI
+	WHERE DIARY_NO = #{diaryNo} AND MEMBER_NO = #{memberNo}
+	</select>
+	
+	<insert id="insertLike">
+	INSERT INTO EMOJI
+	VALUES (
+	#{diaryNo},#{memberNo},#{emojiNo}
+	)
+	</insert>
+	
+	<update id="updateLike">
+	UPDATE EMOJI
+	SET EMOJI_NO = #{emojiNo}
+	WHERE DIARY_NO = #{diaryNo} AND MEMBER_NO = #{memberNo}
+	</update>
+	
+	<delete id="deleteLike">
+	DELETE FROM EMOJI
+	WHERE DIARY_NO = #{diaryNo} AND MEMBER_NO = #{memberNo}
+	</delete>
+	
 	<!-- 다이어리 작성  -->
 	<insert id="diaryWrite" parameterType = "Diary" useGeneratedKeys="true">
 		<selectKey keyProperty = "diaryNo" resultType = "_int" order = "BEFORE">

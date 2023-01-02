@@ -63,6 +63,33 @@ public class DiaryServiceImpl implements DiaryService {
 		
 		return dao.selectEmojiPeopleList(map);
 	}
+	
+	/**
+	 *
+	 */
+	@Override
+	public Emoji selectLike(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return dao.selectLike(map);
+	}
+	
+	@Override
+	public int insertLike(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return dao.insertLike(map);
+	}
+
+	@Override
+	public int deleteLike(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return dao.deleteLike(map);
+	}
+
+	@Override
+	public int updateLike(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return dao.updateLike(map);
+	}
 
 	//다이어리 작성
 	@Override
@@ -126,6 +153,10 @@ public class DiaryServiceImpl implements DiaryService {
 		
 		return dao.updateSchedule(params);
 	}
+
+	
+
+	
 
 
 

@@ -56,6 +56,31 @@ public class DiaryDAO {
 		
 		return sqlSession.selectList("diaryMapper.selectEmojiPeopleList",map);
 	}
+	
+	/**
+	 * @param map
+	 * @return
+	 */
+	public Emoji selectLike(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("diaryMapper.selectLike",map);
+	}
+	
+
+	public int insertLike(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("diaryMapper.insertLike", map);
+	}
+
+	public int deleteLike(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("diaryMapper.deleteLike", map);
+	}
+
+	public int updateLike(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("diaryMapper.updateLike", map);
+	}
 
 	
 	/**다이어리 작성
@@ -127,6 +152,9 @@ public class DiaryDAO {
 		
 		return sqlSession.insert("diaryMapper.updateSchedule",params);
 	}
+
+
+	
 
 
 

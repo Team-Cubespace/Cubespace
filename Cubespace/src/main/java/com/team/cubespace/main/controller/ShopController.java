@@ -85,7 +85,7 @@ public class ShopController {
 		return result;
 	}
 	
-	/** 음악재생 목록 조회
+	/** 음악재생 목록 조회(보류)
 	 * @return
 	 */
 	@GetMapping("/miniMusicPlyer")

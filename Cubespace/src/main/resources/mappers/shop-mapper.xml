@@ -44,16 +44,25 @@
 	<select id="shopFontCount" resultType="_int">
 		SELECT COUNT(FONT_NO) FONT_COUNT  FROM FONT_SHOP
 		WHERE FONT_NO != 1
+		<if test= 'shopSearch != null and shopSearch!="" '>
+		AND FONT_NAME LIKE '%${shopSearch}%' OR FONT_CREATER LIKE '%${shopSearch}%'
+		</if>
 	</select>
 	
 	<!-- 배경음악 상점 상품 갯수 구하기 -->
 	<select id="shopMusicCount" resultType="_int">
 		SELECT COUNT(MUSIC_NO) MUSIC_COUNT  FROM MUSIC_SHOP
+		<if test= 'shopSearch != null and shopSearch!="" '>
+		WHERE MUSIC_NAME LIKE '%${shopSearch}%' OR MUSIC_CREATER LIKE '%${shopSearch}%'
+		</if>
 	</select>
 	
 	<!-- 미니룸소품 상점 상품 갯수 구하기 -->
 	<select id="shopMiniroomCount" resultType="_int">
 		SELECT COUNT(GOODS_NO) GOODS_COUNT  FROM GOODS_SHOP
+		<if test= 'shopSearch != null and shopSearch!="" '>
+		WHERE GOODS_NAME LIKE '%${shopSearch}%' OR GOODS_CREATER LIKE '%${shopSearch}%'
+		</if>
 	</select>
 	
 	
@@ -282,5 +291,10 @@
 		ORDER BY MUSIC_NO DESC
 	</select>
    
+	<!-- 배경음악 상점 상품 갯수 구하기 -->
+	<select id="shopMusicPlyerCount" resultType="_int">
+		SELECT COUNT(MUSIC_NO) MUSIC_COUNT  FROM MUSIC_SHOP
+D
+	</select>
    
 </mapper>

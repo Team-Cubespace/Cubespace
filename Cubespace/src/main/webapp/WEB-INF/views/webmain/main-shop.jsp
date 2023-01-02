@@ -29,6 +29,10 @@
     <jsp:include page="/WEB-INF/views/webmain/MiniMusicPlayer.jsp"/>
 
     <main>
+        <c:if test="${not empty param.shopSearch}">
+            <c:set var = "sURL" value = "&shopSearch=${param.shopSearch}"></c:set>
+        </c:if>
+    
         <div class="shop-main-frame">
             <div class="shop-header">
                 <div class="shop-move">
@@ -131,9 +135,9 @@
             <div class="pagination-area"> <%-- 페이징네이션 --%>
                 <ul class="pagination">
                     <!-- 첫 페이지로 이동( <<) -->
-                    <li><a href="/cubespace/shop/1">&lt;&lt;</a></li>
+                    <li><a href="/cubespace/shop/1?cp=1${sURL}">&lt;&lt;</a></li>
                     <!-- 이전 목록 마지막 번호로 이동 ( < ) -->
-                    <li><a href="/cubespace/shop/${shopCt}?cp=${pagination.prevPage}">&lt;</a></li>
+                    <li><a href="/cubespace/shop/${shopCt}?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
                     <!-- 특정 페이지로 이동 -->
                     <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
                         <c:choose>
@@ -143,14 +147,14 @@
                             </c:when>
                             <c:otherwise>
                                 <!-- <%-- 현재 페이지를 제외한 나머지 --%> -->
-                                <li><a href="/cubespace/shop/${shopCt}?cp=${i}">${i}</a></li>
+                                <li><a href="/cubespace/shop/${shopCt}?cp=${i}${sURL}">${i}</a></li>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
                     <!-- 다음 목록 시작 번호로 이동 ( > )-->
-                    <li><a href="/cubespace/shop/${shopCt}?cp=${pagination.nextPage}">&gt;</a></li>
+                    <li><a href="/cubespace/shop/${shopCt}?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
                     <!-- 끝 페이지로 이동 ( >> ) -->
-                    <li><a href="/cubespace/shop/${shopCt}?cp=${pagination.maxPage}">&gt;&gt;</a></li>
+                    <li><a href="/cubespace/shop/${shopCt}?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
                 </ul>
             </div>
         </div>

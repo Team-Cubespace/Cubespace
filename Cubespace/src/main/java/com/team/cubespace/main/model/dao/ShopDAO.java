@@ -79,23 +79,24 @@ public class ShopDAO {
 	
 
 	/** 폰트 상점 상품 갯수 구하기
+	 * @param pm 
 	 * @return
 	 */
-	public int shopFontCount() {
+	public int shopFontCount(Map<String, Object> pm) {
 		return sqlSession.selectOne("shop.shopFontCount");
 	}
 
 	/** 배경음악 상점 상품 갯수 구하기
 	 * @return
 	 */
-	public int shopMusicCount() {
+	public int shopMusicCount(Map<String, Object> pm) {
 		return sqlSession.selectOne("shop.shopMusicCount");
 	}
 	
 	/** 미니룸소품 상점 상품 갯수 구하기
 	 * @return
 	 */
-	public int shopMiniroomCount() {
+	public int shopMiniroomCount(Map<String, Object> pm) {
 		return sqlSession.selectOne("shop.shopMiniroomCount");
 	}
 	
@@ -142,6 +143,13 @@ public class ShopDAO {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
 		return sqlSession.selectList("shop.miniMusicPlyer",loginMemberNo,rowBounds);
+	}
+
+	/** 폰트 상점 상품 갯수 구하기(배경음악 보류)
+	 * @return
+	 */
+	public int shopMusicPlyerCount() {
+		return sqlSession.selectOne("shop.shopMusicPlyerCount");
 	}
 
 

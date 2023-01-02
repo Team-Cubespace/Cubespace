@@ -25,10 +25,13 @@ const goodsAdd=(goodsNo,shopCathNo,btn)=>{
                 goodsBtnGoodsNo0.classList.remove("goods-btn")
                 goodsBtnGoodsNo0.innerText="보유중"
 
-                goodsBtnGoodsNo1.removeAttribute("onclick");
-                goodsBtnGoodsNo1.classList.add("goods-holding")
-                goodsBtnGoodsNo1.classList.remove("goods-btn")
-                goodsBtnGoodsNo1.innerText="보유중"
+                if(goodsBtnGoodsNo1!=null){
+                    goodsBtnGoodsNo1.removeAttribute("onclick");
+                    goodsBtnGoodsNo1.classList.add("goods-holding")
+                    goodsBtnGoodsNo1.classList.remove("goods-btn")
+                    goodsBtnGoodsNo1.innerText="보유중"
+                }
+
             }else{ 
                 alert("상품추가 실패")
             }

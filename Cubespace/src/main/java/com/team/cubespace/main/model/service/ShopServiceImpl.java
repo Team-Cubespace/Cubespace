@@ -72,17 +72,17 @@ public class ShopServiceImpl  implements ShopService{
 		
 		// 상점 번호에 따른 갯수 구하기 
 		if(shopCt==1){ // 폰트 상점 상품 갯수 구하기
-			listCount  = dao.shopFontCount();
+			listCount  = dao.shopFontCount(pm);
 			
 		}else if (shopCt==2) { // 배경음악 상점 상품 갯수 구하기
-			listCount  = dao.shopMusicCount();
+			listCount  = dao.shopMusicCount(pm);
 			
 		}else { // 미니룸소품 상점 상품 갯수 구하기
-			listCount  = dao.shopMiniroomCount();
+			listCount  = dao.shopMiniroomCount(pm);
 		}
 		
 		// 페이징 처리 객체 생성
-		Pagination pagination = new Pagination(listCount, cp, 16, 5);
+		Pagination pagination = new Pagination(listCount, cp, 12, 5);
 		
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("pagination", pagination);
@@ -109,7 +109,7 @@ public class ShopServiceImpl  implements ShopService{
 	public List<ShopFont> miniMusicPlyer(int loginMemberNo, int cp) {
 		
 		int listCount;
-		listCount  = dao.shopMusicCount();
+		listCount  = dao.shopMusicPlyerCount();
 		
 		// 페이징 처리 객체 생성
 		Pagination pagination = new Pagination(listCount, cp, 16, 5);

@@ -158,7 +158,7 @@ public class DiaryController {
 	   	System.out.println("이슬이니...? :"+loginMember.getMemberNo());
 	   	diary.setMemberNo(loginMember.getMemberNo());
 	   	// [임시 설정]
-	   	diary.setFolderNo(1);
+//	   	diary.setFolderNo(1);
 	   	diary.setDiaryCreateDate(
 	   			diary.getDiaryCreateDate().substring(0, 10) + " "+
 	   			diary.getDiaryCreateDate().substring(11, 16) 
@@ -213,7 +213,7 @@ public class DiaryController {
    	@PostMapping("/diaryUpdate/{diaryNo}")
     public String diaryUpdate(
  		   Diary diary,
- 		   @SessionAttribute("loginMember") Member loginMember,
+// 		   @SessionAttribute("loginMember") Member loginMember,
  		   // 필요한가?
  		   RedirectAttributes ra, 
  		   @RequestHeader("referer") String referer
@@ -230,14 +230,14 @@ public class DiaryController {
  	   	//공개여부 (o)
  	   	//폴더번호 -> folderNo 어케 불러와...?
  	   	System.out.println("수정 다이어리 객체 :"+ diary);
- 	   	System.out.println("이슬이니...? :"+loginMember.getMemberNo());
- 	   	diary.setMemberNo(loginMember.getMemberNo());
+// 	   	System.out.println("이슬이니...? :"+loginMember.getMemberNo());
+// 	   	diary.setMemberNo(loginMember.getMemberNo());
  	   	diary.setDiaryCreateDate(
 	   			diary.getDiaryCreateDate().substring(0, 10) + " "+
 	   			diary.getDiaryCreateDate().substring(11, 16) 
 	   			);
  	   	//[임시 설정]
- 	   	diary.setFolderNo(1);
+// 	   	diary.setFolderNo(1);
  	   	// 4. 게시글 삽입 서비스를 호출한다.
  	   	int result = service.diaryUpdate(diary);
  	   

@@ -1,19 +1,25 @@
 package com.team.cubespace.video.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.team.cubespace.album.model.service.AlbumService;
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.member.model.vo.Member;
@@ -108,7 +114,44 @@ public class VideoController {
 		model.addAttribute("folderName", folderName);
 		model.addAttribute("board", video);
 		
-		
 		return "minihome/video/video-detail";
 	}
+	
+	/** 비디오 작성 페이지
+	 * @return minihome/video/video-write 포워드
+	 */
+	@GetMapping("/videoWrite")
+	public String videoWrite() {
+		return "minihome/video/video-write";
+	}
+	
+	@ResponseBody
+	@PostMapping("/videoWrite")
+	public String videoWrite(Video video,
+			@RequestParam("inputVideo") MultipartFile inputVideo,
+			@SessionAttribute("loginMember") Member loginMember,
+			HttpSession session) throws IOException {
+		
+		// 작성된 동영상에 작성자 번호 세팅
+		video.setMemberNo(loginMember.getMemberNo());
+		
+		String videoWebPath = "/resources/video/";
+		String videoFolderPath = session.getServletContext().getRealPath(videoWebPath);
+		
+		String ffmpegPath = "/resources/ffmpeg-5.1.2-essentials_build/bin";
+		ffmpegPath = session.getServletContext().getRealPath(ffmpegPath);
+		
+		String thumbnailWebPath = "/resources/video/thumbnail/";
+		String thumbnailFolderPath = session.getServletContext().getRealPath(thumbnailWebPath);
+		
+		int videoNo = service.videoWrite(video, inputVideo, videoWebPath, 
+				videoFolderPath, ffmpegPath, thumbnailWebPath, thumbnailFolderPath);
+		
+		Map<String, Integer> resultMap = new HashMap<>();
+		resultMap.put("folderNo", video.getFolderNo());
+		resultMap.put("videoNo", videoNo);
+		
+		return new Gson().toJson(resultMap);
+	}
+	
 }

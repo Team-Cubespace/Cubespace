@@ -108,4 +108,16 @@
 		ORDER SIBLINGS BY COMMENT_NO DESC
 		]]>
 	</select>
+	
+	<!-- 동영상 글 작성 -->
+	<insert id="insertVideo" parameterType="Video" useGeneratedKeys="true">
+		<selectKey keyProperty="videoNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_VIDEO_NO.NEXTVAL FROM DUAL
+		</selectKey>
+	
+		INSERT INTO VIDEO (VIDEO_NO, MEMBER_NO, FOLDER_NO, V_TITLE, V_CONTENT, VIDEO_PATH, 
+			VIDEO_RENAME, VIDEO_ORIGINAL_NAME, V_SCRAP_ALLOW_YN, V_OPEN_FL, V_THUMNAIL)
+		VALUES(#{videoNo}, #{memberNo}, #{folderNo}, #{videoTitle}, #{videoContent}, #{videoPath}, #{videoRename}, 
+			#{videoOriginalName}, #{videoScrapAllowYN}, #{openFlag}, #{videoThumbnail})
+	</insert>
 </mapper>

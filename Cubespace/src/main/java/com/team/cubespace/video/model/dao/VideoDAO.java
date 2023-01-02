@@ -43,4 +43,16 @@ public class VideoDAO {
 	public Video selectVideo(int videoNo) {
 		return sqlSession.selectOne("videoMapper.selectVideo", videoNo);
 	}
+
+	/** 동영상 글 작성
+	 * @param video
+	 * @return videoNo
+	 */
+	public int albumWrite(Video video) {
+		int result = sqlSession.insert("videoMapper.insertVideo", video);
+		if(result > 0) {
+			result = video.getVideoNo();
+		}
+		return result;
+	}
 }

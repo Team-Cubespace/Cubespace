@@ -1,15 +1,13 @@
 package com.team.cubespace.diary.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,12 +19,11 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.team.cubespace.diary.model.service.DiaryService;
 import com.team.cubespace.diary.model.vo.Diary;
 import com.team.cubespace.diary.model.vo.Emoji;
 import com.team.cubespace.diary.model.vo.Plan;
+import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.member.model.vo.Member;
 
 /** 다이어리 컨트롤러
@@ -39,8 +36,20 @@ public class DiaryController {
 	@Autowired
 	private DiaryService service;
 	
-	@GetMapping("/miniroom")
-	public String move() {
+	@GetMapping("/diary/{boardTypeNo}")
+	public String move(
+			@PathVariable ("boardTypeNo") int boardTypeNo,
+			@SessionAttribute("folderList") List<Folder> folderList,
+			@RequestParam(value="folderNo", required=false, defaultValue="-1") int folderNo,
+			Model model
+			) {
+		if(folderNo == -1) {	// 폴더 번호가 -1이면
+			// 폴더리스트를 가져와
+			// 폴더리스트의 0번째 인덱스의 폴더번호를
+			// folderNo로 지정
+			folderNo = folderList.get(0).getFolderNo();
+		}
+		
 		
 		//다이어리part
 		return "minihome/minihome-diary/minihome-diary";

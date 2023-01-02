@@ -130,13 +130,7 @@
 <!-- include 방법 : <section class="minihome-rayout"> 안에 <div data-include-path="파일 경로"></div> 작성 -->
 <script src="/resources/js/common/temp.js"></script>
 <script>
-// document.getElementById('diaryDate').value= new Date().toISOString().slice(0, -1);
-// document.getElementById('diaryDate').value= new Date().toISOString().slice(0, -1);
-// document.getElementById('diaryDate').value = new Date().toLocaleString();
-console.log("날짜"+new Date);
-console.log("날짜"+new Date().toLocaleString());
-console.log("날짜"+new Date().toISOString().slice(0, -1));
-
+/* 글쓸 때 오늘 날짜를 기본값으로 집어넣기! */
 let diary = new Date();
 let fullYear = diary.getFullYear();
 let month = ("0"+diary.getMonth() + 1).slice(-2)
@@ -144,7 +138,6 @@ let day = ("0"+diary.getDate()).slice(-2)
 let hour = ("0" + diary.getHours()).slice(-2)
 let minute = ("0" + diary.getMinutes()).slice(-2)
 
-console.log(fullYear+"-"+month+"-"+day+" "+hour+":"+minute);
 document.getElementById('diaryDate').value =  fullYear+"-"+month+"-"+day+" "+hour+":"+minute;
 </script>
 <script src="/resources/js/minihome/minihome-diary/diary_write.js"></script>

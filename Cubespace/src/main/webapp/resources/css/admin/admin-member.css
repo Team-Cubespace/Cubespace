@@ -1,7 +1,7 @@
 /*팝업 박스*/
 .popup_box {
-    position: relative;
-    top: 0px;
+    position: absolute;
+    top: 1000px;
     left: 50%;
 
     overflow: scroll;

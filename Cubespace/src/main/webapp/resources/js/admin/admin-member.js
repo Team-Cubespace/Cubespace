@@ -89,12 +89,12 @@ for (let btn of btnDelBack) {
 
 //팝업 띄우기
 function openPop() {
-    document.getElementById("popup_layer2").style.display = "block";
+    document.getElementsByClassName("popup_box")[0].style.display = "block";
 }
 
 // 팝업 닫기
 function closePop() {
-    document.getElementById("popup_layer2").style.display = "none";
+    document.getElementsByClassName("popup_box")[0].style.display = "none";
 }
 
 

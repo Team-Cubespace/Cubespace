@@ -209,12 +209,12 @@
                                     <!-- 비밀번호 -->
                                     <div class="signUp-input-password textbox">
                                         <input type="password"  name="memberPw"  class="inputBox" id="inputPw" 
-                                            placeholder="비밀번호" maxlength="20"/>
+                                            placeholder="비밀번호" maxlength="20" autocomplete="off"/>
                                     </div>
                                     <%-- 비밀번호확인 --%>
                                     <div class="signUp-input-password textbox">
                                     <input type="password" name="memberPwConfirm" class="inputBox" id="inputPw2"
-                                        placeholder="비밀번호 확인" maxlength="20"/>
+                                        placeholder="비밀번호 확인" maxlength="20" autocomplete="off"/>
                                     </div>
                                     <div class="firstBox">
                                         <span class="signUp-message" >영문자/숫자/특수문자 포함 8~16글자 사이로 입력해주세요.</span>
@@ -233,7 +233,7 @@
                                     <%-- 이름 --%>
                                     <div class="signUp-input-Name textbox">
                                     <input  type="text" name="memberName" class="inputBox" id="inputName"
-                                         placeholder="이름" maxlength="5"/>
+                                         placeholder="이름" maxlength="5" autocomplete="off"/>
                                     </div>
 
                                     <%-- 휴대번호 --%>

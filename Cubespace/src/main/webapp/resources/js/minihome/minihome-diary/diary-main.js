@@ -611,14 +611,14 @@ function mouseout(btn){
 }
 
 /* 강사님 */
-document.querySelector(".emoji-btn").addEventListener("click", e=>{
-    console.log("음.../")
-    console.log(e.target);
-    console.log(e.target.parentElement.previousElementSibling);
-    console.log(e.target.parentElement.previousElementSibling.children[0]);
+// document.querySelector(".emoji-btn").addEventListener("click", e=>{
+//     console.log("음.../")
+//     console.log(e.target);
+//     console.log(e.target.parentElement.previousElementSibling);
+//     console.log(e.target.parentElement.previousElementSibling.children[0]);
 
-    const popup = e.target.parentElement.previousElementSibling;
-    const section = e.target.parentElement.previousElementSibling.children[0];
+//     const popup = e.target.parentElement.previousElementSibling;
+//     const section = e.target.parentElement.previousElementSibling.children[0];
     
-    selectEmojiList(35, section, popup);
-})
+//     selectEmojiList(35, section, popup);
+// })

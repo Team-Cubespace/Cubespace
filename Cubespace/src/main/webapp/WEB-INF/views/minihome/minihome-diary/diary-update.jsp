@@ -46,6 +46,7 @@
 <body>
     <div class="content-area">
         <section class="minihome-rayout">
+            <jsp:include page="/WEB-INF/views/include/side-folder.jsp"/>
                 <!-- 좌측 section 코드 작성 또는 include -->
                 <!-- 전체 내용 div 태그로 한 번 감싸주세요 -->
                 <!-- ex) <div class="home-area"> <div></div> <span></span> ... </div> -->

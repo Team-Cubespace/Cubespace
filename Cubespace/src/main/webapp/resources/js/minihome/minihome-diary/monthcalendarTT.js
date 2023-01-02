@@ -64,12 +64,7 @@ function allDayTrue(){ //alDay == true 일 때
   $("#startTime").val("00:00");
   $("#endTime").val("00:00");
   /* 하루 종일이니까 날짜도 동일!!!! */
-  /* 원래 있던 위치 */
-  document.getElementById("startDate").addEventListener("change",function(){
-    alert("끝날짜도 바뀐당~");
-    $("#endDate").val($("#startDate").val());
-  })
-  // $("#endDate").val($("#startDate").val());
+  $("#endDate").val($("#startDate").val());
 }
 function allDayFalse(){ //alDay == false 일 때
   $("#startTime").attr("disabled",false)
@@ -88,7 +83,7 @@ function commonInPop(){
     //$("#allDay2").prop("checked", true); 
     document.querySelectorAll("input[name='allDay']")[0].addEventListener("click",function(){
       console.log("allDay에 '예'를 클릭하셨나요...?");  
-      allDayTrue();
+      allDayTrue()
     });
     document.querySelectorAll("input[name='allDay']")[1].addEventListener("click",function(){
       console.log("allDay에 '아니오'를 클릭하셨나요...?");  
@@ -161,11 +156,11 @@ function popup(arg){
     //2. 제목
     document.getElementById("title").value = arg.event.title;
     //3. 내용
-      // if(arg.event.extendedProps.description != undefined){
+      if(arg.event.extendedProps.description != undefined){
         document.getElementById("description").value = arg.event.extendedProps.description;
-      // } else {
-        // document.getElementById("description").value = "";
-      // }
+      } else {
+        document.getElementById("description").value = "";
+      }
     //4. 시작 날짜
     document.getElementById("startDate").value = startFullYear +"-"+startMonth+"-"+startDate;
     //5. 시작 시간
@@ -353,7 +348,6 @@ function addEvent(){
 
 /* [함수] 수정하기 */
 function updateEvent(){
-  
   const planId = document.getElementById("number").value;
   const category = document.getElementById("category").value;
   const title = document.getElementById("title").value;
@@ -363,7 +357,7 @@ function updateEvent(){
   const endDate = document.getElementById("endDate").value;
   const endTime = document.getElementById("endTime").value;
   const allDay =  document.querySelector("input[name='allDay']:checked").value;
-
+  console.log(selectEvent);
   let updateData;
   if(allDay =="true"){
     updateData = {
@@ -396,32 +390,25 @@ function updateEvent(){
 
       if(result > 0){ //성공
         alert("일정이 수정되었습니다.");
-      
         //1. 카테고리
-        selectEvent.event.setExtendedProp("category", document.getElementById("category").value)
-        console.log("카테고리실험1"+selectEvent.event.category);
-        console.log("카테고리실험2"+selectEvent.event.extendedProps.category);
+        selectEvent.event.setExtendedProp("category", category)
         //2. 제목
-        selectEvent.event.setProp("title", document.getElementById("title").value)
+        selectEvent.event.setProp("title", title)
         //3. 내용
-        // if(document.getElementById("description").value = ""){
-        //   selectEvent.event.setExtendedProp("description", undefined)
-        // } else {
-        // }
-        selectEvent.event.setExtendedProp("description", document.getElementById("description").value);
+        if(description = ""){
+          selectEvent.event.setExtendedProp("description", "내용을 입력해주세요.")
+        } else {
+          selectEvent.event.setExtendedProp("description", description);
+        }
         //4.5.6.7 시작 & 종료 날짜 & 시간
-        selectEvent.event.setDates(document.getElementById("startDate").value+"T"+document.getElementById("startTime").value+":00",
-                                  document.getElementById("endDate").value+"T"+document.getElementById("endTime").value+":00")
+        selectEvent.event.setDates(startDate+"T"+startTime+":00", endDate+"T"+endTime+":00")
         //8. 종일 여부
-          if(document.querySelector("input[name='allDay']:checked").value =="true"){
+          if(allDay =="true"){
             selectEvent.event.setAllDay(true);
-            // selectEvent.event.setExtendedProp("allDay","true");
-            console.log("true임");
           } else {
             selectEvent.event.setAllDay(false);
-          // selectEvent.event.setExtendedProp("allDay","false");
-            console.log("false임");
           }
+
       } else { //실패
             console.log("서버에 저장 실패");
       }
@@ -430,7 +417,6 @@ function updateEvent(){
     
     }
   });
-
   //팝업 닫기
   document.getElementById("popup_layer").style.display = "none";
   

@@ -46,6 +46,7 @@
 <body>
     <div class="content-area">
         <section class="minihome-rayout">
+            <jsp:include page="/WEB-INF/views/include/side-folder.jsp"/>
                 <!-- 좌측 section 코드 작성 또는 include -->
                 <!-- 전체 내용 div 태그로 한 번 감싸주세요 -->
                 <!-- ex) <div class="home-area"> <div></div> <span></span> ... </div> -->
@@ -128,6 +129,24 @@
 <!-- html에서 파일을 include 할 수 있도록 해주는 js (근데 VSCode Live Server에서만 보임) -->
 <!-- include 방법 : <section class="minihome-rayout"> 안에 <div data-include-path="파일 경로"></div> 작성 -->
 <script src="/resources/js/common/temp.js"></script>
+<script>
+// document.getElementById('diaryDate').value= new Date().toISOString().slice(0, -1);
+// document.getElementById('diaryDate').value= new Date().toISOString().slice(0, -1);
+// document.getElementById('diaryDate').value = new Date().toLocaleString();
+console.log("날짜"+new Date);
+console.log("날짜"+new Date().toLocaleString());
+console.log("날짜"+new Date().toISOString().slice(0, -1));
+
+let diary = new Date();
+let fullYear = diary.getFullYear();
+let month = ("0"+diary.getMonth() + 1).slice(-2)
+let day = ("0"+diary.getDate()).slice(-2)
+let hour = ("0" + diary.getHours()).slice(-2)
+let minute = ("0" + diary.getMinutes()).slice(-2)
+
+console.log(fullYear+"-"+month+"-"+day+" "+hour+":"+minute);
+document.getElementById('diaryDate').value =  fullYear+"-"+month+"-"+day+" "+hour+":"+minute;
+</script>
 <script src="/resources/js/minihome/minihome-diary/diary_write.js"></script>
 <%-- <script src = "/resources/js/minihome/minihome-diary/minihome-diary.js"></script> --%>
 

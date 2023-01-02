@@ -1,7 +1,7 @@
 /* 미니홈 전체 크기 */
-/* html {
+html {
     background-color: #ddd;
-} */
+}
 .minihome {
     width: 1200px;
     height: 725px;

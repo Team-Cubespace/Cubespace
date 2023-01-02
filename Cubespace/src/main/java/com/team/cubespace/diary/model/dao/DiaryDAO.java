@@ -101,13 +101,31 @@ public class DiaryDAO {
 		return result;
 	}
 
-	/**
+	/** 월간달력_조회
 	 * @param memberNo
 	 * @return
 	 */
 	public List<Plan> selectSchedule(int memberNo) {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.selectList("diaryMapper.selectscheduleList",memberNo);
+	}
+
+	/** 월간달력_일정 등록
+	 * @param params
+	 * @return
+	 */
+	public int addSchedule(Map<String, Object> params) {
+		
+		return sqlSession.insert("diaryMapper.addSchedule",params);
+	}
+
+	/** 월간달력_일정 수정
+	 * @param params
+	 * @return
+	 */
+	public int updateSchedule(Map<String, Object> params) {
+		
+		return sqlSession.insert("diaryMapper.updateSchedule",params);
 	}
 
 

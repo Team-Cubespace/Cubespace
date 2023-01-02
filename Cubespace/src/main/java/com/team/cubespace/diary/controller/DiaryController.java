@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,13 +43,15 @@ public class DiaryController {
 	public String move() {
 		
 		//다이어리part
-		return "minihome/minihome-diary/minihome-diary";
+//		return "minihome/minihome-diary/minihome-diary";
 		
 		//월간달력part
-//		return "minihome/minihome-diary/monthcalendar";
+		return "minihome/minihome-diary/monthcalendar";
 		
 		
 	}
+	
+	/*[ 다이어리 메인 페이지 ]*/
 	
 	/** 클릭한 날짜의 다이어리 목록 조회하기
 	 * @return diaryList
@@ -239,11 +242,11 @@ public class DiaryController {
 	   
 	/*[ 월간 달력 ]*/
 	
-	/**
+	/**월간달력_조회
 	 * @param loginMember
 	 * @return
 	 */
-	@GetMapping("/diary/calendar")
+	@PostMapping("/diary/selectSchedule")
 	@ResponseBody
 	public String selectSchedule(@SessionAttribute("loginMember") Member loginMember) {
 		System.out.println("로그인한 멤버 넘버가 잘 넘어왔니? " +loginMember.getMemberNo());
@@ -254,11 +257,41 @@ public class DiaryController {
 		return new Gson().toJson(scheduleList);
 	}
 	
-//	@GetMapping("/diary/addCalendar")
-//	@ResponseBody
-//	public int addCalendar() {
-//		
-//	}
+	/** 월간달력_일정 등록
+	 * @param loginMember
+	 * @param params
+	 * @return
+	 */
+	@PostMapping("/diary/addSchedule")
+	@ResponseBody
+	public int addSchedule(
+			@SessionAttribute("loginMember") Member loginMember,
+			@RequestBody Map<String, Object> params
+			) {
+		System.out.println("addSchedule 확인!");
+		System.out.println(params);
+		params.put("memberNo", loginMember.getMemberNo());
+		int result = service.addSchedule(params);
+		return result;
+	}
+	
+	/** 월간달력_일정 수정
+	 * @param loginMember
+	 * @param params
+	 * @return
+	 */
+	@PostMapping("/diary/updateSchedule")
+	@ResponseBody
+	public int updateSchedule(
+			@SessionAttribute("loginMember") Member loginMember,
+			@RequestBody Map<String, Object> params
+			) {
+		System.out.println("updateSchedule 확인!");
+		System.out.println(params);
+		params.put("memberNo", loginMember.getMemberNo());
+		int result = service.updateSchedule(params);
+		return result;
+	}
 	
 	
 	

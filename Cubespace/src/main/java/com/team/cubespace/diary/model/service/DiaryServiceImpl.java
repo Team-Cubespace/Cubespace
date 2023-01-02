@@ -99,13 +99,32 @@ public class DiaryServiceImpl implements DiaryService {
 	}
 
 	/*[ 월간 달력 ]*/
-	/**
+	
+	/** 월간달력_조회
 	 *
 	 */
 	@Override
 	public List<Plan> selectSchedule(int memberNo) {
 		// TODO Auto-generated method stub
 		return dao.selectSchedule(memberNo);
+	}
+
+	/** 월간달력_일정 등록
+	 *
+	 */
+	@Override
+	public int addSchedule(Map<String, Object> params) {
+		
+		return dao.addSchedule(params);
+	}
+
+	/** 월간달력_일정 수정
+	 *
+	 */
+	@Override
+	public int updateSchedule(Map<String, Object> params) {
+		
+		return dao.updateSchedule(params);
 	}
 
 

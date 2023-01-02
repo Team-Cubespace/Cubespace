@@ -123,17 +123,46 @@
 	DIARY_NO = #{diaryNo}
 	</update>
 	
-	<!-- 월간 달력 -->
+	<!-- 월간 달력_조회 -->
 	<select id="selectscheduleList" resultMap = "plan_rm">
-	SELECT START_DATE, NVL(END_DATE,START_DATE) END_DATE , PLAN_TITLE , PLAN_CATEGORY, PLAN_ALLDAY_FL,PLAN_DESCRIPTION,
+	SELECT PLAN_NO, START_DATE, NVL(END_DATE,START_DATE) END_DATE , PLAN_TITLE , PLAN_CATEGORY, PLAN_ALLDAY_FL,PLAN_DESCRIPTION,
 	CASE	
-		WHEN PLAN_CATEGORY = 1 THEN '#E0FFFF'
-		WHEN PLAN_CATEGORY = 2 THEN '#E6E6FA'
-		WHEN PLAN_CATEGORY = 3 THEN '#FFF0F5'
-		ELSE '#000000'
+		WHEN PLAN_CATEGORY = 1 THEN '#C0EEE4'
+		WHEN PLAN_CATEGORY = 2 THEN '#F3CCFF'
+		WHEN PLAN_CATEGORY = 3 THEN '#D8F8B7'
+		ELSE '#FFCAC8'
 	END AS COLOR
 	FROM PLAN  
 	WHERE MEMBER_NO = #{memberNo}
 	</select>
+	
+	<insert id="addSchedule">
+	INSERT INTO PLAN
+	VALUES (
+	SEQ_PLAN_NO.NEXTVAL,
+	#{memberNo},
+	TO_DATE('${startDate}','YYYY-MM-DD HH24:MI:SS'),
+	TO_DATE('${endDate}','YYYY-MM-DD HH24:MI:SS'),
+	#{planTitle},
+	#{planCategory},
+	#{allDayFlag},
+	#{planDescription}
+	)
+	</insert>
+	
+	<update id="updateSchedule">
+	UPDATE PLAN 
+	SET 
+	PLAN_TITLE = #{planTitle},
+	PLAN_DESCRIPTION = #{planDescription},
+	START_DATE = TO_DATE('${startDate}','YYYY-MM-DD HH24:MI:SS'),
+	END_DATE = TO_DATE('${endDate}','YYYY-MM-DD HH24:MI:SS'),
+	PLAN_CATEGORY = #{planCategory},
+	PLAN_ALLDAY_FL = #{allDayFlag} 
+	WHERE 
+	PLAN_NO = #{planNo}
+	
+	</update>
+	
  	
 </mapper>

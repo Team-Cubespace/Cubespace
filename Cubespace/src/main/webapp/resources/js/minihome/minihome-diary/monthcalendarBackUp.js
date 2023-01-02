@@ -16,7 +16,6 @@ $.ajax({
         $(data).each(function(index){
           if(data[index].allDayFlag == "Y"){
             events.push({
-            planId : data[index].planNo,
             title: data[index].planTitle, //내 vo에서 넘어온 이름이 이거임
             /* subSting(0,10): 날짜 subString(11,19) */
             //start: data[index].startDate.substring(0,10), //내 vo에서 넘어온 이름이 이거임
@@ -30,7 +29,6 @@ $.ajax({
             });
           } else {
             events.push({
-              planId : data[index].planNo,
               title: data[index].planTitle, //내 vo에서 넘어온 이름이 이거임
               /* subSting(0,10): 날짜 subString(11,19) */
               //start: data[index].startDate.substring(0,10), //내 vo에서 넘어온 이름이 이거임
@@ -149,8 +147,7 @@ function popup(arg){
         endHour = startHour;
         endMinute = startMinute;
       }
-    //0. 일정 번호
-    document.getElementById("number").value =  arg.event.extendedProps.planId;
+
     //1. 카테고리
     document.getElementById("category").value =  arg.event.extendedProps.category;
     //2. 제목
@@ -189,8 +186,6 @@ function popup(arg){
     /* 수정,삭제버튼 숨기기 */
     document.getElementById("updateBtn").style.display = "none";
     document.getElementById("deleteBtn").style.display = "none";
-
-    //0.일정번호 -> 없겠지?
     //1. 카테고리
     document.getElementById("category").value = "1";
     //2. 제목
@@ -341,82 +336,74 @@ function addEvent(){
     
     }
   });
-  /* 팝업 닫기 */
   document.getElementById("popup_layer").style.display = "none";
+
+  // $.ajax({
+  //   url: "/diary/calendar",
+  //   type:'GET',
+  //   dataType: 'json',
+  //   data: {},
+  //   aysnc : false,
+  //   success:function(data){
+      
+  
+      
+  //   },
+  //   error:function(status, request, error){
+    
+  //   }
+  
+  
+  // });
+
   
 } /* [함수] 일정 등록  끝*/
 
 /* [함수] 수정하기 */
 function updateEvent(){
-  const planId = document.getElementById("number").value;
-  const category = document.getElementById("category").value;
-  const title = document.getElementById("title").value;
-  const description = document.getElementById("description").value;
-  const startDate = document.getElementById("startDate").value;
-  const startTime = document.getElementById("startTime").value;
-  const endDate = document.getElementById("endDate").value;
-  const endTime = document.getElementById("endTime").value;
-  const allDay =  document.querySelector("input[name='allDay']:checked").value;
   console.log(selectEvent);
   let updateData;
-  if(allDay =="true"){
-    updateData = {
-        "planNo" : planId,
-        "planCategory": category,
-        "planTitle" : title,
-        "planDescription" : description,
-        "startDate" : startDate+" "+startTime,
-        "endDate": endDate+" "+endTime,
-        "allDayFlag" : 'Y'
-      }
-  } else {
-    updateData = {
-        "planNo" : planId,
-        "planCategory": category,
-        "planTitle" : title,
-        "planDescription" : description,
-        "startDate" : startDate+" "+startTime,
-        "endDate": endDate+" "+endTime,
-        "allDayFlag" : 'N'
-    }
-  }
+  
   $.ajax({
-    url: "/diary/updateSchedule",
+    url: "/diary/addSchedule",
     contentType: 'application/json',
     type:'POST',
-    data: JSON.stringify(updateData),
+    data: JSON.stringify(addEventdata),
     aysnc : false,
     success:function(result){
-
-      if(result > 0){ //성공
-        alert("일정이 수정되었습니다.");
-        //1. 카테고리
-        selectEvent.event.setExtendedProp("category", category)
-        //2. 제목
-        selectEvent.event.setProp("title", title)
-        //3. 내용
-        if(description = ""){
-          selectEvent.event.setExtendedProp("description", "내용을 입력해주세요.")
-        } else {
-          selectEvent.event.setExtendedProp("description", description);
-        }
-        //4.5.6.7 시작 & 종료 날짜 & 시간
-        selectEvent.event.setDates(startDate+"T"+startTime+":00", endDate+"T"+endTime+":00")
-        //8. 종일 여부
-          if(allDay =="true"){
-            selectEvent.event.setAllDay(true);
-          } else {
-            selectEvent.event.setAllDay(false);
-          }
-
-      } else { //실패
-            console.log("서버에 저장 실패");
-      }
+      alert("일정이 수정되었습니다.");
     },
     error:function(status, request, error){
     
     }
   });
+
+
+    //1. 카테고리
+  selectEvent.event.setExtendedProp("category", document.getElementById("category").value)
+  console.log("카테고리실험1"+selectEvent.event.category);
+  console.log("카테고리실험2"+selectEvent.event.extendedProps.category);
+  //2. 제목
+  selectEvent.event.setProp("title", document.getElementById("title").value)
+  //3. 내용
+  if(document.getElementById("description").value = ""){
+    selectEvent.event.setExtendedProp("description", undefined)
+  } else {
+    selectEvent.event.setExtendedProp("description", document.getElementById("description").value);
+  }
+  //4.5.6.7 시작 & 종료 날짜 & 시간
+  selectEvent.event.setDates(document.getElementById("startDate").value+"T"+document.getElementById("startTime").value+":00",
+                            document.getElementById("endDate").value+"T"+document.getElementById("endTime").value+":00")
+  //8. 종일 여부
+    if(document.querySelector("input[name='allDay']:checked").value =="true"){
+      selectEvent.event.setAllDay(true);
+      // selectEvent.event.setExtendedProp("allDay","true");
+      console.log("true임");
+    } else {
+      selectEvent.event.setAllDay(false);
+    // selectEvent.event.setExtendedProp("allDay","false");
+      console.log("false임");
+    }
   //팝업 닫기
   document.getElementById("popup_layer").style.display = "none";
   

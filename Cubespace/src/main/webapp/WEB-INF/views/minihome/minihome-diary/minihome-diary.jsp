@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/resources/css/variables.css">
     <link rel="stylesheet" href="/resources/css/minihome/minihome-rayout.css">
     <link rel="stylesheet" href="/resources/css/minihome/minihome-diary/minihome_diary.css">
-    <link rel="stylesheet" href="/resources/css/minihome/minihome-diary/calendar.css">
+    <link rel="stylesheet" href="/resources/css/minihome/minihome-diary/diary-main.css">
     
 
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
@@ -115,7 +115,7 @@
 
     
     </script>
-<script src="/resources/js/minihome/minihome-diary/calendar.js"></script>
+<script src="/resources/js/minihome/minihome-diary/diary-main.js"></script>
 <%-- <script src = "/resources/js/minihome/minihome-diary/minihome-diary.js"></script> --%>
 
 </html>

@@ -128,13 +128,14 @@
                         </a> -->
                             <div>
                                 <h4>일정등록</h4>
+                                    <input type="hidden" id = "number" placeholder="제목을 입력해주세요.">
                                 <div class = "input-row">
                                     <label for="category">카테고리</label>
                                     <select class="selectBox" id="category" >
-                                        <option value="1" style = "background-color: #fbc2eb;" >없음1</option>
-                                        <option value="2" style = "background-color: #b12a5b;" >직장2</option>
-                                        <option value="3" style = "background-color: #8ec5fc;">집3</option>
-                                        <option value="4" style = "background-color: #8ec5fc;">기념일4</option>
+                                        <option value="1" style = "background-color: #C0EEE4;" >없음1</option>
+                                        <option value="2" style = "background-color: #F3CCFF;" >직장2</option>
+                                        <option value="3" style = "background-color: #D8F8B7;">집3</option>
+                                        <option value="4" style = "background-color: #FFCAC8;">기념일4</option>
                                     </select>
                                 </div>
                                 <div class = "input-row">

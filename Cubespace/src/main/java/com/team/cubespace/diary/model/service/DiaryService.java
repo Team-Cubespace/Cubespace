@@ -1,6 +1,7 @@
 package com.team.cubespace.diary.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.team.cubespace.diary.model.vo.Diary;
 import com.team.cubespace.diary.model.vo.Emoji;
@@ -59,11 +60,23 @@ public interface DiaryService {
 	 */
 	int diaryUpdate(Diary diary);
 
-	/**
+	/** 월간달력_조회
 	 * @param memberNo
 	 * @return
 	 */
 	List<Plan> selectSchedule(int memberNo);
+
+	/** 월간달력_일정 등록
+	 * @param params
+	 * @return
+	 */
+	int addSchedule(Map<String, Object> params);
+
+	/** 월간달력_일정 수정
+	 * @param params
+	 * @return
+	 */
+	int updateSchedule(Map<String, Object> params);
 
 
 

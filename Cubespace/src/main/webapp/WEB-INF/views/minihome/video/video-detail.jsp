@@ -16,16 +16,16 @@
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/minihome/minihome-rayout.css">
     <link rel="stylesheet" href="/resources/css/common/swiper.min.css">
-    <link rel="stylesheet" href="/resources/css/minihome/album/album-detail.css">
+    <link rel="stylesheet" href="/resources/css/minihome/video/video-detail.css">
     <link rel="stylesheet" href="/resources/css/minihome/include/comment.css">
     <link rel="stylesheet" href="/resources/css/minihome/include/scrap.css">
+    <link rel="stylesheet" href="https://vjs.zencdn.net/7.10.2/video-js.css"/>
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
     <style>
         .frame-color {
             background-color : ${minihome.frameColor};
         }
     </style>
-    <jsp:include page="/WEB-INF/views/include/allFontMusic.jsp"/>
 </head>
 <body>
     <div class="content-area frame-color">
@@ -37,7 +37,7 @@
         </section>
 
         <section class="minihome-rayout">
-            <jsp:include page="/WEB-INF/views/minihome/album/album-detail-section.jsp"/>
+            <jsp:include page="/WEB-INF/views/minihome/video/video-detail-section.jsp"/>
                 <!-- 우측 section 코드 작성 또는 include -->
                 <!-- 전체 내용 div 태그로 한 번 감싸주세요 -->
                 <!-- ex) <div class="home-area"> <div></div> <span></span> ... </div> -->
@@ -50,13 +50,13 @@
     </c:if>
     <script>
         const loginMemberNo = '${loginMember.memberNo}';
-        const boardNo = '${board.albumNo}';
+        const boardNo = '${board.videoNo}';
         const profileImage = '${loginMember.profileImage}';
-        const boardTypeNo = 2;
+        const boardTypeNo = 3;
     </script>
     <script src="/resources/js/common/jQuery-core.js"></script>
-    <script src="/resources/js/common/swiper.min.js"></script>
-    <script src="/resources/js/minihome/album/album-detail.js"></script>
+    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+    <script src="/resources/js/minihome/video/video-detail.js"></script>
     <script src="/resources/js/minihome/include/comment.js"></script>
     <script src="/resources/js/minihome/include/board-scrap.js"></script>
 </body>

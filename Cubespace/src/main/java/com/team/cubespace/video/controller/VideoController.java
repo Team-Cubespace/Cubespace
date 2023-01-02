@@ -19,6 +19,7 @@ import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.member.model.vo.Member;
 import com.team.cubespace.minihome.model.vo.Minihome;
 import com.team.cubespace.video.model.service.VideoService;
+import com.team.cubespace.video.model.vo.Video;
 
 @Controller
 public class VideoController {
@@ -85,5 +86,29 @@ public class VideoController {
 		model.addAttribute("folderName", folderName);
 		model.addAttribute("cp", cp);
 		return "minihome/video/video-list";
+	}
+	
+	@GetMapping("/videoDetail/{videoNo}")
+	public String videoDetail(@PathVariable("videoNo") int videoNo,
+			Model model,
+			int folderNo,
+			@SessionAttribute("folderList") List<Folder> folderList) {
+		
+		// 폴더 이름 찾기
+		String folderName = "";
+		for(Folder folder : folderList) {
+			if(folder.getFolderNo() == folderNo) {
+				folderName = folder.getFolderName();
+				break;
+			}
+		}
+
+		// 동영상 서비스 호출
+		Video video = service.selectVideo(videoNo);
+		model.addAttribute("folderName", folderName);
+		model.addAttribute("board", video);
+		
+		
+		return "minihome/video/video-detail";
 	}
 }

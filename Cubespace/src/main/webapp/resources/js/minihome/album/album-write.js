@@ -97,8 +97,8 @@ function deleteFile(num) {
 /* 폼 전송 */
 function submitForm() {
     // 폼데이터 담기
-    var form = document.getElementById("writeAlbumForm");
-    var formData = new FormData(form);
+    let form = document.getElementById("writeAlbumForm");
+    let formData = new FormData(form);
     for (var i = 0; i < filesArr.length; i++) {
         // 삭제되지 않은 파일만 폼데이터에 담기
         if (!filesArr[i].is_delete) {
@@ -129,7 +129,6 @@ function submitForm() {
             console.log(result);
             alert("파일업로드 실패");
         }
-
     })
 }
 

@@ -137,7 +137,8 @@ public class AlbumController {
 	public String albumDetail(@PathVariable("albumNo") int albumNo,
 			Model model,
 			int folderNo,
-			@SessionAttribute("folderList") List<Folder> folderList) {
+			@SessionAttribute
+			("folderList") List<Folder> folderList) {
 		
 		// 폴더 이름 찾기
 		String folderName = "";

@@ -3,9 +3,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="album-main">
     <header>
-        <span>사진첩 작성</span>
+        <span>동영상 작성</span>
     </header>
-    <form id="writeAlbumForm" action="/albumWrite" method="POST" encType="">
+    <form id="writeVideoForm" action="/videoWrite" method="POST" encType="">
         <div class="input-row">
             <label for="">폴더</label>
             <select name="folderNo" id="">
@@ -15,32 +15,14 @@
             </select>
         </div>
         <div class="input-row">
-            <label for="albumTitle">제목</label>
-            <input id="albumTitle" name="albumTitle" type="text" placeholder="제목을 입력하세요">
+            <label for="videoTitle">제목</label>
+            <input id="videoTitle" name="videoTitle" type="text" placeholder="제목을 입력하세요">
         </div>
         <div class="input-row">
-            <label for="albumContent">내용</label>
-            <textarea name="albumContent" id="albumContent" rows="6" placeholder="내용을 입력하세요"></textarea>
+            <label for="videoContent">내용</label>
+            <textarea name="videoContent" id="videoContent" rows="6" placeholder="내용을 입력하세요"></textarea>
         </div>
-        <div class="input-row">
-            <label for="">위치 찾기</label>
-            <div id="locationArea">
-                <button type="button" id="addLocationButton">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span>위치 설정</span>
-                </button>
-                <%-- <div class="location">
-                    <a href="https://map.kakao.com/link/map/우리회사,37.402056,127.108212" target="_blank">
-                        <i class="fa-solid fa-location-dot"></i>
-                        우리회사
-                    </a>
-                    <span class="fa-solid fa-xmark"></span>
-                </div> --%>
-            </div>
-            <input id="latitude" type="text" name="latitude" hidden>
-            <input id="longitude" type="text" name="longitude" hidden>
-            <input id="locationName" type="text" name="locationName" hidden>
-        </div>
+
         <div class="input-row">
             <label>공개설정</label>
             <ul class="radio-list">
@@ -71,14 +53,14 @@
             <label for="">스크랩설정</label>
             <ul class="radio-list">
                 <li>
-                    <input type="radio" id="scrap1" name="albumScrapAllowYN" checked value="Y">
+                    <input type="radio" id="scrap1" name="videoScrapAllowYN" checked value="Y">
                     <%-- <label class="radio" for="scrap1">
                         <i class="fa-solid fa-check"></i>
                     </label> --%>
                     <label for="scrap1">허용</label>
                 </li>
                 <li>    
-                    <input type="radio" id="scrap2"  name="albumScrapAllowYN" value="N">
+                    <input type="radio" id="scrap2"  name="videoScrapAllowYN" value="N">
                     <%-- <label class="radio" for="scrap2">
                         <i class="fa-solid fa-check"></i>
                     </label> --%>
@@ -87,32 +69,25 @@
             </ul>
         </div>
         <div class="input-row">
-            <label class="add-image" for="addFileInput">이미지 등록
+            <label class="add-image" for="addFileInput">동영상 등록
                 <img src="/resources/images/add-image.png" alt="">
             </label>
-            <input type="file" onchange="addFile(this)" multiple id="addFileInput">
-            <ul id="addFileList">
-                
-            </ul>
+            <input type="file" name="inputVideo" onchange="addVideo(this)" id="addFileInput">
+            <div id="addVideoArea">
+                <%-- <video-js id="myVideo" class="video-js vjs-big-play-button vjs-big-play-centered vjs-fluid"
+                data-setup='{"controls":true, "playbackRates": [0.5, 1, 1.5, 2]}'>
+                </video-js> --%>
+                <%-- <video id="myVideo" src="" controls></video> --%>
+            </div>
         </div>
-
+    
         <div class="form-button-area">
             <button id="submitButton" type="submit">작성</button>
             <a id="cancelWrite">취소</a>
         </div>
     </form>
-
-    <section id="mapModal">
-        <div class="map-modal-header">
-            <form id="searchPlaceForm">
-                <input id="searchPlaceInput" type="text" maxLength="15" autocomplete="off">
-                <button hidden></button>
-                <span id="initLavelButton" class="fa-solid fa-location-crosshairs modal-header-button"></span>
-            </form>
-            <span id="closdModalButton" class="fa-solid fa-xmark modal-header-button"></span>
-        </div>
-        <div id="mapContainer">
-        
-        </div>
-    </section>
+    <div id="loadingMask">
+        <img src="/resources/images/common/loading-mask.gif" alt="">
+        <span>파일을 업로드 중입니다.</span>
+    </div>
 </div>

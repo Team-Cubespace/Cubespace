@@ -10,7 +10,7 @@
         <span> > </span>
         <span>${folderName}</span>
     </header>
-    <a href="/albumWrite?folderNo=${folderNo}&cp=${pagination.currentPage}" id="writeButton" type="button">글쓰기</a>
+    <a href="/videoWrite?folderNo=${folderNo}&cp=${pagination.currentPage}" id="writeButton">글쓰기</a>
 
     <c:choose>
         <c:when test="${fn:length(videoList) == 0}">

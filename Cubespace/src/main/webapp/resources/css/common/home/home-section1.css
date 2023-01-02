@@ -34,8 +34,8 @@ section:first-child{
 }
 
 .star-profile{
-    margin: 0 35px;
-    width: 150px;
+    margin: 0 20px;
+    width: 175px;
     position: relative;
     align-items: center;
 }
@@ -45,7 +45,7 @@ section:first-child{
     height: 55px;
     position: absolute;
     top: -23px;
-    left: -1px;
+    left: 8px;
     transform: rotate(-37deg);
 }
 

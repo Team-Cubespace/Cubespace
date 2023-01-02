@@ -134,8 +134,6 @@ const todaySelect = (todayChoice) => {
     })
 };
 
-// (todaySelect(todayChoice))()
-
 todaySelect(todayChoice)
 
 /* 투데이 스타 클릭 시 */

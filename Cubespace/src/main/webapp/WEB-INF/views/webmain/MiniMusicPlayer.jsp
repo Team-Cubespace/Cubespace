@@ -28,7 +28,7 @@
 <%-- <body> --%>
     <%-- <main> --%>
     <div class="modal" id="modalPlayer" style="display: none;">
-        <div class="modal-box" >
+        <div class="modal-box-player" >
             <div class="modal-close-box">
                 <div class="modal-close player-close " id="modalClose" onclick="MusicPlayerClose()" >x</div>
             </div>

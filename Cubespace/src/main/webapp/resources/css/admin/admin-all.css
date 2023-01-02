@@ -7,7 +7,7 @@
     /* flex-direction: column; */
 }
 #frmSearchBase{
-    height: 100px;
+    height: 300px;
 }
 
 #mSearchBase {
@@ -173,7 +173,7 @@
 
     height: 45px;
     text-align: center;
-    font-weight: bold;
+    /* font-weight: bold; */
     font-size: 12px;
     white-space: nowrap;
     vertical-align: middle;
@@ -313,6 +313,7 @@ a {
     justify-content: center;
     align-items: center;
     padding: 0;
+    margin-bottom: 30px;
 }
 
 .pagination li{

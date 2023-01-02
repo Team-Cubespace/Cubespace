@@ -50,7 +50,7 @@
                 </div>
 
 
-                <form id="frmSearchBase" method="get" class="member-search" action="/manager/memberSearch">
+                <form id="frmSearchBase" method="get" class="member-search" action="/admin/member/memberSearch">
                     <input type="hidden" name="sort" id="orderInput">
                     <p class="search__title">회원 검색</p>
                     <div class="search-detail-box form-inline">
@@ -60,16 +60,16 @@
                                 <select name="key" id="key" class="form-control">
 
 
-                                <c:if test="${param.key == 'email'}">
-                                    <c:set var="emailChk" value="selected"></c:set>
-                                </c:if>
-
                                 <c:if test="${param.key == 'nickname'}">
                                     <c:set var="nicknameChk" value="selected"></c:set>
                                 </c:if>
+
+                                <c:if test="${param.key == 'memberNo'}">
+                                    <c:set var="memberNoChk" value="selected"></c:set>
+                                </c:if>
                                     
-                                <option value="email" ${emailChk}>닉네임</option>
-                                <option value="nickname" ${nicknameChk}>회원번호</option>
+                                <option value="nickname" ${nicknameChk}>닉네임</option>
+                                <option value="memberNo" ${memberNoChk}>회원번호</option>
                                         
                                         
                                 </select>
@@ -82,35 +82,35 @@
                             <div>
 
                                 <c:set var="allBlockChk" value="checked"/>
-                                <c:if test="${param.isBlock == 'notBlock'}">
-                                    <c:set var="notBlockChk" value="checked"></c:set>
+                                <c:if test="${param.memberBlockYN == 'noBlock'}">
+                                    <c:set var="noBlockChk" value="checked"></c:set>
                                     <c:set var="allBlockChk" value=""/>
                                 </c:if>
 
-                                <c:if test="${param.isBlock == 'yesBlock'}">
+                                <c:if test="${param.memberBlockYN == 'yesBlock'}">
                                     <c:set var="yesBlockChk" value="checked"></c:set>
                                     <c:set var="allBlockChk" value=""/>
                                 </c:if>
 
                                 <label class="radio-inline">
-                                    <input type="radio" name="isBlock" value="allBlock" ${allBlockChk}>전체
+                                    <input type="radio" name="memberBlockYN" value="allBlock" ${allBlockChk}>전체
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="isBlock" value="notBlock" ${notBlockChk}>활동중
+                                    <input type="radio" name="memberBlockYN" value="noBlock" ${noBlockChk}>활동중
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="isBlock" value="yesBlock" ${yesBlockChk}>차단중
+                                    <input type="radio" name="memberBlockYN" value="yesBlock" ${yesBlockChk}>차단중
                                 </label>
                             </div>
                         </div>
 
                                 <c:set var="allDeleteChk" value="checked"/>
-                                <c:if test="${param.isDelete == 'notDelete'}">
-                                    <c:set var="notDeleteChk" value="checked"></c:set>
+                                <c:if test="${param.memberDeleteYN == 'noDelete'}">
+                                    <c:set var="noDeleteChk" value="checked"></c:set>
                                     <c:set var="allDeleteChk" value=""/>
                                 </c:if>
 
-                                <c:if test="${param.isDelete == 'yesDelete'}">
+                                <c:if test="${param.memberDeleteYN == 'yesDelete'}">
                                     <c:set var="yesDeleteChk" value="checked"></c:set>
                                     <c:set var="allDeleteChk" value=""/>
                                 </c:if>
@@ -119,13 +119,13 @@
                             <div class="search-detail-keyword">탈퇴여부</div>
                             <div>
                                 <label class="radio-inline">
-                                    <input type="radio" name="isDelete" value="allDelete" ${allDeleteChk}>전체
+                                    <input type="radio" name="memberDeleteYN" value="allDelete" ${allDeleteChk}>전체
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="isDelete" value="notDelete" ${notDeleteChk}>활동중
+                                    <input type="radio" name="memberDeleteYN" value="noDelete" ${notDeleteChk}>활동중
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="isDelete" value="yesDelete" ${yesDeleteChk}>탈퇴
+                                    <input type="radio" name="memberDeleteYN" value="yesDelete" ${yesDeleteChk}>탈퇴
                                 </label>
                             </div>
                         </div>
@@ -185,141 +185,12 @@
                     명
                 </div>
 
-                
-                
-                <div class="search-result-area">
-                    <div class="search-result-div" id="number">
-                        <div class="search-result-tab">번호</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <div class="search-content">${member.memberNo}</div>
-                        </c:forEach>
-                    </div>
-                    <div class="search-result-div"  id="email">
-                        <div class="search-result-tab">이메일</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <div class="search-content">${member.memberEmail}</div>
-                        </c:forEach>
-                    </div>
-                    <div class="search-result-div" id="nickname">
-                        <div class="search-result-tab">닉네임</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <form method="post" class="seller" onsubmit="return false;">
-                                <a class="search-content sellerPage">${member.memberNickname}</a>
-                                <input type="hidden" name="sellerNo" value="${member.memberNo}">
-                            </form>
-                        </c:forEach>
-                    </div>
-                    <div class="search-result-div" id="signDate">
-                        <div class="search-result-tab">회원 가입일</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <div class="search-content">${member.enrollDate}</div>
-                        </c:forEach>
-                    </div>
-                    <div class="search-result-div" id="signDate">
-                        <div class="search-result-tab">일일방문자수</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <div class="search-content">${member.today}</div>
-                        </c:forEach>
-                    </div>
-                    <div class="search-result-div" id="signDate">
-                        <div class="search-result-tab">총방문자수</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <div class="search-content">${member.total}</div>
-                        </c:forEach>
-                    </div>
-                    <div class="search-result-div" id="signDate">
-                        <div class="search-result-tab">친구수</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <div class="search-content">${member.friendCount}</div>
-                        </c:forEach>
-                    </div>
-                    <div class="search-result-div" id="boardBlock">
-                        <div class="search-result-tab">게시글차단</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <div class="search-content">${member.boardBlockCount}건</div>
-                        </c:forEach>
-                    </div>
-                    <div class="search-result-div" id="userBlock">
-                        <div class="search-result-tab">유저차단</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <div class="search-content">${member.userBlockCount}건</div>
-                        </c:forEach>
-                    </div>
-                    <div class="search-result-div" id="blockFlag">
-                        <div class="search-result-tab">차단여부</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <c:if test="${member.memberBlockYN == 'Y'}">
-                                <div class="search-content disabled">차단</div>
-                            </c:if>
-                            <c:if test="${member.memberBlockYN == 'N'}">
-                                <div class="search-content">활동중</div>
-                            </c:if>
-                        </c:forEach>
-                    </div>
-                    <div class="search-result-div" id="blockFlag">
-                        <div class="search-result-tab">차단시작일</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <div class="search-content">${member.blockStart}</div>
-                        </c:forEach>
-                    </div>
-                    <div class="search-result-div" id="blockFlag">
-                        <div class="search-result-tab">차단종료일</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <div class="search-content">${member.blockEnd}</div>
-                        </c:forEach>
-                    </div>
-                    <div class="search-result-div" id="delFlag">
-                        <div class="search-result-tab">탈퇴여부</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <c:if test="${member.memberDeleteYN == 'N'}">
-                                <div class="search-content">활동중</div>
-                            </c:if>
-                            <c:if test="${member.memberDeleteYN == 'Y'}">
-                                <div class="search-content disabled">탈퇴</div>
-                            </c:if>
-                        </c:forEach>
-                    </div>
-                    <div class="search-result-div"id="blockData">
-                        <div class="search-result-tab" >차단</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <div class="search-content">
-                                <c:if test="${member.memberBlockYN == 'Y'}">
-                                    <button type="button" class="btn btn-white btn-sm btnBlockBack disabled" 
-                                    id="${member.memberNo}">차단해제</button>
-                                </c:if>
-                                <c:if test="${member.memberBlockYN == 'N'}">
-                                    <button type="button" class="btn btn-white btn-sm btnBlock" 
-                                    id="${member.memberNo}">차단</button>
-                                </c:if>
-                            </div>
-                        </c:forEach>
-                    </div>
 
-                    <div class="search-result-div"id="deleteData">
-                        <div class="search-result-tab" >정보삭제</div>
-                        <c:forEach var="member" items="${memberList}">
-                            <div class="search-content">
-                                <c:if test="${member.memberDeleteYN == 'Y'}">
-                                    <button type="button" class="btn btn-white btn-sm btnDelBack disabled"
-                                    id="${member.memberNo}">삭제복귀</button>
-                                </c:if>
-                                <c:if test="${member.memberDeleteYN == 'N'}">
-                                    <button type="button" class="btn btn-white btn-sm btnDel"
-                                    id="${member.memberNo}">삭제</button>
-                                </c:if>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
-
-            
                 <%-- 회원 등록------------------------------------------- --%>
-
-
-                <div class="popup_layer" id="popup_layer2" style="display: none;">
-                    <div class="popup_box scroll">
+                <%-- <div class="popup_layer" id="popup_layer2" style="display: none;"> --%>
+                    <div class="popup_box scroll" style="display: none;">
                         <div style="height: 10px; width: 500px; float: top;">
-                            <a href="javascript:closePop2();"><i class="fa-solid fa-x allClose"></i></a>
+                            <a href="javascript:closePop();"><i class="fa-solid fa-x allClose"></i></a>
                         </div>
                         <!--팝업 컨텐츠 영역-->
                         <div class="popup_cont">
@@ -362,7 +233,7 @@
                                     <%-- 이름 --%>
                                     <div class="signUp-input-Name textbox">
                                     <input  type="text" name="memberName" class="inputBox" id="inputName"
-                                         placeholder="이름" maxlength="10"/>
+                                         placeholder="이름" maxlength="5"/>
                                     </div>
 
                                     <%-- 휴대번호 --%>
@@ -379,20 +250,123 @@
                             </form>
                         </div>
                     </div>
-                </div>
-
+                <%-- </div> --%>
                 <%-- ------------------------------------------- --%>
                 
-                <div class="pagination-area">
+                
+                <div class="search-result-area">
+                    <div class="search-result-div" id="number">
+                        <div class="search-result-tab">번호</div>
+                        <c:forEach var="member" items="${memberList}">
+                            <div class="search-content">${member.memberNo}</div>
+                        </c:forEach>
+                    </div>
+                    <div class="search-result-div"  id="email">
+                        <div class="search-result-tab">이메일</div>
+                        <c:forEach var="member" items="${memberList}">
+                            <div class="search-content">${member.memberEmail}</div>
+                        </c:forEach>
+                    </div>
+                    <div class="search-result-div" id="nickname">
+                        <div class="search-result-tab">닉네임</div>
+                        <c:forEach var="member" items="${memberList}">
+                            <a class="search-content" href="/minihome/${member.memberNo}" onclick="return openMinihome(this.href)">${member.memberNickname}</a>
+                        </c:forEach>
+                    </div>
+                    <div class="search-result-div" id="signDate">
+                        <div class="search-result-tab">회원 가입일</div>
+                        <c:forEach var="member" items="${memberList}">
+                            <div class="search-content">${member.enrollDate}</div>
+                        </c:forEach>
+                    </div>
+                    <div class="search-result-div" id="signDate">
+                        <div class="search-result-tab">일일방문자수</div>
+                        <c:forEach var="member" items="${memberList}">
+                            <div class="search-content">${member.today}</div>
+                        </c:forEach>
+                    </div>
+                    <div class="search-result-div" id="signDate">
+                        <div class="search-result-tab">총방문자수</div>
+                        <c:forEach var="member" items="${memberList}">
+                            <div class="search-content">${member.total}</div>
+                        </c:forEach>
+                    </div>
+                    <div class="search-result-div" id="signDate">
+                        <div class="search-result-tab">친구수</div>
+                        <c:forEach var="member" items="${memberList}">
+                            <div class="search-content">${member.friendCount}</div>
+                        </c:forEach>
+                    </div>
+                    <div class="search-result-div" id="blockFlag">
+                        <div class="search-result-tab">차단여부</div>
+                        <c:forEach var="member" items="${memberList}">
+                            <c:if test="${member.memberBlockYN == 'Y'}">
+                                <div class="search-content disabled">차단</div>
+                            </c:if>
+                            <c:if test="${member.memberBlockYN == 'N'}">
+                                <div class="search-content">활동중</div>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                    <div class="search-result-div" id="blockFlag">
+                        <div class="search-result-tab">차단시작일</div>
+                        <c:forEach var="member" items="${memberList}">
+                            <c:if test="${empty member.blockStart}">
+                                <div class="search-content">-</div>
+                            </c:if>
+                            <c:if test="${not empty member.blockStart}">
+                                <div class="search-content">${member.blockStart}</div>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                    <div class="search-result-div" id="blockFlag">
+                        <div class="search-result-tab">차단종료일</div>
+                        <c:forEach var="member" items="${memberList}">
+                            <c:if test="${empty member.blockEnd}">
+                                <div class="search-content">-</div>
+                            </c:if>
+                            <c:if test="${not empty member.blockEnd}">
+                                <div class="search-content">${member.blockEnd}</div>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                    <div class="search-result-div" id="delFlag">
+                        <div class="search-result-tab">탈퇴여부</div>
+                        <c:forEach var="member" items="${memberList}">
+                            <c:if test="${member.memberDeleteYN == 'N'}">
+                                <div class="search-content">활동중</div>
+                            </c:if>
+                            <c:if test="${member.memberDeleteYN == 'Y'}">
+                                <div class="search-content disabled">탈퇴</div>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                    <div class="search-result-div"id="deleteData">
+                        <div class="search-result-tab" >정보삭제</div>
+                        <c:forEach var="member" items="${memberList}">
+                            <div class="search-content">
+                                <c:if test="${member.memberDeleteYN == 'Y'}">
+                                    <button type="button" class="btn btn-white btn-sm btnDelBack disabled"
+                                    id="${member.memberNo}">삭제복귀</button>
+                                </c:if>
+                                <c:if test="${member.memberDeleteYN == 'N'}">
+                                    <button type="button" class="btn btn-white btn-sm btnDel"
+                                    id="${member.memberNo}">삭제</button>
+                                </c:if>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
 
+                <div class="pagination-area">
 
                     <ul class="pagination">
                     
                         <!-- 첫 페이지로 이동( <<) -->
-                        <li><a href="/manager/memberSearch?${sURL}">&lt;&lt;</a></li>
+                        <li><a href="/admin/member/memberSearch?${sURL}">&lt;&lt;</a></li>
 
                         <!-- 이전 목록 마지막 번호로 이동 ( < ) -->
-                        <li><a href="/manager/memberSearch?cp=${pagination.prevPage}&${sURL}">&lt;</a></li>
+                        <li><a href="/admin/member/memberSearch?cp=${pagination.prevPage}&${sURL}">&lt;</a></li>
 
                         
                         <!-- 특정 페이지로 이동 -->
@@ -404,16 +378,16 @@
                                 </c:when>
                                 <c:otherwise>
                                     <%-- 현재 페이지를 제외한 나머지 --%>
-                                    <li><a href="/manager/memberSearch?cp=${i}&${sURL}">${i}</a></li>
+                                    <li><a href="/admin/member/memberSearch?cp=${i}&${sURL}">${i}</a></li>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
                         
                         <!-- 다음 목록 시작 번호로 이동 ( > )-->
-                        <li><a href="/manager/memberSearch?cp=${pagination.nextPage}&${sURL}">&gt;</a></li>
+                        <li><a href="/admin/member/memberSearch?cp=${pagination.nextPage}&${sURL}">&gt;</a></li>
 
                         <!-- 끝 페이지로 이동 ( >> ) -->
-                        <li><a href="/manager/memberSearch?cp=${pagination.maxPage}&${sURL}">&gt;&gt;</a></li>
+                        <li><a href="/admin/member/memberSearch?cp=${pagination.maxPage}&${sURL}">&gt;&gt;</a></li>
 
                     </ul>
                 </div>

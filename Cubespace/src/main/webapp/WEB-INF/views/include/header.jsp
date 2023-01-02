@@ -1,10 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%-- <c:if test="${not empty sessionScope.loginMember}">
+    <c:set var="loginMember" value="${sessionScope.loginMember}"/>
+</c:if> --%>
+    <script>
+        // 로그인한 회원 번호
+		const loginMemberNo = "${loginMember.memberNo}";
+    </script>
+    <script>
+        const loginMember = "${loginMember}";
+    </script>
 <header>
     <!------------------ 헤더 메뉴 ------------------>
     <ul class="header-menu-nav">
-        
         <jsp:include page="/WEB-INF/views/webmain/main-memberSearch.jsp"/>
         <!-- 로그인 X && 메인 페이지 X -->
         <c:choose>
@@ -18,10 +26,10 @@
             </c:when>
             <c:otherwise>
             <li class="header-menu">
-                <a href="">
+                <a href="/cubespace/shop/1">
                     <i class="fa-solid fa-shop"></i>
-                    <span>상점</span>
-                </a>
+                <span>상점</span>
+            </a>
             </li>
             <li class="header-menu" onclick="openModal()">
                 <a>
@@ -29,6 +37,7 @@
                     <span>깐부 찾기</span>
                 </a>
             </li>
+            
             <!-- 로그인 O -->
                 <li class="header-menu" onclick="openmodalAlarm()">
                     <a>

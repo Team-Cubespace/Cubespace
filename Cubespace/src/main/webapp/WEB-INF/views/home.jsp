@@ -3,13 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<!-- 임시로 만든 변수 -->
-<c:if test="${not empty sessionScope.loginMember}">
-    <c:set var="loginMember" value="${sessionScope.loginMember}"/>
-</c:if>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -211,9 +204,6 @@
 
     <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 
-    <script>
-        const loginMember = "${loginMember}";
-    </script>
     <script src="/resources/js/common/home.js"></script>
     <script src="/resources/js/common/header.js"></script>
 </body>

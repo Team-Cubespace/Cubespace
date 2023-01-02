@@ -83,21 +83,21 @@ public class ShopDAO {
 	 * @return
 	 */
 	public int shopFontCount(Map<String, Object> pm) {
-		return sqlSession.selectOne("shop.shopFontCount");
+		return sqlSession.selectOne("shop.shopFontCount",pm);
 	}
 
 	/** 배경음악 상점 상품 갯수 구하기
 	 * @return
 	 */
 	public int shopMusicCount(Map<String, Object> pm) {
-		return sqlSession.selectOne("shop.shopMusicCount");
+		return sqlSession.selectOne("shop.shopMusicCount",pm);
 	}
 	
 	/** 미니룸소품 상점 상품 갯수 구하기
 	 * @return
 	 */
 	public int shopMiniroomCount(Map<String, Object> pm) {
-		return sqlSession.selectOne("shop.shopMiniroomCount");
+		return sqlSession.selectOne("shop.shopMiniroomCount",pm);
 	}
 	
 	/** 페이징 처리객체 사용하여 폰트 상점 상품 상품 목록 조회

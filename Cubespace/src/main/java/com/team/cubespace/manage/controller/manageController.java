@@ -380,11 +380,10 @@ public class manageController {
 	@PostMapping("/background/updateBGImage")
 	@ResponseBody
 	public int updateBGImage(@SessionAttribute("loginMember") Member loginMember,
-		MultipartHttpServletRequest request,
+		MultipartFile image,
 		HttpSession session) throws Exception{ 
 		
 		
-		List<MultipartFile> newImgList = request.getFiles("newBGImage");
 		
 		String webPath = "/resources/images/frameImage/";
 		String folderPath = session.getServletContext().getRealPath(webPath);
@@ -393,7 +392,7 @@ public class manageController {
 		backgroundInfo.setMemberNo(loginMember.getMemberNo());
 		
 		
-		return service.updateBGImage(webPath, folderPath, backgroundInfo, newImgList.get(0));
+		return service.updateBGImage(webPath, folderPath, backgroundInfo, image);
 	}
 	
 	/** 프레임색 변경

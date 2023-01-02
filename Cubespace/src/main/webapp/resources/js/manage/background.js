@@ -143,8 +143,8 @@ bgImageUse.addEventListener("click", e => {
 
     if (imageInput.files[0] != undefined) {
 
-        const formData = new FormData();
-        formData.append("image", imageInput.files[0]);
+        const formData = new FormData($('#changeImageForm')[0]);
+        // formData.append("image", imageInput.files[0]);
 
         for (var key of formData.keys()) {
             console.log(key);
@@ -155,6 +155,8 @@ bgImageUse.addEventListener("click", e => {
 
         updateBGImage(formData);
 
+    } else {
+        alert("이미지를 등록한 후 적용하기 버튼을 눌러주세요");
     }
 })
 
@@ -171,10 +173,10 @@ const updateBGImage = formData => {
         url : "/manage/background/updateBGImage",
         type : "post",
         enctype: 'multipart/form-data',
-        data : {"newBGImage" : formData},
+        data : formData,
         processData: false,
         contentType: false,
-        // dataType: 'json',
+        cache:false,
         success : result => {
             if(result > 0) {
                 alert("배경이 변경되었습니다");

@@ -1,6 +1,5 @@
 package com.team.cubespace.video.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.team.cubespace.album.model.service.AlbumService;
+import com.team.cubespace.common.Util;
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.member.model.vo.Member;
 import com.team.cubespace.minihome.model.vo.Minihome;
@@ -130,7 +130,7 @@ public class VideoController {
 	public String videoWrite(Video video,
 			@RequestParam("inputVideo") MultipartFile inputVideo,
 			@SessionAttribute("loginMember") Member loginMember,
-			HttpSession session) throws IOException {
+			HttpSession session) throws Exception {
 		
 		// 작성된 동영상에 작성자 번호 세팅
 		video.setMemberNo(loginMember.getMemberNo());
@@ -154,4 +154,48 @@ public class VideoController {
 		return new Gson().toJson(resultMap);
 	}
 	
+	@GetMapping("/videoUpdate/{videoNo}")
+	public String videoUpdate(@PathVariable("videoNo") int videoNo,
+			Model model) {
+		// 동영상 조회
+		Video video = service.selectVideo(videoNo);
+		
+		if(video.getVideoContent() != null) {
+			video.setVideoContent(Util.newLineClear(video.getVideoContent()));
+		}
+		model.addAttribute("video", video);
+		return "/minihome/video/video-update";
+	}
+	
+	@ResponseBody
+	@PostMapping("/videoUpdate")
+	public String videoUpdate(Video video,
+			@RequestParam("inputVideo") MultipartFile inputVideo,
+			@SessionAttribute("loginMember") Member loginMember,
+			int videoNo,
+			HttpSession session) throws Exception{
+		video.setMemberNo(loginMember.getMemberNo());
+		video.setVideoNo(videoNo);
+		
+		// 작성된 동영상에 작성자 번호 세팅
+		video.setMemberNo(loginMember.getMemberNo());
+		
+		String videoWebPath = "/resources/video/";
+		String videoFolderPath = session.getServletContext().getRealPath(videoWebPath);
+		
+		String ffmpegPath = "/resources/ffmpeg-5.1.2-essentials_build/bin";
+		ffmpegPath = session.getServletContext().getRealPath(ffmpegPath);
+		
+		String thumbnailWebPath = "/resources/video/thumbnail/";
+		String thumbnailFolderPath = session.getServletContext().getRealPath(thumbnailWebPath);
+		
+		int result = service.videoUpdate(video, inputVideo, videoWebPath, 
+				videoFolderPath, ffmpegPath, thumbnailWebPath, thumbnailFolderPath);
+		
+		Map<String, Integer> resultMap = new HashMap<>();
+		resultMap.put("folderNo", video.getFolderNo());
+		resultMap.put("videoNo", videoNo);
+		
+		return new Gson().toJson(resultMap);
+	}
 }

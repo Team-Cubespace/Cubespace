@@ -132,6 +132,18 @@ public class ShopDAO {
 		return sqlSession.selectList("shop.selectShopMiniroomList",pm,rowBounds);
 	}
 
+	/** 음악재생 목록 조회
+	 * @param cp
+	 * @param loginMemberNo
+	 * @return
+	 */
+	public List<ShopFont> miniMusicPlyer(Pagination pagination, int loginMemberNo) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return sqlSession.selectList("shop.miniMusicPlyer",loginMemberNo,rowBounds);
+	}
+
 
 
 

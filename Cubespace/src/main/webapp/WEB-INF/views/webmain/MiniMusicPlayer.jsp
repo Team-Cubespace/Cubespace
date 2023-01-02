@@ -9,19 +9,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Bitter:400,700&display=swap&subset=latin-ext"
-    rel="stylesheet"/>
+
     <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css"/>
-    <link rel="stylesheet" href="/resources/css/webmain/MiniMusicPlayer.css">
+    
     <title>Mini Player</title>
     <link rel="stylesheet" href="/resources/css/reset.css">
     <link rel="stylesheet" href="/resources/css/variables.css">
     <link rel="stylesheet" href="/resources/css/style-web.css">
     <link rel="stylesheet" href="/resources/css/common/checkBox.css">
     <link rel="stylesheet" href="/resources/css/webmain/main-shop.css">
-
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
 
+    <link href="https://fonts.googleapis.com/css?family=Bitter:400,700&display=swap&subset=latin-ext"
+    rel="stylesheet"/>
+    <link rel="stylesheet" href="/resources/css/webmain/MiniMusicPlayer.css">
 
 </head>
 <%-- <body> --%>
@@ -29,7 +30,7 @@
     <div class="modal" id="modalPlayer" style="display: none;">
         <div class="modal-box" >
             <div class="modal-close-box">
-                <div class="modal-close player-close" id="modalClose" onclick="MusicPlayerClose()">x</div>
+                <div class="modal-close player-close " id="modalClose" onclick="MusicPlayerClose()" >x</div>
             </div>
             <div class="wrapper" id="app">
                 <div class="player">
@@ -37,11 +38,8 @@
                         <div class="player-cover">
                             <transition-group :name="transitionName">
                                 <%-- 앨범이미지 --%>
-                                <div class="player-cover__item"
-                                    v-if="$index === currentTrackIndex" 
-                                    :style="{ backgroundImage: `url(${track.cover})` }"  
-                                    v-for="(track, $index) in tracks" :key="$index">
-                                </div>
+                                <%-- <div class="player-cover__item" v-if="$index === currentTrackIndex" :style="{ backgroundImage: `url(${track.cover})` }"  v-for="(track, $index) in tracks" :key="$index"></div> --%>
+                                <div class="player-cover__item" v-if="$index === currentTrackIndex" :style="{ backgroundImage: `url(&#36;{track.cover})` }"  v-for="(track, $index) in tracks" :key="$index"></div>
                             </transition-group>
                         </div>
                         <%-- 버튼관련 --%>
@@ -73,7 +71,7 @@
                             </div>
                             <%-- 재생버튼 --%>
                             <div class="player-controls__item -xl js-play" @click="play">
-                                <svg class="icon">
+                                <svg class="icon play-btn" >
                                     <use xlink:href="#icon-pause" v-if="isTimerPlaying"></use>
                                     <use xlink:href="#icon-play" v-else></use>
                                 </svg>

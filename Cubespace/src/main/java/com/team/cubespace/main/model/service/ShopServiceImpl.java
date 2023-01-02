@@ -103,4 +103,23 @@ public class ShopServiceImpl  implements ShopService{
 		
 		return resultMap;
 	}
+
+	// 음악재생 목록 조회
+	@Override
+	public List<ShopFont> miniMusicPlyer(int loginMemberNo, int cp) {
+		
+		int listCount;
+		listCount  = dao.shopMusicCount();
+		
+		// 페이징 처리 객체 생성
+		Pagination pagination = new Pagination(listCount, cp, 16, 5);
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("pagination", pagination);
+		
+
+		return dao.miniMusicPlyer(pagination, loginMemberNo);
+	}
+
+
 }

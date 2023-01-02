@@ -36,5 +36,12 @@ public interface ShopService {
 	 */
 	Map<String, Object> selectGoodsList(int cp, Map<String, Object> pm, int shopCt);
 
+	/** 음악재생 목록 조회
+	 * @param cp
+	 * @param loginMemberNo
+	 * @return
+	 */
+	List<ShopFont> miniMusicPlyer(int loginMemberNo, int cp);
+
 
 }

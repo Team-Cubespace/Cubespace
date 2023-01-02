@@ -1,5 +1,6 @@
 package com.team.cubespace.main.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,6 @@ public class ShopController {
 	@GetMapping("/cubespace/shop/{shopCt}")
 	public String shopMove(Model model,
 			@PathVariable("shopCt") int shopCt,
-			//@RequestParam(value="shopCt", required=false, defaultValue="1") int shopCt,
 			@RequestParam(value="cp", required=false, defaultValue="1") int cp,
 			@SessionAttribute(value="loginMember", required=false) Member loginMember,
 			@RequestParam Map<String,Object> pm) {
@@ -85,6 +85,24 @@ public class ShopController {
 		return result;
 	}
 	
+	/** 음악재생 목록 조회
+	 * @return
+	 */
+	@GetMapping("/miniMusicPlyer")
+	@ResponseBody
+	public String miniMusicPlyer(@RequestParam(value="cp", required=false, defaultValue="1") int cp,
+								int loginMemberNo) {
+		
+//		Map<String,Object> paramMap = new HashMap<String, Object>();
+//		paramMap.put("loginMemberNo", loginMemberNo);
+//		paramMap.put("cp", cp);
+
+		List<ShopFont> miniMusicPlyerList = service.miniMusicPlyer(loginMemberNo,cp); 
+
+		
+		return new Gson().toJson(miniMusicPlyerList); 
+
+	}
 	
 	
 	

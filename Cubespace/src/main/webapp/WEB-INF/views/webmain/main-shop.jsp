@@ -86,7 +86,7 @@
                         <div class="not-search">검색결과가 존재하지 않습니다.</div>
                     </c:when>
                     <c:otherwise>
-                        <c:forEach var="shopList" items="${shopGoodsList}">
+                        <c:forEach var="shopList" items="${shopGoodsList}" varStatus="vs">
                             <div class="goods">
                                 <c:choose>
                                     <%-- 폰트 페이지 예시화면 --%>
@@ -95,7 +95,7 @@
                                     </c:when>
                                     <%-- 배경음악 페이지 예시화면 --%>
                                     <c:when test="${shopCt==2}">
-                                        <div class="goods-example goods-lpimg" onclick="MusicPlayerOpen()">
+                                        <div class="goods-example goods-lpimg" onclick="MusicPlayerOpen(${vs.index})">
                                             <img class="goods-exampleimg-music" src="${shopList.goodsImagePath}">
                                         </div>    
                                     </c:when>

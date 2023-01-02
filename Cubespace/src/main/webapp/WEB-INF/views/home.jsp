@@ -22,14 +22,17 @@
             <!-- 투데이 인기 스타, 누적 투데이 랭킹 -->
             <div class="star-container">
                 <div class="star-select">
-                    <span id="todayStar"><i class="fa-solid fa-star"></i> 투데이 인기 스타</span>
+                    <span id="todayStar" class="select"><i class="fa-solid fa-star"></i> 투데이 인기 스타</span>
                     <span id="todayRank"><i class="fa-solid fa-ranking-star"></i> 누적 투데이 랭킹</span>
                 </div>
                 
                 <div class="star-profile-container">
-                    <div class="star-profile">
+                
+                    <%-- <div class="star-profile">
                         <img src="/resources/images/crown.png">
-                        <a href="#" class="star-profile-img"><img src="/resources/images/zz.png"></a>
+                        <a href="#" class="star-profile-img">
+                            <img src="/resources/images/zz.png">
+                        </a>
                         <a href="#">1. 기묘동</a>
                         <span>Today 400</span>
                     </div>
@@ -52,7 +55,7 @@
                         <a href="#" class="star-profile-img"><img src="../../resources/images/zz.png"></a>
                         <a href="#">4. 기묘동4</a>
                         <span>Today 100</span>
-                    </div>
+                    </div> --%>
                 </div>
             </div>
 

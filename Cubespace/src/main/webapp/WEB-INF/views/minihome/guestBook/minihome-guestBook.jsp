@@ -93,7 +93,8 @@
                     <span>></span>
                     <span>방명록</span>
                 </header>
-                <div class="guest-list-box <c:if test="${loginMember.memberNo == minihome.memberNo}">test</c:if>">
+                <%-- <div class="guest-list-box <c:if test="${loginMember.memberNo == minihome.memberNo}">test</c:if>"> --%>
+                <div class="guest-list-box ">
 <!----------------------------------------------->
                     <div class="guest-message">
                         <div class="message-header">
@@ -196,7 +197,8 @@
 
                 </div>
                 <!-- 방명록쓰기 -->
-                <div class="guest-box <c:if test="${loginMember.memberNo == minihome.memberNo}">test</c:if>">
+                <%-- <div class="guest-box <c:if test="${loginMember.memberNo == minihome.memberNo}">test</c:if>"> --%>
+                <div class="guest-box ">
                     <div class="guest-img">
                         <%-- 로그인한 회원 프로필 --%>
                         <c:choose>
@@ -214,9 +216,9 @@
                         <div class="guest-btn">
                             <div>
                                 <span class="secret-message">비밀글로 작성</span>
-                                <input type="checkbox" class="switch" onclick='secretchecked()'>
+                                <input type="checkbox" class="switch">
                             </div>
-                            <button class="btn-secondary btn">등록하기</button>
+                            <button class="btn-secondary btn" onclick=" WriteGuestbook()">등록하기</button>
                         </div>
                     </form>
                 </div>
@@ -224,8 +226,11 @@
         </section>
     </div>
 </body>
-<!-- html에서 파일을 include 할 수 있도록 해주는 js (근데 VSCode Live Server에서만 보임) -->
-<!-- include 방법 : <section class="minihome-rayout"> 안에 <div data-include-path="파일 경로"></div> 작성 -->
-<script src="/resources/js/common/temp.js"></script>
+    <script>
+        // 로그인한 회원 번호
+		const loginMemberNo = "${loginMember.memberNo}";
+    </script>
+<!-- jQuery 라이브러리(.js 파일) 추가(CDN 방식) -->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="/resources/js/minihome/guestBook/minihome-guestBook.js"></script>
 </html>

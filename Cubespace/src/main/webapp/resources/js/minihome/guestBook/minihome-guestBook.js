@@ -1,21 +1,57 @@
-const guest_input = document.getElementsByClassName("guest-input")[0];
+/* 값을 저장할 변수 선언 */
+let memberNo;
+let secretMessage;
+
+const guestInput = document.getElementsByClassName("guest-input")[0];
 const checkbox = document.getElementsByClassName("switch")[0];
 
 
+// guestInput.addEventListener("keyup",()=>{
+//     console.log(guestInput.value);
+//     console.log(checkbox.checked);
+// })
 
-guest_input.addEventListener("keyup",()=>{
-    console.log(guest_input.value);
-    console.log(checkbox.checked);
-})
-
-
-// 비밀글 여부
-// 체크시 = 'Y' 아닐시 'N'
-//true = Y
-// false = n
+// 작성 시 호출할 함수 선언
+const WriteGuestbook=()=>{
+    
+    // 입력창에 글이 없을 시
+    if(guestInput.value.trim().length == 0 ){ 
+        alert("방명록 내용을 입력해주세요.");
+        guestInput.value = "";
+        
+    }else{
+        
+        /* 비밀글 체크 여부 확인 */
+        if(checkbox.checked){ // 비밀글 일때
+            secretMessage= 'Y';
+        }else{ // 비밀글이 아닐때
+            secretMessage= 'N';
+        }
+        console.log(guestInput.value); // 글내용 확인
+        console.log(secretMessage); // 비밀글 체크여부 확인
+        console.log(loginMemberNo); // 로그인 번호 확인
+        
+        $.ajax({
+            url : "/writeGuestbook",
+            data: {"guestInput":guestInput.value,"secretMessage":secretMessage,"loginMemberNo":loginMemberNo},
+            success : writeGuestbookInsert =>{
+    
+                if(writeGuestbookInsert == 1){
+                    console.log("작성 성공");
+                }else {
+                    console.log("작성 실패");
+                }
+            }
+        })
+    }
+};
 
 /////////////////////////////////////////////////////////////
 /*
+목록조회 함수
+쓰기 함수
+수정 함수 
+
 게시글 작성(a함수)시
 1. 글 내용이 없다면 제출 안되고 메시지 출력 
 2. 글이 있다면 비밀글 값 가지고 이동 후 INSERT

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guestBook">
+	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
+
+	<!-- 폰트 VO -->
+	<resultMap type="GuestBook" id="guestBook_rm">
+		<id property="goodsNo" column="FONT_NO"/>
+		<result property="useGoodsNo" column="USE_GOODS_NO"></result>
+	</resultMap>
+	
+
+	<!-- 방명록 작성 -->
+	<insert id="writeGuestbook">
+	INSERT INTO GUEST_BOOK
+	VALUES (SEQ_GB_NO.NEXTVAL,#{loginMemberNo},#{minihomeNo},DEFAULT,#{secretMessage},#{guestInput})
+	</insert>
+
+   
+</mapper>

@@ -100,6 +100,7 @@
         <!-- 인기 shorts, 최신 shorts -->
         <section class="place-list-area">
             <div class="place-area" id="placeArea">
+                
                 <div class="shorts-select">
                     <span id="popular-shorts" class="place-area-title"><i class="fa-brands fa-gratipay"></i> 인기 shorts</span>
                     <span id="new-shorts" class="place-area-title"><i class="fa-solid fa-circle-play"></i> 최신 shorts</span>
@@ -110,6 +111,7 @@
                     <span class="next-arrow"><i class="fa-solid fa-arrow-right"></i></span>
 
                     <ul class="place-list">
+                    
                         <li class="place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
                                 <img src="../../resources/images/toy.jpg">

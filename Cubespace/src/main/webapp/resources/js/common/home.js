@@ -155,26 +155,60 @@ todayRank.addEventListener("click", () => {
 
 
 
-
+/* 기본변수 지정 */
+let shortsChoice =1
 
 
 const shortsSelect = () => {
-    // 여기에 ajax로 리스트를 가져오는 코드 작성
-    popularShorts.classList.add("select");
-    newShorts.classList.remove("select");
+
+    $.ajax({
+        url : "/mainShortsSelect",
+        data: {"shortsChoice":shortsChoice},
+        ditaType : "JSON",
+        success : mainShortsList =>{
+
+            const place_list =document.querySelector(".place-item");
+            place_list.innerHTML=""; // 이전내용 제거 
+
+            for(let shorts of mainShortsList){
+
+                // 회원 번호 저장
+                memberNo= shorts.memberNo;
+
+                const place_item = document.createElement("li");
+                place_item.classList.add("place-item");
+
+                    const place_item_a = document.createElement("a");
+                    place_item_a.setAttribute("href","해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)")
+
+
+            }
+        }
+    })
 }
 
-(shortsSelect)();
+shortsSelect(shortsChoice)
 
+/* 인기숏츠 클릭 시  */
 popularShorts.addEventListener("click", () => {
-    shortsSelect();
+    popularShorts.classList.add("select");
+    newShorts.classList.remove("select");
+    shortsChoice =1
+    shortsSelect(shortsChoice);
 })
 
+/* 최신 클릭 시  */
 newShorts.addEventListener("click", () => {
     // 여기에 ajax로 리스트를 가져오는 코드 작성
     newShorts.classList.add("select");
     popularShorts.classList.remove("select");
+    shortsChoice =2
+    shortsSelect(shortsChoice);
 })
+
+
+
+
 
 /* dropdown */
 const dropDownBtn = document.querySelector(".dropdown-btn");

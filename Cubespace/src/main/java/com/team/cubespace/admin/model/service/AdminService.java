@@ -1,5 +1,6 @@
 package com.team.cubespace.admin.model.service;
 
+import java.text.ParseException;
 import java.util.Map;
 
 import com.team.cubespace.admin.model.vo.Block;
@@ -44,7 +45,8 @@ public interface AdminService {
 	/** 회원 차단하기
 	 * @param block
 	 * @return
+	 * @throws ParseException 
 	 */
-	int blockMember(Block inputBlock);
+	int blockMember(Block inputBlock) throws ParseException;
 
 }

@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="/resources/css/common/footer.css">
     <link rel="stylesheet" href="/resources/css/admin/admin-font.css">
     <link rel="stylesheet" href="/resources/css/admin/admin-member.css">
-    <link rel="stylesheet" href="/resources/css/admin/admin-all.css">
+    <link rel="stylesheet" href="/resources/css/admin/admin-allGoods.css">
 
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
 
@@ -35,6 +35,10 @@
             
             <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
+            <p class="otherPageBtn">
+                <a  href="/admin/member">회원관리 페이지</a>
+                <a  href="/admin/member">신고관리 페이지</a>
+            </p>
             <section class="category-lists">
                 <a href = "/admin/goods/font" class="detail link-member activate">폰트 등록</a>
                 <a href = "/admin/goods/music" class="detail link-product">배경음악 등록</a>
@@ -50,30 +54,17 @@
                 </div>
 
 
-                <form id="frmSearchBase" method="get" class="member-search" action="/manager/memberSearch">
+                <form id="frmSearchBase" method="get" class="member-search" action="/admin/goods/searchFont">
                     <input type="hidden" name="sort" id="orderInput">
                     <p class="search__title">폰트 검색</p>
                     <div class="search-detail-box form-inline">
                         <div class="search-detail-div">
-                            <div class="search-detail-keyword">검색어</div>
+                            <div class="search-detail-keyword">폰트 이름 검색</div>
                             <div class="search-detail-select-box">
-                                <select name="key" id="key" class="form-control">
-
-
-                                <c:if test="${param.key == 'email'}">
-                                    <c:set var="emailChk" value="selected"></c:set>
-                                </c:if>
-                                    
-                                <option value="email" ${emailChk} >폰트 이름</option>
-                                        
-                                        
-                                </select>
-                                <input type="text" name="query" class="form-control" value="${param.query}">
+                                <input type="text" name="fontName" class="form-control" value="${param.fontName}">
+                                <button class="btn btn-lg btn-black js-search-button">검색</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="table-btn">
-                        <input type="submit" value="검색" class="btn btn-lg btn-black js-search-button">
                     </div>
                 </form>
 

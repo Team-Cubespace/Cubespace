@@ -116,5 +116,23 @@ public class AdminDAO {
 		return sqlSession.insert("adminMapper.blockMember", inputBlock);
 	}
 
+	/** 차단할 회원이 이미 차단중인지 확인
+	 * @param inputBlock
+	 * @return
+	 */
+	public Block isBlockMember(Block inputBlock) {
+		
+		return sqlSession.selectOne("adminMapper.isBlockMember", inputBlock);
+	}
+
+	/** 이미 차단중인 회원 추가로 차단하기
+	 * @param inputBlock
+	 * @return
+	 */
+	public int updateBlockMember(Block inputBlock) {
+		
+		return sqlSession.update("adminMapper.updateBlockMember", inputBlock);
+	}
+
 	
 }

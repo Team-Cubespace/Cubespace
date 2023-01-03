@@ -3,15 +3,38 @@
 <mapper namespace="adminMapper">
 	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
 
+
+	<resultMap type="Block" id="block_rm">
+		<id property="memberNo" column="MEMBER_NO"/>
+		
+		<result property="blockStart" column="BLOCK_START"/>
+		<result property="blockEnd" column="BLOCK_END"/>		
+	</resultMap>
 	
- 	 <!-- 회원 차단하기 -->
+	
+	
+	
+ 	 <!-- 회원 새로 차단하기 -->
  	<insert id="blockMember">
  		INSERT INTO MEMBER_BLOCK VALUES(
-		#{memberNo}, #{blockStart}, #{blockEnds}
+		#{memberNo}, TO_DATE(#{blockStart},'YYYY-MM-DD HH24:MI:SS') , 
+		TO_DATE(#{blockEnd},'YYYY-MM-DD HH24:MI:SS')
 		)
  	</insert>
+ 	
+ 	
+ 	<!-- 차단할 회원이 이미 차단중인지 확인 -->
+ 	<select id="isBlockMember" resultMap="block_rm">
+ 		SELECT * FROM MEMBER_BLOCK mb 
+		WHERE MEMBER_NO = #{memberNo}
+ 	</select>
  	 
  	 
- 
+ 	 <!-- 이미 차단중인 회원 추가로 차단하기 -->
+ 	<update id="updateBlockMember">
+ 		UPDATE MEMBER_BLOCK SET
+		BLOCK_END = TO_DATE(#{blockEnd},'YYYY-MM-DD HH24:MI:SS')
+		WHERE MEMBER_NO = #{memberNo}
+ 	</update>
   
 </mapper>

@@ -1,5 +1,6 @@
 package com.team.cubespace.admin.controller;
 
+import java.text.ParseException;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -174,7 +175,7 @@ public class AdminController {
 	// 회원 차단하기
 	@GetMapping("/complain/blockMember")
 	@ResponseBody
-	public int blockMember(Block inputBlock) {
+	public int blockMember(Block inputBlock) throws ParseException {
 		// block : memberNo, blockStart, blockEnd
 		return service.blockMember(inputBlock);
 	}

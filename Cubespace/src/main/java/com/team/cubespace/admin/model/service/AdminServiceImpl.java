@@ -1,11 +1,15 @@
 package com.team.cubespace.admin.model.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.team.cubespace.admin.model.dao.AdminDAO;
 import com.team.cubespace.admin.model.vo.Block;
@@ -129,10 +133,41 @@ public class AdminServiceImpl implements AdminService{
 
 	/**
 	 * 회원 차단하기
+	 * @throws ParseException 
 	 */
 	@Override
-	public int blockMember(Block inputBlock) {
+	@Transactional(rollbackFor = Exception.class)
+	public int blockMember(Block inputBlock) throws ParseException {
 		
-		return dao.blockMember(inputBlock);
+		// 차단할 회원이 이미 차단중인지 확인
+		Block isBlockMember = dao.isBlockMember(inputBlock);
+		
+		if(isBlockMember != null) { // 회원이 이미 차단중이면 update 진행
+			
+			String[] originalBlockEndArr = isBlockMember.getBlockEnd().split(" ");
+			String[] updateBlockEndArr = inputBlock.getBlockEnd().split(" ");
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date originalBlockEnd = sdf.parse(originalBlockEndArr[0]);
+			Date updateBlockEnd = sdf.parse(updateBlockEndArr[0]);
+			
+			if(originalBlockEnd.after(updateBlockEnd)) { // 원래의 차단날짜가 더 크면
+				
+				return 2;
+				
+			} else if(originalBlockEnd.equals(updateBlockEnd)){ // 두 차단날짜가 같으면 
+				
+				return 2;
+				
+			} else { //  새로 변경할 차단날짜가 더 크면
+				
+				return dao.updateBlockMember(inputBlock);
+			}
+			
+		} else { // 차단중이 아니면
+			
+			return dao.blockMember(inputBlock);			
+			
+		}
 	}
 }

@@ -35,7 +35,7 @@
             
             <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
-            <p id="goodsAddBtnArea"><button id="goodsAddBtn">상품 등록 페이지</button></p>
+            <p class="otherPageBtn"><a href="/admin/goods/font">상품 등록 페이지</a></p>
             <section class="category-lists">
                 <a href = "/admin/member" class="detail link-member activate">회원</a>
                 <a href = "/admin/complain" class="detail link-member">신고</a>

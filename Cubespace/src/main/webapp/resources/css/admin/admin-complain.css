@@ -125,6 +125,8 @@ input[name='blockDayCount'] {
 }
 .allComplainContent {
     position: absolute;
+    word-break: keep-all;
+    word-wrap: break-word;
     
     top: 0;
     left: 50%;
@@ -143,5 +145,6 @@ input[name='blockDayCount'] {
 }
 .allComplainContent > * {
     overflow:hidden; 
-    word-break:break-all;
+    word-break: keep-all;
+    word-wrap: break-word;
 }

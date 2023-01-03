@@ -36,7 +36,7 @@ import com.team.cubespace.minihome.model.vo.Minihome;
 @Controller
 @RequestMapping("/manage")
 @SessionAttributes({ "folderList",  "fileList" /* , "friendList", "fontList" */})
-public class manageController {
+public class ManageController {
 	
 	@Autowired
 	private ManageService service;
@@ -154,11 +154,9 @@ public class manageController {
 		
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
-//		out.print("<script>alert(" + message +");</script>");
-		out.print("<script>window.parent.location.reload();</script>");
+		out.print("<script>window.parent.alert('" + message +"'); window.parent.location.reload();</script>");
 		out.flush();
 		
-//		return "redirect:/manage/menu";
 		return null;
 	}
 	

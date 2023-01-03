@@ -23,9 +23,7 @@
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/common/header.css">
     <link rel="stylesheet" href="/resources/css/common/footer.css">
-    <link rel="stylesheet" href="/resources/css/admin/admin-goods.css">
-    <link rel="stylesheet" href="/resources/css/admin/admin-member.css">
-    <link rel="stylesheet" href="/resources/css/admin/admin-all.css">
+    <link rel="stylesheet" href="/resources/css/admin/admin-allGoods.css">
 
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
 
@@ -35,6 +33,10 @@
             
             <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
+            <p class="otherPageBtn">
+                <a  href="/admin/member">회원관리 페이지</a>
+                <a  href="/admin/member">신고관리 페이지</a>
+            </p>
             <section class="category-lists">
                 <a href = "/admin/goods/font" class="detail link-member ">폰트 등록</a>
                 <a href = "/admin/goods/music" class="detail link-product">배경음악 등록</a>
@@ -55,20 +57,9 @@
                     <p class="search__title">소품 검색</p>
                     <div class="search-detail-box form-inline">
                         <div class="search-detail-div">
-                            <div class="search-detail-keyword">검색어</div>
+                            <div class="search-detail-keyword">소품 이름 검색</div>
                             <div class="search-detail-select-box">
-                                <select name="key" id="key" class="form-control">
-
-
-                                <c:if test="${param.key == 'email'}">
-                                    <c:set var="emailChk" value="selected"></c:set>
-                                </c:if>
-                                    
-                                <option value="email" ${emailChk} >소품 이름</option>
-                                        
-                                        
-                                </select>
-                                <input type="text" name="query" class="form-control" value="${param.query}">
+                                <input type="text" name="goodsName" class="form-control" value="${param.goodsName}">
                             </div>
                         </div>
                     </div>

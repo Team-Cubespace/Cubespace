@@ -11,10 +11,6 @@ const orderBy = () => {
 };
 
 
-/* 상품등록 페이지 이동 */
-document.getElementById("goodsAddBtn").addEventListener("click", e => {
-    location.href = "/admin/goods/font";
-})
 
 
 
@@ -67,37 +63,39 @@ for(let yesStatus of yesStatusList){
 }
 
 // 처리중 -> 처리완료 변경
+const updateStatusToggle = (e) => {
+
+    if(confirm("처리상태를 처리중 -> 처리완료로 변경하겠습니까?")){
+
+        const complainNo = e.target.getAttribute("name"); // 신고번호
+        
+        $.ajax({
+            url : "/admin/complain/updateStatusToggle",
+            data : {"complainNo" : complainNo, "status" : 1},
+            type : "get",
+            success : result => {
+                if(result > 0) {
+                    alert("처리상태가 변경되었습니다");
+                    e.target.classList.remove("noStatus");
+                    e.target.classList.add("yesStatus");
+                    e.target.innerText = "처리완료";
+                    
+                } else {
+                    console.log("처리상태 변경 실패");
+                }
+            },
+            error : e => {
+                console.log("처리상태 변경 중 오류 발생");
+            }
+        })
+    }
+}
+
 const noStatusList = document.getElementsByClassName("noStatus");
 for(let noStatus of noStatusList){
     noStatus.addEventListener("click", e => {
-        const complainNo = e.target.getAttribute("name"); // 신고번호
         
-
-
-        
-
-        if(confirm("처리상태를 처리중 -> 처리완료로 변경하겠습니까?")){
-            
-            $.ajax({
-                url : "/admin/complain/updateStatusToggle",
-                data : {"complainNo" : complainNo, "status" : 1},
-                type : "get",
-                success : result => {
-                    if(result > 0) {
-                        alert("처리상태가 변경되었습니다");
-                        e.target.classList.remove("noStatus");
-                        e.target.classList.add("yesStatus");
-                        e.target.innerText = "처리완료";
-                        
-                    } else {
-                        console.log("처리상태 변경 실패");
-                    }
-                },
-                error : e => {
-                    console.log("처리상태 변경 중 오류 발생");
-                }
-            })
-        }
+        updateStatusToggle(e);
     })
 }
 
@@ -136,6 +134,9 @@ function closePop() {
 
 
 // 회원 차단하기
+let tempComplainedNo;
+let blockedComplainNo; // 차단 후 처리중->완료 위한 차단번호 변수선언
+let afterBlockStatusToggle; // 차단 후 해당 처리완료/처리중 버튼
 const complainedMemberList = document.getElementsByClassName("complainedMember");
 for(let complainedMember of complainedMemberList) {
     complainedMember.addEventListener("click", e => {
@@ -144,35 +145,62 @@ for(let complainedMember of complainedMemberList) {
 
             const complainedNo = e.target.getAttribute("id"); // 신고번호
             const complainedNickname = e.target.innerText;
+            tempComplainedNo = complainedNo;
+            blockedComplainNo = e.target.getAttribute("name");
+            afterBlockStatusToggle = document.getElementsByClassName(blockedComplainNo)[0];
 
             openPop(complainedNickname);
-
-            document.getElementById("memberBlockBtn").addEventListener("click", e => {
-
-                const realBlockStart = document.getElementById("realBlockStart");
-                const readBlockEnd = document.getElementById("realBlockEnd");
-
-                $.ajax({
-                    url : "/admin/complain/blockMember",
-                    data : {"blockStart" : realBlockStart, "blockEnd" : readBlockEnd, "memberNo" : complainedNo},
-                    type : "get",
-                    success : result => {
-                        if(result > 0) {
-                            alert("회원 차단이 성공적으로 이루어졌습니다");
-                            document.getElementById("frmSearchBase").submit();
-                        } else {
-                            console.log("회원 차단 실패");
-                        }
-                    },
-                    error : e => {
-                        console.log("회원 차단 중 오류 발생");
-                    }
-                })
-
-            })
         }
     })
 }
+
+document.getElementById("memberBlockBtn").addEventListener("click", e => {
+    const realBlockStart = document.getElementById("realBlockStart").value;
+    const readBlockEnd = document.getElementById("realBlockEnd").value;
+
+    $.ajax({
+        url : "/admin/complain/blockMember",
+        data : {"blockStart" : realBlockStart, "blockEnd" : readBlockEnd, "memberNo" : tempComplainedNo},
+        success : result => {
+            if(result > 0) {
+                alert("회원 차단이 성공적으로 이루어졌습니다");
+                afterBlockStatus(afterBlockStatusToggle, blockedComplainNo);
+                document.getElementById("frmSearchBase").submit();
+            } else {
+                console.log("회원 차단 실패");
+            }
+        },
+        error : e => {
+            console.log("회원 차단 중 오류 발생");
+        }
+    })
+
+})
+
+
+// 차단 후 처리상태 처리중->완료 변경
+const afterBlockStatus = (afterBlockStatusToggle, blockedComplainNo) => {
+
+    $.ajax({
+        url : "/admin/complain/updateStatusToggle",
+        data : {"complainNo" : blockedComplainNo, "status" : 1},
+        type : "get",
+        success : result => {
+            if(result > 0) {
+                alert("처리상태가 변경되었습니다");
+                afterBlockStatusToggle.classList.remove("noStatus");
+                afterBlockStatusToggle.classList.add("yesStatus");
+                afterBlockStatusToggle.innerText = "처리완료";
+            } else {
+                console.log("처리상태 변경 실패");
+            }
+        },
+        error : e => {
+            console.log("처리상태 변경 중 오류 발생");
+        }
+    })
+}
+
 
 
 

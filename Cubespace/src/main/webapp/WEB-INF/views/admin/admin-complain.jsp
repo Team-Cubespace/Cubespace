@@ -35,7 +35,7 @@
             
             <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
-            <p id="goodsAddBtnArea"><button id="goodsAddBtn">상품 등록 페이지</button></p>
+            <p class="otherPageBtn"><a href="/admin/goods/font">상품 등록 페이지</a></p>
             <section class="category-lists">
                 <a href = "/admin/member" class="detail link-member">회원</a>
                 <a href = "/admin/complain/complainSearch" class="detail link-member activate">신고</a>
@@ -231,10 +231,10 @@
                                 </c:if>
                                 <c:if test='${complain.complainedDelYN == "N"}'> 
                                     <c:if test='${complain.complainedBlockFL > 0}'> <%-- 신고당한사람 & 차단회원 --%>
-                                        <div class="search-content blockMember complainedMember" id="${complain.complainedNo}">${complain.complainedNickname}(차단중)</div>
+                                        <div class="search-content blockMember complainedMember" name="${complain.complainNo}" id="${complain.complainedNo}">${complain.complainedNickname}(차단중)</div>
                                     </c:if>
                                     <c:if test='${complain.complainedBlockFL == 0}'> <%-- 신고당한사람 --%>
-                                        <div class="search-content complainedMember" id="${complain.complainedNo}">${complain.complainedNickname}</div>
+                                        <div class="search-content complainedMember" name="${complain.complainNo}" id="${complain.complainedNo}">${complain.complainedNickname}</div>
                                     </c:if>
                                 </c:if>
                         </c:forEach>
@@ -246,7 +246,7 @@
                                 <c:when test="${fn:length(complain.complainContent) > 45}">
                                     <div class="search-content seeComplainContent">
                                         <p>${fn:substring(complain.complainContent, 0, 44)}...</p>
-                                        <p class="allComplainContent" style="display: none;">${complain.complainContent}</p>
+                                        <p class="allComplainContent" style="display: none; word-break:break-all;">${complain.complainContent}</p>
                                     </div>
                                 </c:when>
                                 <c:when test="${fn:length(complain.complainContent) <= 44}">
@@ -265,10 +265,10 @@
                         <div class="search-result-tab">처리상태</div>
                         <c:forEach var="complain" items="${complainList}">
                             <c:if test="${complain.status == '1'}">
-                                <div class="search-content yesStatus" name="${complain.complainNo}">처리완료</div>
+                                <div class="search-content yesStatus ${complain.complainNo}" name="${complain.complainNo}">처리완료</div>
                             </c:if>
                             <c:if test="${complain.status == '0'}">
-                                <div class="search-content noStatus"  name="${complain.complainNo}">처리중</div>
+                                <div class="search-content noStatus ${complain.complainNo}"  name="${complain.complainNo}">처리중</div>
                             </c:if>
                         </c:forEach>
                     </div>

@@ -110,7 +110,7 @@ const createFolderList = (folderList) => {
         const openFlag = document.querySelector("input[name='openFlag']:checked").value;
         console.log(openFlag);
         $.ajax({
-            url:"/boardScrap",
+            url:"/boardScrap/" + boardTypeNo,
             data: {
                 memberNo: loginMemberNo,
                 boardNo: boardNo,

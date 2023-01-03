@@ -21,7 +21,7 @@
                 </c:when>
             </c:choose>
         </span>
-        <span class="detail-title-area"><c:if test="${board.videoScrapYN == 'Y'}">[스크랩] </c:if>${board.videoTitle}</span>
+        <span class="detail-title-area"><c:if test="${board.videoScrapYN == 'Y'}">[스크랩] </c:if>${board.videoTitle} [${board.videoReadCount}]</span>
         <span class="detail-create-date">${board.videoCreate}</span>
     </div>
     <div class="slide-container">

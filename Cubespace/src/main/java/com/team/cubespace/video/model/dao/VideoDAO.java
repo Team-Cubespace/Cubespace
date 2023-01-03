@@ -79,4 +79,20 @@ public class VideoDAO {
 	public int videoDelete(int videoNo) {
 		return sqlSession.update("videoMapper.videoDelete", videoNo);
 	}
+
+	/** 동영상 조회수 증가
+	 * @param videoNo
+	 * @return result
+	 */
+	public int updateReadCount(int videoNo) {
+		return sqlSession.update("videoMapper.updateReadCount", videoNo);
+	}
+
+	/** 동영상 스크랩
+	 * @param video
+	 * @return videoNo
+	 */
+	public int videoScrap(Video video) {
+		return sqlSession.insert("videoMapper.videoScrap", video);
+	}
 }

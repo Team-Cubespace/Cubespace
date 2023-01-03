@@ -1,7 +1,5 @@
 package com.team.cubespace.video.model.service;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,22 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.team.cubespace.album.model.service.CommentService;
 import com.team.cubespace.album.model.vo.Album;
+import com.team.cubespace.album.model.vo.Comment;
 import com.team.cubespace.common.Pagination;
 import com.team.cubespace.common.Util;
 import com.team.cubespace.video.model.dao.VideoDAO;
 import com.team.cubespace.video.model.vo.Video;
-
-import net.bramp.ffmpeg.FFmpeg;
-import net.bramp.ffmpeg.FFmpegExecutor;
-import net.bramp.ffmpeg.FFprobe;
-import net.bramp.ffmpeg.builder.FFmpegBuilder;
 
 @Service
 public class VideoServiceImpl implements VideoService{
 	@Autowired
 	private VideoDAO dao;
 
+	@Autowired
+	private CommentService cService;
 	@Override
 	public Map<String, Object> selectVideoList(Map<String, Integer> paramMap, int cp) {
 		
@@ -126,5 +123,28 @@ public class VideoServiceImpl implements VideoService{
 	@Override
 	public int videoDelete(int videoNo) {
 		return dao.videoDelete(videoNo);
+	}
+
+	// 동영상 조회수 증가
+	@Override
+	public int updateReadCount(int videoNo) {
+		return dao.updateReadCount(videoNo);
+	}
+
+	// 동영상 글 스크랩
+	@Override
+	public int videoScrap(Video video, Comment comment) {
+		System.out.println("동영상 스크랩");
+		// 동영상 글 스크랩
+		int result = dao.videoScrap(video);
+		
+		// 글 스크랩 완료 후 댓글이 비어있지 않다면
+		if( result > 0 && comment.getCommentContent() != null) {
+			comment.setCommentContent(Util.XSSHandling(comment.getCommentContent()));
+			comment.setCommentContent(Util.newLineHandling(comment.getCommentContent()));
+			result = cService.insertComment(comment);
+		}
+		
+		return result;
 	}
 }

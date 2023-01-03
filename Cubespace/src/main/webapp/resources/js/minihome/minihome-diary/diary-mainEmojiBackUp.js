@@ -428,7 +428,7 @@ function chooseEmoji(diaryNo,btn){
             const img1 = document.createElement("img");
             img1.classList.add("emoji");
             img1.setAttribute("src","/resources/images/diary/like.png");
-            img1.setAttribute("onclick","likeUp("+1+","+diaryNo+",this)");
+            img1.setAttribute("onclick","likeUp("+1+","+diaryNo+")");
         div3_1_2_2_1.append(img1);
 
         const div3_1_2_2_2 = document.createElement("div");
@@ -437,7 +437,7 @@ function chooseEmoji(diaryNo,btn){
             const img2 = document.createElement("img");
             img2.classList.add("emoji");
             img2.setAttribute("src","/resources/images/diary/heart.png");
-            img2.setAttribute("onclick","likeUp("+2+","+diaryNo+",this)");
+            img2.setAttribute("onclick","likeUp("+2+","+diaryNo+")");
         div3_1_2_2_2.append(img2);
 
         const div3_1_2_2_3 = document.createElement("div");
@@ -446,7 +446,7 @@ function chooseEmoji(diaryNo,btn){
             const img3 = document.createElement("img");
             img3.classList.add("emoji");
             img3.setAttribute("src","/resources/images/diary/smile.png");
-            img3.setAttribute("onclick","likeUp("+3+","+diaryNo+",this)");
+            img3.setAttribute("onclick","likeUp("+3+","+diaryNo+")");
         div3_1_2_2_3.append(img3);
 
         const div3_1_2_2_4 = document.createElement("div");
@@ -455,7 +455,7 @@ function chooseEmoji(diaryNo,btn){
             const img4 = document.createElement("img");
             img4.classList.add("emoji");
             img4.setAttribute("src","/resources/images/diary/tears.png");
-            img4.setAttribute("onclick","likeUp("+4+","+diaryNo+",this)");
+            img4.setAttribute("onclick","likeUp("+4+","+diaryNo+")");
         div3_1_2_2_4.append(img4);
 
         const div3_1_2_2_5 = document.createElement("div");
@@ -464,7 +464,7 @@ function chooseEmoji(diaryNo,btn){
             const img5 = document.createElement("img");
             img5.classList.add("emoji");
             img5.setAttribute("src","/resources/images/diary/cursing.png");
-            img5.setAttribute("onclick","likeUp("+5+","+diaryNo+",this)");
+            img5.setAttribute("onclick","likeUp("+5+","+diaryNo+")");
         div3_1_2_2_5.append(img5);
 
         const div3_1_2_2_6 = document.createElement("div");
@@ -473,7 +473,7 @@ function chooseEmoji(diaryNo,btn){
             const img6 = document.createElement("img");
             img6.classList.add("emoji");
             img6.setAttribute("src","/resources/images/diary/humm.png");
-            img6.setAttribute("onclick","likeUp("+6+","+diaryNo+",this)");
+            img6.setAttribute("onclick","likeUp("+6+","+diaryNo+")");
         div3_1_2_2_6.append(img6);
 
     div3_1_2_2.append(div3_1_2_2_1,div3_1_2_2_2,div3_1_2_2_3,div3_1_2_2_4,div3_1_2_2_5,div3_1_2_2_6)
@@ -498,7 +498,7 @@ function chooseEmoji(diaryNo,btn){
 }
 
 /* [공감하기]에서 이모지를 누른 경우*/
-function likeUp(number,diaryNo,btn){
+function likeUp(number,diaryNo){
     console.log("number"+number);
     console.log("diaryNo" + diaryNo);
     
@@ -516,8 +516,8 @@ function likeUp(number,diaryNo,btn){
 
                         // img.addEventListener("click",function(){
                             console.log("이게 emoji-btn이 맞음?");
-                            console.log(btn.parentElement.parentElement.previousElementSibling);
-                            const emojiBtn = btn.parentElement.parentElement.previousElementSibling;
+                            console.log(img.parentElement.parentElement.previousElementSibling);
+                            const emojiBtn = img.parentElement.parentElement.previousElementSibling;
                             const popup = emojiBtn.parentElement.previousElementSibling;
                             const section = emojiBtn.parentElement.previousElementSibling.children[0];
 

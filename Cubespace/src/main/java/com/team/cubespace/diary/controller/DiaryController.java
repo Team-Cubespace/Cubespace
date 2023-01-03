@@ -131,6 +131,7 @@ public class DiaryController {
 	public int like(int diaryNo, int emojiNo,
 			@SessionAttribute("loginMember") Member loginMember
 			) {
+		
 		int result = 0;
 		int memberNo = loginMember.getMemberNo();
 		Map<String, Object> map = new HashMap<String, Object>();

@@ -65,17 +65,22 @@ function allDayTrue(){ //alDay == true 일 때
   $("#endTime").val("00:00");
   /* 하루 종일이니까 날짜도 동일!!!! */
   /* 원래 있던 위치 */
-  document.getElementById("startDate").addEventListener("change",function(){
-    alert("끝날짜도 바뀐당~");
-    $("#endDate").val($("#startDate").val());
-  })
+  
   // $("#endDate").val($("#startDate").val());
 }
 function allDayFalse(){ //alDay == false 일 때
   $("#startTime").attr("disabled",false)
   $("#endTime").attr("disabled",false)
   $("#endDate").attr("disabled",false);
+
 }
+
+document.getElementById("startDate").addEventListener("change",function(){
+  if( $("#startTime").attr("disabled") == "disabled"){
+    alert("끝날짜도 바뀐당~");
+    $("#endDate").val($("#startDate").val());
+  }
+})
 
 
 

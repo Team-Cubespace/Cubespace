@@ -82,7 +82,7 @@ public class FileScheduling {
 			}
 		}
 		if(!thumbnailList.isEmpty()) {
-			for(File file : videoList) {
+			for(File file : thumbnailList) {
 				String tempName = file.getName();
 				String fileName = tempName.substring(0, tempName.lastIndexOf(".")) + ".png";
 				System.out.println(fileName);

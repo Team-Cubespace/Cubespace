@@ -165,7 +165,7 @@
 		FROM VIDEO WHERE VIDEO_NO = #{scrapVideoNo}  
 	</insert>
 	
-	<select id="selectVideoRenameList">
-		SELECT 
+	<select id="selectVideoRenameList" resultType="string">
+		SELECT VIDEO_RENAME FROM VIDEO
 	</select>
 </mapper>

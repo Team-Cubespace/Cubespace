@@ -221,7 +221,7 @@ let bounds;
     // 글작성 취소 버튼 이벤트 달기
     document.getElementById("cancelWrite").addEventListener("click", ()=>{
         if(confirm("작성중인 내용은 저장되지 않습니다.\n정말 취소하시겠습니까?")){
-            location.href ="/albumList";
+            location.href ="/albumList/2" + location.search;
         }
     });
 })();

@@ -40,6 +40,13 @@ main::-webkit-scrollbar {
     margin-right: 23px;
 }
 
+.album-list a {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
 .album-list img {
     width: 100%;
     height: 100%;
@@ -77,4 +84,50 @@ main::-webkit-scrollbar {
 .empty-space i {
     font-size: 130px;
     color: #ddd;
+}
+
+.album-list a:hover > div {
+    background-color: rgba(0,0,0,0.4);
+    opacity: 1;
+}
+
+/* 목록 글정보 */
+.album-hover {
+    transition: 0.1s;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    color: white;
+}
+.album-hover .album-title {
+    font-size: 15px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* 라인수 */
+    -webkit-box-orient: vertical;
+    word-wrap:break-word;
+}
+.album-hover > div {
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.album-hover .count {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.album-hover .count > i {
+    margin-right: 10px;
 }

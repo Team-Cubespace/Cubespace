@@ -24,6 +24,30 @@
                 <c:forEach var="album" items="${resultMap.albumList}">
                     <li>
                         <a href="/albumDetail/${album.albumNo}?folderNo=${folderNo}&cp=${cp}">
+                            <div class="album-hover">
+                                <span class="album-title">${album.albumTitle}</span>
+                                <div>
+                                    <span class="open-flag">
+                                        <c:choose>
+                                            <c:when test="${album.openFlag == 1}">
+                                                전체공개
+                                            </c:when>
+                                            <c:when test="${album.openFlag == 2}">
+                                                깐부공개
+                                            </c:when>
+                                            <c:when test="${album.openFlag == 3}">
+                                                비공개
+                                            </c:when>
+                                        </c:choose>
+                                    </span>
+                                    <span class="video-create">${album.albumCreate}</span>
+                                </div>
+
+                                <span class="count">
+                                    <i class="fa-solid fa-comment"></i>
+                                    ${album.commentCount}
+                                </span>
+                            </div>
                             <img src="${album.thumbnailImage}" alt="">
                         </a>
                     </li>

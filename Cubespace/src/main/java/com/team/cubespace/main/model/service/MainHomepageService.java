@@ -12,4 +12,10 @@ public interface MainHomepageService {
 	 */
 	List<MainHomepage> mainTodaySelect(int todayChoice);
 
+	/** 숏츠영상 인기 및 신규 조회
+	 * @param shortsChoice
+	 * @return
+	 */
+	List<MainHomepage> mainShortsSelect(int shortsChoice);
+
 }

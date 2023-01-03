@@ -73,7 +73,16 @@
                     <c:otherwise>
                         <div class="profile">
                             <div class="profile-img">
-                                <img src="/resources/images/zz.png">
+
+                            <c:choose>
+                                <c:when test="${loginMember.profileImage==null}">
+                                    <img src="/resources/images/common/cubes.png">
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="${loginMember.profileImage}">
+                                </c:otherwise>
+                            </c:choose>
+
                                 <div class="dropdown-btn"><i class="fa-solid fa-caret-down dropdown-btn-icon"></i></div>
                                 
                                 <!-- dropdown -->
@@ -102,7 +111,7 @@
             <div class="place-area" id="placeArea">
                 
                 <div class="shorts-select">
-                    <span id="popular-shorts" class="place-area-title"><i class="fa-brands fa-gratipay"></i> 인기 shorts</span>
+                    <span id="popular-shorts" class="place-area-title select"><i class="fa-brands fa-gratipay"></i> 인기 shorts</span>
                     <span id="new-shorts" class="place-area-title"><i class="fa-solid fa-circle-play"></i> 최신 shorts</span>
                 </div>
 
@@ -111,8 +120,17 @@
                     <span class="next-arrow"><i class="fa-solid fa-arrow-right"></i></span>
 
                     <ul class="place-list">
-                    
+
                         <li class="place-item">
+                            <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
+                                <img src="../../resources/images/toy.jpg">
+                                <span class="place-title">형이 인형 뽑는 방법 알려준다</span>
+                                <span>김효동2</span>
+                                <span>조회수 5,000</span>
+                            </a>
+                        </li>
+
+                        <%-- <li class="place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
                                 <img src="../../resources/images/toy.jpg">
                                 <span class="place-title">형이 인형 뽑는 방법 알려준다</span>
@@ -191,16 +209,7 @@
                                 <span>김효동2</span>
                                 <span>조회수 5,000</span>
                             </a>
-                        </li>
-
-                        <li class="place-item">
-                            <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="../../resources/images/toy.jpg">
-                                <span class="place-title">형이 인형 뽑는 방법 알려준다</span>
-                                <span>김효동2</span>
-                                <span>조회수 5,000</span>
-                            </a>
-                        </li>
+                        </li> --%>
                     </ul>
                 </div>
             </div>
@@ -210,6 +219,6 @@
     <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 
     <script src="/resources/js/common/home.js"></script>
-    <script src="/resources/js/common/header.js"></script>
+    
 </body>
 </html>

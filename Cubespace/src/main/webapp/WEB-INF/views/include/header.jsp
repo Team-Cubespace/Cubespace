@@ -76,4 +76,5 @@
             <span class="header-logo-title">Cubespace</span>
         </a>
     </div>
+    <script src="/resources/js/common/header.js"></script>
 </header>

@@ -20,4 +20,10 @@ public class MainHomepageServiceImpl implements MainHomepageService {
 	public List<MainHomepage> mainTodaySelect(int todayChoice) {
 		return  dao.mainTodaySelect(todayChoice);
 	}
+
+	// 숏츠영상 인기 및 신규 조회
+	@Override
+	public List<MainHomepage> mainShortsSelect(int shortsChoice) {
+		return  dao.mainShortsSelect(shortsChoice);
+	}
 }

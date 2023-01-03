@@ -32,7 +32,18 @@ public class MainHomepageController {
 	}
 
 	
-	
+	/** 숏츠영상 인기 및 신규 조회
+	 * @param shortsChoice
+	 * @return
+	 */
+	@GetMapping("/mainShortsSelect")
+	@ResponseBody
+	public String mainShortsSelect(int shortsChoice) {
+		
+		List<MainHomepage> mainShortsList = service.mainShortsSelect(shortsChoice);
+		
+		return new Gson().toJson(mainShortsList); 
+	}
 	
 	
 }

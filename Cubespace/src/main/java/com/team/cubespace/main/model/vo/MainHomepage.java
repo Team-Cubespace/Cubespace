@@ -17,4 +17,11 @@ public class MainHomepage {
 	int today;				// 투데이
 	int total;				// 누적투데이
 	
+	private int folderNo;			// 비디오가 속한 폴더 번호
+	private int videoNo;			// 영상 번호
+	private String videoTitle;			// 영상 제목
+	private String videoThumbnail;	// 비디오 썸네일 이미지 경로
+	private int videoReadCount;		// 비디오 조회 수
+
+	
 }

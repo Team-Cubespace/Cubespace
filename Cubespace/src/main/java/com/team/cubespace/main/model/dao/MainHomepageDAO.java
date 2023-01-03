@@ -23,4 +23,12 @@ public class MainHomepageDAO {
 
 	}
 
+	/** 숏츠영상 인기 및 신규 조회
+	 * @param shortsChoice
+	 * @return
+	 */
+	public List<MainHomepage> mainShortsSelect(int shortsChoice) {
+		return sqlSession.selectList("mainHomepage.mainShortsSelect",shortsChoice);
+	}
+
 }

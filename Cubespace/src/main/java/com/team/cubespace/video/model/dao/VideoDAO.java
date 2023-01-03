@@ -43,4 +43,63 @@ public class VideoDAO {
 	public Video selectVideo(int videoNo) {
 		return sqlSession.selectOne("videoMapper.selectVideo", videoNo);
 	}
+
+	/** 동영상 글 작성
+	 * @param video
+	 * @return videoNo
+	 */
+	public int albumWrite(Video video) {
+		int result = sqlSession.insert("videoMapper.insertVideo", video);
+		if(result > 0) {
+			result = video.getVideoNo();
+		}
+		return result;
+	}
+
+	/** 동영상 글 수정 (제목, 내용, 공개여부, 폴더번호, 스크랩 허용 여부)
+	 * @param video
+	 * @return result
+	 */
+	public int videoUpdate(Video video) {
+		return sqlSession.update("videoMapper.videoUpdate", video);
+	}
+
+	/** 동영상 파일 수정(비디오 웹경로, 비디오 파일변경명, 비디오 파일원본명, 썸네일 경로) 
+	 * @param video
+	 * @return result
+	 */
+	public int videoUpdateFile(Video video) {
+		return sqlSession.update("videoMapper.videoUpdateFile", video);
+	}
+
+	/** 동영상 글 삭제
+	 * @param videoNo
+	 * @return result
+	 */
+	public int videoDelete(int videoNo) {
+		return sqlSession.update("videoMapper.videoDelete", videoNo);
+	}
+
+	/** 동영상 조회수 증가
+	 * @param videoNo
+	 * @return result
+	 */
+	public int updateReadCount(int videoNo) {
+		return sqlSession.update("videoMapper.updateReadCount", videoNo);
+	}
+
+	/** 동영상 스크랩
+	 * @param video
+	 * @return videoNo
+	 */
+	public int videoScrap(Video video) {
+		return sqlSession.insert("videoMapper.videoScrap", video);
+	}
+
+	/** 동영상 변경명 목록 조회
+	 * @return
+	 */
+	public List<String> selectVideoList() {
+		return sqlSession.selectList("videoMapper.selectVideoRenameList");
+	}
 }

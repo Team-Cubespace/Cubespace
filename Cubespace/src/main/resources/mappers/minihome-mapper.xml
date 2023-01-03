@@ -11,6 +11,7 @@
   		<result property="comment" column="COMMENT"/>
   		<result property="today" column="TODAY"/>
   		<result property="total" column="TOTAL"/>
+  		<result property="maxTotal" column="MAX_TOTAL"/>
   		<result property="ownMusicNo" column="OWN_MUSIC_NO"/>
   		<result property="musicPath" column="MUSIC_PATH"/>
   		<result property="musicName" column="MUSIC_NAME"/>
@@ -21,7 +22,8 @@
  	  
  	<!-- 미니홈 정보 조회 -->  
  	<select id="selectMinihome" parameterType="_int" resultMap="minihome_rm">
- 		SELECT MH.MEMBER_NO, HOMEPAGE_NAME, BACKGROUND_SKIN, "COMMENT", TODAY, TOTAL, FRAME_COLOR, FRAME_MENU_COLOR, FRAME_FONT_COLOR, MUSIC_PATH, MUSIC_NAME
+ 		SELECT MH.MEMBER_NO, HOMEPAGE_NAME, BACKGROUND_SKIN, "COMMENT", TODAY, TOTAL, FRAME_COLOR, FRAME_MENU_COLOR, FRAME_FONT_COLOR, MUSIC_PATH, MUSIC_NAME,
+ 			(SELECT MAX(TOTAL) FROM MINI_HOMEPAGE) MAX_TOTAL
 		FROM MINI_HOMEPAGE MH
 		LEFT JOIN MUSIC_SHOP ON(OWN_MUSIC_NO = MUSIC_NO)
 		WHERE MH.MEMBER_NO = #{memberNo}

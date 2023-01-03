@@ -4,7 +4,7 @@
 
 <div class="detail-main">
     <header>
-        동영상 > <c:if test="${board.videoScrapYN == 'Y'}">[스크랩] </c:if>${folderName}
+        동영상 > ${folderName}
         <button id="goToList">목록으로</button>
     </header>
     <div class="detail-subtitle">
@@ -21,7 +21,7 @@
                 </c:when>
             </c:choose>
         </span>
-        <span class="detail-title-area">${board.videoTitle}</span>
+        <span class="detail-title-area"><c:if test="${board.videoScrapYN == 'Y'}">[스크랩] </c:if>${board.videoTitle} [${board.videoReadCount}]</span>
         <span class="detail-create-date">${board.videoCreate}</span>
     </div>
     <div class="slide-container">
@@ -79,7 +79,7 @@
                     <div class="modal-scrap-allow">
                         <label class="modal-label" for="">공개 설정</label>
                         <div class="modal-radio-area">
-                            <input type="radio" name="openFlag" value="1" id="modalOpenFlag1">
+                            <input type="radio" name="openFlag" value="1" id="modalOpenFlag1" checked>
                             <label for="modalOpenFlag1">전체공개</label>
 
                             <input type="radio" name="openFlag" value="2" id="modalOpenFlag2">

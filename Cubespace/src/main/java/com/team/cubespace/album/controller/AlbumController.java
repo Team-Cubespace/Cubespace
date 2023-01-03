@@ -137,7 +137,8 @@ public class AlbumController {
 	public String albumDetail(@PathVariable("albumNo") int albumNo,
 			Model model,
 			int folderNo,
-			@SessionAttribute("folderList") List<Folder> folderList) {
+			@SessionAttribute
+			("folderList") List<Folder> folderList) {
 		
 		// 폴더 이름 찾기
 		String folderName = "";
@@ -225,12 +226,18 @@ public class AlbumController {
 		return new Gson().toJson(resultMap);
 	}
 	
+	/** 사진첩 스크랩
+	 * @param album
+	 * @param comment
+	 * @return result
+	 */
 	@ResponseBody
-	@PostMapping("/boardScrap")
+	@PostMapping("/boardScrap/2")
 	public int boardScrap(Album album, Comment comment) {
 		
 		album.setScrapAlbumNo(comment.getBoardNo());
+		
 		int result = service.albumScrap(album, comment);
-		return 0;
+		return result;
 	}
 }

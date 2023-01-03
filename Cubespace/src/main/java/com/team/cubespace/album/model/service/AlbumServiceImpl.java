@@ -247,4 +247,10 @@ public class AlbumServiceImpl implements AlbumService{
 		}
 		return result;
 	}
+
+	// 사진첩 이미지변경명 목록 조회
+	@Override
+	public List<String> selectImageList() {
+		return dao.selectImageList();
+	}
 }

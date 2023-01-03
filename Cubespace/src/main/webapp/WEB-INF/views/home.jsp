@@ -3,13 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<!-- 임시로 만든 변수 -->
-<c:if test="${not empty sessionScope.loginMember}">
-    <c:set var="loginMember" value="${sessionScope.loginMember}"/>
-</c:if>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,14 +22,17 @@
             <!-- 투데이 인기 스타, 누적 투데이 랭킹 -->
             <div class="star-container">
                 <div class="star-select">
-                    <span id="todayStar"><i class="fa-solid fa-star"></i> 투데이 인기 스타</span>
+                    <span id="todayStar" class="select"><i class="fa-solid fa-star"></i> 투데이 인기 스타</span>
                     <span id="todayRank"><i class="fa-solid fa-ranking-star"></i> 누적 투데이 랭킹</span>
                 </div>
                 
                 <div class="star-profile-container">
-                    <div class="star-profile">
+                
+                    <%-- <div class="star-profile">
                         <img src="/resources/images/crown.png">
-                        <a href="#" class="star-profile-img"><img src="/resources/images/zz.png"></a>
+                        <a href="#" class="star-profile-img">
+                            <img src="/resources/images/zz.png">
+                        </a>
                         <a href="#">1. 기묘동</a>
                         <span>Today 400</span>
                     </div>
@@ -59,7 +55,7 @@
                         <a href="#" class="star-profile-img"><img src="../../resources/images/zz.png"></a>
                         <a href="#">4. 기묘동4</a>
                         <span>Today 100</span>
-                    </div>
+                    </div> --%>
                 </div>
             </div>
 
@@ -77,7 +73,16 @@
                     <c:otherwise>
                         <div class="profile">
                             <div class="profile-img">
-                                <img src="/resources/images/zz.png">
+
+                            <c:choose>
+                                <c:when test="${loginMember.profileImage==null}">
+                                    <img src="/resources/images/common/cubes.png">
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="${loginMember.profileImage}">
+                                </c:otherwise>
+                            </c:choose>
+
                                 <div class="dropdown-btn"><i class="fa-solid fa-caret-down dropdown-btn-icon"></i></div>
                                 
                                 <!-- dropdown -->
@@ -104,8 +109,9 @@
         <!-- 인기 shorts, 최신 shorts -->
         <section class="place-list-area">
             <div class="place-area" id="placeArea">
+                
                 <div class="shorts-select">
-                    <span id="popular-shorts" class="place-area-title"><i class="fa-brands fa-gratipay"></i> 인기 shorts</span>
+                    <span id="popular-shorts" class="place-area-title select"><i class="fa-brands fa-gratipay"></i> 인기 shorts</span>
                     <span id="new-shorts" class="place-area-title"><i class="fa-solid fa-circle-play"></i> 최신 shorts</span>
                 </div>
 
@@ -114,7 +120,17 @@
                     <span class="next-arrow"><i class="fa-solid fa-arrow-right"></i></span>
 
                     <ul class="place-list">
+
                         <li class="place-item">
+                            <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
+                                <img src="../../resources/images/toy.jpg">
+                                <span class="place-title">형이 인형 뽑는 방법 알려준다</span>
+                                <span>김효동2</span>
+                                <span>조회수 5,000</span>
+                            </a>
+                        </li>
+
+                        <%-- <li class="place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
                                 <img src="../../resources/images/toy.jpg">
                                 <span class="place-title">형이 인형 뽑는 방법 알려준다</span>
@@ -193,16 +209,7 @@
                                 <span>김효동2</span>
                                 <span>조회수 5,000</span>
                             </a>
-                        </li>
-
-                        <li class="place-item">
-                            <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="../../resources/images/toy.jpg">
-                                <span class="place-title">형이 인형 뽑는 방법 알려준다</span>
-                                <span>김효동2</span>
-                                <span>조회수 5,000</span>
-                            </a>
-                        </li>
+                        </li> --%>
                     </ul>
                 </div>
             </div>
@@ -211,10 +218,7 @@
 
     <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 
-    <script>
-        const loginMember = "${loginMember}";
-    </script>
     <script src="/resources/js/common/home.js"></script>
-    <script src="/resources/js/common/header.js"></script>
+    
 </body>
 </html>

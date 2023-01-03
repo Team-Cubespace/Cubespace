@@ -34,18 +34,19 @@ section:first-child{
 }
 
 .star-profile{
-    margin: 0 25px;
+    margin: 0 20px;
+    width: 175px;
     position: relative;
     align-items: center;
 }
 
 .star-profile > img{
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     position: absolute;
-    top: -15px;
-    left: -15px;
-    transform: rotate(-35deg);
+    top: -23px;
+    left: 8px;
+    transform: rotate(-37deg);
 }
 
 .star-profile a{

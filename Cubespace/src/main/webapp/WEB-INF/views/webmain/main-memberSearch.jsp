@@ -23,7 +23,9 @@
     <div class="modal" id="modal" style="display: none;">
         <%-- 모달 창 --%>
         <div class="modal-box" >
-            <div class="modal-close" id="modalClose" onclick="closeModal()"><</div>
+            <div class="modal-close-box">
+                <div class="modal-close" id="modalClose" onclick="closeModal()"><</div>
+            </div>
             <%-- 모달 헤더 --%>
             <div class="modal-head">
                 <img class="head-img" src="/resources/images/common/memberSearch.png" alt="깐부찾기이미지">
@@ -48,10 +50,6 @@
             </div>
         </div>
     </div>
-    <script>
-    		// 로그인한 회원 번호
-		const loginMemberNo = "${loginMember.memberNo}";
-    </script>
     <!-- jQuery 라이브러리(.js 파일) 추가(CDN 방식) -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <%-- 해당 모달 개인 js --%>

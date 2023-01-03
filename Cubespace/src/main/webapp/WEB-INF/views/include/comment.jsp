@@ -55,7 +55,7 @@
                                 </c:if>
                             </div>
                             <div class="comment-content-area">
-                                <p>
+                                <p style="font-family: '${comment.ownFontNo}'">
                                     ${comment.commentContent}
                                 </p>                            
                             </div>

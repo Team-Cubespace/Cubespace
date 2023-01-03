@@ -44,10 +44,43 @@ public class GuestBookController {
 		
 		paramMpa.put("minihomeNo",minihome.getMemberNo());
 		
-		
 		int writeGuestbook = service.writeGuestbook(paramMpa);
 		
 		return writeGuestbook; 
 	}
+
+	
+	/** 방명록 목록 조회
+	 * @return
+	 */
+	@GetMapping("/listGuestbook")
+	@ResponseBody
+	public String listGuestbook(@SessionAttribute("minihome") Minihome minihome) {
+	
+		int minihomeNo = minihome.getMemberNo();
+		
+		List<GuestBook> listGuestbook = service.listGuestbook(minihomeNo);
+		
+		return new Gson().toJson(listGuestbook); 
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

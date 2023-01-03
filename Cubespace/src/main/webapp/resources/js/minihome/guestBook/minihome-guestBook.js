@@ -2,25 +2,53 @@
 let memberNo;
 let secretMessage;
 
+
+
+/* 방명록 목록 조회 및 생성 함수 선언 */
+const listGuestbook=()=>{
+
+    $.ajax({
+        url : "/listGuestbook",
+        dataType : "JSON",
+        success : guestbookList =>{
+            
+            const guestListBox = document.getElementsByClassName("guest-list-box")[0];
+            guestListBox.innerHTML=""; // 이전 내용 제거
+
+            for(let listGuestbook of guestbookList){
+
+                // listGuestbook.gbContent          글내용
+                // listGuestbook.gbCreate           작성시간
+                // listGuestbook.gbNo               방명록번호
+                // listGuestbook.gbSecret           비밀글여부
+                // listGuestbook.receiverNo         미니홈피주인
+                // listGuestbook.senderNo           글남긴놈  
+                // listGuestbook.memberNickname     글남긴놈(닉네임)  
+                // listGuestbook.profileImage       글남긴놈프로필경로 
+                
+
+
+
+            }
+
+        }
+
+    })
+}
+
+
+
 const guestInput = document.getElementsByClassName("guest-input")[0];
 const checkbox = document.getElementsByClassName("switch")[0];
 
-
-// guestInput.addEventListener("keyup",()=>{
-//     console.log(guestInput.value);
-//     console.log(checkbox.checked);
-// })
-
-// 작성 시 호출할 함수 선언
-const WriteGuestbook=()=>{
+/* 방명록 작성 함수 선언 */
+const writeGuestbook=()=>{
     
     // 입력창에 글이 없을 시
     if(guestInput.value.trim().length == 0 ){ 
         alert("방명록 내용을 입력해주세요.");
         guestInput.value = "";
-        
     }else{
-        
         /* 비밀글 체크 여부 확인 */
         if(checkbox.checked){ // 비밀글 일때
             secretMessage= 'Y';
@@ -45,18 +73,6 @@ const WriteGuestbook=()=>{
         })
     }
 };
-
-/////////////////////////////////////////////////////////////
-/*
-목록조회 함수
-쓰기 함수
-수정 함수 
-
-게시글 작성(a함수)시
-1. 글 내용이 없다면 제출 안되고 메시지 출력 
-2. 글이 있다면 비밀글 값 가지고 이동 후 INSERT
-3. INSERT 성공 시 방명록 다시 조회하여 JSON파일로 스크립트로 
-*/
 
 
 // 수정 시 

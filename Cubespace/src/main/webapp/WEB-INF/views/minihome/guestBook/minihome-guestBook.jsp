@@ -218,7 +218,7 @@
                                 <span class="secret-message">비밀글로 작성</span>
                                 <input type="checkbox" class="switch">
                             </div>
-                            <button class="btn-secondary btn" onclick=" WriteGuestbook()">등록하기</button>
+                            <button class="btn-secondary btn" onclick=" writeGuestbook()">등록하기</button>
                         </div>
                     </form>
                 </div>

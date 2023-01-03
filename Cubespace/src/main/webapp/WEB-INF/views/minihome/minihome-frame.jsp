@@ -62,7 +62,7 @@
                         <span>매력지수 액티브</span>
                         <div class="active-range">
                             <div class="empty"></div>
-                            <div class="fill"></div>
+                            <div class="fill frame-color" style="width: ${(minihome.total * 1.0) / (minihome.maxTotal * 1.0) * 100}%"></div>
                         </div>
                     </div>
                 </div>

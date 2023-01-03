@@ -144,7 +144,7 @@ public class VideoController {
 		String ffmpegPath = "/resources/ffmpeg-5.1.2-essentials_build/bin";
 		ffmpegPath = session.getServletContext().getRealPath(ffmpegPath);
 		
-		String thumbnailWebPath = "/resources/video/thumbnail/";
+		String thumbnailWebPath = "/resources/videothumbnail/";
 		String thumbnailFolderPath = session.getServletContext().getRealPath(thumbnailWebPath);
 		
 		int videoNo = service.videoWrite(video, inputVideo, videoWebPath, 
@@ -189,7 +189,7 @@ public class VideoController {
 		String ffmpegPath = "/resources/ffmpeg-5.1.2-essentials_build/bin";
 		ffmpegPath = session.getServletContext().getRealPath(ffmpegPath);
 		
-		String thumbnailWebPath = "/resources/video/thumbnail/";
+		String thumbnailWebPath = "/resources/videothumbnail/";
 		String thumbnailFolderPath = session.getServletContext().getRealPath(thumbnailWebPath);
 		
 		int result = service.videoUpdate(video, inputVideo, videoWebPath, 

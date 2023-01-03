@@ -68,7 +68,10 @@
                 </div>
                 <div class="minihome-header-right">
                     <div class="minihome-title-area">
-                        <input class="minihome-title" value="${minihome.homepageName}" id="minihomeTitle" readOnly maxLength="10">
+                        <%-- <input class="minihome-title" value="${minihome.homepageName}" id="minihomeTitle" readOnly maxLength="10"> --%>
+                        <div id="minihomeTitleContainer">
+                            <p class="minihome-title" id="minihomeTitle">${minihome.homepageName}</p>
+                        </div>
                         <button id="updateMinihomeTitleButton" type="button" class="fa-solid fa-gear header-hover"></button>
                         <button type="button" id="confirmUpdateButton">수정</button>
                         <button type="button" id="cancelUpdateButton">

@@ -133,6 +133,7 @@ html {
     padding: 5px;
     border-radius: 5px;
     display: none;
+    cursor: pointer;
 }
 #confirmUpdateButton {
     margin-right: 5px;

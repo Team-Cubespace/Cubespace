@@ -22,6 +22,10 @@
     *{
         font-family : "${myFont}";
     }
+
+    input:not(#minihomeTitle), textarea {
+        font-family : "${loginMember.ownFontNo}";
+    }
     </style>
 
 

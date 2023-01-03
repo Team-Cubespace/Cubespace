@@ -65,7 +65,7 @@
 		<result property="profileImage" column="PROFILE_IMG"/>
 		<result property="parentCommentNo" column="PARENT_COMMENT_NO"/>
 		<result property="childCommentCount" column="CHILD_COMMENT_COUNT"/>
-		<result property="fontPath" column="FONT_PATH"/>
+		<result property="ownFontNo" column="OWN_FONT_NO"/>
 	</resultMap>
 	
 	<!-- 깐부 여부 체크 -->
@@ -135,8 +135,7 @@
 				END COMMENT_CREATE,
 				BOARD_NO, MEMBER_NO, PARENT_COMMENT_NO, MEMBER_NAME, MEMBER_NICKNAME, PROFILE_IMG,
 				(SELECT COUNT(*) FROM "COMMENT" WHERE PARENT_COMMENT_NO = MAIN.COMMENT_NO AND COMMENT_DEL_YN='N') CHILD_COMMENT_COUNT,
-				(SELECT FONT_PATH FROM FONT_SHOP WHERE FONT_NO = (
-					SELECT GOODS_NO FROM MEMBER_OWN_GOODS WHERE OWN_NO = OWN_FONT_NO)) FONT_PATH
+				OWN_FONT_NO
 				FROM "COMMENT" MAIN
 				JOIN "MEMBER" USING(MEMBER_NO)
 			WHERE BOARD_NO = #{albumNo}

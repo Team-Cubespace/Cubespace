@@ -10,7 +10,9 @@
         <span> > </span>
         <span>${folderName}</span>
     </header>
-    <a href="/videoWrite?folderNo=${folderNo}&cp=${pagination.currentPage}" id="writeButton">글쓰기</a>
+    <c:if test="${loginMember.memberNo == minihome.memberNo}">
+        <a href="/videoWrite?folderNo=${folderNo}&cp=${pagination.currentPage}" id="writeButton">글쓰기</a>
+    </c:if>
 
     <c:choose>
         <c:when test="${fn:length(videoList) == 0}">

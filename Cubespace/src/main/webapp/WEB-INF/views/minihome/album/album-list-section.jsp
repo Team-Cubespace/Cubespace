@@ -9,7 +9,9 @@
         <span> > </span>
         <span>${folderName}</span>
     </header>
-    <a href="/albumWrite?folderNo=${folderNo}&cp=${pagination.currentPage}" id="writeButton" type="button">글쓰기</a>
+    <c:if test="${loginMember.memberNo == minihome.memberNo}">
+        <a href="/albumWrite?folderNo=${folderNo}&cp=${pagination.currentPage}" id="writeButton" type="button">글쓰기</a>
+    </c:if>
 
     <c:choose>
         <c:when test="${fn:length(albumList) == 0}">

@@ -18,5 +18,5 @@ public class Comment {
 	private String profileImage;		// 회원 프로필 이미지
 	private int parentCommentNo;		// 부모 댓글 번호
 	private int childCommentCount;		// 자식 댓글 갯수
-	private String fontPath;			// 폰트 경로
+	private int ownFontNo;				// 폰트 경로
 }

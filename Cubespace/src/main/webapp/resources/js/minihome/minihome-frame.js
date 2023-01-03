@@ -1,5 +1,5 @@
 // 미니홈피 이름 변경
-let prevMiniohmeTitle;
+let prevMiniohmeTitleEl;
 (()=>{
     // 톱니바퀴 버튼
     const updateMinihomeTitleButton = document.getElementById("updateMinihomeTitleButton");
@@ -8,13 +8,35 @@ let prevMiniohmeTitle;
     // 취소 버튼
     const cancelUpdateButton = document.getElementById("cancelUpdateButton")
     // 미니홈피 이름 인풋
-    const minihomeTitle = document.getElementById("minihomeTitle");
+    // const minihomeTitle = document.getElementById("minihomeTitle");
 
     // 톱니바퀴 아이콘 클릭 시
     updateMinihomeTitleButton.addEventListener("click", ()=>{
         // minihomeTitle 인풋 가져와서 read-only 해제
-        prevMiniohmeTitle = minihomeTitle.value;
-        minihomeTitle.readOnly = false;
+        const minihomeTitleContainer = document.getElementById("minihomeTitleContainer");
+        prevMiniohmeTitleEl = minihomeTitleContainer.innerHTML;
+
+        let prevValue = document.getElementById("minihomeTitle").innerText;
+        // XSS 방지 처리 해제
+        prevValue =  prevValue.replaceAll("&amp;", "&");
+        prevValue =  prevValue.replaceAll("&lt;", "<");
+        prevValue =  prevValue.replaceAll("&gt;", ">");
+        prevValue =  prevValue.replaceAll("&quot;", "\"");
+        
+        // 개행문자 처리 해제
+        prevValue =  prevValue.replaceAll("<br>", "\n").replaceAll("&nbsp;", " ");
+
+        // 인풋 태그 생성
+        const minihomeTitleInput = document.createElement("input");
+        minihomeTitleInput.classList.add("minihome-title");
+        minihomeTitleInput.setAttribute("id", "minihomeTitle");
+        minihomeTitleInput.setAttribute("maxLength", 30);
+        minihomeTitleInput.value = prevValue;
+
+        minihomeTitleContainer.innerHTML = "";
+        minihomeTitleContainer.prepend(minihomeTitleInput);
+
+        // minihomeTitle.readOnly = false;
         // 수정버튼 출력
         confirmUpdateButton.style.display = "block";
         // 취소버튼 출력
@@ -26,7 +48,7 @@ let prevMiniohmeTitle;
     // 수정 버튼 클릭 시
     confirmUpdateButton.addEventListener("click", ()=>{
         // minihomeTitle 인풋의 값 가져와서
-        const value = minihomeTitle.value.trim();
+        const value = document.getElementById("minihomeTitle").value.trim();
         if(value.length != 0) {
             $.ajax({
                 url:"/updateMinihomeTitle",
@@ -37,7 +59,8 @@ let prevMiniohmeTitle;
                 success: result=>{
                     if(result > 0) {
                         console.log("변경 성공");
-                        prevMiniohmeTitle = value;
+                        document.getElementById("minihomeTitleContainer").innerHTML = prevMiniohmeTitleEl;
+                        document.getElementById("minihomeTitle").innerText = value;
                     }
                 }
             })
@@ -51,15 +74,15 @@ let prevMiniohmeTitle;
         updateMinihomeTitleButton.classList.add("header-hover");
 
         // monihomeTitle 인풋 read-only 설정
-        minihomeTitle.readOnly = true;
+        // minihomeTitle.readOnly = true;
     });
 
     // 취소 버튼 클릭 시
     cancelUpdateButton.addEventListener("click", ()=>{
         // m inihomeTitle 인풋 readOnly 적용
-        minihomeTitle.readOnly = true;
+        // minihomeTitle.readOnly = true;
         // 이전 이름값 백업을 value에 삽입
-        minihomeTitle.value = prevMiniohmeTitle;
+        // minihomeTitle.value = prevMiniohmeTitle;
         // 수정버튼 삭제
         confirmUpdateButton.style.display = "none";
         // 취소버튼 삭제
@@ -67,7 +90,8 @@ let prevMiniohmeTitle;
         // 톱니바퀴 출력
         updateMinihomeTitleButton.classList.add("header-hover");
         // monihomeTitle 인풋 read-only 설정
-        minihomeTitle.readOnly = true;
+        // minihomeTitle.readOnly = true;
+        document.getElementById("minihomeTitleContainer").innerHTML = prevMiniohmeTitleEl;
     });
 })();
 

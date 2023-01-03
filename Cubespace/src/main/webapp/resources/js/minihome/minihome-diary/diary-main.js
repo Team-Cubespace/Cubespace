@@ -1,5 +1,8 @@
 let peoplePopContainer;
 
+/* 날짜를 담는 변수 */
+let dateContainer;
+
 // 공공데이터 포털 공휴일 조회 함수
 const getRestDeInfo = (date) => {
 
@@ -67,18 +70,23 @@ const getRestDeInfo = (date) => {
     // const homepageMemberNo = 1; /* 이슬이 다이어리를 조회해보겠다. */
     // const loginMemberNo = 7; 
 
-    var today = new Date();
+    let flag ;
+    let today;
+    if(flag != ""){
+        //today = new Date(변수명)
+    }else {
+        //[ 현재 날짜 ]
+        //var today = new Date();
+    }
     var year = today.getFullYear();
     var month = ('0' + (today.getMonth() + 1)).slice(-2);
     var day = ('0' + today.getDate()).slice(-2);
     const diaryDate = year + '-' + month  + '-' + day;
-
-    selectDiary(diaryDate);
     
+    /* '글쓰기'버튼 누를 때, 어느 날짜에 글을 쓰는지 알기 위해서...  */
+    dateContainer = diaryDate;
+    selectDiary(diaryDate);
 
-function writeBtn(diaryDate){
-    console.log(diaryDate);
-}
 
 // 달력 생성 함수
 const makeCalendar = (date) => {
@@ -149,51 +157,15 @@ const makeCalendar = (date) => {
             // !!!!!!!!!!!!!!요기다 해당 날짜 다이어리 조회 ajax 코드 작성!!!!!!!!!!!!!!!!!
             // $.ajax({}) 
 
-            /* [나의 주석] 
             
-                구현할 때 들고가야 하는 것 : 작성일 / (loginmember 넘버 &미니홈피 주인장 회원넘버 = 관계조회시 필요) / 폴더 넘버
-                가져와서 뿌리는 것 : 제목 / 내용 / 작성일(시간만) / 공개여부 / 공감목록(map으로 select 2번해가지고 공감목록 & 글목록을 map에다가 넣으면 될 듯?)
-                만약에 loginmember와 (미니홈피 주인)이 같을 경우,
-                만약에 loginmember와 (미니홈피 주인)이 깐부관계인 경우(둘의 관계를 select한다음에 번호를 줘야하나?)
-
-                -> 그러면 불러오는 글 목록이 if문으로 달라지지 않을까?
-                1. DB에 작성일을 들고, 작성일이 일치하는 목록을 불러온다.
-                2. 글쓰기 할 때도 저 작성일 넣어야됨.
-
-                -> [ 글 목록 ]
-                1) 본인의 미니홈피    : 1,2,3 다 조회 (3 공개 여부는 controller에서 처리)
-                (나머지 1,2 공개 여부는 jsp에서 처리 // if문으로.....)
-                2) 깐부의 미니홈피    : 1,2 조회
-                3) 낯선 자의 미니홈피 : 1 조회
-
-                -> [공감목록]
-                1) 목록이 있는 경우 : 조회됨 & 누르면 깐부 목록을 조회할 수 있음
-                2) 목록이 없는 경우 : 아예 뜨지를 않으니 클릭도 못하지...
-
-                -> [ 공감하기 버튼 ] : ID말고 queryselector 써야 됨!!!!!!
-                1) 본인의 미니홈피 O   : 공감하기 버튼 보여짐 X 
-                2) 본인의 미니홈피 X   : 공감하기 버튼 보여짐 O
-                    (1) 깐부인 경우    : 공감하기 버튼 누름 O
-                        1. 누른다. (emoji의번호 필요함.switch로 각각 값을 줘야하나?)
-                            -> ajax : insert한다.  & 새로 목록 조회해주기[함수:selectEmojiList](or 특정이모지 +1)
-                        2. 이미 누른 경우
-                            1. 다시 그걸 누른다 = 취소됨  : delete  & 새로 목록 조회해주기[함수:selectEmojiList](or 특정 이모지 -1)
-                            2. 다른 이모지를 누른다 = 변경됨 : update   & 새로 목록 조회해주기[함수:selectEmojiList]or 누른 이모지 +1 / 이전 이모지 -1)
-
-                        (1) 이미 누른 경우 : 누른 공감버튼에 border표시
-                        (2) 취소하면 border 빼고, 숫자 내려가고,
-                        (3) 다른 공감 emoji 누르면 다른 쪽꺼 (2)됨.
-                    (2) 낯선 자인 경우 : 공감하기 버튼 누름 X
-
-            
-            */
             //[나의 코드]
             /* 작성일 / 폴더 넘버 / 미니홈피 주인장 넘버 */
             const diaryDate = `${currentYear}-${currentMonth}-${temp}`;
             // const folderNumber = 1; /* 폴더 */
             // const homepageMemberNo = 1; /* 이슬이 다이어리를 조회해보겠다. */
             // const loginMemberNo = 7; 
-            
+            dateContainer = diaryDate;
+            console.log("클릭한 날짜 : " +dateContainer);
             selectDiary(diaryDate);
 
             // ------- 여긴 ajax success 코드로 활용 -------------
@@ -223,6 +195,11 @@ const makeCalendar = (date) => {
         }
     }
 }
+
+function write(dateContainer){
+
+}
+
 
 function selectDiary(diaryDate){
     
@@ -392,6 +369,7 @@ document.getElementById("nextMonth").addEventListener("click", ()=>{
 
 // 화면 로딩 시 현재 날짜 출력 및 선택
 (()=>{
+
     makeCalendar(new Date());
     
     const m = new Date().getMonth() + 1;
@@ -667,5 +645,9 @@ function selectEmojiPeopleList(emojiNo,diaryNo,btn){
 
 function mouseout(btn){
     btn.parentElement.parentElement.nextSibling.innerText = "";
+}
+
+function writeBtn(){
+
 }
 

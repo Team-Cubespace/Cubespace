@@ -30,21 +30,13 @@
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
     <%-- summernote css --%>
     <style>
-    /* .summernoteBox {
-        width: 620px;
-        background-color: white;
-        border: 1px solid black;
+    .frame-color {
+            background-color : ${minihome.frameColor};
     }
-
-    .summernote {
-        height: 500px;
-        width: 620px;
-        resize: none;
-    } */
     </style>
 </head>
 <body>
-    <div class="content-area">
+    <div class="content-area frame-color">
         <section class="minihome-rayout">
             <jsp:include page="/WEB-INF/views/include/side-folder.jsp"/>
                 <!-- 좌측 section 코드 작성 또는 include -->

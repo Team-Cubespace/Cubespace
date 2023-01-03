@@ -12,36 +12,28 @@ $.ajax({
     console.log("스케줄리스트가 잘 불러져 왔니?");
     console.log(data);
 
+    /* 이벤트객체를 담는 빈 배열 */
     var events=[];
+    /* allDay를 조정해주는 변수 설정 */
+    let allDayFlag;
         $(data).each(function(index){
           if(data[index].allDayFlag == "Y"){
-            events.push({
-            planId : data[index].planNo,
-            title: data[index].planTitle, //내 vo에서 넘어온 이름이 이거임
-            /* subSting(0,10): 날짜 subString(11,19) */
-            //start: data[index].startDate.substring(0,10), //내 vo에서 넘어온 이름이 이거임
-            start : data[index].startDate,
-            end : data[index].endDate,
-            allDay : true,
-            category : data[index].planCategory,
-            color : data[index].color,
-            description : data[index].planDescription,
-            textColor : '#243763'
-            });
+            allDayFlag = true;
           } else {
-            events.push({
-              planId : data[index].planNo,
-              title: data[index].planTitle, //내 vo에서 넘어온 이름이 이거임
-              /* subSting(0,10): 날짜 subString(11,19) */
-              //start: data[index].startDate.substring(0,10), //내 vo에서 넘어온 이름이 이거임
-              start : data[index].startDate,
-              end : data[index].endDate,
-              allDay : false,
-              category : data[index].planCategory,
-              color : data[index].color,
-              textColor : '#243763'
-              });
+            allDayFlag = false;
           }
+          events.push({
+          planId : data[index].planNo,
+          title: data[index].planTitle, //내 vo에서 넘어온 이름이 이거임
+          start : data[index].startDate,
+          end : data[index].endDate,
+          allDay : allDayFlag,
+          category : data[index].planCategory,
+          color : data[index].color,
+          description : data[index].planDescription,
+          textColor : '#243763'
+          });
+          
         });
     console.log("이벤트 목록입니다.");
     defaultEvents = events;
@@ -65,6 +57,12 @@ function allDayTrue(){ //alDay == true 일 때
   $("#endTime").val("00:00");
   /* 하루 종일이니까 날짜도 동일!!!! */
   /* 원래 있던 위치 */
+
+  /* 하루종일을 [예]로 클릭할 때 */
+  if( $("#startTime").attr("disabled") == "disabled"){
+    alert("끝날짜도 바뀐당1~");
+    $("#endDate").val($("#startDate").val());
+  }
   
   // $("#endDate").val($("#startDate").val());
 }
@@ -75,14 +73,25 @@ function allDayFalse(){ //alDay == false 일 때
 
 }
 
+/* 강사님 수정 코드 */
+/* 하루종일[예]인 상태에서 시작날짜가 바뀔 때 */
 document.getElementById("startDate").addEventListener("change",function(){
   if( $("#startTime").attr("disabled") == "disabled"){
-    alert("끝날짜도 바뀐당~");
+    alert("끝날짜도 바뀐당2~");
     $("#endDate").val($("#startDate").val());
   }
 })
 
-
+/* 이벤트들은 밖으로 빼준당 왜냐면 호출될 때마다 클릭되기를 기다리고 있다가... 쌓이는 듯...*/
+document.querySelectorAll("input[name='allDay']")[0].addEventListener("click",function(){
+  console.log("allDay에 '예'를 클릭하셨나요...?");  
+  allDayTrue();
+});
+/* 이벤트들은 밖으로 빼준당 */
+document.querySelectorAll("input[name='allDay']")[1].addEventListener("click",function(){
+  console.log("allDay에 '아니오'를 클릭하셨나요...?");  
+  allDayFalse()
+});
 
 /* [함수] 팝업 2개 (등록 or 수정) 공통 */
 function commonInPop(){
@@ -91,14 +100,6 @@ function commonInPop(){
     //allDay = true 일 때의 세팅 : 하루종일이기 때문에, [(1)시작날짜 = 끝날짜 & (2) 시간은 없음]
     //redio버튼 클릭 이벤트
     //$("#allDay2").prop("checked", true); 
-    document.querySelectorAll("input[name='allDay']")[0].addEventListener("click",function(){
-      console.log("allDay에 '예'를 클릭하셨나요...?");  
-      allDayTrue();
-    });
-    document.querySelectorAll("input[name='allDay']")[1].addEventListener("click",function(){
-      console.log("allDay에 '아니오'를 클릭하셨나요...?");  
-      allDayFalse()
-    });
     /* 제목값 세팅 */
     let oldTitle = document.getElementById("title").value;
     document.getElementById("title").addEventListener("keyup",function(){
@@ -166,11 +167,11 @@ function popup(arg){
     //2. 제목
     document.getElementById("title").value = arg.event.title;
     //3. 내용
-      // if(arg.event.extendedProps.description != undefined){
+      if(arg.event.extendedProps.description != undefined){
         document.getElementById("description").value = arg.event.extendedProps.description;
-      // } else {
-        // document.getElementById("description").value = "";
-      // }
+      } else {
+        document.getElementById("description").value = "";
+      }
     //4. 시작 날짜
     document.getElementById("startDate").value = startFullYear +"-"+startMonth+"-"+startDate;
     //5. 시작 시간
@@ -183,7 +184,11 @@ function popup(arg){
       if(arg.event.allDay){
         $("#allDay1").prop("checked", true);
         /* 클릭했을 때 바뀌는 거 말고도 여기도 세팅해줘야 됨... */
-        allDayTrue();
+        $("#startTime").attr("disabled",true);
+        $("#endTime").attr("disabled",true);
+        $("#endDate").attr("disabled",true);
+        $("#startTime").val("00:00");
+        $("#endTime").val("00:00");
       }else{
         $("#allDay2").prop("checked", true);
         allDayFalse();
@@ -259,7 +264,17 @@ function createCalendar(){
           popup(arg);
           selectEvent = arg;
         },
-        events : defaultEvents
+        events : defaultEvents,
+
+        eventResize: function(info) {
+          alert(info.event.title + " end is now " + info.event.end.toISOString());
+      
+          if (!confirm("is this okay?")) {
+            info.revert();
+          }
+        }
+
+        
     });
     calendar.render();
 }
@@ -273,7 +288,8 @@ function addEvent(){
   const startTime = document.getElementById("startTime").value;
   const endDate = document.getElementById("endDate").value;
   const endTime = document.getElementById("endTime").value;
-  const allDay =  document.querySelector("input[name='allDay']:checked").value;
+  let allDay =  document.querySelector("input[name='allDay']:checked").value;
+  let allDayvariable;
   /* 이거 맞춰줘야해... */
   let backgroundColor;
   if(category == 1){
@@ -289,38 +305,32 @@ function addEvent(){
   /* db에 추가할 데이터 */
   let addEventdata;
   if(allDay =="true"){
-    addEventdata = {
-        "planCategory": category,
-        "planTitle" : title,
-        "planDescription" : description,
-        "startDate" : startDate+" "+startTime,
-        "endDate": endDate+" "+endTime,
-        "allDayFlag" : 'Y'
-      }
+    allDayvariable = "Y";
   } else {
-    addEventdata = {
-        "planCategory": category,
-        "planTitle" : title,
-        "planDescription" : description,
-        "startDate" : startDate+" "+startTime,
-        "endDate": endDate+" "+endTime,
-        "allDayFlag" : 'N'
-    }
+    allDayvariable = "N";
   }
   $.ajax({
     url: "/diary/calendar/addSchedule",
-    contentType: 'application/json',
+    // contentType: 'application/json',
     type:'POST',
-    data: JSON.stringify(addEventdata),
-    aysnc : false,
+    data: {
+      "planCategory": category,
+      "planTitle" : title,
+      "planDescription" : description,
+      "startDate" : startDate+" "+startTime,
+      "endDate": endDate+" "+endTime,
+      "allDayFlag" : allDayvariable
+    },
     success:function(result){
       
       if(result > 0){ //성공
         alert("일정이 등록되었습니다.");
+        console.log(result);
         /* ● calendar자체의 addEvent함수를 쓰고 싶어서 전역변수를 먼저 만든 다음, fullCalendar 값을 넣고 걔의 함수를 씀. ● */
         if(allDay =="true"){
           console.log("allday가 trueㅋ")
           calendar.addEvent({
+            planId : result,
             category: category,
             title : title,
             description : description,
@@ -332,6 +342,7 @@ function addEvent(){
           });
         } else {
           calendar.addEvent({
+            planId : result,
             category: category,
             title : title,
             description : description,
@@ -358,45 +369,59 @@ function addEvent(){
 
 /* [함수] 수정하기 */
 function updateEvent(){
+  console.log("안녕...");
   
   const planId = document.getElementById("number").value;
   const category = document.getElementById("category").value;
   const title = document.getElementById("title").value;
-  const description = document.getElementById("description").value;
+  const description = document.getElementById("title").value;
   const startDate = document.getElementById("startDate").value;
   const startTime = document.getElementById("startTime").value;
   const endDate = document.getElementById("endDate").value;
   const endTime = document.getElementById("endTime").value;
   const allDay =  document.querySelector("input[name='allDay']:checked").value;
+    /* 이거 맞춰줘야해... */
+    let backgroundColor;
+    if(document.getElementById("category").value == 1){
+      backgroundColor = "#C0EEE4"
+    } else if (document.getElementById("category").value == 2){
+      backgroundColor = "#F3CCFF"
+    } else if (document.getElementById("category").value == 3){
+      backgroundColor = "#D8F8B7"
+    } else {
+      backgroundColor = "#FFCAC8"
+    }
 
   let updateData;
   if(allDay =="true"){
     updateData = {
-        "planNo" : planId,
-        "planCategory": category,
-        "planTitle" : title,
-        "planDescription" : description,
-        "startDate" : startDate+" "+startTime,
-        "endDate": endDate+" "+endTime,
+        "planNo" : document.getElementById("number").value,
+        "planCategory": document.getElementById("category").value,
+        "planTitle" : document.getElementById("title").value,
+        "planDescription" : document.getElementById("title").value,
+        "startDate" : document.getElementById("startDate").value+" "+document.getElementById("startTime").value,
+        "endDate": document.getElementById("endDate").value+" "+document.getElementById("endTime").value,
         "allDayFlag" : 'Y'
+        
       }
   } else {
     updateData = {
-        "planNo" : planId,
-        "planCategory": category,
-        "planTitle" : title,
-        "planDescription" : description,
-        "startDate" : startDate+" "+startTime,
-        "endDate": endDate+" "+endTime,
-        "allDayFlag" : 'N'
+      "planNo" : document.getElementById("number").value,
+      "planCategory": document.getElementById("category").value,
+      "planTitle" : document.getElementById("title").value,
+      "planDescription" : document.getElementById("title").value,
+      "startDate" : document.getElementById("startDate").value+" "+document.getElementById("startTime").value,
+      "endDate": document.getElementById("endDate").value+" "+document.getElementById("endTime").value,
+      "allDayFlag" : 'N'
     }
   }
+  console.log("수정할 일정 잘 담겼니?");
+  console.log(updateData);
   $.ajax({
     url: "/diary/calendar/updateSchedule",
     contentType: 'application/json',
     type:'POST',
     data: JSON.stringify(updateData),
-    aysnc : false,
     success:function(result){
 
       if(result > 0){ //성공
@@ -412,8 +437,8 @@ function updateEvent(){
         // if(document.getElementById("description").value = ""){
         //   selectEvent.event.setExtendedProp("description", undefined)
         // } else {
+          selectEvent.event.setExtendedProp("description", document.getElementById("description").value);
         // }
-        selectEvent.event.setExtendedProp("description", document.getElementById("description").value);
         //4.5.6.7 시작 & 종료 날짜 & 시간
         selectEvent.event.setDates(document.getElementById("startDate").value+"T"+document.getElementById("startTime").value+":00",
                                   document.getElementById("endDate").value+"T"+document.getElementById("endTime").value+":00")
@@ -427,6 +452,9 @@ function updateEvent(){
           // selectEvent.event.setExtendedProp("allDay","false");
             console.log("false임");
           }
+          /* 색깔 */
+          selectEvent.event.setProp("color", backgroundColor);
+          
       } else { //실패
             console.log("서버에 저장 실패");
       }
@@ -440,3 +468,30 @@ function updateEvent(){
   document.getElementById("popup_layer").style.display = "none";
   
 }/* [함수] 수정하기 끝*/
+
+function deleteEvent(){
+  
+  const planId = document.getElementById("number").value;
+
+  $.ajax({
+    url: "/diary/calendar/deleteSchedule",
+    type:'POST',
+    data: {"planId":planId},
+    success:function(result){
+
+      if(result > 0){ //성공
+        alert("일정이 삭제되었습니다.");
+        selectEvent.event.remove();
+        
+      } else { //실패
+        console.log("서버에 저장 실패");
+      }
+    },
+    error:function(status, request, error){
+
+    }
+  });
+
+//팝업 닫기
+document.getElementById("popup_layer").style.display = "none";
+}

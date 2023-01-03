@@ -319,12 +319,13 @@ public class DiaryController {
 	@ResponseBody
 	public int addSchedule(
 			@SessionAttribute("loginMember") Member loginMember,
-			@RequestBody Map<String, Object> params
+//			@RequestBody Map<String, Object> params
+			Plan plan
 			) {
 		System.out.println("addSchedule 확인!");
-		System.out.println(params);
-		params.put("memberNo", loginMember.getMemberNo());
-		int result = service.addSchedule(params);
+		System.out.println(plan);
+		plan.setMemberNo(loginMember.getMemberNo());
+		int result = service.addSchedule(plan);
 		return result;
 	}
 	
@@ -345,6 +346,23 @@ public class DiaryController {
 		int result = service.updateSchedule(params);
 		return result;
 	}
+	
+	
+	/**월간달력_일정 삭제
+	 * @param planId
+	 * @return
+	 */
+	@PostMapping("/diary/calendar/deleteSchedule")
+	@ResponseBody
+	public int deleteSchedule(int planId) {
+		
+		int result = service.deleteSchedule(planId);
+		
+		return result;
+	}
+
+	
+	
 	
 	
 	

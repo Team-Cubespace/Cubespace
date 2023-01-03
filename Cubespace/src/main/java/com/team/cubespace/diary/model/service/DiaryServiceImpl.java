@@ -140,9 +140,9 @@ public class DiaryServiceImpl implements DiaryService {
 	 *
 	 */
 	@Override
-	public int addSchedule(Map<String, Object> params) {
+	public int addSchedule(Plan plan) {
 		
-		return dao.addSchedule(params);
+		return dao.addSchedule(plan);
 	}
 
 	/** 월간달력_일정 수정
@@ -152,6 +152,13 @@ public class DiaryServiceImpl implements DiaryService {
 	public int updateSchedule(Map<String, Object> params) {
 		
 		return dao.updateSchedule(params);
+	}
+
+	// 월간달력_일정 삭제
+	@Override
+	public int deleteSchedule(int planId) {
+		
+		return dao.deleteSchedule(planId);
 	}
 
 	

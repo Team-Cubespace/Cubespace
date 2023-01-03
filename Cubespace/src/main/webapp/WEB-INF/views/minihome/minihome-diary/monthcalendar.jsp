@@ -25,6 +25,9 @@
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
     
     <style>
+        .frame-color {
+            background-color : ${minihome.frameColor};
+        }
 
         /* 캘린더 css */
         .calendar-container {
@@ -100,7 +103,7 @@
     </style>
 </head>
 <body>
-    <div class="content-area">
+    <div class="content-area frame-color">
         <section class="minihome-rayout">
             <jsp:include page="/WEB-INF/views/include/side-folder.jsp"/>
             <!-- 좌측 section 코드 작성 또는 include -->
@@ -174,8 +177,9 @@
                                 <div class = "modal-footer">
                                     <button id = "mainBtn" onClick = "addEvent()">등록</button>
 
-                                    <button id = "updateBtn" onClick = "updateEvent()" >수정</button>
-                                    <button id = "deleteBtn">삭제</button>
+                                    <button id = "updateBtn" onClick = "updateEvent()">수정</button>
+
+                                    <button id = "deleteBtn" onClick = "deleteEvent()">삭제</button>
 
                                     <button id = "cancleBtn">취소</button>
                                 </div>

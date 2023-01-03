@@ -160,10 +160,13 @@
 	WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
-	<insert id="addSchedule">
+	<insert id="addSchedule" parameterType = "Plan" useGeneratedKeys="true">
+		<selectKey keyProperty = "planNo" resultType = "_int" order = "BEFORE">
+			SELECT SEQ_PLAN_NO.NEXTVAL FROM DUAL
+		</selectKey>
 	INSERT INTO PLAN
 	VALUES (
-	SEQ_PLAN_NO.NEXTVAL,
+	#{planNo},
 	#{memberNo},
 	TO_DATE('${startDate}','YYYY-MM-DD HH24:MI:SS'),
 	TO_DATE('${endDate}','YYYY-MM-DD HH24:MI:SS'),
@@ -185,8 +188,12 @@
 	PLAN_ALLDAY_FL = #{allDayFlag} 
 	WHERE 
 	PLAN_NO = #{planNo}
-	
 	</update>
+	
+	<delete id="deleteSchedule">
+	DELETE FROM PLAN
+	WHERE PLAN_NO = #{planId}
+	</delete>
 	
  	
 </mapper>

@@ -3,7 +3,7 @@ let defaultEvents =[] ;
 
 /* [ajax] 캘린더 오픈 시 :  이벤트를 DB에서 조회해서 캘린더에 뿌려주기 */
 $.ajax({
-  url: "/diary/selectSchedule",
+  url: "/diary/calendar/selectSchedule",
   type:'POST',
   dataType: 'json',
   data:{"loginMember":loginMember},
@@ -64,7 +64,7 @@ function allDayTrue(){ //alDay == true 일 때
   $("#startTime").val("00:00");
   $("#endTime").val("00:00");
   /* 하루 종일이니까 날짜도 동일!!!! */
-  $("#endDate").val($("#startDate").val());
+  // $("#endDate").val($("#startDate").val());
 }
 function allDayFalse(){ //alDay == false 일 때
   $("#startTime").attr("disabled",false)
@@ -72,7 +72,13 @@ function allDayFalse(){ //alDay == false 일 때
   $("#endDate").attr("disabled",false);
 }
 
-
+/* 강사님 수정 코드 */
+document.getElementById("startDate").addEventListener("change",function(){
+  if( $("#startTime").attr("disabled") == "disabled"){
+    alert("끝날짜도 바뀐당~");
+    $("#endDate").val($("#startDate").val());
+  }
+})
 
 /* [함수] 팝업 2개 (등록 or 수정) 공통 */
 function commonInPop(){
@@ -298,7 +304,7 @@ function addEvent(){
     }
   }
   $.ajax({
-    url: "/diary/addSchedule",
+    url: "/diary/calendar/addSchedule",
     contentType: 'application/json',
     type:'POST',
     data: JSON.stringify(addEventdata),
@@ -381,7 +387,7 @@ function updateEvent(){
     }
   }
   $.ajax({
-    url: "/diary/updateSchedule",
+    url: "/diary/calendar/updateSchedule",
     contentType: 'application/json',
     type:'POST',
     data: JSON.stringify(updateData),

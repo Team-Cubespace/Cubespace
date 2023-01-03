@@ -139,9 +139,17 @@ public class DiaryDAO {
 	 * @param params
 	 * @return
 	 */
-	public int addSchedule(Map<String, Object> params) {
+	public int addSchedule(Plan plan) {
 		
-		return sqlSession.insert("diaryMapper.addSchedule",params);
+		//planNo를 반환해와줘....!
+		
+		int result = sqlSession.insert("diaryMapper.addSchedule",plan);
+		if(result > 0) {
+			result = plan.getPlanNo();
+		}
+		System.out.println("planNo" + result);
+		
+		return result;
 	}
 
 	/** 월간달력_일정 수정
@@ -150,7 +158,16 @@ public class DiaryDAO {
 	 */
 	public int updateSchedule(Map<String, Object> params) {
 		
-		return sqlSession.insert("diaryMapper.updateSchedule",params);
+		return sqlSession.update("diaryMapper.updateSchedule",params);
+	}
+
+	/** 월간달력_일정 삭제
+	 * @param planId
+	 * @return
+	 */
+	public int deleteSchedule(int planId) {
+		
+		return sqlSession.delete("diaryMapper.deleteSchedule",planId);
 	}
 
 

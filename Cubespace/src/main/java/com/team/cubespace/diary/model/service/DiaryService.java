@@ -82,13 +82,19 @@ public interface DiaryService {
 	 * @param params
 	 * @return
 	 */
-	int addSchedule(Map<String, Object> params);
+	int addSchedule(Plan plan);
 
 	/** 월간달력_일정 수정
 	 * @param params
 	 * @return
 	 */
 	int updateSchedule(Map<String, Object> params);
+
+	/** 월간달력_일정 삭제
+	 * @param planId
+	 * @return
+	 */
+	int deleteSchedule(int planId);
 
 	
 

@@ -410,3 +410,6 @@ a {
 #goodsAddBtn {
     height: 100%;
 }
+.js-search-button{
+    cursor: pointer;
+}

@@ -49,9 +49,9 @@ public class AdminController {
 	/** 회원 차단, 신고관리 페이지 이동
 	 * @return
 	 */
-	@GetMapping("/block")
-	public String adminBlock() {
-		return "admin/admin-block";
+	@GetMapping("/complain")
+	public String adminComplain() {
+		return "admin/admin-complain";
 	}
 	
 	/** 회원 신고/정지 페이지 이동
@@ -137,4 +137,27 @@ public class AdminController {
 		
 		return loginService.signUp(inputMember, backgroundInfo);
 	}
+	
+	
+	
+//	-------------------------------------------------------------------------------
+
+	/** 신고 목록 조회
+	 * @param paramMap
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/complain/complainSearch")
+	public String blockSearch(@RequestParam Map<String, Object> paramMap,
+			@RequestParam(value="cp", required=false, defaultValue="1" ) int cp,
+			Model model
+			) {
+		
+		// 회원 목록 조회
+		Map<String, Object> map = service.complainSearch(paramMap, cp);
+		model.addAttribute("map", map);
+
+		return "admin/admin-complain";
+	}
+	
 }

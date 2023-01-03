@@ -8,7 +8,7 @@
 <c:set var="allMemberCount" value="${map.allMemberCount}"/>
 <c:set var="listCount" value="${map.listCount}"/>
 
-<c:set var="sURL" value="sort=${param.sort}&key=${param.key}&query=${param.query}&isBlock=${param.isBlock}&isDelete=${param.isDelete}&calanderBefore=${param.calanderBefore}&calanderAfter=${param.calanderAfter}"/>
+<c:set var="sURL" value="sort=${param.sort}&key=${param.key}&query=${param.query}&status=${param.status}&calanderBefore=${param.calanderBefore}&calanderAfter=${param.calanderAfter}"/>
 
 
 
@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="/resources/css/common/footer.css">
     <link rel="stylesheet" href="/resources/css/admin/admin-member.css">
     <link rel="stylesheet" href="/resources/css/admin/admin-all.css">
-    <link rel="stylesheet" href="/resources/css/admin/admin-block.css">
+    <link rel="stylesheet" href="/resources/css/admin/admin-complain.css">
 
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
 
@@ -37,22 +37,21 @@
 
             <section class="category-lists">
                 <a href = "/admin/member" class="detail link-member">회원</a>
-                <a href = "/admin/block" class="detail link-member activate">신고</a>
+                <a href = "/admin/complain/complainSearch" class="detail link-member activate">신고</a>
             </section>
 
             <section class="main-class">
                 <div class="member-title">
-                    <h3>회원 리스트</h3>
+                    <h3>신고 리스트</h3>
                     <div>
-                        <button id="memberAddBtn">+ 회원 등록</button>
                         <button id="goodsAddBtn">+ 상품 등록</button>
                     </div>
                 </div>
 
 
-                <form id="frmSearchBase" method="get" class="member-search" action="/manager/memberSearch">
+                <form id="frmSearchBase" method="get" class="member-search" action="/admin/complain/complainSearch">
                     <input type="hidden" name="sort" id="orderInput">
-                    <p class="search__title">회원 검색</p>
+                    <p class="search__title">신고 검색</p>
                     <div class="search-detail-box form-inline">
                         <div class="search-detail-div">
                             <div class="search-detail-keyword">검색어</div>
@@ -60,16 +59,16 @@
                                 <select name="key" id="key" class="form-control">
 
 
-                                <c:if test="${param.key == 'email'}">
-                                    <c:set var="emailChk" value="selected"></c:set>
-                                </c:if>
-
                                 <c:if test="${param.key == 'nickname'}">
                                     <c:set var="nicknameChk" value="selected"></c:set>
                                 </c:if>
+
+                                <c:if test="${param.key == 'complainNo'}">
+                                    <c:set var="complainNoChk" value="selected"></c:set>
+                                </c:if>
                                     
-                                <option value="email" ${emailChk}>닉네임</option>
-                                <option value="nickname" ${nicknameChk}>신고번호</option>
+                                <option value="nickname" ${nicknameChk}>닉네임</option>
+                                <option value="complainNo" ${complainNoChk}>신고번호</option>
                                         
                                         
                                 </select>
@@ -81,25 +80,25 @@
                             <div class="search-detail-keyword">처리여부</div>
                             <div>
 
-                                <c:set var="allBlockChk" value="checked"/>
-                                <c:if test="${param.isBlock == 'notBlock'}">
-                                    <c:set var="notBlockChk" value="checked"></c:set>
-                                    <c:set var="allBlockChk" value=""/>
+                                <c:set var="allStatusChk" value="checked"/>
+                                <c:if test="${param.status == 1}"> <%-- 처리완료 --%>
+                                    <c:set var="yesStatusChk" value="checked"></c:set>
+                                    <c:set var="allStatusChk" value=""/>
                                 </c:if>
 
-                                <c:if test="${param.isBlock == 'yesBlock'}">
-                                    <c:set var="yesBlockChk" value="checked"></c:set>
-                                    <c:set var="allBlockChk" value=""/>
+                                <c:if test="${param.status == 0}"> <%-- 처리중 --%>
+                                    <c:set var="noStatusChk" value="checked"></c:set>
+                                    <c:set var="allStatusChk" value=""/>
                                 </c:if>
 
                                 <label class="radio-inline">
-                                    <input type="radio" name="isBlock" value="allBlock" ${allBlockChk}>전체
+                                    <input type="radio" name="status" value="allStatus" ${allStatusChk}>전체
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="isBlock" value="notBlock" ${notBlockChk}>처리중
+                                    <input type="radio" name="status" value="noStatus" ${noStatusChk}>처리중
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="isBlock" value="yesBlock" ${yesBlockChk}>처리완료
+                                    <input type="radio" name="status" value="yesStatus" ${yesStatusChk}>처리완료
                                 </label>
                             </div>
                         </div>
@@ -118,54 +117,33 @@
                         
                             </div>
                         </div>
-
                     </div>
-
-
-
-            
                     <div class="table-btn">
                         <input type="submit" value="검색" class="btn btn-lg btn-black js-search-button">
                     </div>
                 </form>
 
                 <div class="selectBox">
-
                     <c:set var="order1" value="selected"/>
                     <c:if test="${param.sort == '2'}">
                         <c:set var="order2" value="selected"></c:set>
                         <c:set var="order1" value=""/>
                     </c:if>
-                    <c:if test="${param.sort == '3'}">
-                        <c:set var="order3" value="selected"></c:set>
-                        <c:set var="order1" value=""/>
-                    </c:if>
-                    <c:if test="${param.sort == '4'}">
-                        <c:set var="order4" value="selected"></c:set>
-                        <c:set var="order1" value=""/>
-                    </c:if>
-
                     
-
-
                     <select onchange="orderBy()" id="order">
-                        <option value="order1" ${order1}>가입일 빠른순</option>
-                        <option value="order2" ${order2}>가입일 역순</option>
-                        <option value="order3" ${order3}>일일방문자순</option>
-                        <option value="order4" ${order4}>총방문자순</option>
+                        <option value="order1" ${order1}>최신 신고순</option>
+                        <option value="order2" ${order2}>오래된 신고순</option>
                     </select>
                 </div>
 
                 <div class="pull-left">
                     검색
                     <strong>${listCount}</strong>
-                    명 / 전체
+                    건 / 전체
                     <strong>${allMemberCount}</strong>
-                    명
+                    건
                 </div>
 
-                
-                
                 <div class="search-result-area">
                     <div class="search-result-div" id="number">
                         <div class="search-result-tab">번호</div>
@@ -200,24 +178,25 @@
                     <div class="search-result-div" id="complainCreate">
                         <div class="search-result-tab">처리상태</div>
                         <c:forEach var="complain" items="${complainList}">
-                            <div class="search-content">${complain.status}</div>
+                            <c:if test="${complain.status == 1}">
+                                <div class="search-content">처리완료</div>
+                            </c:if>
+                            <c:if test="${complain.status == 0}">
+                                <div class="search-content">처리중</div>
+                            </c:if>
                         </c:forEach>
                     </div>
                 </div>
 
-            
-                
-                
+
                 <div class="pagination-area">
-
-
                     <ul class="pagination">
                     
                         <!-- 첫 페이지로 이동( <<) -->
-                        <li><a href="/admin/block?${sURL}">&lt;&lt;</a></li>
+                        <li><a href="/admin/complain/complainSearch?${sURL}">&lt;&lt;</a></li>
 
                         <!-- 이전 목록 마지막 번호로 이동 ( < ) -->
-                        <li><a href="/admin/block?cp=${pagination.prevPage}&${sURL}">&lt;</a></li>
+                        <li><a href="/admin/complain/complainSearch?cp=${pagination.prevPage}&${sURL}">&lt;</a></li>
 
                         
                         <!-- 특정 페이지로 이동 -->
@@ -229,16 +208,16 @@
                                 </c:when>
                                 <c:otherwise>
                                     <%-- 현재 페이지를 제외한 나머지 --%>
-                                    <li><a href="/admin/block?cp=${i}&${sURL}">${i}</a></li>
+                                    <li><a href="/admin/complain/complainSearch?cp=${i}&${sURL}">${i}</a></li>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
                         
                         <!-- 다음 목록 시작 번호로 이동 ( > )-->
-                        <li><a href="/admin/block?cp=${pagination.nextPage}&${sURL}">&gt;</a></li>
+                        <li><a href="/admin/complain/complainSearch?cp=${pagination.nextPage}&${sURL}">&gt;</a></li>
 
                         <!-- 끝 페이지로 이동 ( >> ) -->
-                        <li><a href="/admin/block?cp=${pagination.maxPage}&${sURL}">&gt;&gt;</a></li>
+                        <li><a href="/admin/complain/complainSearch?cp=${pagination.maxPage}&${sURL}">&gt;&gt;</a></li>
 
                     </ul>
                 </div>
@@ -253,6 +232,6 @@
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
         <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
-        <script src="/resources/js/admin/admin-member.js"></script>
+        <script src="/resources/js/admin/admin-complain.js"></script>
     </body>
 </html>

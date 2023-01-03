@@ -77,12 +77,42 @@ public class AdminServiceImpl implements AdminService{
 		return dao.deleteMemberBack(memberNo);
 	}
 
+
+	
+	
 	/**
-	 * 새로운 회원 등록하기
+	 * 신고 목록 조회
 	 */
 	@Override
-	public int insertNewMember(Member inputMember) {
-
-		return dao.deleteMemberBack(memberNo);
+	public Map<String, Object> complainSearch(Map<String, Object> paramMap, int cp) {
+		
+		// 조건에 맞는 신고 수
+		int listCount = dao.getComplainListCount(paramMap);
+		
+		// 전체 신고수 
+		int allComplainCount = dao.getAllComplainCount();
+		
+		// 전체 신고 수 + cp를 이용해 페이징처리
+		Pagination pagination = new Pagination(listCount, cp, 30, 10);
+		
+		// sort 값 계산
+		paramMap.put("order", "COMPLAIN_NO DESC");
+		if(paramMap.get("sort").equals("1")) { // 신고일 최신순
+			paramMap.put("order", "COMPLAIN_NO DESC");
+		}
+		if(paramMap.get("sort").equals("2")) { // 신고일 오래된순
+			paramMap.put("order", "COMPLAIN_NO ASC");
+		}
+		
+		// 조건에 맞는 신고 목록
+		List<Member> complainList = dao.complainSearch(pagination, paramMap);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("memberList", complainList);
+		map.put("allMemberCount", allComplainCount);
+		map.put("listCount", listCount);
+		
+		return map;
 	}
 }

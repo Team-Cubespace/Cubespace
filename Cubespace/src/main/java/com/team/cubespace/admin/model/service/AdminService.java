@@ -25,10 +25,12 @@ public interface AdminService {
 	 */
 	int deleteMemberBack(int memberNo);
 
-	/** 새로운 회원 등록하기
-	 * @param inputMember
+
+	/** 신고 목록 조회
+	 * @param paramMap
+	 * @param cp
 	 * @return
 	 */
-	int insertNewMember(Member inputMember);
+	Map<String, Object> complainSearch(Map<String, Object> paramMap, int cp);
 
 }

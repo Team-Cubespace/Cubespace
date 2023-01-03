@@ -66,5 +66,14 @@ public class AdminDAO {
 		return sqlSession.update("loginMapper.deleteMemberBack", memberNo);
 	}
 
+	/** 조건에 맞는 신고 수
+	 * @param paramMap
+	 * @return
+	 */
+	public int getComplainListCount(Map<String, Object> paramMap) {
+		
+		return sqlSession.update("complainMapper.getComplainListCount", paramMap);
+	}
+
 	
 }

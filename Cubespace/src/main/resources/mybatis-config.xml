@@ -26,6 +26,7 @@
 		<typeAlias type="com.team.cubespace.manage.model.vo.File" alias="File"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.Background" alias="Background"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.Music" alias="Music"/>		
+		<typeAlias type="com.team.cubespace.complain.model.vo.Complain" alias="Complain"/>		
 		<typeAlias type="com.team.cubespace.album.model.vo.Album" alias="Album"/>		
 		<typeAlias type="com.team.cubespace.album.model.vo.AlbumImage" alias="AlbumImage"/>
 		<typeAlias type="com.team.cubespace.album.model.vo.Comment" alias="Comment"/>
@@ -43,5 +44,6 @@
 		<mapper resource="/mappers/comment-mapper.xml"/>	
 		<mapper resource="/mappers/notifications-mapper.xml"/>	
 		<mapper resource="/mappers/video-mapper.xml"/>	
+		<mapper resource="/mappers/complain-mapper.xml"/>	
 	</mappers>
 </configuration>

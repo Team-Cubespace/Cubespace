@@ -42,7 +42,7 @@
 
             <section class="main-class">
                 <div class="member-title">
-                    <h3>신고 리스트</h3>
+                    <h3>회원 리스트</h3>
                     <div>
                         <button id="memberAddBtn">+ 회원 등록</button>
                         <button id="goodsAddBtn">+ 상품 등록</button>
@@ -187,7 +187,6 @@
 
 
                 <%-- 회원 등록------------------------------------------- --%>
-                <%-- <div class="popup_layer" id="popup_layer2" style="display: none;"> --%>
                     <div class="popup_box scroll" style="display: none;">
                         <div style="height: 10px; width: 500px; float: top;">
                             <a href="javascript:closePop();"><i class="fa-solid fa-x allClose"></i></a>
@@ -250,10 +249,9 @@
                             </form>
                         </div>
                     </div>
-                <%-- </div> --%>
+
                 <%-- ------------------------------------------- --%>
-                
-                
+
                 <div class="search-result-area">
                     <div class="search-result-div" id="number">
                         <div class="search-result-tab">번호</div>
@@ -393,16 +391,7 @@
                 </div>
 
 
-
-                <%-- <div class="center">
-                    <nav>
-                        <ul class="pagination pagination-sm">
-                            <li class="active">
-                                <span>1</span>
-                            </li>
-                        </ul>
-                    </nav>
-                </div> --%>
+                </div> 
             </section>
             
         </main>

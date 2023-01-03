@@ -120,4 +120,31 @@
 		VALUES(#{videoNo}, #{memberNo}, #{folderNo}, #{videoTitle}, #{videoContent}, #{videoPath}, #{videoRename}, 
 			#{videoOriginalName}, #{videoScrapAllowYN}, #{openFlag}, #{videoThumbnail})
 	</insert>
+	
+	<!-- 동영상 글 수정 (제목, 내용, 공개여부, 폴더번호, 스크랩 허용 여부)-->
+	<update id="videoUpdate">
+		UPDATE VIDEO SET
+		V_TITLE = #{videoTitle},
+		V_CONTENT = #{videoContent},
+		V_OPEN_FL = #{openFlag},
+		FOLDER_NO = #{folderNo},
+		V_SCRAP_ALLOW_YN = #{videoScrapAllowYN}
+		WHERE VIDEO_NO = #{videoNo}
+	</update>
+	
+	<!-- 동영상 파일 수정(비디오 웹경로, 비디오 파일변경명, 비디오 파일원본명, 썸네일 경로) -->
+	<update id="videoUpdateFile">
+		UPDATE VIDEO SET
+		VIDEO_PATH = #{videoPath},
+		VIDEO_ORIGINAL_NAME = #{videoOriginalName},
+		VIDEO_RENAME = #{videoRename},
+		V_THUMNAIL = #{videoThumbnail}
+		WHERE VIDEO_NO = #{videoNo}
+	</update>
+	
+	<delete id="videoDelete">
+		UPDATE VIDEO SET
+		V_DEL_YN = 'Y'
+		WHERE VIDEO_NO = #{videoNo}
+	</delete>
 </mapper>

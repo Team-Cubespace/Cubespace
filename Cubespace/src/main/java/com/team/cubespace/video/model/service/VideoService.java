@@ -34,6 +34,26 @@ public interface VideoService {
 	 * @throws IOException 
 	 */
 	int videoWrite(Video video, MultipartFile inputVideo, String videoWebPath, String videoFolderPath,
-			String ffmpegPath, String thumbnailWebPath, String thumbnailFolderPath) throws IOException;
+			String ffmpegPath, String thumbnailWebPath, String thumbnailFolderPath) throws Exception;
+
+	/** 동영상 글 수정
+	 * @param video
+	 * @param inputVideo
+	 * @param videoWebPath
+	 * @param videoFolderPath
+	 * @param ffmpegPath
+	 * @param thumbnailWebPath
+	 * @param thumbnailFolderPath
+	 * @return result
+	 * @throws Exception 
+	 */
+	int videoUpdate(Video video, MultipartFile inputVideo, String videoWebPath, String videoFolderPath,
+			String ffmpegPath, String thumbnailWebPath, String thumbnailFolderPath) throws Exception;
+
+	/** 동영상 글 삭제
+	 * @param videoNo
+	 * @return result
+	 */
+	int videoDelete(int videoNo);
 	
 }

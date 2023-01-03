@@ -8,8 +8,20 @@
         <button id="goToList">목록으로</button>
     </header>
     <div class="detail-subtitle">
-        <span class="detail-open-flag">공개</span>
-        <span class="detail-title-area">${board.albumTitle}</span>
+        <span class="detail-open-flag">
+            <c:choose>
+                <c:when test="${board.openFlag == 1}">
+                    전체공개
+                </c:when>
+                <c:when test="${board.openFlag == 2}">
+                    깐부공개
+                </c:when>
+                <c:when test="${board.openFlag == 3}">
+                    비공개
+                </c:when>
+            </c:choose>
+        </span>
+        <span class="detail-title-area"><c:if test="${board.albumScrapYN == 'Y'}">[스크랩] </c:if>${board.albumTitle}</span>
         <span class="detail-create-date">${board.albumCreate}</span>
     </div>
     <div class="slide-container">
@@ -90,7 +102,7 @@
                     <div class="modal-scrap-allow">
                         <label class="modal-label" for="">공개 설정</label>
                         <div class="modal-radio-area">
-                            <input type="radio" name="openFlag" value="1" id="modalOpenFlag1">
+                            <input type="radio" name="openFlag" value="1" id="modalOpenFlag1" checked>
                             <label for="modalOpenFlag1">전체공개</label>
 
                             <input type="radio" name="openFlag" value="2" id="modalOpenFlag2">

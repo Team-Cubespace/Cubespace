@@ -232,6 +232,6 @@ public class AlbumController {
 		
 		album.setScrapAlbumNo(comment.getBoardNo());
 		int result = service.albumScrap(album, comment);
-		return 0;
+		return result;
 	}
 }

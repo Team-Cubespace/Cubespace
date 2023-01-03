@@ -122,7 +122,10 @@ const createFolderList = (folderList) => {
             type:"POST",
             success: result =>{
                 if(result > 0) {
-                    alert("스크랩 성공");
+                    console.log(result);
+                    alert("게시글을 스크랩 하였습니다.");
+                    document.getElementById("boardScrapModal").style.display = "none";
+                    selectCommentList(boardNo);
                 }
             }
         })

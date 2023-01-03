@@ -33,6 +33,7 @@
 		<result property="albumCreate" column="A_CREATE"/>
 		<result property="latitude" column="LATITUDE"/>
 		<result property="longitude" column="LONGITUDE"/>
+		<result property="albumScrapYN" column="A_SCRAP_YN"/>		
 		<result property="albumScrapAllowYN" column="A_SCRAP_ALLOW_YN"/>
 		<result property="openFlag" column="A_OPEN_FL"/>
 		<result property="locationName" column="LOCATION_NAME"/>

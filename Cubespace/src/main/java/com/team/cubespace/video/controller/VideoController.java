@@ -1,6 +1,5 @@
 package com.team.cubespace.video.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,13 +13,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.team.cubespace.album.model.service.AlbumService;
+import com.team.cubespace.common.Util;
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.member.model.vo.Member;
 import com.team.cubespace.minihome.model.vo.Minihome;
@@ -130,7 +132,7 @@ public class VideoController {
 	public String videoWrite(Video video,
 			@RequestParam("inputVideo") MultipartFile inputVideo,
 			@SessionAttribute("loginMember") Member loginMember,
-			HttpSession session) throws IOException {
+			HttpSession session) throws Exception {
 		
 		// 작성된 동영상에 작성자 번호 세팅
 		video.setMemberNo(loginMember.getMemberNo());
@@ -154,4 +156,79 @@ public class VideoController {
 		return new Gson().toJson(resultMap);
 	}
 	
+	@GetMapping("/videoUpdate/{videoNo}")
+	public String videoUpdate(@PathVariable("videoNo") int videoNo,
+			Model model) {
+		// 동영상 조회
+		Video video = service.selectVideo(videoNo);
+		
+		if(video.getVideoContent() != null) {
+			video.setVideoContent(Util.newLineClear(video.getVideoContent()));
+		}
+		model.addAttribute("video", video);
+		return "/minihome/video/video-update";
+	}
+	
+	@ResponseBody
+	@PostMapping("/videoUpdate")
+	public String videoUpdate(Video video,
+			@RequestParam("inputVideo") MultipartFile inputVideo,
+			@SessionAttribute("loginMember") Member loginMember,
+			int videoNo,
+			HttpSession session) throws Exception{
+		video.setMemberNo(loginMember.getMemberNo());
+		video.setVideoNo(videoNo);
+		
+		// 작성된 동영상에 작성자 번호 세팅
+		video.setMemberNo(loginMember.getMemberNo());
+		
+		String videoWebPath = "/resources/video/";
+		String videoFolderPath = session.getServletContext().getRealPath(videoWebPath);
+		
+		String ffmpegPath = "/resources/ffmpeg-5.1.2-essentials_build/bin";
+		ffmpegPath = session.getServletContext().getRealPath(ffmpegPath);
+		
+		String thumbnailWebPath = "/resources/video/thumbnail/";
+		String thumbnailFolderPath = session.getServletContext().getRealPath(thumbnailWebPath);
+		
+		int result = service.videoUpdate(video, inputVideo, videoWebPath, 
+				videoFolderPath, ffmpegPath, thumbnailWebPath, thumbnailFolderPath);
+		
+		Map<String, Integer> resultMap = new HashMap<>();
+		resultMap.put("folderNo", video.getFolderNo());
+		resultMap.put("videoNo", videoNo);
+		
+		return new Gson().toJson(resultMap);
+	}
+	
+	/** 동영상 글 삭제
+	 * @param videoNo
+	 * @param referer
+	 * @param folderNo
+	 * @param cp
+	 * @param ra
+	 * @return path
+	 */
+	@GetMapping("/videoDelete/{videoNo}")
+	public String videoDelete(@PathVariable("videoNo") int videoNo,
+			@RequestHeader("referer") String referer,
+			int folderNo,
+			int cp,
+			RedirectAttributes ra) {
+		
+		int result = service.videoDelete(videoNo);
+		
+		String message = "";
+		String path = "";
+		if(result > 0) {
+			message = "삭제에 성공했습니다.";
+			path = "/videoList/3?folderNo=" + folderNo + "&cp=" + cp;
+		} else {
+			message = "삭제에 실패했습니다.";
+			path = referer;
+		}
+		
+		ra.addFlashAttribute("message", message);
+		return "redirect:" + path;
+	}
 }

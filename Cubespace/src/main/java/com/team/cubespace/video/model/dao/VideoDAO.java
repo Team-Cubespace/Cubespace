@@ -55,4 +55,28 @@ public class VideoDAO {
 		}
 		return result;
 	}
+
+	/** 동영상 글 수정 (제목, 내용, 공개여부, 폴더번호, 스크랩 허용 여부)
+	 * @param video
+	 * @return result
+	 */
+	public int videoUpdate(Video video) {
+		return sqlSession.update("videoMapper.videoUpdate", video);
+	}
+
+	/** 동영상 파일 수정(비디오 웹경로, 비디오 파일변경명, 비디오 파일원본명, 썸네일 경로) 
+	 * @param video
+	 * @return result
+	 */
+	public int videoUpdateFile(Video video) {
+		return sqlSession.update("videoMapper.videoUpdateFile", video);
+	}
+
+	/** 동영상 글 삭제
+	 * @param videoNo
+	 * @return result
+	 */
+	public int videoDelete(int videoNo) {
+		return sqlSession.update("videoMapper.videoDelete", videoNo);
+	}
 }

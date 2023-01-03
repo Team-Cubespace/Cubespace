@@ -41,7 +41,6 @@ public class FileScheduling {
 			for(File file : fileList) {
 				// 파일 이름 가져오기
 				String fileName = file.getName();
-				System.out.println(fileName);
 				// dbImageList에 fileName이 없다면 
 				// db에는 없는데 server에는 있는 파일
 				if(dbImageList.indexOf(fileName) == -1) {
@@ -73,11 +72,11 @@ public class FileScheduling {
 			for(File file : videoList) {
 				// 파일 이름 가져오기
 				String fileName = file.getName();
-				System.out.println(fileName);
 				// dbImageList에 fileName이 없다면 
 				// db에는 없는데 server에는 있는 파일
 				if(dbVideoList.indexOf(fileName) == -1) {
 					file.delete();
+					System.out.println(fileName + "삭제");
 				}
 			}
 		}
@@ -89,6 +88,7 @@ public class FileScheduling {
 				
 				if(dbVideoList.indexOf(fileName) == -1) {
 					file.delete();
+					System.out.println(fileName + "삭제");
 				}
 			}
 		}

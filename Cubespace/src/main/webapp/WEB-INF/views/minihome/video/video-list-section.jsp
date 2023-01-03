@@ -26,7 +26,7 @@
                     <li>
                         <a href="/videoDetail/${video.videoNo}?folderNo=${folderNo}&cp=${cp}">
                             <div class="album-hover">
-                                <span class="album-title">${video.videoTitle}</span>
+                                <span class="album-title"><c:if test="${video.videoScrapYN == 'Y'}">[스크랩] </c:if>${video.videoTitle}</span>
                                 <div>
                                     <span class="open-flag">
                                         <c:choose>

@@ -25,7 +25,7 @@
                     <li>
                         <a href="/albumDetail/${album.albumNo}?folderNo=${folderNo}&cp=${cp}">
                             <div class="album-hover">
-                                <span class="album-title">${album.albumTitle}</span>
+                                <span class="album-title"><c:if test="${album.albumScrapYN == 'Y'}">[스크랩] </c:if>${album.albumTitle}</span>
                                 <div>
                                     <span class="open-flag">
                                         <c:choose>

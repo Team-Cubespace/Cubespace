@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.team.cubespace.complain.model.dao.ComplainDAO;
 
 @Service
-public class ComplainServiceImpl {
+public class ComplainServiceImpl implements ComplainService{
 	
 	@Autowired
 	private ComplainDAO dao;

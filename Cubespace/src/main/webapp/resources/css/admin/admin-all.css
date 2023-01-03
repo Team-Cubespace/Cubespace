@@ -407,9 +407,23 @@ a {
 #memberAddBtn {
     height: 100%;
 }
+#goodsAddBtnArea {
+    display: flex;
+    justify-content: flex-end;
+}
 #goodsAddBtn {
-    height: 100%;
+    height: 50px;
 }
 .js-search-button{
     cursor: pointer;
+}
+
+.popup_area {
+    position: absolute;
+    margin-left: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
 }

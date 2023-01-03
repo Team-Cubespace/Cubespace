@@ -16,3 +16,132 @@
 .search-result-area>div:nth-child(6){
     flex-basis: 7%;
 }
+
+.deleteMember{
+    background-color: #bbb;
+}
+.blockMember{
+    background-color: #eee;
+}
+.yesStatus {
+    background-color: #eee;
+    cursor: pointer;
+}
+.noStatus{
+    cursor: pointer;
+}
+.complainedMember {
+    cursor: pointer;
+}
+.complainedMemberArea {
+    text-align: center;
+    padding: 20px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+/*팝업 박스*/
+.popup_box {
+    position: absolute;
+    top: 1000px;
+    left: 50%;
+
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 400px;
+    width: 550px;
+    transform: translate(-50%, -50%);
+    z-index: 1002;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
+    -webkit-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
+}
+/* #signUp-frm > div:nth-child(1){
+    display: flex;
+    flex-direction: column;
+} */
+.selectDate {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 8px 15px;
+    width: 150px;
+    background-color: #eee;
+}
+.radio-inline {
+    padding: 5px 0;
+}
+input[name='blockDayCount'] {
+    margin-left: 5px;
+}
+.search-detail-date {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 15px;
+}
+.search-detail-expectedDate + div{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 8px 15px;
+    width: 365px;
+}
+.search-detail-expectedDate{
+    width: 150px;
+    background-color: #eee;
+    padding: 8px 15px;
+}
+.search-detail-div {
+    border-bottom: 2px solid #ddd;
+}
+.popup_area{
+    margin: 0 15px;
+    width: 515px;
+}
+.payRemainArea{
+    width: 100%;
+    margin : 30px 0 0px;
+    padding: 0;
+}
+.dateArea {
+    display: flex;
+    justify-content: space-between;
+}
+.blockStart, .blockEnd {
+    width: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+
+.seeComplainContent {
+    position: relative;
+    cursor: pointer;
+}
+.allComplainContent {
+    position: absolute;
+    
+    top: 0;
+    left: 50%;
+
+    height: 100px;
+    width: 400px;
+    transform: translate(-50%, -50%);
+    z-index: 1002;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
+    -webkit-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
+
+
+}
+.allComplainContent > * {
+    overflow:hidden; 
+    word-break:break-all;
+}

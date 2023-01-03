@@ -4,8 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:set var="pagination" value="${map.pagination}"/>
-<c:set var="memberList" value="${map.memberList}"/>
-<c:set var="allMemberCount" value="${map.allMemberCount}"/>
+<c:set var="complainList" value="${map.complainList}"/>
+<c:set var="allComplainCount" value="${map.allComplainCount}"/>
 <c:set var="listCount" value="${map.listCount}"/>
 
 <c:set var="sURL" value="sort=${param.sort}&key=${param.key}&query=${param.query}&status=${param.status}&calanderBefore=${param.calanderBefore}&calanderAfter=${param.calanderAfter}"/>
@@ -35,6 +35,7 @@
             
             <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
+            <p id="goodsAddBtnArea"><button id="goodsAddBtn">상품 등록 페이지</button></p>
             <section class="category-lists">
                 <a href = "/admin/member" class="detail link-member">회원</a>
                 <a href = "/admin/complain/complainSearch" class="detail link-member activate">신고</a>
@@ -43,9 +44,9 @@
             <section class="main-class">
                 <div class="member-title">
                     <h3>신고 리스트</h3>
-                    <div>
+                    <%-- <div>
                         <button id="goodsAddBtn">+ 상품 등록</button>
-                    </div>
+                    </div> --%>
                 </div>
 
 
@@ -79,26 +80,25 @@
                         <div  class="search-detail-div">
                             <div class="search-detail-keyword">처리여부</div>
                             <div>
-
                                 <c:set var="allStatusChk" value="checked"/>
-                                <c:if test="${param.status == 1}"> <%-- 처리완료 --%>
+                                <c:if test="${param.status == '1'}"> <%-- 처리완료 --%>
                                     <c:set var="yesStatusChk" value="checked"></c:set>
                                     <c:set var="allStatusChk" value=""/>
                                 </c:if>
 
-                                <c:if test="${param.status == 0}"> <%-- 처리중 --%>
+                                <c:if test="${param.status == '0'}"> <%-- 처리중 --%>
                                     <c:set var="noStatusChk" value="checked"></c:set>
                                     <c:set var="allStatusChk" value=""/>
                                 </c:if>
 
                                 <label class="radio-inline">
-                                    <input type="radio" name="status" value="allStatus" ${allStatusChk}>전체
+                                    <input type="radio" name="status" value="" ${allStatusChk}>전체
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="status" value="noStatus" ${noStatusChk}>처리중
+                                    <input type="radio" name="status" value="0" ${noStatusChk}>처리중
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="status" value="yesStatus" ${yesStatusChk}>처리완료
+                                    <input type="radio" name="status" value="1" ${yesStatusChk}>처리완료
                                 </label>
                             </div>
                         </div>
@@ -140,9 +140,65 @@
                     검색
                     <strong>${listCount}</strong>
                     건 / 전체
-                    <strong>${allMemberCount}</strong>
+                    <strong>${allComplainCount}</strong>
                     건
                 </div>
+
+                <%-- 회원 차단------------------------------------------- --%>
+                    <div class="popup_box scroll" style="display: none;">
+                    <%-- <div class="popup_box scroll" > --%>
+                        <div style="height: 10px; width: 500px; float: top;">
+                            <a href="javascript:closePop();"><i class="fa-solid fa-x allClose"></i></a>
+                        </div>
+                        <!--팝업 컨텐츠 영역-->
+                        <div class="popup_area">
+                            <div class="payRemainArea">
+                                <h1><span>회원 차단</span></h1>
+                            </div>
+                            <div class="complainedMemberArea"></div>
+
+                            <form  method="get" name="signUp-frm" id="block-frm" onsubmit="return false">
+                                <div class="search-detail-div">
+                                    <div class="search-detail-expectedDate">차단 예상일</div>
+                                    <div class="dateArea">
+                                        <div class="input-group js-datepicker blockStart">
+                                            <p id="blockStart"></p>
+                                        </div>
+                                        &nbsp;&nbsp;~&nbsp;&nbsp;
+                                        <div class="input-group js-datepicker blockEnd">
+                                            <p id="blockEnd"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="search-detail-div blockDaySelectArea">
+                                    <div class="selectDate">차단 날짜 지정</div>
+                                    <div class="search-detail-date">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="blockDayCount" value="1" id="block1">&nbsp;+ 1일
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="blockDayCount" value="5" id="block5">&nbsp;+ 5일
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="blockDayCount" value="7" id="block7">&nbsp;+ 7일
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="blockDayCount" value="30" id="block30">&nbsp;+ 30일
+                                        </label>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="realBlockStart">
+                                <input type="hidden" id="realBlockEnd">
+                            
+                                <div class="SignUpAgreement6">
+                                    <button type="button" class="SignUp" id="memberBlockBtn">차단 등록</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                <%-- ------------------------------------------- --%>
 
                 <div class="search-result-area">
                     <div class="search-result-div" id="number">
@@ -154,19 +210,49 @@
                     <div class="search-result-div"  id="complainerNickname">
                         <div class="search-result-tab">신고한사람</div>
                         <c:forEach var="complain" items="${complainList}">
-                            <div class="search-content">${complain.complainerNickname}</div>
+                            <c:if test='${complain.complainerDelYN == "Y"}'> <%-- 신고한사람 & 탈퇴회원 --%>
+                                <div class="search-content deleteMember">${complain.complainerNickname}(탈퇴)</div>
+                            </c:if>
+                            <c:if test='${complain.complainerDelYN == "N"}'> 
+                                <c:if test='${complain.complainerBlockFL > 0}'> <%-- 신고한사람 & 차단회원 --%>
+                                    <div class="search-content blockMember">${complain.complainerNickname}(차단중)</div>
+                                </c:if>
+                                <c:if test='${complain.complainerBlockFL == 0}'> <%-- 신고한사람 --%>
+                                    <div class="search-content">${complain.complainerNickname}</div>
+                                </c:if>
+                            </c:if>
                         </c:forEach>
                     </div>
                     <div class="search-result-div" id="complainedNickname">
                         <div class="search-result-tab">신고당한사람</div>
                         <c:forEach var="complain" items="${complainList}">
-                            <div class="search-content">${complain.complainedNickname}</div>
+                            <c:if test='${complain.complainedDelYN == "Y"}'> <%-- 신고당한사람 & 탈퇴회원 --%>
+                                    <div class="search-content deleteMember complainedMember">${complain.complainedNickname}(탈퇴)</div>
+                                </c:if>
+                                <c:if test='${complain.complainedDelYN == "N"}'> 
+                                    <c:if test='${complain.complainedBlockFL > 0}'> <%-- 신고당한사람 & 차단회원 --%>
+                                        <div class="search-content blockMember complainedMember" id="${complain.complainedNo}">${complain.complainedNickname}(차단중)</div>
+                                    </c:if>
+                                    <c:if test='${complain.complainedBlockFL == 0}'> <%-- 신고당한사람 --%>
+                                        <div class="search-content complainedMember" id="${complain.complainedNo}">${complain.complainedNickname}</div>
+                                    </c:if>
+                                </c:if>
                         </c:forEach>
                     </div>
                     <div class="search-result-div" id="complainContent">
                         <div class="search-result-tab">신고내용</div>
                         <c:forEach var="complain" items="${complainList}">
-                            <div class="search-content">${complain.complainComment}</div>
+                            <c:choose>
+                                <c:when test="${fn:length(complain.complainContent) > 45}">
+                                    <div class="search-content seeComplainContent">
+                                        <p>${fn:substring(complain.complainContent, 0, 44)}...</p>
+                                        <p class="allComplainContent" style="display: none;">${complain.complainContent}</p>
+                                    </div>
+                                </c:when>
+                                <c:when test="${fn:length(complain.complainContent) <= 44}">
+                                    <div class="search-content">${complain.complainContent}</div>
+                                </c:when>         
+                            </c:choose>                   
                         </c:forEach>
                     </div>
                     <div class="search-result-div" id="complainCreate">
@@ -178,11 +264,11 @@
                     <div class="search-result-div" id="complainCreate">
                         <div class="search-result-tab">처리상태</div>
                         <c:forEach var="complain" items="${complainList}">
-                            <c:if test="${complain.status == 1}">
-                                <div class="search-content">처리완료</div>
+                            <c:if test="${complain.status == '1'}">
+                                <div class="search-content yesStatus" name="${complain.complainNo}">처리완료</div>
                             </c:if>
-                            <c:if test="${complain.status == 0}">
-                                <div class="search-content">처리중</div>
+                            <c:if test="${complain.status == '0'}">
+                                <div class="search-content noStatus"  name="${complain.complainNo}">처리중</div>
                             </c:if>
                         </c:forEach>
                     </div>

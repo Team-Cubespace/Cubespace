@@ -35,9 +35,10 @@
             
             <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
+            <p id="goodsAddBtnArea"><button id="goodsAddBtn">상품 등록 페이지</button></p>
             <section class="category-lists">
                 <a href = "/admin/member" class="detail link-member activate">회원</a>
-                <a href = "/admin/block" class="detail link-member">신고</a>
+                <a href = "/admin/complain" class="detail link-member">신고</a>
             </section>
 
             <section class="main-class">
@@ -45,7 +46,6 @@
                     <h3>회원 리스트</h3>
                     <div>
                         <button id="memberAddBtn">+ 회원 등록</button>
-                        <button id="goodsAddBtn">+ 상품 등록</button>
                     </div>
                 </div>
 

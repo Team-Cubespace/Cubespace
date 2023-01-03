@@ -8,7 +8,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.team.cubespace.admin.model.vo.Block;
 import com.team.cubespace.common.Pagination;
+import com.team.cubespace.complain.model.vo.Complain;
 import com.team.cubespace.member.model.vo.Member;
 
 @Repository
@@ -72,7 +74,46 @@ public class AdminDAO {
 	 */
 	public int getComplainListCount(Map<String, Object> paramMap) {
 		
-		return sqlSession.update("complainMapper.getComplainListCount", paramMap);
+		return sqlSession.selectOne("complainMapper.getComplainListCount", paramMap);
+	}
+
+	/** 전체 신고수 
+	 * @return
+	 */
+	public int getAllComplainCount() {
+		
+		return sqlSession.selectOne("complainMapper.getAllComplainCount");
+	}
+
+	/** 조건에 맞는 신고 목록
+	 * @param pagination
+	 * @param paramMap
+	 * @return
+	 */
+	public List<Member> complainListSearch(Pagination pagination, Map<String, Object> paramMap) {
+
+		int offset = (pagination.getCurrentPage() -1) * pagination.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return  sqlSession.selectList("complainMapper.complainListSearch", paramMap, rowBounds);
+	}
+
+	/** 처리 상태 변경
+	 * @param inputComplain
+	 * @return
+	 */
+	public int updateStatusToggle(Complain inputComplain) {
+		
+		return sqlSession.update("complainMapper.updateStatusToggle", inputComplain);
+	}
+
+	/** 회원 차단하기
+	 * @param inputBlock
+	 * @return
+	 */
+	public int blockMember(Block inputBlock) {
+		
+		return sqlSession.insert("adminMapper.blockMember", inputBlock);
 	}
 
 	

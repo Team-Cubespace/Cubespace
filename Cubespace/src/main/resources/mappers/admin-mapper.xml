@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminMapper">
+	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
+
+	
+ 	 <!-- 회원 차단하기 -->
+ 	<insert id="blockMember">
+ 		INSERT INTO MEMBER_BLOCK VALUES(
+		#{memberNo}, #{blockStart}, #{blockEnds}
+		)
+ 	</insert>
+ 	 
+ 	 
+ 
+  
+</mapper>

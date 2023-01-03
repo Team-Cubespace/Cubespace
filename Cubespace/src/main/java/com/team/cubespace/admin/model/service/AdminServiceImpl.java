@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team.cubespace.admin.model.dao.AdminDAO;
+import com.team.cubespace.admin.model.vo.Block;
 import com.team.cubespace.common.Pagination;
+import com.team.cubespace.complain.model.vo.Complain;
 import com.team.cubespace.member.model.vo.Member;
 
 @Service
@@ -89,7 +91,7 @@ public class AdminServiceImpl implements AdminService{
 		// 조건에 맞는 신고 수
 		int listCount = dao.getComplainListCount(paramMap);
 		
-		// 전체 신고수 
+		// 
 		int allComplainCount = dao.getAllComplainCount();
 		
 		// 전체 신고 수 + cp를 이용해 페이징처리
@@ -105,14 +107,32 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 		// 조건에 맞는 신고 목록
-		List<Member> complainList = dao.complainSearch(pagination, paramMap);
+		List<Member> complainList = dao.complainListSearch(pagination, paramMap);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pagination", pagination);
-		map.put("memberList", complainList);
-		map.put("allMemberCount", allComplainCount);
+		map.put("complainList", complainList);
+		map.put("allComplainCount", allComplainCount);
 		map.put("listCount", listCount);
 		
 		return map;
+	}
+
+	/**
+	 * 처리 상태 변경
+	 */
+	@Override
+	public int updateStatusToggle(Complain inputComplain) {
+		
+		return dao.updateStatusToggle(inputComplain);
+	}
+
+	/**
+	 * 회원 차단하기
+	 */
+	@Override
+	public int blockMember(Block inputBlock) {
+		
+		return dao.blockMember(inputBlock);
 	}
 }

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.cubespace.admin.model.service.AdminService;
+import com.team.cubespace.admin.model.vo.Block;
+import com.team.cubespace.complain.model.vo.Complain;
 import com.team.cubespace.login.model.service.LoginService;
 import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.member.model.vo.Member;
@@ -158,6 +160,23 @@ public class AdminController {
 		model.addAttribute("map", map);
 
 		return "admin/admin-complain";
+	}
+	
+	// 처리 상태 변경
+	@GetMapping("/complain/updateStatusToggle")
+	@ResponseBody
+	public int updateStatusToggle(Complain inputComplain) {
+		// inputComplain : complainNo, status(0/1)
+		return service.updateStatusToggle(inputComplain);
+	}
+	
+	
+	// 회원 차단하기
+	@GetMapping("/complain/blockMember")
+	@ResponseBody
+	public int blockMember(Block inputBlock) {
+		// block : memberNo, blockStart, blockEnd
+		return service.blockMember(inputBlock);
 	}
 	
 }

@@ -20,6 +20,7 @@
 		<result property="thumbnailImage" column="THUMBNAIL_IMG"/>		
 		<result property="albumCreate" column="A_CREATE"/>
 		<result property="openFlag" column="A_OPEN_FL"/>
+		<result property="albumScrapYN" column="A_SCRAP_YN"/>		
 		<result property="commentCount" column="COMMENT_COUNT"/>		
 		<!-- <result property="albumContent" column="A_CONTENT"/> -->
 	</resultMap>
@@ -110,7 +111,7 @@
 	<!-- 앨범 목록 조회 -->
 	<select id="selectAlbumList" parameterType="map" resultMap="albumList_rm">
 		<![CDATA[
-		SELECT A.ALBUM_NO, MEMBER_NO, A.A_OPEN_FL, A.A_TITLE, A.A_OPEN_FL,
+		SELECT A.ALBUM_NO, MEMBER_NO, A.A_OPEN_FL, A.A_TITLE, A.A_SCRAP_YN,
 			(SELECT IMG_PATH || IMG_RENAME 
 			FROM ALBUM_IMG AI 
 			WHERE AI.ALBUM_NO = A.ALBUM_NO AND AI.IMG_ORDER = 0) THUMBNAIL_IMG,

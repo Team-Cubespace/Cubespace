@@ -10,6 +10,7 @@
 		<result property="videoThumbnail" column="V_THUMNAIL"/>
 		<result property="videoTitle" column="V_TITLE"/>
 		<result property="openFlag" column="V_OPEN_FL"/>
+		<result property="videoScrapYN" column="V_SCRAP_YN"/>
 		<result property="videoReadCount" column="V_READ_COUNT"/>
 		<result property="videoCreate" column="V_CREATE"/>
 		<result property="commentCount" column="COMMENT_COUNT"/>
@@ -71,7 +72,7 @@
 	<!-- 특정 폴더의 동영상 목록 조회 -->
 	<select id="selectVideoList" parameterType="map" resultMap="videoList_rm">
 		<![CDATA[
-		SELECT VIDEO_NO, MEMBER_NO, V_THUMNAIL, V_TITLE, V_READ_COUNT, V_OPEN_FL,
+		SELECT VIDEO_NO, MEMBER_NO, V_THUMNAIL, V_TITLE, V_READ_COUNT, V_OPEN_FL, V_SCRAP_YN,
 			TO_CHAR(V_CREATE, 'YYYY.MM.DD') V_CREATE,
 			(SELECT COUNT(*) FROM "COMMENT" WHERE BOARD_TYPE_NO = 3 AND BOARD_NO = VIDEO_NO) COMMENT_COUNT
 		FROM VIDEO

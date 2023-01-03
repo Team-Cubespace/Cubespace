@@ -57,8 +57,8 @@ public class FileScheduling {
 		List<String> dbVideoList = vService.selectVideoList();
 		
 		// Server에 저장된 모든 이미지 파일 조회
-		String videoFolderPath = application.getRealPath("/resources/video");
-		String thumbnailFolderPath = application.getRealPath("/resources/video/thumbnail");
+		String videoFolderPath = application.getRealPath("/resources/video/");
+		String thumbnailFolderPath = application.getRealPath("/resources/videothumbnail/");
 		
 		// 지정된 경로에 존재하는 파일 목록을 배열로 변환
 		File[] videoArr = new File(videoFolderPath).listFiles();
@@ -84,7 +84,7 @@ public class FileScheduling {
 		if(!thumbnailList.isEmpty()) {
 			for(File file : thumbnailList) {
 				String tempName = file.getName();
-				String fileName = tempName.substring(0, tempName.lastIndexOf(".")) + ".png";
+				String fileName = tempName.substring(0, tempName.lastIndexOf(".")) + ".mp4";
 				System.out.println(fileName);
 				
 				if(dbVideoList.indexOf(fileName) == -1) {

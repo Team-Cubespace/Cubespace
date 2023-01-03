@@ -131,3 +131,14 @@ main::-webkit-scrollbar {
 .album-hover .count > i {
     margin-right: 10px;
 }
+
+.album-hover .video-count {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+}
+.album-hover .video-count span:first-child {
+    margin-right: 20px;
+}

@@ -170,6 +170,15 @@ public class DiaryDAO {
 		return sqlSession.delete("diaryMapper.deleteSchedule",planId);
 	}
 
+	/** 월간달력_일정 수정_드롭 시 날짜 수정
+	 * @param plan
+	 * @return
+	 */
+	public int updateScheduleDrop(Plan plan) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("diaryMapper.updateScheduleDrop",plan);
+	}
+
 
 	
 

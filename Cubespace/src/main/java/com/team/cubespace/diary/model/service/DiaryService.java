@@ -96,6 +96,12 @@ public interface DiaryService {
 	 */
 	int deleteSchedule(int planId);
 
+	/** 월간달력_일정 수정_드롭 시 날짜 수정
+	 * @param plan
+	 * @return
+	 */
+	int updateScheduleDrop(Plan plan);
+
 	
 
 	

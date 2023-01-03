@@ -347,7 +347,6 @@ public class DiaryController {
 		return result;
 	}
 	
-	
 	/**월간달력_일정 삭제
 	 * @param planId
 	 * @return
@@ -357,6 +356,18 @@ public class DiaryController {
 	public int deleteSchedule(int planId) {
 		
 		int result = service.deleteSchedule(planId);
+		
+		return result;
+	}
+	
+	/** 월간달력_일정 수정_드롭 시 날짜 수정
+	 * @return
+	 */
+	@PostMapping("/diary/calendar/updateScheduleDrop")
+	@ResponseBody
+	public int updateScheduleDrop(Plan plan) {
+		System.out.println("드롭"+plan);
+		int result = service.updateScheduleDrop(plan);
 		
 		return result;
 	}

@@ -161,6 +161,13 @@ public class DiaryServiceImpl implements DiaryService {
 		return dao.deleteSchedule(planId);
 	}
 
+	// 월간달력_일정 수정_드롭 시 날짜 수정
+	@Override
+	public int updateScheduleDrop(Plan plan) {
+		// TODO Auto-generated method stub
+		return dao.updateScheduleDrop(plan);
+	}
+
 	
 
 	

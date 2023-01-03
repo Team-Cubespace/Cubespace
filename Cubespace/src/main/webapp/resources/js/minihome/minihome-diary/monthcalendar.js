@@ -252,7 +252,11 @@ function createCalendar(){
         editable: true,
         dayMaxEvents: true, // allow "more" link when too many events
         selectable : true,
-
+        eventTimeFormat: {
+          hour: 'numeric',
+          minute: '2-digit',
+          meridiem: 'short'
+        },
         /* 일자 클릭 시 모달 호출 */
         select : function (arg){  
           popup(arg);
@@ -266,14 +270,96 @@ function createCalendar(){
         },
         events : defaultEvents,
 
-        eventResize: function(info) {
-          alert(info.event.title + " end is now " + info.event.end.toISOString());
-      
-          if (!confirm("is this okay?")) {
-            info.revert();
-          }
-        }
+        eventMouseEnter : function(arg){
+          
+        },
 
+        // eventResize: function(info) {
+        //   alert(info.event.title + " end is now " + info.event.end.toISOString());
+      
+        //   if (!confirm("is this okay?")) {
+        //     info.revert();
+        //   }
+        // }
+/* ****************************************************************************** */
+        eventDragStart: function (event, jsEvent, ui, view) {
+          //alert("eventDragStart 이건 언제 발생?")
+        },
+        eventDragStop : function (){
+          //alert(" eventDragStop 이건 언제 발생?")
+        },
+        //일정 드래그앤드롭
+        eventDrop: function (arg) {
+          //alert(arg.event.start);
+          //alert(arg.event.extendedProps.planId);
+          //alert("수정된 시작 날짜" + arg.event.startStr +"수정된 끝날짜"+arg.event.endStr );
+
+          /* 날짜 세팅 =  (월은 1 더해줘야 하고 / 월&일 둘다 1자리수일 경우 세팅 필요함.*/
+          let startFullYear = arg.event.start.getFullYear();
+          let startMonth = ("0" + (arg.event.start.getMonth() + 1)).slice(-2);
+          let startDate= ("0" + arg.event.start.getDate()).slice(-2);
+          let startHour = ("0" + arg.event.start.getHours()).slice(-2);
+          let startMinute = ("0" + arg.event.start.getMinutes()).slice(-2);
+          let endFullYear;
+          let endMonth; 
+          let endDate;
+          let endHour;
+          let endMinute;
+          /* 시작 = 끝이 완전 똑같을 경우 NVL처리를 해줘도...캘린더 자체에서...end가 null이 되기 때문에....세팅을 해줘야해..... */
+            if(arg.event.end != null){
+              endFullYear = arg.event.end.getFullYear();
+              endMonth = ("0" + (arg.event.end.getMonth() + 1)).slice(-2);
+              endDate = ("0" + arg.event.end.getDate()).slice(-2);
+              endHour = ("0" + arg.event.end.getHours()).slice(-2);
+              endMinute  = ("0" + arg.event.end.getMinutes()).slice(-2);
+            } else {
+              endFullYear = startFullYear;
+              endMonth = startMonth;
+              endDate = startDate;
+              endHour = startHour;
+              endMinute = startMinute;
+            }
+            let planStart = startFullYear +"-"+startMonth+"-"+startDate + " "+ startHour+":"+startMinute;
+            //alert(planStart);
+            let planEnd = endFullYear +"-"+endMonth+"-"+endDate + " " + endHour+":"+endMinute;
+            //alert(planEnd);
+            let planId = arg.event.extendedProps.planId;
+            //alert(planId);
+
+            $.ajax({
+              url: "/diary/calendar/updateScheduleDrop",
+              type:'POST',
+              data: {"startDate":planStart,"endDate":planEnd,"planNo":planId},
+              success:function(result){
+          
+                if(result > 0){ //성공
+                  alert("일정이 수정되었습니다.");
+                } else {
+                  console.log("데이터베이스에 드래그수정 실패");
+                }
+              }, 
+              error:function(status, request, error){
+              
+              }
+            });
+          // 드랍시 수정된 날짜반영
+          // var newDates = calDateWhenDragnDrop(event);
+      
+          // //드롭한 일정 업데이트
+          // $.ajax({
+          //   type: "get",
+          //   url: "",
+          //   data: {
+          //     //...
+          //   },
+          //   success: function (response) {
+          //     alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
+          //   }
+          // });
+          
+        }
+        /* ****************************************************************************** */
+        
         
     });
     calendar.render();

@@ -195,5 +195,13 @@
 	WHERE PLAN_NO = #{planId}
 	</delete>
 	
+	<update id="updateScheduleDrop">
+	UPDATE PLAN
+	SET 
+	START_DATE = TO_DATE('${startDate}','YYYY-MM-DD HH24:MI:SS'),
+	END_DATE = TO_DATE('${endDate}','YYYY-MM-DD HH24:MI:SS')
+	WHERE PLAN_NO = #{planNo}
+	</update>
+	
  	
 </mapper>

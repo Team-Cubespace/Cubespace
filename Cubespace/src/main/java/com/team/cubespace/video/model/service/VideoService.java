@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.team.cubespace.album.model.vo.Comment;
 import com.team.cubespace.video.model.vo.Video;
 
 public interface VideoService {
@@ -61,5 +62,14 @@ public interface VideoService {
 	 * @return result
 	 */
 	int updateReadCount(int videoNo);
+
+	/** 동영상 글 스크랩
+	 * @param video
+	 * @param comment
+	 * @return result
+	 */
+	int videoScrap(Video video, Comment comment);
+	
+	
 	
 }

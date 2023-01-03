@@ -66,7 +66,7 @@
 			WHERE FOLDER_NO = #{folderNo}
 			AND V_DEL_YN = 'N'
 			AND V_OPEN_FL <= #{flag}
-			ORDER BY VIDEO_NO
+			ORDER BY VIDEO_NO DESC
 		]]>
 	</select>
 	
@@ -155,4 +155,13 @@
 		V_READ_COUNT = V_READ_COUNT + 1
 		WHERE VIDEO_NO = #{videoNo}
 	</update>
+	
+	<!-- 동영상 글 스크랩 -->
+	<insert id="videoScrap">
+		INSERT INTO VIDEO (VIDEO_NO, MEMBER_NO, V_TITLE, V_CONTENT, VIDEO_PATH, VIDEO_RENAME, 
+					V_OPEN_FL, V_SCRAP_YN, FOLDER_NO, V_THUMNAIL, VIDEO_ORIGINAL_NAME)
+		SELECT SEQ_VIDEO_NO.NEXTVAL, #{memberNo}, V_TITLE, V_CONTENT, VIDEO_PATH, VIDEO_RENAME,
+					 #{openFlag}, 'Y', #{folderNo}, V_THUMNAIL, VIDEO_ORIGINAL_NAME
+		FROM VIDEO WHERE VIDEO_NO = #{scrapVideoNo}  
+	</insert>
 </mapper>

@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.team.cubespace.album.model.service.AlbumService;
+import com.team.cubespace.album.model.vo.Comment;
 import com.team.cubespace.common.Util;
 import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.member.model.vo.Member;
@@ -230,5 +231,19 @@ public class VideoController {
 		
 		ra.addFlashAttribute("message", message);
 		return "redirect:" + path;
+	}
+	
+	/** 동영상 스크랩
+	 * @param video
+	 * @param comment
+	 * @return result
+	 */
+	@ResponseBody
+	@PostMapping("/boardScrap/3")
+	public int videoScrap(Video video, Comment comment) {
+		video.setScrapVideoNo(comment.getBoardNo());
+		
+		int result = service.videoScrap(video, comment);
+		return result;
 	}
 }

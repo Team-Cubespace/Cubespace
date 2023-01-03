@@ -226,11 +226,17 @@ public class AlbumController {
 		return new Gson().toJson(resultMap);
 	}
 	
+	/** 사진첩 스크랩
+	 * @param album
+	 * @param comment
+	 * @return result
+	 */
 	@ResponseBody
-	@PostMapping("/boardScrap")
+	@PostMapping("/boardScrap/2")
 	public int boardScrap(Album album, Comment comment) {
 		
 		album.setScrapAlbumNo(comment.getBoardNo());
+		
 		int result = service.albumScrap(album, comment);
 		return result;
 	}

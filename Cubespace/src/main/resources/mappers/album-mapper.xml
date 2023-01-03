@@ -107,6 +107,7 @@
 			WHERE FOLDER_NO = #{folderNo}
 			AND A_DEL_FL = 'N'
 			AND A_OPEN_FL <= #{flag}
+			ORDER BY ALBUM_NO DESC
 		]]>
 	</select>
 	

@@ -23,7 +23,7 @@ public class Video {
 	private String videoScrapAllowYN;	// 비디오 스크랩 가능 여부
 	private int folderNo;			// 비디오가 속한 폴더 번호
 	private String videoThumbnail;	// 비디오 썸네일 이미지 경로
-	
+	private int scrapVideoNo;	// 스크랩할 동영상 글 번호
 	
 	private int videoReadCount;		// 비디오 조회 수
 	

@@ -1,5 +1,6 @@
 package com.team.cubespace.guestbook.controller;
 
+import org.apache.jasper.tagplugins.jstl.core.If;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ public class GuestBookController {
 	public String guestBook() {
 		
 		return "/minihome/guestBook/minihome-guestBook";
+
 	}
 	
 	

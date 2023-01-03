@@ -196,3 +196,11 @@ input[type='checkbox'], input[type='radio'] {
     font-weight: bold;
 }
 
+.guest-list-box.test{
+
+    height: 100%;
+
+}
+.guest-box.test{
+    display: none;
+}

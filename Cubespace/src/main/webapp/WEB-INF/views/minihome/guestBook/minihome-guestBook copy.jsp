@@ -93,7 +93,7 @@
                     <span>></span>
                     <span>방명록</span>
                 </header>
-                <div class="guest-list-box <c:if test="${loginMember.memberNo == minihome.memberNo}">test</c:if>">
+                <div class="guest-list-box">
 <!----------------------------------------------->
                     <div class="guest-message">
                         <div class="message-header">
@@ -196,7 +196,7 @@
 
                 </div>
                 <!-- 방명록쓰기 -->
-                <div class="guest-box <c:if test="${loginMember.memberNo == minihome.memberNo}">test</c:if>">
+                <div class="guest-box">
                     <div class="guest-img">
                         <%-- 로그인한 회원 프로필 --%>
                         <c:choose>

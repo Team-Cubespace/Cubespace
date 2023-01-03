@@ -55,5 +55,11 @@ public interface VideoService {
 	 * @return result
 	 */
 	int videoDelete(int videoNo);
+
+	/** 동영상 조회수 증가
+	 * @param videoNo
+	 * @return result
+	 */
+	int updateReadCount(int videoNo);
 	
 }

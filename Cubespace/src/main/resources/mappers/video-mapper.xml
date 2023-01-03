@@ -142,9 +142,17 @@
 		WHERE VIDEO_NO = #{videoNo}
 	</update>
 	
+	<!-- 동영상 삭제 -->
 	<delete id="videoDelete">
 		UPDATE VIDEO SET
 		V_DEL_YN = 'Y'
 		WHERE VIDEO_NO = #{videoNo}
 	</delete>
+	
+	<!-- 동영상 조회수 증가 -->
+	<update id="updateReadCount">
+		UPDATE VIDEO SET
+		V_READ_COUNT = V_READ_COUNT + 1
+		WHERE VIDEO_NO = #{videoNo}
+	</update>
 </mapper>

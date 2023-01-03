@@ -127,4 +127,10 @@ public class VideoServiceImpl implements VideoService{
 	public int videoDelete(int videoNo) {
 		return dao.videoDelete(videoNo);
 	}
+
+	// 동영상 조회수 증가
+	@Override
+	public int updateReadCount(int videoNo) {
+		return dao.updateReadCount(videoNo);
+	}
 }

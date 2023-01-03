@@ -48,6 +48,10 @@
 			<mapping path="/minihome/*"/>
 			<beans:bean id="minihomeInterceptor" class="com.team.cubespace.common.interceptor.MinihomeInterceptor"></beans:bean>
 		</interceptor>
+		<interceptor>
+			<mapping path="/videoDetail/*"/>
+			<beans:bean id="videoInterceptor" class="com.team.cubespace.common.interceptor.VideoInterceptor"></beans:bean>	
+		</interceptor>
 	</interceptors>
 	
 	

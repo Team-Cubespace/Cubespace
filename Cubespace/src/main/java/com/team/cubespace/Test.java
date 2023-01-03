@@ -5,13 +5,8 @@ import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List<String> list = new ArrayList<>();
-		
-		list.add("돈가스");
-		list.add("떡볶이");
-		list.add("자장면");
-		
-		System.out.println(list.indexOf("돈"));
+//		System.out.println((double)3 / (double)6 * 100);
+		System.out.println((3 * 1.0) / (6 * 1.0) * 100);
 		
 	}
 }

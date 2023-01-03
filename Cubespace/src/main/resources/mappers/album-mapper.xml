@@ -232,4 +232,9 @@
 		INSERT INTO ALBUM_IMG (IMG_NO, ALBUM_NO, IMG_PATH, IMG_RENAME, IMG_ORDER, IMG_ORIGINAL_NAME)
 		SELECT SEQ_IMG_NO.NEXTVAL, #{albumNo}, IMG_PATH, IMG_RENAME, IMG_ORDER, IMG_ORIGINAL_NAME  FROM ALBUM_IMG WHERE ALBUM_NO = #{scrapAlbumNo}
 	</insert>
+	
+	<!-- 사진첩 이미지변경명 목록 조회 -->
+	<select id="selectImageList" resultType="string">
+		SELECT IMG_RENAME FROM ALBUM_IMG
+	</select>
 </mapper>

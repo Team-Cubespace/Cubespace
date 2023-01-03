@@ -1,6 +1,7 @@
 package com.team.cubespace.video.model.service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -69,6 +70,11 @@ public interface VideoService {
 	 * @return result
 	 */
 	int videoScrap(Video video, Comment comment);
+
+	/** 동영상 변경명 목록 조회
+	 * @return
+	 */
+	List<String> selectVideoList();
 	
 	
 	

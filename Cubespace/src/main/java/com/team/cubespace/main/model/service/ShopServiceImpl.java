@@ -82,7 +82,7 @@ public class ShopServiceImpl  implements ShopService{
 		}
 		
 		// 페이징 처리 객체 생성
-		Pagination pagination = new Pagination(listCount, cp, 12, 5);
+		Pagination pagination = new Pagination(listCount, cp, 16, 5);
 		
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("pagination", pagination);

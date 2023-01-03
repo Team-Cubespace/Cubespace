@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mainHomepage">
+	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
+	
+	<resultMap type="MainHomepage" id="mainHomepage_rm">
+		<id property="memberNo" column="MEMBER_NO"/>
+		
+		<result property="profileImage" column="PROFILE_IMG"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+		<result property="today" column="TODAY"/>
+		<result property="total" column="TOTAL"/>
+		
+		<result property="folderNo" column="FOLDER_NO"/>
+		<result property="videoNo" column="VIDEO_NO"/>
+		<result property="videoTitle" column="V_TITLE"/>
+		<result property="videoThumbnail" column="V_THUMNAIL"/>
+		<result property="videoReadCount" column="V_READ_COUNT"/>
+		
+		
+		
+		
+	</resultMap>
+	
+	<select id="mainTodaySelect" resultMap="mainHomepage_rm">
+		SELECT * FROM
+		(SELECT MEMBER_NO, PROFILE_IMG, MEMBER_NICKNAME, TODAY, TOTAL
+		FROM "MEMBER"
+		JOIN MINI_HOMEPAGE USING(MEMBER_NO)
+				<choose>
+					<when test='todayChoice == 1'>
+		ORDER BY TODAY DESC, MEMBER_NO DESC )
+					</when>
+					<when test='todayChoice == 2'>
+		ORDER BY TOTAL DESC, MEMBER_NO DESC )
+					</when>
+					<otherwise>
+					</otherwise>
+				</choose>
+		<![CDATA[WHERE ROWNUM <= 3]]>
+	</select>
+
+	<select id="mainShortsSelect" resultMap="mainHomepage_rm">
+		SELECT * FROM(SELECT FOLDER_NO, VIDEO_NO, V_TITLE, V_THUMNAIL, V_READ_COUNT, MEMBER_NO, MEMBER_NICKNAME
+		FROM VIDEO
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE V_DEL_YN ='N'
+		AND V_OPEN_FL = 1
+		AND V_SCRAP_YN = 'N'
+				<choose>
+					<when test='shortsChoice == 1'>
+		ORDER BY V_READ_COUNT DESC, VIDEO_NO DESC)
+					</when>
+					<when test='shortsChoice == 2'>
+		ORDER BY VIDEO_NO DESC)
+					</when>
+					<otherwise>
+					</otherwise>
+				</choose>
+		<![CDATA[WHERE ROWNUM <= 10]]>
+	</select>
+	
+	
+</mapper>

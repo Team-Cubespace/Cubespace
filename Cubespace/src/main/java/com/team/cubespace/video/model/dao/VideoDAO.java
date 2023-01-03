@@ -71,4 +71,12 @@ public class VideoDAO {
 	public int videoUpdateFile(Video video) {
 		return sqlSession.update("videoMapper.videoUpdateFile", video);
 	}
+
+	/** 동영상 글 삭제
+	 * @param videoNo
+	 * @return result
+	 */
+	public int videoDelete(int videoNo) {
+		return sqlSession.update("videoMapper.videoDelete", videoNo);
+	}
 }

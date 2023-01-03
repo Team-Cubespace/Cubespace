@@ -45,6 +45,7 @@ public class VideoServiceImpl implements VideoService{
 		return resultMap;
 	}
 
+	// 비디오 상세 조회
 	@Override
 	public Video selectVideo(int videoNo) {
 		return dao.selectVideo(videoNo);
@@ -119,5 +120,11 @@ public class VideoServiceImpl implements VideoService{
 			}
 		}
 		return result;
+	}
+
+	// 비디오 글 삭제
+	@Override
+	public int videoDelete(int videoNo) {
+		return dao.videoDelete(videoNo);
 	}
 }

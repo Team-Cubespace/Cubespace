@@ -49,5 +49,11 @@ public interface VideoService {
 	 */
 	int videoUpdate(Video video, MultipartFile inputVideo, String videoWebPath, String videoFolderPath,
 			String ffmpegPath, String thumbnailWebPath, String thumbnailFolderPath) throws Exception;
+
+	/** 동영상 글 삭제
+	 * @param videoNo
+	 * @return result
+	 */
+	int videoDelete(int videoNo);
 	
 }

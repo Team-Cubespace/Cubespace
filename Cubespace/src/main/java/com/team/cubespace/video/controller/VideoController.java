@@ -13,10 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.team.cubespace.album.model.service.AlbumService;
@@ -197,5 +199,36 @@ public class VideoController {
 		resultMap.put("videoNo", videoNo);
 		
 		return new Gson().toJson(resultMap);
+	}
+	
+	/** 동영상 글 삭제
+	 * @param videoNo
+	 * @param referer
+	 * @param folderNo
+	 * @param cp
+	 * @param ra
+	 * @return path
+	 */
+	@GetMapping("/videoDelete/{videoNo}")
+	public String videoDelete(@PathVariable("videoNo") int videoNo,
+			@RequestHeader("referer") String referer,
+			int folderNo,
+			int cp,
+			RedirectAttributes ra) {
+		
+		int result = service.videoDelete(videoNo);
+		
+		String message = "";
+		String path = "";
+		if(result > 0) {
+			message = "삭제에 성공했습니다.";
+			path = "/videoList/3?folderNo=" + folderNo + "&cp=" + cp;
+		} else {
+			message = "삭제에 실패했습니다.";
+			path = referer;
+		}
+		
+		ra.addFlashAttribute("message", message);
+		return "redirect:" + path;
 	}
 }

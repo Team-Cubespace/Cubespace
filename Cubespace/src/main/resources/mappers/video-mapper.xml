@@ -141,4 +141,10 @@
 		V_THUMNAIL = #{videoThumbnail}
 		WHERE VIDEO_NO = #{videoNo}
 	</update>
+	
+	<delete id="videoDelete">
+		UPDATE VIDEO SET
+		V_DEL_YN = 'Y'
+		WHERE VIDEO_NO = #{videoNo}
+	</delete>
 </mapper>

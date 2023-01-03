@@ -164,4 +164,8 @@
 					 #{openFlag}, 'Y', #{folderNo}, V_THUMNAIL, VIDEO_ORIGINAL_NAME
 		FROM VIDEO WHERE VIDEO_NO = #{scrapVideoNo}  
 	</insert>
+	
+	<select id="selectVideoRenameList">
+		SELECT 
+	</select>
 </mapper>

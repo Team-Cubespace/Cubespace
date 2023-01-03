@@ -98,7 +98,7 @@ public class VideoServiceImpl implements VideoService{
 			// 임시 파일 
 			String tempRename = Util.fileRename(inputVideo.getOriginalFilename());
 			String fileRename = Util.fileRename(inputVideo.getOriginalFilename().substring(0, inputVideo.getOriginalFilename().lastIndexOf("."))+".mp4");
-			String thumbnailRename = Util.fileRename("1.png");
+			String thumbnailRename = fileRename.substring(0, fileRename.lastIndexOf(".")) + ".png";
 			
 			video.setVideoPath(videoWebPath);
 			video.setVideoOriginalName(inputVideo.getOriginalFilename());
@@ -146,5 +146,11 @@ public class VideoServiceImpl implements VideoService{
 		}
 		
 		return result;
+	}
+
+	// 동영상 변경명 목록 조회
+	@Override
+	public List<String> selectVideoList() {
+		return dao.selectVideoList();
 	}
 }

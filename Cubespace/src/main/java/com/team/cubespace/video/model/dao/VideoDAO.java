@@ -95,4 +95,11 @@ public class VideoDAO {
 	public int videoScrap(Video video) {
 		return sqlSession.insert("videoMapper.videoScrap", video);
 	}
+
+	/** 동영상 변경명 목록 조회
+	 * @return
+	 */
+	public List<String> selectVideoList() {
+		return sqlSession.selectList("videoMapper.selectVideoRenameList");
+	}
 }

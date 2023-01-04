@@ -4,13 +4,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:set var="pagination" value="${map.pagination}"/>
-<c:set var="memberList" value="${map.memberList}"/>
-<c:set var="allMemberCount" value="${map.allMemberCount}"/>
+<c:set var="fontList" value="${map.fontList}"/>
+<c:set var="allFontCount" value="${map.allFontCount}"/>
 <c:set var="listCount" value="${map.listCount}"/>
 
 <c:set var="sURL" value="sort=${param.sort}&key=${param.key}&query=${param.query}&isBlock=${param.isBlock}&isDelete=${param.isDelete}&calanderBefore=${param.calanderBefore}&calanderAfter=${param.calanderAfter}"/>
 
-
+<jsp:include page="/WEB-INF/views/include/allFontMusic.jsp" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +24,6 @@
     <link rel="stylesheet" href="/resources/css/common/header.css">
     <link rel="stylesheet" href="/resources/css/common/footer.css">
     <link rel="stylesheet" href="/resources/css/admin/admin-font.css">
-    <link rel="stylesheet" href="/resources/css/admin/admin-member.css">
     <link rel="stylesheet" href="/resources/css/admin/admin-allGoods.css">
 
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
@@ -37,7 +36,7 @@
 
             <p class="otherPageBtn">
                 <a  href="/admin/member">회원관리 페이지</a>
-                <a  href="/admin/member">신고관리 페이지</a>
+                <a  href="/admin/complain">신고관리 페이지</a>
             </p>
             <section class="category-lists">
                 <a href = "/admin/goods/font" class="detail link-member activate">폰트 등록</a>
@@ -54,14 +53,14 @@
                 </div>
 
 
-                <form id="frmSearchBase" method="get" class="member-search" action="/admin/goods/searchFont">
-                    <input type="hidden" name="sort" id="orderInput">
+                <form id="frmSearchBase" method="get" class="member-search" action="/admin/goods/font">
+                    <input type="hidden" name="sort" id="orderInput" value = "1">
                     <p class="search__title">폰트 검색</p>
                     <div class="search-detail-box form-inline">
                         <div class="search-detail-div">
                             <div class="search-detail-keyword">폰트 이름 검색</div>
                             <div class="search-detail-select-box">
-                                <input type="text" name="fontName" class="form-control" value="${param.fontName}">
+                                <input type="text" name="fontName" class="form-control" value="${param.fontName}" style="font-family:'1'">
                                 <button class="btn btn-lg btn-black js-search-button">검색</button>
                             </div>
                         </div>
@@ -99,7 +98,7 @@
                     검색
                     <strong>${listCount}</strong>
                     개 / 전체
-                    <strong>${allMemberCount}</strong>
+                    <strong>${allFontCount}</strong>
                     개
                 </div>
 
@@ -122,7 +121,7 @@
                         <div class="search-result-tab">폰트 예시</div>
                         <c:forEach var="font" items="${fontList}">
                             <%-- form태그 말고 다른 형식으로 수정해야함 --%>
-                            <div class="search-content ${font.fontNo}" name="${font.fontPath}">우리들의 작은 공간 큐브스페이스에서 시작하세요</div>
+                            <div class="search-content fontExample ${font.fontNo}" name="${font.fontPath}" style="font-family:'${font.fontNo}';">우리들의 작은 공간 큐브스페이스에서 시작하세요</div>
                         </c:forEach>
                     </div>
                     <div class="search-result-div" id="signDate">
@@ -134,7 +133,7 @@
                     <div class="search-result-div" id="signDate">
                         <div class="search-result-tab">폰트 사용횟수</div>
                         <c:forEach var="font" items="${fontList}">
-                            <div class="search-content">${font.fontCount}</div>
+                            <div class="search-content">${font.fontUseCount}</div>
                         </c:forEach>
                     </div>
                     <div class="search-result-div" id="signDate">

@@ -51,18 +51,45 @@
  	
  	<!-- 조건에 맞는 폰트 수 -->
  	<select id="getFontListCount" resultType="_int">
- 	
+	 	SELECT COUNT(*) FROM (
+		SELECT FONT_NO, FONT_NAME ,FONT_PATH ,FONT_CREATER , NVL(COUNT_NO,0) FONT_USE_COUNT 
+		FROM FONT_SHOP F
+		LEFT JOIN (
+		   SELECT COUNT(*) COUNT_NO, GOODS_NO
+		   FROM MEMBER_OWN_GOODS
+		   WHERE SHOP_CATH_NO = 1
+		   GROUP BY GOODS_NO
+		   ORDER BY COUNT_NO DESC
+		) S ON (F.FONT_NO = S.GOODS_NO)) 
+		
+		<if test= 'fontName != null and fontName != "" '>
+		WHERE FONT_NAME LIKE '%${fontName}%'
+		</if>
  	</select>
  	
  	
  	<!-- 조건에 맞는 폰트 리스트 -->
  	<select id="fontSearch" resultMap="font_rm">
- 	
+ 		SELECT * FROM (
+		SELECT FONT_NO, FONT_NAME ,FONT_PATH ,FONT_CREATER , NVL(COUNT_NO,0) FONT_USE_COUNT 
+		FROM FONT_SHOP F
+		LEFT JOIN (
+		   SELECT COUNT(*) COUNT_NO, GOODS_NO
+		   FROM MEMBER_OWN_GOODS
+		   WHERE SHOP_CATH_NO = 1
+		   GROUP BY GOODS_NO
+		   ORDER BY COUNT_NO DESC
+		) S ON (F.FONT_NO = S.GOODS_NO)) 
+		<if test= 'fontName != null and fontName != "" '>
+		WHERE FONT_NAME LIKE '%${fontName}%'
+		</if>
+		
+		ORDER BY ${order}
  	</select>
  	
  	
  	<!-- 전체 폰트수 -->
- 	<select id="getAllFontCount">
+ 	<select id="getAllFontCount" resultType="_int">
  		SELECT COUNT(*) FROM FONT_SHOP 
  	</select>
  	

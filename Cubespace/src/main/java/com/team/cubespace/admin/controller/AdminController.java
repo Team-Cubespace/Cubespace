@@ -69,20 +69,7 @@ public class AdminController {
 		return "admin/admin-complain";
 	}
 	
-	/** 회원 신고/정지 페이지 이동
-	 * @return
-	 */
-	@GetMapping("/goods/font")
-	public String adminGoods_font(@RequestParam Map<String, Object> paramMap,
-			@RequestParam(value="cp", required=false, defaultValue="1" ) int cp,
-			Model model) {
-		
-		// 폰트 목록 조회
-		Map<String, Object> map = service.fontSearch(paramMap, cp);
-		model.addAttribute("map", map);
 
-		return "admin/admin-font";
-	}
 	/** 배경음악 등록 페이지 이동
 	 * @return
 	 */
@@ -202,7 +189,24 @@ public class AdminController {
 	
 	
 //	-------------------------------------------------------------------------------
+	
+	/** 폰트 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/goods/font")
+	public String adminGoods_font(@RequestParam Map<String, Object> paramMap,
+			@RequestParam(value="cp", required=false, defaultValue="1" ) int cp,
+			Model model) {
+		
+		// paramMap : fontName
+		
+		// 폰트 목록 조회
+		Map<String, Object> map = service.fontSearch(paramMap, cp);
+		model.addAttribute("map", map);
 
+		return "admin/admin-font";
+	}
+	
 	
 	/** 새 폰트 등록
 	 * @param inputFont

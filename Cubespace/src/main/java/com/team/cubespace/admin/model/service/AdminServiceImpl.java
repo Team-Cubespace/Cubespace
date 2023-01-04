@@ -1,5 +1,6 @@
 package com.team.cubespace.admin.model.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -191,19 +192,22 @@ public class AdminServiceImpl implements AdminService{
 		Pagination pagination = new Pagination(listCount, cp, 30, 10);
 		
 		// sort 값 계산
-//		paramMap.put("order", "FONT_NAME ASC");
-//		if(paramMap.get("sort").equals("1")) { // 사용횟수 많은순
-//			paramMap.put("order", "MEMBER_NO DESC");
-//		}
-//		if(paramMap.get("sort").equals("2")) { // 사용횟수 적은순
-//			paramMap.put("order", "MEMBER_NO ASC");
-//		}
-//		if(paramMap.get("sort").equals("3")) { // 등록일 빠른순
-//			paramMap.put("order", "TODAY DESC, MEMBER_NO DESC");
-//		}
-//		if(paramMap.get("sort").equals("4")) { // 등록일 느린순
-//			paramMap.put("order", "TOTAL DESC, MEMBER_NO DESC");
-//		}
+		paramMap.put("order", "FONT_USE_COUNT DESC ,FONT_NO DESC");
+		if(paramMap.get("sort") != null) {
+			
+			if(paramMap.get("sort").equals("1")) { // 사용횟수 많은순
+				paramMap.put("order", "FONT_USE_COUNT DESC ,FONT_NO DESC");
+			}
+			if(paramMap.get("sort").equals("2")) { // 사용횟수 적은순
+				paramMap.put("order", "FONT_USE_COUNT ASC, FONT_NO DESC");
+			}
+			if(paramMap.get("sort").equals("3")) { // 등록일 빠른순
+				paramMap.put("order", "FONT_NO DESC");
+			}
+			if(paramMap.get("sort").equals("4")) { // 등록일 느린순
+				paramMap.put("order", "FONT_NO ASC");
+			}
+		}
 		
 		// 조건에 맞는 폰트 목록
 		List<Member> fontList = dao.fontSearch(pagination, paramMap);
@@ -231,7 +235,7 @@ public class AdminServiceImpl implements AdminService{
 		int result = dao.insertFont(inputFont);
 		
 		if(result > 0) {
-			fontFile.transferTo(new java.io.File(folderPath + rename));
+			fontFile.transferTo(new File(folderPath + rename));
 		}
 		
 		return result;

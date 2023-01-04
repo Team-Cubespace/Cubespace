@@ -4,6 +4,7 @@ let secretMessage;
 let gbNo;
 let backUp
 let prevText;
+let gbSecret;
 
 /* 방명록 목록 조회 및 생성 함수 선언 */
 const listGuestBook=()=>{
@@ -14,7 +15,6 @@ const listGuestBook=()=>{
         success : guestbookList =>{
             
             const guestListBox = document.getElementsByClassName("guest-list-box")[0];
-            
             
             if(guestbookList==""||guestbookList==null){ // 방명록이 없다면
                 const noGuestBookList = document.createElement("div")
@@ -28,6 +28,10 @@ const listGuestBook=()=>{
                 
                 for(let listGuestbook of guestbookList){
     
+                    /* 전역변수 저장 */
+                    gbNo= listGuestbook.gbNo;
+                    gbSecret= listGuestbook.gbSecret;
+
                     // listGuestbook.gbContent          글내용
                     // listGuestbook.gbCreate           작성시간
                     // listGuestbook.gbNo               방명록번호
@@ -66,8 +70,7 @@ const listGuestBook=()=>{
                                 /* 글 버튼 관련 생성 */
                                 if(listGuestbook.receiverNo==loginMemberNo){ // 미니홈주인일때
                                     
-                                    /* 회원번호 전역변수 저장 */
-                                    gbNo= listGuestbook.gbNo;
+
                                     
                                     if(listGuestbook.gbSecret =='N'){ // 방명록 공개
                                         btn_secret.innerText="비밀글변경";
@@ -90,14 +93,14 @@ const listGuestBook=()=>{
                                             btn_secret.innerText="비밀글변경";
                                             btn_secret.setAttribute("onclick","secretGuestBook("+listGuestbook.gbNo+", this)")
                                             btn_modify.innerText="수정";
-                                            btn_modify.setAttribute("onclick","modifyGuestBook("+listGuestbook.gbNo+", this)")
+                                            btn_modify.setAttribute("onclick","modifyGuestBook("+listGuestbook.gbNo+",'"+gbSecret+"', this)")
                                             btn_delete.innerText="삭제";
                                             btn_delete.setAttribute("onclick","deleteGuestBook("+listGuestbook.gbNo+", this)")
                                             btn_box.append(btn_secret,btn_modify,btn_delete);
             
                                         }else{ // 방명록 비공개
                                             btn_modify.innerText="수정";
-                                            btn_modify.setAttribute("onclick","modifyGuestBook("+listGuestbook.gbNo+", this)")
+                                            btn_modify.setAttribute("onclick","modifyGuestBook("+listGuestbook.gbNo+",'"+gbSecret+"', this)")
     
                                             btn_delete.innerText="삭제";
                                             btn_delete.setAttribute("onclick","deleteGuestBook("+listGuestbook.gbNo+", this)")
@@ -249,9 +252,11 @@ const deleteGuestBook=(gbNo,btn)=>{
         success : guestBookDelete =>{
 
             if(guestBookDelete==1){ // 방명록삭제 성공
+                resetInput()
                 /* 목록 조회 */
                 listGuestBook()
                 alert("방명록이 삭제 되었습니다.")
+
 
             }else{ // 방명록삭제 실패
                 alert("방명록삭제 실패")
@@ -262,27 +267,72 @@ const deleteGuestBook=(gbNo,btn)=>{
 }
 
 /* 방명록 수정 버튼 함수 선언 */
-const modifyGuestBook =(gbNo,btn)=>{
-
-    /* 수정 제출버튼 생성 */
+const modifyGuestBook =(gbNo,gbSecret,btn)=>{
     const btnSecondary =document.querySelector(".btn-secondary")
-    btnSecondary.setAttribute("onclick","updateGuestBook("+gbNo+")")
-    btnSecondary.innerText="수정하기";
-
-    /*  수정 취소버튼 생성 */
-    document.getElementsByClassName("btn-cancellation")[0].style.display = "block";
-
-    /* guestInput요소 선택 */
-    prevText =  btn.parentElement.parentElement.nextElementSibling.lastElementChild.lastElementChild
-
-    /* 기존 방명록 글 백업 */
-    backUp =prevText.innerText
-
-    /* 기존 글 입력창에 넣기  */
-    guestInput.value = backUp;
     
-    /* 글 수정시 바로바로 변경됨 */
-    guestInput.onkeyup = () => {prevText.innerText=guestInput.value;}
+    // 이미 수정 중일때
+    if(backUp!=null){
+        let checkUpdate=confirm("다른 방명록이 수정 중입니다.\n현재 방명록을 수정하시겠습니까?")
+        
+        if(checkUpdate){ // 확인
+            /* 수정 제출버튼 생성 */
+            btnSecondary.setAttribute("onclick","updateGuestBook("+gbNo+")")
+
+            // 기존 내용 백업
+            prevText.innerText=backUp;
+            // 입력창 값 삭제
+            guestInput.value="";
+
+            /* guestInput요소 선택 */
+            prevText =  btn.parentElement.parentElement.nextElementSibling.lastElementChild.lastElementChild
+
+            /* 기존 방명록 글 백업 */
+            backUp =prevText.innerText
+
+            /* 기존 글 입력창에 넣기  */
+            guestInput.value = backUp;
+            
+            /* 글 수정시 바로바로 변경됨 */
+            guestInput.onkeyup = () => {prevText.innerText=guestInput.value;}
+
+            if(gbSecret=='Y'){
+                console.log("넘어옴1");
+                checkbox.checked=true
+            }else{
+                checkbox.checked=false
+                console.log("넘어옴2");
+            }
+        
+        }else{ // 취소시 
+        }
+
+    }else{
+        
+        /* 수정 제출버튼 생성 */
+        btnSecondary.setAttribute("onclick","updateGuestBook("+gbNo+")")
+        btnSecondary.innerText="수정하기";
+    
+        /*  수정 취소버튼 생성 */
+        document.getElementsByClassName("btn-cancellation")[0].style.display = "block";
+    
+        /* guestInput요소 선택 */
+        prevText =  btn.parentElement.parentElement.nextElementSibling.lastElementChild.lastElementChild
+    
+        /* 기존 방명록 글 백업 */
+        backUp =prevText.innerText
+    
+        /* 기존 글 입력창에 넣기  */
+        guestInput.value = backUp;
+        
+        /* 글 수정시 바로바로 변경됨 */
+        guestInput.onkeyup = () => {prevText.innerText=guestInput.value;}
+
+        if(gbSecret){
+            checkbox.checked=true
+        }else{
+            checkbox.checked=false
+        }
+    }
 }
 
 // 수정완료 제출 버튼 함수 선언
@@ -320,7 +370,7 @@ const updateGuestBook=(gbNo)=>{
 }
 
 /* 초기화 함수 선언 */
-const resetInput =()=>{
+function resetInput (){
 
     // 입력창 값 삭제
     guestInput.value="";
@@ -344,32 +394,3 @@ const cancelUpdate =()=>{
     /* 초기화 */
     resetInput()
 }
-
-
-/*
-
-수정 두번 클릭시 
-
-1.백업본이 null 이 아니라면 메시지출력 = 수정하시겠습니까?
-2.수정 클릭하면 이전꺼 백업하고 백업변수에 다시 수정하는 텍스트 삽입
-*/
-
-
-
-
-// 수정 시 
-/*
-
-
-수정 누른 후 수정누르면 어캐할까
-방법 1)
-수정 클릭시 modify 전역변수 체크 1이 아닐 시 수정 가능 
-1일때 다른 수정 버튼 클릭 안되게 
-
-방법2)
-수정 중 다른 수정 클릭 시 수정을 취소하고 다른 수정을 하겠습니까 메시지 출력
-확인 시 기존 수정 중인거 롤백 
-다른수정 누르면 백업본 여부 확인하여 알림 띄우고 
-
-
-*/

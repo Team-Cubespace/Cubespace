@@ -1,3 +1,37 @@
+// 뒤로가기
+const goBack = ()=>{
+    let historyArr = localStorage.getItem("minihomeHistory");
+
+    if(historyArr != null) {
+        historyArr = JSON.parse(historyArr);
+        const minihomeNo = historyArr.pop();
+        const url = `/minihome/${minihomeNo}`;
+        const specs = "resizable=no, status=no, menubar=no, width=1203, height=718, top=50, left=300";
+
+        window.open(url, "minihome", specs, false);
+    }
+}
+/* 배경색에 ‘어두움 정도’ 따라 텍스트의 색상 결정 */
+function getTextColorByBackgroundColor(hexColor) {
+
+    const c = hexColor.substring(1)      // 색상 앞의 # 제거
+    const rgb = parseInt(c, 16)   // rrggbb를 10진수로 변환
+    const r = (rgb >> 16) & 0xff  // red 추출
+    const g = (rgb >> 8) & 0xff  // green 추출
+    const b = (rgb >> 0) & 0xff  // blue 추출
+
+    const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b // per ITU-R BT.709
+
+    // 색상 선택
+    return luma < 127.5 ? "white" : "black" // 글자색이
+}
+// 이전 미니홈피 글자색 지정
+(()=>{
+    const goBackButton = document.getElementById("goBackButton");
+
+    goBackButton.style.color = getTextColorByBackgroundColor(originalFrameColor);
+})();
+
 // 미니홈피 이름 변경
 let prevMiniohmeTitleEl;
 (()=>{

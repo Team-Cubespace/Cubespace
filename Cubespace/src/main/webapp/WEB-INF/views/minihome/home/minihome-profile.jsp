@@ -39,9 +39,7 @@
         </div>
  
         <!-- 필요할 경우 css 추가 -->
-        <div class="profile-message">
-            집에 가고싶다...
-        </div>
+        <textarea class="profile-message" spellcheck="false" readonly>집에 가고 싶다..</textarea>
 
         <!-- 스페이스 주인 번호와 loginMember.memberNo가 같을 경우 -->
         <span id="profileUpdate">프로필 수정</span>
@@ -69,6 +67,8 @@
         <!-- 스페이스 주인 번호와 loginMember.memberNo가 다를 경우 -->
         <!-- <span id="returnMyHome">내 스페이스로 돌아가기</span> -->
     </div>
+
+    <jsp:include page="/WEB-INF/views/minihome/home/profile-update.jsp"/>
 </body>
 
 <script src="/resources/js/minihome/home/minihome-profile.js"></script>

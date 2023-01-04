@@ -230,3 +230,26 @@ $("#pictureBtn").click(e => {
         a.click()
     })
 })
+
+let wallStyle = "#"
+
+/* 벽지 */
+$("input:radio[name=wall]").change(() => {
+    const wallColor = document.getElementById("wallColor");
+    const wallImage = document.getElementById("wallImage");
+    
+    if(wallColor.checked) {
+        wallImage.nextElementSibling.classList.add("no-checked");
+        wallColor.nextElementSibling.classList.remove("no-checked");
+        
+    }
+
+    if(wallImage.checked) {
+        wallColor.nextElementSibling.classList.add("no-checked");
+        wallImage.nextElementSibling.classList.remove("no-checked");
+    }
+})
+
+document.getElementById("abc").addEventListener("change", () => {
+    console.log(document.getElementById("abc").value);
+})

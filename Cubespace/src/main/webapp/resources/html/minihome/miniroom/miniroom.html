@@ -87,14 +87,20 @@
                     </div>
                 </div>
 
-                <header>벽지 & 바닥</header>
-
-                <div>
-                    <input type="radio">
-                    벽지 꾸미기 바닥 꾸미기
+                <div class="btn-container">
+                    <button id="pictureBtn">미니룸 사진 저장</button> <button id="saveBtn">현재 상태 저장</button>
                 </div>
 
-                <div>이미지 선택 색상 선택<input type="color" id="abc"> </div>
+                <header>벽지</header>
+
+                <div class="select-wall">
+                    <input type="radio" name="wall" id="wallColor"> <div class="s">색상 선택<input type="color" id="abc"></div>
+                    <input type="radio" name="wall" id="wallImage"> <span>이미지 선택 패턴 채우기</span>
+                    <button>원래대로</button>
+                </div>
+
+                <header>바닥</header>
+
 
                 <header class="miniroom-header">
                     <span>미니미 & 소품</span>
@@ -107,10 +113,9 @@
                         <div></div>
                         <div></div>
                         <div></div>
+                        <div></div>
                     </div>
                 </div>
-
-                <button id="pictureBtn">미니룸 사진 저장</button> <button>현재 상태 저장</button>
             </div>
         </section>
     </div>
@@ -119,7 +124,6 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> 
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-<script src="../../../js/minihome/minihome-home.js"></script>
 <script src="../../../js/minihome/miniroom/miniroom.js"></script>
 <script src="../../../js/common/temp.js"></script>
 </html>

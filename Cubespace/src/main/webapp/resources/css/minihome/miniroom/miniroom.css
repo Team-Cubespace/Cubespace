@@ -152,6 +152,7 @@
     left: 466.5px;
 }
 
+/* 빈 타일, 배치된 타일 */
 .empty{
     background-color: rgba(170, 0, 255, 0.3);
     border: 2px dashed rgb(160, 93, 255);

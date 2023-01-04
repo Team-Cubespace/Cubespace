@@ -1,5 +1,5 @@
-/* home main content */
-@import "minihome-content.css";
-
 /* miniroom */
 @import "../miniroom/miniroom.css";
+
+/* home main content */
+@import "minihome-content.css";

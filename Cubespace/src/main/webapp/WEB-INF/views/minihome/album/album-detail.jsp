@@ -50,7 +50,7 @@
     </c:if>
     <script>
         const loginMemberNo = '${loginMember.memberNo}';
-        const boardNo = '${album.albumNo}';
+        const boardNo = '${board.albumNo}';
         const profileImage = '${loginMember.profileImage}';
         const boardTypeNo = 2;
     </script>

@@ -8,14 +8,26 @@
         <button id="goToList">목록으로</button>
     </header>
     <div class="detail-subtitle">
-        <span class="detail-open-flag">공개</span>
-        <span class="detail-title-area">${album.albumTitle}</span>
-        <span class="detail-create-date">${album.albumCreate}</span>
+        <span class="detail-open-flag">
+            <c:choose>
+                <c:when test="${board.openFlag == 1}">
+                    전체공개
+                </c:when>
+                <c:when test="${board.openFlag == 2}">
+                    깐부공개
+                </c:when>
+                <c:when test="${board.openFlag == 3}">
+                    비공개
+                </c:when>
+            </c:choose>
+        </span>
+        <span class="detail-title-area"><c:if test="${board.albumScrapYN == 'Y'}">[스크랩] </c:if>${board.albumTitle}</span>
+        <span class="detail-create-date">${board.albumCreate}</span>
     </div>
     <div class="slide-container">
         <div class="swiper-container">
             <ul class="swiper-wrapper">
-                <c:forEach var="albumImage" items="${album.albumImageList}">
+                <c:forEach var="albumImage" items="${board.albumImageList}">
                     <li class="swiper-slide">
                         <img src="${albumImage.imagePath}${albumImage.imageRename}" alt="">
                     </li>
@@ -23,7 +35,7 @@
             </ul>
         </div>
 
-        <c:if test="${fn:length(album.albumImageList) > 1}">
+        <c:if test="${fn:length(board.albumImageList) > 1}">
             <%-- 페이지 네이션 --%>
             <div class="swiper-pagination"></div>
             <span class="button-next">
@@ -36,14 +48,14 @@
     </div>
 
     <p class="album-content">
-        ${album.albumContent}
+        ${board.albumContent}
     </p>
     <div class="album-detail-footer">
         <%-- 게시글에 좌표가 등록 되었을때만 --%>
-        <c:if test="${not empty album.latitude}">
-            <a href="https://map.kakao.com/link/map/${album.locationName},${album.latitude},${album.longitude}" target="_blank" class="location">
+        <c:if test="${not empty board.latitude}">
+            <a href="https://map.kakao.com/link/map/${board.locationName},${board.latitude},${board.longitude}" target="_blank" class="location">
                 <i class="fa-solid fa-location-dot"></i>
-                ${album.locationName}
+                ${board.locationName}
             </a>
         </c:if>
 
@@ -51,14 +63,14 @@
             <c:choose>
                 <%-- 게시글의 작성자번호와 로그인된 회원의 번호가 일치하지 않을 때 --%>
                 <c:when test="${minihome.memberNo != loginMember.memberNo}">
-                    <c:if test="${album.albumScrapAllowYN == 'Y'}">
+                    <c:if test="${board.albumScrapAllowYN == 'Y'}">
                            <button id="showScrapModal" type="button">스크랩</button> 
                     </c:if>
                 </c:when>
                 <c:otherwise>
                     <%-- 게시글의 작성자번호와 로그인된 회원의 번호가 일치할 때 --%>
-                    <a href="/albumUpdate/${album.albumNo}?folderNo=${album.folderNo}&cp=${param.cp}">수정</a>
-                    <a href="/albumDelete/${album.albumNo}?folderNo=${album.folderNo}&cp=${param.cp}">삭제</a>
+                    <a href="/albumUpdate/${board.albumNo}?folderNo=${board.folderNo}&cp=${param.cp}">수정</a>
+                    <a href="/albumDelete/${board.albumNo}?folderNo=${board.folderNo}&cp=${param.cp}">삭제</a>
                 </c:otherwise>
             </c:choose>
         </div>
@@ -90,7 +102,7 @@
                     <div class="modal-scrap-allow">
                         <label class="modal-label" for="">공개 설정</label>
                         <div class="modal-radio-area">
-                            <input type="radio" name="openFlag" value="1" id="modalOpenFlag1">
+                            <input type="radio" name="openFlag" value="1" id="modalOpenFlag1" checked>
                             <label for="modalOpenFlag1">전체공개</label>
 
                             <input type="radio" name="openFlag" value="2" id="modalOpenFlag2">

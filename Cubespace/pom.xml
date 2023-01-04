@@ -21,6 +21,15 @@
 	
 	<dependencies>
 	
+		<!-- 동영상 처리 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/net.bramp.ffmpeg/ffmpeg -->
+		<dependency>
+		    <groupId>net.bramp.ffmpeg</groupId>
+		    <artifactId>ffmpeg</artifactId>
+		    <version>0.7.0</version>
+		</dependency>
+	
+	
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>

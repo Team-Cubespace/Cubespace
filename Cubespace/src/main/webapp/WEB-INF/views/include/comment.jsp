@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <div class="comment-section">
     <div class="comment-header">
-        <span class="comment-count">댓글 ${fn:length(album.commentList)}개</span>
-        <button type="button" onclick="selectCommentList(albumNo)"></button>
+        <span class="comment-count">댓글 ${fn:length(board.commentList)}개</span>
     </div>
     <div class="comment-write-row">
         <div class="comment-profile-image-area">
@@ -26,7 +26,7 @@
         </div>
     </div>
     <ul id="commentListArea" class="comment-list">
-        <c:forEach var="comment" items="${album.commentList}">
+        <c:forEach var="comment" items="${board.commentList}">
             <c:choose>
                 <%-- 부모 댓글이라면 --%>
                 <c:when test="${comment.level == 1}">
@@ -55,7 +55,7 @@
                                 </c:if>
                             </div>
                             <div class="comment-content-area">
-                                <p>
+                                <p style="font-family: '${comment.ownFontNo}'">
                                     ${comment.commentContent}
                                 </p>                            
                             </div>

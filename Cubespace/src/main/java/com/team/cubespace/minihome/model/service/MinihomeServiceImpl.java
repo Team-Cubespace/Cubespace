@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.team.cubespace.common.Util;
 import com.team.cubespace.minihome.model.dao.MinihomeDAO;
 import com.team.cubespace.minihome.model.vo.Minihome;
 
@@ -25,6 +26,9 @@ public class MinihomeServiceImpl implements MinihomeService{
 	// 미니홈 이름 수정
 	@Override
 	public int updateMinihomeName(Map<String, Object> paramMap) {
+		String homepageName = Util.XSSHandling((String)paramMap.get("homepageName"));
+		homepageName = Util.newLineHandling(homepageName);
+		paramMap.put("homepageName", homepageName);
 		return dao.updateMinihomeName(paramMap);
 	}
 

@@ -58,11 +58,11 @@ allFriend.addEventListener("click", e => {
 const openMinihome = (url) => {
     console.log(url);
     let title = "minihome";
-    let name = "_blank";
+    // let name = "_blank";
     let replace = "false";
 
     let specs = "resizable=no, status=no, menubar=no, width=1203, height=718, top=50, left=300";
-    window.open(url,name,specs,replace);
+    window.open(url,title,specs,true);
 
     return false;
 }

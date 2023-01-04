@@ -13,6 +13,7 @@ public class Video {
 	private int videoNo;			// 영상 번호
 	private int memberNo;			// 작성자 회원 번호
 	private String videoTitle;			// 영상 제목
+	private String videoContent;
 	private String videoCreate;		// 영상 작성일
 	private String videoPath;		// 영상 경로
 	private String videoRename;		// 영상 변경명
@@ -22,8 +23,10 @@ public class Video {
 	private String videoScrapAllowYN;	// 비디오 스크랩 가능 여부
 	private int folderNo;			// 비디오가 속한 폴더 번호
 	private String videoThumbnail;	// 비디오 썸네일 이미지 경로
-	private int videoReadCount;		// 비디오 조회 수
+	private int scrapVideoNo;	// 스크랩할 동영상 글 번호
+	private int commentCount;	// 댓글 갯수
 	
+	private int videoReadCount;		// 비디오 조회 수
 	
 	private List<Comment> commentList;			// 댓글 목록
 	

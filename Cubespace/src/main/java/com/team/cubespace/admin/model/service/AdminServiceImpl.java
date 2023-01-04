@@ -1,5 +1,6 @@
 package com.team.cubespace.admin.model.service;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,11 +11,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.team.cubespace.admin.model.dao.AdminDAO;
 import com.team.cubespace.admin.model.vo.Block;
 import com.team.cubespace.common.Pagination;
+import com.team.cubespace.common.Util;
 import com.team.cubespace.complain.model.vo.Complain;
+import com.team.cubespace.manage.model.vo.Font;
 import com.team.cubespace.member.model.vo.Member;
 
 @Service
@@ -169,5 +173,68 @@ public class AdminServiceImpl implements AdminService{
 			return dao.blockMember(inputBlock);			
 			
 		}
+	}
+
+	/**
+	 * 폰트 목록 조회
+	 */
+	@Override
+	public Map<String, Object> fontSearch(Map<String, Object> paramMap, int cp) {
+		
+		// 조건에 맞는 폰트 수
+		int listCount = dao.getFontListCount(paramMap);
+		
+		// 전체 폰트수 
+		int allFontCount = dao.getAllFontCount();
+		
+		// 전체 폰트 수 + cp를 이용해 페이징처리
+		Pagination pagination = new Pagination(listCount, cp, 30, 10);
+		
+		// sort 값 계산
+//		paramMap.put("order", "FONT_NAME ASC");
+//		if(paramMap.get("sort").equals("1")) { // 사용횟수 많은순
+//			paramMap.put("order", "MEMBER_NO DESC");
+//		}
+//		if(paramMap.get("sort").equals("2")) { // 사용횟수 적은순
+//			paramMap.put("order", "MEMBER_NO ASC");
+//		}
+//		if(paramMap.get("sort").equals("3")) { // 등록일 빠른순
+//			paramMap.put("order", "TODAY DESC, MEMBER_NO DESC");
+//		}
+//		if(paramMap.get("sort").equals("4")) { // 등록일 느린순
+//			paramMap.put("order", "TOTAL DESC, MEMBER_NO DESC");
+//		}
+		
+		// 조건에 맞는 폰트 목록
+		List<Member> fontList = dao.fontSearch(pagination, paramMap);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("fontList", fontList);
+		map.put("allFontCount", allFontCount);
+		map.put("listCount", listCount);
+		
+		return map;
+	}
+
+	/**
+	 * 새 폰트 등록
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	@Override
+	public int insertFont(String webPath, String folderPath, Font inputFont, MultipartFile fontFile) throws Exception{
+		
+		String rename = Util.fileRename(fontFile.getOriginalFilename());
+		inputFont.setFontPath(webPath + rename);
+		
+		int result = dao.insertFont(inputFont);
+		
+		if(result > 0) {
+			fontFile.transferTo(new java.io.File(folderPath + rename));
+		}
+		
+		return result;
+
 	}
 }

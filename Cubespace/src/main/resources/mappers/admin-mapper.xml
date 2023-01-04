@@ -11,8 +11,16 @@
 		<result property="blockEnd" column="BLOCK_END"/>		
 	</resultMap>
 	
+	<resultMap type="Font" id="font_rm">
+   		<id property="fontNo" column="FONT_NO"/>
+   		<result property="fontName" column="FONT_NAME"></result>
+   		<result property="fontPath" column="FONT_PATH"></result>
+   		<result property="fontCreater" column="FONT_CREATER"></result>
+   		<result property="fontUseCount" column="FONT_USE_COUNT"></result>
+ 	 </resultMap>
 	
 	
+	<!-- 회원 차단====================================================  -->
 	
  	 <!-- 회원 새로 차단하기 -->
  	<insert id="blockMember">
@@ -36,5 +44,36 @@
 		BLOCK_END = TO_DATE(#{blockEnd},'YYYY-MM-DD HH24:MI:SS')
 		WHERE MEMBER_NO = #{memberNo}
  	</update>
+ 	
+ 	
+ 	
+	<!-- 폰트 등록====================================================  -->
+ 	
+ 	<!-- 조건에 맞는 폰트 수 -->
+ 	<select id="getFontListCount" resultType="_int">
+ 	
+ 	</select>
+ 	
+ 	
+ 	<!-- 조건에 맞는 폰트 리스트 -->
+ 	<select id="fontSearch" resultMap="font_rm">
+ 	
+ 	</select>
+ 	
+ 	
+ 	<!-- 전체 폰트수 -->
+ 	<select id="getAllFontCount">
+ 		SELECT COUNT(*) FROM FONT_SHOP 
+ 	</select>
+ 	
+ 	
+ 	<!-- 새 폰트 등록 -->
+ 	<insert id="insertFont">
+ 		INSERT INTO FONT_SHOP VALUES(
+		SEQ_FONT_NO.NEXTVAL, #{fontName}, #{fontPath}, #{fontCreater})
+ 	</insert>
+ 	
+ 	
+ 	
   
 </mapper>

@@ -3,8 +3,11 @@ package com.team.cubespace.admin.model.service;
 import java.text.ParseException;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.team.cubespace.admin.model.vo.Block;
 import com.team.cubespace.complain.model.vo.Complain;
+import com.team.cubespace.manage.model.vo.Font;
 import com.team.cubespace.member.model.vo.Member;
 
 public interface AdminService {
@@ -48,5 +51,23 @@ public interface AdminService {
 	 * @throws ParseException 
 	 */
 	int blockMember(Block inputBlock) throws ParseException;
+
+	/** 폰트 목록 조회
+	 * @param paramMap
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> fontSearch(Map<String, Object> paramMap, int cp);
+
+	
+	/** 새 폰트 등록
+	 * @param webPath
+	 * @param folderPath
+	 * @param inputFont
+	 * @param fontPath
+	 * @return
+	 * @throws Exception 
+	 */
+	int insertFont(String webPath, String folderPath, Font inputFont, MultipartFile fontFile) throws Exception;
 
 }

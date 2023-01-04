@@ -1,9 +1,11 @@
 package com.team.cubespace.admin.controller;
 
 import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.cubespace.admin.model.service.AdminService;
@@ -22,8 +25,17 @@ import com.team.cubespace.admin.model.vo.Block;
 import com.team.cubespace.complain.model.vo.Complain;
 import com.team.cubespace.login.model.service.LoginService;
 import com.team.cubespace.manage.model.vo.Background;
+import com.team.cubespace.manage.model.vo.Font;
 import com.team.cubespace.member.model.vo.Member;
 
+/**
+ * @author User
+ *
+ */
+/**
+ * @author User
+ *
+ */
 @Controller
 @RequestMapping("/admin")
 @SessionAttributes({"loginMember", "message"})
@@ -61,7 +73,14 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/goods/font")
-	public String adminGoods_font() {
+	public String adminGoods_font(@RequestParam Map<String, Object> paramMap,
+			@RequestParam(value="cp", required=false, defaultValue="1" ) int cp,
+			Model model) {
+		
+		// 폰트 목록 조회
+		Map<String, Object> map = service.fontSearch(paramMap, cp);
+		model.addAttribute("map", map);
+
 		return "admin/admin-font";
 	}
 	/** 배경음악 등록 페이지 이동
@@ -178,6 +197,39 @@ public class AdminController {
 	public int blockMember(Block inputBlock) throws ParseException {
 		// block : memberNo, blockStart, blockEnd
 		return service.blockMember(inputBlock);
+	}
+	
+	
+	
+//	-------------------------------------------------------------------------------
+
+	
+	/** 새 폰트 등록
+	 * @param inputFont
+	 * @param file
+	 * @return
+	 * @throws Exception 
+	 */
+	@PostMapping("/font/insertFont")
+	public String insertFont(Font inputFont, MultipartFile fontFile, 
+			HttpSession session, Model model,
+			RedirectAttributes ra) throws Exception {
+		
+		String webPath = "/resources/font/";
+		String folderPath = session.getServletContext().getRealPath(webPath);
+		
+		
+		int result =  service.insertFont(webPath, folderPath, inputFont, fontFile);
+		String message = null;
+		
+		if(result > 0) {
+			message = "새 폰트가 등록되었습니다";
+		} else {
+			message = "폰트 등록 실패";
+		}
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:/admin/font";
 	}
 	
 }

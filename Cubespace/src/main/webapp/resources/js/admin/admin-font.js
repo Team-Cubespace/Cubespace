@@ -44,3 +44,29 @@ document.getElementById("fontAddBtn").addEventListener("click", openPop2);
 
 
 /* -------------------------------------------------------------- */
+// 폰트 등록하기(form-submit, post)
+
+
+
+
+
+// 폰트 수정하기(ajax)
+const updateFontList = document.getElementsByClassName("updateFont");
+for(let updateFont of updateFontList){
+    updateFont.addEventListener("click", e => {
+
+        document.getElementById("signUpBtn").innerText = "폰트 수정 완료";
+        document.getElementById("formTitle").innerText = "폰트 수정";
+
+        const fontNo = e.target.getAttribute("name");
+        const tempList = document.getElementsByClassName(fontNo);
+        const fontName = tempList[0];
+        const fontpath = tempList[1].getAttribute("name");
+        const fontCreater = tempList[2];
+
+        document.getElementById("fontNameInput").value = fontName;
+        document.getElementById("fontPathInput").value = fontpath;
+        document.getElementById("fontCreaterInput").value = fontCreater;
+        
+    })
+}

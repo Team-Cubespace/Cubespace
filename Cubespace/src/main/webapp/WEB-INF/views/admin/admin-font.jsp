@@ -98,7 +98,7 @@
                 <div class="pull-left">
                     검색
                     <strong>${listCount}</strong>
-                    명 / 전체
+                    개 / 전체
                     <strong>${allMemberCount}</strong>
                     개
                 </div>
@@ -115,29 +115,32 @@
                     <div class="search-result-div"  id="email">
                         <div class="search-result-tab">폰트 이름</div>
                         <c:forEach var="font" items="${fontList}">
-                            <div class="search-content">${font.fontName}</div>
+                            <div class="search-content ${font.fontNo}">${font.fontName}</div>
                         </c:forEach>
                     </div>
                     <div class="search-result-div" id="nickname">
                         <div class="search-result-tab">폰트 예시</div>
                         <c:forEach var="font" items="${fontList}">
                             <%-- form태그 말고 다른 형식으로 수정해야함 --%>
-                            <form method="post" class="seller" onsubmit="return false;">
-                                <span class="search-content sellerPage">우리들의 작은 공간 큐브스페이스에서 시작하세요</span>
-                                <input type="hidden" name="sellerNo" value="">
-                            </form>
+                            <div class="search-content ${font.fontNo}" name="${font.fontPath}">우리들의 작은 공간 큐브스페이스에서 시작하세요</div>
                         </c:forEach>
                     </div>
                     <div class="search-result-div" id="signDate">
                         <div class="search-result-tab">폰트 제작자</div>
                         <c:forEach var="font" items="${fontList}">
-                            <div class="search-content">${font.fontCreater}</div>
+                            <div class="search-content ${font.fontNo}">${font.fontCreater}</div>
                         </c:forEach>
                     </div>
                     <div class="search-result-div" id="signDate">
                         <div class="search-result-tab">폰트 사용횟수</div>
                         <c:forEach var="font" items="${fontList}">
                             <div class="search-content">${font.fontCount}</div>
+                        </c:forEach>
+                    </div>
+                    <div class="search-result-div" id="signDate">
+                        <div class="search-result-tab">수정하기</div>
+                        <c:forEach var="font" items="${fontList}">
+                            <div class="search-content updateFont" name="${font.fontNo}">수정하기</div>
                         </c:forEach>
                     </div>
                 </div>
@@ -153,26 +156,26 @@
                         <!--팝업 컨텐츠 영역-->
                         <div class="popup_cont">
                             <div class="payRemainArea">
-                                <h1><span>폰트 등록</span></h1>
+                                <h1><span id="formTitle">폰트 등록</span></h1>
                             </div>
 
-                            <form  method="get" name="signUp-frm" id="signUp-frm" onsubmit="return false">
+                            <form action="/admin/font/insertFont" method="post" name="insertFont-frm" id="insertFont-frm" onsubmit="return false">
                                 <div>
                                     <!-- 폰트 이름 -->
-                                    <div class="signUp-input-Email textbox">
-                                        <input  type="text" name="fontName"  class="inputBox" id="fontName" 
+                                    <div class="signUp-input-fontName textbox">
+                                        <input  type="text" name="fontName"  class="inputBox" id="fontNameInput" 
                                             placeholder="폰트 이름"  autocomplete="off" />
                                     </div>
                                     
                                     <!-- 폰트 경로 -->
-                                    <div class="signUp-input-password textbox">
-                                        <input type="file"  name="fontPath"  class="inputBox" id="fontPath"  />
+                                    <div class="signUp-input-fontPath textbox">
+                                        <input type="file"  name="fontPath"  class="inputBox" id="fontPathInput"  />
                                     </div>
                                     
 
                                     <!-- 폰트 제작자 -->
-                                    <div class="signUp-input-Nickname textbox">
-                                        <input type="text" name="fontCreater" class="inputBox"  id="fontCreater"
+                                    <div class="signUp-input-fontCreater textbox">
+                                        <input type="text" name="fontCreater" class="inputBox"  id="fontCreaterInput"
                                             placeholder="폰트 제작자" />
                                     </div>
 
@@ -198,10 +201,10 @@
                     <ul class="pagination">
                     
                         <!-- 첫 페이지로 이동( <<) -->
-                        <li><a href="/admin/font?${sURL}">&lt;&lt;</a></li>
+                        <li><a href="/admin/goods/font?${sURL}">&lt;&lt;</a></li>
 
                         <!-- 이전 목록 마지막 번호로 이동 ( < ) -->
-                        <li><a href="/admin/font?cp=${pagination.prevPage}&${sURL}">&lt;</a></li>
+                        <li><a href="/admin/goods/font?cp=${pagination.prevPage}&${sURL}">&lt;</a></li>
 
                         
                         <!-- 특정 페이지로 이동 -->
@@ -213,33 +216,20 @@
                                 </c:when>
                                 <c:otherwise>
                                     <%-- 현재 페이지를 제외한 나머지 --%>
-                                    <li><a href="/admin/font?cp=${i}&${sURL}">${i}</a></li>
+                                    <li><a href="/admin/goods/font?cp=${i}&${sURL}">${i}</a></li>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
                         
                         <!-- 다음 목록 시작 번호로 이동 ( > )-->
-                        <li><a href="/admin/font?cp=${pagination.nextPage}&${sURL}">&gt;</a></li>
+                        <li><a href="/admin/goods/font?cp=${pagination.nextPage}&${sURL}">&gt;</a></li>
 
                         <!-- 끝 페이지로 이동 ( >> ) -->
-                        <li><a href="/admin/font?cp=${pagination.maxPage}&${sURL}">&gt;&gt;</a></li>
+                        <li><a href="/admin/goods/font?cp=${pagination.maxPage}&${sURL}">&gt;&gt;</a></li>
 
                     </ul>
                 </div>
-
-
-
-                <%-- <div class="center">
-                    <nav>
-                        <ul class="pagination pagination-sm">
-                            <li class="active">
-                                <span>1</span>
-                            </li>
-                        </ul>
-                    </nav>
-                </div> --%>
             </section>
-            
         </main>
 
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />

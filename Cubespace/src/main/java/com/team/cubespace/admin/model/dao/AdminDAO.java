@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.team.cubespace.admin.model.vo.Block;
 import com.team.cubespace.common.Pagination;
 import com.team.cubespace.complain.model.vo.Complain;
+import com.team.cubespace.manage.model.vo.Font;
 import com.team.cubespace.member.model.vo.Member;
 
 @Repository
@@ -132,6 +133,46 @@ public class AdminDAO {
 	public int updateBlockMember(Block inputBlock) {
 		
 		return sqlSession.update("adminMapper.updateBlockMember", inputBlock);
+	}
+
+	/** 조건에 맞는 폰트 수 
+	 * @param paramMap
+	 * @return
+	 */
+	public int getFontListCount(Map<String, Object> paramMap) {
+		
+		return sqlSession.selectOne("adminMapper.getFontListCount", paramMap);
+	}
+
+	/** 전체 폰트수
+	 * @return
+	 */
+	public int getAllFontCount() {
+		
+		return sqlSession.selectOne("adminMapper.getAllFontCount");
+	}
+
+	/** 조건에 맞는 폰트 리스트
+	 * @param pagination
+	 * @param paramMap
+	 * @return
+	 */
+	public List<Member> fontSearch(Pagination pagination, Map<String, Object> paramMap) {
+
+		int offset = (pagination.getCurrentPage() -1) * pagination.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return  sqlSession.selectList("adminMapper.fontSearch", paramMap, rowBounds);
+
+	}
+
+	/** 새 폰트 등록
+	 * @param inputFont
+	 * @return
+	 */
+	public int insertFont(Font inputFont) {
+		
+		return sqlSession.insert("adminMapper.insertFont", inputFont);
 	}
 
 	

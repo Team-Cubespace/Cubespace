@@ -1,5 +1,6 @@
 let peoplePopContainer;
-/* [글쓰기]할 때 날짜를 담는 변수 */
+
+/* 날짜를 담는 변수 */
 let dateContainer;
 
 // 공공데이터 포털 공휴일 조회 함수
@@ -69,6 +70,25 @@ const getRestDeInfo = (date) => {
 
 //2. 날짜 클릭 시 화면
 
+    let flag ;
+    //let today;
+    if(flag != ""){
+        //today = new Date(변수명)
+    }else {
+        //[ 현재 날짜 ]
+        //var today = new Date();
+    }
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    var day = ('0' + today.getDate()).slice(-2);
+    /*  */
+    const diaryDate = year + '-' + month  + '-' + day;
+    
+    /* '글쓰기'버튼 누를 때, 어느 날짜에 글을 쓰는지 알기 위해서...  */
+    dateContainer = diaryDate;
+    selectDiary(diaryDate);
+
 
 // 달력 생성 함수
 const makeCalendar = (date) => {
@@ -79,18 +99,12 @@ const makeCalendar = (date) => {
     const d = new Date(date).getDate()
     const currentMonth = m >= 10 ? m : "0" + m;
     const currentDate = d >= 10 ? d : "0" + d;
-
     const currentDay = weekDay[new Date(date).getDay()];
-    console.log("----------------------------------------------------");
-    console.log(currentYear);
-    console.log(currentMonth);
-    console.log(currentDate);
+
     // 날짜 변환
     document.querySelector(".today").innerText = `${currentMonth}.${currentDate}`;
     document.querySelector(".today-day").innerText = `${currentDay}`;
     document.querySelector(".year-month").innerText = `${currentYear}.${currentMonth}`;
-
-    console.log("또다른실험" + `${currentYear}.${currentMonth}`);
 
 
     // 달력 변환
@@ -114,30 +128,12 @@ const makeCalendar = (date) => {
     // + 해당 당 공휴일 얻어와 일치하는 날의 holiday 클래스 추가하기
     const restDay = getRestDeInfo(`${currentYear}-${currentMonth}`);
     // -------------------------------------------------------------
-    
-    $.ajax({
-        url : "/selectDate",
-        data : {"yearMonth":`${currentYear}-${currentMonth}`},
-        dataType : "JSON",
-        success :  (dateList)  => {
-            console.log("그레이..." );
-            console.log(dateList);
-            for(let date of dateList) {
-                document.getElementById(date).style.backgroundColor = "#ddd";
-            }
-        },
-        error : () => { 
-            
-        }
-        
-    });
-    //--------------------------------------------------------------
+
 
     for (let i = 1; i <= lastDay; i++) {
         const li = document.createElement("li");
         const a = document.createElement("a");
         a.innerText = i;
-        li.setAttribute("id", i);
         li.append(a);
 
         // -------------------------------------------------------------
@@ -170,10 +166,8 @@ const makeCalendar = (date) => {
             // const folderNumber = 1; /* 폴더 */
             // const homepageMemberNo = 1; /* 이슬이 다이어리를 조회해보겠다. */
             // const loginMemberNo = 7; 
-
-            /* [글쓰기 시 (1) 날짜 클릭 시에 그 날짜를 dateContainer에 담는다.] */
             dateContainer = diaryDate;
-            console.log("클릭했을 시 date : " +dateContainer);
+            console.log("클릭한 날짜 : " +dateContainer);
             selectDiary(diaryDate);
 
             // ------- 여긴 ajax success 코드로 활용 -------------
@@ -204,8 +198,11 @@ const makeCalendar = (date) => {
     }
 }
 
+function writeBtn(dateContainer){
 
-/* [1] 일기 목록 조회 */
+}
+
+
 function selectDiary(diaryDate){
     
     /* 일기 목록 조회하는 ajax */
@@ -296,7 +293,6 @@ function selectDiary(diaryDate){
                                 // const div3_1_1_2 = document.createElement("div");
                                 // div3_1_1_2.classList.add("people-pop-container");
                                 
-                                /* [2] 공감 목록 조회 */
                                 selectEmojiList(diary.diaryNo,div3_1_1_1,div3_1_1);
 
                                 const div3_1_1_2 = document.createElement("div");
@@ -361,8 +357,8 @@ function selectDiary(diaryDate){
 
 // 이전 달
 document.getElementById("prevMonth").addEventListener("click", ()=>{
-    let date = new Date(document.querySelector(".year-month").innerText);
-makeCalendar(new Date(date.setMonth(date.getMonth() - 1)));
+   let date = new Date(document.querySelector(".year-month").innerText);
+   makeCalendar(new Date(date.setMonth(date.getMonth() - 1)));
 });
 
 // 다음 달
@@ -373,57 +369,16 @@ document.getElementById("nextMonth").addEventListener("click", ()=>{
 
 
 
-
-
-
+// 화면 로딩 시 현재 날짜 출력 및 선택
 (()=>{
 
-    /* ------------------------------------------------------------------------------------- */
-
-    let today;
-    let today2;
-    if(flagNo != ""){ //flag가 있으면, 그 날짜가 담긴 date객체가 나오며, 거기에 따른 일기목록이 조회됨.
-        today = new Date(datedatedate);
-        today2 = new Date(datedatedate);
-    }else {
-        //[ 현재 날짜 ]
-        today = new Date();
-        today2 = new Date();
-    }
-    //var today = new Date();
-    var year = today.getFullYear();
-    var month = ('0' + (today.getMonth() + 1)).slice(-2);
-    var day = ('0' + today.getDate()).slice(-2);
+    makeCalendar(new Date());
     
-    /* diaryDate 변수 : flag여부에 따라 달라짐. 
-    1. 오늘 날짜
-    2. 글쓰기 후 돌아왔을 때 보여지는 날짜 */
-    const diaryDate = year + '-' + month  + '-' + day;
-    
-    /* [글쓰기 시 (2) 화면로딩 시에 그 날짜를 dateContainer에 담는다.] */
-    dateContainer =  diaryDate;
-    console.log("화면 로딩 시의 date : " + dateContainer);
-    selectDiary(diaryDate);
-
-    /* ------------------------------------------------------------------------------------- */
-
-    // 화면 로딩 시 현재 날짜 출력 및 선택
-    /* [기존] ----------------------------------------*/
-    // makeCalendar(new Date());
-    // const m = new Date().getMonth() + 1;
-    // const d = new Date().getDate()
-    /* [수정] -----------------------------------------*/
-    console.log("투ㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ데이 "+ today);
-    console.log("11111111111111111111 " + today.getDate());
-    makeCalendar(today);
-    const m = today2.getMonth() + 1;
-    const d = today2.getDate();
-    console.log(m);
-    console.log(d);
-    /* ------------------------------------------------ */
-    const currentMonth = m >= 10 ? m : "0" + m;     
+    const m = new Date().getMonth() + 1;
+    const d = new Date().getDate()
+    const currentMonth = m >= 10 ? m : "0" + m;
     const currentDate = d >= 10 ? d : "0" + d;
-    console.log(currentDate);
+
     const arr = document.querySelectorAll(".calendar-day > li");
 
     for(let a of arr){
@@ -433,22 +388,8 @@ document.getElementById("nextMonth").addEventListener("click", ()=>{
             break;
         }
     }
+})()
 
-    
-
-})();
-
-function writeBtn(){    
-    
-    /* 이 변수 쓰려면 함수가 밑에 있어야 될 걸..? */
-    console.log("글쓸 때 보내는 날짜" + dateContainer);
-
-    location.href = "/diaryWrite?date=" + dateContainer;
-
-    // return false;
-}
-
-/* [3] 고르는 이모지 목록 조회 */
 function chooseEmoji(diaryNo,btn){
     /* 이모지 리스트가 만들어짐. */
     console.log(btn.parentElement);
@@ -707,3 +648,8 @@ function selectEmojiPeopleList(emojiNo,diaryNo,btn){
 function mouseout(btn){
     btn.parentElement.parentElement.nextSibling.innerText = "";
 }
+
+function writeBtn(){
+
+}
+

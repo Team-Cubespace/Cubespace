@@ -40,7 +40,7 @@
                 <!-- 전체 내용 div 태그로 한 번 감싸주세요 -->
                 <!-- ex) <div class="home-area"> <div></div> <span></span> ... </div> -->
                 <div class = "home-area">
-                    <header><span>다이어리 > </span><span>다이어리1</span></header>
+                    <header><span>다이어리 > </span><span>${folderNo}</span></header>
                     <div class = "calendar-box">
                         <div class = "calendar-section">
                             <!-- jsp인 경우 include할 거...? -->
@@ -101,7 +101,8 @@
                         </div>
                     </div>
                     <div class = "write-section">
-                        <div class = "writeBtn" ><a href="/diaryWrite" onclick = "writeBtn()">글쓰기</a>
+                        <div  class = "writeBtn" onclick="writeBtn()"><span>글쓰기</span>
+                        
                         </div>
                     </div>
                     <div class = "diary-section-container">
@@ -118,9 +119,15 @@
 <script src="/resources/js/common/temp.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
 <script>
-const folderNo = "${folderNo}";
+    const folderNo = "${folderNo}";
+    const datedatedate = "${datedatedate}";
+    const flagNo = "${flagNo}";
+    console.log("folderNo" + folderNo );
+    console.log("datedatedate" + datedatedate );
+    console.log("flagNo" + flagNo );
 </script>
 <script src="/resources/js/minihome/minihome-diary/diary-main.js"></script>
+<%-- <script src="/resources/js/minihome/minihome-diary/try1.js"></script> --%>
 <%-- <script src = "/resources/js/minihome/minihome-diary/minihome-diary.js"></script> --%>
 
 </html>

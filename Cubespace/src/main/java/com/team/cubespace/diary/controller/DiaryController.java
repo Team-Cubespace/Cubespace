@@ -45,10 +45,13 @@ public class DiaryController {
 			@RequestParam(value="folderNo", required=false, defaultValue="-1") int folderNo,
 			Model model
 			) {
+		//탭 누를 때 설정
 		if(folderNo == -1) {	// 폴더 번호가 -1이면
 			// 폴더리스트를 가져와
 			// 폴더리스트의 0번째 인덱스의 폴더번호를
 			// folderNo로 지정
+			
+			//무조건 탭 누를 때는 '나의다이어리'띄우고 싶다면, 설정하기
 			if(folderList.get(0).getFolderName().equals("나의 월간달력")) {
 				folderNo = folderList.get(1).getFolderNo();
 			} else {
@@ -58,8 +61,6 @@ public class DiaryController {
 		model.addAttribute("folderNo", folderNo);
 		//다이어리part
 		return "minihome/minihome-diary/minihome-diary";
-		//월간달력part
-//		return "minihome/minihome-diary/monthcalendar";
 	}
 	
 	@GetMapping("/monthCalendar")
@@ -72,6 +73,22 @@ public class DiaryController {
 	}
 	
 	/*[ 다이어리 메인 페이지 ]*/
+	
+	/**
+	 * @param yearMonth
+	 * @return
+	 */
+	@GetMapping("/selectDate")
+	@ResponseBody
+	public String selectDateList(
+			String yearMonth
+			) {
+		System.out.println(yearMonth);
+		List<Integer> dateList = service.selectDateList(yearMonth);
+		System.out.println("ㅠㅠ"+dateList);
+		return new Gson().toJson(dateList);
+	}
+	
 	
 	/** 클릭한 날짜의 다이어리 목록 조회하기
 	 * @return diaryList
@@ -99,6 +116,9 @@ public class DiaryController {
 			}
 		}
 		List<Diary> diaryList = service.selectDiaryList(homepageMemberNo,diaryDate,folderNo,openFlag);
+		System.out.println("로그인 멤버 넘버" + loginMemberNo);
+		System.out.println("홈페이지 넘버" + homepageMemberNo) ;
+		System.out.println("다이어리 목록" + diaryList);
 		return new Gson().toJson(diaryList);
 	}
 	/** 일기의 공감 목록 조회하기
@@ -159,19 +179,23 @@ public class DiaryController {
 	
 	//게시글 작성 페이지 이동
    @GetMapping("/diaryWrite")
-   public String diaryWrite() {
+   public String diaryWrite(
+		   @RequestParam(value = "date") String date,
+		   Model model
+		   ) {
+	   System.out.println("글쓸 때 날짜" + date);
+	   model.addAttribute("date", date);
 	   return "minihome/minihome-diary/diary-write";
 	   ///prefix :WEB-INF/views/
 	   // suffix : .jsp
    }
+   
    //게시글 작성
    @PostMapping("/diaryWrite")
    public String diaryWrite(
 		   Diary diary,
 		   @SessionAttribute("loginMember") Member loginMember,
-		   // 필요한가?
-		   RedirectAttributes ra, 
-		   @RequestHeader("referer") String referer
+		   Model model
 		   ) throws IOException {
 	   
 	   	//INSERT -> 회원번호/제목/내용/작성일/삭제여부/공개여부/폴더번호
@@ -183,42 +207,26 @@ public class DiaryController {
 	   	//작성일 (o)
 	   	//삭제여부 DEFAULT
 	   	//공개여부 (o)
-	   	//폴더번호 -> folderNo 어케 불러와...?
+	   	//폴더번호 (o)
 	   	System.out.println("다이어리 객체 :"+ diary);
-	   	System.out.println("이슬이니...? :"+loginMember.getMemberNo());
+	   	//회원 번호
 	   	diary.setMemberNo(loginMember.getMemberNo());
-	   	// [임시 설정]
-//	   	diary.setFolderNo(1);
+	   	//2023-01-27T11:28 형태를 T빼주고 DB날짜형식으로 바꿔주는 설정
 	   	diary.setDiaryCreateDate(
 	   			diary.getDiaryCreateDate().substring(0, 10) + " "+
 	   			diary.getDiaryCreateDate().substring(11, 16) 
 	   			);
-	   	System.out.println(diary.getDiaryCreateDate());
-	   	//System.out.println(diary.getDiaryCreateDate().substring(0, 10));
-	   	//System.out.println(diary.getDiaryCreateDate().substring(11, 16));
-	   	
-	   	// 4. 게시글 삽입 서비스를 호출한다.
+	   	//게시글 삽입 
 	   	int diaryNo = service.diaryWrite(diary);
-	   
-	    String message = null;
-	    String path = null;
 	    
-	    if(diaryNo > 0) {
-	    	message = "게시글이 등록되었습니다.";
-	    	
-	    	path = "/miniroom";
-	    	
-	    	//path = "/board/" + boardCode + "/" + diaryNo;
-	    			// /board/1/2003 (상세조회 요청 주소)
-	    } else {
-	    	message = "게시글 작성 실패";
-	    	path = referer;
-	    	
-	    }
-	    
-	    ra.addFlashAttribute("message",message);
-	    
-		return "redirect:" + path;
+	   	if (diaryNo > 0) {
+	   		model.addAttribute("folderNo", diary.getFolderNo());
+	   		model.addAttribute("datedatedate", diary.getDiaryCreateDate().substring(0, 10));
+	   		model.addAttribute("flagNo", 1);
+	   		System.out.println("model값" + model);
+	   	}
+	   	//다이어리part
+		return "minihome/minihome-diary/minihome-diary";
    }
    
     /*[수정 페이지]*/

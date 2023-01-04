@@ -33,6 +33,13 @@ public class DiaryServiceImpl implements DiaryService {
 		map.put("loginMemberNo", loginMemberNo);
 		return dao.checkFriend(map);
 	}
+	
+	//
+	@Override
+	public List<Integer> selectDateList(String yearMonth) {
+		
+		return dao.selectDateList(yearMonth);
+	}
 
 	//
 	@Override
@@ -167,6 +174,8 @@ public class DiaryServiceImpl implements DiaryService {
 		// TODO Auto-generated method stub
 		return dao.updateScheduleDrop(plan);
 	}
+
+	
 
 	
 

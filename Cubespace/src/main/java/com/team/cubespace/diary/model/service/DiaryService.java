@@ -21,6 +21,12 @@ public interface DiaryService {
 	int checkFriend(int homepageMemberNo, int loginMemberNo);
 
 	/**
+	 * @param yearMonth
+	 * @return
+	 */
+	List<Integer> selectDateList(String yearMonth);
+
+	/**
 	 * @param homepageMemberNo
 	 * @param diaryDate
 	 * @param folderNumber
@@ -101,6 +107,7 @@ public interface DiaryService {
 	 * @return
 	 */
 	int updateScheduleDrop(Plan plan);
+
 
 	
 

@@ -12,6 +12,7 @@
   		<result property="diaryCreateDate" column="D_CREATE"/>
   		<result property="diaryOpenFlag" column="D_OPEN_FL"/>
   		<result property="folderNo" column="FOLDER_NO"/>
+  		<result property="yearMonth" column="YEAR_MONTH"/>
   	</resultMap>
   	
   	<resultMap type="Emoji" id="emoji_rm">
@@ -49,6 +50,12 @@
 	WHERE (ASKED_MEMBER_NO = #{loginMemberNo} AND ASKING_MEMBER_NO = #{homepageMemberNo})
 	OR (ASKED_MEMBER_NO = #{homepageMemberNo} AND ASKING_MEMBER_NO = #{loginMemberNo})
 	AND FRIEND_ACCEPT_FL = 1)
+  	</select>
+  	
+  	<select id="selectDateList" resultType="_int">
+  	SELECT DISTINCT TO_NUMBER(TO_CHAR(D_CREATE, 'DD')) YEAR_MONTH 
+	FROM DIARY 
+	WHERE TO_CHAR(D_CREATE, 'YYYY-MM') = '${yearMonth}' ORDER BY 1
   	</select>
  	  
  	<select id="selectDiaryList" resultMap="diary_rm">

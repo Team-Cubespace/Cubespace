@@ -1,7 +1,7 @@
 let peoplePopContainer;
 
 /* 날짜를 담는 변수 */
-let dateContainer;
+//let dateContainer;
 
 // 공공데이터 포털 공휴일 조회 함수
 const getRestDeInfo = (date) => {
@@ -65,27 +65,10 @@ const getRestDeInfo = (date) => {
 
 // ---------------------------------------------------------
 //[나의 코드]
-    /* 작성일 / 폴더 넘버 / 미니홈피 주인장 넘버 */
-    // const folderNumber = 1; /* 폴더 */
-    // const homepageMemberNo = 1; /* 이슬이 다이어리를 조회해보겠다. */
-    // const loginMemberNo = 7; 
 
-    let flag ;
-    let today;
-    if(flag != ""){
-        //today = new Date(변수명)
-    }else {
-        //[ 현재 날짜 ]
-        //var today = new Date();
-    }
-    var year = today.getFullYear();
-    var month = ('0' + (today.getMonth() + 1)).slice(-2);
-    var day = ('0' + today.getDate()).slice(-2);
-    const diaryDate = year + '-' + month  + '-' + day;
-    
-    /* '글쓰기'버튼 누를 때, 어느 날짜에 글을 쓰는지 알기 위해서...  */
-    dateContainer = diaryDate;
-    selectDiary(diaryDate);
+//1. 첫 화면
+
+//2. 날짜 클릭 시 화면
 
 
 // 달력 생성 함수
@@ -196,7 +179,7 @@ const makeCalendar = (date) => {
     }
 }
 
-function write(dateContainer){
+function writeBtn(dateContainer){
 
 }
 
@@ -355,8 +338,8 @@ function selectDiary(diaryDate){
 
 // 이전 달
 document.getElementById("prevMonth").addEventListener("click", ()=>{
-   let date = new Date(document.querySelector(".year-month").innerText);
-   makeCalendar(new Date(date.setMonth(date.getMonth() - 1)));
+    let date = new Date(document.querySelector(".year-month").innerText);
+makeCalendar(new Date(date.setMonth(date.getMonth() - 1)));
 });
 
 // 다음 달
@@ -368,8 +351,10 @@ document.getElementById("nextMonth").addEventListener("click", ()=>{
 
 
 // 화면 로딩 시 현재 날짜 출력 및 선택
-(()=>{
 
+
+(()=>{
+    console.log("안녕" +new Date());
     makeCalendar(new Date());
     
     const m = new Date().getMonth() + 1;
@@ -386,6 +371,31 @@ document.getElementById("nextMonth").addEventListener("click", ()=>{
             break;
         }
     }
+
+    /* ------------------------------------------------------------------------------------- */
+    let flag ;
+    //let today;
+    if(flag != ""){ //flag가 있으면, 그 날짜가 담긴 date객체가 나오며, 거기에 따른 일기목록이 조회됨.
+        //today = new Date(변수명)
+    }else {
+        //[ 현재 날짜 ]
+        //var today = new Date();
+    }
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    var day = ('0' + today.getDate()).slice(-2);
+    
+    /* diaryDate 변수 : flag여부에 따라 달라짐. 
+    1. 오늘 날짜
+    2. 글쓰기 후 돌아왔을 때 보여지는 날짜 */
+    const diaryDate = year + '-' + month  + '-' + day;
+
+    console.log("지금 날짜는 언제로 되어 있어? : " + diaryDate);
+    
+    /* '글쓰기'버튼 누를 때, 어느 날짜에 글을 쓰는지 알기 위해서...  */
+    
+    selectDiary(diaryDate);
 })()
 
 function chooseEmoji(diaryNo,btn){

@@ -71,7 +71,7 @@
                         </div>
                         <div class="input-row">
                             <%-- <label for="diaryContent">내용</label> --%>
-                            <textarea id="summernote" name = "diaryContent"><p>Hello Summernote</p></textarea>
+                            <textarea id="summernote" name = "diaryContent"></textarea>
                             <%-- <div id="summernote" name = "diaryContent"><p>Hello Summernote</p></div>
                             <script>
                             const summmernote = document.getElementById("summernote");
@@ -124,13 +124,16 @@
 <script>
 /* 글쓸 때 오늘 날짜를 기본값으로 집어넣기! */
 let diary = new Date();
-let fullYear = diary.getFullYear();
-let month = ("0"+diary.getMonth() + 1).slice(-2)
-let day = ("0"+diary.getDate()).slice(-2)
+// let fullYear = diary.getFullYear();
+// let month = ("0"+diary.getMonth() + 1).slice(-2)
+// let day = ("0"+diary.getDate()).slice(-2)
 let hour = ("0" + diary.getHours()).slice(-2)
 let minute = ("0" + diary.getMinutes()).slice(-2)
 
-document.getElementById('diaryDate').value =  fullYear+"-"+month+"-"+day+" "+hour+":"+minute;
+// document.getElementById('diaryDate').value =  fullYear+"-"+month+"-"+day+" "+hour+":"+minute;
+
+document.getElementById('diaryDate').value = '${date}'+" "+hour+":"+minute;
+
 </script>
 <script src="/resources/js/minihome/minihome-diary/diary_write.js"></script>
 <%-- <script src = "/resources/js/minihome/minihome-diary/minihome-diary.js"></script> --%>

@@ -16,7 +16,7 @@ public class Diary {
 	private String diaryCreateDate;		// 다이어리 작성일
 	private int diaryOpenFlag;			// 다이어리 공개 여부 (1,2,3)
 	private int folderNo;				// 다이어리 폴더 번호
-	
+	private int yearMonth;
 	
 	
 

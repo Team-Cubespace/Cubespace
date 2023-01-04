@@ -179,6 +179,15 @@ public class DiaryDAO {
 		return sqlSession.update("diaryMapper.updateScheduleDrop",plan);
 	}
 
+	/**
+	 * @param yearMonth
+	 * @return
+	 */
+	public List<Integer> selectDateList(String yearMonth) {
+		
+		return sqlSession.selectList("diaryMapper.selectDateList",yearMonth);
+	}
+
 
 	
 

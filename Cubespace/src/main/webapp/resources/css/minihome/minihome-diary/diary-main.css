@@ -109,7 +109,7 @@
 
 .calendar-day > li > a{
     display: inline-block;
-    color: #bbb;
+    color: #aaa;
     font-weight: bold;
     text-decoration: none;
     letter-spacing: -2px;

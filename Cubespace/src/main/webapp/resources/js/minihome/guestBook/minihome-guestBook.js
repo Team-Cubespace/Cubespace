@@ -2,8 +2,6 @@
 let memberNo;
 let secretMessage;
 
-
-
 /* 방명록 목록 조회 및 생성 함수 선언 */
 const listGuestbook=()=>{
 
@@ -35,7 +33,6 @@ const listGuestbook=()=>{
 
     })
 }
-
 
 
 const guestInput = document.getElementsByClassName("guest-input")[0];

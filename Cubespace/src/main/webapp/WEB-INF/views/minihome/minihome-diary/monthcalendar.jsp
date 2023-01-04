@@ -73,6 +73,11 @@
         background-color: white;
         border-radius: 20px;
         }
+        /* .modal-title {
+            font-size : 20px;
+            font-weight : bold;
+            padding-bottom : 10px;
+        } */
         .input-row{
             border-bottom: 1px solid #ddd;
             padding: 6px 0px;
@@ -85,11 +90,14 @@
             font-weight: bold;
             /* display: inline-block */
         }
+        .input-row input[type = 'time'] {
+            width : 100px;
+        } 
         .input-row input[type = 'text']{
             border:none;
             outline: none;
         }
-        .input-row textarea{
+        .input-row >textarea{
             resize: none;
             border: none;
             outline: none;
@@ -131,8 +139,10 @@
                             <i class="fa-solid fa-x xbtnBack" id = "fa-x"></i>
                         </a> -->
                             <div>
-                                <h4>일정등록</h4>
-                                    <input type="hidden" id = "number" placeholder="제목을 입력해주세요.">
+                                <div class = "input-row">
+                                    <span class = "modal-title">일정등록</span>
+                                    <input type="hidden" id = "number">
+                                </div>
                                 <div class = "input-row">
                                     <label for="category">카테고리</label>
                                     <select class="selectBox" id="category" >

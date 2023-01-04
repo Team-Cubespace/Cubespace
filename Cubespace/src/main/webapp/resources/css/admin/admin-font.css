@@ -27,3 +27,6 @@
 .fontExample {
     font-size: 17px !important;
 }
+.deleteFont {
+    cursor: pointer;
+}

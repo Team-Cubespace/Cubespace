@@ -70,4 +70,10 @@ public interface AdminService {
 	 */
 	int insertFont(String rename, String folderPath, Font inputFont, MultipartFile fontFile) throws Exception;
 
+	/** 폰트 삭제
+	 * @param fontNo
+	 * @return
+	 */
+	int deleteFont(int fontNo);
+
 }

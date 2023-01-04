@@ -105,6 +105,13 @@
 		#{fontNo}, #{fontName}, #{fontPath}, #{fontCreater})
  	</insert>
  	
+ 	
+ 	<!-- 폰트 삭제 -->
+ 	<delete id="deleteFont">
+ 		DELETE FROM FONT_SHOP WHERE FONT_NO = #{fontNo}
+ 	</delete>
+ 	
+
  
  	
   

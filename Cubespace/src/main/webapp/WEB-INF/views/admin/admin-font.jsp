@@ -65,7 +65,6 @@
                         </div>
                     </div>
                 </form>
-${allFontList}
                 <div class="selectBox">
 
                     <c:set var="order1" value="selected"/>
@@ -136,9 +135,9 @@ ${allFontList}
                         </c:forEach>
                     </div>
                     <div class="search-result-div" id="signDate">
-                        <div class="search-result-tab">수정하기</div>
+                        <div class="search-result-tab">삭제하기</div>
                         <c:forEach var="font" items="${fontList}">
-                            <div class="search-content updateFont" name="${font.fontNo}">수정하기</div>
+                            <div class="search-content deleteFont" name="${font.fontNo}">삭제</div>
                         </c:forEach>
                     </div>
                 </div>

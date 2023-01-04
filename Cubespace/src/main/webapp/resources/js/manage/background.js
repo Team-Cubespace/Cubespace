@@ -22,17 +22,6 @@ function getTextColorByBackgroundColor(hexColor) {
 }
 
 
-/* 부모창(minihome-frame.jsp에 저장된 색 가져오기) */
-(() => {
-    const originalFrameColor = parent.originalFrameColor;
-    const originalFrameMenuColor = parent.originalFrameMenuColor;
-    const originalFrameFontColor = parent.originalFrameFontColor;
-    const originalBackgroundSkin = parent.originalBackgroundSkin;
-
-
-})(); // 페이지 로딩시 즉시 실행
-
-
 
 //-----------------------------------------------------------------------  
 /* 적용하기 버튼 */

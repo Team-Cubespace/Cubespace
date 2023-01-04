@@ -175,5 +175,14 @@ public class AdminDAO {
 		return sqlSession.insert("adminMapper.insertFont", inputFont);
 	}
 
+	/** 폰트 삭제
+	 * @param fontNo
+	 * @return
+	 */
+	public int deleteFont(int fontNo) {
+		
+		return sqlSession.delete("adminMapper.deleteFont", fontNo);
+	}
+
 	
 }

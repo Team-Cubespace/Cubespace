@@ -243,4 +243,13 @@ public class AdminServiceImpl implements AdminService{
 		return result;
 
 	}
+
+	/**
+	 * 폰트 삭제
+	 */
+	@Override
+	public int deleteFont(int fontNo) {
+		
+		return dao.deleteFont(fontNo);
+	}
 }

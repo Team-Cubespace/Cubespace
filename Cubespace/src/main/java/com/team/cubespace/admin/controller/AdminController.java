@@ -247,4 +247,31 @@ public class AdminController {
 		return "redirect:/admin/goods/font";
 	}
 	
+	/** 폰트 삭제
+	 * @param fontNo
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/font/deleteFont")
+	public String deleteFont(@RequestParam Map<String, Object> paramMap, Model model,
+			RedirectAttributes ra) {
+		
+		
+		int fontNo = Integer.parseInt((String)paramMap.get("fontNo"));
+		int result = service.deleteFont(fontNo);
+		if(result > 0) {
+			
+			// session의 allFontList에서 폰트 삭제
+			List<Font> allFontList = (List<Font>) model.getAttribute("allFontList");;
+			for(int i = 0; i < allFontList.size(); i++) {
+				if(allFontList.get(i).getFontNo() == fontNo) {
+					allFontList.remove(i);
+					break;
+				}
+			ra.addFlashAttribute("message", "폰트가 삭제되었습니다");		
+			}
+			model.addAttribute("allFontList", allFontList);
+		}
+		return "redirect:/admin/goods/font";
+	}
 }

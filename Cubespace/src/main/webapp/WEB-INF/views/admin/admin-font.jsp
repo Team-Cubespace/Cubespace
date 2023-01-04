@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="/resources/css/common/header.css">
     <link rel="stylesheet" href="/resources/css/common/footer.css">
     <link rel="stylesheet" href="/resources/css/admin/admin-font.css">
+    <link rel="stylesheet" href="/resources/css/admin/admin-member.css">
     <link rel="stylesheet" href="/resources/css/admin/admin-allGoods.css">
 
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
@@ -51,8 +52,6 @@
                         <button id="fontAddBtn">+ 폰트 등록</button>
                     </div>
                 </div>
-
-
                 <form id="frmSearchBase" method="get" class="member-search" action="/admin/goods/font">
                     <input type="hidden" name="sort" id="orderInput" value = "1">
                     <p class="search__title">폰트 검색</p>
@@ -66,7 +65,7 @@
                         </div>
                     </div>
                 </form>
-
+${allFontList}
                 <div class="selectBox">
 
                     <c:set var="order1" value="selected"/>
@@ -158,7 +157,7 @@
                                 <h1><span id="formTitle">폰트 등록</span></h1>
                             </div>
 
-                            <form action="/admin/font/insertFont" method="post" name="insertFont-frm" id="insertFont-frm" onsubmit="return false">
+                            <form action="/admin/font/insertFont" method="post" enctype="multipart/form-data" name="insertFont-frm" id="insertFont-frm">
                                 <div>
                                     <!-- 폰트 이름 -->
                                     <div class="signUp-input-fontName textbox">
@@ -168,7 +167,7 @@
                                     
                                     <!-- 폰트 경로 -->
                                     <div class="signUp-input-fontPath textbox">
-                                        <input type="file"  name="fontPath"  class="inputBox" id="fontPathInput"  />
+                                        <input type="file"  name="fontFile"  class="inputBox" id="fontPathInput"  />
                                     </div>
                                     
 
@@ -183,7 +182,7 @@
                                 </div>
 
                                 <div class="SignUpAgreement6">
-                                    <button type="button" class="SignUp" id="signUpBtn">폰트 등록 완료</button>
+                                    <button class="SignUp" id="signUpBtn">폰트 등록 완료</button>
                                 </div>
                             </form>
                         </div>

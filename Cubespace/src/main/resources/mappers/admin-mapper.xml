@@ -95,12 +95,17 @@
  	
  	
  	<!-- 새 폰트 등록 -->
- 	<insert id="insertFont">
+ 	<insert id="insertFont" parameterType="com.team.cubespace.manage.model.vo.Font" useGeneratedKeys="true">
+ 	
+ 		<selectKey keyProperty="fontNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_FONT_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		
  		INSERT INTO FONT_SHOP VALUES(
-		SEQ_FONT_NO.NEXTVAL, #{fontName}, #{fontPath}, #{fontCreater})
+		#{fontNo}, #{fontName}, #{fontPath}, #{fontCreater})
  	</insert>
  	
- 	
+ 
  	
   
 </mapper>

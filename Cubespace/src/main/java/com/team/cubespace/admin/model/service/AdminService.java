@@ -68,6 +68,6 @@ public interface AdminService {
 	 * @return
 	 * @throws Exception 
 	 */
-	int insertFont(String webPath, String folderPath, Font inputFont, MultipartFile fontFile) throws Exception;
+	int insertFont(String rename, String folderPath, Font inputFont, MultipartFile fontFile) throws Exception;
 
 }

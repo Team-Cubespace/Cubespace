@@ -227,15 +227,17 @@ public class AdminServiceImpl implements AdminService{
 	 * @throws IllegalStateException 
 	 */
 	@Override
-	public int insertFont(String webPath, String folderPath, Font inputFont, MultipartFile fontFile) throws Exception{
+	public int insertFont(String rename, String folderPath, Font inputFont, MultipartFile fontFile
+			) throws Exception{
 		
-		String rename = Util.fileRename(fontFile.getOriginalFilename());
-		inputFont.setFontPath(webPath + rename);
+		
 		
 		int result = dao.insertFont(inputFont);
 		
 		if(result > 0) {
 			fontFile.transferTo(new File(folderPath + rename));
+//			result = inputFont.getFontNo();
+			
 		}
 		
 		return result;

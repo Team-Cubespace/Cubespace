@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.cubespace.admin.model.service.AdminService;
 import com.team.cubespace.admin.model.vo.Block;
+import com.team.cubespace.common.Util;
 import com.team.cubespace.complain.model.vo.Complain;
 import com.team.cubespace.login.model.service.LoginService;
 import com.team.cubespace.manage.model.vo.Background;
@@ -38,7 +39,7 @@ import com.team.cubespace.member.model.vo.Member;
  */
 @Controller
 @RequestMapping("/admin")
-@SessionAttributes({"loginMember", "message"})
+@SessionAttributes({"loginMember", "message", "allFontList"})
 public class AdminController {
 
 	@Autowired
@@ -222,18 +223,28 @@ public class AdminController {
 		String webPath = "/resources/font/";
 		String folderPath = session.getServletContext().getRealPath(webPath);
 		
+		String rename = Util.fileRename(fontFile.getOriginalFilename());
+		inputFont.setFontPath(webPath + rename);
 		
-		int result =  service.insertFont(webPath, folderPath, inputFont, fontFile);
+		
+		int result =  service.insertFont(rename, folderPath, inputFont, fontFile);
 		String message = null;
 		
 		if(result > 0) {
+			
 			message = "새 폰트가 등록되었습니다";
+			
+			// session의 allFontList에 추가
+			List<Font> allFontList = (List<Font>) model.getAttribute("allFontList");
+			allFontList.add(inputFont);
+			model.addAttribute("allFontList", allFontList);
+			
 		} else {
 			message = "폰트 등록 실패";
 		}
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect:/admin/font";
+		return "redirect:/admin/goods/font";
 	}
 	
 }

@@ -145,13 +145,60 @@ $('#musicVolume').on('input', function(){
 const musicDuration = document.getElementById("duration");
 let currentTime = 1;
 let minihomeMusic;
-
+let interval;
 
 // 재생 시간 출력 함수
 const printCurrentTime = () => {
-    
     musicDuration.innerText = moment(currentTime * 1000).format("mm:ss");
     currentTime++;
+}
+
+// 미니홈 음악 재생
+const toggleMusicPlay = playButton => {
+    if(playButton.classList.contains("fa-circle-play")) {   // 플레이 버튼이면
+        // 음악 재생
+        // minihomeMusic.play();
+        if(minihomeMusic.pause()) {
+            minihomeMusic.play();
+        }
+        // 1초마다 현재 재생 시간을 출력   
+        interval = setInterval(printCurrentTime, 1000);
+        // 일시정지 아이콘으로 바꾸기
+        playButton.classList.remove("fa-circle-play");
+        playButton.classList.add("fa-circle-pause");
+
+        document.getElementById("minihomeMusicName").classList.add("music-play-marquee");
+    } else {                                                 // 일시정지 버튼이면
+        // 노래 정지
+        // minihomeMusic.pause();
+        if(minihomeMusic.playing()) {
+            minihomeMusic.pause();
+        }
+        // 재생 아이콘으로 바꾸기
+        playButton.classList.add("fa-circle-play");
+        playButton.classList.remove("fa-circle-pause");
+
+        // 재생시간 출력 멈춤
+        clearInterval(interval);
+        // 노래 제목 멈춤
+        document.getElementById("minihomeMusicName").classList.remove("music-play-marquee");
+    }
+}
+
+// 볼륨조절
+const handleVolume = musicVolume=>{
+    let volume = musicVolume.value;
+    const volumeIcon = document.getElementById("volumeIcon");
+
+    minihomeMusic.volume("0." + musicVolume.value)
+
+    if(volume == 0) {
+        volumeIcon.className = "fa-solid fa-volume-xmark";
+    } else if(volume <= 50) {
+        volumeIcon.className = "fa-solid fa-volume-low";
+    } else {
+        volumeIcon.className = "fa-solid fa-volume-high";
+    }
 }
 
 const createMusic = (musicPath, autoplay) => {
@@ -167,7 +214,16 @@ const createMusic = (musicPath, autoplay) => {
     });
 }
 
+const removeMusic = () => {
+    // 화면에 오디오플레이어 삭제
+    toggleMusicPlay(document.getElementById("playButton"));
+    document.getElementsByClassName("audio-container")[0].remove();
+
+    minihomeMusic = null;
+}
+
 const initMinihomeMusic = music => {
+    // 기존 설정된 음악이 있을 때
     if(minihomeMusic != null) {
         let autoplay = false;
         if(minihomeMusic.playing()){    // 재생중이었다면
@@ -183,13 +239,85 @@ const initMinihomeMusic = music => {
         // 재생시간 초기화 00:00
         musicDuration.innerText = "00:00";
         createMusic(music.MUSIC_PATH, autoplay);
+    } else {
+    // 기존 설정된 음악이 없을 때
+        // 음악 전체 컨트롤러
+        const audioController = document.createElement("div");
+        audioController.classList.add("audio-container");
+
+        // 음악 제목 영역
+        const musicNameBox = document.createElement("div");
+        musicNameBox.classList.add("music-name-box");
+
+        const marquee = document.createElement("div");
+        marquee.classList.add("marquee");
+        
+        const minihomeMusicName = document.createElement("p");
+        minihomeMusicName.setAttribute("id", "minihomeMusicName");
+        minihomeMusicName.classList.add("music-name");
+        minihomeMusicName.innerText = music.MUSIC_NAME;
+
+        // 음악 컨트롤러
+        const musicController = document.createElement("div");
+        musicController.classList.add("music-controller");
+
+        // 플레이 버튼
+        const buttonDiv = document.createElement("div");
+        const playButton = document.createElement("button");
+        playButton.className = "fa-solid fa-circle-play";
+        playButton.setAttribute("id", "playButton");
+        playButton.addEventListener("click", ()=>{
+            toggleMusicPlay(playButton);
+        });
+        const duration = document.createElement("span");
+        duration.setAttribute("id", "duration");
+        duration.innerText = "00:00";
+
+        // 음악 볼륨 영역
+        const musicVolumeArea = document.createElement("div");
+        musicVolumeArea.classList.add("music-volume-area");
+        const volumeIcon = document.createElement("i");
+        volumeIcon.setAttribute("id", "volumeIcon");
+        volumeIcon.className = "fa-solid fa-volume-high";
+
+        const musicVolume = document.createElement("input");
+        musicVolume.setAttribute("id", "musicVolume");
+        musicVolume.setAttribute("type", "range");
+        musicVolume.setAttribute("max", 99);
+        musicVolume.setAttribute("step", 1);
+        musicVolume.value = 50;
+        musicVolume.addEventListener("input", ()=>{
+            handleVolume(musicVolume);
+        });
+        // 음악 볼륨영역 조립
+        musicVolumeArea.append(volumeIcon, musicVolume);
+        // 컨트롤러 플레이 버튼 영역 조립
+        buttonDiv.append(playButton, duration);
+        // 음악 컨트롤러 조립
+        musicController.append(buttonDiv, musicVolumeArea);
+
+        // 음악 제목 영역 조립
+        marquee.append(minihomeMusicName)
+        musicNameBox.append(marquee);
+        audioController.append(musicNameBox, musicController);    
+        document.getElementById("minihomeHeaderRight").append(audioController);
+
+        // 기존 range 색입히기
+        let val = $('#musicVolume').val();
+        $('#musicVolume').css('background', 'linear-gradient(to right, #2e2e2e 0%, #2e2e2e '+ val +'%, #d5d4d3 ' + val + '%, #d5d4d3 100%)');
+
+        // range input 시 색 입히기
+        $('#musicVolume').on('input', function(){
+            let val = $(this).val();
+            $(this).css('background', 'linear-gradient(to right, #2e2e2e 0%, #2e2e2e '+ val +'%, #d5d4d3 ' + val + '%, #d5d4d3 100%)');
+        });
+        createMusic(music.MUSIC_PATH, false);
     }
 }
 
-
 (()=>{
     if(minihomeMusicPath != "") {   // 음악 경로가 비어있지 않다면
-        let interval;
+        
         // 음악 객체 생성
         // minihomeMusic = new Audio(minihomeMusicPath);
         // // 자동 반복 세팅
@@ -198,70 +326,36 @@ const initMinihomeMusic = music => {
         interval = setInterval(printCurrentTime, 1000);
         // 재생 버튼
         const playButton = document.getElementById("playButton");
- 
-        playButton.addEventListener("click", ()=>{
-            if(playButton.classList.contains("fa-circle-play")) {   // 플레이 버튼이면
-                // 음악 재생
-                // minihomeMusic.play();
-                if(minihomeMusic.pause()) {
-                    minihomeMusic.play();
-                }
-                // 1초마다 현재 재생 시간을 출력   
-                interval = setInterval(printCurrentTime, 1000);
-                // 일시정지 아이콘으로 바꾸기
-                playButton.classList.remove("fa-circle-play");
-                playButton.classList.add("fa-circle-pause");
-
-                document.getElementById("minihomeMusicName").classList.add("music-play-marquee");
-            } else {                                                 // 일시정지 버튼이면
-                // 노래 정지
-                // minihomeMusic.pause();
-                if(minihomeMusic.playing()) {
-                    minihomeMusic.pause();
-                }
-                // 재생 아이콘으로 바꾸기
-                playButton.classList.add("fa-circle-play");
-                playButton.classList.remove("fa-circle-pause");
-
-                // 재생시간 출력 멈춤
-                clearInterval(interval);
-                // 노래 제목 멈춤
-                document.getElementById("minihomeMusicName").classList.remove("music-play-marquee");
-            }
+        playButton.addEventListener("click", () => {
+            toggleMusicPlay(playButton);
         });
 
         // 볼륨 조절
         const musicVolume = document.getElementById("musicVolume");
-
         musicVolume.addEventListener("input", ()=>{
-            
-            let volume = musicVolume.value;
-            const volumeIcon = document.getElementById("volumeIcon");
-
-            minihomeMusic.volume("0." + musicVolume.value)
-
-            if(volume == 0) {
-                volumeIcon.className = "fa-solid fa-volume-xmark";
-            } else if(volume <= 50) {
-                volumeIcon.className = "fa-solid fa-volume-low";
-            } else {
-                volumeIcon.className = "fa-solid fa-volume-high";
-            }
-        });
-        window.addEventListener("message", e=>{
-            if(minihomeMusic != null) {
-                $.ajax({
-                    url:"/selectMusic",
-                    data: {
-                        musicNo:e.data
-                    },
-                    dataType:"JSON",
-                    type:"GET",
-                    success: music=>{
-                        initMinihomeMusic(music);
-                    }
-                });
-            }
+            handleVolume(musicVolume);
         });
     }
+    window.addEventListener("message", e=>{
+        // 설정한 음악이 있다면
+        if(e.data != 0) {
+            $.ajax({
+                url:"/selectMusic",
+                data: {
+                    musicNo:e.data
+                },
+                dataType:"JSON",
+                type:"GET",
+                success: music=>{
+                    initMinihomeMusic(music);
+                }
+            });        
+        } else {
+        // 음악 설정을 해제했다면
+            if(minihomeMusic != null) { // 기존에 설정된 음악이 있었다면
+                // 음악플레이어 삭제
+                removeMusic();
+            }
+        }
+    });
 })();

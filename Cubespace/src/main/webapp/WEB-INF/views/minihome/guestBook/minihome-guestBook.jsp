@@ -26,6 +26,7 @@
         }
     </style>
 </head>
+    <jsp:include page="/WEB-INF/views/include/allFontMusic.jsp"/>
 <body>
     <div class="content-area frame-color">
         <section class="minihome-rayout " >
@@ -93,8 +94,7 @@
                     <span>></span>
                     <span>방명록</span>
                 </header>
-                <%-- <div class="guest-list-box <c:if test="${loginMember.memberNo == minihome.memberNo}">test</c:if>"> --%>
-                <div class="guest-list-box ">
+                <div class="guest-list-box <c:if test="${loginMember.memberNo == minihome.memberNo}">test</c:if>">
 <!----------------------------------------------->
                     <div class="guest-message">
                         <div class="message-header">
@@ -102,10 +102,11 @@
                                 <div class="member-nickname">이글을쓴본인</div>
                                 <div>(2022.12.15 오후03:30)</div>
                             </div>
+                            
                             <div class="btn-box">
-                                <div>비밀글변경</div>
+                                <div onclick="secretGuestBook()">비밀글변경</div>
                                 <div>수정</div>
-                                <div>삭제</div>
+                                <div onclick="deleteGuestBook()">삭제</div>
                             </div>
                         </div>
 
@@ -113,92 +114,20 @@
                             <div class="member-img">
                                 <img src="/resources/images/삐약.gif" alt="">
                             </div>
+
                             <div class="message-box">
                                 <div class="secret-situation">
-                                </div>
-                                <div class="member-message">작성자 시점 비밀글 아닐때 : 인데 길이가 길어지면 어떠한 현상이 벌어질까요? 너무너무 궁금합니다</div>
-                            </div>
-                        </div>
-                    </div>
-<!----------------------------------------------->
-                    <div class="guest-message">
-                        <div class="message-header">
-                            <div>
-                                <div class="member-nickname">이글을쓴본인</div>
-                                <div>(2022.12.15 오후03:30)</div>
-                            </div>
-                            <div class="btn-box">
-                                <div>수정</div>
-                                <div>삭제</div>
-                            </div>
-                        </div>
-                        <div class="message-body">
-                            <div class="member-img">
-                                <img src="/resources/images/삐약.gif" alt="">
-                            </div>
-                            <div>
-                                <div class="secret-situation">
                                     <img src="/resources/images/common/guestBook.png" alt="">
                                     <div>비밀글(이글은 작성자와 주인만 볼수 있어요)</div>
                                 </div>
-                                <div class="member-message">작성자 시점 비밀글 일때</div>
+                                <div class="member-message" style="font-family:5">작성자 시점 비밀글 아닐때 : 인데 길이가 길어지면 어떠한 현상이 벌어질까요? 너무너무 궁금합니다</div>
                             </div>
                         </div>
                     </div>
-<!----------------------------------------------->
-                    <div class="guest-message">
-                        <div class="message-header">
-                            <div>
-                                <div class="member-nickname">미니홈피주인</div>
-                                <div>(2022.12.15 오후03:30)</div>
-                            </div>
-                            <div class="btn-box">
-                                <div>비밀글변경</div>
-                                <div>삭제</div>
-                            </div>
-                        </div>
-                        <div class="message-body">
-                            <div class="member-img">
-                                <img src="/resources/images/common/Mokoko1.gif" alt="">
-                            </div>
-                            <div>
-                                <div class="secret-situation">
-                                </div>
-                                <div class="member-message">홈피주인시점 작성글이 비밀글이 아닐때</div>
-                            </div>
-                        </div>
-                    </div>
-<!----------------------------------------------->
-                    <div class="guest-message">
-                        <div class="message-header">
-                            <div>
-                                <div class="member-nickname">다른사람시점</div>
-                                <div>(2022.12.15 오후03:30)</div>
-                            </div>
-                            <!-- <div class="btn-box"> -->
-                                <!-- <div>비밀글변경</div> -->
-                                <!-- <div>삭제</div> -->
-                            <!-- </div> -->
-                        </div>
-                        <div class="message-body">
-                            <div class="member-img">
-                                <img src="/resources/images/제로투.png" alt="">
-                            </div>
-                            <div>
-                                <div class="secret-situation">
-                                    <img src="/resources/images/common/guestBook.png" alt="">
-                                    <div>비밀글(이글은 작성자와 주인만 볼수 있어요)</div>
-                                </div>
-                                <!-- <div class="member-message">홈피주인시점 작성글이 비밀글이 아닐때</div> -->
-                            </div>
-                        </div>
-                    </div>
-
-
                 </div>
+<!----------------------------------------------->
                 <!-- 방명록쓰기 -->
-                <%-- <div class="guest-box <c:if test="${loginMember.memberNo == minihome.memberNo}">test</c:if>"> --%>
-                <div class="guest-box ">
+                <div class="guest-box <c:if test="${loginMember.memberNo == minihome.memberNo}">test</c:if>">
                     <div class="guest-img">
                         <%-- 로그인한 회원 프로필 --%>
                         <c:choose>
@@ -212,13 +141,13 @@
                     </div>
                     <%-- 작성글 제출 --%>
                     <form action="" class="guest-content">
-                        <textarea  class="guest-input" placeholder="내용을 입력해 주세요."></textarea>
+                        <textarea  class="guest-input" placeholder="내용을 입력해 주세요." maxlength="333"></textarea>
                         <div class="guest-btn">
                             <div>
                                 <span class="secret-message">비밀글로 작성</span>
                                 <input type="checkbox" class="switch">
                             </div>
-                            <button class="btn-secondary btn" onclick=" writeGuestbook()">등록하기</button>
+                            <button type="button" class="btn-secondary btn" onclick=" writeGuestBook()">등록하기</button>
                         </div>
                     </form>
                 </div>

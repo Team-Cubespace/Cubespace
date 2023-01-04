@@ -19,14 +19,32 @@ public class GuestBookServiceImpl implements GuestBookService{
 	// 방명록 작성
 	@Override
 	@Transactional
-	public int writeGuestbook(Map<String, Object> paramMpa) {
-		return dao.writeGuestbook(paramMpa);
+	public int writeGuestBook(Map<String, Object> paramMpa) {
+		return dao.writeGuestBook(paramMpa);
 	}
 
 	// 방명록 목록 조회
 	@Override
-	public List<GuestBook> listGuestbook(int minihomeNo) {
-		return dao.listGuestbook(minihomeNo);
+	public List<GuestBook> listGuestBook(int minihomeNo) {
+		return dao.listGuestBook(minihomeNo);
+	}
+
+	// 기존 방명록 비밀글로 변경
+	@Override
+	public int secretGuestBook(int gbNo) {
+		return dao.secretGuestBook(gbNo);
+	}
+
+	// 방명록 삭제
+	@Override
+	public int deleteGuestBook(int gbNo) {
+		return dao.deleteGuestBook(gbNo);
+	}
+
+	// 방명록 수정
+	@Override
+	public int modifyGuestBook(Map<String, Object> paramMpa) {
+		return dao.modifyGuestBook(paramMpa);
 	}
 	
 	

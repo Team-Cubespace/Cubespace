@@ -34,9 +34,9 @@ public class GuestBookController {
 	 * @param paramMpa
 	 * @return
 	 */
-	@GetMapping("/writeGuestbook")
+	@GetMapping("/writeGuestBook")
 	@ResponseBody
-	public int writeGuestbook(@RequestParam Map<String, Object> paramMpa,
+	public int writeGuestBook(@RequestParam Map<String, Object> paramMpa,
 							@SessionAttribute("minihome") Minihome minihome) {
 		
 //		int minihomeNo = minihome.getMemberNo();
@@ -44,27 +44,66 @@ public class GuestBookController {
 		
 		paramMpa.put("minihomeNo",minihome.getMemberNo());
 		
-		int writeGuestbook = service.writeGuestbook(paramMpa);
+		int writeGuestBook = service.writeGuestBook(paramMpa);
 		
-		return writeGuestbook; 
+		return writeGuestBook; 
 	}
 
 	
 	/** 방명록 목록 조회
 	 * @return
 	 */
-	@GetMapping("/listGuestbook")
+	@GetMapping("/listGuestBook")
 	@ResponseBody
-	public String listGuestbook(@SessionAttribute("minihome") Minihome minihome) {
+	public String listGuestBook(@SessionAttribute("minihome") Minihome minihome) {
 	
 		int minihomeNo = minihome.getMemberNo();
 		
-		List<GuestBook> listGuestbook = service.listGuestbook(minihomeNo);
+		List<GuestBook> listGuestbook = service.listGuestBook(minihomeNo);
 		
 		return new Gson().toJson(listGuestbook); 
 	}
 	
 	
+	/** 기존 방명록 비밀글로 변경
+	 * @param gbNo
+	 * @return
+	 */
+	@GetMapping("/secretGuestBook")
+	@ResponseBody
+	public int secretGuestBook(int gbNo) {
+		
+		int secretChange = service.secretGuestBook(gbNo);
+		
+		return secretChange;
+	}
+	
+	/** 방명록 삭제
+	 * @param gbNo
+	 * @return
+	 */
+	@GetMapping("/deleteGuestBook")
+	@ResponseBody
+	public int deleteGuestBook(int gbNo) {
+		
+		int guestBookDelete =service.deleteGuestBook(gbNo);
+		
+		return guestBookDelete;
+	}
+	
+	
+	/** 방명록 수정
+	 * @param paramMpa
+	 * @return
+	 */
+	@GetMapping("/modifyGuestBook")
+	@ResponseBody
+	public int modifyGuestBook(@RequestParam Map<String, Object> paramMpa) {
+		
+		int result = service.modifyGuestBook(paramMpa);
+		
+		return result;
+	}
 	
 	
 	

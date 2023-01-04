@@ -1,4 +1,3 @@
-
 /* 깐부 끊기 */
 const deleteFriendBtnList = document.getElementsByClassName("deleteFriend");
 
@@ -54,15 +53,15 @@ allFriend.addEventListener("click", e => {
 
 
 
-/* 깐부 미니홈페이지 오픈 */
-const openMinihome = (url) => {
-    console.log(url);
-    let title = "minihome";
-    // let name = "_blank";
-    let replace = "false";
+// /* 깐부 미니홈페이지 오픈 */
+// const openMinihome = (url) => {
+//     console.log(url);
+//     let title = "minihome";
+//     // let name = "_blank";
+//     let replace = "false";
 
-    let specs = "resizable=no, status=no, menubar=no, width=1203, height=718, top=50, left=300";
-    window.open(url,title,specs,true);
+//     let specs = "resizable=no, status=no, menubar=no, width=1203, height=718, top=50, left=300";
+//     window.open(url,title,specs,false);
 
-    return false;
-}
+//     return false;
+// }

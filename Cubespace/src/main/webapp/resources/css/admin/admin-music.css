@@ -30,6 +30,7 @@
 }
 .search-content {
     height: 60px !important;
+    border-right: 2px solid #eee;
 }
 .inputBox{
     width: 400px !important;   
@@ -37,3 +38,15 @@
 .textbox {
     justify-content: space-between !important;
 }
+.musicName{
+    justify-content: flex-start !important;
+}
+.playMusic {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.fa-play {
+    color: var(--lightMain);
+}
+

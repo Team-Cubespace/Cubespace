@@ -126,7 +126,9 @@
                         <div class="search-result-tab">듣기</div>
                         <c:forEach var="music" items="${musicList}">
                             <%-- 이 태그 말고 다른 형식으로 수정해야함 --%>
-                            <div class="search-content"></div>
+                            <div class="search-content">
+                                <i class="playMusic fa-solid fa-play " id="${music.musicPath}"></i>
+                            </div>
                         </c:forEach>
                     </div>
                     <div class="search-result-div" id="signDate">

@@ -97,4 +97,10 @@ public interface AdminService {
 	 */
 	int insertMusic(List<String> renameList, List<String> folderPathList, Music inputMusic, MultipartFile musicThumnailFile, MultipartFile musicPathFile) throws Exception;
 
+	/** 배경음악 삭제
+	 * @param musicNo
+	 * @return
+	 */
+	int deleteMusic(int musicNo);
+
 }

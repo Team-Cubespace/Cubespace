@@ -85,10 +85,10 @@
 
 
                     <select onchange="orderBy()" id="order">
-                        <option value="order1" ${order1}>사용횟수 많은순</option>
-                        <option value="order2" ${order2}>사용횟수 적은순</option>
-                        <option value="order3" ${order3}>등록일 빠른순</option>
-                        <option value="order4" ${order4}>등록일 느린순</option>
+                        <option value="order1" ${order1}></option>
+                        <option value="order2" ${order2}>등록일 느린순</option>
+                        <option value="order3" ${order3}>사용횟수 많은순</option>
+                        <option value="order4" ${order4}>사용횟수 적은순</option>
                     </select>
                 </div>
 

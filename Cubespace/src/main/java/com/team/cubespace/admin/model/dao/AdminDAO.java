@@ -224,5 +224,14 @@ public class AdminDAO {
 		return sqlSession.insert("adminMapper.insertMusic", inputMusic);
 	}
 
+	/** 배경음악 삭제
+	 * @param musicNo
+	 * @return
+	 */
+	public int deleteMusic(int musicNo) {
+		
+		return sqlSession.delete("adminMapper.deleteMusic", musicNo);
+	}
+
 	
 }

@@ -15,46 +15,21 @@ const orderBy = () => {
 };
 
 
-
-
 /* -------------------------------------------------------------- */
-
-
 //팝업 띄우기
-function openPop() {
-    document.getElementById("popup_layer").style.display = "block";
-}
-
 function openPop2() {
     document.getElementById("popup_layer2").style.display = "block";
 }
 
 // 팝업 닫기
-function closePop() {
-    document.getElementById("popup_layer").style.display = "none";
-}
 function closePop2() {
     document.getElementById("popup_layer2").style.display = "none";
 }
 
-
-
 document.getElementById("fontAddBtn").addEventListener("click", openPop2);
 
-
-
 /* -------------------------------------------------------------- */
-// 오디오객체는 전역변수로 하나 정하기
-// 재생시
-/* 
-    정지버튼 리스트 돌면서 모든 정지버튼 리스트를 재생으로 만들어놓음
-    오디오객체 초기화
-
-*/
-// 정지시
-// 재생버튼 리스트 돌면서 버튼 모양 변경
-// 오디오객체 pause();
-
+/* 오디오 플레이 */
 audio1 = new Audio(); // 새 오디오 객체 생성
 
 let playBtnList = document.getElementsByClassName("fa-play");
@@ -80,7 +55,6 @@ const playFx = e => {
 
     e.target.classList.add("fa-stop");
     e.target.classList.remove("fa-play");
-
     
     audio1 = new Audio(musicPath);
 
@@ -102,64 +76,21 @@ const playFx = e => {
 
                     playFx(g);
                 })
-}
-    
+            }
         })
-    
     }
 }
     
+/* -------------------------------------------------------------- */
+/* 음악 삭제 */
+const deleteMusicList = document.getElementsByClassName("deleteMusic");
+for(let deleteMusic of deleteMusicList){
+    deleteMusic.addEventListener("click", e=>{
 
-    
-
-
-// for(let stopBtn of stopBtnList) {
-
-// }
-
-
-
-
-// for(let stopBtn of stopBtnList){
-//     stopBtn.addEventListener("click", e => {
-//         stopPlay();
-//         stopMusic();
-//     })
-// }
-
-
-// /* 음악 정지버튼 */
-// const stopPlay = e => {
-//     stopBtnList = document.getElementsByClassName("fa-stop");
-//     for(let stopBtn of stopBtnList){
-//         stopBtn.classList.add("fa-play");
-//         stopBtn.classList.remove("fa-stop");
-//     }
-// }
-
-// /* 음악 재생버튼 */
-// const startPlay = e => {
-//     playBtnList = document.getElementsByClassName("fa-play");
-//     for(let playBtn of playBtnList) {
-//         playBtn.classList.add("fa-stop");
-//         playBtn.classList.remove("fa-play");
-//     }
-// }
-
-// /* 오디오 재생 */
-// const listenMusic = e => {
-//     const musicPath = e.target.getAttribute("id");
-//         audio1 = new Audio(musicPath);
-//         audio1.loop = false; // 반복재생하지 않음
-//         audio1.volume = 0.5; // 음량 설정
-//         audio1.play(); // sound1.mp3 재생
-
-
-// }
-
-// /* 오디오 정지 */
-// const stopMusic = e => {
-//     audio1.pause();
-// }
-
-
+        console.log(e.target.getAttribute("name"));
+        if(confirm("정말 음악을 삭제하시겠습니까?")){
+            const musicNo = e.target.getAttribute("name");
+            location.href =  "/admin/music/deleteMusic?musicNo=" + musicNo;
+        }
+    })
+}

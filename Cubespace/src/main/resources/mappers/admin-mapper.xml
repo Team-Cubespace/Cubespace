@@ -177,6 +177,12 @@
  		INSERT INTO MUSIC_SHOP VALUES(
 		#{musicNo}, #{musicName},#{musicPath} ,#{musicThumnail}, #{musicCreater})
  	</insert>
+ 	
+ 	
+ 	<!-- 배경음악 삭제 -->
+ 	<delete id="deleteMusic">
+ 		DELETE FROM MUSIC_SHOP WHERE MUSIC_NO = #{musicNo}
+ 	</delete>
  
  	
   

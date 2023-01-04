@@ -50,3 +50,6 @@
     color: var(--lightMain);
 }
 
+.pull-left{
+    margin: 0 0 15px 10px !important;
+}

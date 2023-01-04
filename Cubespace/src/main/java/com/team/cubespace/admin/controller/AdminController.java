@@ -352,4 +352,31 @@ public class AdminController {
 		
 		return "redirect:/admin/goods/music";
 	}
+	
+	/** 배경음악 삭제
+	 * @param musicNo
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/music/deleteMusic")
+	public String deleteMusic(int musicNo, Model model,
+			RedirectAttributes ra) {
+		
+	
+		int result = service.deleteMusic(musicNo);
+		if(result > 0) {
+			
+			// session의 allFontList에서 폰트 삭제
+			List<Music> allMusicList = (List<Music>) model.getAttribute("allMusicList");;
+			for(int i = 0; i < allMusicList.size(); i++) {
+				if(allMusicList.get(i).getMusicNo() == musicNo) {
+					allMusicList.remove(i);
+					break;
+				}
+			ra.addFlashAttribute("message", "배경음악이 삭제되었습니다");		
+			}
+			model.addAttribute("allMusicList", allMusicList);
+		}
+		return "redirect:/admin/goods/music";
+	}
 }

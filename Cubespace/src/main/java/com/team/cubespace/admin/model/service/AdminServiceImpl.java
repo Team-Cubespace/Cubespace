@@ -190,23 +190,23 @@ public class AdminServiceImpl implements AdminService{
 		int allFontCount = dao.getAllFontCount();
 		
 		// 전체 폰트 수 + cp를 이용해 페이징처리
-		Pagination pagination = new Pagination(listCount, cp, 30, 10);
+		Pagination pagination = new Pagination(listCount, cp, 15, 10);
 		
 		// sort 값 계산
-		paramMap.put("order", "FONT_USE_COUNT DESC ,FONT_NO DESC");
+		paramMap.put("order", "FONT_NO DESC");
 		if(paramMap.get("sort") != null) {
 			
-			if(paramMap.get("sort").equals("1")) { // 사용횟수 많은순
+			if(paramMap.get("sort").equals("1")) { // 등록일 빠른순
+				paramMap.put("order", "");
+			}
+			if(paramMap.get("sort").equals("2")) { // 등록일 느린순
+				paramMap.put("order", "FONT_NO ASC");
+			}
+			if(paramMap.get("sort").equals("3")) { // 사용횟수 많은순
 				paramMap.put("order", "FONT_USE_COUNT DESC ,FONT_NO DESC");
 			}
-			if(paramMap.get("sort").equals("2")) { // 사용횟수 적은순
+			if(paramMap.get("sort").equals("4")) { // 사용횟수 적은순
 				paramMap.put("order", "FONT_USE_COUNT ASC, FONT_NO DESC");
-			}
-			if(paramMap.get("sort").equals("3")) { // 등록일 빠른순
-				paramMap.put("order", "FONT_NO DESC");
-			}
-			if(paramMap.get("sort").equals("4")) { // 등록일 느린순
-				paramMap.put("order", "FONT_NO ASC");
 			}
 		}
 		
@@ -264,23 +264,23 @@ public class AdminServiceImpl implements AdminService{
 		int allMusicCount = dao.getAllMusicCount();
 		
 		// 전체 음악 수 + cp를 이용해 페이징처리
-		Pagination pagination = new Pagination(listCount, cp, 30, 10);
+		Pagination pagination = new Pagination(listCount, cp, 15, 10);
 		
 		// sort 값 계산
-		paramMap.put("order", "MUSIC_USE_COUNT DESC ,MUSIC_NO DESC");
+		paramMap.put("order", "MUSIC_NO DESC");
 		if(paramMap.get("sort") != null) {
 			
-			if(paramMap.get("sort").equals("1")) { // 사용횟수 많은순
-				paramMap.put("order", "MUSIC_USE_COUNT DESC ,MUSIC_NO DESC");
-			}
-			if(paramMap.get("sort").equals("2")) { // 사용횟수 적은순
-				paramMap.put("order", "MUSIC_USE_COUNT ASC, MUSIC_NO DESC");
-			}
-			if(paramMap.get("sort").equals("3")) { // 등록일 빠른순
+			if(paramMap.get("sort").equals("1")) { // 등록일 빠른순
 				paramMap.put("order", "MUSIC_NO DESC");
 			}
-			if(paramMap.get("sort").equals("4")) { // 등록일 느린순
+			if(paramMap.get("sort").equals("2")) { // 등록일 느린순
 				paramMap.put("order", "MUSIC_NO ASC");
+			}
+			if(paramMap.get("sort").equals("3")) { // 사용횟수 많은순
+				paramMap.put("order", "MUSIC_USE_COUNT DESC ,MUSIC_NO DESC");
+			}
+			if(paramMap.get("sort").equals("4")) { // 사용횟수 적은순
+				paramMap.put("order", "MUSIC_USE_COUNT ASC, MUSIC_NO DESC");
 			}
 		}
 		
@@ -311,5 +311,14 @@ public class AdminServiceImpl implements AdminService{
 			musicPathFile.transferTo(new File(folderPathList.get(1) + renameList.get(1))); // 음악
 		}
 		return result;
+	}
+
+	/**
+	 * 배경음악 삭제
+	 */
+	@Override
+	public int deleteMusic(int musicNo) {
+
+		return dao.deleteMusic(musicNo);
 	}
 }

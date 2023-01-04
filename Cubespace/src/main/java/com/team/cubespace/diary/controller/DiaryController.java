@@ -43,6 +43,8 @@ public class DiaryController {
 			@PathVariable ("boardTypeNo") int boardTypeNo,
 			@SessionAttribute("folderList") List<Folder> folderList,
 			@RequestParam(value="folderNo", required=false, defaultValue="-1") int folderNo,
+			@SessionAttribute("minihome") Minihome minihome,
+			@SessionAttribute("loginMember") Member loginMember,
 			Model model
 			) {
 		//탭 누를 때 설정
@@ -58,7 +60,16 @@ public class DiaryController {
 				folderNo = folderList.get(0).getFolderNo();
 			}
 		}
+		// 폴더 이름 찾기
+		String folderName = "";
+		for(Folder folder : folderList) {
+			if(folder.getFolderNo() == folderNo) {
+				folderName = folder.getFolderName();
+				break;
+			}
+		}
 		model.addAttribute("folderNo", folderNo);
+		model.addAttribute("folderName", folderName);
 		//다이어리part
 		return "minihome/minihome-diary/minihome-diary";
 	}
@@ -220,6 +231,8 @@ public class DiaryController {
 	   	int diaryNo = service.diaryWrite(diary);
 	    
 	   	if (diaryNo > 0) {
+	   		//글을 작성하고 나면 돌아가는 페이지에서
+	   		//글이 있는 폴더, 쓴 날짜가 필요함. 그리고 flag도...!
 	   		model.addAttribute("folderNo", diary.getFolderNo());
 	   		model.addAttribute("datedatedate", diary.getDiaryCreateDate().substring(0, 10));
 	   		model.addAttribute("flagNo", 1);
@@ -238,23 +251,22 @@ public class DiaryController {
 		   Model model
 		   ) {
    		System.out.println("수정 페이지로 넘어왔니?");
+   		//다이어리를 불러와
    		Diary diary = service.selectDiaryDetail(diaryNo);
 	   
 //   		//개행문자 처리 해제 
 //   		board.setBoardContent(Util.newLineClear(board.getBoardContent()));
 	   
+   		//불러와서 수정페이지에 뿌려줘야지.
    		model.addAttribute("diary", diary);
    		return "minihome/minihome-diary/diary-update";
    	}
    
-   	//다이어리 수정
+   	//다이어리 수정(수정페이지에서 [수정]버튼 누를 때...)
    	@PostMapping("/diaryUpdate/{diaryNo}")
     public String diaryUpdate(
- 		   Diary diary,
-// 		   @SessionAttribute("loginMember") Member loginMember,
- 		   // 필요한가?
- 		   RedirectAttributes ra, 
- 		   @RequestHeader("referer") String referer
+ 		   Diary diary, 
+ 		   Model model
  		   ) throws IOException {
  	   
  	   	//INSERT -> 회원번호/제목/내용/작성일/삭제여부/공개여부/폴더번호
@@ -279,26 +291,20 @@ public class DiaryController {
  	   	// 4. 게시글 삽입 서비스를 호출한다.
  	   	int result = service.diaryUpdate(diary);
  	   
- 	    String message = null;
- 	    String path = null;
- 	    
- 	    if(result > 0) {
- 	    	message = "게시글이 수정되었습니다.";
- 	    	
- 	    	path = "/miniroom";
- 	    	
- 	    	//path = "/board/" + boardCode + "/" + diaryNo;
- 	    			// /board/1/2003 (상세조회 요청 주소)
- 	    } else {
- 	    	message = "게시글 수정 실패";
- 	    	path = referer;
- 	    	
- 	    }
- 	    
- 	    ra.addFlashAttribute("message",message);
- 	    
- 		return "redirect:" + path;
+ 		if (result > 0) {
+	   		//글을 작성하고 나면 돌아가는 페이지에서
+	   		//글이 있는 폴더, 쓴 날짜가 필요함. 그리고 flag도...!
+	   		model.addAttribute("folderNo", diary.getFolderNo());
+	   		model.addAttribute("datedatedate", diary.getDiaryCreateDate().substring(0, 10));
+	   		model.addAttribute("flagNo", 1);
+	   		System.out.println("model값" + model);
+	   	}
+	   	//다이어리part
+		return "minihome/minihome-diary/minihome-diary";
+ 	 
     }
+   	
+   	
 
 	   
 	/*[ 월간 달력 ]*/
@@ -309,9 +315,11 @@ public class DiaryController {
 	 */
 	@PostMapping("/diary/calendar/selectSchedule")
 	@ResponseBody
-	public String selectSchedule(@SessionAttribute("loginMember") Member loginMember) {
+	public String selectSchedule(
+			@SessionAttribute("minihome") Minihome minihome,
+			@SessionAttribute("loginMember") Member loginMember) {
 		System.out.println("로그인한 멤버 넘버가 잘 넘어왔니? " +loginMember.getMemberNo());
-		List<Plan> scheduleList = service.selectSchedule(loginMember.getMemberNo());
+		List<Plan> scheduleList = service.selectSchedule(minihome.getMemberNo());
 		System.out.println("스케쥴리스트 확인!");
 		System.out.println(scheduleList);
 		
@@ -354,6 +362,7 @@ public class DiaryController {
 		int result = service.updateSchedule(params);
 		return result;
 	}
+	
 	
 	/**월간달력_일정 삭제
 	 * @param planId

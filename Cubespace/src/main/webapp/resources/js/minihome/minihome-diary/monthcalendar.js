@@ -1,4 +1,4 @@
-let loginMember = 1;
+let loginMember1 = 1;
 let defaultEvents =[] ;
 
 /* [ajax] 캘린더 오픈 시 :  이벤트를 DB에서 조회해서 캘린더에 뿌려주기 */
@@ -6,7 +6,7 @@ $.ajax({
   url: "/diary/calendar/selectSchedule",
   type:'POST',
   dataType: 'json',
-  data:{"loginMember":loginMember},
+  data:{"loginMember1":loginMember1},
   aysnc : false,
   success:function(data){
     console.log("스케줄리스트가 잘 불러져 왔니?");
@@ -236,6 +236,9 @@ var selectEvent;
 // document.addEventListener('DOMContentLoaded', function() {
 function createCalendar(){
 
+  /* 남의 캘린더에는 수정 못하게 하는 코드 */
+  const editableFlag = minihomeNo == loginMemberNo;
+
   /* 캘린더 시작 */
     var calendarEl = document.getElementById('calendar');
 
@@ -249,7 +252,7 @@ function createCalendar(){
         },
         // initialDate: '2020-09-12',
         navLinks: true, // can click day/week names to navigate views
-        editable: true,
+        
         dayMaxEvents: true, // allow "more" link when too many events
         selectable : true,
         eventTimeFormat: {
@@ -262,6 +265,8 @@ function createCalendar(){
           popup(arg);
         },
 
+        editable : editableFlag,
+        
         /* 이벤트 클릭 시 모달 호출 */
         /* arg = 클릭한 그 이벤트의 내용임. 얘를 모달에 담고, 수정버튼을 눌렀을 때, 수정되도록... */
         eventClick : function (arg){ 
@@ -342,23 +347,10 @@ function createCalendar(){
               
               }
             });
-          // 드랍시 수정된 날짜반영
-          // var newDates = calDateWhenDragnDrop(event);
-      
-          // //드롭한 일정 업데이트
-          // $.ajax({
-          //   type: "get",
-          //   url: "",
-          //   data: {
-          //     //...
-          //   },
-          //   success: function (response) {
-          //     alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
-          //   }
-          // });
+      ;
           
         }
-        /* ****************************************************************************** */
+  /* ****************************************************************************** */
         
         
     });

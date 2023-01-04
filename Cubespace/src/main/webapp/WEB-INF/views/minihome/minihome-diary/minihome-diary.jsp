@@ -40,7 +40,7 @@
                 <!-- 전체 내용 div 태그로 한 번 감싸주세요 -->
                 <!-- ex) <div class="home-area"> <div></div> <span></span> ... </div> -->
                 <div class = "home-area">
-                    <header><span>다이어리 > </span><span>${folderNo}</span></header>
+                    <header><span>다이어리 > </span><span>${folderName}</span></header>
                     <div class = "calendar-box">
                         <div class = "calendar-section">
                             <!-- jsp인 경우 include할 거...? -->
@@ -101,9 +101,12 @@
                         </div>
                     </div>
                     <div class = "write-section">
-                        <div  class = "writeBtn" onclick="writeBtn()"><span>글쓰기</span>
                         
-                        </div>
+                        <c:if test = "${minihome.memberNo==loginMember.memberNo}">
+                            <div  class = "writeBtn" onclick="writeBtn()">
+                                <span>글쓰기</span>
+                            </div>
+                        </c:if>
                     </div>
                     <div class = "diary-section-container">
                         <%-- cut.jsp에 잘라냄 /어차피 js로 다 만드는 거라서...ㅋ --%>
@@ -122,6 +125,11 @@
     const folderNo = "${folderNo}";
     const datedatedate = "${datedatedate}";
     const flagNo = "${flagNo}";
+    /* 세션에 있으니까 model에 안 담아줘도 jsp에서 바로 쓸 수 있음. */
+    const minihomeNo = "${minihome.memberNo}";
+    const loginMemberNo = "${loginMember.memberNo}";
+    console.log("homepageMemberNo" +minihomeNo );
+    console.log("loginMember" + loginMemberNo );
     console.log("folderNo" + folderNo );
     console.log("datedatedate" + datedatedate );
     console.log("flagNo" + flagNo );

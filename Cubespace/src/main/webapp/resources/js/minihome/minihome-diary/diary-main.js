@@ -120,8 +120,6 @@ const makeCalendar = (date) => {
         data : {"yearMonth":`${currentYear}-${currentMonth}`},
         dataType : "JSON",
         success :  (dateList)  => {
-            console.log("그레이..." );
-            console.log(dateList);
             for(let date of dateList) {
                 document.getElementById(date).style.backgroundColor = "#ddd";
             }
@@ -312,15 +310,15 @@ function selectDiary(diaryDate){
 
                             const div3_1_2 = document.createElement("div");
                             div3_1_2.classList.add("choose-emoji-section");
-
-                                const div3_1_2_1 = document.createElement("div");
-                                div3_1_2_1.classList.add("emoji-btn");
-                                div3_1_2_1.innerText="공감하기";
-                                div3_1_2_1.setAttribute("onclick","chooseEmoji("+diary.diaryNo+",this)")
+                                if(minihomeNo != loginMemberNo){
+                                    const div3_1_2_1 = document.createElement("div");
+                                    div3_1_2_1.classList.add("emoji-btn");
+                                    div3_1_2_1.innerText="공감하기";
+                                    div3_1_2_1.setAttribute("onclick","chooseEmoji("+diary.diaryNo+",this)")
                                 
                             /* 아직 미완성조각 */
                             div3_1_2.append(div3_1_2_1);
-                        
+                            }
                         div3_1.append(div3_1_1,div3_1_2);
 
 
@@ -707,3 +705,4 @@ function selectEmojiPeopleList(emojiNo,diaryNo,btn){
 function mouseout(btn){
     btn.parentElement.parentElement.nextSibling.innerText = "";
 }
+

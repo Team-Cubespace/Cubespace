@@ -57,7 +57,9 @@
                             <label for="">폴더</label>
                             <select name="folderNo" id="">
                             <c:forEach var="folder" items="${folderList}">
+                                <c:if test = "${folder.folderName != '나의 월간달력'}">
                                 <option value="${folder.folderNo}">${folder.folderName}</option>
+                                </c:if>
                             </c:forEach>
                             </select>
                         </div>

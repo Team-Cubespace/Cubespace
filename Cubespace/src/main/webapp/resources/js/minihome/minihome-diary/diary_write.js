@@ -49,9 +49,40 @@ $('#summernote').summernote({
 
 });
 
-/* 제출시 조건 */
-function submit(){
-    
+//게시글 작성 유효성 검사
+
+let beforeDate = document.getElementById("diaryDate").value;
+document.getElementById("diaryDate").addEventListener("change",function(){
+    if(new Date(document.getElementById("diaryDate").value) > new Date()){
+        alert("미래의 일기를 쓰실 수 없습니다....");
+        document.getElementById('diaryDate').value =  beforeDate;
+    }
+})
+
+function writeValidate() {
+    const diaryTitle = document.getElementById("diaryTitle");
+    const diaryContent = document.getElementById("summernote");
+    const diaryDate = document.getElementById("diaryDate").value;
+    console.log("다이어리작성시"+diaryDate);
+    if(diaryTitle.value.trim().length == 0){
+        
+        alert("제목을 입력해주세요.");
+        diaryTitle.value = "";
+        diaryTitle.focus();
+        return false;
+    }
+
+    if(diaryContent.value.trim().length == 0){
+        
+        alert("내용을 입력해주세요.");
+        diaryContent.value = "";
+        diaryContent.focus();
+        return false;
+    }
+
+
+
+    return true;
 }
     
     

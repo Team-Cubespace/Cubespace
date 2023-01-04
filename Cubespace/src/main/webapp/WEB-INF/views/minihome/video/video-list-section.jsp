@@ -10,7 +10,9 @@
         <span> > </span>
         <span>${folderName}</span>
     </header>
-    <a href="/videoWrite?folderNo=${folderNo}&cp=${pagination.currentPage}" id="writeButton">글쓰기</a>
+    <c:if test="${loginMember.memberNo == minihome.memberNo}">
+        <a href="/videoWrite?folderNo=${folderNo}&cp=${pagination.currentPage}" id="writeButton">글쓰기</a>
+    </c:if>
 
     <c:choose>
         <c:when test="${fn:length(videoList) == 0}">
@@ -23,6 +25,36 @@
                 <c:forEach var="video" items="${videoList}">
                     <li>
                         <a href="/videoDetail/${video.videoNo}?folderNo=${folderNo}&cp=${cp}">
+                            <div class="album-hover">
+                                <span class="album-title"><c:if test="${video.videoScrapYN == 'Y'}">[스크랩] </c:if>${video.videoTitle}</span>
+                                <div>
+                                    <span class="open-flag">
+                                        <c:choose>
+                                            <c:when test="${video.openFlag == 1}">
+                                                전체공개
+                                            </c:when>
+                                            <c:when test="${video.openFlag == 2}">
+                                                깐부공개
+                                            </c:when>
+                                            <c:when test="${video.openFlag == 3}">
+                                                비공개
+                                            </c:when>
+                                        </c:choose>
+                                    </span>
+                                    <span class="video-create">${video.videoCreate}</span>
+                                </div>
+
+                                <div class="video-count">
+                                    <span>
+                                        <i class="fa-solid fa-eye"></i>
+                                        ${video.videoReadCount}
+                                    </span>
+                                    <span>
+                                        <i class="fa-solid fa-comment"></i>
+                                        ${video.commentCount}
+                                    </span>
+                                </div>
+                            </div>
                             <img src="${video.videoThumbnail}" alt="">
                         </a>
                     </li>

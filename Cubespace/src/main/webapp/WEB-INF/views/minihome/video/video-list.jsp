@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/resources/css/reset.css">
     <link rel="stylesheet" href="/resources/css/variables.css">
     <link rel="stylesheet" href="/resources/css/minihome/minihome-rayout.css">
-    <link rel="stylesheet" href="/resources/css/minihome/video/video-list.css">
+    <link rel="stylesheet" href="/resources/css/minihome/album/album-list.css">
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
     <style>
         .frame-color {

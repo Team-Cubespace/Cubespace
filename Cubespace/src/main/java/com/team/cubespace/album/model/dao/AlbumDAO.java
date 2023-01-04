@@ -125,9 +125,16 @@ public class AlbumDAO {
 
 	/** 앨범 이미지 스크랩
 	 * @param album
-	 * @return
+	 * @return result
 	 */
 	public int albumImageScrap(Album album) {
 		return sqlSession.insert("albumMapper.albumImageScrap", album);
+	}
+
+	/** 사진첩 이미지변경명 목록 조회
+	 * @return imageList
+	 */
+	public List<String> selectImageList() {
+		return sqlSession.selectList("albumMapper.selectImageList");
 	}
 }

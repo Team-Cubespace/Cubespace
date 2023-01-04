@@ -71,4 +71,9 @@ public interface AlbumService {
 	 */
 	public int albumScrap(Album album, Comment comment);
 
+	/** 사진첩 이미지변경명 목록 조회
+	 * @return imageList
+	 */
+	public List<String> selectImageList();
+
 }

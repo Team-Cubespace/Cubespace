@@ -74,7 +74,7 @@ const createCommentList = (commentList) => {
 
         const commentContentP = document.createElement("P");
         commentContentP.innerHTML = comment.commentContent;
-
+        commentContentP.style.fontFamily = `${comment.ownFontNo}`;
         // 답글 버튼 영역
         const commentButtonArea = document.createElement("div");
         commentButtonArea.classList.add("comment-button-area");

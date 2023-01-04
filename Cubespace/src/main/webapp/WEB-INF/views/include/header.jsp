@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%-- <c:if test="${not empty sessionScope.loginMember}">
     <c:set var="loginMember" value="${sessionScope.loginMember}"/>
 </c:if> --%>
@@ -49,23 +50,25 @@
                     </a>
                 </li>
                 <jsp:include page="/WEB-INF/views/webmain/main-notifications.jsp"/>
-
-                <li class="header-menu">
-                    <button type="button" id="headerDropDownButton">
-                        <c:if test="${empty loginMember.profileImage}">
-                            <img src="/resources/images/common/cubes.png" alt="로그인 회원 프로필 이미지" class="header-profile-image">
-                        </c:if>
-                        <c:if test="${not empty loginMember.profileImage}">
-                            <img src="${loginMember.profileImage}" alt="로그인 회원 프로필 이미지" class="header-profile-image">
-                        </c:if>
-                        <ul class="header-drop-down" id="headerDropDown">
-                            <li><a href="">내 미니홈피</a></li>
-                            <li><a href="/member/login/updateInfo">내 정보 수정</a></li>
-                            <li><a href="/member/logout">로그아웃</a></li>
-                        </ul>
-                        <i class="fa-solid fa-angle-down"></i>
-                    </button>
-                </li>
+                <c:set var="fileName" value="${fn:split(pageContext.request.requestURI, '/')}"></c:set>
+                <c:if test="${fileName[fn:length(fileName) - 1] != 'home.jsp'}">
+                    <li class="header-menu">
+                        <button type="button" id="headerDropDownButton">
+                            <c:if test="${empty loginMember.profileImage}">
+                                <img src="/resources/images/common/cubes.png" alt="로그인 회원 프로필 이미지" class="header-profile-image">
+                            </c:if>
+                            <c:if test="${not empty loginMember.profileImage}">
+                                <img src="${loginMember.profileImage}" alt="로그인 회원 프로필 이미지" class="header-profile-image">
+                            </c:if>
+                            <ul class="header-drop-down" id="headerDropDown">
+                                <li><a href="/minihome/${loginMember.memberNo}" onclick="return openMinihome(this.href)">내 미니홈피</a></li>
+                                <li><a href="/member/updateInfo">내 정보 수정</a></li>
+                                <li><a href="/member/logout">로그아웃</a></li>
+                            </ul>
+                            <i class="fa-solid fa-angle-down"></i>
+                        </button>
+                    </li>
+                </c:if>
             </c:otherwise>
         </c:choose>
     </ul>

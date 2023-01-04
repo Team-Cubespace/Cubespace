@@ -107,7 +107,7 @@ const selectMemeberAlarm=()=>{
 }
 
 /* 모달처음 시작시 깐부알림 함수 즉시 적용 */
-(selectMemeberAlarm)()
+// (selectMemeberAlarm)()
 
 /* 깐부알림 클릭 시  함수 호출 */
 alarmLeftChoice.addEventListener("click",selectMemeberAlarm)

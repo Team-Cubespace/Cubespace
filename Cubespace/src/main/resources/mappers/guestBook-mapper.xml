@@ -38,11 +38,13 @@
 		UPDATE GUEST_BOOK SET GB_SECRET_YN = 'Y'
 		WHERE  GB_NO = #{gbNo} 
 	</update>
+	
 	<!-- 방명록 삭제 -->
 	<delete id="deleteGuestBook">
 		DELETE FROM GUEST_BOOK 
 		WHERE  GB_NO = #{gbNo} 
 	</delete>
+	
 	<!-- 방명록 수정 -->
 	<update id="modifyGuestBook">
 		UPDATE GUEST_BOOK SET GB_SECRET_YN = #{secretMessage},GB_CONTENT= #{guestInput}

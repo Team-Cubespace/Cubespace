@@ -3,6 +3,7 @@ package com.team.cubespace.login.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.member.model.vo.Member;
 
 public interface LoginService {
@@ -19,7 +20,7 @@ public interface LoginService {
 	 * @return
 	 * @throws Exception 
 	 */
-	int signUp(Member inputMember) throws Exception;
+	int signUp(Member inputMember, Background backgroundInfo) throws Exception;
 
 	/** 회원 ID/PW 찾기 회원조회
 	 * @param paramMap
@@ -54,11 +55,12 @@ public interface LoginService {
 	int telDupCheck(String memberTel);
 
 	/** 카카오로그인
+	 * @param backgroundInfo 
 	 * @param paramMap
 	 * @return loginMember
 	 * @throws Exception 
 	 */
-	Member kakaoLogin(Member inputMember) throws Exception;
+	Member kakaoLogin(Member inputMember, Background backgroundInfo) throws Exception;
 	
 	/** 내 회원 정보 수정
 	 * @param inputMember
@@ -87,5 +89,7 @@ public interface LoginService {
 	 * @return
 	 */
 	int deleteMemberBlock();
+
+
 
 }

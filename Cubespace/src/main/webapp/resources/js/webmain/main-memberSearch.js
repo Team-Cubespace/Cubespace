@@ -1,15 +1,6 @@
 /* 값을 저장할 변수 선언 */
 let memberNo;
 
-/* 모달 열기 */
-function openModal(){
-    document.getElementById("modal").style.display = "block";
-}
-/* 모달 닫기 */
-function closeModal(){
-    document.getElementById("modal").style.display = "none";
-}
-
 /* 상단 선택 마우스이벤트 */
 const leftChoice = document.getElementById("leftChoice");
 const  rightChoice= document.getElementById("rightChoice");
@@ -331,4 +322,13 @@ const addFriendCancel = (memberNo, btn)=>{
             }
         }
     })
+}
+
+/* 모달 열기 */
+function openModal(){
+    document.getElementById("modal").style.display = "block";
+}
+/* 모달 닫기 */
+function closeModal(){
+    document.getElementById("modal").style.display = "none";
 }

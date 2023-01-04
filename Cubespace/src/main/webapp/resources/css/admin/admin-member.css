@@ -256,7 +256,7 @@
     font-size: 16px;
     text-align: center;
     align-items: center;
-    color: #e53095;
+    color: var(--mainColor);
     font-weight : bolder;
 }
 
@@ -373,15 +373,16 @@ input:-webkit-autofill:active  {
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    background-color: var(--yellow);
-    color: black;
+    background-color: var(--mainColor);
+    color: white;
     cursor: pointer;
     font-weight: bold;
     border: none;
 }
 
 .SignUp:hover{
-    transform: scale(0.9);
+    transition-duration: 0.3s;
+    background-color: var(--subColor);
 }
 /*************************************************/
 

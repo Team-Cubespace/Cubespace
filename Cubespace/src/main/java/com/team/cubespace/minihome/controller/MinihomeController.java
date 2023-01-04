@@ -1,14 +1,21 @@
 package com.team.cubespace.minihome.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.google.gson.Gson;
 import com.team.cubespace.manage.model.service.ManageService;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
 import com.team.cubespace.minihome.model.service.MinihomeService;
@@ -31,14 +38,36 @@ public class MinihomeController {
 	 * @return minihome/minihome-frame 포워드
 	 */
 	@GetMapping("/minihome/{memberNo}")	// @pathVariable memberNo 필요
-	public String minihome(@PathVariable("memberNo") int memberNo, Model model) {
+	public String minihome(@PathVariable("memberNo") int memberNo, 
+			Model model
+			) {
 		Minihome minihome = minihomeService.selectMinihome(memberNo);
 		
 		CategoryOrder co = manageService.getCategoryOrder(memberNo);
 		minihome.setCategoryOrder(co);
 		
+		// 특정 회원이 사용하는 폰트번호를 미니홈에 저장
+		int fontNo = manageService.getMemberFontNo(memberNo);
+		minihome.setFontNo(fontNo);
+		
+		
 		model.addAttribute("minihome", minihome);
 		
 		return "minihome/minihome-frame";
+	}
+	
+	@PostMapping("/updateMinihomeTitle")
+	@ResponseBody
+	public int updateMinihomeName(@RequestParam Map<String, Object> paramMap,
+			@SessionAttribute("minihome") Minihome minihome) {
+		paramMap.put("memberNo", minihome.getMemberNo());
+		return minihomeService.updateMinihomeName(paramMap);
+	}
+	
+	@ResponseBody
+	@GetMapping("/selectMusic")
+	public String selectMusic(int musicNo) {
+		Map<String, String> resultMap = minihomeService.selectMusic(musicNo);
+		return new Gson().toJson(resultMap);
 	}
 }

@@ -2,7 +2,7 @@ var fileNo = 0;
 var filesArr = new Array();
 console.log("hello");
 /* 첨부파일 추가 */
-
+console.log(location.href);
 const addFile = (obj)=>{
     var maxFileCnt = 5;   // 첨부파일 최대 개수
     var attFileCnt = document.getElementsByClassName('file-item').length;    // 기존 추가된 첨부파일 개수
@@ -97,8 +97,8 @@ function deleteFile(num) {
 /* 폼 전송 */
 function submitForm() {
     // 폼데이터 담기
-    var form = document.getElementById("writeAlbumForm");
-    var formData = new FormData(form);
+    let form = document.getElementById("writeAlbumForm");
+    let formData = new FormData(form);
     for (var i = 0; i < filesArr.length; i++) {
         // 삭제되지 않은 파일만 폼데이터에 담기
         if (!filesArr[i].is_delete) {
@@ -121,14 +121,14 @@ function submitForm() {
         success: result => {
             console.log(result);
             if(result.albumNo > 0) {
-                location.href=`/albumDetail/${result.albumNo}?folderNo=${result.folderNo}&cp=1`;
+                const cp = new URLSearchParams(location.search).get("cp");
+                location.href=`/albumDetail/${result.albumNo}?folderNo=${result.folderNo}&cp=${cp}`;
             }
         },
         error: result => {
             console.log(result);
             alert("파일업로드 실패");
         }
-
     })
 }
 
@@ -207,7 +207,7 @@ let bounds;
     // 글작성 취소 버튼 이벤트 달기
     document.getElementById("cancelWrite").addEventListener("click", ()=>{
         if(confirm("작성중인 내용은 저장되지 않습니다.\n정말 취소하시겠습니까?")){
-            location.href ="/albumList";
+            location.href ="/albumList/2" + location.search;
         }
     });
 })();

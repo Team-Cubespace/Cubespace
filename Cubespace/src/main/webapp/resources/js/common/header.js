@@ -17,3 +17,50 @@
         });
     }
 })();
+
+/* 미니홈페이지 오픈 */
+const openMinihome = (url) => {
+    console.log("오픈함수 호출");
+    localStorage.removeItem("minihomeHistory");
+    console.log(url);
+    let title = "minihome";
+
+    let status = "resizable=no, status=no, menubar=no, width=1203, height=718, top=50, left=300";
+    window.open(url, title, status, false);
+
+    return false;
+}
+
+
+/* 로그아웃 */
+const logout = document.getElementById("logout");
+if(logout != null){
+
+    logout.addEventListener("click", e => {
+    
+        //카카오로그아웃  
+        (()=>{
+            
+            if (Kakao.Auth.getAccessToken()) {
+            Kakao.API.request({
+                url: '/v1/user/unlink'
+                , success: function (response) {
+        
+                console.log(response);
+                window.location.href="/";
+                },
+                fail: function () {
+        
+                alert("로그아웃에 실패하셨습니다");
+                }
+            })
+            Kakao.Auth.setAccessToken(undefined);
+        
+            } else {
+            alert("이미 로그아웃 상태입니다");
+            }
+        })();
+    
+        location.href = "/member/logout";
+    })
+}

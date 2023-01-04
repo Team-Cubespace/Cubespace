@@ -42,7 +42,7 @@ public class AlbumServiceImpl implements AlbumService{
 		int listCount  = dao.getListCount(paramMap);
 		
 		// 페이징 처리 객체 생성
-		Pagination pagination = new Pagination(listCount, cp, 12, 10);
+		Pagination pagination = new Pagination(listCount, cp, 9, 10);
 		
 		// 페이징 처리객체 사용하여 앨범 게시글 목록 조회
 		List<Album> albumList = dao.selectAlbumList(pagination, paramMap);
@@ -246,5 +246,11 @@ public class AlbumServiceImpl implements AlbumService{
 			}
 		}
 		return result;
+	}
+
+	// 사진첩 이미지변경명 목록 조회
+	@Override
+	public List<String> selectImageList() {
+		return dao.selectImageList();
 	}
 }

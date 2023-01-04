@@ -38,6 +38,7 @@ import com.team.cubespace.minihome.model.vo.Minihome;
 public class AlbumController {
 	@Autowired
 	private AlbumService service;
+	
 	/** 앨범 목록 조회 페이지
 	 * @return minihome/album/album-list 포워드
 	 */
@@ -47,8 +48,8 @@ public class AlbumController {
 			@SessionAttribute("minihome") Minihome minihome,
 			@SessionAttribute("folderList") List<Folder> folderList,
 			@RequestParam(value="folderNo", required=false, defaultValue="-1") int folderNo,
-			@RequestParam(value="cp", required=false, defaultValue="1") int cp,
-			HttpServletRequest req) {
+			@RequestParam(value="cp", required=false, defaultValue="1") int cp
+			/*HttpServletRequest req*/) {
 		
 		if(folderNo == -1) {	// 폴더 번호가 -1이면
 			// 폴더리스트를 가져와
@@ -136,7 +137,8 @@ public class AlbumController {
 	public String albumDetail(@PathVariable("albumNo") int albumNo,
 			Model model,
 			int folderNo,
-			@SessionAttribute("folderList") List<Folder> folderList) {
+			@SessionAttribute
+			("folderList") List<Folder> folderList) {
 		
 		// 폴더 이름 찾기
 		String folderName = "";
@@ -150,8 +152,7 @@ public class AlbumController {
 		// 앨범 서비스 호출
 		Album album = service.selectAlbum(albumNo);
 		model.addAttribute("folderName", folderName);
-		model.addAttribute("album", album);
-		
+		model.addAttribute("board", album);
 		return "minihome/album/album-detail";
 	}
 	
@@ -225,12 +226,18 @@ public class AlbumController {
 		return new Gson().toJson(resultMap);
 	}
 	
+	/** 사진첩 스크랩
+	 * @param album
+	 * @param comment
+	 * @return result
+	 */
 	@ResponseBody
-	@PostMapping("/boardScrap")
+	@PostMapping("/boardScrap/2")
 	public int boardScrap(Album album, Comment comment) {
 		
 		album.setScrapAlbumNo(comment.getBoardNo());
+		
 		int result = service.albumScrap(album, comment);
-		return 0;
+		return result;
 	}
 }

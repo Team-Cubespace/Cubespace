@@ -29,11 +29,14 @@
 }
 
 /****************************************************/
+.modal-close-box{
+    display: flex;
+}
 /* 뒤로가기 버튼 < */
 .modal-close{
     display: inline;
-    font-size: 50px;
-    margin: 0 0 0 10px;
+    font-size: 30px;
+    margin: 25px 0 0 20px;
     cursor: pointer;
     /* background-color: red; */
 }

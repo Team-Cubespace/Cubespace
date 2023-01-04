@@ -9,7 +9,7 @@
 
 
 #signUp-frm {
-    padding: 100px 0;
+    /* padding: 100px 0; */
     width: 800px;
     display: flex;
     flex-direction: column;
@@ -146,7 +146,7 @@
     align-items: center;
     height: 100px;
     font-size: 15px;
-    margin-top: 50px;
+    margin: 50px 0;
 }
 
 /*회원가입하기 다음페이지 이동 버튼 */

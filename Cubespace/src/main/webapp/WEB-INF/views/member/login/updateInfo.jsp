@@ -58,7 +58,7 @@
                     <div class="signUp-input-Name textbox">
                         <i class="fa-regular fa-user"></i>
                         <input type="text" name="memberName" class="inputBox" id="memberName" placeholder="이름을 입력해주세요"
-                            maxlength="10" value="${loginMember.memberName}"/>
+                            maxlength="5" value="${loginMember.memberName}"/>
                     </div>
                     <div class="firstBox">
                         <span class="signUp-message" id="nameMessage"></span>

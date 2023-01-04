@@ -30,7 +30,9 @@
     <div class="modal" id="modalAlarm" style="display: none;">
         <!-- <%-- 모달 창 --%> -->
         <div class="modal-box" >
-            <div class="modal-close" id="modalAlarmClose" onclick="closeModalAlarm()"><</div>
+            <div class="modal-close-box">
+                <div class="modal-close" id="modalAlarmClose" onclick="closeModalAlarm()"><</div>
+            </div>
             <!-- <%-- 모달 헤더 --%> -->
             <div class="modal-head">
                 <img class="head-img-bell" src="/resources/images/common/bell.png" alt="알림">
@@ -65,20 +67,20 @@
                         </div>
 
                         <div class="profile-body">
-                            <div class="member-choice">
+                            <div class="member-accept" onclick="return openMinihome(this.href)">
                                 <i class="fa-solid fa-check" id="faCheck"></i>
                                 <div >수락</div>
                             </div>
 
-                            <div class="member-cancel">
+                            <div class="member-cancel" onclick="return openMinihome(this.href)">
                                 <i class="fa-solid fa-xmark"></i>
                                 <div >거절</div>
                             </div>
 
-                            <div class="member-choice">
+                            <a class="member-minihome" onclick="return openMinihome(this.href)">
                                 <img class="minihome-img" src="/resources/images/common/smallCube.png" alt="">
-                                <a href="/minihome" onclick="return openMinihome(this.href)">미니홈피</a><!--  <%-- a --%> -->
-                            </div>
+                                <div >미니홈피</div><!--  <%-- a --%> -->
+                            </a>
                         </div>
                     </div>
 
@@ -170,10 +172,6 @@
             </div>
         </div>
     </div>
-    <script>
-    // // 로그인한 회원 번호
-    // const loginMemberNo = "${loginMember.memberNo}";
-    </script>
     <!-- jQuery 라이브러리(.js 파일) 추가(CDN 방식) -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <!-- <%-- 해당 모달 개인 js --%> -->

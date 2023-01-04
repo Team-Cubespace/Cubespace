@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="/resources/css/variables.css">
     <link rel="stylesheet" href="/resources/css/minihome/minihome-frame.css">
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
+    <script>
+        console.log("${request.getContextPath()}");
+    </script>
     <style>
         .frame-color {
             background-color : ${minihome.frameColor};
@@ -21,13 +24,32 @@
             color: ${minihome.frameFontColor};
         }
         .frame-menu-color a:hover {
-            background-color: ${minihome.frameFontColor};
-            color: ${minihome.frameMenuColor};
+            background-color : white;
+            color: black;
+        }
+        .minihome {
+            background-color : ${minihome.backgroundSkin};
         }
     </style>
+
+    <script>
+        originalFrameColor = "${minihome.frameColor}";
+        originalFrameMenuColor = "${minihome.frameMenuColor}";
+        originalFrameFontColor = "${minihome.frameFontColor}";
+        originalBackgroundSkin = "${minihome.backgroundSkin}";
+    </script>
+
+
+
+<jsp:include page="/WEB-INF/views/include/allFontMusic.jsp"/>
+
 </head>
 <body>
     <div class="minihome">
+        <button type="button" id="goBackButton" class="go-back-button frame-color" onclick="goBack()">
+            <i class="fa-solid fa-house"></i>
+            이전 미니홈피
+        </button>
         <%-- <div class="audio-container">
             <button class="fa-solid fa-play" id="audioButton"></button>
             <span class="audio-title" id="audioTitle">노래 이름</span>
@@ -44,25 +66,43 @@
                         <span>매력지수 액티브</span>
                         <div class="active-range">
                             <div class="empty"></div>
-                            <div class="fill"></div>
+                            <div class="fill frame-color" style="width: ${(minihome.total * 1.0) / (minihome.maxTotal * 1.0) * 100}%"></div>
                         </div>
                     </div>
                 </div>
-                <div class="minihome-header-right">
+                <div class="minihome-header-right" id="minihomeHeaderRight">
                     <div class="minihome-title-area">
-                        <input class="minihome-title" value="${minihome.homepageName}">
-                        <button id="updateMinihomeTitleButton" type="button" class="fa-solid fa-gear"></button>
+                        <%-- <input class="minihome-title" value="${minihome.homepageName}" id="minihomeTitle" readOnly maxLength="10"> --%>
+                        <div id="minihomeTitleContainer">
+                            <p class="minihome-title" id="minihomeTitle">${minihome.homepageName}</p>
+                        </div>
+                        <button id="updateMinihomeTitleButton" type="button" class="fa-solid fa-gear header-hover"></button>
+                        <button type="button" id="confirmUpdateButton">수정</button>
+                        <button type="button" id="cancelUpdateButton">
+                        취소</button>
                     </div>
                     <c:if test="${not empty minihome.musicPath}">
                         <div class="audio-container">
-                            <button id="playButton" class="fa-solid fa-circle-play"></button>
-                            <%-- <i class="fa-solid fa-circle-pause"></i> --%>
-                            <%-- <i class="fa-solid fa-circle-play"></i> --%>
-                            <span id="duration">00:00</span>
-                            <span id="musicName">${minihome.musicName}</span>
-                            <div class="music-volume-area">
-                                <i class="fa-solid fa-volume-high"></i>
-                                <input id="musicVolume" type="range">
+                            <div class="music-name-box">
+                                <div class="marquee">
+                                    <p id="minihomeMusicName" class="music-name music-play-marquee">${minihome.musicName}</p>
+                                </div>
+                            </div>
+                            <div class="music-controller">
+                                <div>
+                                    <button id="playButton" class="fa-solid fa-circle-pause"></button>
+                                    <%-- <i class="fa-solid fa-circle-pause"></i> --%>
+                                    <%-- <i class="fa-solid fa-circle-play"></i> --%>
+                                    <span id="duration">00:00</span>
+                                </div>
+                                <div class="music-volume-area">
+                                    <i id="volumeIcon" class="fa-solid fa-volume-high"></i>
+                                    <%-- <i class="fa-solid fa-volume-xmark"></i> --%>
+                                    <%-- <i class="fa-solid fa-volume-low"></i> --%>
+                                    <%-- <i class="fa-solid fa-volume"></i>     --%>
+                                    <%-- <i class="fa-solid fa-volume-high"></i> --%>
+                                    <input id="musicVolume" type="range" max="99" step="1" value="50">
+                                </div>
                             </div>
                         </div>
                     </c:if>
@@ -77,18 +117,32 @@
                 </iframe>
                 <ul class="minihome-menu frame-menu-color">
                     <li><a href="">홈</a></li>
-                    <li style="order:${minihome.categoryOrder.diary}"><a href="">다이어리</a></li>
-                    <li style="order:${minihome.categoryOrder.album}"><a href="/albumList/2" target="minihomeMenu">사진첩</a></li>
-                    <li style="order:${minihome.categoryOrder.video}"><a href="">동영상</a></li>
-                    <li style="order:${minihome.categoryOrder.guestBook}"><a href="">방명록</a></li>
-                    <c:if test="${minihome.memberNo eq loginMember.memberNo}">
+                    <c:if test="${minihome.categoryOrder.diary != -1}">
+                        <li style="order:${minihome.categoryOrder.diary}"><a href="">다이어리</a></li>
+                    </c:if>
+                    <c:if test="${minihome.categoryOrder.album != -1}">
+                        <li style="order:${minihome.categoryOrder.album}"><a href="/albumList/2" target="minihomeMenu">사진첩</a></li>
+                    </c:if>
+                    <c:if test="${minihome.categoryOrder.video != -1}">
+                        <li style="order:${minihome.categoryOrder.video}"><a href="/videoList/3" target="minihomeMenu">동영상</a></li>
+                    </c:if>
+                    <c:if test="${minihome.categoryOrder.guestBook != -1}">
+                        <li style="order:${minihome.categoryOrder.guestBook}"><a href="">방명록</a></li>
+                    </c:if>
+
+                    <c:if test="${minihome.memberNo == loginMember.memberNo}">
                         <li><a href="/manage/font" target="minihomeMenu">관리</a></li>
                     </c:if>
                 </ul>
             </section>
         </div>
     </div>
+    <script>
+        let minihomeMusicPath = '${minihome.musicPath}';
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/resources/js/common/jQuery-core.js"></script>
+    <script src="/resources/js/common/moment.js"></script>
     <script src="/resources/js/minihome/minihome-frame.js"></script>
 </body>
 </html>

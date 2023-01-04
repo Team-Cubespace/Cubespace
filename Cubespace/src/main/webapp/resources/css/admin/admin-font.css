@@ -1,0 +1,23 @@
+#frmSearchBase{
+    height: 100px;
+}
+
+#fontAddBtn {
+    height: 100%;
+}
+
+.search-result-area>div:nth-child(1){
+    flex-basis: 10%;
+}
+.search-result-area>div:nth-child(2){
+    flex-basis: 15%;
+}
+.search-result-area>div:nth-child(3){
+    flex-basis: 50%;
+}
+.search-result-area>div:nth-child(4){
+    flex-basis: 15%;
+}
+.search-result-area>div:nth-child(5){
+    flex-basis: 10%;
+}

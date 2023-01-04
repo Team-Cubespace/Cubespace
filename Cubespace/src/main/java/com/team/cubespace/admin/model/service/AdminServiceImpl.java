@@ -20,6 +20,7 @@ import com.team.cubespace.common.Pagination;
 import com.team.cubespace.common.Util;
 import com.team.cubespace.complain.model.vo.Complain;
 import com.team.cubespace.manage.model.vo.Font;
+import com.team.cubespace.manage.model.vo.Music;
 import com.team.cubespace.member.model.vo.Member;
 
 @Service
@@ -230,8 +231,6 @@ public class AdminServiceImpl implements AdminService{
 	public int insertFont(String rename, String folderPath, Font inputFont, MultipartFile fontFile
 			) throws Exception{
 		
-		
-		
 		int result = dao.insertFont(inputFont);
 		
 		if(result > 0) {
@@ -241,7 +240,6 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 		return result;
-
 	}
 
 	/**
@@ -251,5 +249,67 @@ public class AdminServiceImpl implements AdminService{
 	public int deleteFont(int fontNo) {
 		
 		return dao.deleteFont(fontNo);
+	}
+
+	/**
+	 *  배경음악 페이지 
+	 */
+	@Override
+	public Map<String, Object> musicSearch(Map<String, Object> paramMap, int cp) {
+		
+		// 조건에 맞는 음악 수
+		int listCount = dao.getMusicListCount(paramMap);
+		
+		// 전체 음악수 
+		int allMusicCount = dao.getAllMusicCount();
+		
+		// 전체 음악 수 + cp를 이용해 페이징처리
+		Pagination pagination = new Pagination(listCount, cp, 30, 10);
+		
+		// sort 값 계산
+		paramMap.put("order", "MUSIC_USE_COUNT DESC ,MUSIC_NO DESC");
+		if(paramMap.get("sort") != null) {
+			
+			if(paramMap.get("sort").equals("1")) { // 사용횟수 많은순
+				paramMap.put("order", "MUSIC_USE_COUNT DESC ,MUSIC_NO DESC");
+			}
+			if(paramMap.get("sort").equals("2")) { // 사용횟수 적은순
+				paramMap.put("order", "MUSIC_USE_COUNT ASC, MUSIC_NO DESC");
+			}
+			if(paramMap.get("sort").equals("3")) { // 등록일 빠른순
+				paramMap.put("order", "MUSIC_NO DESC");
+			}
+			if(paramMap.get("sort").equals("4")) { // 등록일 느린순
+				paramMap.put("order", "MUSIC_NO ASC");
+			}
+		}
+		
+		// 조건에 맞는 음악 목록
+		List<Member> musicList = dao.musicSearch(pagination, paramMap);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("musicList", musicList);
+		map.put("allMusicCount", allMusicCount);
+		map.put("listCount", listCount);
+		
+		return map;
+	}
+
+	/**
+	 * 새 배경음악 등록
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	@Override
+	public int insertMusic(List<String> renameList, List<String> folderPathList, Music inputMusic, MultipartFile musicThumnailFile, MultipartFile musicPathFile) throws Exception {
+
+		int result = dao.insertMusic(inputMusic); // result = musicNo
+				
+		if(result > 0) { 
+			musicThumnailFile.transferTo(new File(folderPathList.get(0) + renameList.get(0))); // 썸네일
+			musicPathFile.transferTo(new File(folderPathList.get(1) + renameList.get(1))); // 음악
+		}
+		return result;
 	}
 }

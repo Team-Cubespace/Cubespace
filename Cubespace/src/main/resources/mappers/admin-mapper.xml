@@ -6,7 +6,6 @@
 
 	<resultMap type="Block" id="block_rm">
 		<id property="memberNo" column="MEMBER_NO"/>
-		
 		<result property="blockStart" column="BLOCK_START"/>
 		<result property="blockEnd" column="BLOCK_END"/>		
 	</resultMap>
@@ -17,6 +16,16 @@
    		<result property="fontPath" column="FONT_PATH"></result>
    		<result property="fontCreater" column="FONT_CREATER"></result>
    		<result property="fontUseCount" column="FONT_USE_COUNT"></result>
+ 	 </resultMap>
+ 	 
+ 	 
+	<resultMap type="Music" id="music_rm">
+   		<id property="musicNo" column="MUSIC_NO"/>
+   		<result property="musicName" column="MUSIC_NAME"></result>
+   		<result property="musicPath" column="MUSIC_PATH"></result>
+   		<result property="musicThumnail" column="MUSIC_THUMNAIL"></result>
+   		<result property="musicCreater" column="MUSIC_CREATER"></result>
+   		<result property="musicUseCount" column="MUSIC_USE_COUNT"></result>
  	 </resultMap>
 	
 	
@@ -111,7 +120,63 @@
  		DELETE FROM FONT_SHOP WHERE FONT_NO = #{fontNo}
  	</delete>
  	
-
+ 	
+ 	
+ 	<!-- 음악 등록====================================================  -->
+ 	
+ 	<!-- 조건에 맞는 음악 수 -->
+	<select id="getMusicListCount" resultType="_int">
+		SELECT COUNT(*) FROM (
+			SELECT MUSIC_NO, MUSIC_NAME ,MUSIC_PATH, MUSIC_THUMNAIL, MUSIC_CREATER , NVL(COUNT_NO,0) MUSIC_USE_COUNT
+			FROM MUSIC_SHOP F
+			LEFT JOIN (
+			   SELECT COUNT(*) COUNT_NO, GOODS_NO
+			   FROM MEMBER_OWN_GOODS
+			   WHERE SHOP_CATH_NO = 2
+			   GROUP BY GOODS_NO
+			   ORDER BY COUNT_NO DESC
+			) S ON (F.MUSIC_NO = S.GOODS_NO)) 
+		<if test= 'musicName != null and musicName != "" '>
+		WHERE MUSIC_NAME LIKE '%${musicName}%'
+		</if>
+	</select>
+	
+	
+ 	<!-- 조건에 맞는 음악 목록 -->
+	<select id="musicSearch" resultMap="music_rm">
+		SELECT * FROM (
+			SELECT MUSIC_NO, MUSIC_NAME ,MUSIC_PATH, MUSIC_THUMNAIL, MUSIC_CREATER , NVL(COUNT_NO,0) MUSIC_USE_COUNT
+			FROM MUSIC_SHOP F
+			LEFT JOIN (
+			   SELECT COUNT(*) COUNT_NO, GOODS_NO
+			   FROM MEMBER_OWN_GOODS
+			   WHERE SHOP_CATH_NO = 2
+			   GROUP BY GOODS_NO
+			   ORDER BY COUNT_NO DESC
+			) S ON (F.MUSIC_NO = S.GOODS_NO)) 
+		<if test= 'musicName != null and musicName != "" '>
+		WHERE MUSIC_NAME LIKE '%${musicName}%'
+		</if>
+		ORDER BY ${order}
+	</select>
+	
+	
+	<!-- 전체 음악수  -->
+	<select id="getAllMusicCount" resultType="_int">
+		SELECT COUNT(*) FROM MUSIC_SHOP 
+	</select>
+	
+	
+ 	<!-- 새 음악 등록 -->
+ 	<insert id="insertMusic" parameterType="com.team.cubespace.manage.model.vo.Music" useGeneratedKeys="true">
+ 	
+ 		<selectKey keyProperty="musicNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_MUSIC_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		
+ 		INSERT INTO MUSIC_SHOP VALUES(
+		#{musicNo}, #{musicName},#{musicPath} ,#{musicThumnail}, #{musicCreater})
+ 	</insert>
  
  	
   

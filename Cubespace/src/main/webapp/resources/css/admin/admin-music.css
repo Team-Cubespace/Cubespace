@@ -5,21 +5,35 @@
 }
 
 .search-result-area>div:nth-child(1){
-    flex-basis: 10%;
+    flex-basis: 5%;
 }
 .search-result-area>div:nth-child(2){
-    flex-basis: 15%;
+    flex-basis: 5%;
 }
 .search-result-area>div:nth-child(3){
-    flex-basis: 35%;
+    flex-basis: 47%;
 }
 .search-result-area>div:nth-child(4){
-    flex-basis: 15%;
-}
-.search-result-area>div:nth-child(5){
-    flex-basis: 15%;
-}
-.search-result-area>div:nth-child(6){
     flex-basis: 10%;
 }
-
+.search-result-area>div:nth-child(5){
+    flex-basis: 18%;
+}
+.search-result-area>div:nth-child(6){
+    flex-basis: 8%;
+}
+.search-result-area>div:nth-child(7){
+    flex-basis: 7%;
+}
+.deleteMusic {
+    cursor: pointer;
+}
+.search-content {
+    height: 60px !important;
+}
+.inputBox{
+    width: 400px !important;   
+}
+.textbox {
+    justify-content: space-between !important;
+}

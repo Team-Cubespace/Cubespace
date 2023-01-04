@@ -1,6 +1,8 @@
 package com.team.cubespace.admin.model.service;
 
+import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -8,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.team.cubespace.admin.model.vo.Block;
 import com.team.cubespace.complain.model.vo.Complain;
 import com.team.cubespace.manage.model.vo.Font;
+import com.team.cubespace.manage.model.vo.Music;
 import com.team.cubespace.member.model.vo.Member;
 
 public interface AdminService {
@@ -75,5 +78,23 @@ public interface AdminService {
 	 * @return
 	 */
 	int deleteFont(int fontNo);
+
+	/**  배경음악 페이지 
+	 * @param paramMap
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> musicSearch(Map<String, Object> paramMap, int cp);
+
+	/** 새 배경음악 등록
+	 * @param renameList
+	 * @param folderPathList
+	 * @param inputMusic
+	 * @param musicFileList
+	 * @return
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	int insertMusic(List<String> renameList, List<String> folderPathList, Music inputMusic, MultipartFile musicThumnailFile, MultipartFile musicPathFile) throws Exception;
 
 }

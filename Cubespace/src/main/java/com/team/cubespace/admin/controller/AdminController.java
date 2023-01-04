@@ -1,6 +1,7 @@
 package com.team.cubespace.admin.controller;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,7 @@ import com.team.cubespace.complain.model.vo.Complain;
 import com.team.cubespace.login.model.service.LoginService;
 import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.manage.model.vo.Font;
+import com.team.cubespace.manage.model.vo.Music;
 import com.team.cubespace.member.model.vo.Member;
 
 /**
@@ -39,7 +41,7 @@ import com.team.cubespace.member.model.vo.Member;
  */
 @Controller
 @RequestMapping("/admin")
-@SessionAttributes({"loginMember", "message", "allFontList"})
+@SessionAttributes({"loginMember", "message", "allFontList", "allMusicList"})
 public class AdminController {
 
 	@Autowired
@@ -71,13 +73,7 @@ public class AdminController {
 	}
 	
 
-	/** 배경음악 등록 페이지 이동
-	 * @return
-	 */
-	@GetMapping("/goods/music")
-	public String adminGoods_music() {
-		return "admin/admin-music";
-	}
+
 	/** 소품등록 이동
 	 * @return
 	 */
@@ -273,5 +269,87 @@ public class AdminController {
 			model.addAttribute("allFontList", allFontList);
 		}
 		return "redirect:/admin/goods/font";
+	}
+	
+	
+	
+//	-------------------------------------------------------------------------------
+
+	/** 배경음악 페이지 
+	 * @return
+	 */
+	@GetMapping("/goods/music")
+	public String adminGoods_music(@RequestParam Map<String, Object> paramMap,
+			@RequestParam(value="cp", required=false, defaultValue="1" ) int cp,
+			Model model) {
+		
+		// paramMap : musicName
+		
+		// 폰트 목록 조회
+		Map<String, Object> map = service.musicSearch(paramMap, cp);
+		model.addAttribute("map", map);
+	
+		return "admin/admin-music";
+	}
+	
+	
+	/** 새 배경음악 등록
+	 * @param inputMusic
+	 * @param musicFileList
+	 * @param session
+	 * @param model
+	 * @param ra
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping("/goods/insertMusic")
+	public String insertMusic(Music inputMusic, 
+			@RequestParam(name = "musicThumnailFile") MultipartFile musicThumnailFile,
+			@RequestParam(name = "musicPathFile") MultipartFile musicPathFile,
+			HttpSession session, Model model,
+			RedirectAttributes ra) throws Exception {
+		
+		List<String> renameList = new ArrayList<>();
+		List<String> folderPathList = new ArrayList<>();
+		
+		// 썸네일
+		String webPath = "/resources/musicThumnail/";
+		String folderPath = session.getServletContext().getRealPath(webPath);
+		
+		String rename = Util.fileRename(musicThumnailFile.getOriginalFilename());
+		inputMusic.setMusicThumnail(webPath + rename);
+		renameList.add(0, rename);
+		folderPathList.add(0, folderPath);
+		
+		
+		// 음악파일
+		webPath = "/resources/music/";
+		folderPath = session.getServletContext().getRealPath(webPath);
+		
+		rename = Util.fileRename(musicPathFile.getOriginalFilename());
+		inputMusic.setMusicPath(webPath + rename);
+		renameList.add(1, rename);
+		folderPathList.add(1, folderPath);
+		
+		
+		
+		int result =  service.insertMusic(renameList, folderPathList, inputMusic, musicThumnailFile, musicPathFile);
+		String message = null;
+		
+		if(result > 0) {
+			
+			message = "새 음악이 등록되었습니다";
+			
+			// session의 allFontList에 추가
+			List<Music> allMusicList = (List<Music>) model.getAttribute("allMusicList");
+			allMusicList.add(inputMusic);
+			model.addAttribute("allMusicList", allMusicList);
+			
+		} else {
+			message = "음악 등록 실패";
+		}
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:/admin/goods/music";
 	}
 }

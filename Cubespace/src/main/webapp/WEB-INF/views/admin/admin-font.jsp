@@ -8,7 +8,7 @@
 <c:set var="allFontCount" value="${map.allFontCount}"/>
 <c:set var="listCount" value="${map.listCount}"/>
 
-<c:set var="sURL" value="sort=${param.sort}&key=${param.key}&query=${param.query}&isBlock=${param.isBlock}&isDelete=${param.isDelete}&calanderBefore=${param.calanderBefore}&calanderAfter=${param.calanderAfter}"/>
+<c:set var="sURL" value="sort=${param.sort}&key=${param.key}&query=${param.query}"/>
 
 <jsp:include page="/WEB-INF/views/include/allFontMusic.jsp" />
 

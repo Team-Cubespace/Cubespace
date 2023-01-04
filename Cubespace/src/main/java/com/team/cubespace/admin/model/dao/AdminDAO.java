@@ -12,6 +12,7 @@ import com.team.cubespace.admin.model.vo.Block;
 import com.team.cubespace.common.Pagination;
 import com.team.cubespace.complain.model.vo.Complain;
 import com.team.cubespace.manage.model.vo.Font;
+import com.team.cubespace.manage.model.vo.Music;
 import com.team.cubespace.member.model.vo.Member;
 
 @Repository
@@ -182,6 +183,45 @@ public class AdminDAO {
 	public int deleteFont(int fontNo) {
 		
 		return sqlSession.delete("adminMapper.deleteFont", fontNo);
+	}
+
+	/** 조건에 맞는 음악 수
+	 * @param paramMap
+	 * @return
+	 */
+	public int getMusicListCount(Map<String, Object> paramMap) {
+
+		return sqlSession.selectOne("adminMapper.getMusicListCount", paramMap);
+	}
+
+	/** 전체 음악수 
+	 * @return
+	 */
+	public int getAllMusicCount() {
+
+		return sqlSession.selectOne("adminMapper.getAllMusicCount");
+	}
+
+	/** 조건에 맞는 음악 목록
+	 * @param pagination
+	 * @param paramMap
+	 * @return
+	 */
+	public List<Member> musicSearch(Pagination pagination, Map<String, Object> paramMap) {
+
+		int offset = (pagination.getCurrentPage() -1) * pagination.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return  sqlSession.selectList("adminMapper.musicSearch", paramMap, rowBounds);
+	}
+
+	/** 내 배경음악 등록
+	 * @param inputMusic
+	 * @return
+	 */
+	public int insertMusic(Music inputMusic) {
+		
+		return sqlSession.insert("adminMapper.insertMusic", inputMusic);
 	}
 
 	

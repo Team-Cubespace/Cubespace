@@ -70,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="minihome-header-right">
+                <div class="minihome-header-right" id="minihomeHeaderRight">
                     <div class="minihome-title-area">
                         <%-- <input class="minihome-title" value="${minihome.homepageName}" id="minihomeTitle" readOnly maxLength="10"> --%>
                         <div id="minihomeTitleContainer">

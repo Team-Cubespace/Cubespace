@@ -126,7 +126,7 @@
         </div>
     </div>
     <script>
-        window.parent.postMessage("3", "*");
+        window.parent.postMessage("0", "*");
     </script>
     <jsp:include page="/WEB-INF/views/include/comment.jsp"/>
 </div>

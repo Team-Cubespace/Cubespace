@@ -72,4 +72,10 @@
 		COMMENT_CONTENT = #{commentContent}
 		WHERE COMMENT_NO = #{commentNo}
 	</update>
+	
+	<!-- 알림 보내기 -->
+	<insert id="sendAlarm">
+		INSERT INTO ALARM (ALARM_NO, SENDER_NO, RECEIVER_NO, ALARM_TYPE, BOARD_TYPE_NO, BOARD_NO)
+		VALUES (SEQ_ALARM_NO.NEXTVAL, #{senderNo}, #{receiverNo}, #{alarmType}, #{boardTypeNo}, #{boardNo})
+	</insert>
 </mapper>

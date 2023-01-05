@@ -5,7 +5,8 @@
 .input-row label:first-child{
     width: 100px;
     font-weight: bold;
-    display: inline-block;
+    font-size: 15px;
+    /* display: inline-block; */
 }
 
 /* 입력창 단위 */
@@ -75,13 +76,36 @@ input[type='radio'] {
     display: flex;
     flex-direction: column;
     cursor: pointer;
+    min-height: 130px;
+    width: 70px;
 }
 .add-image img{
+    width: 70px;
+    height: 70px;
     background-color: transparent;
     margin-top: 10px;
     border: none;
     cursor: pointer;
+    margin-bottom: 10px;
 }
+
+.add-image-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 15px;    
+}
+.add-image-info > span {
+    font-size: 14px;
+    color: grey;
+    text-align: end;
+}
+#videoSizeSpan,
+#videoDurationSpan {
+    color: var(--ink);
+    font-size: 15px;
+}
+
 input[type='file'] {
     display: none;
 }

@@ -88,7 +88,9 @@ const submitForm = ()=>{
         },
         error: result =>{
             console.log(result);
+            document.getElementById("loadingMask").style.display = "none";
             alert("파일업로드 실패");
+            
         }
     })
 }

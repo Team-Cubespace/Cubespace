@@ -171,11 +171,12 @@ input[type='file'] {
 /* 동영상 미리보기 */
 #addVideoArea {
     width: 100%;
-    max-height: 500px;
+    max-height: 450px;
 }
 
 #myVideo {
     width: 100%;
+    max-height: 450px;
     height: 100%;
 }
 

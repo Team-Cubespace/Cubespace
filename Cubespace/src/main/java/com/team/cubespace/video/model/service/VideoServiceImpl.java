@@ -45,8 +45,8 @@ public class VideoServiceImpl implements VideoService{
 
 	// 비디오 상세 조회
 	@Override
-	public Video selectVideo(int videoNo) {
-		return dao.selectVideo(videoNo);
+	public Video selectVideo(Map<String, Integer> paramMap) {
+		return dao.selectVideo(paramMap);
 	}
 
 	// 비디오 글 작성

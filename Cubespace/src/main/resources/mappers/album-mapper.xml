@@ -30,6 +30,7 @@
 		
 		<result property="memberNo" column="MEMBER_NO"/>
 		<result property="folderNo" column="FOLDER_NO"/>
+		<result property="folderName" column="FOLDER_NAME"/>		
 		<result property="albumTitle" column="A_TITLE"/>
 		<result property="albumContent" column="A_CONTENT"/>
 		<result property="thumbnailImage" column="THUMBNAIL_IMG"/>		
@@ -127,10 +128,10 @@
 	</select>
 	
 	<!-- 앨범 상세 조회 -->
-	<select id="selectAlbum" parameterType="_int" resultMap="albumDetail_rm">
+	<select id="selectAlbum" parameterType="map" resultMap="albumDetail_rm">
 		SELECT ALBUM_NO, MEMBER_NO, A_TITLE, A_CONTENT, LATITUDE, LONGITUDE, LOCATION_NAME, A_SCRAP_YN, FOLDER_NO, A_SCRAP_ALLOW_YN, A_OPEN_FL,
-		
-			TO_CHAR(A_CREATE, 'YYYY.MM.DD') A_CREATE 
+			TO_CHAR(A_CREATE, 'YYYY.MM.DD') A_CREATE,
+			(SELECT FOLDER_NAME FROM FOLDER WHERE FOLDER_NO = #{folderNo}) FOLDER_NAME
 		FROM ALBUM
 		WHERE ALBUM_NO = #{albumNo}
 	</select>

@@ -25,8 +25,8 @@
             color: ${minihome.frameFontColor};
         }
         .frame-menu-color a:hover {
-            background-color: ${minihome.frameFontColor};
-            color: ${minihome.frameMenuColor};
+            background-color : white;
+            color: black;
         }
     </style>
 
@@ -66,6 +66,10 @@
 </head>
 <body>
     <div class="minihome">
+        <button type="button" id="goBackButton" class="go-back-button frame-color" onclick="goBack()">
+            <i class="fa-solid fa-house"></i>
+            이전 미니홈피
+        </button>
         <%-- <div class="audio-container">
             <button class="fa-solid fa-play" id="audioButton"></button>
             <span class="audio-title" id="audioTitle">노래 이름</span>
@@ -86,7 +90,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="minihome-header-right">
+                <div class="minihome-header-right" id="minihomeHeaderRight">
                     <div class="minihome-title-area">
                         <%-- <input class="minihome-title" value="${minihome.homepageName}" id="minihomeTitle" readOnly maxLength="10"> --%>
                         <div id="minihomeTitleContainer">

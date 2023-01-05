@@ -236,7 +236,7 @@ const notificationsCancel =(memberNo, btn) =>{
 /* 모달 열기 */
 function openmodalAlarm(){
     document.getElementById("modalAlarm").style.display = "block";
-    selectMemeberAlarm()
+    // selectMemeberAlarm()
 }
 /* 모달 닫기 */
 function closeModalAlarm(){

@@ -1,0 +1,13 @@
+header{
+    flex-direction: column;
+    height: 100px;
+}
+header>*:nth-child(1){
+    justify-content: flex-end;
+}
+header>*:nth-child(2){
+    justify-content: space-between;
+}
+.originalFont{
+    background-color: rgba(0,0,0,0.03);;
+}

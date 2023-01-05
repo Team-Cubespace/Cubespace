@@ -200,9 +200,9 @@ const listGuestBook=()=>{
                                 member_img.append(img);
                 }
             }
+            initNicknameDropDown()
         }
     })
-    initNicknameDropDown()
 }
 (listGuestBook)()
 
@@ -261,7 +261,6 @@ const secretGuestBook =(gbNo,btn)=>{
         }
     })
 }
-
 /* 방명록 삭제 함수 선언 */
 const deleteGuestBook=(gbNo,btn)=>{
 
@@ -315,11 +314,9 @@ const modifyGuestBook =(gbNo,gbSecret,btn)=>{
             guestInput.onkeyup = () => {prevText.innerText=guestInput.value;}
 
             if(gbSecret=='Y'){
-                console.log("넘어옴1");
                 checkbox.checked=true
             }else{
                 checkbox.checked=false
-                console.log("넘어옴2");
             }
         
         }else{ // 취소시 

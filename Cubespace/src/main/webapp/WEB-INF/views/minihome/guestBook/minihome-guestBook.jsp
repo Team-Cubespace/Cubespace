@@ -97,7 +97,7 @@
                 </header>
                 <div class="guest-list-box <c:if test="${loginMember.memberNo == minihome.memberNo}">test</c:if>">
 <!----------------------------------------------->
-                    <div class="guest-message">
+                    <%-- <div class="guest-message">
                         <div class="message-header">
                             <div>
                                 <div class="member-nickname">이글을쓴본인</div>
@@ -140,7 +140,7 @@
                                 <div class="member-message" style="font-family:5">작성자 시점 비밀글 아닐때 : 인데 길이가 길어지면 어떠한 현상이 벌어질까요? 너무너무 궁금합니다</div>
                             </div>
                         </div>
-                    </div>
+                    </div> --%>
 
                 </div>
 <!----------------------------------------------->

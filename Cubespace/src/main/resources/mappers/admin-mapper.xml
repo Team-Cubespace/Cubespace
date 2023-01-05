@@ -37,6 +37,14 @@
 		<result property="goodsCount" column="GOODS_COUNT_NO"></result>
 		<result property="goodsUseCount" column="GOODS_USE_COUNT"></result>
 	</resultMap>
+ 	 
+	<resultMap type="Background" id="background_rm">
+		<id property="backgroundNo" column="BACKGROUND_NO"/>
+		<result property="backgroundSkin" column="BACKGROUND_SKIN"></result>
+		<result property="frameColor" column="FRAME_COLOR"></result>
+		<result property="frameMenuColor" column="FRAME_MENU_COLOR"></result>
+		<result property="frameFontColor" column="FRAME_FONT_COLOR"></result>
+	</resultMap>
 	
 	
 	<!-- 회원 차단====================================================  -->
@@ -249,6 +257,8 @@
 	</delete>
   
   
+
+  
   
   <!-- 스케줄링을 위한 조회====================================================  -->
   	
@@ -277,5 +287,38 @@
   		SELECT REPLACE(GOODS_PATH, '/resources/miniroomGoods/', '') GOODS_PATH 
   		FROM GOODS_SHOP
   	</select>
-  
+  	
+  	
+  	
+  	<!-- DB에 저장된 전체 배경색정보 덩어옴 -->
+  	<select id="getBGColorInfo" resultMap="background_rm">
+  		SELECT BACKGROUND_SKIN, FRAME_COLOR, FRAME_MENU_COLOR, FRAME_FONT_COLOR 
+  		FROM BACKGROUND_COLOR
+  	</select>
+  	
+  	
+  	<!-- 전체 회원의 미니홈피 배경색 변경 -->
+  	<update id="updateAllColor">
+  		UPDATE MINI_HOMEPAGE SET
+		BACKGROUND_SKIN  = #{backgroundSkin},
+		FRAME_COLOR = #{frameColor},
+		FRAME_MENU_COLOR  = #{frameMenuColor},
+		FRAME_FONT_COLOR  = #{frameFontColor}
+		WHERE BACKGROUND_SKIN  = #{originalBackgroundSkin}
+		AND FRAME_COLOR  = #{originalFrameColor}
+		AND FRAME_MENU_COLOR  = #{originalFrameMenuColor}
+		AND FRAME_FONT_COLOR  = #{originalFrameFontColor}
+  	</update>
+  	
+  	
+  	<!-- db의 전체 배경색 정보 변경 -->
+  	<update id="updateDBColor">
+  		UPDATE BACKGROUND_COLOR SET
+  		BACKGROUND_SKIN  = #{backgroundSkin},
+		FRAME_COLOR = #{frameColor},
+		FRAME_MENU_COLOR  = #{frameMenuColor},
+		FRAME_FONT_COLOR  = #{frameFontColor}
+		WHERE BACKGROUND_NO = 1
+  	</update>
+		  
 </mapper>

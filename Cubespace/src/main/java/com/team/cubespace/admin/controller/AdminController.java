@@ -2,6 +2,7 @@ package com.team.cubespace.admin.controller;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -439,4 +440,43 @@ public class AdminController {
 		return "redirect:/admin/goods/goods";
 	}
 	
+	
+	/** 미니홈피 전체 배경색 변경
+	 * @param background
+	 * @return
+	 * @throws Exception 
+	 */
+	@GetMapping("/goods/updateAllColor")
+	public String updateAllColor(Background background, RedirectAttributes ra) throws Exception {
+				
+		Background originalBGColor = (Background) application.getAttribute("backgroundColorInfo");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("originalBackgroundSkin", originalBGColor.getBackgroundSkin());
+		map.put("originalFrameColor", originalBGColor.getFrameColor());
+		map.put("originalFrameMenuColor", originalBGColor.getFrameMenuColor());
+		map.put("originalFrameFontColor", originalBGColor.getFrameFontColor());
+		
+		map.put("backgroundSkin", background.getBackgroundSkin());
+		map.put("frameColor", background.getFrameColor());
+		map.put("frameMenuColor", background.getFrameMenuColor());
+		map.put("frameFontColor", background.getFrameFontColor());
+		
+		
+		// 전체 회원의 미니홈피 배경색 변경
+		// 회원의 기존 미니홈피 색이 "모두" 처음 설정된 것과 같으면 새로 변경
+		int result = service.updateAllColor(map);
+		
+		String message = null;
+		if(result > 0) {
+			message = "미니홈피 전체 배경색을 변경하였습니다";
+		} else {
+			message = "미니홈피 전체 배경색 변경 실패";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:/admin/goods/goods";
+	
+	}
 }

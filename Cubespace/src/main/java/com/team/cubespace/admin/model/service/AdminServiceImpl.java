@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.cubespace.admin.model.dao.AdminDAO;
 import com.team.cubespace.admin.model.vo.Block;
@@ -20,6 +21,7 @@ import com.team.cubespace.common.Pagination;
 import com.team.cubespace.common.Util;
 import com.team.cubespace.complain.model.vo.Complain;
 import com.team.cubespace.main.model.vo.ShopMiniroom;
+import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.manage.model.vo.Font;
 import com.team.cubespace.manage.model.vo.Music;
 import com.team.cubespace.member.model.vo.Member;
@@ -430,4 +432,36 @@ public class AdminServiceImpl implements AdminService{
 		
 		return dao.selectGoodsPathList();
 	}
+
+	/**
+	 * DB에 저장된 전체 배경색정보 덩어옴
+	 */
+	@Override
+	public Background getBGColorInfo() {
+		
+		return dao.getBGColorInfo();
+	}
+
+	/**
+	 * 전체 회원의 미니홈피 배경색 변경
+	 * @throws Exception 
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public int updateAllColor(Map<String, Object> map) throws Exception {
+		
+		// 기본 배경색인 회원들의 색 변경
+		int updateMemberResult = dao.updateAllColor(map);
+		
+		// db의 전체 배경색 정보 변경
+		int updateDBResult = dao.updateDBColor(map);
+		
+		if(updateMemberResult * updateDBResult > 0) {
+			return 1;
+		} else {
+			throw new Exception("배경 변경 중 오류 발생");
+		}
+	}
+
+
 }

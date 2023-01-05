@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.team.cubespace.admin.model.vo.Block;
 import com.team.cubespace.complain.model.vo.Complain;
 import com.team.cubespace.main.model.vo.ShopMiniroom;
+import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.manage.model.vo.Font;
 import com.team.cubespace.manage.model.vo.Music;
 import com.team.cubespace.member.model.vo.Member;
@@ -146,5 +147,18 @@ public interface AdminService {
 	 * @return
 	 */
 	List<String> selectGoodsPathList();
+
+	
+	/** DB에 저장된 전체 배경색정보 덩어옴
+	 * @return
+	 */
+	Background getBGColorInfo();
+
+	/** 전체 회원의 미니홈피 배경색 변경
+	 * @param map
+	 * @return
+	 * @throws Exception 
+	 */
+	int updateAllColor(Map<String, Object> map) throws Exception;
 
 }

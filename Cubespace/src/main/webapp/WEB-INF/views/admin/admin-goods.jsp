@@ -50,6 +50,7 @@
                     <h3>소품 리스트</h3>
                     <div>
                         <button id="goodsAddBtn">+ 소품 등록</button>
+                        <button id="updateAllColorBtn">미니홈피 배경색 변경</button>
                     </div>
                 </div>
 
@@ -188,6 +189,61 @@
                         </div>
                     </div>
                 </div>
+
+                <%--전체 배경색 변경 ------------------------------------------- --%>
+                <div class="popup_layer" id="popup_layer1" style="display: none;">
+                    <div class="popup_box scroll">
+                        <div style="height: 10px; width: 500px; float: top;">
+                            <a href="javascript:closePop1();"><i class="fa-solid fa-x allClose"></i></a>
+                        </div>
+                        <!--팝업 컨텐츠 영역-->
+                        <div class="popup_cont">
+                            <div class="payRemainArea">
+                                <h1><span>미니홈피 전체 색 변경</span></h1>
+                            </div>
+
+                            <form action="/admin/goods/updateAllColor" method="get" name="updateAllColorForm" id="updateAllColorForm" >
+                                <div>
+                                    <div class="listTitle backgroundTitleArea">
+                                        <span class="backgroundTitle">전체 배경설정</span>
+                                    </div>
+                                    <div class="changeColorArea">
+                                        <div>
+                                            <input type="color" id="BGColorInput" name="backgroundSkin" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="listTitle backgroundTitleArea">
+                                        <span class="backgroundTitle">프레임 배경설정</span>
+                                    </div>
+                                    <div class="changeColorArea">
+                                        <div>
+                                            <input type="color" id="frameColorInput" name="frameColor" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="frameMenuColorArea">
+                                    <div class="listTitle backgroundTitleArea">
+                                        <span class="backgroundTitle">프레임 메뉴 색상 설정</span>
+                                    </div>
+                                    <div class="changeColorArea">
+                                        <div>
+                                            <input type="color" id="frameMenuColorInput" name="frameMenuColor" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="frameFontColor" id="frameFontColor">
+                                <div class="SignUpAgreement6">
+                                    <button class="SignUp" id="finishColorChangeBtn">미니홈피 색 변경 완료</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
 
                 <%-- ------------------------------------------- --%>
                 <div class="pagination-area">

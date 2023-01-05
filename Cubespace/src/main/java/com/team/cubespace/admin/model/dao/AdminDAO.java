@@ -12,6 +12,7 @@ import com.team.cubespace.admin.model.vo.Block;
 import com.team.cubespace.common.Pagination;
 import com.team.cubespace.complain.model.vo.Complain;
 import com.team.cubespace.main.model.vo.ShopMiniroom;
+import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.manage.model.vo.Font;
 import com.team.cubespace.manage.model.vo.Music;
 import com.team.cubespace.member.model.vo.Member;
@@ -314,6 +315,33 @@ public class AdminDAO {
 		return sqlSession.selectList("adminMapper.selectGoodsPathList");
 
 	}
+
+	/** DB에 저장된 전체 배경색정보 덩어옴
+	 * @return
+	 */
+	public Background getBGColorInfo() {
+		
+		return sqlSession.selectOne("adminMapper.getBGColorInfo");
+	}
+
+	/** 전체 회원의 미니홈피 배경색 변경
+	 * @param map
+	 * @return
+	 */
+	public int updateAllColor(Map<String, Object> map) {
+		
+		return sqlSession.update("adminMapper.updateAllColor", map);
+	}
+
+	/**  db의 전체 배경색 정보 변경
+	 * @param map
+	 * @return
+	 */
+	public int updateDBColor(Map<String, Object> map) {
+
+		return sqlSession.update("adminMapper.updateDBColor", map);
+	}
+
 
 	
 }

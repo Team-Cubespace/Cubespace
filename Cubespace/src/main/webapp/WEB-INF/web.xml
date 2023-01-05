@@ -30,9 +30,9 @@
 		
 		<multipart-config>
 			<location>/</location>
-			<max-file-size>20971520</max-file-size> <!--1MB * 20 -->
-			<max-request-size>41943040</max-request-size><!-- 40MB -->
-			<file-size-threshold>20971520</file-size-threshold> <!-- 20MB -->
+			<max-file-size>104857600</max-file-size> <!--1MB * 20 -->
+			<max-request-size>104857600</max-request-size><!-- 40MB -->
+			<file-size-threshold>104857600</file-size-threshold> <!-- 20MB -->
 		</multipart-config>
 	</servlet>
 		

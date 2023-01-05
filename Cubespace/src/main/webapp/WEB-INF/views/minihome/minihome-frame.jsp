@@ -110,7 +110,7 @@
             </div>
             <section class="minihome-main">
 
-                <iframe src="/minihome/home/7" frameborder="0" name="minihomeMenu" scrolling="no">
+                <iframe src="/minihome/home/${minihome.memberNo}" frameborder="0" name="minihomeMenu" scrolling="no">
                 <%-- <iframe src="/albumList/2" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
                 <%-- <iframe src="/manage/friend" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
 

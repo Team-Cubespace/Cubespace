@@ -100,7 +100,7 @@ public class VideoController {
 	@GetMapping("/videoDetail/{videoNo}")
 	public String videoDetail(@PathVariable("videoNo") int videoNo,
 			Model model,
-			int folderNo,
+			@RequestParam(value="folderNo", required=false) int folderNo,
 			@SessionAttribute("folderList") List<Folder> folderList) {
 		
 		// 폴더 이름 찾기

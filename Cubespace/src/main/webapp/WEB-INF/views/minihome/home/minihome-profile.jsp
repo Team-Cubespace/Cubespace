@@ -3,6 +3,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<c:set var="profile" value="${profileMap.profile}"/>
+<c:set var="friendList" value="${profileMap.friendList}"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,20 +14,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/resources/css/minihome/home/minihome-profile.css">
     <title>프로필</title>
+    <script>
+        const minihomeNo = "${minihome.memberNo}";
+        const loginNo = "${loginMember.memberNo}";
+    </script>
 </head>
 <body>
     <div class="profile-area">
-        <img src="/resources/images/삐약.gif" class="profile-img">
 
-        <div class="emoji-container">
-            <div class="today-emoji">
+        <!-- 프로필 이미지 -->
+        <c:choose>
+            <c:when test="${profile.profileImage == null}">
+                <img src="/resources/images/common/cubes.png" class="profile-img">
+            </c:when>
+
+            <c:otherwise>
+                <img src="${profile.profileImage}" class="profile-img">
+            </c:otherwise>
+        </c:choose>
+
+        <!-- 기분 -->
+        <div class="emotion-container">
+            <div class="today-emotion">
                 <span>Today is</span>&nbsp;
-                <span id="emojiText">유혹중</span>&nbsp;
-                <img id="emojiImg" src="/resources/images/emotion/007-temptation.png">
+                <span id="emotionText">${profile.emotionName}</span>&nbsp;
+                <img id="emotionImg" src="${profile.emotionPath}">
             </div>
 
-            <!-- 스페이스 주인 번호와 loginMember.memberNo가 같을 경우 -->
-            <div class="today-dropdown-btn"><i class="fa-solid fa-caret-down today-dropdown-btn-icon"></i></div>
+            <c:if test="${minihome.memberNo == loginMember.memberNo}">
+                <div class="today-dropdown-btn"><i class="fa-solid fa-caret-down today-dropdown-btn-icon"></i></div>
+            </c:if>
 
             <div class="today-dropdown">
                 <span><span>기뻐요</span>&nbsp;<img src="/resources/images/emotion/001-happy.png"></span>
@@ -38,34 +57,36 @@
             </div>
         </div>
  
-        <!-- 필요할 경우 css 추가 -->
-        <textarea class="profile-message" spellcheck="false" readonly>집에 가고 싶다..</textarea>
+        <!-- 프로필 메시지 (수정 필요) -->
+        <textarea class="profile-message" spellcheck="false" readonly>${profile.comment}</textarea>
 
-        <!-- 스페이스 주인 번호와 loginMember.memberNo가 같을 경우 -->
-        <span id="profileUpdate">프로필 수정</span>
+        <!-- 프로필 수정 -->
+        <c:if test="${minihome.memberNo == loginMember.memberNo}">
+            <div><span id="profileUpdate">프로필 수정</span></div>
+        </c:if>
 
-        <div class="line"></div>
-
-        <div>
-            <span class="user-nickname">편의점에서썸타는</span>
-            <span class="user-name">(김효동)</span>
+        <!-- 닉네임, 이름, 이메일 -->
+        <div class="user-info-container">
+            <span class="user-nickname">${profile.memberNickname}</span>
+            <span class="user-name">(${profile.memberName})</span>
         </div>
 
-        <span class="user-email">gyehd1230@naver.com</span>
+        <span class="user-email">${profile.memberEmail}</span>
 
+        <!-- 깐부 파도타기 -->
         <div class="surf-container">
-            <select id="surf" onchange="window.open(value,'_self');">
-                <option>♥ 깐부 파도타기 ♥</option>
-                <option value="/minihome/home/1">현진</option>
-                <option value="#">수연</option>
-                <option value="#">영현</option>
-                <option value="#">다원</option>
-                <option value="#">동현띠</option>
+            <select id="surf" onchange="return openMinihome(this.value)">
+                <option>~ 깐부 파도타기 ~</option>
+                <c:forEach var="friend" items="${friendList}">
+                    <option value="/minihome/${friend.memberNo}">${friend.memberNickname}(${friend.memberName})</option>
+                </c:forEach>
             </select>
         </div>
 
-        <!-- 스페이스 주인 번호와 loginMember.memberNo가 다를 경우 -->
-        <!-- <span id="returnMyHome">내 스페이스로 돌아가기</span> -->
+        <!-- 내 스페이스로 돌아가기 -->
+        <c:if test="${minihome.memberNo != loginMember.memberNo}">
+            <div><a href="/minihome/${loginMember.memberNo}" id="returnMyHome" onclick="return openMinihome(this.href)">내 스페이스로 돌아가기</a></div>
+        </c:if>
     </div>
 
     <jsp:include page="/WEB-INF/views/minihome/home/profile-update.jsp"/>

@@ -136,7 +136,7 @@ public class AlbumController {
 	@GetMapping("/albumDetail/{albumNo}")
 	public String albumDetail(@PathVariable("albumNo") int albumNo,
 			Model model,
-			int folderNo,
+			@RequestParam(value="folderNo", required=false) int folderNo,
 			@SessionAttribute
 			("folderList") List<Folder> folderList) {
 		

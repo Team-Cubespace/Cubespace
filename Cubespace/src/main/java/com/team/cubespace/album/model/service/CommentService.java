@@ -18,7 +18,7 @@ public interface CommentService {
 	 * @param comment
 	 * @return result
 	 */
-	int insertComment(Comment comment);
+	int insertComment(Comment comment, int hostMemberNo);
 
 	/** 댓글 삭제
 	 * @param commentNo

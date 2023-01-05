@@ -45,20 +45,8 @@ public class CommentController {
 	public int insertComment(Comment comment, @SessionAttribute("minihome") Minihome minihome) {
 		
 		// 댓글 등록
-		int result = service.insertComment(comment);
+		int result = service.insertComment(comment, minihome.getMemberNo());
 		
-		// 댓글 등록 성공 시 그리고 댓글 작성자가 미니홈피 주인이 아닐 때
-		if(result > 0 && minihome.getMemberNo() != comment.getMemberNo()) {
-			Notifications alarm = new Notifications();
-			alarm.setSenderNo(comment.getMemberNo());
-			alarm.setReceiverNo(minihome.getMemberNo());
-			alarm.setBoardTypeNo(comment.getBoardTypeNo());
-			alarm.setBoardNo(comment.getBoardNo());
-			alarm.setAlarmType(1);
-			
-			result = service.sendAlarm(alarm);
-			System.out.println("알람 보내기 성공");
-		}
 		return result;
 	}
 	

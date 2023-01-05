@@ -69,7 +69,7 @@ public interface AlbumService {
 	 * @param paramMap
 	 * @return result
 	 */
-	public int albumScrap(Album album, Comment comment);
+	public int albumScrap(Album album, Comment comment, int hostMemberNo);
 
 	/** 사진첩 이미지변경명 목록 조회
 	 * @return imageList

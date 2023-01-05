@@ -26,12 +26,27 @@ public class CommentServiceImpl implements CommentService{
 
 	// 댓글 등록
 	@Override
-	public int insertComment(Comment comment) {
+	public int insertComment(Comment comment, int hostMemberNo) {
 		
 		comment.setCommentContent(Util.XSSHandling(comment.getCommentContent()));
 		comment.setCommentContent(Util.newLineHandling(comment.getCommentContent()));
+		int result = dao.insertComment(comment);
 		
-		return dao.insertComment(comment);
+		// 댓글 등록 성공 그리고 댓글 작성자와 미니홈의 주인이 같지 않을 때
+		if(result > 0 && hostMemberNo != comment.getMemberNo()) {
+			Notifications alarm = new Notifications();
+			alarm.setSenderNo(comment.getMemberNo());
+			alarm.setReceiverNo(hostMemberNo);
+			alarm.setBoardTypeNo(comment.getBoardTypeNo());
+			alarm.setBoardNo(comment.getBoardNo());
+			alarm.setAlarmType(1);
+			
+			result = this.sendAlarm(alarm);
+			System.out.println("알람 보내기 성공");
+		}
+		
+		
+		return result;
 	}
 
 	// 댓글 삭제

@@ -26,8 +26,8 @@
             <div id="homeArea">
                 <header>최근 게시물</header>
 
-                <!-- 최근 게시물 (요청주소 수정 필요) -->
-                <div class="new-post-container">
+                <!-- 최근 게시물 -->
+                <div class="new-post-container">W
                     <c:choose>
                         <c:when test="${fn:length(newPost) == 0}">
                             <div class="nothing">최근 게시물이 없습니다&nbsp;<i class="fa-solid fa-face-sad-tear"></i></div>

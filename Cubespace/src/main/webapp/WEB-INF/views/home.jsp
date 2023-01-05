@@ -58,7 +58,6 @@
                     </div> --%>
                 </div>
             </div>
-
             <!-- 로그인, 프로필, 미니홈피 -->
             <div class="profile-container">
                 <c:choose>

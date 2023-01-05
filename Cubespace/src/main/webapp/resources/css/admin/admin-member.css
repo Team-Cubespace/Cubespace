@@ -1,7 +1,7 @@
 /*팝업 박스*/
 .popup_box {
-    position: relative;
-    top: 0px;
+    position: absolute;
+    top: 1000px;
     left: 50%;
 
     overflow: scroll;
@@ -27,7 +27,6 @@
 /* 스크롤바 막대 설정*/
 .scroll::-webkit-scrollbar-thumb{
     height: 17%;
-    background-color: var(--yellow);
     /* border-radius: 10px;   */
 }
 
@@ -305,14 +304,13 @@
     border-radius: 50px;
     border: none;
     padding: 0 40px;
-    background-color: var(--lightYellow);
     font-size: 18px;
     outline: none;
     box-shadow: 3px 3px 3px 3px rgba(221, 221, 221, 0.934); /* 박스그림자 */
 }
 
 .inputBox:focus{
-    border: 2px solid #e53095;
+    border: 2px solid var(--lightMain);
 }
 
 /* 인증번호받기, 인증하기, 중복확인 */
@@ -320,7 +318,6 @@
     position: absolute;
     cursor: pointer;
     color: #e53095;
-    background-color: var(--lightYellow);
     font-size: 18px;
     width: 120px;
     right: 15px; 

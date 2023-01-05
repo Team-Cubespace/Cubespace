@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,10 +28,29 @@
             background-color : white;
             color: black;
         }
+    </style>
+
+    <c:if test="${fn:length(minihome.backgroundSkin) > 10}">
+    <style>
+        .minihome {
+            background-image : url(${minihome.backgroundSkin});
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        body{
+            width: 1200px;
+            height: 725px;
+        }
+    </style>
+    </c:if>
+    <c:if test="${fn:length(minihome.backgroundSkin) <= 9}">
+    <style>
         .minihome {
             background-color : ${minihome.backgroundSkin};
         }
     </style>
+    </c:if>
 
     <script>
         originalFrameColor = "${minihome.frameColor}";
@@ -111,7 +131,7 @@
             <section class="minihome-main">
 
                 <%-- <iframe src="/albumList/2" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
-                <iframe src="/albumList/2" frameborder="0" name="minihomeMenu" scrolling="no">
+                <iframe src="/manage/background" frameborder="0" name="minihomeMenu" scrolling="no">
 
                 </iframe>
                 <ul class="minihome-menu frame-menu-color">

@@ -4,9 +4,10 @@ html {
 }
 .minihome {
     width: 1200px;
-    height: 715px;
+    height: 725px;
     background-color: #ddd;
     padding-left: 15px;
+    margin-top: 3px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

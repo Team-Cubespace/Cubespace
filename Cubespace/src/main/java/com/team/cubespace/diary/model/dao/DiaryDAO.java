@@ -34,6 +34,15 @@ public class DiaryDAO {
 	 * @param map
 	 * @return
 	 */
+	public List<Integer> selectDateList(Map<String, Object> map) {
+		
+		return sqlSession.selectList("diaryMapper.selectDateList",map);
+	}
+	
+	/**
+	 * @param map
+	 * @return
+	 */
 	public List<Diary> selectDiaryList(Map<String, Object> map) {
 		
 		return sqlSession.selectList("diaryMapper.selectDiaryList",map);
@@ -125,6 +134,15 @@ public class DiaryDAO {
 		
 		return result;
 	}
+	
+	/** 다이어리 삭제
+	 * @param diaryNo
+	 * @return
+	 */
+	public int diaryDelete(int diaryNo) {
+		
+		return sqlSession.update("diaryMapper.diaryDelete",diaryNo);
+	}
 
 	/** 월간달력_조회
 	 * @param memberNo
@@ -179,14 +197,9 @@ public class DiaryDAO {
 		return sqlSession.update("diaryMapper.updateScheduleDrop",plan);
 	}
 
-	/**
-	 * @param yearMonth
-	 * @return
-	 */
-	public List<Integer> selectDateList(String yearMonth) {
-		
-		return sqlSession.selectList("diaryMapper.selectDateList",yearMonth);
-	}
+	
+
+	
 
 
 	

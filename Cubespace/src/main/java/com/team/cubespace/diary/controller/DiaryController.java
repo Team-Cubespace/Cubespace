@@ -92,10 +92,14 @@ public class DiaryController {
 	@GetMapping("/selectDate")
 	@ResponseBody
 	public String selectDateList(
+			@SessionAttribute("minihome") Minihome minihome,
 			String yearMonth
 			) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("yearMonth", yearMonth);
+		map.put("memberNo", minihome.getMemberNo());
 		System.out.println(yearMonth);
-		List<Integer> dateList = service.selectDateList(yearMonth);
+		List<Integer> dateList = service.selectDateList(map);
 		System.out.println("ㅠㅠ"+dateList);
 		return new Gson().toJson(dateList);
 	}
@@ -242,6 +246,15 @@ public class DiaryController {
 		return "minihome/minihome-diary/minihome-diary";
    }
    
+   	@GetMapping("/diaryCancle/{date}")
+   	public String diaryCancle(@PathVariable("date") String date
+   			, Model model) {
+   		System.out.println(date);
+   		model.addAttribute("datedatedate",date);
+   		model.addAttribute("flagNo", 1);
+   		return "minihome/minihome-diary/minihome-diary";
+   	}
+   
     /*[수정 페이지]*/
 
    	//다이어리 수정 페이지 이동
@@ -303,6 +316,19 @@ public class DiaryController {
 		return "minihome/minihome-diary/minihome-diary";
  	 
     }
+   	
+   	/** 다이어리 삭제
+   	 * @param diaryNo
+   	 * @return
+   	 */
+   	@PostMapping("/diaryDelete")
+   	@ResponseBody
+   	public int diaryDelete(int diaryNo) {
+   		
+   		int result = service.diaryDelete(diaryNo);
+   		System.out.println("디비에 삭제까지는 된 듯? " + result);
+   		return result;
+   	}
    	
    	
 

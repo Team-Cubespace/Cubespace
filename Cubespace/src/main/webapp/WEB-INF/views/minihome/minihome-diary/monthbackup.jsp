@@ -43,12 +43,8 @@
         }
 
         /* 모달창 css */
-        .home-area {
-            /* position : relative; */
-        }
         .popup_layer {
-        /* position: absolute; */
-        position :fixed;
+        position: fixed;
         top: 0;
         left: 0;
         z-index: 10000;
@@ -62,31 +58,26 @@
         top: 50%;
         left: 50%;
         /* overflow-y: scroll; */
-        height: 440px;
+        height: 400px;
         width: 500px;
         transform: translate(-50%, -50%);
         z-index: 1002;
         box-sizing: border-box;
-        background: white;
-        padding : 10px;
-
-
+        /* background: rgb(103, 21, 21); */
         box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
         -webkit-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
         -moz-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
         }
-        /* .popup_cont {
+        .popup_cont {
         padding : 10px;
         background-color: white;
         border-radius: 20px;
-        } */
-        .modal-title {
+        }
+        /* .modal-title {
             font-size : 20px;
             font-weight : bold;
             padding-bottom : 10px;
-        }
-
-
+        } */
         .input-row{
             border-bottom: 1px solid #ddd;
             padding: 6px 0px;
@@ -98,9 +89,6 @@
             width: 100px;
             font-weight: bold;
             /* display: inline-block */
-        }
-        .margin {
-            width : 20px;
         }
         .input-row input[type = 'time'] {
             width : 100px;
@@ -117,7 +105,7 @@
         .modal-footer {
             display: flex;
             justify-content: end;
-            padding: 10px;
+            padding: 20px;
         }
 
     </style>
@@ -146,7 +134,7 @@
                 <div class="popup_layer" id="popup_layer" style ="display:none;">
                     <!-- style="display: none;" -->
                     <div class="popup_box">
-                        <%-- <div class="popup_cont" id = "popup_con"> --%>
+                        <div class="popup_cont" id = "popup_con">
                         <!-- <a href="javascript:closePop4();" class="xbtn">
                             <i class="fa-solid fa-x xbtnBack" id = "fa-x"></i>
                         </a> -->
@@ -173,18 +161,18 @@
                                     <textarea name="" id="description" 
                                     cols="50" rows="10" placeholder = "일정에 필요한 설명을 입력해주세요."></textarea>  
                                 </div>
-                                <div class = "input-row ">
+                                <div class = "input-row">
                                     <label for="startDate">시작 날짜</label>
                                     <input type="date" id = "startDate">
-                                    <div class = "margin"></div>
+                                
                                     <label for="startTime">시작 시간</label>
                                     <input type="time" id = "startTime" value = "00:00">
                                 </div>
-                                <div class = "input-row ">
+                                <div class = "input-row">
                                     <label for="endDate">종료 날짜</label>
                                     <input type="date" id = "endDate">
-                                    <div class = "margin"></div>
-                                    <label for="endTime ">종료 시간</label>
+                                
+                                    <label for="endTime">종료 시간</label>
                                     <input type="time" id = "endTime" value = "00:00">
                                 </div>
                                 <div class = "input-row">
@@ -206,7 +194,7 @@
                                     <button id = "cancleBtn">취소</button>
                                 </div>
                             </div>
-                        <%-- </div> --%>
+                        </div>
                     </div>
                 </div>
             </div>

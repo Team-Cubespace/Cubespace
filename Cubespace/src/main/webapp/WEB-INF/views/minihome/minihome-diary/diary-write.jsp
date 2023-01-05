@@ -69,7 +69,7 @@
                         </div>
                         <div class="input-row">
                             <label for="diaryTitle">제목</label>
-                            <input id="diaryTitle" name="diaryTitle" type="text" placeholder="제목을 입력하세요">
+                            <input id="diaryTitle" name="diaryTitle" type="text" placeholder="제목을 입력하세요" maxlength = "30">
                         </div>
                         <div class="input-row">
                             <%-- <label for="diaryContent">내용</label> --%>
@@ -89,28 +89,28 @@
                                     <%-- <label class="radio" for="scope1">
                                         <i class="fa-solid fa-check"></i>
                                     </label> --%>
-                                    <label for="scope1">공개</label>
+                                    <label for="scope1" class = "show">공개</label>
                                 </li>
                                 <li>
                                     <input type="radio" id="scope2" name="diaryOpenFlag" value="2">
                                     <%-- <label class="radio" for="scope2">
                                         <i class="fa-solid fa-check"></i>
                                     </label> --%>
-                                    <label for="scope2">깐부공개</label>
+                                    <label for="scope2" class = "show">깐부공개</label>
                                 </li>
                                 <li>
                                     <input type="radio" id="scope3" name="diaryOpenFlag" value="3">
                                     <%-- <label class="radio" for="scope3">
                                         <i class="fa-solid fa-check"></i>
                                     </label> --%>
-                                    <label for="scope3">비공개</label>             
+                                    <label for="scope3" class = "show">비공개</label>             
                                 </li>
                             </ul>
                         </div>
                         <div class="form-button-area">
                             <button type = "submit" id="submitButton">작성</button>
                             <%-- <button id="submitButton" type="submit">작성</button> --%>
-                            <a id="cancelWrite">취소</a>
+                            <a id="cancelWrite" href = "/diaryCancle/${date}">취소</a>
                         </div>
                     </form>
 

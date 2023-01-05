@@ -13,6 +13,7 @@
   		<result property="diaryOpenFlag" column="D_OPEN_FL"/>
   		<result property="folderNo" column="FOLDER_NO"/>
   		<result property="yearMonth" column="YEAR_MONTH"/>
+  		<result property="diaryDeleteFlag" column="D_DEL_YN"/>
   	</resultMap>
   	
   	<resultMap type="Emoji" id="emoji_rm">
@@ -55,7 +56,10 @@
   	<select id="selectDateList" resultType="_int">
   	SELECT DISTINCT TO_NUMBER(TO_CHAR(D_CREATE, 'DD')) YEAR_MONTH 
 	FROM DIARY 
-	WHERE TO_CHAR(D_CREATE, 'YYYY-MM') = '${yearMonth}' ORDER BY 1
+	WHERE TO_CHAR(D_CREATE, 'YYYY-MM') = '${yearMonth}' 
+	AND MEMBER_NO = #{memberNo} 
+	AND D_DEL_YN = 'N'
+	ORDER BY 1
   	</select>
  	  
  	<select id="selectDiaryList" resultMap="diary_rm">
@@ -153,6 +157,13 @@
 	WHERE
 	DIARY_NO = #{diaryNo}
 	</update>
+	
+	<update id="diaryDelete">
+	UPDATE DIARY
+	SET D_DEL_YN = 'Y'
+	WHERE DIARY_NO = #{diaryNo}
+	</update>
+	
 	
 	<!-- 월간 달력_조회 -->
 	<select id="selectscheduleList" resultMap = "plan_rm">

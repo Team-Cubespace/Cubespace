@@ -69,7 +69,7 @@
                         </div>
                         <div class="input-row">
                             <label for="diaryTitle">제목</label>
-                            <input id="diaryTitle" name="diaryTitle" type="text" placeholder="제목을 입력하세요" value = "${diary.diaryTitle}">
+                            <input id="diaryTitle" name="diaryTitle" type="text" placeholder="제목을 입력하세요" value = "${diary.diaryTitle}" maxlength = "30">
                         </div>
                         <div class="input-row">
                             <%-- <label for="diaryContent">내용</label> --%>

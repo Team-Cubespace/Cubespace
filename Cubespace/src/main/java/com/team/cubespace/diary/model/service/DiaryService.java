@@ -21,10 +21,10 @@ public interface DiaryService {
 	int checkFriend(int homepageMemberNo, int loginMemberNo);
 
 	/**
-	 * @param yearMonth
+	 * @param map
 	 * @return
 	 */
-	List<Integer> selectDateList(String yearMonth);
+	List<Integer> selectDateList(Map<String, Object> map);
 
 	/**
 	 * @param homepageMemberNo
@@ -77,6 +77,12 @@ public interface DiaryService {
 	 * @return
 	 */
 	int diaryUpdate(Diary diary);
+	
+	/** 다이어리 삭제
+	 * @param diaryNo
+	 * @return
+	 */
+	int diaryDelete(int diaryNo);
 
 	/** 월간달력_조회
 	 * @param memberNo
@@ -107,6 +113,8 @@ public interface DiaryService {
 	 * @return
 	 */
 	int updateScheduleDrop(Plan plan);
+
+	
 
 
 	

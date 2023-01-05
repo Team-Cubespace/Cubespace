@@ -72,6 +72,8 @@ function writeValidate() {
         return false;
     }
 
+    
+
     if(diaryContent.value.trim().length == 0){
         
         alert("내용을 입력해주세요.");

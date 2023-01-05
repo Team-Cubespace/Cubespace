@@ -121,7 +121,9 @@ const makeCalendar = (date) => {
         dataType : "JSON",
         success :  (dateList)  => {
             for(let date of dateList) {
-                document.getElementById(date).style.backgroundColor = "#ddd";
+                document.getElementById(date).style.backgroundColor = "#EBEBEB";
+                // document.getElementById(date).style.backgroundColor = "#ddd";
+                // document.getElementById(date).style.fontWeight = "bolder";
             }
         },
         error : () => { 
@@ -270,8 +272,9 @@ function selectDiary(diaryDate){
                     // console.log("야 제발 돼" +current);
                     
                 
-                    
-                    div2.innerHTML =diary.diaryContent;
+                    let replaceDiaryContent =  diary.diaryContent;
+
+                    div2.innerHTML =replaceDiaryContent;
                     
                     const div3 = document.createElement("div");
                     div3.classList.add("under-section");
@@ -325,19 +328,21 @@ function selectDiary(diaryDate){
                         const div3_2 = document.createElement("div");
                         div3_2.classList.add("under2");
 
-                            const div3_2_1 = document.createElement("div");
-                            // div3_2_1.setAttribute("onclick","updateDiary("+diary.diaryNo+")")
-                            // div3_2_1.innerText = "ㄴㄷㄹ";
-                                const div3_2_1_a = document.createElement("a");
-                                div3_2_1_a.setAttribute("href","/diaryUpdate/"+diary.diaryNo+"");
-                                div3_2_1_a.innerText = "수정";
-                            div3_2_1.append(div3_2_1_a);
-                            
-                            const div3_2_2 = document.createElement("div");
-                            div3_2_2.setAttribute("onclick","deleteDiary("+diary.diaryNo+")")
-                            div3_2_2.innerText = "삭제";
+                            if(minihomeNo == loginMemberNo){
+                                const div3_2_1 = document.createElement("div");
+                                
+                                    const div3_2_1_a = document.createElement("a");
+                                    div3_2_1_a.setAttribute("href","/diaryUpdate/"+diary.diaryNo+"");
+                                    div3_2_1_a.innerText = "수정";
+                                div3_2_1.append(div3_2_1_a);
+                                
+                                const div3_2_2 = document.createElement("div");
+                                div3_2_2.setAttribute("onclick","deleteDiary("+diary.diaryNo+")")
+                                div3_2_2.innerText = "삭제";
 
-                        div3_2.append(div3_2_1,div3_2_2);
+                                div3_2.append(div3_2_1,div3_2_2);
+                            }
+
 
                     div3.append(div3_1,div3_2);
                 
@@ -368,10 +373,6 @@ document.getElementById("nextMonth").addEventListener("click", ()=>{
     let date = new Date(document.querySelector(".year-month").innerText);
     makeCalendar(new Date(date.setMonth(date.getMonth() + 1)));
 });
-
-
-
-
 
 
 (()=>{
@@ -438,7 +439,7 @@ document.getElementById("nextMonth").addEventListener("click", ()=>{
 
 function writeBtn(){    
     
-    /* 이 변수 쓰려면 함수가 밑에 있어야 될 걸..? */
+    /* [dateContainer 변수] 쓰려면 함수가 밑에 있어야 될 걸..? */
     console.log("글쓸 때 보내는 날짜" + dateContainer);
 
     location.href = "/diaryWrite?date=" + dateContainer;
@@ -446,9 +447,42 @@ function writeBtn(){
     // return false;
 }
 
-/* [3] 고르는 이모지 목록 조회 */
+function deleteDiary(diaryNo){
+    if(confirm("다이어리를 삭제하시겠습니까?")){
+
+        $.ajax({
+            url : "/diaryDelete",
+            type : "POST",
+            data : {"diaryNo":diaryNo},
+            success : result => {
+                if(result > 0){
+                    alert("다이어리가 삭제되었습니다.");
+                    console.log("다이어리 삭제 실패...성공");
+
+                    /* [dateContainer 변수] 쓰려면 함수가 밑에 있어야 될 걸..? */
+                    selectDiary(dateContainer);
+                } else {
+                    console.log("다이어리 삭제 실패...");
+                }
+            }, error : () => {
+
+            }
+        })
+    }
+
+}
+
+/* [3] [이모지 고르는 리스트] 조회 */
 function chooseEmoji(diaryNo,btn){
-    /* 이모지 리스트가 만들어짐. */
+
+    /* [이모지 고르는 리스트] 하나만 나오게 조회하기 */
+    if(document.querySelector(".choose-emoji")!= null) {
+
+        document.querySelector(".choose-emoji").remove();
+
+    }
+
+    /* [이모지 고르는 리스트]가 만들어짐. */
     console.log(btn.parentElement);
     console.log("이게 choose-emoji-section이 맞냐?")
     const div3_1_2_2 = document.createElement("div");
@@ -530,7 +564,7 @@ function chooseEmoji(diaryNo,btn){
         //     selectEmojiList(35, section, popup);
         // })
 
-      
+    
         
 }
 
@@ -561,7 +595,8 @@ function likeUp(number,diaryNo,btn){
                             selectEmojiList(diaryNo,section,popup);
                         // })
                     }
-
+                    /* 이모지 누르면 [이모지 고르는 리스트] 없어짐 */
+                    document.querySelector(".choose-emoji").remove();
             } else{
                 console.log("저장 실패");
             }
@@ -682,7 +717,12 @@ function selectEmojiPeopleList(emojiNo,diaryNo,btn){
                     const div3_1_1_2_1_2_1 = document.createElement("div");
                         const img = document.createElement("img");
                         img.classList.add("profile-image");
-                        img.setAttribute("src",emojiPeople.profileImage)
+                        
+                        if(emojiPeople.profileImage == null){
+                            img.setAttribute("src","/resources/images/common/cubes-logo.png")
+                        } else{
+                            img.setAttribute("src",emojiPeople.profileImage)
+                        }
                     div3_1_1_2_1_2_1.append(img);
                         
                     const div3_1_1_2_1_2_2 = document.createElement("div");
@@ -705,4 +745,21 @@ function selectEmojiPeopleList(emojiNo,diaryNo,btn){
 function mouseout(btn){
     btn.parentElement.parentElement.nextSibling.innerText = "";
 }
+
+// 화면 어디를 클릭하든
+document.addEventListener("click",function(e){
+
+    const temp = document.querySelectorAll(".emoji-btn, .choose-emoji, .choose-emoji  *");
+
+        for(let t of temp){
+            if(t == e.target){
+                return;
+            }
+        }
+
+    
+    document.querySelector(".choose-emoji").remove();
+
+
+})
 

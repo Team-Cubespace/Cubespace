@@ -1,7 +1,11 @@
 .minihome-rayout:nth-child(2){
     position: relative;
 }
+.input-row label {
+    width:90px;
+    margin-left: 10px;
 
+}
 .input-row label:first-child{
     width: 100px;
     font-weight: bold;
@@ -20,6 +24,7 @@
 .input-row input[type='text'] {
     border: none;
     outline: none;
+    width: 500px;
     /* font-size: 15px; */
 }
 .input-row textarea {
@@ -67,4 +72,11 @@
     margin-right: 5px;
     background-color: var(--ink);
     color: white;
+}
+
+.show{
+    width: 60px !important;
+    padding-left: 5px;
+
+
 }

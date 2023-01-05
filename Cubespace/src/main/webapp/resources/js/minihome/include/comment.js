@@ -32,9 +32,32 @@ const createCommentList = (commentList) => {
         // 댓글 회원 닉네임 영역
         const commentNicknameArea = document.createElement("div");
         commentNicknameArea.classList.add("comment-nickname-area")
-        const memberNickname = document.createElement("span");
+        const memberNickname = document.createElement("button");
         memberNickname.classList.add("member-nickname");
         memberNickname.innerText = comment.memberNickname;
+        // 댓글작성자가 로그인한 회원이 아닐경우
+        if(loginMemberNo != comment.memberNo) { // 드롭다운 생성
+            memberNickname.classList.add("nickname-drop-down-button");
+            const nickNameDropDownBox = document.createElement("ul");
+            nickNameDropDownBox.classList.add("nickname-drop-down-box");
+
+            const menu1 = document.createElement("li");
+            const openMinihome = document.createElement("a");
+            openMinihome.href = `/minihome/${comment.memberNo}`;
+            openMinihome.setAttribute("onclick", "return openMinihome(this.href)");
+            openMinihome.innerText = "미니홈피";
+
+            const menu2 = document.createElement("li");
+            const report = document.createElement("a");
+            // 모달창 여는 함수
+            report.innerText = "신고";
+
+            menu1.append(openMinihome);
+            menu2.append(report);
+
+            nickNameDropDownBox.append(menu1, menu2);
+            memberNickname.append(nickNameDropDownBox);
+        }
 
         commentNicknameArea.append(memberNickname);
         if(loginMemberNo == comment.memberNo) { // 자신이 작성한 댓글일 때만 생성
@@ -109,6 +132,7 @@ const createCommentList = (commentList) => {
             commentListArea.append(childCommentCount);
         }
     }
+    initNicknameDropDown();
 }
 
 // 댓글 목록 조회

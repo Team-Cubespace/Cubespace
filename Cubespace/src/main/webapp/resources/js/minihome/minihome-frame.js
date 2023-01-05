@@ -1,10 +1,24 @@
 // 뒤로가기
+(()=>{
+    const checkHistory = localStorage.getItem("minihomeHistory");
+    if(checkHistory == null) {
+        console.log("null임");
+    }
+    if(checkHistory != null) {
+        if(JSON.parse(checkHistory).length != 0) {
+            document.getElementById("goBackButton").style.display = "block";
+        }
+    }
+})();
+
 const goBack = ()=>{
     let historyArr = localStorage.getItem("minihomeHistory");
 
     if(historyArr != null) {
+        if(JSON.parse(historyArr).length != 0)
         historyArr = JSON.parse(historyArr);
         const minihomeNo = historyArr.pop();
+        localStorage.setItem("minihomeHistory", JSON.stringify(historyArr));
         const url = `/minihome/${minihomeNo}`;
         const specs = "resizable=no, status=no, menubar=no, width=1203, height=718, top=50, left=300";
 
@@ -159,15 +173,16 @@ const toggleMusicPlay = playButton => {
         // 음악 재생
         // minihomeMusic.play();
         if(minihomeMusic.pause()) {
+            console.log("재생");
             minihomeMusic.play();
         }
         // 1초마다 현재 재생 시간을 출력   
-        interval = setInterval(printCurrentTime, 1000);
+        // interval = setInterval(printCurrentTime, 1000);
         // 일시정지 아이콘으로 바꾸기
-        playButton.classList.remove("fa-circle-play");
-        playButton.classList.add("fa-circle-pause");
+        // playButton.classList.remove("fa-circle-play");
+        // playButton.classList.add("fa-circle-pause");
 
-        document.getElementById("minihomeMusicName").classList.add("music-play-marquee");
+        // document.getElementById("minihomeMusicName").classList.add("music-play-marquee");
     } else {                                                 // 일시정지 버튼이면
         // 노래 정지
         // minihomeMusic.pause();
@@ -179,7 +194,7 @@ const toggleMusicPlay = playButton => {
         playButton.classList.remove("fa-circle-pause");
 
         // 재생시간 출력 멈춤
-        clearInterval(interval);
+        // clearInterval(interval);
         // 노래 제목 멈춤
         document.getElementById("minihomeMusicName").classList.remove("music-play-marquee");
     }
@@ -202,13 +217,29 @@ const handleVolume = musicVolume=>{
 }
 
 const createMusic = (musicPath, autoplay) => {
+    console.log("음악생성");
     currentTime = 0;    // 시간 초기화
     // 뮤직플레이어 소스 변경
     minihomeMusic = new Howl({
         src: [musicPath],
         autoplay: autoplay,
         loop: true,
+        onplay: () => {
+            interval = setInterval(printCurrentTime, 1000);
+            playButton.classList.remove("fa-circle-play");
+            playButton.classList.add("fa-circle-pause");
+
+            document.getElementById("minihomeMusicName").classList.add("music-play-marquee");
+        },
+        onpause: ()=>{
+            clearInterval(interval);
+            playButton.classList.add("fa-circle-play");
+            playButton.classList.remove("fa-circle-pause");
+
+            document.getElementById("minihomeMusicName").classList.remove("music-play-marquee");
+        },
         onend: () =>{
+            console.log("노래끝남");
             currentTime = 0;
         }
     });
@@ -216,9 +247,11 @@ const createMusic = (musicPath, autoplay) => {
 
 const removeMusic = () => {
     // 화면에 오디오플레이어 삭제
-    toggleMusicPlay(document.getElementById("playButton"));
+    if(minihomeMusic.playing()){    // 재생중이었다면
+        minihomeMusic.stop();
+    }
     document.getElementsByClassName("audio-container")[0].remove();
-
+    clearInterval(interval);
     minihomeMusic = null;
 }
 
@@ -323,7 +356,7 @@ const initMinihomeMusic = music => {
         // // 자동 반복 세팅
         // minihomeMusic.loop = true;
         createMusic(minihomeMusicPath, true);
-        interval = setInterval(printCurrentTime, 1000);
+        // interval = setInterval(printCurrentTime, 1000);
         // 재생 버튼
         const playButton = document.getElementById("playButton");
         playButton.addEventListener("click", () => {

@@ -66,10 +66,10 @@
 </head>
 <body>
     <div class="minihome">
-        <button type="button" id="goBackButton" class="go-back-button frame-color" onclick="goBack()">
+        <%-- <button type="button" id="goBackButton" class="go-back-button frame-color" onclick="goBack()">
             <i class="fa-solid fa-house"></i>
             이전 미니홈피
-        </button>
+        </button> --%>
         <%-- <div class="audio-container">
             <button class="fa-solid fa-play" id="audioButton"></button>
             <span class="audio-title" id="audioTitle">노래 이름</span>
@@ -105,7 +105,7 @@
                         <div class="audio-container">
                             <div class="music-name-box">
                                 <div class="marquee">
-                                    <p id="minihomeMusicName" class="music-name music-play-marquee">${minihome.musicName}</p>
+                                    <p id="minihomeMusicName" class="music-name">${minihome.musicName}</p>
                                 </div>
                             </div>
                             <div class="music-controller">
@@ -150,8 +150,10 @@
                     </c:if>
 
                     <c:if test="${minihome.memberNo == loginMember.memberNo}">
-                        <li><a href="/manage/font" target="minihomeMenu">관리</a></li>
+                        <li class="manage-menu" ><a href="/manage/font" target="minihomeMenu">관리</a></li>
                     </c:if>
+
+                        <li id="goBackButton"><a onclick="goBack()">이전<br>미니홈피</a></li>
                 </ul>
             </section>
         </div>

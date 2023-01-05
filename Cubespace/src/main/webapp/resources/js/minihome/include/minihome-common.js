@@ -1,8 +1,8 @@
 // 미니홈 히스토리 저장
+console.log("안녕");
 const openMinihome = (url) => {
     // 현재 보고있는 미니홈 번호 가져오기
     const minihomeNo = window.parent.location.href.substring(window.parent.location.href.lastIndexOf('/') + 1);
-    
     // localStorage에서 json 가져오기
     let historyArr = localStorage.getItem("minihomeHistory");
     // 히스토리가 없을 때
@@ -19,7 +19,6 @@ const openMinihome = (url) => {
     // 배열 다시 json으로 파싱해서 localStorage안에 넣기
     localStorage.setItem("minihomeHistory",JSON.stringify(historyArr));
 
-    console.log(url);
     let title = "minihome";
     // let name = "_blank";
     let replace = "false";
@@ -27,5 +26,32 @@ const openMinihome = (url) => {
     let specs = "resizable=no, status=no, menubar=no, width=1203, height=718, top=50, left=300";
     window.open(url,title,specs,false);
 
+    return false;
+}
+
+
+// 닉네임 드롭다운 초기화
+const initNicknameDropDown= ()=>{
+    const nickNameList = document.getElementsByClassName("nickname-drop-down-button");
+    for(let nickName of nickNameList) {
+        nickName.addEventListener("click", (e)=>{
+            // e.stopPropagation();    
+            nickName.firstElementChild.classList.toggle("show");
+            nickName.firstElementChild.style.left = e.offsetX + "px";
+            nickName.firstElementChild.style.top = e.offsetY + "px";
+        });
+        nickName.addEventListener("blur", ()=>{
+            console.log("blur실행");
+            setTimeout(()=> {
+                nickName.firstElementChild.classList.remove("show");
+            }, 100);
+        })
+    }
+}
+
+initNicknameDropDown();
+
+const test = ()=>{
+    console.log("신고합니다.");
     return false;
 }

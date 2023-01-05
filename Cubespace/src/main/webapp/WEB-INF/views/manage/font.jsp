@@ -13,30 +13,15 @@
     <link rel="stylesheet" href="/resources/css/common/checkBox.css">
     <link rel="stylesheet" href="/resources/css/minihome/minihome-rayout.css">
     <link rel="stylesheet" href="/resources/css/manage/manage.css">
+    <link rel="stylesheet" href="/resources/css/manage/font.css">
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
     <title></title>
-
-
 
     <style>
     .frame-color {
         background-color : ${minihome.frameColor};
     }
-    header{
-        flex-direction: column;
-        height: 100px;
-    }
-    header>*:nth-child(1){
-        justify-content: flex-end;
-    }
-    header>*:nth-child(2){
-        justify-content: space-between;
-    }
-
     </style>
-
-    
-
 </head>
 <body>
     <div class="content-area frame-color">
@@ -54,7 +39,7 @@
                         <span class="rightTitle">폰트 관리</span>
                         <form class="searchArea" id="searchArea">
                             <i id="allFont" class="whiteBtn">모든 폰트</i>
-                            <input type="text" id="searchInput" class="headerSearch" name="searchInput" placeholder="폰트 이름 검색" value="${param.searchInput}">
+                            <input type="text" id="searchInput" class="headerSearch" name="searchInput" placeholder="폰트 이름 검색" maxlength="10" value="${param.searchInput}">
                             <i class="fa-solid fa-magnifying-glass" id="searchBtn"></i>
                         </form>
                     </div>
@@ -76,11 +61,21 @@
 
                     <c:if test="${not empty fontList}">
                     <c:forEach var="font" items="${fontList}">
-                    <div class="fontMain">
+                    <c:if test='${loginMember.ownFontNo == font.fontNo}'>
+                        <div class="fontMain originalFont">
+                    </c:if>
+                    <c:if test='${loginMember.ownFontNo != font.fontNo}'>
+                        <div class="fontMain">
+                    </c:if>
                         <div class="fontTitle" style="font-family:'${font.fontNo}'">${font.fontName}</div>
                         <div class="fontExample" style="font-family:'${font.fontNo}'">우리들의 작은 공간 큐브스페이스에서 시작하세요</div>
                         <div class="fontUse">
+                        <c:if test='${loginMember.ownFontNo == font.fontNo}'>
+                            <input type="radio" name="useFontRadio" class="useFontRadio" value="${font.fontNo}" checked>
+                        </c:if>
+                        <c:if test='${loginMember.ownFontNo != font.fontNo}'>
                             <input type="radio" name="useFontRadio" class="useFontRadio" value="${font.fontNo}">
+                        </c:if>
                         </div>
                     </div>
                     </c:forEach>

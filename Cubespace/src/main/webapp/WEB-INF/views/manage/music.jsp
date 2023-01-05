@@ -21,7 +21,7 @@
             background-color : ${minihome.frameColor};
         }
     </style>
-    
+
 </head>
 <body>
     <div class="content-area frame-color">
@@ -36,12 +36,12 @@
                         <span class="rightTitle">배경음악 관리</span>
                         <form class="searchArea">
                             <i id="allMusic" class="whiteBtn">모든 배경음악</i>
-                            <input type="text" id="searchInput" name="searchInput" class="headerSearch" placeholder="배경음악 검색" value="${param.searchInput}">
+                            <input type="text" id="searchInput" name="searchInput" class="headerSearch" placeholder="배경음악 검색" maxlength="15" value="${param.searchInput}">
                             <button class="fa-solid fa-magnifying-glass" id="searchBtn"></button>
                         </form>
                     </div>
-                    <a href="" class="storeLinkArea"> <%-- 상점 이동 링크 --%>
-                        <i class="fa-solid fa-store"></i> 상점이동
+                    <a href="/cubespace/shop/2" target="_blank" id="shopLink" class="storeLinkArea"> 상점 이동
+                        <i class="fa-solid fa-store"></i>
                     </a>
                 </header>
                 <div class="musicArea">

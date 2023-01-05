@@ -44,7 +44,7 @@
                     <span class="rightTitle">깐부 관리</span>
                     <form class="searchArea" id="searchArea">
                         <i id="allFriend" class="whiteBtn">모든 깐부</i>
-                        <input type="text" id="searchInput" name="searchInput" class="headerSearch" placeholder="깐부 닉네임 검색" value="${param.searchInput}">
+                        <input type="text" id="searchInput" name="searchInput" class="headerSearch" placeholder="깐부 닉네임 검색" maxlength="5" value="${param.searchInput}">
                         <i class="fa-solid fa-magnifying-glass" id="searchBtn"></i>
                     </form>
                 </header>

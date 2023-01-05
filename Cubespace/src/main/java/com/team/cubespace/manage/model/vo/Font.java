@@ -16,5 +16,6 @@ public class Font {
 	
 	private int memberNo;
 	private String memberNickname;
+	private int fontUseCount; // 폰트 사용횟수
 
 }

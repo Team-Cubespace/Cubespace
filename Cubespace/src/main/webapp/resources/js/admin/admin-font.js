@@ -44,3 +44,13 @@ document.getElementById("fontAddBtn").addEventListener("click", openPop2);
 
 
 /* -------------------------------------------------------------- */
+// 폰트 삭제하기
+const deleteFontList = document.getElementsByClassName("deleteFont");
+for(let deleteFont of deleteFontList){
+    deleteFont.addEventListener("click", e => {
+        if(confirm("정말 폰트를 삭제하시겠습니까?")){
+            const fontNo = e.target.getAttribute("name");
+            location.href =  "/admin/font/deleteFont?fontNo=" + fontNo;
+        }
+    })
+}

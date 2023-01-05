@@ -16,3 +16,16 @@
 #fontAddBtn {
     height: 100%;
 }
+.search-content {
+    height: 60px !important;
+    border-right: 2px solid #eee;
+}
+.inputBox{
+    width: 400px !important;   
+}
+.textbox {
+    justify-content: space-between !important;
+}
+.pull-left{
+    margin: 0 0 15px 10px !important;
+}

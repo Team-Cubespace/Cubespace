@@ -81,5 +81,6 @@
     const memberNo = "${loginMember.memberNo}"
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script> <%-- jquery --%>
+<script src="/resources/js/minihome/include/minihome-common.js"></script>
 <script src="/resources/js/manage/friend.js"></script>
 </html>

@@ -16,5 +16,6 @@ public class Music {
 	private String musicCreater;
 	
 	private int memberNo;
+	private int musicUseCount; // 몇 명의 회원이 음악을 듣는지
 
 }

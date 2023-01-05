@@ -54,10 +54,10 @@
                                 <span class="whiteBtn" id="bgColorReturn">초기화하기</span>
                             </div>
                         </div>
-                        <div class="changeImgArea">
+                        <form class="changeImgArea" id="changeImageForm">
                             <div>
                                 <label for="imageInput" class="changeColorTitle whiteBtn">이미지 변경</label>
-                                <input type="file" id="imageInput" name="imageInput" accept="image/*" multiple/>
+                                <input type="file" id="imageInput" name="imageInput" accept="image/*"/>
                             </div>
                             <div class="backgroundBtnArea">
                                 <%-- <span class="whiteBtn" id="bgImagePreview">미리보기</span> --%>
@@ -65,7 +65,7 @@
                                 <span class="whiteBtn" id="bgImageReturn">초기화하기</span>
                             </div>
                             
-                        </div>
+                        </form>
                         <img src="" alt="" id="imageShow">
                     </div>
                     <div>

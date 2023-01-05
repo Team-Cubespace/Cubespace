@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,13 +25,32 @@
             color: ${minihome.frameFontColor};
         }
         .frame-menu-color a:hover {
-            background-color: ${minihome.frameFontColor};
-            color: ${minihome.frameMenuColor};
+            background-color : white;
+            color: black;
         }
+    </style>
+
+    <c:if test="${fn:length(minihome.backgroundSkin) > 10}">
+    <style>
+        .minihome {
+            background-image : url(${minihome.backgroundSkin});
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        body{
+            width: 1200px;
+            height: 725px;
+        }
+    </style>
+    </c:if>
+    <c:if test="${fn:length(minihome.backgroundSkin) <= 9}">
+    <style>
         .minihome {
             background-color : ${minihome.backgroundSkin};
         }
     </style>
+    </c:if>
 
     <script>
         originalFrameColor = "${minihome.frameColor}";
@@ -46,6 +66,10 @@
 </head>
 <body>
     <div class="minihome">
+        <button type="button" id="goBackButton" class="go-back-button frame-color" onclick="goBack()">
+            <i class="fa-solid fa-house"></i>
+            이전 미니홈피
+        </button>
         <%-- <div class="audio-container">
             <button class="fa-solid fa-play" id="audioButton"></button>
             <span class="audio-title" id="audioTitle">노래 이름</span>
@@ -66,7 +90,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="minihome-header-right">
+                <div class="minihome-header-right" id="minihomeHeaderRight">
                     <div class="minihome-title-area">
                         <%-- <input class="minihome-title" value="${minihome.homepageName}" id="minihomeTitle" readOnly maxLength="10"> --%>
                         <div id="minihomeTitleContainer">
@@ -107,7 +131,7 @@
             <section class="minihome-main">
 
                 <%-- <iframe src="/albumList/2" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
-                <iframe src="/albumList/2" frameborder="0" name="minihomeMenu" scrolling="no">
+                <iframe src="/manage/background" frameborder="0" name="minihomeMenu" scrolling="no">
 
                 </iframe>
                 <ul class="minihome-menu frame-menu-color">

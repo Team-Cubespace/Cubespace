@@ -1,0 +1,55 @@
+<!-- JSP 파일로 변환할 때 -->
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minihome Content Area</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/variables.css">
+    <link rel="stylesheet" href="../../css/minihome/minihome-rayout.css">
+    <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
+
+    <!-- 캘린더 ver5의 js/css -->
+    <!-- 화면 해상도에 따라 글자 크기 대응(모바일 대응) -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <!-- jquery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- fullcalendar CDN -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
+    <!-- fullcalendar 언어 CDN -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+</head>
+<body>
+    <div class="content-area">
+        <section class="minihome-rayout">
+                <!-- 좌측 section 코드 작성 또는 include -->
+                <!-- 전체 내용 div 태그로 한 번 감싸주세요 -->
+                <!-- ex) <div class="home-area"> <div></div> <span></span> ... </div> -->
+        </section>
+
+        <section class="minihome-rayout">
+                <!-- 우측 section 코드 작성 또는 include -->
+                <!-- 전체 내용 div 태그로 한 번 감싸주세요 -->
+                <!-- ex) <div class="home-area"> <div></div> <span></span> ... </div> -->
+                <div class = "home-area">
+                    <div id='calendar-container' class = "calendar-container">
+                        <div id='calendar' class = "calendar"></div>
+                    </div>
+                </div>
+        </section>
+    </div>
+</body>
+
+<!-- html에서 파일을 include 할 수 있도록 해주는 js (근데 VSCode Live Server에서만 보임) -->
+<!-- include 방법 : <section class="minihome-rayout"> 안에 <div data-include-path="파일 경로"></div> 작성 -->
+<script src="../../js/common/temp.js"></script>
+<script src="../../js/minihome/minihome-diary/full_calendar_db_ver5.js"></script>
+</html>

@@ -19,6 +19,9 @@
 		<typeAlias type="com.team.cubespace.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.team.cubespace.main.model.vo.MemberSearch" alias="MemberSearch"/>
 		<typeAlias type="com.team.cubespace.minihome.model.vo.Minihome" alias="Minihome"/>		
+		<typeAlias type="com.team.cubespace.diary.model.vo.Diary" alias="Diary"/>		
+		<typeAlias type="com.team.cubespace.diary.model.vo.Emoji" alias="Emoji"/>		
+		<typeAlias type="com.team.cubespace.diary.model.vo.Plan" alias="Plan"/>		
 		<typeAlias type="com.team.cubespace.folder.model.vo.Folder" alias="Folder"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.Font" alias="Font"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.CategoryOrder" alias="CategoryOrder"/>		
@@ -45,6 +48,7 @@
 		<mapper resource="/mappers/memberSearch-mapper.xml"/>
 		<mapper resource="/mappers/login-mapper.xml"/>
 		<mapper resource="/mappers/minihome-mapper.xml"/>
+		<mapper resource="/mappers/diary-mapper.xml"/>
 		<mapper resource="/mappers/manage-mapper.xml"/>
 		<mapper resource="/mappers/album-mapper.xml"/>
 		<mapper resource="/mappers/comment-mapper.xml"/>	

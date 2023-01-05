@@ -31,4 +31,10 @@ public interface NotificationsService {
 	 */
 	List<Notifications> activityNotification(int loginMemberNo);
 
+	/** 알람 개별삭제
+	 * @param alarmNo
+	 * @return
+	 */
+	int messageDelete(int alarmNo);
+
 }

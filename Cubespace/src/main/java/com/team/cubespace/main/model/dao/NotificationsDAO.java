@@ -22,4 +22,12 @@ public class NotificationsDAO {
 		return sqlSession.selectList("notifications.activityNotification",loginMemberNo);
 	}
 
+	/** 알람 개별삭제
+	 * @param alarmNo
+	 * @return
+	 */
+	public int messageDelete(int alarmNo) {
+		return sqlSession.delete("notifications.messageDelete",alarmNo);
+	}
+
 }

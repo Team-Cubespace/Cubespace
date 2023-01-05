@@ -46,4 +46,10 @@ public class NotificationsServiceImpl implements NotificationsService {
 	public List<Notifications> activityNotification(int loginMemberNo) {
 		return dao.activityNotification(loginMemberNo);
 	}
+
+	// 알람 개별삭제
+	@Override
+	public int messageDelete(int alarmNo) {
+		return dao.messageDelete(alarmNo);
+	}
 }

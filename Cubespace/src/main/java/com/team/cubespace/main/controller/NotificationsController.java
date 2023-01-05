@@ -69,6 +69,19 @@ public class NotificationsController {
 		return new Gson().toJson(NotificationsList); 
 	}
 	
+	/** 알람 개별삭제
+	 * @param alarmNo
+	 * @return
+	 */
+	@GetMapping("/messageDelete")
+	@ResponseBody
+	public int messageDelete(int alarmNo) {
+		
+		int result = service.messageDelete(alarmNo);
+		
+		return result;
+	}
+	
 	
 	
 }

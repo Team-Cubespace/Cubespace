@@ -46,6 +46,9 @@
 		ORDER BY ALARM_NO DESC
 	</select>
 
+	<delete id="messageDelete">
+	DELETE FROM ALARM WHERE ALARM_NO = #{alarmNo}
+	</delete>
  		
 
  		

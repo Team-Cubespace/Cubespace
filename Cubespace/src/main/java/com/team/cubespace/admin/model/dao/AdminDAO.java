@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import com.team.cubespace.admin.model.vo.Block;
 import com.team.cubespace.common.Pagination;
 import com.team.cubespace.complain.model.vo.Complain;
+import com.team.cubespace.main.model.vo.ShopMiniroom;
+import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.manage.model.vo.Font;
 import com.team.cubespace.manage.model.vo.Music;
 import com.team.cubespace.member.model.vo.Member;
@@ -232,6 +234,114 @@ public class AdminDAO {
 		
 		return sqlSession.delete("adminMapper.deleteMusic", musicNo);
 	}
+
+	/** 조건에 맞는 소품 수
+	 * @param paramMap
+	 * @return
+	 */
+	public int getGoodsListCount(Map<String, Object> paramMap) {
+
+		return sqlSession.selectOne("adminMapper.getGoodsListCount", paramMap);
+	}
+
+	/** 전체 소품수 
+	 * @return
+	 */
+	public int getAllGoodsCount() {
+
+		return sqlSession.selectOne("adminMapper.getAllGoodsCount");
+	}
+
+	/** 조건에 맞는 음악 목록
+	 * @param pagination
+	 * @param paramMap
+	 * @return
+	 */
+	public List<ShopMiniroom> goodsSearch(Pagination pagination, Map<String, Object> paramMap) {
+
+		int offset = (pagination.getCurrentPage() -1) * pagination.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return  sqlSession.selectList("adminMapper.goodsSearch", paramMap, rowBounds);
+	}
+
+	/** 새 소품 등록
+	 * @param inputGoods
+	 * @return
+	 */
+	public int insertGoods(ShopMiniroom inputGoods) {
+
+		return sqlSession.insert("adminMapper.insertGoods", inputGoods);
+	}
+
+	/** 소품 삭제
+	 * @param goodsNo
+	 * @return
+	 */
+	public int deleteGoods(int goodsNo) {
+		
+		return sqlSession.delete("adminMapper.deleteGoods", goodsNo);
+	}
+
+	/** font의 모든 이미지 변경명을 조회
+	 * @return
+	 */
+	public List<String> selectFontPathList() {
+		
+		return sqlSession.selectList("adminMapper.selectFontPathList");
+	}
+
+	/** music의 모든 변경명 조회
+	 * @return
+	 */
+	public List<String> selectMusicPathList() {
+
+		return sqlSession.selectList("adminMapper.selectMusicPathList");
+	}
+
+	/** musicThumnail의 모든 변경명 조회
+	 * @return
+	 */
+	public List<String> selectMusicThumnailPathList() {
+
+		return sqlSession.selectList("adminMapper.selectMusicThumnailPathList");
+	}
+
+	/** goods의 모든 변경명 조회
+	 * @return
+	 */
+	public List<String> selectGoodsPathList() {
+		
+		return sqlSession.selectList("adminMapper.selectGoodsPathList");
+
+	}
+
+	/** DB에 저장된 전체 배경색정보 덩어옴
+	 * @return
+	 */
+	public Background getBGColorInfo() {
+		
+		return sqlSession.selectOne("adminMapper.getBGColorInfo");
+	}
+
+	/** 전체 회원의 미니홈피 배경색 변경
+	 * @param map
+	 * @return
+	 */
+	public int updateAllColor(Map<String, Object> map) {
+		
+		return sqlSession.update("adminMapper.updateAllColor", map);
+	}
+
+	/**  db의 전체 배경색 정보 변경
+	 * @param map
+	 * @return
+	 */
+	public int updateDBColor(Map<String, Object> map) {
+
+		return sqlSession.update("adminMapper.updateDBColor", map);
+	}
+
 
 	
 }

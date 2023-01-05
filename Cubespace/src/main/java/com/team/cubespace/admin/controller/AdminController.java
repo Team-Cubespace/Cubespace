@@ -2,6 +2,7 @@ package com.team.cubespace.admin.controller;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +27,7 @@ import com.team.cubespace.admin.model.vo.Block;
 import com.team.cubespace.common.Util;
 import com.team.cubespace.complain.model.vo.Complain;
 import com.team.cubespace.login.model.service.LoginService;
+import com.team.cubespace.main.model.vo.ShopMiniroom;
 import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.manage.model.vo.Font;
 import com.team.cubespace.manage.model.vo.Music;
@@ -73,15 +75,6 @@ public class AdminController {
 	}
 	
 
-
-	/** 소품등록 이동
-	 * @return
-	 */
-	@GetMapping("/goods/goods")
-	public String adminGoods_goods() {
-		return "admin/admin-goods";
-	}
-	
 	
 //	-------------------------------------------------------------------------------
 	/** 회원 목록 조회
@@ -378,5 +371,112 @@ public class AdminController {
 			model.addAttribute("allMusicList", allMusicList);
 		}
 		return "redirect:/admin/goods/music";
+	}
+	
+	
+//	-------------------------------------------------------------------------------
+
+	/** 소품등록 이동
+	 * @return
+	 */
+	@GetMapping("/goods/goods")
+	public String adminGoods_goods(@RequestParam Map<String, Object> paramMap,
+			@RequestParam(value="cp", required=false, defaultValue="1" ) int cp,
+			Model model) {
+		
+		// paramMap : goodsName
+		
+		// 폰트 목록 조회
+		Map<String, Object> map = service.goodsSearch(paramMap, cp);
+		model.addAttribute("map", map);
+	
+		return "admin/admin-goods";
+	}
+	
+	/** 새 소품 등록
+	 * @param inputFont
+	 * @param file
+	 * @return
+	 * @throws Exception 
+	 */
+	@PostMapping("/goods/insertGoods")
+	public String insertGoods(ShopMiniroom inputGoods, MultipartFile goodsPathFile, 
+			HttpSession session, Model model,
+			RedirectAttributes ra) throws Exception {
+		
+		String webPath = "/resources/miniroomGoods/";
+		String folderPath = session.getServletContext().getRealPath(webPath);
+		
+		String rename = Util.fileRename(goodsPathFile.getOriginalFilename());
+		inputGoods.setGoodsPath(webPath + rename);
+		
+		
+		int result =  service.insertGoods(rename, folderPath, inputGoods, goodsPathFile);
+		String message = null;
+		
+		if(result > 0) {
+			message = "새 소품이 등록되었습니다";
+		} else {
+			message = "소품 등록 실패";
+		}
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:/admin/goods/goods";
+	}
+	
+	/** 소품 삭제
+	 * @param goodsNo
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/goods/deleteGoods")
+	public String deleteGoods(int goodsNo, RedirectAttributes ra) {
+		
+		int result = service.deleteGoods(goodsNo);
+		if(result > 0) {
+			ra.addFlashAttribute("message", "소품이 삭제되었습니다");		
+		}
+		
+		return "redirect:/admin/goods/goods";
+	}
+	
+	
+	/** 미니홈피 전체 배경색 변경
+	 * @param background
+	 * @return
+	 * @throws Exception 
+	 */
+	@GetMapping("/goods/updateAllColor")
+	public String updateAllColor(Background background, RedirectAttributes ra) throws Exception {
+				
+		Background originalBGColor = (Background) application.getAttribute("backgroundColorInfo");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("originalBackgroundSkin", originalBGColor.getBackgroundSkin());
+		map.put("originalFrameColor", originalBGColor.getFrameColor());
+		map.put("originalFrameMenuColor", originalBGColor.getFrameMenuColor());
+		map.put("originalFrameFontColor", originalBGColor.getFrameFontColor());
+		
+		map.put("backgroundSkin", background.getBackgroundSkin());
+		map.put("frameColor", background.getFrameColor());
+		map.put("frameMenuColor", background.getFrameMenuColor());
+		map.put("frameFontColor", background.getFrameFontColor());
+		
+		
+		// 전체 회원의 미니홈피 배경색 변경
+		// 회원의 기존 미니홈피 색이 "모두" 처음 설정된 것과 같으면 새로 변경
+		int result = service.updateAllColor(map);
+		
+		String message = null;
+		if(result > 0) {
+			message = "미니홈피 전체 배경색을 변경하였습니다";
+		} else {
+			message = "미니홈피 전체 배경색 변경 실패";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:/admin/goods/goods";
+	
 	}
 }

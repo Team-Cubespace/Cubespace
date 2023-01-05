@@ -14,4 +14,12 @@ public class NotificationsDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
+	/** 활동알림 목록 조회
+	 * @param loginMemberNo
+	 * @return
+	 */
+	public List<Notifications> activityNotification(int loginMemberNo) {
+		return sqlSession.selectList("notifications.activityNotification",loginMemberNo);
+	}
+
 }

@@ -40,4 +40,10 @@ public class NotificationsServiceImpl implements NotificationsService {
 		return daoMemberSear.memberCancelBtn(paramMap);
 
 	}
+
+	// 활동알림 목록 조회
+	@Override
+	public List<Notifications> activityNotification(int loginMemberNo) {
+		return dao.activityNotification(loginMemberNo);
+	}
 }

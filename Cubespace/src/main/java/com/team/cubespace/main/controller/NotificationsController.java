@@ -57,6 +57,17 @@ public class NotificationsController {
 	}
 	
 	
+	/** 활동알림 목록 조회
+	 * @return
+	 */
+	@GetMapping("/activityNotification")
+	@ResponseBody
+	public String activityNotification(int loginMemberNo) {
+		
+		List<Notifications> NotificationsList =service.activityNotification(loginMemberNo);
+		
+		return new Gson().toJson(NotificationsList); 
+	}
 	
 	
 	

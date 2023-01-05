@@ -25,4 +25,10 @@ public interface NotificationsService {
 	 */
 	int memberCancelBtn(Map<String, Object> paramMap);
 
+	/** 활동알림 목록 조회
+	 * @param loginMemberNo
+	 * @return
+	 */
+	List<Notifications> activityNotification(int loginMemberNo);
+
 }

@@ -142,14 +142,86 @@ alarmRightChoice.addEventListener("click",()=>{
     /* 비동기로 활동알림 DB조회 구문작성 */
     $.ajax({
         url : "/activityNotification",
+        data: {"loginMemberNo":loginMemberNo},
         dataType : "JSON",
         success : activityNotificationList =>{
 
+            for(let alarmActivity of activityNotificationList){
+
+                /* 회원번호 전역변수 저장 */
+                memberNo= alarmActivity.memberNo;
+
+                const mebmerProfileAlarm = document.createElement("div");
+                mebmerProfileAlarm.classList.add("mebmer-profile-alarm");
+
+                    const div = document.createElement("div")
+
+                        const memberImg = document.createElement("img");
+                        memberImg.classList.add("member-img");
+
+                        /* DB에 프로필 사진이 NUll이라면 */
+                        if(alarmActivity.profileImage == null){
+                            memberImg.setAttribute("src","/resources/images/common/cubes.png")
+                        } else{//null이 아니라면
+                            memberImg.setAttribute("src",alarmActivity.profileImage)
+                        } 
+
+                        const contents = document.createElement("div")
+                        contents.classList.add("contents");
+                        
+                            const profileInfoAlarm = document.createElement("div")
+                            profileInfoAlarm.classList.add("profile-info-alarm");
+
+                                /* 프로필 닉네임 생성 */
+                                const memberNickname =document.createElement("div");
+                                memberNickname.classList.add("member-nickname");
+                                memberNickname.innerText=alarmActivity.memberNickname;
+
+                                /* 알림생성된 시간 생성 */
+                                const alarmTime = document.createElement("div")
+                                alarmTime.classList.add("alarm-time");
+                                alarmTime.innerText=alarmActivity.alarmCreate;
+                            
+                            const alarmInfo = document.createElement("div")
+                            alarmInfo.classList.add("alarm-info");
+
+                                /* 카테고리 이름 생성 */
+                                const typeName = document.createElement("div")
+                                typeName.innerText=alarmActivity.boardTypeName
+
+                                /* 게시물 제목 생성 */
+                                const boardTitle = document.createElement("div")
+                                boardTitle.classList.add("board-title");
+                                boardTitle.innerText=alarmActivity.boardTitle
+
+                                /* 댓글/스크랩  생성 */
+                                const boardType = document.createElement("div")
+                                boardType.classList.add("board-type");
+
+                                if(alarmActivity.alarmType==1){ // 댓글일때
+                                    boardType.innerText="게시물에 댓글을 남겼습니다."
+
+                                }else{ // 스크랩일때
+                                    boardType.innerText="게시물을 스크랩했습니다."
+                                }
+                            
+                            const alarmDelete = document.createElement("div")
+                            alarmDelete.classList.add("alarm-delete");
+                            
+                            const messageDelete=document.createElement("i")
+                            messageDelete.classList.add("fa-solid","fa-xmark","message-delete");
+                            messageDelete.setAttribute("onclick","messageDelete(this)");
 
 
+                    alarmSection.append(mebmerProfileAlarm);
+                        mebmerProfileAlarm.append(div);
+                                div.append(memberImg,contents,alarmDelete);
+                                    contents.append(profileInfoAlarm,alarmInfo);
+                                        profileInfoAlarm.append(memberNickname,alarmTime);
+                                        alarmInfo.append(typeName,boardTitle,boardType);
+                                    alarmDelete.append(messageDelete)
 
-
-            
+            }
         }
     })
 })
@@ -190,19 +262,21 @@ alarmRightChoice.addEventListener("click",()=>{
         deleteAllButton.classList.add("delete-all-button");
         deleteAllButton.innerHTML="전체삭제";
         deleteall.append(deleteAllButton);
+        
+        /* 전체삭제 클릭시 전체 삭제 */
+        const deleteButton = document.querySelector(".delete-all-button");
+        if(deleteButton){
+            deleteButton.addEventListener("click",()=>{
+                alarmSection.innerHTML="";
 
+                //비동기로 디비 업데이트
+            })
+        }
     }
 })
 
-/* 전체삭제 클릭시 전체 삭제 */
-const deleteButton = document.querySelector(".delete-all-button");
-if(deleteButton){
-    deleteButton.addEventListener("click",()=>{
-        alarmSection.innerHTML="";
 
-        //비동기로 디비 업데이트
-    })
-}
+
 /* 삭제버튼 */
 const messageDelete = (btn)=>{
     const remove = btn.parentElement.parentElement.parentElement;

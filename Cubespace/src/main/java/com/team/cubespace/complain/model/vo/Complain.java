@@ -23,6 +23,8 @@ public class Complain {
 	private int complainedBlockFL; // 신고당한사람 차단여부 // int입니다(memberNo or 0 조회)
 	private String complainerDelYN; // 신고한사람 탈퇴여부
 	private String complainedDelYN; // 신고당한사람 탈퇴여부
+	private String blockStart; // 신고당한사람이 차단당했다면: 차단시작시간
+	private String blockEnd; // 신고당한사람이 차단당했다면: 차단종료시간
 	
 
 }

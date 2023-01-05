@@ -38,7 +38,7 @@
             <p class="otherPageBtn"><a href="/admin/goods/font">상품 등록 페이지</a></p>
             <section class="category-lists">
                 <a href = "/admin/member" class="detail link-member">회원</a>
-                <a href = "/admin/complain/complainSearch" class="detail link-member activate">신고</a>
+                <a href = "/admin/complain" class="detail link-member activate">신고</a>
             </section>
 
             <section class="main-class">
@@ -204,7 +204,7 @@
                     <div class="search-result-div" id="number">
                         <div class="search-result-tab">번호</div>
                         <c:forEach var="complain" items="${complainList}">
-                            <div class="search-content">${complain.complainNo}</div>
+                            <div class="search-content complainNo">${complain.complainNo}</div>
                         </c:forEach>
                     </div>
                     <div class="search-result-div"  id="complainerNickname">
@@ -237,6 +237,28 @@
                                         <div class="search-content complainedMember" name="${complain.complainNo}" id="${complain.complainedNo}">${complain.complainedNickname}</div>
                                     </c:if>
                                 </c:if>
+                        </c:forEach>
+                    </div>
+                    <div class="search-result-div" id="blockFlag">
+                        <div class="search-result-tab">차단시작일</div>
+                        <c:forEach var="complain" items="${complainList}">
+                            <c:if test="${empty complain.blockStart}">
+                                <div class="search-content originalBlockStart">-</div>
+                            </c:if>
+                            <c:if test="${not empty complain.blockStart}">
+                                <div class="search-content originalBlockStart">${complain.blockStart}</div>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                    <div class="search-result-div" id="blockFlag">
+                        <div class="search-result-tab">차단종료일</div>
+                        <c:forEach var="complain" items="${complainList}">
+                            <c:if test="${empty complain.blockEnd}">
+                                <div class="search-content originalBlockEnd">-</div>
+                            </c:if>
+                            <c:if test="${not empty complain.blockEnd}">
+                                <div class="search-content originalBlockEnd">${complain.blockEnd}</div>
+                            </c:if>
                         </c:forEach>
                     </div>
                     <div class="search-result-div" id="complainContent">

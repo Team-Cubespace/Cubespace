@@ -22,7 +22,7 @@ public interface VideoService {
 	 * @param videoNo
 	 * @return video
 	 */
-	Video selectVideo(int videoNo);
+	Video selectVideo(Map<String, Integer> paramMap);
 
 	/** 동영상 글 작성
 	 * @param video

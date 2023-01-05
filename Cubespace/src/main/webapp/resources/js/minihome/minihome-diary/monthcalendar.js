@@ -113,8 +113,9 @@ document.getElementById("cancleBtn").addEventListener("click",function(){
 
 /* [함수] : 팝업 모달창 = (1) 이벤트 수정  & (2) 신규 이벤트 등록 */
 function popup(arg){
-
-  document.getElementById("popup_layer").style.display = "block";
+  if(minihomeNo == loginMemberNo){
+    document.getElementById("popup_layer").style.display = "block";
+  }
 
   /* (1)이벤트 값이 있는 경우(수정) */
   if(arg.event != undefined){

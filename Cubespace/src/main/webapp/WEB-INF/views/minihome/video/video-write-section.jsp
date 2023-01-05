@@ -70,7 +70,11 @@
         </div>
         <div class="input-row">
             <label class="add-image" for="addFileInput">동영상 등록
+            <div class="add-image-info">
                 <img src="/resources/images/add-image.png" alt="">
+                <span><span id="videoSizeSpan">0</span> / 100MB</span>
+                <span><span id="videoDurationSpan">0</span> / 60초</span>
+            </div>
             </label>
             <input type="file" name="inputVideo" onchange="addVideo(this)" id="addFileInput">
             <div id="addVideoArea">

@@ -50,10 +50,25 @@ const listGuestBook=()=>{
                             const div = document.createElement("div");
     
                                 /* 닉네임 생성 */
-                                const member_nickname = document.createElement("div");
-                                member_nickname.classList.add("member-nickname");
+                                const member_nickname = document.createElement("button");
+                                member_nickname.classList.add("member-nickname","nickname-drop-down-button");
                                 member_nickname.innerText=listGuestbook.memberNickname;
-    
+                                
+                                const nicknameDropDownBox = document.createElement("ul")
+                                nicknameDropDownBox.classList.add("nickname-drop-down-box");
+                                
+                                        const li1 = document.createElement("li")
+                                            const a1 = document.createElement("a")
+                                            a1.setAttribute("href","/minihome/"+listGuestbook.senderNo+"")
+                                            a1.setAttribute("onclick","return openMinihome(this.href)")
+                                            a1.innerText="미니홈피";
+
+                                        const li2 = document.createElement("li")
+                                            const a2 = document.createElement("a")
+                                            a2.setAttribute("onclick","reportFriend()")
+                                            a2.innerText="신고";
+
+
                                 /* 글 작성 날짜 시간 생성 */
                                 const time = document.createElement("div");
                                 time.innerText="("+listGuestbook.gbCreate+")";
@@ -177,13 +192,17 @@ const listGuestBook=()=>{
                         guest_message.append(message_header,message_body);
                             message_header.append(div,btn_box);
                                 div.append(member_nickname,time);
+                                    member_nickname.append(nicknameDropDownBox);
+                                    nicknameDropDownBox.append(li1,li2);
+                                    li1.append(a1);
+                                    li2.append(a2);
                             message_body.append(member_img,message_box);
                                 member_img.append(img);
-
                 }
             }
         }
     })
+    initNicknameDropDown()
 }
 (listGuestBook)()
 

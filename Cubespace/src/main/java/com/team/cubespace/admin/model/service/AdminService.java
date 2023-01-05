@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.team.cubespace.admin.model.vo.Block;
 import com.team.cubespace.complain.model.vo.Complain;
+import com.team.cubespace.main.model.vo.ShopMiniroom;
 import com.team.cubespace.manage.model.vo.Font;
 import com.team.cubespace.manage.model.vo.Music;
 import com.team.cubespace.member.model.vo.Member;
@@ -102,5 +103,48 @@ public interface AdminService {
 	 * @return
 	 */
 	int deleteMusic(int musicNo);
+
+	/** 소품등록 페이지 이동
+	 * @param paramMap
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> goodsSearch(Map<String, Object> paramMap, int cp);
+
+	/** 새 소품 등록
+	 * @param rename
+	 * @param folderPath
+	 * @param inputGoods
+	 * @param goodsPathFile
+	 * @return
+	 * @throws Exception 
+	 */
+	int insertGoods(String rename, String folderPath, ShopMiniroom inputGoods, MultipartFile goodsPathFile) throws Exception;
+
+	/** 소품 삭제
+	 * @param goodsNo
+	 * @return
+	 */
+	int deleteGoods(int goodsNo);
+
+	/** font의 모든 변경명을 조회
+	 * @return
+	 */
+	List<String> selectFontPathList();
+
+	/** music의 모든 변경명 조회
+	 * @return
+	 */
+	List<String> selectMusicPathList();
+
+	/** musicThumnail의 모든 변경명 조회
+	 * @return
+	 */
+	List<String> selectMusicThumnailPathList();
+
+	/** goods의 모든 변경명 조회
+	 * @return
+	 */
+	List<String> selectGoodsPathList();
 
 }

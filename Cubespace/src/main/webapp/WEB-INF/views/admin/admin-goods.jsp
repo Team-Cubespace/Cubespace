@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/common/header.css">
     <link rel="stylesheet" href="/resources/css/common/footer.css">
+    <link rel="stylesheet" href="/resources/css/admin/admin-member.css">
     <link rel="stylesheet" href="/resources/css/admin/admin-allGoods.css">
     <link rel="stylesheet" href="/resources/css/admin/admin-goods.css">
 
@@ -48,7 +49,7 @@
                 <div class="member-title">
                     <h3>소품 리스트</h3>
                     <div>
-                        <button id="fontAddBtn">+ 소품 등록</button>
+                        <button id="goodsAddBtn">+ 소품 등록</button>
                     </div>
                 </div>
 
@@ -61,11 +62,9 @@
                             <div class="search-detail-keyword">소품 이름 검색</div>
                             <div class="search-detail-select-box">
                                 <input type="text" name="goodsName" class="form-control" value="${param.goodsName}">
+                                <button value="검색" class="btn btn-lg btn-black js-search-button">검색</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="table-btn">
-                        <input type="submit" value="검색" class="btn btn-lg btn-black js-search-button">
                     </div>
                 </form>
 
@@ -122,7 +121,7 @@
                     <div class="search-result-div" id="nickname">
                         <div class="search-result-tab">소품 예시</div>
                         <c:forEach var="goods" items="${goodsList}">
-                            <img class="search-content" src="${goods.goodsPath}">
+                            <img class="search-content goodsImage" src="${goods.goodsPath}">
                         </c:forEach>
                     </div>
                     <div class="search-result-div" id="signDate">

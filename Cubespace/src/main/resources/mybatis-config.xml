@@ -19,6 +19,9 @@
 		<typeAlias type="com.team.cubespace.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.team.cubespace.main.model.vo.MemberSearch" alias="MemberSearch"/>
 		<typeAlias type="com.team.cubespace.minihome.model.vo.Minihome" alias="Minihome"/>		
+		<typeAlias type="com.team.cubespace.diary.model.vo.Diary" alias="Diary"/>		
+		<typeAlias type="com.team.cubespace.diary.model.vo.Emoji" alias="Emoji"/>		
+		<typeAlias type="com.team.cubespace.diary.model.vo.Plan" alias="Plan"/>		
 		<typeAlias type="com.team.cubespace.folder.model.vo.Folder" alias="Folder"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.Font" alias="Font"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.CategoryOrder" alias="CategoryOrder"/>		
@@ -37,6 +40,7 @@
 		<typeAlias type="com.team.cubespace.main.model.vo.ShopMusic" alias="ShopMusic"/>
 		<typeAlias type="com.team.cubespace.main.model.vo.MainHomepage" alias="MainHomepage"/>
 		<typeAlias type="com.team.cubespace.video.model.vo.Video" alias="Video"/>
+		<typeAlias type="com.team.cubespace.guestbook.model.vo.GuestBook" alias="GuestBook"/>
 	</typeAliases>
 	
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->
@@ -44,6 +48,7 @@
 		<mapper resource="/mappers/memberSearch-mapper.xml"/>
 		<mapper resource="/mappers/login-mapper.xml"/>
 		<mapper resource="/mappers/minihome-mapper.xml"/>
+		<mapper resource="/mappers/diary-mapper.xml"/>
 		<mapper resource="/mappers/manage-mapper.xml"/>
 		<mapper resource="/mappers/album-mapper.xml"/>
 		<mapper resource="/mappers/comment-mapper.xml"/>	
@@ -53,5 +58,6 @@
 		<mapper resource="/mappers/complain-mapper.xml"/>	
 		<mapper resource="/mappers/admin-mapper.xml"/>	
 		<mapper resource="/mappers/mainHomepage-mapper.xml"/>	
+		<mapper resource="/mappers/guestBook-mapper.xml"/>	
 	</mappers>
 </configuration>

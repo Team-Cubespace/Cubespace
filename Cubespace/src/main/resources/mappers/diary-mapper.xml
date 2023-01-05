@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="diaryMapper">
+	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
+
+	<resultMap type="Diary" id="diary_rm">
+  		<id property="diaryNo" column="DIARY_NO"/>
+  		
+  		<result property="memberNo" column="MEMBER_NO"/>
+  		<result property="diaryTitle" column="D_TITLE"/>
+  		<result property="diaryContent" column="D_CONTENT"/>
+  		<result property="diaryCreateDate" column="D_CREATE"/>
+  		<result property="diaryOpenFlag" column="D_OPEN_FL"/>
+  		<result property="folderNo" column="FOLDER_NO"/>
+  		<result property="yearMonth" column="YEAR_MONTH"/>
+  		<result property="diaryDeleteFlag" column="D_DEL_YN"/>
+  	</resultMap>
+  	
+  	<resultMap type="Emoji" id="emoji_rm">
+  		<id property="diaryNo" column="DIARY_NO"/>
+  		
+  		<result property="memberNo" column="MEMBER_NO"/>
+  		<result property="emojiNo" column="EMOJI_NO"/>
+  		<result property="emojiCount" column="EMOJI_COUNT"/>
+  		<result property="emojiPath" column="EMOJI_PATH"/>
+  	</resultMap>
+  	
+  	<resultMap type="Member" id="member_rm">
+  		<id property="memberNo" column="MEMBER_NO"/>
+  		
+  		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+  		<result property="profileImage" column="PROFILE_IMG"/>
+  	</resultMap>
+  	
+  	<resultMap type="Plan" id="plan_rm">
+  		<id property="planNo" column="PLAN_NO"/>
+  		
+  		<result property="memberNo" column="MEMBER_NO"/>
+  		<result property="startDate" column="START_DATE"/>
+  		<result property="endDate" column="END_DATE"/>
+  		<result property="planTitle" column="PLAN_TITLE"/>
+  		<result property="planCategory" column="PLAN_CATEGORY"/>
+  		<result property="allDayFlag" column="PLAN_ALLDAY_FL"/>
+  		<result property="color" column="COLOR"/>
+  		<result property="planDescription" column="PLAN_DESCRIPTION"/>
+  	</resultMap>
+  	
+  	<select id="checkFriend" resultType = "_int">
+  	SELECT COUNT(*) FROM (
+	SELECT * FROM FRIEND
+	WHERE (ASKED_MEMBER_NO = #{loginMemberNo} AND ASKING_MEMBER_NO = #{homepageMemberNo})
+	OR (ASKED_MEMBER_NO = #{homepageMemberNo} AND ASKING_MEMBER_NO = #{loginMemberNo})
+	AND FRIEND_ACCEPT_FL = 1)
+  	</select>
+  	
+  	<select id="selectDateList" resultType="_int">
+  	SELECT DISTINCT TO_NUMBER(TO_CHAR(D_CREATE, 'DD')) YEAR_MONTH 
+	FROM DIARY 
+	WHERE TO_CHAR(D_CREATE, 'YYYY-MM') = '${yearMonth}' 
+	AND MEMBER_NO = #{memberNo} 
+	AND D_DEL_YN = 'N'
+	ORDER BY 1
+  	</select>
+ 	  
+ 	<select id="selectDiaryList" resultMap="diary_rm">
+ 	SELECT DIARY_NO, D_TITLE, D_CONTENT, TO_CHAR(D_CREATE,'AM HH24"시 "MI"분"') D_CREATE, D_OPEN_FL, FOLDER_NO  
+	FROM DIARY
+	WHERE MEMBER_NO = #{homepageMemberNo}
+	AND TO_CHAR (D_CREATE,'YYYY-MM-DD') = #{diaryDate}
+	AND FOLDER_NO = #{folderNumber}
+	AND D_DEL_YN  = 'N'
+	<choose>
+		<when test='openFlag == "0"'>
+		 AND (D_OPEN_FL = 1 OR D_OPEN_FL  = 2)
+		</when>
+		<when test='openFlag == "1"'>
+		 AND (D_OPEN_FL = 1)
+		</when>
+		<otherwise>
+		
+		</otherwise>
+	</choose>
+ 	</select>
+ 	
+ 	<select id="selectEmojiList" resultMap="emoji_rm">
+ 	SELECT DIARY_NO, COUNT(*) EMOJI_COUNT, E.EMOJI_NO, EMOJI_PATH
+	FROM EMOJI E
+	JOIN EMOJI_IMG I ON (E.EMOJI_NO = I.EMOJI_NO)
+	WHERE DIARY_NO = #{diaryNo}
+	GROUP BY DIARY_NO, E.EMOJI_NO, EMOJI_PATH
+ 	</select>
+ 	
+ 	<select id="selectEmojiPeopleList" resultMap = "member_rm">
+	SELECT MEMBER_NICKNAME, PROFILE_IMG
+	FROM EMOJI E
+	JOIN EMOJI_IMG I ON (E.EMOJI_NO = I.EMOJI_NO)
+	JOIN MEMBER M ON (M.MEMBER_NO = E.MEMBER_NO)
+	WHERE DIARY_NO = #{diaryNo} AND E.EMOJI_NO = #{emojiNo}
+	</select>
+	
+	<select id="selectLike" resultMap = "emoji_rm">
+	SELECT MEMBER_NO, EMOJI_NO
+	FROM EMOJI
+	WHERE DIARY_NO = #{diaryNo} AND MEMBER_NO = #{memberNo}
+	</select>
+	
+	<insert id="insertLike">
+	INSERT INTO EMOJI
+	VALUES (
+	#{diaryNo},#{memberNo},#{emojiNo}
+	)
+	</insert>
+	
+	<update id="updateLike">
+	UPDATE EMOJI
+	SET EMOJI_NO = #{emojiNo}
+	WHERE DIARY_NO = #{diaryNo} AND MEMBER_NO = #{memberNo}
+	</update>
+	
+	<delete id="deleteLike">
+	DELETE FROM EMOJI
+	WHERE DIARY_NO = #{diaryNo} AND MEMBER_NO = #{memberNo}
+	</delete>
+	
+	<!-- 다이어리 작성  -->
+	<insert id="diaryWrite" parameterType = "Diary" useGeneratedKeys="true">
+		<selectKey keyProperty = "diaryNo" resultType = "_int" order = "BEFORE">
+		SELECT SEQ_DIARY_NO.NEXTVAL FROM DUAL
+		</selectKey>
+	INSERT INTO DIARY
+	VALUES(#{diaryNo},
+	    #{memberNo},
+	    #{diaryTitle},
+	    #{diaryContent},
+	    TO_DATE('${diaryCreateDate}','YYYY-MM-DD HH24:MI:SS'),
+	    DEFAULT,  
+	    #{diaryOpenFlag},
+	    #{folderNo} )
+	</insert>
+	
+	<!-- 다이어리 수정 페이지 조회 -->
+	<select id="selectDiaryDetail" resultMap = "diary_rm">
+	SELECT DIARY_NO , MEMBER_NO , D_TITLE,D_CONTENT,D_CREATE,D_OPEN_FL,FOLDER_NO
+	FROM DIARY
+	WHERE DIARY_NO = #{diaryNo}
+	</select>
+	
+	<!-- 다이어리 수정 -->
+	<update id="diaryUpdate">
+	UPDATE DIARY
+	SET 
+	D_TITLE = #{diaryTitle},
+	D_CONTENT = #{diaryContent},
+	D_CREATE = TO_DATE('${diaryCreateDate}','YYYY-MM-DD HH24:MI:SS'),
+	D_OPEN_FL = #{diaryOpenFlag},
+	FOLDER_NO = #{folderNo}
+	WHERE
+	DIARY_NO = #{diaryNo}
+	</update>
+	
+	<update id="diaryDelete">
+	UPDATE DIARY
+	SET D_DEL_YN = 'Y'
+	WHERE DIARY_NO = #{diaryNo}
+	</update>
+	
+	
+	<!-- 월간 달력_조회 -->
+	<select id="selectscheduleList" resultMap = "plan_rm">
+	SELECT PLAN_NO, START_DATE, NVL(END_DATE,START_DATE) END_DATE , PLAN_TITLE , PLAN_CATEGORY, PLAN_ALLDAY_FL,PLAN_DESCRIPTION,
+	CASE	
+		WHEN PLAN_CATEGORY = 1 THEN '#C0EEE4'
+		WHEN PLAN_CATEGORY = 2 THEN '#F3CCFF'
+		WHEN PLAN_CATEGORY = 3 THEN '#D8F8B7'
+		ELSE '#FFCAC8'
+	END AS COLOR
+	FROM PLAN  
+	WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<insert id="addSchedule" parameterType = "Plan" useGeneratedKeys="true">
+		<selectKey keyProperty = "planNo" resultType = "_int" order = "BEFORE">
+			SELECT SEQ_PLAN_NO.NEXTVAL FROM DUAL
+		</selectKey>
+	INSERT INTO PLAN
+	VALUES (
+	#{planNo},
+	#{memberNo},
+	TO_DATE('${startDate}','YYYY-MM-DD HH24:MI:SS'),
+	TO_DATE('${endDate}','YYYY-MM-DD HH24:MI:SS'),
+	#{planTitle},
+	#{planCategory},
+	#{allDayFlag},
+	#{planDescription}
+	)
+	</insert>
+	
+	<update id="updateSchedule">
+	UPDATE PLAN 
+	SET 
+	PLAN_TITLE = #{planTitle},
+	PLAN_DESCRIPTION = #{planDescription},
+	START_DATE = TO_DATE('${startDate}','YYYY-MM-DD HH24:MI:SS'),
+	END_DATE = TO_DATE('${endDate}','YYYY-MM-DD HH24:MI:SS'),
+	PLAN_CATEGORY = #{planCategory},
+	PLAN_ALLDAY_FL = #{allDayFlag} 
+	WHERE 
+	PLAN_NO = #{planNo}
+	</update>
+	
+	<delete id="deleteSchedule">
+	DELETE FROM PLAN
+	WHERE PLAN_NO = #{planId}
+	</delete>
+	
+	<update id="updateScheduleDrop">
+	UPDATE PLAN
+	SET 
+	START_DATE = TO_DATE('${startDate}','YYYY-MM-DD HH24:MI:SS'),
+	END_DATE = TO_DATE('${endDate}','YYYY-MM-DD HH24:MI:SS')
+	WHERE PLAN_NO = #{planNo}
+	</update>
+	
+ 	
+</mapper>

@@ -1,0 +1,209 @@
+/* * {
+    border: 1px solid black;
+    
+} */
+
+
+
+/* 강사님의 은총_달력 section */
+.calendar-section {
+    display: flex;
+    justify-content: center;
+    margin : 10px;
+}
+
+/* 글쓰기 버튼이 있는 공간 */
+.write-section{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 40px;
+}
+
+/* 글쓰기 버튼 */
+.writeBtn{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding :10px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+/* 일기가 있는 공간 */
+.diary-section {
+    border: 1px solid black;
+    padding :10px;
+    margin-top: 30px;
+    margin-bottom: 150px;
+}
+
+
+/* 제목 밑에 공개여부 & 시간 */
+.title-section > div:nth-child(2) {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.title-section > div:nth-child(2) > *{
+    padding :10px;
+}
+
+.title {
+    padding-left: 10px;
+    padding-top : 10px;
+    font-size : 15px;
+}
+
+/* 내용이 있는 공간 */
+.content{
+    /* background-color: aquamarine; */
+    min-height: 200px;
+    max-height: 1000px;
+    overflow: auto;
+    border-top: 1px solid black;
+    border-bottom:  1px solid black;
+    padding-top: 20px;
+    padding-left: 10px;
+
+    
+}
+/* 밑 공간 */
+.under-section {
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+/******* 밑공간 part1 *******/
+.under1 {
+    display: flex;
+}
+/* 이모지들 뜨고 hover하면 팝뜨는공간 */
+.emoji-and-pop{
+    position:relative;
+    padding : 0 10px 0 10px;
+    /* width: 250px; */
+
+}
+/* 사람들 나오는 팝업 */
+.people-pop {
+    width: 200px;
+    border: 1px solid black;
+    min-height: 50px;
+    position: absolute;
+    background-color: white;
+    border-radius: 10px;
+    top:50px;
+    left:10px;
+}
+.people-list {
+    display: flex;
+    justify-content: center;
+    padding:10px;
+    border-bottom: 1px solid black;
+}
+
+.profile-box{
+    display: flex;
+    padding : 5px;
+}
+
+.profile-box > div {
+    padding-left :10px;
+}
+
+.profile-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.name {
+    display: flex;
+    align-items: center;
+}
+/* 이모지들 모아둔 section */
+.emoji-section {
+    display: flex;
+    /* justify-content: center; */
+}
+/* 하나의 이모지 & 숫자를 모아둔 곳 */
+.emoji-row{
+    padding-right: 5px;
+}
+/* 이미지를 가둔 가두리 */
+.emoji-box {
+    height: 35px;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+}
+/* 이미지 */
+.emoji {
+    height: 28px;
+    width: 28px;
+}
+/* 이미지에 커서를 갖다댈 때 */
+.emoji:hover{
+    height:30px;
+    width: 30px;
+    cursor: pointer;
+}
+/* 숫자 */
+.emoji-number{
+    display: flex;
+    justify-content: center;
+}
+/* 공감하기 버튼 */
+.emoji-btn{
+    cursor: pointer;
+}
+/* 공감하기 버튼에 커서를 갖다댈 때 */
+.emoji-btn:hover{
+    font-weight: bold;
+}
+
+/******* 밑공간 part2 *******/
+.under2{
+    display: flex;
+    align-items: center;
+}
+.under2 > * {
+    padding :10px;
+    cursor: pointer;
+}
+.under2 > *:hover{
+    font-weight: bold;
+}
+/* 팝업 */
+.choose-emoji-section{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.choose-emoji {
+    width:250px;
+    height: 50px;
+    position: absolute;
+    top : 40px;
+    display: flex;
+    border :1px solid black;
+    background-color: white;
+    border-radius: 10px;
+    padding:3px;
+    display: flex;
+    align-content: center;
+    justify-content: space-evenly;
+}
+/* .choose-emoji > div {
+    display: flex;
+    align-items: center;
+} */
+
+
+
+
+
+
+
+
+

@@ -56,6 +56,7 @@
     </script>
     <script src="/resources/js/common/jQuery-core.js"></script>
     <script src="/resources/js/common/swiper.min.js"></script>
+    <script src="/resources/js/minihome/include/minihome-common.js"></script>
     <script src="/resources/js/minihome/album/album-detail.js"></script>
     <script src="/resources/js/minihome/include/comment.js"></script>
     <script src="/resources/js/minihome/include/board-scrap.js"></script>

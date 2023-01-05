@@ -85,6 +85,7 @@
 		FROM FOLDER F
 		WHERE MEMBER_NO = #{hostMemberNo}	-- 미니홈 주인 회원 번호
 		AND BOARD_TYPE_NO = #{boardTypeNo}
+		AND FOLDER_DEL_YN = 'N'
 		ORDER BY FOLDER_ORDER
 	</select>
 	

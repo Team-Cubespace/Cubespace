@@ -30,4 +30,20 @@ public class NotificationsDAO {
 		return sqlSession.delete("notifications.messageDelete",alarmNo);
 	}
 
+	/** 알림 전체삭제
+	 * @param alarmNoList
+	 * @return
+	 */
+	public int messageDeleteAll(String alarmNoList) {
+		return sqlSession.delete("notifications.messageDeleteAll",alarmNoList);
+	}
+
+	/** 확인된 알림 값 변경
+	 * @param aList
+	 * @return
+	 */
+	public int alarmRead(String aList) {
+		return sqlSession.update("notifications.alarmRead",aList);
+	}
+
 }

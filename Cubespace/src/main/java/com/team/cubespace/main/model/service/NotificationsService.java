@@ -37,4 +37,18 @@ public interface NotificationsService {
 	 */
 	int messageDelete(int alarmNo);
 
+	/** 알림 전체 삭제
+	 * @param alarmNoList
+	 * @return
+	 */
+	int messageDeleteAll(String alarmNoList);
+
+	/** 확인된 알림 값 변경
+	 * @param aList
+	 * @return
+	 */
+	int alarmRead(String aList);
+
+
+
 }

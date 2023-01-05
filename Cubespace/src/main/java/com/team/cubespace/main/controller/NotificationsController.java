@@ -82,6 +82,39 @@ public class NotificationsController {
 		return result;
 	}
 	
+	/** 알람 전체 삭제 
+	 * @param alarmNoList
+	 * @return
+	 */
+	@GetMapping("/messageDeleteAll")
+	@ResponseBody
+	public int messageDeleteAll(@RequestParam(value = "alarmNoList[]") List<String> alarmNoList) {
+		
+		String aList = String.join(",",alarmNoList);
+		
+		int result =service.messageDeleteAll(aList);
+		
+		return result;
+		
+	}
+	
+	/** 확인된 알림 값 변경
+	 * @param alarmNoList
+	 * @return
+	 */
+	@GetMapping("/alarmRead")
+	@ResponseBody
+	public int alarmRead(@RequestParam(value = "alarmNoList[]") List<String> alarmNoList) {
+		
+		String aList = String.join(",",alarmNoList);
+		
+		int result =service.alarmRead(aList);
+		
+		return result;
+		
+	}
+	
+	
 	
 	
 }

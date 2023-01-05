@@ -138,6 +138,24 @@ alarmRightChoice.addEventListener("mouseout", () => {
     }
 })
 
+/* 알람 읽음 처리 함수 선언 */
+const alarmRead=(alarmNoList)=>{
+
+    if(alarmNoList.length!=0){
+
+        $.ajax({
+            url : "/alarmRead",
+            data : {"alarmNoList":alarmNoList},
+            success : alarmReadCheck =>{
+                
+                if(alarmReadCheck > 0){
+                    console.log("읽음처리 완료");
+                }
+            }
+        })
+    } 
+}
+
 /* 비동기로 활동알림 DB조회 구문작성 */
 const activityNotification=()=>{
     $.ajax({
@@ -222,7 +240,7 @@ const activityNotification=()=>{
                                     alarmDelete.append(messageDelete)
 
             }
-            console.log(alarmNoList);
+            alarmRead(alarmNoList)
         }
     })
 }
@@ -260,19 +278,22 @@ alarmLeftChoice.addEventListener("mouseout", () => {
 /* 전체삭제 비동기 함수 선언 */
 const messageDeleteAll =(alarmNoList) =>{
 
-    $.ajax({
-        url : "/messageDeleteAll",
-        data : {"alarmNoList":alarmNoList},
-        success : messageDeleteAll =>{
-            
-            if(messageDeleteAll == 1){
+    if(alarmNoList.length!=0){
 
-                alarmSection.innerHTML="";
-                /* 활동알림목록 조회 */
-                activityNotification()
+        $.ajax({
+            url : "/messageDeleteAll",
+            data : {"alarmNoList":alarmNoList},
+            success : messageDeleteAll =>{
+                
+                if(messageDeleteAll > 0){
+                    alarmNoList=[];
+                    alarmSection.innerHTML="";
+                    /* 활동알림목록 조회 */
+                    activityNotification()
+                }
             }
-        }
-    })
+        })
+    } 
 }
 
 
@@ -283,6 +304,7 @@ alarmRightChoice.addEventListener("click",()=>{
     /* 만들위치 지정 */
     const deleteall = document.createElement("div");
     const delete_all = document.querySelector(".delete-all");
+    alarmNoList=[];
 
     /* 특정위치에 1번만 요소추가하기 */
     if(delete_all==null){
@@ -295,14 +317,13 @@ alarmRightChoice.addEventListener("click",()=>{
         deleteAllButton.classList.add("delete-all-button");
         deleteAllButton.innerHTML="전체삭제";
         deleteall.append(deleteAllButton);
-        
+
         /* 전체삭제 클릭시 전체 삭제 */
         const deleteButton = document.querySelector(".delete-all-button");
         if(deleteButton){
             deleteButton.addEventListener("click",()=>{
-                alarmSection.innerHTML="";
-
-                //비동기로 디비 업데이트
+                /* 전체삭제함수 호출 */
+                messageDeleteAll(alarmNoList)
             })
         }
     }
@@ -312,7 +333,7 @@ alarmRightChoice.addEventListener("click",()=>{
 
 /* 삭제버튼 */
 const messageDelete = (btn,alarmNo)=>{
-    
+    alarmNoList=[];
     //비동기로 디비 업데이트
     $.ajax({
         url : "/messageDelete",

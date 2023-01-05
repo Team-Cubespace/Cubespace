@@ -52,4 +52,18 @@ public class NotificationsServiceImpl implements NotificationsService {
 	public int messageDelete(int alarmNo) {
 		return dao.messageDelete(alarmNo);
 	}
+
+	// 알림 전체삭제
+	@Override
+	public int messageDeleteAll(String alarmNoList) {
+		return dao.messageDeleteAll(alarmNoList);
+	}
+
+	// 확인된 알림 값 변경
+	@Override
+	public int alarmRead(String aList) {
+		return dao.alarmRead(aList);
+	}
+
+
 }

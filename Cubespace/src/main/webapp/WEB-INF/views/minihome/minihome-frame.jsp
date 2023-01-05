@@ -146,7 +146,7 @@
                         <li style="order:${minihome.categoryOrder.video}"><a href="/videoList/3" target="minihomeMenu">동영상</a></li>
                     </c:if>
                     <c:if test="${minihome.categoryOrder.guestBook != -1}">
-                        <li style="order:${minihome.categoryOrder.guestBook}"><a href="">방명록</a></li>
+                        <li style="order:${minihome.categoryOrder.guestBook}"><a href="/guestBook" target="minihomeMenu">방명록</a></li>
                     </c:if>
 
                     <c:if test="${minihome.memberNo == loginMember.memberNo}">

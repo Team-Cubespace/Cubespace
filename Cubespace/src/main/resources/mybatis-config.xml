@@ -37,6 +37,7 @@
 		<typeAlias type="com.team.cubespace.main.model.vo.ShopMusic" alias="ShopMusic"/>
 		<typeAlias type="com.team.cubespace.main.model.vo.MainHomepage" alias="MainHomepage"/>
 		<typeAlias type="com.team.cubespace.video.model.vo.Video" alias="Video"/>
+		<typeAlias type="com.team.cubespace.guestbook.model.vo.GuestBook" alias="GuestBook"/>
 	</typeAliases>
 	
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->
@@ -53,5 +54,6 @@
 		<mapper resource="/mappers/complain-mapper.xml"/>	
 		<mapper resource="/mappers/admin-mapper.xml"/>	
 		<mapper resource="/mappers/mainHomepage-mapper.xml"/>	
+		<mapper resource="/mappers/guestBook-mapper.xml"/>	
 	</mappers>
 </configuration>

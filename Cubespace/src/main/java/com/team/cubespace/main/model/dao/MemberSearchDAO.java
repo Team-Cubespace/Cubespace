@@ -76,4 +76,12 @@ public class MemberSearchDAO {
 	public int memberCancelBtn(Map<String, Object> paramMap) {
 		return sqlSession.delete("memberSearch.memberCancelBtn",paramMap);
 	}
+
+	/** 깐부 서로 신청 여부 확인
+	 * @param paramMap
+	 * @return
+	 */
+	public int memberFriendCheck(Map<String, Object> paramMap) {
+		return sqlSession.selectOne("memberSearch.memberFriendCheck",paramMap);
+	}
 }

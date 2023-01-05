@@ -55,7 +55,7 @@ useMusicBtn.addEventListener("click", e => {
             success : result => {
                 if(result > 0) {
                     alert("배경음악이 적용되었습니다");
-                    window.parent.location.reload();
+                    window.parent.postMessage(musicNo, "*");
                 } else {
                     console.log("배경음악 적용 실패");
                 }
@@ -83,7 +83,7 @@ deleteMusic.addEventListener("click", e => {
             success : result => {
                 if(result > 0) {
                     alert("배경음악이 적용되었습니다");
-                    window.parent.location.reload();
+                    window.parent.postMessage(0, "*");
                 } else {
                     console.log("배경음악 적용 실패");
                 }

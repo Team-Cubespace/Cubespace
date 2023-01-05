@@ -13,6 +13,7 @@ import com.team.cubespace.album.model.vo.Album;
 import com.team.cubespace.album.model.vo.Comment;
 import com.team.cubespace.common.Pagination;
 import com.team.cubespace.common.Util;
+import com.team.cubespace.main.model.vo.Notifications;
 import com.team.cubespace.video.model.dao.VideoDAO;
 import com.team.cubespace.video.model.vo.Video;
 
@@ -136,16 +137,28 @@ public class VideoServiceImpl implements VideoService{
 
 	// 동영상 글 스크랩
 	@Override
-	public int videoScrap(Video video, Comment comment) {
+	public int videoScrap(Video video, Comment comment, int hostMemberNo) {
 		System.out.println("동영상 스크랩");
 		// 동영상 글 스크랩
 		int result = dao.videoScrap(video);
+		
+		if(result > 0) {
+			Notifications alarm = new Notifications();
+			alarm.setSenderNo(video.getMemberNo());
+			alarm.setReceiverNo(hostMemberNo);
+			alarm.setBoardTypeNo(comment.getBoardTypeNo());
+			alarm.setBoardNo(video.getScrapVideoNo());
+			alarm.setAlarmType(2);
+			
+			result = cService.sendAlarm(alarm);
+			System.out.println("알람 보내기 성공");
+		}
 		
 		// 글 스크랩 완료 후 댓글이 비어있지 않다면
 		if( result > 0 && comment.getCommentContent() != null) {
 			comment.setCommentContent(Util.XSSHandling(comment.getCommentContent()));
 			comment.setCommentContent(Util.newLineHandling(comment.getCommentContent()));
-			result = cService.insertComment(comment);
+			result = cService.insertComment(comment, hostMemberNo);
 		}
 		
 		return result;

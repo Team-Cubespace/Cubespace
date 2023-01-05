@@ -140,6 +140,18 @@ alarmRightChoice.addEventListener("click",()=>{
     alarmSection.innerHTML="";
 
     /* 비동기로 활동알림 DB조회 구문작성 */
+    $.ajax({
+        url : "/activityNotification",
+        dataType : "JSON",
+        success : activityNotificationList =>{
+
+
+
+
+
+            
+        }
+    })
 })
 
 /* 깐부알림 마우스 올라갈시 */
@@ -179,20 +191,24 @@ alarmRightChoice.addEventListener("click",()=>{
         deleteAllButton.innerHTML="전체삭제";
         deleteall.append(deleteAllButton);
 
-        /* 전체삭제 클릭시 전체 삭제 */
-        const deleteButton = document.querySelector(".delete-all-button");
-        if(deleteButton){
-            deleteButton.addEventListener("click",()=>{
-                alarmSection.innerHTML="";
-            })
-        }
     }
 })
 
+/* 전체삭제 클릭시 전체 삭제 */
+const deleteButton = document.querySelector(".delete-all-button");
+if(deleteButton){
+    deleteButton.addEventListener("click",()=>{
+        alarmSection.innerHTML="";
+
+        //비동기로 디비 업데이트
+    })
+}
 /* 삭제버튼 */
 const messageDelete = (btn)=>{
     const remove = btn.parentElement.parentElement.parentElement;
     remove.remove()
+
+     //비동기로 디비 업데이트
 }
 
 /* 수락(비동기) */

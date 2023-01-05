@@ -240,10 +240,10 @@ public class VideoController {
 	 */
 	@ResponseBody
 	@PostMapping("/boardScrap/3")
-	public int videoScrap(Video video, Comment comment) {
+	public int videoScrap(Video video, Comment comment, @SessionAttribute("minihome") Minihome minihome) {
 		video.setScrapVideoNo(comment.getBoardNo());
 		
-		int result = service.videoScrap(video, comment);
+		int result = service.videoScrap(video, comment, minihome.getMemberNo());
 		return result;
 	}
 }

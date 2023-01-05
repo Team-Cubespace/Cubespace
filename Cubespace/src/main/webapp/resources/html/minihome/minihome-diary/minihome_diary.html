@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다이어리</title>
+    <link rel="stylesheet" href="/component/include/reset.css">
+    <link rel="stylesheet" href="../css/minihome_diary.css">
+    <link rel="stylesheet" href="../css/calendar.css">
+    <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
+</head>
+<body>
+
+
+        <!-- home area로 집어넣을 곳 -->
+        <div class = "home-area">
+            <div class = "category">
+                <span>다이어리 ></span>
+                <span>다이어리1</span>
+            </div>
+            <div class = "calendar-section">
+                <!-- jsp인 경우 include할 거...? -->
+                <div class="calendar-container">
+        
+                    <div class="calendar-left-area">
+                        <span class="today">12.19</span>
+                        <span class="today-day">Mon</span>
+                    </div>
+            
+            
+                    <div class="calendar-right-area">
+                        <div class="calendar-header">
+                            <button id="prevMonth"><i class="fa-solid fa-caret-left"></i></button>
+                            <span class="year-month">2022.12</span>
+                            <button id="nextMonth"><i class="fa-solid fa-caret-right"></i></button>
+                        </div>
+            
+                        <ul class="calendar-day">
+                            <!-- <li><a>1</a></li>
+                            <li><a>2</a></li>
+                            <li><a>3</a></li>
+                            <li class="holiday"><a>4</a></li>
+                            <li><a>5</a></li>
+                            <li><a>6</a></li>
+                            <li><a>7</a></li>
+                            <li><a>8</a></li>
+                            <li><a>9</a></li>
+                            <li><a>10</a></li>
+                            <li class="holiday"><a>11</a></li>
+                            <li><a>12</a></li>
+                            <li class="day-active"><a>13</a></li> -->
+                        </ul>
+                
+                        <ul class="calendar-day">
+                            <!-- <li><a>14</a></li>
+                            <li class="day-active"><a>15</a></li>
+                            <li class="day-active"><a>16</a></li>
+                            <li><a>17</a></li>
+                            <li class="holiday"><a>18</a></li>
+                            <li class="day-click"><a>19</a></li>
+                            <li><a>20</a></li>
+                            <li><a>21</a></li>
+                            <li><a>22</a></li>
+                            <li><a>23</a></li>
+                            <li><a>24</a></li>
+                            <li class="holiday"><a>25</a></li>
+                            <li><a>26</a></li>
+                            <li><a>27</a></li>
+                            <li><a>28</a></li>
+                            <li><a>29</a></li>
+                            <li><a>30</a></li>
+                            <li><a>31</a></li> -->
+                        </ul>
+                    </div>
+                </div>
+                <!-- include 끝 -->
+            </div>
+            <div class = "write-section">
+                <div class = "writeBtn">글쓰기</div>
+            </div>
+            <div class = "diary-section">
+                <div class = "title-section">
+                    <div class = "disclosure-option">공개</div>
+                    <div class = "title">오늘은 추워</div>
+                    <div class = "create-time">20시 03분</div>
+                </div>
+                <div class = "content">내용입니다.</div>
+
+            </div>
+
+        </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
+    <script src = "../js/calendar.js"></script>
+</body>
+</html>

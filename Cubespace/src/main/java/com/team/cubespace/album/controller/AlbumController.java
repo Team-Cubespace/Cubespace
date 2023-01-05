@@ -233,11 +233,13 @@ public class AlbumController {
 	 */
 	@ResponseBody
 	@PostMapping("/boardScrap/2")
-	public int boardScrap(Album album, Comment comment) {
+	public int boardScrap(Album album, Comment comment, @SessionAttribute("minihome") Minihome minihome) {
 		
 		album.setScrapAlbumNo(comment.getBoardNo());
 		
-		int result = service.albumScrap(album, comment);
+		int result = service.albumScrap(album, comment, minihome.getMemberNo());
+		// 스크랩 성공 시 알림 보내기
+		
 		return result;
 	}
 }

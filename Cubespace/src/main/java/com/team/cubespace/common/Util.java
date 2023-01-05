@@ -13,9 +13,6 @@ import net.bramp.ffmpeg.FFprobe;
 import net.bramp.ffmpeg.builder.FFmpegBuilder;
 
 public class Util {
-
-	
-	
 	
 	// 파일명 변경 메소드
 	public static String fileRename(String originFileName) {
@@ -85,6 +82,5 @@ public class Util {
 					.done();
 		FFmpegExecutor thumbnailExecutor = new FFmpegExecutor(ffmpeg, ffprobe);
 		thumbnailExecutor.createJob(thumbnailBuilder).run();
-		
 	}
 }

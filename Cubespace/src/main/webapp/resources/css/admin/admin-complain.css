@@ -1,19 +1,25 @@
 .search-result-area>div:nth-child(1){
-    flex-basis: 7%;
+    flex-basis: 5%;
 }
 .search-result-area>div:nth-child(2){
-    flex-basis: 15%;
+    flex-basis: 10%;
 }
 .search-result-area>div:nth-child(3){
-    flex-basis: 15%;
+    flex-basis: 10%;
 }
 .search-result-area>div:nth-child(4){
-    flex-basis: 41%;
+    flex-basis: 10%;
 }
 .search-result-area>div:nth-child(5){
-    flex-basis: 15%;
+    flex-basis: 10%;
 }
 .search-result-area>div:nth-child(6){
+    flex-basis: 35%;
+}
+.search-result-area>div:nth-child(7){
+    flex-basis: 13%;
+}
+.search-result-area>div:nth-child(8){
     flex-basis: 7%;
 }
 
@@ -126,12 +132,11 @@ input[name='blockDayCount'] {
 .allComplainContent {
     position: absolute;
     word-break: keep-all;
-    word-wrap: break-word;
     
     top: 0;
     left: 50%;
 
-    height: 100px;
+    min-height: 100px;
     width: 400px;
     transform: translate(-50%, -50%);
     z-index: 1002;
@@ -141,7 +146,8 @@ input[name='blockDayCount'] {
     -webkit-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
     -moz-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
 
-
+    padding: 5px;
+    line-height: 150%;
 }
 .allComplainContent > * {
     overflow:hidden; 

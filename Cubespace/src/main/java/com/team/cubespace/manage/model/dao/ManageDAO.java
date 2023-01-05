@@ -24,7 +24,7 @@ public class ManageDAO {
 	 */
 	public List<Map<String, Object>> getAllFontList() {
 		
-		return sqlSession.selectList("ManageMapper.getAllFontList");
+		return sqlSession.selectList("manageMapper.getAllFontList");
 	}
 	
 	
@@ -33,7 +33,7 @@ public class ManageDAO {
 	 */
 	public List<Map<String, Object>> getAllMusicList() {
 
-		return sqlSession.selectList("ManageMapper.getAllMusicList");
+		return sqlSession.selectList("manageMapper.getAllMusicList");
 	}
 
 	/** 폴더 리스트 조회
@@ -42,7 +42,7 @@ public class ManageDAO {
 	 */
 	public List<Folder> getFolderList(int memberNo) {
 		
-		return sqlSession.selectList("ManageMapper.getFolderList", memberNo);
+		return sqlSession.selectList("manageMapper.getFolderList", memberNo);
 	}
 
 	/** 카테고리 순서 조회
@@ -51,7 +51,7 @@ public class ManageDAO {
 	 */
 	public CategoryOrder getCategoryOrder(int memberNo) {
 		
-		return sqlSession.selectOne("ManageMapper.getCategoryOrder", memberNo);
+		return sqlSession.selectOne("manageMapper.getCategoryOrder", memberNo);
 	}
 
 	/** 카테고리 순서 변경
@@ -60,7 +60,7 @@ public class ManageDAO {
 	 */
 	public int changeCategory(CategoryOrder categoryOrder) {
 		
-		int result =  sqlSession.update("ManageMapper.changeCategory", categoryOrder);
+		int result =  sqlSession.update("manageMapper.changeCategory", categoryOrder);
 		return result;
 	}
 
@@ -70,7 +70,7 @@ public class ManageDAO {
 	 */
 	public int categorySelectCancel(int memberNo) {
 		
-		return sqlSession.update("ManageMapper.categorySelectCancel", memberNo);
+		return sqlSession.update("manageMapper.categorySelectCancel", memberNo);
 	}
 
 	/** 친구 목록 조회
@@ -85,7 +85,7 @@ public class ManageDAO {
 //		}
 //		paramMap.put("query", query);
 		
-		return sqlSession.selectList("ManageMapper.getFriendList", paramMap);
+		return sqlSession.selectList("manageMapper.getFriendList", paramMap);
 	}
 
 	/** 깐부끊기
@@ -94,12 +94,12 @@ public class ManageDAO {
 	 */
 	public int deleteFriend(Map<String, Object> paramMap) {
 		
-		return sqlSession.delete("ManageMapper.deleteFriend", paramMap);
+		return sqlSession.delete("manageMapper.deleteFriend", paramMap);
 	}
 
 	public List<Map<String, Object>> getFontList(Map<String, Object> paramMap) {
 		
-		return sqlSession.selectList("ManageMapper.getFontList", paramMap);
+		return sqlSession.selectList("manageMapper.getFontList", paramMap);
 	}
 
 	/** 새 폰트 적용하기
@@ -108,7 +108,7 @@ public class ManageDAO {
 	 */
 	public int useFont(Map<String, Object> paramMap) {
 		
-		return sqlSession.update("ManageMapper.useFont", paramMap);
+		return sqlSession.update("manageMapper.useFont", paramMap);
 	}
 
 
@@ -119,7 +119,7 @@ public class ManageDAO {
 	 */
 	public int getMemberFontNo(int memberNo) {
 		
-		return sqlSession.selectOne("ManageMapper.getMemberFontNo", memberNo);
+		return sqlSession.selectOne("manageMapper.getMemberFontNo", memberNo);
 	}
 
 	/**  카테고리 중 보여질것 선택
@@ -128,7 +128,7 @@ public class ManageDAO {
 	 */
 	public int categorySelect(Map<String, Object> paramMap) {
 		
-		return sqlSession.update("ManageMapper.categorySelect", paramMap);
+		return sqlSession.update("manageMapper.categorySelect", paramMap);
 	}
 
 	/** 카테고리에 새 폴더 삽입
@@ -137,7 +137,7 @@ public class ManageDAO {
 	 */
 	public int addFolder(Map<String, Object> paramMap) {
 		
-		return sqlSession.insert("ManageMapper.addFolder", paramMap);
+		return sqlSession.insert("manageMapper.addFolder", paramMap);
 	}
 
 	/** 카테고리에서 폴더 삭제
@@ -146,7 +146,7 @@ public class ManageDAO {
 	 */
 	public int deleteFolder(Map<String, Object> paramMap) {
 		
-		return sqlSession.update("ManageMapper.deleteFolder", paramMap);
+		return sqlSession.update("manageMapper.deleteFolder", paramMap);
 	}
 
 	/** 폴더삭제 후 나머지 폴더순서 새로 정렬
@@ -155,7 +155,7 @@ public class ManageDAO {
 	 */
 	public int updateFolderOrder(Map<String, Object> paramMap) {
 		
-		return sqlSession.delete("ManageMapper.updateFolderOrder", paramMap);
+		return sqlSession.delete("manageMapper.updateFolderOrder", paramMap);
 	}
 
 
@@ -166,7 +166,7 @@ public class ManageDAO {
 	 */
 	public int updateFolder(Folder folder) {
 		
-		return sqlSession.update("ManageMapper.updateFolder", folder);
+		return sqlSession.update("manageMapper.updateFolder", folder);
 	}
 
 	/** (다이어리)해당 파일의 폴더목록 조회
@@ -175,7 +175,7 @@ public class ManageDAO {
 	 */
 	public List<File> selectDiaryFileList(File file) {
 		
-		return sqlSession.selectList("ManageMapper.selectDiaryFileList", file);	
+		return sqlSession.selectList("manageMapper.selectDiaryFileList", file);	
 	}
 	
 	
@@ -185,7 +185,7 @@ public class ManageDAO {
 	 */
 	public List<File> selectAlbumFileList(File file) {
 		
-		return sqlSession.selectList("ManageMapper.selectAlbumFileList", file);	
+		return sqlSession.selectList("manageMapper.selectAlbumFileList", file);	
 	}
 
 	/** (비디오)해당 파일의 폴더목록 조회
@@ -194,7 +194,7 @@ public class ManageDAO {
 	 */
 	public List<File> selectVideoFileList(File file) {
 
-		return sqlSession.selectList("ManageMapper.selectVideoFileList", file);	
+		return sqlSession.selectList("manageMapper.selectVideoFileList", file);	
 	}
 
 	/** (다이어리)내 폴더의 파일 한개 삭제하기
@@ -203,7 +203,7 @@ public class ManageDAO {
 	 */
 	public int deleteDiaryFile(File file) {
 		
-		return sqlSession.update("ManageMapper.deleteDiaryFile", file);	
+		return sqlSession.update("manageMapper.deleteDiaryFile", file);	
 	}
 	
 	/** (앨범)내 폴더의 파일 한개 삭제하기
@@ -212,7 +212,7 @@ public class ManageDAO {
 	 */
 	public int deleteAlbumFile(File file) {
 		
-		return sqlSession.update("ManageMapper.deleteAlbumFile", file);	
+		return sqlSession.update("manageMapper.deleteAlbumFile", file);	
 	}
 	
 	/** (비디오)내 폴더의 파일 한개 삭제하기
@@ -221,7 +221,7 @@ public class ManageDAO {
 	 */
 	public int deleteVideoFile(File file) {
 		
-		return sqlSession.update("ManageMapper.deleteVideoFile", file);	
+		return sqlSession.update("manageMapper.deleteVideoFile", file);	
 	}
 
 	/** 게시글 공개여부 설정(다이어리)
@@ -230,7 +230,7 @@ public class ManageDAO {
 	 */
 	public int updateDiaryOpenFlag(File file) {
 		
-		return sqlSession.update("ManageMapper.updateDiaryOpenFlag", file);	
+		return sqlSession.update("manageMapper.updateDiaryOpenFlag", file);	
 	}
 
 	/** 게시글 공개여부 설정(앨범)
@@ -239,7 +239,7 @@ public class ManageDAO {
 	 */
 	public int updateAlbumOpenFlag(File file) {
 		
-		return sqlSession.update("ManageMapper.updateAlbumOpenFlag", file);	
+		return sqlSession.update("manageMapper.updateAlbumOpenFlag", file);	
 	}
 
 	/** 게시글 공개여부 설정(비디오)
@@ -248,7 +248,7 @@ public class ManageDAO {
 	 */
 	public int updateVideoOpenFlag(File file) {
 		
-		return sqlSession.update("ManageMapper.updateVideoOpenFlag", file);	
+		return sqlSession.update("manageMapper.updateVideoOpenFlag", file);	
 	}
 
 	/** 배경색/이미지 초기화하기
@@ -257,7 +257,7 @@ public class ManageDAO {
 	 */
 	public int resetBGColor(Background backgroundInfo) {
 		
-		return sqlSession.update("ManageMapper.updateBGColor", backgroundInfo);	
+		return sqlSession.update("manageMapper.updateBGColor", backgroundInfo);	
 	}
 
 	/** 프레임 초기화하기
@@ -266,7 +266,7 @@ public class ManageDAO {
 	 */
 	public int resetFrameColor(Background backgroundInfo) {
 		
-		return sqlSession.update("ManageMapper.updateFrameColor", backgroundInfo);	
+		return sqlSession.update("manageMapper.updateFrameColor", backgroundInfo);	
 	}
 	
 	/** 프레임 메뉴 색 초기화하기
@@ -275,7 +275,7 @@ public class ManageDAO {
 	 */
 	public int resetFrameMenuColor(Background backgroundInfo) {
 		
-		return sqlSession.update("ManageMapper.updateFrameMenuColor", backgroundInfo);	
+		return sqlSession.update("manageMapper.updateFrameMenuColor", backgroundInfo);	
 	}
 
 	/** 배경색 변경
@@ -284,7 +284,7 @@ public class ManageDAO {
 	 */
 	public int updateBGColor(Background backgroundInfo) {
 		
-		return sqlSession.update("ManageMapper.updateBGColor", backgroundInfo);	
+		return sqlSession.update("manageMapper.updateBGColor", backgroundInfo);	
 	}
 
 
@@ -295,7 +295,7 @@ public class ManageDAO {
 	 */
 	public int updateFrameColor(Background backgroundInfo) {
 		
-		return sqlSession.update("ManageMapper.updateFrameColor", backgroundInfo);	
+		return sqlSession.update("manageMapper.updateFrameColor", backgroundInfo);	
 	}
 	
 	
@@ -306,7 +306,7 @@ public class ManageDAO {
 	 */
 	public int updateFrameMenuColor(Background backgroundInfo) {
 		
-		return sqlSession.update("ManageMapper.updateFrameMenuColor", backgroundInfo);	
+		return sqlSession.update("manageMapper.updateFrameMenuColor", backgroundInfo);	
 	}
 
 	/** 내 배경음악 목록 조회
@@ -315,7 +315,7 @@ public class ManageDAO {
 	 */
 	public List<Map<String, Object>> getMusicList(Map<String, Object> paramMap) {
 		
-		return sqlSession.selectList("ManageMapper.getMusicList", paramMap);	
+		return sqlSession.selectList("manageMapper.getMusicList", paramMap);	
 	}
 
 	/** 내 배경음악 설정하기
@@ -324,7 +324,7 @@ public class ManageDAO {
 	 */
 	public int useMusic(Map<String, Object> paramMap) {
 
-		return sqlSession.update("ManageMapper.useMusic", paramMap);	
+		return sqlSession.update("manageMapper.useMusic", paramMap);	
 	}
 
 
@@ -334,11 +334,10 @@ public class ManageDAO {
 	 */
 	public int deleteMusic(int memberNo) {
 		
-		return sqlSession.update("ManageMapper.deleteMusic", memberNo);	
+		return sqlSession.update("manageMapper.deleteMusic", memberNo);	
 	}
 
 
-	
 	
 
 

@@ -63,6 +63,7 @@ useMusicBtn.addEventListener("click", e => {
             error : e => {console.log("배경음악 적용 중 오류 발생");}
         })
 
+
     } else {
         alert("배경음악을 선택한 후 버튼을 눌러주세요");
     }

@@ -36,7 +36,7 @@
                         <span class="rightTitle">배경음악 관리</span>
                         <form class="searchArea">
                             <i id="allMusic" class="whiteBtn">모든 배경음악</i>
-                            <input type="text" id="searchInput" name="searchInput" class="headerSearch" placeholder="배경음악 검색" maxlength="10" value="${param.searchInput}">
+                            <input type="text" id="searchInput" name="searchInput" class="headerSearch" placeholder="배경음악 검색" maxlength="15" value="${param.searchInput}">
                             <button class="fa-solid fa-magnifying-glass" id="searchBtn"></button>
                         </form>
                     </div>

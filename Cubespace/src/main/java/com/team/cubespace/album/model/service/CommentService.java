@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.team.cubespace.album.model.vo.Comment;
+import com.team.cubespace.main.model.vo.Notifications;
 
 public interface CommentService {
 
@@ -30,5 +31,11 @@ public interface CommentService {
 	 * @return result
 	 */
 	int updateComment(Comment comment);
+
+	/** 알람 보내기
+	 * @param alarm
+	 * @return result
+	 */
+	int sendAlarm(Notifications alarm);
 
 }

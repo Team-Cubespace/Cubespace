@@ -75,5 +75,5 @@ public interface AlbumService {
 	 * @return imageList
 	 */
 	public List<String> selectImageList();
-
+	
 }

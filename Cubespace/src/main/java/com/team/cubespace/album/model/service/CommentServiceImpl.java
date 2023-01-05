@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.team.cubespace.album.model.dao.CommentDAO;
 import com.team.cubespace.album.model.vo.Comment;
 import com.team.cubespace.common.Util;
+import com.team.cubespace.main.model.vo.Notifications;
 
 @Service
 public class CommentServiceImpl implements CommentService{
@@ -46,5 +47,10 @@ public class CommentServiceImpl implements CommentService{
 		comment.setCommentContent(Util.newLineHandling(comment.getCommentContent()));
 		
 		return dao.updateComment(comment);
+	}
+
+	@Override
+	public int sendAlarm(Notifications alarm) {
+		return dao.sendAlarm(alarm);
 	}
 }

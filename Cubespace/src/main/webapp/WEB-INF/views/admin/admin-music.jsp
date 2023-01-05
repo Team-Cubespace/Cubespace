@@ -160,7 +160,6 @@
 
                 <%-- 음악 등록------------------------------------------- --%>
                 <div class="popup_layer" id="popup_layer2" style="display: none;">
-                <%-- <div class="popup_layer" id="popup_layer2"> --%>
                     <div class="popup_box scroll">
                         <div style="height: 10px; width: 500px; float: top;">
                             <a href="javascript:closePop2();"><i class="fa-solid fa-x allClose"></i></a>

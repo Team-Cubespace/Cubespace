@@ -145,7 +145,7 @@ const listGuestBook=()=>{
                                 if(listGuestbook.receiverNo==loginMemberNo ||listGuestbook.senderNo==loginMemberNo){ // 미니홈피 주인, 글작성자 일때
                                     
                                     if(listGuestbook.gbSecret =='N'){ // 방명록 공개
-                                        member_message.innerText=listGuestbook.gbContent;
+                                        member_message.innerHTML=listGuestbook.gbContent;
                                         member_message.classList.add("public");
                                         message_box.append(member_message);
     
@@ -153,7 +153,7 @@ const listGuestBook=()=>{
                                     }else { // 방명록 비공개
                                         secretImg.setAttribute("src","/resources/images/common/guestBook.png")
                                         secretText.innerText="비밀글(이글은 작성자와 주인만 볼수 있어요)";
-                                        member_message.innerText=listGuestbook.gbContent;
+                                        member_message.innerHTML=listGuestbook.gbContent;
                                         message_box.append(secret_situation,member_message);
                                         secret_situation.append(secretImg,secretText);
                                     }
@@ -161,7 +161,7 @@ const listGuestBook=()=>{
                                 } else { // 그외사람
     
                                     if(listGuestbook.gbSecret =='N'){ // 방명록 공개
-                                        member_message.innerText=listGuestbook.gbContent;
+                                        member_message.innerHTML=listGuestbook.gbContent;
                                         member_message.classList.add("public");
                                         message_box.append(member_message);
     

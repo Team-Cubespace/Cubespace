@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.team.cubespace.common.Util;
 import com.team.cubespace.guestbook.model.dao.GuestBookDAO;
 import com.team.cubespace.guestbook.model.vo.GuestBook;
 @Service
@@ -20,6 +21,14 @@ public class GuestBookServiceImpl implements GuestBookService{
 	@Override
 	@Transactional
 	public int writeGuestBook(Map<String, Object> paramMpa) {
+		
+		String guestInput =(String) paramMpa.get("guestInput");
+		
+		guestInput=Util.XSSHandling(guestInput);
+		guestInput=Util.newLineHandling(guestInput);
+		
+		paramMpa.put("guestInput",guestInput);
+		
 		return dao.writeGuestBook(paramMpa);
 	}
 
@@ -44,6 +53,12 @@ public class GuestBookServiceImpl implements GuestBookService{
 	// 방명록 수정
 	@Override
 	public int modifyGuestBook(Map<String, Object> paramMpa) {
+		String guestInput =(String) paramMpa.get("guestInput");
+
+		guestInput=Util.XSSHandling(guestInput);
+		guestInput=Util.newLineHandling(guestInput);
+		
+		paramMpa.put("guestInput",guestInput);
 		return dao.modifyGuestBook(paramMpa);
 	}
 	

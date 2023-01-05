@@ -87,6 +87,17 @@
 		AND FRIEND_ACCEPT_FL = 0
 	</delete>
    
+   <!-- 깐부 서로 신청 여부 확인 -->
+   <select id="memberFriendCheck" resultType="_int">
+	   SELECT COUNT(*)  
+		FROM FRIEND 
+		WHERE (ASKING_MEMBER_NO = #{loginMemberNo}
+		AND ASKED_MEMBER_NO = #{memberNo}
+		AND FRIEND_ACCEPT_FL = 0) OR
+		(ASKED_MEMBER_NO = #{loginMemberNo}
+		AND ASKING_MEMBER_NO = #{memberNo}
+		AND FRIEND_ACCEPT_FL = 0)
+   </select>
    
    
 </mapper>

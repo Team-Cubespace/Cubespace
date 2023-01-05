@@ -67,9 +67,10 @@ public interface VideoService {
 	/** 동영상 글 스크랩
 	 * @param video
 	 * @param comment
+	 * @param hostMemberNo
 	 * @return result
 	 */
-	int videoScrap(Video video, Comment comment);
+	int videoScrap(Video video, Comment comment, int hostMemberno);
 
 	/** 동영상 변경명 목록 조회
 	 * @return

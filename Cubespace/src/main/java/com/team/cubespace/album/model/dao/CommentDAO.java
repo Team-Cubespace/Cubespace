@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.team.cubespace.album.model.vo.Comment;
+import com.team.cubespace.main.model.vo.Notifications;
 
 /**
  * @author Tonic
@@ -48,5 +49,13 @@ public class CommentDAO {
 	 */
 	public int updateComment(Comment comment) {
 		return sqlSession.update("commentMapper.updateComment", comment);
+	}
+
+	/** 알람 보내기
+	 * @param alarm
+	 * @return result
+	 */
+	public int sendAlarm(Notifications alarm) {
+		return sqlSession.insert("commentMapper.sendAlarm", alarm);
 	}
 }

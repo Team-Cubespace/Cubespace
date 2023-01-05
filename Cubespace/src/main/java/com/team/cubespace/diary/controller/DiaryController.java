@@ -98,9 +98,7 @@ public class DiaryController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("yearMonth", yearMonth);
 		map.put("memberNo", minihome.getMemberNo());
-		System.out.println(yearMonth);
 		List<Integer> dateList = service.selectDateList(map);
-		System.out.println("ㅠㅠ"+dateList);
 		return new Gson().toJson(dateList);
 	}
 	
@@ -131,9 +129,6 @@ public class DiaryController {
 			}
 		}
 		List<Diary> diaryList = service.selectDiaryList(homepageMemberNo,diaryDate,folderNo,openFlag);
-		System.out.println("로그인 멤버 넘버" + loginMemberNo);
-		System.out.println("홈페이지 넘버" + homepageMemberNo) ;
-		System.out.println("다이어리 목록" + diaryList);
 		return new Gson().toJson(diaryList);
 	}
 	/** 일기의 공감 목록 조회하기
@@ -155,7 +150,6 @@ public class DiaryController {
 	@GetMapping("/selectEmojiPeopleList")
 	@ResponseBody
 	public String selectEmojiPeopleList(int diaryNo, int emojiNo) {
-		System.out.println("이게 컨트롤러까지 오나요?");
 		List<Emoji> emojiPeopleList = service.selectEmojiPeopleList(diaryNo,emojiNo);
 		
 		return new Gson().toJson(emojiPeopleList);
@@ -174,7 +168,6 @@ public class DiaryController {
 		map.put("memberNo", memberNo);
 		map.put("emojiNo", emojiNo);
 		Emoji emoji = service.selectLike(map);
-		System.out.println(emoji);
 		if (emoji == null) {
 			result = service.insertLike(map);
 		} else {
@@ -198,7 +191,6 @@ public class DiaryController {
 		   @RequestParam(value = "date") String date,
 		   Model model
 		   ) {
-	   System.out.println("글쓸 때 날짜" + date);
 	   model.addAttribute("date", date);
 	   return "minihome/minihome-diary/diary-write";
 	   ///prefix :WEB-INF/views/
@@ -223,7 +215,6 @@ public class DiaryController {
 	   	//삭제여부 DEFAULT
 	   	//공개여부 (o)
 	   	//폴더번호 (o)
-	   	System.out.println("다이어리 객체 :"+ diary);
 	   	//회원 번호
 	   	diary.setMemberNo(loginMember.getMemberNo());
 	   	//2023-01-27T11:28 형태를 T빼주고 DB날짜형식으로 바꿔주는 설정
@@ -240,7 +231,6 @@ public class DiaryController {
 	   		model.addAttribute("folderNo", diary.getFolderNo());
 	   		model.addAttribute("datedatedate", diary.getDiaryCreateDate().substring(0, 10));
 	   		model.addAttribute("flagNo", 1);
-	   		System.out.println("model값" + model);
 	   	}
 	   	//다이어리part
 		return "minihome/minihome-diary/minihome-diary";
@@ -249,7 +239,6 @@ public class DiaryController {
    	@GetMapping("/diaryCancle/{date}")
    	public String diaryCancle(@PathVariable("date") String date
    			, Model model) {
-   		System.out.println(date);
    		model.addAttribute("datedatedate",date);
    		model.addAttribute("flagNo", 1);
    		return "minihome/minihome-diary/minihome-diary";
@@ -263,7 +252,6 @@ public class DiaryController {
    			@PathVariable("diaryNo") int diaryNo,
 		   Model model
 		   ) {
-   		System.out.println("수정 페이지로 넘어왔니?");
    		//다이어리를 불러와
    		Diary diary = service.selectDiaryDetail(diaryNo);
 	   
@@ -292,7 +280,6 @@ public class DiaryController {
  	   	//삭제여부 DEFAULT
  	   	//공개여부 (o)
  	   	//폴더번호 -> folderNo 어케 불러와...?
- 	   	System.out.println("수정 다이어리 객체 :"+ diary);
 // 	   	System.out.println("이슬이니...? :"+loginMember.getMemberNo());
 // 	   	diary.setMemberNo(loginMember.getMemberNo());
  	   	diary.setDiaryCreateDate(
@@ -310,7 +297,6 @@ public class DiaryController {
 	   		model.addAttribute("folderNo", diary.getFolderNo());
 	   		model.addAttribute("datedatedate", diary.getDiaryCreateDate().substring(0, 10));
 	   		model.addAttribute("flagNo", 1);
-	   		System.out.println("model값" + model);
 	   	}
 	   	//다이어리part
 		return "minihome/minihome-diary/minihome-diary";
@@ -326,7 +312,6 @@ public class DiaryController {
    	public int diaryDelete(int diaryNo) {
    		
    		int result = service.diaryDelete(diaryNo);
-   		System.out.println("디비에 삭제까지는 된 듯? " + result);
    		return result;
    	}
    	
@@ -344,10 +329,7 @@ public class DiaryController {
 	public String selectSchedule(
 			@SessionAttribute("minihome") Minihome minihome,
 			@SessionAttribute("loginMember") Member loginMember) {
-		System.out.println("로그인한 멤버 넘버가 잘 넘어왔니? " +loginMember.getMemberNo());
 		List<Plan> scheduleList = service.selectSchedule(minihome.getMemberNo());
-		System.out.println("스케쥴리스트 확인!");
-		System.out.println(scheduleList);
 		
 		return new Gson().toJson(scheduleList);
 	}
@@ -364,8 +346,6 @@ public class DiaryController {
 //			@RequestBody Map<String, Object> params
 			Plan plan
 			) {
-		System.out.println("addSchedule 확인!");
-		System.out.println(plan);
 		plan.setMemberNo(loginMember.getMemberNo());
 		int result = service.addSchedule(plan);
 		return result;
@@ -382,8 +362,6 @@ public class DiaryController {
 			@SessionAttribute("loginMember") Member loginMember,
 			@RequestBody Map<String, Object> params
 			) {
-		System.out.println("updateSchedule 확인!");
-		System.out.println(params);
 		params.put("memberNo", loginMember.getMemberNo());
 		int result = service.updateSchedule(params);
 		return result;
@@ -409,7 +387,6 @@ public class DiaryController {
 	@PostMapping("/diary/calendar/updateScheduleDrop")
 	@ResponseBody
 	public int updateScheduleDrop(Plan plan) {
-		System.out.println("드롭"+plan);
 		int result = service.updateScheduleDrop(plan);
 		
 		return result;

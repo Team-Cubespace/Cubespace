@@ -19,6 +19,9 @@
 		<typeAlias type="com.team.cubespace.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.team.cubespace.main.model.vo.MemberSearch" alias="MemberSearch"/>
 		<typeAlias type="com.team.cubespace.minihome.model.vo.Minihome" alias="Minihome"/>		
+		<typeAlias type="com.team.cubespace.diary.model.vo.Diary" alias="Diary"/>		
+		<typeAlias type="com.team.cubespace.diary.model.vo.Emoji" alias="Emoji"/>		
+		<typeAlias type="com.team.cubespace.diary.model.vo.Plan" alias="Plan"/>		
 		<typeAlias type="com.team.cubespace.folder.model.vo.Folder" alias="Folder"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.Font" alias="Font"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.CategoryOrder" alias="CategoryOrder"/>		
@@ -26,6 +29,8 @@
 		<typeAlias type="com.team.cubespace.manage.model.vo.File" alias="File"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.Background" alias="Background"/>		
 		<typeAlias type="com.team.cubespace.manage.model.vo.Music" alias="Music"/>		
+		<typeAlias type="com.team.cubespace.complain.model.vo.Complain" alias="Complain"/>		
+		<typeAlias type="com.team.cubespace.admin.model.vo.Block" alias="Block"/>		
 		<typeAlias type="com.team.cubespace.album.model.vo.Album" alias="Album"/>		
 		<typeAlias type="com.team.cubespace.album.model.vo.AlbumImage" alias="AlbumImage"/>
 		<typeAlias type="com.team.cubespace.album.model.vo.Comment" alias="Comment"/>
@@ -37,6 +42,7 @@
 		<typeAlias type="com.team.cubespace.video.model.vo.Video" alias="Video"/>
 		<typeAlias type="com.team.cubespace.minihome.model.vo.NewPost" alias="NewPost"/>
 		<typeAlias type="com.team.cubespace.minihome.model.vo.FriendMessage" alias="FriendMessage"/>
+		<typeAlias type="com.team.cubespace.guestbook.model.vo.GuestBook" alias="GuestBook"/>
 	</typeAliases>
 	
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->
@@ -44,13 +50,17 @@
 		<mapper resource="/mappers/memberSearch-mapper.xml"/>
 		<mapper resource="/mappers/login-mapper.xml"/>
 		<mapper resource="/mappers/minihome-mapper.xml"/>
+		<mapper resource="/mappers/diary-mapper.xml"/>
 		<mapper resource="/mappers/manage-mapper.xml"/>
 		<mapper resource="/mappers/album-mapper.xml"/>
 		<mapper resource="/mappers/comment-mapper.xml"/>	
 		<mapper resource="/mappers/notifications-mapper.xml"/>	
 		<mapper resource="/mappers/shop-mapper.xml"/>	
-		<mapper resource="/mappers/video-mapper.xml"/>	
-		<mapper resource="/mappers/mainHomepage-mapper.xml"/>
+		<mapper resource="/mappers/video-mapper.xml"/>
 		<mapper resource="/mappers/minihomeMain-mapper.xml"/>
+		<mapper resource="/mappers/complain-mapper.xml"/>	
+		<mapper resource="/mappers/admin-mapper.xml"/>	
+		<mapper resource="/mappers/mainHomepage-mapper.xml"/>	
+		<mapper resource="/mappers/guestBook-mapper.xml"/>	
 	</mappers>
 </configuration>

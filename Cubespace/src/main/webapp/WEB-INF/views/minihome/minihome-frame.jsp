@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,10 +28,29 @@
             background-color : white;
             color: black;
         }
+    </style>
+
+    <c:if test="${fn:length(minihome.backgroundSkin) > 10}">
+    <style>
+        .minihome {
+            background-image : url(${minihome.backgroundSkin});
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        body{
+            width: 1200px;
+            height: 725px;
+        }
+    </style>
+    </c:if>
+    <c:if test="${fn:length(minihome.backgroundSkin) <= 9}">
+    <style>
         .minihome {
             background-color : ${minihome.backgroundSkin};
         }
     </style>
+    </c:if>
 
     <script>
         originalFrameColor = "${minihome.frameColor}";
@@ -46,10 +66,10 @@
 </head>
 <body>
     <div class="minihome">
-        <button type="button" id="goBackButton" class="go-back-button frame-color" onclick="goBack()">
+        <%-- <button type="button" id="goBackButton" class="go-back-button frame-color" onclick="goBack()">
             <i class="fa-solid fa-house"></i>
             이전 미니홈피
-        </button>
+        </button> --%>
         <%-- <div class="audio-container">
             <button class="fa-solid fa-play" id="audioButton"></button>
             <span class="audio-title" id="audioTitle">노래 이름</span>
@@ -85,7 +105,7 @@
                         <div class="audio-container">
                             <div class="music-name-box">
                                 <div class="marquee">
-                                    <p id="minihomeMusicName" class="music-name music-play-marquee">${minihome.musicName}</p>
+                                    <p id="minihomeMusicName" class="music-name">${minihome.musicName}</p>
                                 </div>
                             </div>
                             <div class="music-controller">
@@ -109,16 +129,19 @@
                 </div>
             </div>
             <section class="minihome-main">
-
                 <iframe src="/minihome/home/${minihome.memberNo}" frameborder="0" name="minihomeMenu" scrolling="no">
-                <%-- <iframe src="/albumList/2" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
                 <%-- <iframe src="/manage/friend" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
-
+                <%-- 내꺼 --%>
+                <%-- <iframe src="/diary/1" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
+                <%-- <iframe src="/diary/write" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
+                <%-- <iframe src="/albumList/2" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
+                <%-- <iframe src="/manage/background" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
                 </iframe>
+                
                 <ul class="minihome-menu frame-menu-color">
                     <li><a href="">홈</a></li>
                     <c:if test="${minihome.categoryOrder.diary != -1}">
-                        <li style="order:${minihome.categoryOrder.diary}"><a href="">다이어리</a></li>
+                        <li style="order:${minihome.categoryOrder.diary}"><a href="/diary/1" target="minihomeMenu">다이어리</a></li>
                     </c:if>
                     <c:if test="${minihome.categoryOrder.album != -1}">
                         <li style="order:${minihome.categoryOrder.album}"><a href="/albumList/2" target="minihomeMenu">사진첩</a></li>
@@ -127,12 +150,14 @@
                         <li style="order:${minihome.categoryOrder.video}"><a href="/videoList/3" target="minihomeMenu">동영상</a></li>
                     </c:if>
                     <c:if test="${minihome.categoryOrder.guestBook != -1}">
-                        <li style="order:${minihome.categoryOrder.guestBook}"><a href="">방명록</a></li>
+                        <li style="order:${minihome.categoryOrder.guestBook}"><a href="/guestBook" target="minihomeMenu">방명록</a></li>
                     </c:if>
 
                     <c:if test="${minihome.memberNo == loginMember.memberNo}">
-                        <li><a href="/manage/font" target="minihomeMenu">관리</a></li>
+                        <li class="manage-menu" ><a href="/manage/font" target="minihomeMenu">관리</a></li>
                     </c:if>
+
+                        <li id="goBackButton"><a onclick="goBack()">이전<br>미니홈피</a></li>
                 </ul>
             </section>
         </div>

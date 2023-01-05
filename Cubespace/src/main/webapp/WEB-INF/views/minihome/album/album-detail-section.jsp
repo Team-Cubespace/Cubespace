@@ -4,7 +4,7 @@
 
 <div class="detail-main">
     <header>
-        사진첩 > ${folderName}
+        사진첩 > ${board.folderName}
         <button id="goToList">목록으로</button>
     </header>
     <div class="detail-subtitle">

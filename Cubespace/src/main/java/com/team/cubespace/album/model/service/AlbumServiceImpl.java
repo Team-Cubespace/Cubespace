@@ -18,6 +18,7 @@ import com.team.cubespace.album.model.vo.AlbumImage;
 import com.team.cubespace.album.model.vo.Comment;
 import com.team.cubespace.common.Pagination;
 import com.team.cubespace.common.Util;
+import com.team.cubespace.main.model.vo.Notifications;
 
 /**
  * @author Tonic
@@ -56,8 +57,8 @@ public class AlbumServiceImpl implements AlbumService{
 	
 	// 앨범 상세 조회
 	@Override
-	public Album selectAlbum(int albumNo) {
-		return dao.selectAlbum(albumNo);
+	public Album selectAlbum(Map<String, Integer> paramMap) {
+		return dao.selectAlbum(paramMap);
 	}
 
 	// 앨범 작성 서비스
@@ -228,7 +229,7 @@ public class AlbumServiceImpl implements AlbumService{
 	// 게시글 스크랩
 	@Transactional
 	@Override
-	public int albumScrap(Album album, Comment comment) {
+	public int albumScrap(Album album, Comment comment, int hostMemberNo) {
 		
 		// 게시글 스크랩 dao 호출
 		int result = dao.albumScrap(album);
@@ -237,10 +238,22 @@ public class AlbumServiceImpl implements AlbumService{
 			// 이미지 정보 복사해오기
 			result = dao.albumImageScrap(album);
 			
-			if(result > 0 && comment.getCommentContent() != null) {	// 댓글 작성 시
+			if(result > 0) {
+				Notifications alarm = new Notifications();
+				alarm.setSenderNo(album.getMemberNo());
+				alarm.setReceiverNo(hostMemberNo);
+				alarm.setBoardTypeNo(comment.getBoardTypeNo());
+				alarm.setBoardNo(album.getScrapAlbumNo());
+				alarm.setAlarmType(2);
+				
+				result = cService.sendAlarm(alarm);
+				System.out.println("알람 보내기 성공");
+			}
+			
+			if(result > 0 && comment.getCommentContent().length() != 0) {	// 댓글 작성 시
 				comment.setCommentContent(Util.XSSHandling(comment.getCommentContent()));
 				comment.setCommentContent(Util.newLineHandling(comment.getCommentContent()));
-				result = cService.insertComment(comment);
+				result = cService.insertComment(comment, hostMemberNo);
 			} else {
 				// 예외 발생 시켜 롤백
 			}

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.team.cubespace.admin.model.service.AdminService;
 import com.team.cubespace.manage.model.service.ManageService;
 import com.team.cubespace.manage.model.vo.Background;
 
@@ -23,12 +24,16 @@ public class HomeController {
 	@Autowired
 	private ManageService mService;
 	
+	@Autowired
+	private AdminService aService;
+	
+	
 	// application scope에 배경색/프레임정보를 담기 위한 객체 생성
 	@Autowired
 	ServletContext application;
 	
 	@GetMapping("/")
-	public String home(Model model, HttpServletRequest req) {
+	public String home(Model model) {
 		
 		// 상점에 등록된 전체 폰트 리스트 조회
 		List<Map<String, Object>> allFontList = mService.getAllFontList();
@@ -37,15 +42,10 @@ public class HomeController {
 		// 상점에 등록된 전체 배경음악 리스트 조회
 		List<Map<String, Object>> allMusicList = mService.getAllMusicList();
 		model.addAttribute("allMusicList", allMusicList); // 모두의 사용을 위해 세션에 등록
+	
 		
-		
-		
-		// 모두가 공용으로 사용할 배경색 정보를 application scope에 올려놓음
-		Background backgroundColorInfo = new Background();
-		backgroundColorInfo.setBackgroundSkin("#DDD");
-		backgroundColorInfo.setFrameColor("#82C9E8");
-		backgroundColorInfo.setFrameMenuColor("#1A8DBF");
-		backgroundColorInfo.setFrameFontColor("WHITE");
+		// DB에 저장된 전체 배경색정보 덩어옴
+		Background backgroundColorInfo = aService.getBGColorInfo();
 		
 		application.setAttribute("backgroundColorInfo", backgroundColorInfo);
 

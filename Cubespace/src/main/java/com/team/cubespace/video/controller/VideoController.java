@@ -97,24 +97,23 @@ public class VideoController {
 		return "minihome/video/video-list";
 	}
 	
+	/** 동영상 상세조회
+	 * @param videoNo
+	 * @param model
+	 * @param folderNo
+	 * @param folderList
+	 * @return
+	 */
 	@GetMapping("/videoDetail/{videoNo}")
 	public String videoDetail(@PathVariable("videoNo") int videoNo,
 			Model model,
-			@RequestParam(value="folderNo", required=false) int folderNo,
-			@SessionAttribute("folderList") List<Folder> folderList) {
-		
-		// 폴더 이름 찾기
-		String folderName = "";
-		for(Folder folder : folderList) {
-			if(folder.getFolderNo() == folderNo) {
-				folderName = folder.getFolderName();
-				break;
-			}
-		}
-
+			int folderNo) {
+	
+		Map<String, Integer> paramMap = new HashMap<>();
+		paramMap.put("videoNo", videoNo);
+		paramMap.put("folderNo", folderNo);
 		// 동영상 서비스 호출
-		Video video = service.selectVideo(videoNo);
-		model.addAttribute("folderName", folderName);
+		Video video = service.selectVideo(paramMap);
 		model.addAttribute("board", video);
 		
 		return "minihome/video/video-detail";
@@ -159,9 +158,13 @@ public class VideoController {
 	
 	@GetMapping("/videoUpdate/{videoNo}")
 	public String videoUpdate(@PathVariable("videoNo") int videoNo,
-			Model model) {
+			Model model,
+			int folderNo) {
 		// 동영상 조회
-		Video video = service.selectVideo(videoNo);
+		Map<String, Integer> paramMap = new HashMap<>();
+		paramMap.put("videoNo", videoNo);
+		paramMap.put("folderNo", folderNo);
+		Video video = service.selectVideo(paramMap);
 		
 		if(video.getVideoContent() != null) {
 			video.setVideoContent(Util.newLineClear(video.getVideoContent()));
@@ -240,10 +243,10 @@ public class VideoController {
 	 */
 	@ResponseBody
 	@PostMapping("/boardScrap/3")
-	public int videoScrap(Video video, Comment comment) {
+	public int videoScrap(Video video, Comment comment, @SessionAttribute("minihome") Minihome minihome) {
 		video.setScrapVideoNo(comment.getBoardNo());
 		
-		int result = service.videoScrap(video, comment);
+		int result = service.videoScrap(video, comment, minihome.getMemberNo());
 		return result;
 	}
 }

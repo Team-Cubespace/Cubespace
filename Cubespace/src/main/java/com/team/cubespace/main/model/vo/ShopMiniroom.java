@@ -16,4 +16,6 @@ public class ShopMiniroom {
 	private String goodsName;			// 미니룸소품 이름
 	private String goodsPath;			// 미니룸소품경로
 	private String goodsCreater;		// 미니룸소품 제작자
+	
+	private int goodsUseCount; // 몇명이 이 소품을 사용하는지
 }

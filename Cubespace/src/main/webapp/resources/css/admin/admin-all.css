@@ -7,7 +7,7 @@
     /* flex-direction: column; */
 }
 #frmSearchBase{
-    height: 100px;
+    height: 300px;
 }
 
 #mSearchBase {
@@ -108,6 +108,7 @@
     padding: 8px 15px;
 
     display: flex;
+    align-items: center;
 
 }
 
@@ -115,7 +116,7 @@
     padding: 8px 15px;
 }
 .form-control{
-    width: 300px;
+    width: 100%;
 }
 .search-detail-keyword + div{
     display: flex;
@@ -173,9 +174,9 @@
 
     height: 45px;
     text-align: center;
-    font-weight: bold;
+    /* font-weight: bold; */
     font-size: 12px;
-    white-space: nowrap;
+    white-space: wrap;
     vertical-align: middle;
     /* border-top: 1px solid #AEAEAE !important; */
     border-bottom: 1px solid #AEAEAE !important;
@@ -313,6 +314,7 @@ a {
     justify-content: center;
     align-items: center;
     padding: 0;
+    margin-bottom: 30px;
 }
 
 .pagination li{
@@ -406,6 +408,38 @@ a {
 #memberAddBtn {
     height: 100%;
 }
-#goodsAddBtn {
-    height: 100%;
+#goodsAddBtnArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.otherPageBtn {
+    display: flex;
+}
+.otherPageBtn > *{
+    height: 30px;
+    width: 150px;
+    cursor: pointer;
+    border : 1px solid black;
+    border-radius: 3px;
+    background-color: #eee;
+    margin-bottom: 5px;
+    margin-right: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.js-search-button{
+    cursor: pointer;
+}
+
+.popup_area {
+    position: absolute;
+    margin-left: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
 }

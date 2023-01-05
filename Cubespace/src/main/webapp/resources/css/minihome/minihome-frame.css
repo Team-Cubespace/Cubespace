@@ -4,9 +4,10 @@ html {
 }
 .minihome {
     width: 1200px;
-    height: 715px;
+    height: 725px;
     background-color: #ddd;
     padding-left: 15px;
+    margin-top: 3px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -155,24 +156,32 @@ html {
 /* 미니홈피 메뉴 탭 */
 .minihome-menu {
     position: absolute;
+    height: 450px;
     top: 20px;
-    right: -47px;
+    right: -50px;
     display: flex;
     flex-direction: column;
 }
 .minihome-menu li {
     display: block;
     margin: 3px 0px;
-    font-size: 13px;
+    font-size: 14px;
     letter-spacing: -1px;
 }
-.minihome-menu li:last-of-type {
+.minihome-menu .manage-menu{
     order: 10;
 }
+#goBackButton {
+    order: 999;
+    margin-top: auto;
+    display: none;
+    cursor: pointer;
+}
+
 .minihome-menu a {
     display: flex;
-    width: 67px;
-    height: 35px;
+    width: 70px;
+    height: 40px;
     /* padding: 10px 9px; */
     border: 1px solid black;
     border-left: none;
@@ -369,7 +378,7 @@ iframe {
     border: none;
     font-size: 15px;
     font-weight: bold;
-    display: none;
+    /* display: none; */
 }
 
 .go-back-button i {

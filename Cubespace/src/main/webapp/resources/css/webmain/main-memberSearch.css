@@ -104,6 +104,7 @@ input:focus {outline:none;}
 }
 /* 회원 닉네임 */
 .member-nickname{
+    font-weight: bold;
     margin: 0 10px 0 10px;
     font-size: 18px;
 }

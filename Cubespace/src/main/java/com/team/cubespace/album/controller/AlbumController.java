@@ -136,22 +136,13 @@ public class AlbumController {
 	@GetMapping("/albumDetail/{albumNo}")
 	public String albumDetail(@PathVariable("albumNo") int albumNo,
 			Model model,
-			@RequestParam(value="folderNo", required=false) int folderNo,
-			@SessionAttribute
-			("folderList") List<Folder> folderList) {
-		
-		// 폴더 이름 찾기
-		String folderName = "";
-		for(Folder folder : folderList) {
-			if(folder.getFolderNo() == folderNo) {
-				folderName = folder.getFolderName();
-				break;
-			}
-		}
+			int folderNo) {
 		
 		// 앨범 서비스 호출
-		Album album = service.selectAlbum(albumNo);
-		model.addAttribute("folderName", folderName);
+		Map<String, Integer> paramMap = new HashMap<>();
+		paramMap.put("albumNo", albumNo);
+		paramMap.put("folderNo", folderNo);
+		Album album = service.selectAlbum(paramMap);
 		model.addAttribute("board", album);
 		return "minihome/album/album-detail";
 	}
@@ -186,9 +177,14 @@ public class AlbumController {
 	@GetMapping("/albumUpdate/{albumNo}")
 	public String albumUpdate(@PathVariable("albumNo") int albumNo,
 			Model model,
+			int folderNo,
 			@RequestHeader("referer") String referer) {
 		// 앨범 조회
-		Album album = service.selectAlbum(albumNo);
+		
+		Map<String, Integer> paramMap = new HashMap<>();
+		paramMap.put("albumNo", albumNo);
+		paramMap.put("folderNo", folderNo);
+		Album album = service.selectAlbum(paramMap);
 		
 		if(album.getAlbumContent() != null) {
 			album.setAlbumContent(Util.newLineClear(album.getAlbumContent()));
@@ -233,11 +229,13 @@ public class AlbumController {
 	 */
 	@ResponseBody
 	@PostMapping("/boardScrap/2")
-	public int boardScrap(Album album, Comment comment) {
+	public int boardScrap(Album album, Comment comment, @SessionAttribute("minihome") Minihome minihome) {
 		
 		album.setScrapAlbumNo(comment.getBoardNo());
 		
-		int result = service.albumScrap(album, comment);
+		int result = service.albumScrap(album, comment, minihome.getMemberNo());
+		// 스크랩 성공 시 알림 보내기
+		
 		return result;
 	}
 }

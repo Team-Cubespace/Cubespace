@@ -33,7 +33,7 @@ public interface AlbumService {
 	 * @param albumNo
 	 * @return album
 	 */
-	public Album selectAlbum(int albumNo);
+	public Album selectAlbum(Map<String, Integer> paramMap);
 
 	/** 앨범 작성 서비스
 	 * @param album
@@ -69,11 +69,11 @@ public interface AlbumService {
 	 * @param paramMap
 	 * @return result
 	 */
-	public int albumScrap(Album album, Comment comment);
+	public int albumScrap(Album album, Comment comment, int hostMemberNo);
 
 	/** 사진첩 이미지변경명 목록 조회
 	 * @return imageList
 	 */
 	public List<String> selectImageList();
-
+	
 }

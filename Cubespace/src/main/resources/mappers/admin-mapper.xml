@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminMapper">
+	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
+
+
+	<resultMap type="Block" id="block_rm">
+		<id property="memberNo" column="MEMBER_NO"/>
+		<result property="blockStart" column="BLOCK_START"/>
+		<result property="blockEnd" column="BLOCK_END"/>		
+	</resultMap>
+	
+	<resultMap type="Font" id="font_rm">
+   		<id property="fontNo" column="FONT_NO"/>
+   		<result property="fontName" column="FONT_NAME"></result>
+   		<result property="fontPath" column="FONT_PATH"></result>
+   		<result property="fontCreater" column="FONT_CREATER"></result>
+   		<result property="fontUseCount" column="FONT_USE_COUNT"></result>
+ 	 </resultMap>
+ 	 
+ 	 
+	<resultMap type="Music" id="music_rm">
+   		<id property="musicNo" column="MUSIC_NO"/>
+   		<result property="musicName" column="MUSIC_NAME"></result>
+   		<result property="musicPath" column="MUSIC_PATH"></result>
+   		<result property="musicThumnail" column="MUSIC_THUMNAIL"></result>
+   		<result property="musicCreater" column="MUSIC_CREATER"></result>
+   		<result property="musicUseCount" column="MUSIC_USE_COUNT"></result>
+ 	 </resultMap>
+ 	 
+ 	 
+	<resultMap type="ShopMiniroom" id="goods_rm">
+		<id property="goodsNo" column="GOODS_NO"/>
+		<result property="goodsName" column="GOODS_NAME"></result>
+		<result property="goodsPath" column="GOODS_PATH"></result>
+		<result property="goodsCreater" column="GOODS_CREATER"></result>
+		<result property="goodsCount" column="GOODS_COUNT_NO"></result>
+		<result property="goodsUseCount" column="GOODS_USE_COUNT"></result>
+	</resultMap>
+ 	 
+	<resultMap type="Background" id="background_rm">
+		<id property="backgroundNo" column="BACKGROUND_NO"/>
+		<result property="backgroundSkin" column="BACKGROUND_SKIN"></result>
+		<result property="frameColor" column="FRAME_COLOR"></result>
+		<result property="frameMenuColor" column="FRAME_MENU_COLOR"></result>
+		<result property="frameFontColor" column="FRAME_FONT_COLOR"></result>
+	</resultMap>
+	
+	
+	<!-- 회원 차단====================================================  -->
+	
+ 	 <!-- 회원 새로 차단하기 -->
+ 	<insert id="blockMember">
+ 		INSERT INTO MEMBER_BLOCK VALUES(
+		#{memberNo}, TO_DATE(#{blockStart},'YYYY-MM-DD HH24:MI:SS') , 
+		TO_DATE(#{blockEnd},'YYYY-MM-DD HH24:MI:SS')
+		)
+ 	</insert>
+ 	
+ 	
+ 	<!-- 차단할 회원이 이미 차단중인지 확인 -->
+ 	<select id="isBlockMember" resultMap="block_rm">
+ 		SELECT * FROM MEMBER_BLOCK mb 
+		WHERE MEMBER_NO = #{memberNo}
+ 	</select>
+ 	 
+ 	 
+ 	 <!-- 이미 차단중인 회원 추가로 차단하기 -->
+ 	<update id="updateBlockMember">
+ 		UPDATE MEMBER_BLOCK SET
+		BLOCK_END = TO_DATE(#{blockEnd},'YYYY-MM-DD HH24:MI:SS')
+		WHERE MEMBER_NO = #{memberNo}
+ 	</update>
+ 	
+ 	
+ 	
+	<!-- 폰트 등록====================================================  -->
+ 	
+ 	<!-- 조건에 맞는 폰트 수 -->
+ 	<select id="getFontListCount" resultType="_int">
+	 	SELECT COUNT(*) FROM (
+		SELECT FONT_NO, FONT_NAME ,FONT_PATH ,FONT_CREATER , NVL(COUNT_NO,0) FONT_USE_COUNT 
+		FROM FONT_SHOP F
+		LEFT JOIN (
+		   SELECT COUNT(*) COUNT_NO, GOODS_NO
+		   FROM MEMBER_OWN_GOODS
+		   WHERE SHOP_CATH_NO = 1
+		   GROUP BY GOODS_NO
+		   ORDER BY COUNT_NO DESC
+		) S ON (F.FONT_NO = S.GOODS_NO)) 
+		
+		<if test= 'fontName != null and fontName != "" '>
+		WHERE FONT_NAME LIKE '%${fontName}%'
+		</if>
+ 	</select>
+ 	
+ 	
+ 	<!-- 조건에 맞는 폰트 리스트 -->
+ 	<select id="fontSearch" resultMap="font_rm">
+ 		SELECT * FROM (
+		SELECT FONT_NO, FONT_NAME ,FONT_PATH ,FONT_CREATER , NVL(COUNT_NO,0) FONT_USE_COUNT 
+		FROM FONT_SHOP F
+		LEFT JOIN (
+		   SELECT COUNT(*) COUNT_NO, GOODS_NO
+		   FROM MEMBER_OWN_GOODS
+		   WHERE SHOP_CATH_NO = 1
+		   GROUP BY GOODS_NO
+		   ORDER BY COUNT_NO DESC
+		) S ON (F.FONT_NO = S.GOODS_NO)) 
+		<if test= 'fontName != null and fontName != "" '>
+		WHERE FONT_NAME LIKE '%${fontName}%'
+		</if>
+		
+		ORDER BY ${order}
+ 	</select>
+ 	
+ 	
+ 	<!-- 전체 폰트수 -->
+ 	<select id="getAllFontCount" resultType="_int">
+ 		SELECT COUNT(*) FROM FONT_SHOP 
+ 	</select>
+ 	
+ 	
+ 	<!-- 새 폰트 등록 -->
+ 	<insert id="insertFont" parameterType="com.team.cubespace.manage.model.vo.Font" useGeneratedKeys="true">
+ 	
+ 		<selectKey keyProperty="fontNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_FONT_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		
+ 		INSERT INTO FONT_SHOP VALUES(
+		#{fontNo}, #{fontName}, #{fontPath}, #{fontCreater})
+ 	</insert>
+ 	
+ 	
+ 	<!-- 폰트 삭제 -->
+ 	<delete id="deleteFont">
+ 		DELETE FROM FONT_SHOP WHERE FONT_NO = #{fontNo}
+ 	</delete>
+ 	
+ 	
+ 	
+ 	<!-- 음악 등록====================================================  -->
+ 	
+ 	<!-- 조건에 맞는 음악 수 -->
+	<select id="getMusicListCount" resultType="_int">
+		SELECT COUNT(*) FROM (
+			SELECT MUSIC_NO, MUSIC_NAME ,MUSIC_PATH, MUSIC_THUMNAIL, MUSIC_CREATER , NVL(COUNT_NO,0) MUSIC_USE_COUNT
+			FROM MUSIC_SHOP F
+			LEFT JOIN (
+			   SELECT COUNT(*) COUNT_NO, GOODS_NO
+			   FROM MEMBER_OWN_GOODS
+			   WHERE SHOP_CATH_NO = 2
+			   GROUP BY GOODS_NO
+			   ORDER BY COUNT_NO DESC
+			) S ON (F.MUSIC_NO = S.GOODS_NO)) 
+		<if test= 'musicName != null and musicName != "" '>
+		WHERE MUSIC_NAME LIKE '%${musicName}%'
+		</if>
+	</select>
+	
+	
+ 	<!-- 조건에 맞는 음악 목록 -->
+	<select id="musicSearch" resultMap="music_rm">
+		SELECT * FROM (
+			SELECT MUSIC_NO, MUSIC_NAME ,MUSIC_PATH, MUSIC_THUMNAIL, MUSIC_CREATER , NVL(COUNT_NO,0) MUSIC_USE_COUNT
+			FROM MUSIC_SHOP F
+			LEFT JOIN (
+			   SELECT COUNT(*) COUNT_NO, GOODS_NO
+			   FROM MEMBER_OWN_GOODS
+			   WHERE SHOP_CATH_NO = 2
+			   GROUP BY GOODS_NO
+			   ORDER BY COUNT_NO DESC
+			) S ON (F.MUSIC_NO = S.GOODS_NO)) 
+		<if test= 'musicName != null and musicName != "" '>
+		WHERE MUSIC_NAME LIKE '%${musicName}%'
+		</if>
+		ORDER BY ${order}
+	</select>
+	
+	
+	<!-- 전체 음악수  -->
+	<select id="getAllMusicCount" resultType="_int">
+		SELECT COUNT(*) FROM MUSIC_SHOP 
+	</select>
+	
+	
+ 	<!-- 새 음악 등록 -->
+ 	<insert id="insertMusic" parameterType="com.team.cubespace.manage.model.vo.Music" useGeneratedKeys="true">
+ 	
+ 		<selectKey keyProperty="musicNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_MUSIC_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		
+ 		INSERT INTO MUSIC_SHOP VALUES(
+		#{musicNo}, #{musicName},#{musicPath} ,#{musicThumnail}, #{musicCreater})
+ 	</insert>
+ 	
+ 	
+ 	<!-- 배경음악 삭제 -->
+ 	<delete id="deleteMusic">
+ 		DELETE FROM MUSIC_SHOP WHERE MUSIC_NO = #{musicNo}
+ 	</delete>
+ 
+ 
+<!-- 소품 등록====================================================  -->
+ 	
+ 	<!--  조건에 맞는 소품 수 -->
+ 	<select id="getGoodsListCount" resultType="_int">
+ 		SELECT COUNT(*) FROM (
+		SELECT F.GOODS_NO, GOODS_NAME ,GOODS_PATH, GOODS_CREATER , NVL(COUNT_NO,0) GOODS_USE_COUNT
+		FROM GOODS_SHOP F
+		LEFT JOIN (
+		   SELECT COUNT(*) COUNT_NO, GOODS_NO
+		   FROM MEMBER_OWN_GOODS
+		   WHERE SHOP_CATH_NO = 3
+		   GROUP BY GOODS_NO
+		) S ON (F.GOODS_NO = S.GOODS_NO)) 
+		<if test= 'goodsName != null and goodsName != "" '>
+			WHERE GOODS_NAME LIKE '%${goodsName}%'
+		</if>
+ 	</select>
+ 	
+ 	<!-- 조건에 맞는 음악 목록 -->
+ 	<select id="goodsSearch" resultMap="goods_rm">
+ 		SELECT * FROM (
+		SELECT F.GOODS_NO, GOODS_NAME ,GOODS_PATH, GOODS_CREATER , NVL(COUNT_NO,0) GOODS_USE_COUNT
+		FROM GOODS_SHOP F
+		LEFT JOIN (
+		   SELECT COUNT(*) COUNT_NO, GOODS_NO
+		   FROM MEMBER_OWN_GOODS
+		   WHERE SHOP_CATH_NO = 3
+		   GROUP BY GOODS_NO
+		) S ON (F.GOODS_NO = S.GOODS_NO)) 
+		<if test= 'goodsName != null and goodsName != "" '>
+			WHERE GOODS_NAME LIKE '%${goodsName}%'
+		</if>
+		
+		ORDER BY ${order}
+ 	</select>
+ 	
+ 	<!-- 전체 소품수  -->
+ 	<select id="getAllGoodsCount" resultType="_int">
+ 		SELECT COUNT(*) FROM GOODS_SHOP
+ 	</select>
+ 	
+ 	 <!-- 새 폰트 등록 -->
+ 	<insert id="insertGoods">
+ 		INSERT INTO GOODS_SHOP VALUES(
+		SEQ_GOODS_NO.NEXTVAL, #{goodsName}, #{goodsPath}, #{goodsCreater})
+ 	</insert>
+
+	<!-- 소품 삭제 -->
+	<delete id="deleteGoods">
+		DELETE FROM GOODS_SHOP gs 
+		WHERE GOODS_NO = #{goodsNo}
+	</delete>
+  
+  
+
+  
+  
+  <!-- 스케줄링을 위한 조회====================================================  -->
+  	
+  	<!-- font의 모든 이미지 변경명을 조회 -->
+  	<select id="selectFontPathList" resultType="string">
+  		SELECT REPLACE(FONT_PATH, '/resources/font/', '') FONT_PATH
+		FROM FONT_SHOP fs 
+  	</select>
+  	
+  	
+  	<!-- music의 모든 변경명 조회 -->
+  	<select id="selectMusicPathList" resultType="string">
+  		SELECT REPLACE(MUSIC_PATH, '/resources/music/', '') MUSIC_PATH 
+  		FROM MUSIC_SHOP
+  	</select>
+  	
+  	
+  	<!-- musicThumnail의 모든 변경명 조회 -->
+  	<select id="selectMusicThumnailPathList" resultType="string">
+  		SELECT REPLACE(MUSIC_THUMNAIL, '/resources/musicThumnail/', '') MUSIC_THUMNAIL 
+  		FROM MUSIC_SHOP
+  	</select>
+  	
+  	<!-- goods의 모든 변경명 조회 -->
+  	<select id="selectGoodsPathList" resultType="string">
+  		SELECT REPLACE(GOODS_PATH, '/resources/miniroomGoods/', '') GOODS_PATH 
+  		FROM GOODS_SHOP
+  	</select>
+  	
+  	
+  	
+  	<!-- DB에 저장된 전체 배경색정보 덩어옴 -->
+  	<select id="getBGColorInfo" resultMap="background_rm">
+  		SELECT BACKGROUND_SKIN, FRAME_COLOR, FRAME_MENU_COLOR, FRAME_FONT_COLOR 
+  		FROM BACKGROUND_COLOR
+  	</select>
+  	
+  	
+  	<!-- 전체 회원의 미니홈피 배경색 변경 -->
+  	<update id="updateAllColor">
+  		UPDATE MINI_HOMEPAGE SET
+		BACKGROUND_SKIN  = #{backgroundSkin},
+		FRAME_COLOR = #{frameColor},
+		FRAME_MENU_COLOR  = #{frameMenuColor},
+		FRAME_FONT_COLOR  = #{frameFontColor}
+		WHERE BACKGROUND_SKIN  = #{originalBackgroundSkin}
+		AND FRAME_COLOR  = #{originalFrameColor}
+		AND FRAME_MENU_COLOR  = #{originalFrameMenuColor}
+		AND FRAME_FONT_COLOR  = #{originalFrameFontColor}
+  	</update>
+  	
+  	
+  	<!-- db의 전체 배경색 정보 변경 -->
+  	<update id="updateDBColor">
+  		UPDATE BACKGROUND_COLOR SET
+  		BACKGROUND_SKIN  = #{backgroundSkin},
+		FRAME_COLOR = #{frameColor},
+		FRAME_MENU_COLOR  = #{frameMenuColor},
+		FRAME_FONT_COLOR  = #{frameFontColor}
+		WHERE BACKGROUND_NO = 1
+  	</update>
+		  
+</mapper>

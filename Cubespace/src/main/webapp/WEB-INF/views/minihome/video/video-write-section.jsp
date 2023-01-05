@@ -10,7 +10,7 @@
             <label for="">폴더</label>
             <select name="folderNo" id="">
             <c:forEach var="folder" items="${folderList}">
-                <option value="${folder.folderNo}">${folder.folderName}</option>
+                <option value="${folder.folderNo}" <c:if test="${param.folderNo == folder.folderNo}">selected</c:if>>${folder.folderName}</option>
             </c:forEach>
             </select>
         </div>
@@ -70,7 +70,11 @@
         </div>
         <div class="input-row">
             <label class="add-image" for="addFileInput">동영상 등록
+            <div class="add-image-info">
                 <img src="/resources/images/add-image.png" alt="">
+                <span><span id="videoSizeSpan">0</span> / 100MB</span>
+                <span><span id="videoDurationSpan">0</span> / 60초</span>
+            </div>
             </label>
             <input type="file" name="inputVideo" onchange="addVideo(this)" id="addFileInput">
             <div id="addVideoArea">

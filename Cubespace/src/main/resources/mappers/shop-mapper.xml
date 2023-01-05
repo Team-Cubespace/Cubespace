@@ -294,7 +294,6 @@
 	<!-- 배경음악 상점 상품 갯수 구하기 -->
 	<select id="shopMusicPlyerCount" resultType="_int">
 		SELECT COUNT(MUSIC_NO) MUSIC_COUNT  FROM MUSIC_SHOP
-D
 	</select>
    
 </mapper>

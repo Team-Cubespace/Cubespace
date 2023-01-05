@@ -11,6 +11,7 @@ public class Album {
 	private int albumNo; 			// 사진첩 번호
 	private int memberNo;			// 작성자 회원 번호
 	private int folderNo;			// 폴더 번호
+	private String folderName;		// 폴더 이름
 	private String thumbnailImage;	// 썸네일 이미지
 	private String albumTitle; 		// 사진첩 제목
 	private String albumContent;	// 사진첩 내용

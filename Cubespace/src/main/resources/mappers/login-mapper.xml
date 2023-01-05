@@ -31,6 +31,7 @@
    		<result property="emotionName" column="EMOTION_NAME"></result>
    		<result property="alarmCount" column="ALARM_COUNT"></result>
    		<result property="today" column="TODAY"></result>
+   		<result property="total" column="TOTAL"></result>
    		<result property="friendCount" column="FRIEND_COUNT"></result>
  	 </resultMap>
  	 
@@ -253,7 +254,153 @@
 		DELETE FROM MEMBER_BLOCK mb WHERE BLOCK_END > SYSDATE
 	</delete>
 	
-
+	
+	<!-- ============================================================= -->
+	
+	<!-- 관리자 기능 -->
+	<!-- 특정 조건 회원 수 조회 -->
+	<select id="getMemberListCount" resultType = "_int">
+		SELECT COUNT(*) FROM(
+		SELECT M.MEMBER_NO, MEMBER_EMAIL,MEMBER_NICKNAME, ENROLL_DATE, TODAY, TOTAL, 
+		CASE WHEN MB.MEMBER_NO >= 0 THEN 'Y' ELSE 'N' END MEMBER_BLOCK_YN,
+		BLOCK_START, BLOCK_END, MEMBER_DEL_YN,
+				((SELECT COUNT(ASKED_MEMBER_NO) FRIEND_NO
+				FROM friend 
+				JOIN MEMBER ON(ASKED_MEMBER_NO = MEMBER_NO)
+				WHERE ASKING_MEMBER_NO = M.MEMBER_NO  AND FRIEND_ACCEPT_FL = 1)
+				+ 
+				(SELECT COUNT(ASKING_MEMBER_NO) FRIEND_NO
+				FROM friend 
+				JOIN MEMBER ON(ASKING_MEMBER_NO = MEMBER_NO)
+				WHERE ASKED_MEMBER_NO = M.MEMBER_NO AND FRIEND_ACCEPT_FL = 1)) FRIEND_COUNT
+		FROM MEMBER M
+		JOIN MINI_HOMEPAGE MH ON(MH.MEMBER_NO = M.MEMBER_NO)
+		LEFT JOIN MEMBER_BLOCK MB ON(M.MEMBER_NO = MB.MEMBER_NO))
+		WHERE MEMBER_NO > 0
+		
+		<if test='query != null and query != ""'>
+			<choose>
+				<when test='key == "nickname"'>
+					AND MEMBER_NICKNAME LIKE '%${query}%'
+				</when>
+				<when test='key == "memberNo"'>
+					AND MEMBER_NO = #{query}
+				</when>
+			</choose>
+		</if>
+		
+		<if test='memberBlockYN != null'>
+			<choose>
+				<when test='memberBlockYN == "yesBlock"'>
+					AND MEMBER_BLOCK_YN = 'Y'
+				</when>
+				<when test='memberBlockYN == "noBlock"'>
+					AND MEMBER_BLOCK_YN = 'N'
+				</when>
+			</choose>
+		</if>
+		
+		<if test='memberDeleteYN != null'>
+			<choose>
+				<when test='memberDeleteYN == "yesDelete"'>
+					AND MEMBER_DEL_YN = 'Y'
+				</when>
+				<when test='memberDeleteYN == "noDelete"'>
+					AND MEMBER_DEL_YN = 'N'
+				</when>
+			</choose>
+		</if>
+		
+		<if test='calanderBefore != ""'>			
+			AND ENROLL_DATE >= TO_DATE(#{calanderBefore}, 'YYYY-MM-DD')
+		</if>
+		<if test='calanderAfter != ""'>		
+			<![CDATA[	
+			AND ENROLL_DATE <= TO_DATE(#{calanderAfter}, 'YYYY-MM-DD')
+			]]>
+		</if>
+	</select>
+	
+	
+	<!-- 특정 조건 회원목록 조회 -->
+	<select id="memberSearch" resultMap="member_rm">
+		SELECT MEMBER_NO, MEMBER_EMAIL,MEMBER_NICKNAME, ENROLL_DATE, TODAY, TOTAL, MEMBER_BLOCK_YN, 
+		BLOCK_START, BLOCK_END, MEMBER_DEL_YN, FRIEND_COUNT FROM(
+			SELECT M.MEMBER_NO, MEMBER_EMAIL,MEMBER_NICKNAME, ENROLL_DATE, TODAY, TOTAL, 
+			CASE WHEN MB.MEMBER_NO >= 0 THEN 'Y' ELSE 'N' END MEMBER_BLOCK_YN,
+			BLOCK_START, BLOCK_END, MEMBER_DEL_YN,
+					((SELECT COUNT(ASKED_MEMBER_NO) FRIEND_NO
+					FROM friend 
+					JOIN MEMBER ON(ASKED_MEMBER_NO = MEMBER_NO)
+					WHERE ASKING_MEMBER_NO = M.MEMBER_NO  AND FRIEND_ACCEPT_FL = 1)
+					+ 
+					(SELECT COUNT(ASKING_MEMBER_NO) FRIEND_NO
+					FROM friend 
+					JOIN MEMBER ON(ASKING_MEMBER_NO = MEMBER_NO)
+					WHERE ASKED_MEMBER_NO = M.MEMBER_NO AND FRIEND_ACCEPT_FL = 1)) FRIEND_COUNT
+			FROM MEMBER M
+			JOIN MINI_HOMEPAGE MH ON(MH.MEMBER_NO = M.MEMBER_NO)
+			LEFT JOIN MEMBER_BLOCK MB ON(M.MEMBER_NO = MB.MEMBER_NO))
+			WHERE MEMBER_NO > 0
+			
+			<if test='query != null and query != ""'>
+				<choose>
+					<when test='key == "nickname"'>
+						AND MEMBER_NICKNAME LIKE '%${query}%'
+					</when>
+					<when test='key == "memberNo"'>
+						AND MEMBER_NO = #{query}
+					</when>
+				</choose>
+			</if>
+			
+			<if test='memberBlockYN != null'>
+				<choose>
+					<when test='memberBlockYN == "yesBlock"'>
+						AND MEMBER_BLOCK_YN = 'Y'
+					</when>
+					<when test='memberBlockYN == "noBlock"'>
+						AND MEMBER_BLOCK_YN = 'N'
+					</when>
+				</choose>
+			</if>
+			
+			<if test='memberDeleteYN != null'>
+				<choose>
+					<when test='memberDeleteYN == "yesDelete"'>
+						AND MEMBER_DEL_YN = 'Y'
+					</when>
+					<when test='memberDeleteYN == "noDelete"'>
+						AND MEMBER_DEL_YN = 'N'
+					</when>
+				</choose>
+			</if>
+			
+			<if test='calanderBefore != ""'>			
+				AND ENROLL_DATE >= TO_DATE(#{calanderBefore}, 'YYYY-MM-DD')
+			</if>
+			<if test='calanderAfter != ""'>		
+				<![CDATA[	
+				AND ENROLL_DATE <= TO_DATE(#{calanderAfter}, 'YYYY-MM-DD')
+				]]>
+			</if>
+			
+			ORDER BY ${order}
+	</select>
+	
+	
+	<!-- 전체 회원 수 조회  -->
+	<select id="getAllMemberCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+	
+	
+	<!-- 회원 정보 삭제 복구 -->
+	<update id="deleteMemberBack">
+		UPDATE "MEMBER" SET
+		MEMBER_DEL_YN = 'N'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
 	
 	
 </mapper>

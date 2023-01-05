@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<link rel="stylesheet" href="/resources/css/minihome/include/minihome-common.css">
 <div class="comment-section">
     <div class="comment-header">
         <span class="comment-count">댓글 ${fn:length(board.commentList)}개</span>
@@ -43,7 +44,24 @@
                         </div>
                         <div class="comment-content">
                             <div class="comment-nickname-area">
-                                <span class="member-nickname">${comment.memberNickname}</span>
+                                <c:choose>
+                                    <c:when test="${loginMember.memberNo != comment.memberNo}">
+                                        <button class="member-nickname nickname-drop-down-button">
+                                            ${comment.memberNickname}
+                                            <ul class="nickname-drop-down-box">
+                                                <li>
+                                                    <a href="/minihome/${comment.memberNo}" onclick="return openMinihome(this.href)">미니홈피</a>
+                                                </li>
+                                                <li><a onclick="test()">신고</a></li>
+                                            </ul>
+                                        </button>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button class="member-nickname">
+                                            ${comment.memberNickname}
+                                        </button>
+                                    </c:otherwise>
+                                </c:choose>
                                 <!-- 로그인 회원번호와 댓글의 회원번호가 일치할때만 생성 -->
                                 <c:if test="${loginMember.memberNo == comment.memberNo}">
                                     <button class="comment-drop-down-button fa-solid fa-ellipsis-vertical">

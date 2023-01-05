@@ -13,9 +13,6 @@ import net.bramp.ffmpeg.FFprobe;
 import net.bramp.ffmpeg.builder.FFmpegBuilder;
 
 public class Util {
-
-	
-	
 	
 	// 파일명 변경 메소드
 	public static String fileRename(String originFileName) {
@@ -66,7 +63,7 @@ public class Util {
 				.setFormat("mp4")								// 포맷(확장자)
 				.setVideoCodec("libx264")
 				.setAudioChannels(2)						// 오디오 채널(1ㅣ모노, 2:스테레오)
-				.setVideoResolution(1280, 720)					// 동영상 해상도
+//				.setVideoResolution(1280, 720)					// 동영상 해상도
 				.setVideoBitRate(1464800)						// 동영상 비트레이트 (프레임)
 				.setStrict(FFmpegBuilder.Strict.EXPERIMENTAL)	// ffmpeg 빌더 실행 허용
 				.done();
@@ -85,6 +82,5 @@ public class Util {
 					.done();
 		FFmpegExecutor thumbnailExecutor = new FFmpegExecutor(ffmpeg, ffprobe);
 		thumbnailExecutor.createJob(thumbnailBuilder).run();
-		
 	}
 }

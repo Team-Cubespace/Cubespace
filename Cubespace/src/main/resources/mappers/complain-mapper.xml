@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="complainMapper">
+	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
+
+	<resultMap type="Complain" id="complain_rm">
+   		<id property="complainNo" column="COMPLAIN_NO"/>
+   		<result property="complainerNo" column="COMPLAINER_NO"></result>
+   		<result property="complainedNo" column="COMPLAINED_NO"></result>
+   		<result property="complainContent" column="COMPLAIN_CONTENT"></result>
+   		<result property="complainCreate" column="C_CREATE"></result>
+   		<result property="status" column="STATUS"></result>
+   		
+   		<result property="complainerNickname" column="COMPLAINER_NICKNAME"></result>
+   		<result property="complainedNickname" column="COMPLAINED_NICKNAME"></result>
+   		<result property="complainerBlockFL" column="COMPLAINER_BLOCK_FL"></result>
+   		<result property="complainedBlockFL" column="COMPLAINED_BLOCK_FL"></result>
+   		<result property="complainerDelYN" column="COMPLAINER_DEL_YN"></result>
+   		<result property="complainedDelYN" column="COMPLAINED_DEL_YN"></result>
+   		<result property="blockStart" column="BLOCK_START"></result>
+   		<result property="blockEnd" column="BLOCK_END"></result>
+   		
+   		
+ 	 </resultMap>
+ 	 
+ 	 <!-- 조건에 맞는 신고 수 -->
+	<select id="getComplainListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM
+			(SELECT COMPLAIN_NO, 
+				(SELECT MEMBER_NICKNAME FROM MEMBER M WHERE MC.COMPLAINER_NO = M.MEMBER_NO) COMPLAINER_NICKNAME,
+				(SELECT MEMBER_NICKNAME FROM MEMBER M WHERE MC.COMPLAINED_NO = M.MEMBER_NO) COMPLAINED_NICKNAME,
+				(SELECT MEMBER_NO FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = MC.COMPLAINER_NO) COMPLAINER_BLOCK_FL,
+				(SELECT MEMBER_NO FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = MC.COMPLAINED_NO) COMPLAINED_BLOCK_FL,
+				(SELECT MEMBER_DEL_YN FROM MEMBER M WHERE MC.COMPLAINER_NO = M.MEMBER_NO) COMPLAINER_DEL_YN,
+				(SELECT MEMBER_DEL_YN FROM MEMBER M WHERE MC.COMPLAINED_NO = M.MEMBER_NO) COMPLAINED_DEL_YN,
+			COMPLAINER_NO, COMPLAINED_NO, COMPLAIN_CONTENT, 
+			TO_CHAR(C_CREATE, 'YYYY-MM-DD') C_CREATE, 
+			STATUS
+			FROM MEMBER_COMPLAIN MC)
+		WHERE COMPLAIN_NO > 0
+		<if test='query != null and query != ""'>
+			<choose>
+				<when test='key == "nickname"'>
+					AND (COMPLAINER_NICKNAME LIKE '%${query}%' OR COMPLAINED_NICKNAME LIKE '%${query}%')
+				</when>
+				<when test='key == "complainNo"'>
+					AND COMPLAIN_NO = #{query}
+				</when>
+			</choose>
+		</if>
+		
+		<if test='status != null'>
+			<choose>
+				<when test='status == "1"'>
+					AND STATUS = 1
+				</when>
+				<when test='status == "0"'>
+					AND STATUS = 0
+				</when>
+			</choose>
+		</if>
+		
+		<if test='calanderBefore != ""'>
+			AND C_CREATE >= TO_DATE(#{calanderBefore}, 'YYYY-MM-DD')
+		</if>
+		<if test='calanderAfter != ""'>
+			<![CDATA[
+			AND C_CREATE <= TO_DATE(#{calanderAfter}, 'YYYY-MM-DD')
+			]]>
+		</if>
+
+	</select>
+	
+	
+	<!-- 전체 신고수 -->
+	<select id="getAllComplainCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER_COMPLAIN
+	</select>
+	
+	
+	<!-- 조건에 맞는 신고 목록 -->
+	<select id="complainListSearch" resultMap="complain_rm">
+		SELECT  * FROM
+			(SELECT COMPLAIN_NO, 
+				(SELECT MEMBER_NICKNAME FROM MEMBER M WHERE MC.COMPLAINER_NO = M.MEMBER_NO) COMPLAINER_NICKNAME,
+				(SELECT MEMBER_NICKNAME FROM MEMBER M WHERE MC.COMPLAINED_NO = M.MEMBER_NO) COMPLAINED_NICKNAME,
+				(SELECT MEMBER_NO FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = MC.COMPLAINER_NO) COMPLAINER_BLOCK_FL,
+				(SELECT MEMBER_NO FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = MC.COMPLAINED_NO) COMPLAINED_BLOCK_FL,
+				(SELECT TO_CHAR(BLOCK_START, 'YYYY-MM-DD HH24:MI') FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = MC.COMPLAINED_NO) BLOCK_START,
+				(SELECT TO_CHAR(BLOCK_END, 'YYYY-MM-DD HH24:MI') FROM MEMBER_BLOCK MB WHERE MB.MEMBER_NO = MC.COMPLAINED_NO) BLOCK_END,
+				(SELECT MEMBER_DEL_YN FROM MEMBER M WHERE MC.COMPLAINER_NO = M.MEMBER_NO) COMPLAINER_DEL_YN,
+				(SELECT MEMBER_DEL_YN FROM MEMBER M WHERE MC.COMPLAINED_NO = M.MEMBER_NO) COMPLAINED_DEL_YN,
+			COMPLAINER_NO, COMPLAINED_NO, COMPLAIN_CONTENT, 
+			TO_CHAR(C_CREATE, 'YYYY-MM-DD') C_CREATE, 
+			STATUS
+			FROM MEMBER_COMPLAIN MC)
+		WHERE COMPLAIN_NO > 0
+		<if test='query != null and query != ""'>
+			<choose>
+				<when test='key == "nickname"'>
+					AND (COMPLAINER_NICKNAME LIKE '%${query}%' OR COMPLAINED_NICKNAME LIKE '%${query}%')
+				</when>
+				<when test='key == "complainNo"'>
+					AND COMPLAIN_NO = #{query}
+				</when>
+			</choose>
+		</if>
+		
+		<if test='status != null'>
+			<choose>
+				<when test='status == "1"'>
+					AND STATUS = 1
+				</when>
+				<when test='status == "0"'>
+					AND STATUS = 0
+				</when>
+			</choose>
+		</if>
+		
+		<if test='calanderBefore != "" and calanderBefore != null'>
+			AND C_CREATE >= TO_DATE(#{calanderBefore}, 'YYYY-MM-DD')
+		</if>
+		<if test='calanderAfter != "" and calanderAfter != null'>
+			<![CDATA[
+			AND C_CREATE <= TO_DATE(#{calanderAfter}, 'YYYY-MM-DD')
+			]]>
+		</if>
+		
+		ORDER BY ${order}
+		
+	</select>
+ 	 
+ 	 
+ 	 <!-- 처리 상태 변경 -->
+ 	 <update id="updateStatusToggle">
+ 	 	UPDATE MEMBER_COMPLAIN SET
+		STATUS = #{status}
+		WHERE COMPLAIN_NO = #{complainNo}
+ 	 </update>
+ 	 
+ 	 
+ 
+  
+</mapper>

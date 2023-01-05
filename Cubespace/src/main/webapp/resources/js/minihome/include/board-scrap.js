@@ -103,7 +103,7 @@ const createFolderList = (folderList) => {
         console.log(folderNo);
 
         // 남길 댓글 내용
-        const modalCommentContent = document.getElementById("modalCommentContent").value;
+        const modalCommentContent = document.getElementById("modalCommentContent").value.trim();
         console.log(modalCommentContent);
 
         // 공개 범위

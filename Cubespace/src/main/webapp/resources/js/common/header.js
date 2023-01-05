@@ -21,13 +21,14 @@
 /* 미니홈페이지 오픈 */
 const openMinihome = (url) => {
     console.log("오픈함수 호출");
-console.log(url);
-let title = "minihome";
+    localStorage.removeItem("minihomeHistory");
+    console.log(url);
+    let title = "minihome";
 
-let status = "resizable=no, status=no, menubar=no, width=1203, height=718, top=50, left=300";
-window.open(url, title, status);
+    let status = "resizable=no, status=no, menubar=no, width=1203, height=718, top=50, left=300";
+    window.open(url, title, status, false);
 
-return false;
+    return false;
 }
 
 

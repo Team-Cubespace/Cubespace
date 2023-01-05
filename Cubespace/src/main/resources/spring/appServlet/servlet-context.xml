@@ -69,11 +69,17 @@
 	<!-- bean : Spring에서 만든 객체 -->
 	
 	<!-- form에서 데이터 전달 방식이 multipart/data인 경우 아래 resolver 사용 -->
-    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+<!--     <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <beans:property name="maxUploadSize" value="209715200"/>
         <beans:property name="maxInMemorySize" value="1048576"/>
     </beans:bean>
-
+ -->
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+	</beans:bean>
+	
+	
+	
 	
 	<!-- component-scan : base-package에 명시된 패키지 아래에
 			 @Component관련 어노테이션을 찾아 인식하여 bean으로 등록하는 태그 

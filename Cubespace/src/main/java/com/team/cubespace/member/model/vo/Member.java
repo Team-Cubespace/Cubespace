@@ -39,5 +39,6 @@ public class Member {
 	
 	private int alarmCount; // 알람 수
 	private int today; // 투데이 방문자수
+	private int total; // 총 방문자수
 	private int friendCount; // 친구수
 	}

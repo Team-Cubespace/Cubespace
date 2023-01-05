@@ -26,7 +26,16 @@ public class MemberSearchServiceImpl implements MemberSearchService{
 	@Override
 	@Transactional
 	public int memberAddFriend(Map<String, Object> paramMap) {
-		return dao.memberAddFriend(paramMap);
+		
+		// 깐부 서로 신청 여부 확인
+		int result=dao.memberFriendCheck(paramMap);
+	
+		if(result==0) { // 서로 친구요청이 없을 경우 친구요청보낵기
+			return dao.memberAddFriend(paramMap);
+			
+		}else { // 서로 친구요청이 1개라도 있을 경우
+			return  0;
+		}
 	}
 
 	// 내가 신청한 회원 목록 조회

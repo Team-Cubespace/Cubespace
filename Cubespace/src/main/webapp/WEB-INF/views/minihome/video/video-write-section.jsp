@@ -10,7 +10,7 @@
             <label for="">폴더</label>
             <select name="folderNo" id="">
             <c:forEach var="folder" items="${folderList}">
-                <option value="${folder.folderNo}">${folder.folderName}</option>
+                <option value="${folder.folderNo}" <c:if test="${param.folderNo == folder.folderNo}">selected</c:if>>${folder.folderName}</option>
             </c:forEach>
             </select>
         </div>

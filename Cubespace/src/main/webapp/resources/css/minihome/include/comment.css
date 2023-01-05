@@ -113,8 +113,11 @@
     justify-content: space-between;
 }
 .member-nickname {
+    background-color: transparent;
+    border: none;
     font-size: 14px;
     display: block;
+    padding: 0px;
     margin-bottom: 5px;
 }
 

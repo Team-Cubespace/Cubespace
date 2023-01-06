@@ -23,11 +23,12 @@
 		<result property="videoTitle" column="V_TITLE"/>
 		<result property="videoCreate" column="V_CREATE"/>
 		<result property="videoContent" column="V_CONTENT"/>
+		<result property="folderNo" column="FOLDER_NO"/>
+		<result property="folderName" column="FOLDER_NAME"/>
 		<result property="videoPath" column="VIDEO_PATH"/>
 		<result property="openFlag" column="V_OPEN_FL"/>
 		<result property="videoScrapYN" column="V_SCRAP_YN"/>
 		<result property="videoScrapAllowYN" column="V_SCRAP_ALLOW_YN"/>
-		<result property="folderNo" column="FOLDER_NO"/>
 		<result property="videoThumbnail" column="V_THUMNAIL"/>
 		<result property="videoReadCount" column="V_READ_COUNT"/>
 		<result property="videoOriginalName" column="VIDEO_ORIGINAL_NAME"/>
@@ -87,7 +88,8 @@
 	<select id="selectVideo" parameterType="_int" resultMap="videoDetail_rm">
 		SELECT VIDEO_NO, MEMBER_NO, V_TITLE, V_CONTENT, VIDEO_PATH||VIDEO_RENAME VIDEO_PATH, VIDEO_ORIGINAL_NAME,
 			V_OPEN_FL, V_SCRAP_YN, FOLDER_NO, V_THUMNAIL, V_SCRAP_ALLOW_YN, V_READ_COUNT,
-			TO_CHAR(V_CREATE, 'YYYY.MM.DD') V_CREATE
+			TO_CHAR(V_CREATE, 'YYYY.MM.DD') V_CREATE,
+			(SELECT FOLDER_NAME FROM FOLDER WHERE FOLDER_NO = #{folderNo}) FOLDER_NAME
 		FROM VIDEO
 		WHERE VIDEO_NO = #{videoNo}
 	</select>

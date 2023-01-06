@@ -57,8 +57,8 @@ public class AlbumServiceImpl implements AlbumService{
 	
 	// 앨범 상세 조회
 	@Override
-	public Album selectAlbum(int albumNo) {
-		return dao.selectAlbum(albumNo);
+	public Album selectAlbum(Map<String, Integer> paramMap) {
+		return dao.selectAlbum(paramMap);
 	}
 
 	// 앨범 작성 서비스

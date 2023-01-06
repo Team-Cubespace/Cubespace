@@ -322,7 +322,7 @@ function selectDiary(diaryDate){
                             /* 아직 미완성조각 */
                             div3_1_2.append(div3_1_2_1);
                             }
-                        div3_1.append(div3_1_1,div3_1_2);
+                        div3_1.append(div3_1_2,div3_1_1);
 
 
                         const div3_2 = document.createElement("div");
@@ -589,8 +589,8 @@ function likeUp(number,diaryNo,btn){
                             console.log("이게 emoji-btn이 맞음?");
                             console.log(btn.parentElement.parentElement.previousElementSibling);
                             const emojiBtn = btn.parentElement.parentElement.previousElementSibling;
-                            const popup = emojiBtn.parentElement.previousElementSibling;
-                            const section = emojiBtn.parentElement.previousElementSibling.children[0];
+                            const popup = emojiBtn.parentElement.nextElementSibling;
+                            const section = emojiBtn.parentElement.nextElementSibling.children[0];
 
                             selectEmojiList(diaryNo,section,popup);
                         // })

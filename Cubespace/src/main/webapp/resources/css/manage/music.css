@@ -82,7 +82,7 @@
 }
 #searchInput {
     padding: 5px;
-    width: 250px;
+    width: 200px;
 }
 .fa-magnifying-glass{
     top: 5px;
@@ -98,4 +98,8 @@
 .musicArea >div:nth-child(1){
     display: flex;
     justify-content: flex-end;
+}
+
+#shopLink {
+    cursor: pointer;
 }

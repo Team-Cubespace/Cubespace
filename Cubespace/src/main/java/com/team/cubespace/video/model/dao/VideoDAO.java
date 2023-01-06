@@ -40,8 +40,8 @@ public class VideoDAO {
 	 * @param videoNo
 	 * @return video
 	 */
-	public Video selectVideo(int videoNo) {
-		return sqlSession.selectOne("videoMapper.selectVideo", videoNo);
+	public Video selectVideo(Map<String, Integer> paramMap) {
+		return sqlSession.selectOne("videoMapper.selectVideo", paramMap);
 	}
 
 	/** 동영상 글 작성

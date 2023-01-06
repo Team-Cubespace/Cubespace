@@ -53,8 +53,8 @@ public class AlbumDAO {
 	 * @param albumNo
 	 * @return album
 	 */
-	public Album selectAlbum(int albumNo) {
-		return sqlSession.selectOne("albumMapper.selectAlbum", albumNo);
+	public Album selectAlbum(Map<String, Integer> paramMap) {
+		return sqlSession.selectOne("albumMapper.selectAlbum", paramMap);
 	}
 
 	/** 앨범 개시글 삽입 (이미지 제외)

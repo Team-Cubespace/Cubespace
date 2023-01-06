@@ -52,7 +52,7 @@
                     <header>
                         <span>다이어리 작성</span>
                     </header>
-                    <form id="writediaryForm" action="/diaryUpdate/${diary.diaryNo}" method="POST" encType="">
+                    <form id="writediaryForm" action="/diaryUpdate/${diary.diaryNo}" method="POST" encType="" onsubmit="return writeValidate();">
                         <div class="input-row">
                             <label for="">폴더</label>
                             <select name="folderNo" id="">
@@ -107,8 +107,9 @@
                             </ul>
                         </div>
                         <div class="form-button-area">
-                            <button id="submitButton" type="submit">작성</button>
-                            <a id="cancelWrite">취소</a>
+                            <button type = "submit" id="submitButton">작성</button>
+                            <%-- <button id="submitButton" type="submit">작성</button> --%>
+                            <a id="cancelWrite" href = "/diaryCancle/${diary.diaryCreateDate}">취소</a>
                         </div>
                     </form>
 

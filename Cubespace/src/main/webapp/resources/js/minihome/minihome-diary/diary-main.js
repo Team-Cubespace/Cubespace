@@ -81,16 +81,13 @@ const makeCalendar = (date) => {
     const currentDate = d >= 10 ? d : "0" + d;
 
     const currentDay = weekDay[new Date(date).getDay()];
-    console.log("----------------------------------------------------");
-    console.log(currentYear);
-    console.log(currentMonth);
-    console.log(currentDate);
+    
     // 날짜 변환
     document.querySelector(".today").innerText = `${currentMonth}.${currentDate}`;
     document.querySelector(".today-day").innerText = `${currentDay}`;
     document.querySelector(".year-month").innerText = `${currentYear}.${currentMonth}`;
 
-    console.log("또다른실험" + `${currentYear}.${currentMonth}`);
+    
 
 
     // 달력 변환
@@ -157,7 +154,7 @@ const makeCalendar = (date) => {
 
             // ** ajax 전달할 때 날짜 데이터로 사용 **
             // 클릭한 날짜(년-월-일)
-            console.log(`${currentYear}-${currentMonth}-${temp}`);
+            
 
             
             // !!!!!!!!!!!!!!요기다 해당 날짜 다이어리 조회 ajax 코드 작성!!!!!!!!!!!!!!!!!
@@ -173,7 +170,7 @@ const makeCalendar = (date) => {
 
             /* [글쓰기 시 (1) 날짜 클릭 시에 그 날짜를 dateContainer에 담는다.] */
             dateContainer = diaryDate;
-            console.log("클릭했을 시 date : " +dateContainer);
+        
             selectDiary(diaryDate);
 
             // ------- 여긴 ajax success 코드로 활용 -------------
@@ -216,8 +213,6 @@ function selectDiary(diaryDate){
         dataType : "JSON",
         success :  (diaryList)  => {
 
-            /*확인용*/console.log("해당 날짜의 다이어리 목록 받기 성공")
-            /*확인용*/console.log(diaryList);
             /* diaryNo, diaryTitle, diaryContent, diaryCreateDate, diaryOpenFlag 가지고 옴. */
             
             /* 각각의 diary-section의 위치를 잡아주는 기준(부모) */
@@ -226,9 +221,6 @@ function selectDiary(diaryDate){
             diarySectionContainer.innerText = "";
             
             for(diary of diaryList){
-
-                /*확인용*/console.log("각각의 다이어리");
-                /*확인용*/console.log(diary);
 
                 const div = document.createElement("div");
                 div.classList.add("diary-section");
@@ -263,14 +255,6 @@ function selectDiary(diaryDate){
 
                     const div2 = document.createElement("div");
                     div2.classList.add("content");
-                    // let diaryContentSetting = diary.diaryContent;
-                    // var content = diary.diaryContent;
-                    // console.log(content);
-                    
-                    // var current = /*[[${content} ]]*/{};
-
-                    // console.log("야 제발 돼" +current);
-                    
                 
                     let replaceDiaryContent =  diary.diaryContent;
 
@@ -303,7 +287,6 @@ function selectDiary(diaryDate){
                                 const div3_1_1_2 = document.createElement("div");
                                 div3_1_1_2.classList.add("people-pop-container");
                                 
-                                console.log(div3_1_1_2);
                                 peoplePopContainer = div3_1_1_2;
                             /* selectEmojiList가서 div3_1_1_2를 beforeend로 넣을 꺼야... */
                         
@@ -401,7 +384,6 @@ document.getElementById("nextMonth").addEventListener("click", ()=>{
     
     /* [글쓰기 시 (2) 화면로딩 시에 그 날짜를 dateContainer에 담는다.] */
     dateContainer =  diaryDate;
-    console.log("화면 로딩 시의 date : " + dateContainer);
     selectDiary(diaryDate);
 
     /* ------------------------------------------------------------------------------------- */
@@ -412,17 +394,12 @@ document.getElementById("nextMonth").addEventListener("click", ()=>{
     // const m = new Date().getMonth() + 1;
     // const d = new Date().getDate()
     /* [수정] -----------------------------------------*/
-    console.log("투ㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ데이 "+ today);
-    console.log("11111111111111111111 " + today.getDate());
     makeCalendar(today);
     const m = today2.getMonth() + 1;
     const d = today2.getDate();
-    console.log(m);
-    console.log(d);
     /* ------------------------------------------------ */
     const currentMonth = m >= 10 ? m : "0" + m;     
     const currentDate = d >= 10 ? d : "0" + d;
-    console.log(currentDate);
     const arr = document.querySelectorAll(".calendar-day > li");
 
     for(let a of arr){
@@ -440,7 +417,6 @@ document.getElementById("nextMonth").addEventListener("click", ()=>{
 function writeBtn(){    
     
     /* [dateContainer 변수] 쓰려면 함수가 밑에 있어야 될 걸..? */
-    console.log("글쓸 때 보내는 날짜" + dateContainer);
 
     location.href = "/diaryWrite?date=" + dateContainer;
 
@@ -457,12 +433,10 @@ function deleteDiary(diaryNo){
             success : result => {
                 if(result > 0){
                     alert("다이어리가 삭제되었습니다.");
-                    console.log("다이어리 삭제 실패...성공");
 
                     /* [dateContainer 변수] 쓰려면 함수가 밑에 있어야 될 걸..? */
                     selectDiary(dateContainer);
                 } else {
-                    console.log("다이어리 삭제 실패...");
                 }
             }, error : () => {
 
@@ -483,8 +457,6 @@ function chooseEmoji(diaryNo,btn){
     }
 
     /* [이모지 고르는 리스트]가 만들어짐. */
-    console.log(btn.parentElement);
-    console.log("이게 choose-emoji-section이 맞냐?")
     const div3_1_2_2 = document.createElement("div");
     div3_1_2_2.classList.add("choose-emoji");
 
@@ -549,36 +521,17 @@ function chooseEmoji(diaryNo,btn){
 
     div3_1_2_2.append(div3_1_2_2_1,div3_1_2_2_2,div3_1_2_2_3,div3_1_2_2_4,div3_1_2_2_5,div3_1_2_2_6)
     btn.parentElement.insertAdjacentElement("beforeend",div3_1_2_2);
-
-
-            /* 강사님 */
-        // document.querySelector(".emoji-btn").addEventListener("click", e=>{
-        //     console.log("음.../")
-        //     console.log(e.target);
-        //     console.log(e.target.parentElement.previousElementSibling);
-        //     console.log(e.target.parentElement.previousElementSibling.children[0]);
-
-        //     const popup = e.target.parentElement.previousElementSibling;
-        //     const section = e.target.parentElement.previousElementSibling.children[0];
-            
-        //     selectEmojiList(35, section, popup);
-        // })
-
-    
         
 }
 
 /* [공감하기]에서 이모지를 누른 경우*/
 function likeUp(number,diaryNo,btn){
-    console.log("number"+number);
-    console.log("diaryNo" + diaryNo);
     
     $.ajax({
         url : "/like",
         data : {"diaryNo":diaryNo,"emojiNo":number},
         success :  (result)  => {
             if(result>0){
-                console.log("데이터베이스 저장 성공");
                     /* 변형 */
                     let imgList = document.querySelectorAll(".emoji");
                     for(let i = 0 ; i < imgList.length ; i++){
@@ -586,8 +539,6 @@ function likeUp(number,diaryNo,btn){
                         let img = imgList.item(i);
 
                         // img.addEventListener("click",function(){
-                            console.log("이게 emoji-btn이 맞음?");
-                            console.log(btn.parentElement.parentElement.previousElementSibling);
                             const emojiBtn = btn.parentElement.parentElement.previousElementSibling;
                             const popup = emojiBtn.parentElement.nextElementSibling;
                             const section = emojiBtn.parentElement.nextElementSibling.children[0];
@@ -598,7 +549,6 @@ function likeUp(number,diaryNo,btn){
                     /* 이모지 누르면 [이모지 고르는 리스트] 없어짐 */
                     document.querySelector(".choose-emoji").remove();
             } else{
-                console.log("저장 실패");
             }
         }, error : () => { 
                     
@@ -614,19 +564,12 @@ function likeUp(number,diaryNo,btn){
 function selectEmojiList(diaryNo,div3_1_1_1,div3_1_1){
 
     
-    /*확인용*/console.log("이모지목록 조회하는 함수가 실행됩니다.");
-    /*확인용*/console.log("이모지 목록이 조회되는 다이어리 번호" + diaryNo);
-    console.log(div3_1_1_1);
-    console.log(div3_1_1);
-    
     $.ajax({
         url : "/selectEmojiList",
         data : {"diaryNo":diaryNo},
         dataType : "JSON",
         success :  (emojiList)  => {
 
-        /*확인용*/console.log(diaryNo+"번 다이어리의 이모지 목록");
-        /*확인용*/console.log(emojiList);
         /* 가져오는 것 : emojiNo, emojiPath, emojiCount, diaryNo */
 
         /* 누적방지용? 이거 지우니까 첫번째만 됨 장난하냐? */
@@ -679,12 +622,8 @@ function selectEmojiList(diaryNo,div3_1_1_1,div3_1_1){
 function selectEmojiPeopleList(emojiNo,diaryNo,btn){
     /* div3_1_1_1_1_1 = btn */
     // btn.parentElement.parentElement.nextSibling
-    console.log("안되냐?인식?")
-    console.log(btn.parentElement.parentElement.nextSibling);
     peoplePopContainer=btn.parentElement.parentElement.nextSibling;
     /* div3_1_1_2 = peoplepopcontainer */
-    /*확인용*/console.log("이모지를 누른 사람의 목록을 조회하는 함수가 실행됩니다.");
-    /*확인용*/console.log("사람 목록이 조회되는 다이어리 번호" + diaryNo);
 
     $.ajax({
         url : "/selectEmojiPeopleList",
@@ -692,8 +631,6 @@ function selectEmojiPeopleList(emojiNo,diaryNo,btn){
         dataType : "JSON",
         success :  (emojiPeopleList)  => {
         
-        /*확인용*/console.log(diaryNo+"번 다이어리의"+emojiNo+"번 이모지를 누른 사람들의 목록");
-        /*확인용*/console.log(emojiPeopleList);
         /* 가져오는 것 : DIARY_NO, E.EMOJI_NO, EMOJI_PATH, E.MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG */
 
         const div3_1_1_2_1 = document.createElement("div");
@@ -703,8 +640,6 @@ function selectEmojiPeopleList(emojiNo,diaryNo,btn){
         peoplePopContainer.innerText = "";
 
         peoplePopContainer.append(div3_1_1_2_1);
-            console.log("peoplePopContainer");
-            console.log(peoplePopContainer);
             const div3_1_1_2_1_1 = document.createElement("div");
             div3_1_1_2_1_1.classList.add("people-list");
             div3_1_1_2_1_1.innerText = "공감을 누른 회원 목록";

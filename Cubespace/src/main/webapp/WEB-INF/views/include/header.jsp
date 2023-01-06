@@ -40,16 +40,16 @@
             </li>
             
             <!-- 로그인 O -->
+                <jsp:include page="/WEB-INF/views/webmain/main-notifications.jsp"/>
                 <li class="header-menu" onclick="openmodalAlarm()">
                     <a>
                         <div class="notice">
-                            <span class="notice-new"></span>
+                            <span class="notice-new" id="alarmCount"></span>
                             <i class="fa-solid fa-bell"></i>
                         </div>
                         <span>알림</span>
                     </a>
                 </li>
-                <jsp:include page="/WEB-INF/views/webmain/main-notifications.jsp"/>
                 <c:set var="fileName" value="${fn:split(pageContext.request.requestURI, '/')}"></c:set>
                 <c:if test="${fileName[fn:length(fileName) - 1] != 'home.jsp'}">
                     <li class="header-menu">
@@ -80,4 +80,11 @@
         </a>
     </div>
     <script src="/resources/js/common/header.js"></script>
+    <!-- jQuery 라이브러리(.js 파일) 추가(CDN 방식) -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <%-- include 모달 깐부창찾기 --%>
+    <script src="/resources/js/webmain/main-memberSearch.js"></script>
+    <%-- include 모달 알림 --%>
+    <script src="/resources/js/webmain/main-notifications.js"></script>
+
 </header>

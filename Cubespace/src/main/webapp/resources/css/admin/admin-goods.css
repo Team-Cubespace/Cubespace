@@ -1,27 +1,30 @@
 .search-result-area>div:nth-child(1){
-    flex-basis: 15%;
+    flex-basis: 10%;
 }
 .search-result-area>div:nth-child(2){
-    flex-basis: 15%;
+    flex-basis: 41%;
 }
 .search-result-area>div:nth-child(3){
-    flex-basis: 15%;
+    flex-basis: 14%;
 }
 .search-result-area>div:nth-child(4){
-    flex-basis: 40%;
+    flex-basis: 20%;
 }
 .search-result-area>div:nth-child(5){
-    flex-basis: 15%;
+    flex-basis: 10%;
+}
+.search-result-area>div:nth-child(6){
+    flex-basis: 10%;
 }
 #fontAddBtn {
     height: 100%;
 }
 .search-content {
-    height: 60px !important;
+    height: 150px !important;
     border-right: 2px solid #eee;
 }
 .inputBox{
-    width: 400px !important;   
+    width: 330px !important;   
 }
 .textbox {
     justify-content: space-between !important;
@@ -29,3 +32,32 @@
 .pull-left{
     margin: 0 0 15px 10px !important;
 }
+#goodsAddBtn {
+    height: 100%;
+}
+.popup_box{
+    height: 450px;
+}
+.goodsImage {
+    width: 150px;
+    height: 150px;
+}
+.deleteGoods {
+    cursor: pointer;
+}
+#updateAllColorBtn{
+    height: 100%;
+}
+
+
+/* 미니홈피 전체 색 변경 모달 */
+#updateAllColorForm > div{
+    padding: 10px 0;
+    border-bottom: 2px solid #eee;
+    display: flex;
+}
+.backgroundTitle {
+    padding: 10px;
+}
+
+

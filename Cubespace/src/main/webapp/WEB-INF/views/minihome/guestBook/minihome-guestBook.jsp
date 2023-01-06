@@ -11,6 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minihome Content Area</title>
+    <link rel="stylesheet" href="/resources/css/minihome/include/minihome-common.css">
     <link rel="stylesheet" href="/resources/css/reset.css">
     <link rel="stylesheet" href="/resources/css/variables.css">
     <link rel="stylesheet" href="/resources/css/common/checkBox.css">
@@ -100,6 +101,22 @@
                         <div class="message-header">
                             <div>
                                 <div class="member-nickname">이글을쓴본인</div>
+                                
+                                <button class="member-nickname nickname-drop-down-button">
+                                글을쓴본인
+                                    <ul class="nickname-drop-down-box">
+                                        <li>
+                                            <a href="/minihome/방명록남긴회원번호" onclick= return openMinihome(this.href)>미니홈피</a>
+                                        </li>
+                                        <li>
+                                            <a onclick="reportFriend()">신고</a>
+                                        </li>
+                                    </ul>
+                                </button>
+
+
+
+
                                 <div>(2022.12.15 오후03:30)</div>
                             </div>
                             
@@ -163,5 +180,6 @@
     </script>
 <!-- jQuery 라이브러리(.js 파일) 추가(CDN 방식) -->
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="/resources/js/minihome/include/minihome-common.js "></script>
 <script src="/resources/js/minihome/guestBook/minihome-guestBook.js"></script>
 </html>

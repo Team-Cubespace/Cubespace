@@ -13,12 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.cubespace.admin.model.dao.AdminDAO;
 import com.team.cubespace.admin.model.vo.Block;
 import com.team.cubespace.common.Pagination;
 import com.team.cubespace.common.Util;
 import com.team.cubespace.complain.model.vo.Complain;
+import com.team.cubespace.main.model.vo.ShopMiniroom;
+import com.team.cubespace.manage.model.vo.Background;
 import com.team.cubespace.manage.model.vo.Font;
 import com.team.cubespace.manage.model.vo.Music;
 import com.team.cubespace.member.model.vo.Member;
@@ -321,4 +324,144 @@ public class AdminServiceImpl implements AdminService{
 
 		return dao.deleteMusic(musicNo);
 	}
+
+	/**
+	 * 소품등록 페이지 이동
+	 */
+	@Override
+	public Map<String, Object> goodsSearch(Map<String, Object> paramMap, int cp) {
+		
+		// 조건에 맞는 소품 수
+		int listCount = dao.getGoodsListCount(paramMap);
+		
+		// 전체 소품수 
+		int allGoodsCount = dao.getAllGoodsCount();
+		
+		// 전체 소품 수 + cp를 이용해 페이징처리
+		Pagination pagination = new Pagination(listCount, cp, 10, 10);
+		
+		// sort 값 계산
+		paramMap.put("order", "GOODS_NO DESC");
+		if(paramMap.get("sort") != null) {
+			
+			if(paramMap.get("sort").equals("1")) { // 등록일 빠른순
+				paramMap.put("order", "GOODS_NO DESC");
+			}
+			if(paramMap.get("sort").equals("2")) { // 등록일 느린순
+				paramMap.put("order", "GOODS_NO ASC");
+			}
+			if(paramMap.get("sort").equals("3")) { // 사용횟수 많은순
+				paramMap.put("order", "GOODS_USE_COUNT DESC ,GOODS_NO DESC");
+			}
+			if(paramMap.get("sort").equals("4")) { // 사용횟수 적은순
+				paramMap.put("order", "GOODS_USE_COUNT ASC, GOODS_NO DESC");
+			}
+		}
+		
+		// 조건에 맞는 음악 목록
+		List<ShopMiniroom> goodsList = dao.goodsSearch(pagination, paramMap);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("goodsList", goodsList);
+		map.put("allGoodsCount", allGoodsCount);
+		map.put("listCount", listCount);
+		
+		return map;
+	}
+
+	/**
+	 * 새 소품 등록
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	@Override
+	public int insertGoods(String rename, String folderPath, ShopMiniroom inputGoods, MultipartFile goodsPathFile) throws Exception {
+		
+		int result = dao.insertGoods(inputGoods);
+		
+		if(result > 0) {
+			goodsPathFile.transferTo(new File(folderPath + rename));
+//			result = 0/1	
+		}
+
+		return result;
+	}
+
+	/**
+	 * 소품 삭제
+	 */
+	@Override
+	public int deleteGoods(int goodsNo) {
+		
+		return dao.deleteGoods(goodsNo);
+	}
+
+	/**
+	 * font의 모든 이미지 변경명을 조회
+	 */
+	@Override
+	public List<String> selectFontPathList() {
+		
+		return dao.selectFontPathList();
+	}
+
+	/**
+	 *  music의 모든 변경명 조회
+	 */
+	@Override
+	public List<String> selectMusicPathList() {
+
+		return dao.selectMusicPathList();
+	}
+
+	/**
+	 *  musicThumnail의 모든 변경명 조회
+	 */
+	@Override
+	public List<String> selectMusicThumnailPathList() {
+
+		return dao.selectMusicThumnailPathList();
+	}
+
+	/**
+	 * goods의 모든 변경명 조회
+	 */
+	@Override
+	public List<String> selectGoodsPathList() {
+		
+		return dao.selectGoodsPathList();
+	}
+
+	/**
+	 * DB에 저장된 전체 배경색정보 덩어옴
+	 */
+	@Override
+	public Background getBGColorInfo() {
+		
+		return dao.getBGColorInfo();
+	}
+
+	/**
+	 * 전체 회원의 미니홈피 배경색 변경
+	 * @throws Exception 
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public int updateAllColor(Map<String, Object> map) throws Exception {
+		
+		// 기본 배경색인 회원들의 색 변경
+		int updateMemberResult = dao.updateAllColor(map);
+		
+		// db의 전체 배경색 정보 변경
+		int updateDBResult = dao.updateDBColor(map);
+		
+		if(updateMemberResult * updateDBResult > 0) {
+			return 1;
+		} else {
+			throw new Exception("배경 변경 중 오류 발생");
+		}
+	}
+
+
 }

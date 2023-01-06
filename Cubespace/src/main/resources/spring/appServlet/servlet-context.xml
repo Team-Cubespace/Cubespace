@@ -39,12 +39,12 @@
 	
 	<!-- 인터셉터 등록 -->
  	<interceptors>
-		<interceptor>
+		<!-- <interceptor>
 			<mapping path="/diary/*"/>
 			<mapping path="/albumList/*"/>
 			<mapping path="/videoList/*"/>
 			<beans:bean id="folderInterceptor" class="com.team.cubespace.common.interceptor.FolderInterceptor"></beans:bean>
-		</interceptor>
+		</interceptor> -->
 		<interceptor>
 			<mapping path="/minihome/*"/>
 			<beans:bean id="minihomeInterceptor" class="com.team.cubespace.common.interceptor.MinihomeInterceptor"></beans:bean>
@@ -69,14 +69,10 @@
 	<!-- bean : Spring에서 만든 객체 -->
 	
 	<!-- form에서 데이터 전달 방식이 multipart/data인 경우 아래 resolver 사용 -->
-<!--     <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<!-- <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <beans:property name="maxUploadSize" value="209715200"/>
         <beans:property name="maxInMemorySize" value="1048576"/>
-    </beans:bean>
- -->
-	<beans:bean id="multipartResolver"
-		class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
-	</beans:bean>
+    </beans:bean> -->
 	
 	
 	

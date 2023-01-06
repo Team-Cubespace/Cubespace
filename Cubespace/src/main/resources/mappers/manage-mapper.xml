@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="ManageMapper">
+<mapper namespace="manageMapper">
 	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
 
 	<resultMap type="Folder" id="folder_rm">
@@ -366,5 +366,7 @@
 		WHERE MEMBER_NO = #{memberNo}
  	</update>
  	
+ 	
+
   
 </mapper>

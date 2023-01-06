@@ -27,6 +27,24 @@
    		<result property="musicCreater" column="MUSIC_CREATER"></result>
    		<result property="musicUseCount" column="MUSIC_USE_COUNT"></result>
  	 </resultMap>
+ 	 
+ 	 
+	<resultMap type="ShopMiniroom" id="goods_rm">
+		<id property="goodsNo" column="GOODS_NO"/>
+		<result property="goodsName" column="GOODS_NAME"></result>
+		<result property="goodsPath" column="GOODS_PATH"></result>
+		<result property="goodsCreater" column="GOODS_CREATER"></result>
+		<result property="goodsCount" column="GOODS_COUNT_NO"></result>
+		<result property="goodsUseCount" column="GOODS_USE_COUNT"></result>
+	</resultMap>
+ 	 
+	<resultMap type="Background" id="background_rm">
+		<id property="backgroundNo" column="BACKGROUND_NO"/>
+		<result property="backgroundSkin" column="BACKGROUND_SKIN"></result>
+		<result property="frameColor" column="FRAME_COLOR"></result>
+		<result property="frameMenuColor" column="FRAME_MENU_COLOR"></result>
+		<result property="frameFontColor" column="FRAME_FONT_COLOR"></result>
+	</resultMap>
 	
 	
 	<!-- 회원 차단====================================================  -->
@@ -184,6 +202,123 @@
  		DELETE FROM MUSIC_SHOP WHERE MUSIC_NO = #{musicNo}
  	</delete>
  
+ 
+<!-- 소품 등록====================================================  -->
  	
+ 	<!--  조건에 맞는 소품 수 -->
+ 	<select id="getGoodsListCount" resultType="_int">
+ 		SELECT COUNT(*) FROM (
+		SELECT F.GOODS_NO, GOODS_NAME ,GOODS_PATH, GOODS_CREATER , NVL(COUNT_NO,0) GOODS_USE_COUNT
+		FROM GOODS_SHOP F
+		LEFT JOIN (
+		   SELECT COUNT(*) COUNT_NO, GOODS_NO
+		   FROM MEMBER_OWN_GOODS
+		   WHERE SHOP_CATH_NO = 3
+		   GROUP BY GOODS_NO
+		) S ON (F.GOODS_NO = S.GOODS_NO)) 
+		<if test= 'goodsName != null and goodsName != "" '>
+			WHERE GOODS_NAME LIKE '%${goodsName}%'
+		</if>
+ 	</select>
+ 	
+ 	<!-- 조건에 맞는 음악 목록 -->
+ 	<select id="goodsSearch" resultMap="goods_rm">
+ 		SELECT * FROM (
+		SELECT F.GOODS_NO, GOODS_NAME ,GOODS_PATH, GOODS_CREATER , NVL(COUNT_NO,0) GOODS_USE_COUNT
+		FROM GOODS_SHOP F
+		LEFT JOIN (
+		   SELECT COUNT(*) COUNT_NO, GOODS_NO
+		   FROM MEMBER_OWN_GOODS
+		   WHERE SHOP_CATH_NO = 3
+		   GROUP BY GOODS_NO
+		) S ON (F.GOODS_NO = S.GOODS_NO)) 
+		<if test= 'goodsName != null and goodsName != "" '>
+			WHERE GOODS_NAME LIKE '%${goodsName}%'
+		</if>
+		
+		ORDER BY ${order}
+ 	</select>
+ 	
+ 	<!-- 전체 소품수  -->
+ 	<select id="getAllGoodsCount" resultType="_int">
+ 		SELECT COUNT(*) FROM GOODS_SHOP
+ 	</select>
+ 	
+ 	 <!-- 새 폰트 등록 -->
+ 	<insert id="insertGoods">
+ 		INSERT INTO GOODS_SHOP VALUES(
+		SEQ_GOODS_NO.NEXTVAL, #{goodsName}, #{goodsPath}, #{goodsCreater})
+ 	</insert>
+
+	<!-- 소품 삭제 -->
+	<delete id="deleteGoods">
+		DELETE FROM GOODS_SHOP gs 
+		WHERE GOODS_NO = #{goodsNo}
+	</delete>
   
+  
+
+  
+  
+  <!-- 스케줄링을 위한 조회====================================================  -->
+  	
+  	<!-- font의 모든 이미지 변경명을 조회 -->
+  	<select id="selectFontPathList" resultType="string">
+  		SELECT REPLACE(FONT_PATH, '/resources/font/', '') FONT_PATH
+		FROM FONT_SHOP fs 
+  	</select>
+  	
+  	
+  	<!-- music의 모든 변경명 조회 -->
+  	<select id="selectMusicPathList" resultType="string">
+  		SELECT REPLACE(MUSIC_PATH, '/resources/music/', '') MUSIC_PATH 
+  		FROM MUSIC_SHOP
+  	</select>
+  	
+  	
+  	<!-- musicThumnail의 모든 변경명 조회 -->
+  	<select id="selectMusicThumnailPathList" resultType="string">
+  		SELECT REPLACE(MUSIC_THUMNAIL, '/resources/musicThumnail/', '') MUSIC_THUMNAIL 
+  		FROM MUSIC_SHOP
+  	</select>
+  	
+  	<!-- goods의 모든 변경명 조회 -->
+  	<select id="selectGoodsPathList" resultType="string">
+  		SELECT REPLACE(GOODS_PATH, '/resources/miniroomGoods/', '') GOODS_PATH 
+  		FROM GOODS_SHOP
+  	</select>
+  	
+  	
+  	
+  	<!-- DB에 저장된 전체 배경색정보 덩어옴 -->
+  	<select id="getBGColorInfo" resultMap="background_rm">
+  		SELECT BACKGROUND_SKIN, FRAME_COLOR, FRAME_MENU_COLOR, FRAME_FONT_COLOR 
+  		FROM BACKGROUND_COLOR
+  	</select>
+  	
+  	
+  	<!-- 전체 회원의 미니홈피 배경색 변경 -->
+  	<update id="updateAllColor">
+  		UPDATE MINI_HOMEPAGE SET
+		BACKGROUND_SKIN  = #{backgroundSkin},
+		FRAME_COLOR = #{frameColor},
+		FRAME_MENU_COLOR  = #{frameMenuColor},
+		FRAME_FONT_COLOR  = #{frameFontColor}
+		WHERE BACKGROUND_SKIN  = #{originalBackgroundSkin}
+		AND FRAME_COLOR  = #{originalFrameColor}
+		AND FRAME_MENU_COLOR  = #{originalFrameMenuColor}
+		AND FRAME_FONT_COLOR  = #{originalFrameFontColor}
+  	</update>
+  	
+  	
+  	<!-- db의 전체 배경색 정보 변경 -->
+  	<update id="updateDBColor">
+  		UPDATE BACKGROUND_COLOR SET
+  		BACKGROUND_SKIN  = #{backgroundSkin},
+		FRAME_COLOR = #{frameColor},
+		FRAME_MENU_COLOR  = #{frameMenuColor},
+		FRAME_FONT_COLOR  = #{frameFontColor}
+		WHERE BACKGROUND_NO = 1
+  	</update>
+		  
 </mapper>

@@ -1,5 +1,8 @@
 package com.team.cubespace.minihome.model.vo;
 
+import java.util.List;
+
+import com.team.cubespace.folder.model.vo.Folder;
 import com.team.cubespace.manage.model.vo.CategoryOrder;
 
 import lombok.Getter;
@@ -23,4 +26,8 @@ public class Minihome {
 	private CategoryOrder categoryOrder;	// 메뉴 카테고리 순서
 	private int fontNo; // "내" 폰트번호
 	private int musicNo; // "내" 배경음악 번호
+	
+	private List<Folder> diaryFolderList;	//	다이어리 폴더 목록
+	private List<Folder> albumFolderList;	// 	사진첩 폴더 목록
+	private List<Folder> videoFolderList;	//	동영상 폴더 목록
 }

@@ -25,4 +25,36 @@ public interface NotificationsService {
 	 */
 	int memberCancelBtn(Map<String, Object> paramMap);
 
+	/** 활동알림 목록 조회
+	 * @param loginMemberNo
+	 * @return
+	 */
+	List<Notifications> activityNotification(int loginMemberNo);
+
+	/** 알람 개별삭제
+	 * @param alarmNo
+	 * @return
+	 */
+	int messageDelete(int alarmNo);
+
+	/** 알림 전체 삭제
+	 * @param alarmNoList
+	 * @return
+	 */
+	int messageDeleteAll(String alarmNoList);
+
+	/** 확인된 알림 값 변경
+	 * @param aList
+	 * @return
+	 */
+	int alarmRead(String aList);
+
+	/** 알림 카운트 확인
+	 * @param loginMemberNo
+	 * @return
+	 */
+	int notificationsCount(int loginMemberNo);
+
+
+
 }

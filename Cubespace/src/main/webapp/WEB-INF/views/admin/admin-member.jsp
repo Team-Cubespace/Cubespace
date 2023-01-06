@@ -302,7 +302,12 @@
                                 <div class="search-content disabled">차단</div>
                             </c:if>
                             <c:if test="${member.memberBlockYN == 'N'}">
-                                <div class="search-content">활동중</div>
+                                <c:if test="${member.memberDeleteYN == 'Y'}">
+                                    <div class="search-content">-</div>
+                                </c:if>
+                                <c:if test="${member.memberDeleteYN == 'N'}">
+                                    <div class="search-content">활동중</div>
+                                </c:if>
                             </c:if>
                         </c:forEach>
                     </div>

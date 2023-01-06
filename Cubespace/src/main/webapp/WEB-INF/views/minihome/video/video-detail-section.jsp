@@ -4,7 +4,7 @@
 
 <div class="detail-main">
     <header>
-        동영상 > ${folderName}
+        동영상 > ${board.folderName}
         <button id="goToList">목록으로</button>
     </header>
     <div class="detail-subtitle">
@@ -25,7 +25,10 @@
         <span class="detail-create-date">${board.videoCreate}</span>
     </div>
     <div class="slide-container">
-        <video-js id="vid1" class="video-js vjs-big-play-button vjs-big-play-centered vjs-fluid"
+        <%-- <video id="myVideo" src="${board.videoPath}" controls>
+        
+        </video> --%>
+        <video-js id="vid1" class="video-js vjs-big-play-button vjs-big-play-centered"
             data-setup='{"controls":true, "playbackRates": [0.5, 1, 1.5, 2]}'>
             <source src="${board.videoPath}" type="video/webm">
             <source src="${board.videoPath}" type="video/mp4">
@@ -102,8 +105,5 @@
             </div>
         </div>
     </div>
-    <script>
-        window.parent.postMessage("3", "*");
-    </script>
     <jsp:include page="/WEB-INF/views/include/comment.jsp"/>
 </div>

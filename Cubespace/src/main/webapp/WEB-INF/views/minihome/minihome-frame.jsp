@@ -131,11 +131,11 @@
             <section class="minihome-main">
 
                 <%-- 내꺼 --%>
-                <iframe src="/diary/1" frameborder="0" name="minihomeMenu" scrolling="no">
+                <%-- <iframe src="/diary/1" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
                 <%-- <iframe src="/diary/write" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
 
                 <%-- <iframe src="/albumList/2" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
-                <iframe src="/manage/background" frameborder="0" name="minihomeMenu" scrolling="no">
+                <iframe src="/manage/font" frameborder="0" name="minihomeMenu" scrolling="no">
 
                 </iframe>
                 <ul class="minihome-menu frame-menu-color">

@@ -17,4 +17,5 @@ public class ShopMusic {
 	private String goodsPath;			// 배경음악 경로
 	private String goodsImagePath;		// 배경음악 썸네일경로
 	private String goodsCreater;		// 배경음악 제작자
+	
 }

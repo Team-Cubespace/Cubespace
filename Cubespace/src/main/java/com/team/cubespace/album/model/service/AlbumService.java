@@ -33,7 +33,7 @@ public interface AlbumService {
 	 * @param albumNo
 	 * @return album
 	 */
-	public Album selectAlbum(int albumNo);
+	public Album selectAlbum(Map<String, Integer> paramMap);
 
 	/** 앨범 작성 서비스
 	 * @param album

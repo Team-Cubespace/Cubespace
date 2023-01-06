@@ -42,7 +42,7 @@ public class VideoController {
 	public String videoList(@PathVariable("boardTypeNo") int boardTypeNo,
 			Model model, @SessionAttribute(value="loginMember", required=false) Member loginMember,
 			@SessionAttribute("minihome") Minihome minihome,
-			@SessionAttribute("folderList") List<Folder> folderList,
+//			@SessionAttribute("folderList") List<Folder> folderList,
 			@RequestParam(value="folderNo", required=false, defaultValue="-1") int folderNo,
 			@RequestParam(value="cp", required=false, defaultValue="1") int cp,
 			HttpServletRequest req) {
@@ -51,7 +51,7 @@ public class VideoController {
 			// 폴더리스트를 가져와
 			// 폴더리스트의 0번째 인덱스의 폴더번호를
 			// folderNo로 지정
-			folderNo = folderList.get(0).getFolderNo();
+			folderNo = minihome.getVideoFolderList().get(0).getFolderNo();
 		}
 		
 		Map<String, Integer> paramMap = new HashMap<>();
@@ -83,7 +83,7 @@ public class VideoController {
 		
 		// 폴더 이름 찾기
 		String folderName = "";
-		for(Folder folder : folderList) {
+		for(Folder folder : minihome.getVideoFolderList()) {
 			if(folder.getFolderNo() == folderNo) {
 				folderName = folder.getFolderName();
 				break;
@@ -97,26 +97,25 @@ public class VideoController {
 		return "minihome/video/video-list";
 	}
 	
+	/** 동영상 상세조회
+	 * @param videoNo
+	 * @param model
+	 * @param folderNo
+	 * @param folderList
+	 * @return
+	 */
 	@GetMapping("/videoDetail/{videoNo}")
 	public String videoDetail(@PathVariable("videoNo") int videoNo,
 			Model model,
 			int folderNo,
-			@SessionAttribute("folderList") List<Folder> folderList) {
-		
-		// 폴더 이름 찾기
-		String folderName = "";
-		for(Folder folder : folderList) {
-			if(folder.getFolderNo() == folderNo) {
-				folderName = folder.getFolderName();
-				break;
-			}
-		}
-
+			HttpServletRequest request) {
+	
+		Map<String, Integer> paramMap = new HashMap<>();
+		paramMap.put("videoNo", videoNo);
+		paramMap.put("folderNo", folderNo);
 		// 동영상 서비스 호출
-		Video video = service.selectVideo(videoNo);
-		model.addAttribute("folderName", folderName);
+		Video video = service.selectVideo(paramMap);
 		model.addAttribute("board", video);
-		
 		return "minihome/video/video-detail";
 	}
 	
@@ -159,9 +158,13 @@ public class VideoController {
 	
 	@GetMapping("/videoUpdate/{videoNo}")
 	public String videoUpdate(@PathVariable("videoNo") int videoNo,
-			Model model) {
+			Model model,
+			int folderNo) {
 		// 동영상 조회
-		Video video = service.selectVideo(videoNo);
+		Map<String, Integer> paramMap = new HashMap<>();
+		paramMap.put("videoNo", videoNo);
+		paramMap.put("folderNo", folderNo);
+		Video video = service.selectVideo(paramMap);
 		
 		if(video.getVideoContent() != null) {
 			video.setVideoContent(Util.newLineClear(video.getVideoContent()));

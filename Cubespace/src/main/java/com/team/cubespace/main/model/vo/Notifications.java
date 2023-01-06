@@ -16,4 +16,11 @@ public class Notifications {
 	private int alarmType;			// 알람 타입 번호 (1:댓글, 2:스크랩)
 	private String alarmCreate;		// 알람 생성일
 	private String readYN;			// 읽음 여부
+	
+	private String boardTypeName;		// 사진첩,동영상
+	private String boardTitle;			// 게시글 제목
+	
+	
+	private String memberNickname;		// 회원 닉네임
+	private String profileImage;		// 회원 프로필사진
 }

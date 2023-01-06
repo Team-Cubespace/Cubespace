@@ -20,85 +20,68 @@ const orderBy = () => {
 /* -------------------------------------------------------------- */
 
 //팝업 띄우기
-function openPop() {
-    document.getElementsByClassName("popup_box")[0].style.display = "block";
+function openPop1() {
+    document.getElementById("popup_layer1").style.display = "block";
+}
+function openPop2() {
+    document.getElementById("popup_layer2").style.display = "block";
 }
 
 // 팝업 닫기
-function closePop() {
-    document.getElementsByClassName("popup_box")[0].style.display = "none";
+function closePop1() {
+    document.getElementById("popup_layer1").style.display = "none";
 }
-document.getElementById("fontAddBtn").addEventListener("click", openPop2);
+function closePop2() {
+    document.getElementById("popup_layer2").style.display = "none";
+}
 
 /* -------------------------------------------------------------- */
 
-// 회원정보 등록
-document.getElementById("memberAddBtn").addEventListener("click", openPop);
-document.getElementById("signUpBtn").addEventListener("click", () => {
+// 상품정보 등록
+document.getElementById("goodsAddBtn").addEventListener("click", openPop2);
 
 
-    const memberEmail = document.getElementById("inputEmail").value;
-    const memberPw = document.getElementById("inputPw").value;
-    const memberPw2 = document.getElementById("inputPw2").value;
-    const memberNickname = document.getElementById("inputNickname").value;
-    const memberName = document.getElementById("inputName").value;
-    const memberTel = document.getElementById("inputTel").value;
 
+// 상품정보 삭제
+const deleteGoodsList = document.getElementsByClassName("deleteGoods");
+for(let deleteGoods of deleteGoodsList){
+    deleteGoods.addEventListener("click", e=>{
 
-    if (memberPw != memberPw2) {
-        alert("비밀번호가 일치하지 않습니다");
-        return;
-
-    } else {
-        
-        $.ajax({
-
-            url: "/admin/member/insertNewMember",
-            data: {
-                "memberEmail": memberEmail,
-                "memberPw": memberPw,
-                "memberNickname": memberNickname,
-                "memberName": memberName,
-                "memberTel": memberTel,
-            },
-            type: "post",
-            success: result => {
-                if (result > 0) {
-                    alert("회원 정보가 등록되었습니다.");
-                    document.getElementById("frmSearchBase").submit();
-                }
-            },
-            error: () => {
-                alert("회원 등록 실패");
-            }
-        })
-    }
-});
-
-
-// 회원정보 삭제
-const btnDel = document.getElementsByClassName("btnDel");
-for (let btn of btnDel) {
-    btn.addEventListener("click", e => {
-
-        const memberNo = e.target.getAttribute("id");
-        if (confirm("정말 회원 정보를 삭제하시겠습니까?")) {
-
-            $.ajax({
-                url: "/admin/member/deleteMember",
-                data: { "memberNo": memberNo },
-                type: "post",
-                success: result => {
-                    if (result > 0) {
-                        alert("회원 정보가 삭제되었습니다");
-                        document.getElementById("frmSearchBase").submit();
-                    } else {
-                        alert("회원 정보 삭제 실패");
-                    }
-                },
-                error: () => { console.log("회원 정보 삭제 중 에러 발생"); }
-
-            })
+        console.log(e.target.getAttribute("name"));
+        if(confirm("정말 상품 정보를 삭제하시겠습니까?")){
+            const goodsNo = e.target.getAttribute("name");
+            location.href =  "/admin/goods/deleteGoods?goodsNo=" + goodsNo;
         }
-    });
+    })
 }
+
+
+/* -------------------------------------------------------------- */
+// 미니홈피 배경색 변경
+document.getElementById("updateAllColorBtn").addEventListener("click", openPop1);
+
+// 프레임 폰트색 결정
+const frameFontColor = document.getElementById("frameFontColor");
+document.getElementById("frameMenuColorInput").addEventListener("change", e => {
+    if(e.target.value != undefined){
+        frameFontColor.value = getTextColorByBackgroundColor(e.target.value);
+        console.log(frameFontColor.value);
+    }
+})
+
+
+/* 배경색에 ‘어두움 정도’ 따라 텍스트의 색상 결정 */
+function getTextColorByBackgroundColor(hexColor) {
+
+    const c = hexColor.substring(1)      // 색상 앞의 # 제거
+    const rgb = parseInt(c, 16)   // rrggbb를 10진수로 변환
+    const r = (rgb >> 16) & 0xff  // red 추출
+    const g = (rgb >> 8) & 0xff  // green 추출
+    const b = (rgb >> 0) & 0xff  // blue 추출
+
+    const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b // per ITU-R BT.709
+
+    // 색상 선택
+    return luma < 127.5 ? "white" : "black" // 글자색이
+}
+

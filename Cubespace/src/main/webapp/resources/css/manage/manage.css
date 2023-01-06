@@ -115,6 +115,7 @@ header {
 .storeLinkArea {
     display: flex;
     align-items: center;
+    margin-bottom: 5px;
 }
 .fa-caret-down {
     margin-right: 5px;

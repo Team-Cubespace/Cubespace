@@ -14,21 +14,6 @@ const orderBy = () => {
 };
 
 
-/* 미니홈페이지 오픈 */
-const openMinihome = (url) => {
-    console.log(url);
-    let title = "minihome";
-
-    let status = "resizable=no, status=no, menubar=no, width=1203, height=718, top=50, left=300";
-    window.open(url, title, status);
-
-    return false;
-}
-
-
-
-
-
 
 // 회원정보 삭제
 const btnDel = document.getElementsByClassName("btnDel");
@@ -145,9 +130,3 @@ document.getElementById("signUpBtn").addEventListener("click", () => {
     }
 });
 
-
-
-/* 상품등록 페이지 이동 */
-document.getElementById("goodsAddBtn").addEventListener("click", e => {
-    location.href = "/admin/goods/font";
-})

@@ -57,6 +57,78 @@ public class NotificationsController {
 	}
 	
 	
+	/** 활동알림 목록 조회
+	 * @return
+	 */
+	@GetMapping("/activityNotification")
+	@ResponseBody
+	public String activityNotification(int loginMemberNo) {
+		
+		List<Notifications> NotificationsList =service.activityNotification(loginMemberNo);
+		
+		return new Gson().toJson(NotificationsList); 
+	}
+	
+	/** 알람 개별삭제
+	 * @param alarmNo
+	 * @return
+	 */
+	@GetMapping("/messageDelete")
+	@ResponseBody
+	public int messageDelete(int alarmNo) {
+		
+		int result = service.messageDelete(alarmNo);
+		
+		return result;
+	}
+	
+	/** 알람 전체 삭제 
+	 * @param alarmNoList
+	 * @return
+	 */
+	@GetMapping("/messageDeleteAll")
+	@ResponseBody
+	public int messageDeleteAll(@RequestParam(value = "alarmNoList[]") List<String> alarmNoList) {
+		
+		String aList = String.join(",",alarmNoList);
+		
+		int result =service.messageDeleteAll(aList);
+		
+		return result;
+		
+	}
+	
+	/** 확인된 알림 값 변경
+	 * @param alarmNoList
+	 * @return
+	 */
+	@GetMapping("/alarmRead")
+	@ResponseBody
+	public int alarmRead(@RequestParam(value = "alarmNoList[]") List<String> alarmNoList) {
+		
+		String aList = String.join(",",alarmNoList);
+		
+		int result =service.alarmRead(aList);
+		
+		return result;
+	}
+	
+	
+	/** 알림 카운트 확인
+	 * @param loginMemberNo
+	 * @return
+	 */
+	@GetMapping("/notificationsCount")
+	@ResponseBody
+	public int  notificationsCount(int loginMemberNo) {
+		
+		int result = service.notificationsCount(loginMemberNo);
+		
+		return result;
+	}
+	
+	
+	
 	
 	
 	

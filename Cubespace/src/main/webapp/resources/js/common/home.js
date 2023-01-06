@@ -102,7 +102,6 @@ const shortsSelect = (shortsChoice) => {
 
             for(let shorts of mainShortsList){
                 
-                console.log(mainShortsList);
                 // 회원 번호 저장
                 memberNo= shorts.memberNo;
                 folderNo= shorts.folderNo;

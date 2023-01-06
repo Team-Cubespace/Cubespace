@@ -80,6 +80,7 @@
 		
 		</otherwise>
 	</choose>
+	ORDER BY DIARY_NO DESC
  	</select>
  	
  	<select id="selectEmojiList" resultMap="emoji_rm">

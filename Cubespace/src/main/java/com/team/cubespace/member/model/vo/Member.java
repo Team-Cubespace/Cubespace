@@ -41,4 +41,9 @@ public class Member {
 	private int today; // 투데이 방문자수
 	private int total; // 총 방문자수
 	private int friendCount; // 친구수
+	
+	//회원 신고
+	private int complainerNo; // 신고한 사람
+ 	private int complainedNo; // 신고당한 사람
+ 	private String complainContent; //신고 내용
 	}

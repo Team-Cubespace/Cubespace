@@ -54,7 +54,7 @@ $('#summernote').summernote({
 let beforeDate = document.getElementById("diaryDate").value;
 document.getElementById("diaryDate").addEventListener("change",function(){
     if(new Date(document.getElementById("diaryDate").value) > new Date()){
-        alert("미래의 일기를 쓰실 수 없습니다....");
+        alert("현재보다 ");
         document.getElementById('diaryDate').value =  beforeDate;
     }
 })
@@ -82,10 +82,19 @@ function writeValidate() {
         return false;
     }
 
+    if(new Date(document.getElementById("diaryDate").value) > new Date()){
+        alert("미래의 일기를 쓰실 수 없습니다....");
+        document.getElementById('diaryDate').value =  beforeDate;
+    }
+
 
 
     return true;
 }
+
+
+
+
     
     
 

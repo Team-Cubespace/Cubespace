@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper">
+	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름(반드시 지정!) -->
+	
+	<resultMap type="Member" id="member_rm">
+		<id property="memberNo" column="MEMBER_NO"/>
+		
+		<result property="memberNickname" column="MEMBER_NO"/>
+		<result property="complainerNo" column="MEMBER_NICKNAME"/>
+		<result property="complainedNo" column="COMPLAINED_NO"/>
+		<result property="complainContent" column="COMPLAIN_CONTENT"/>
+	</resultMap>
+	
+	<select id="selectMember" resultMap = "member_rm">
+	SELECT MEMBER_NICKNAME FROM MEMBER
+	WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<insert id="reportMember">
+	INSERT INTO MEMBER_COMPLAIN
+	VALUES (SEQ_COMPLAIN_NO.NEXTVAL, #{complainerNo},#{complainedNo},#{complainContent},SYSDATE)
+	</insert>
+</mapper>

@@ -33,6 +33,8 @@ document.getElementById("writeBtn").addEventListener("click", e => {
     });
 })
 
+/* 메시지 지우기 */
+
 /* 메시지 더보기 */
 function more(){
     $(".friend-message:hidden").slice(0, 5).css("display", "flex");

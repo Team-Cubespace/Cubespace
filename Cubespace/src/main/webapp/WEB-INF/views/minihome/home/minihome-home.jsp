@@ -10,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>홈</title>
+    <link rel="stylesheet" href="/resources/css/minihome/include/minihome-common.css">
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/minihome/minihome-rayout.css">
     <link rel="stylesheet" href="/resources/css/minihome/home/minihome-home.css">
@@ -38,20 +39,12 @@
                                 <div class="new-post">
                                     <div class="post-content">
                                         <span class="post-category">
-                                            <c:if test="${newPost.category == '사진첩'}">
-                                                <a href="/albumList/2">사진첩</a>
-                                            </c:if>
-
-                                            <c:if test="${newPost.category == '동영상'}">
-                                                <a href="/videoList/3">동영상</a>
-                                            </c:if>
+                                            <c:if test="${newPost.category == '사진첩'}"><a href="/albumList/2"></c:if>
+                                            <c:if test="${newPost.category == '동영상'}"><a href="/videoList/3"></c:if>
+                                            ${newPost.category}</a>
                                         </span>
 
                                         <span>::</span>
-
-                                        <c:if test="${newPost.openFL == 3}">
-                                            <i class="fa-solid fa-lock"></i>
-                                        </c:if>
 
                                         <span class="post-title">
                                             <c:set var="title" value="${newPost.title}"/>
@@ -61,12 +54,14 @@
                                             </c:if>
 
                                             <c:if test="${newPost.category == '사진첩'}">
-                                                <a href="/albumDetail/${newPost.postNo}?folderNo=${newPost.folderNo}" title="${title}">${title}</a>
+                                                <a href="/albumDetail/${newPost.postNo}?folderNo=${newPost.folderNo}" title="${title}">
                                             </c:if>
 
                                             <c:if test="${newPost.category == '동영상'}">
-                                                <a href="/videoDetail/${newPost.postNo}?folderNo=${newPost.folderNo}" title="${title}">${title}</a>
+                                                <a href="/videoDetail/${newPost.postNo}?folderNo=${newPost.folderNo}" title="${title}">
                                             </c:if>
+
+                                            <c:if test="${newPost.openFL == 3}"><i class="fa-solid fa-lock"></i></c:if>${title}</a>
                                         </span>
                                     </div>
 
@@ -103,7 +98,7 @@
                     <span id="writeBtn">등록</span>
                 </div>
 
-                <!-- 깐부 메시지 목록 (폰트 관련 수정 필요, dropdown 추가할 때 깐부 닉네임 태그 button으로 수정) -->
+                <!-- 깐부 메시지 목록 -->
                 <div class="friend-message-container">
                     <c:choose>
                         <c:when test="${fn:length(friendMessage) == 0}">
@@ -112,16 +107,27 @@
 
                         <c:otherwise>
                             <c:forEach var="message" items="${friendMessage}">
-                                <div class="friend-message" style="font-family: '${message.ownFontNo}';">
+                                <div class="friend-message">
                                     <div class="message-content">
-                                        <span class="friend-name"><span>${message.memberNickname}</span></span>
-                                        <span>::</span>
-                                        <span class="message"><span title="${message.content}">${message.content}</span></span>
+                                        <button class="friend-name member-nickname nickname-drop-down-button" style="font-family: '${message.ownFontNo}';">
+                                            ${message.memberNickname}
+                                            <ul class="nickname-drop-down-box">
+                                                <li><a href="/minihome/${message.memberNo}" onclick="return openMinihome(this.href)">미니홈피</a></li>
+                                                <li><a onclick="reportFriend()">신고</a></li>
+                                            </ul>
+                                        </button>
+                                        
+                                        <span style="font-family: '${message.ownFontNo}';">::</span>
+                                        <span class="message"><span title="${message.content}" style="font-family: '${message.ownFontNo}';">${message.content}</span></span>
                                     </div>
-                                    <div class="message-time">${message.create}</div>
-                                    <!-- <c:if test="${minihome.memberNo == loginMember.memberNo || message.memberNo == loginMember.memberNo}">
-                                            <button class="delete-btn" value="${message.commentNo}">&times;</button>
-                                    </c:if> -->
+
+                                    <div class="message-time">
+                                        <span style="font-family: '${message.ownFontNo}';">${message.create}</span>
+
+                                        <c:if test="${minihome.memberNo == loginMember.memberNo || message.memberNo == loginMember.memberNo}">
+                                            <button class="delete-btn" value="${message.commentNo}"><i class="fa-solid fa-xmark"></i></button>
+                                        </c:if>
+                                    </div>
                                 </div>
                             </c:forEach>
                         </c:otherwise>

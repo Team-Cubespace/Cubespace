@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -65,6 +66,23 @@ public class MinihomeMainController {
 		return service.emotion(paramMap);
 	}
 	
+	// 프로필 수정
+	@PostMapping("/updateProfile")
+	@ResponseBody
+	public int updateProfile(@RequestParam(value="profileImage") MultipartFile profileImage,
+							 @RequestParam(value="comment") String comment,
+							 @RequestParam(value="updateFlag") String updateFlag,
+            		   		 @SessionAttribute("loginMember") Member loginMember,
+            		   		 HttpServletRequest req) throws Exception {
+		
+		loginMember.setComment(comment);
+		String webPath = "/resources/images/memberProfile/";
+		String filePath = req.getSession().getServletContext().getRealPath(webPath);
+		
+		int result = service.updateProfile(webPath, filePath, profileImage, updateFlag, loginMember);
+		return result;
+	}
+	
 	// 깐부 상태 확인
 	@GetMapping("/friendFlag")
 	public void friend(@RequestParam(value="arr[]") int[] arr) {
@@ -73,21 +91,4 @@ public class MinihomeMainController {
 	}
 	
 	// 깐부 메시지 등록
-	
-	
-	// 프로필 수정
-	@GetMapping("/updateProfile")
-	@ResponseBody
-	public int updateProfile(@RequestParam(value="profileImage") MultipartFile profileImage,
-							 @RequestParam(value="comment") String comment,
-            		   		 @SessionAttribute("loginMember") Member loginMember,
-            		   		 HttpServletRequest req) throws Exception {
-		
-		loginMember.setComment(comment);
-		String webPath = "/resources/images/memberProfile/";
-		String filePath = req.getSession().getServletContext().getRealPath(webPath);
-		
-		int result = service.updateProfile(webPath, filePath, profileImage, loginMember);
-		return result;
-	}
 }

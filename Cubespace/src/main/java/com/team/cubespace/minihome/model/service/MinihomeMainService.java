@@ -51,5 +51,6 @@ public interface MinihomeMainService {
 	 * @return result
 	 * @throws Exception
 	 */
-	int updateProfile(String webPath, String filePath, MultipartFile profileImage, Member loginMember) throws Exception;
+	int updateProfile(String webPath, String filePath, MultipartFile profileImage,
+					  String updateFlag, Member loginMember) throws Exception;
 }

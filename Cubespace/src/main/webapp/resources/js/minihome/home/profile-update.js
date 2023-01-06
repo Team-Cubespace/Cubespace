@@ -1,6 +1,10 @@
 if(minihomeNo == loginNo){
     /* 프로필 이미지 관련 상수 */
     const preview = document.getElementById("preview");
+    const profileImage = document.getElementById("selectImage");
+    const updateFlag = document.getElementById("updateFlag");
+
+    /* 변경 전 이미지 주소를 저장할 변수 */
     let beforeImage = preview.src;
 
     /* 프로필 메시지 관련 상수 */
@@ -8,31 +12,49 @@ if(minihomeNo == loginNo){
     const updateMessage = document.getElementById('updateMessage');
     const letterCount = document.getElementById("letterCount");
 
+    /* 기본 이미지로 변경하는 함수 */
+    const normalization = () => {
+        preview.setAttribute("src", "/resources/images/common/cubes.png");
+        profileImage.value = "";
+        updateFlag.value = "Y";
+    }
+
+    /* 이미지 변경을 취소하는 함수 */
+    const initialization = () => {
+        preview.setAttribute("src", beforeImage);
+        profileImage.value = "";
+        updateFlag.value = "N";
+    }
+
     /* 프로필 수정 click */
     document.getElementById("profileUpdate").addEventListener("click", () => {
-        document.querySelector(".profile-update-area").style.display = "flex";
+        document.querySelector(".profile-update-area").style.display = "block";
         document.querySelector(".profile-area").style.display = "none";
         updateMessage.value = profileMessage.value;
         letterCounting();
     })
 
     /* 프로필 이미지 선택 */
-    document.getElementById("selectImage").addEventListener("change", e => {
+    profileImage.addEventListener("change", e => {
         if(e.target.files[0] != undefined) {
             const reader = new FileReader();
             reader.readAsDataURL(e.target.files[0]);
             reader.onload = e => {preview.setAttribute("src", e.target.result);}
+            updateFlag.value = "Y";
+        } else {
+            if(preview.src == "/resources/images/common/cubes.png") {normalization();}
+            else {initialization();}
         }
     })
 
     /* 프로필 이미지 삭제 */
     document.getElementById("deleteImageBtn").addEventListener("click", () => {
-        preview.src = "/resources/images/common/cubes.png";
+        normalization();
     })
 
     /* 원래대로 되돌리기 */
     document.getElementById("rollbackImageBtn").addEventListener("click", () => {
-        preview.src = beforeImage;
+        initialization();
     })
 
     /* resize */
@@ -76,17 +98,15 @@ if(minihomeNo == loginNo){
 
     /* 수정완료 */
     document.getElementById("updateBtn").addEventListener("click", () => {
-        let profileImage;
-        if(preview.src == "/resources/images/common/cubes.png"){
-            profileImage = null;
-        }
+        var profileFrm = $('#profileFrm')[0];
+        var formData = new FormData(profileFrm);
 
         $.ajax({
-            url : "/emotion",
-            enctype : "multipart/form-data",
-            data : {"profileImage" : profileImage,
-                    "memberNo" : loginNo},
+            url : "/updateProfile",
+            data : formData,
             type : "POST",
+            processData: false,
+            contentType: false,
             success : (result) => {
                 if(result > 0) {
                     document.querySelector(".profile-area").style.display = "flex";
@@ -94,6 +114,7 @@ if(minihomeNo == loginNo){
                     document.querySelector(".profile-img").src = preview.src;
                     beforeImage = preview.src;
                     profileMessage.value = updateMessage.value;
+                    initialization();
                 } else {
                     console.log("프로필 수정 실패");
                 }
@@ -106,7 +127,6 @@ if(minihomeNo == loginNo){
     document.getElementById("cancellBtn").addEventListener("click", () => {
         document.querySelector(".profile-area").style.display = "flex";
         document.querySelector(".profile-update-area").style.display = "none";
-        preview.src = beforeImage;
-        updateMessage.value = profileMessage.value;
+        initialization();
     })
 }

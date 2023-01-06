@@ -57,7 +57,7 @@
             </div>
         </div>
  
-        <!-- 프로필 메시지 (수정 필요) -->
+        <!-- 프로필 메시지 -->
         <textarea class="profile-message" wrap="physical" spellcheck="false" readonly>${profile.comment}</textarea>
 
         <!-- 프로필 수정 -->

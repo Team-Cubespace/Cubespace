@@ -28,6 +28,8 @@
     </style>
 </head>
     <jsp:include page="/WEB-INF/views/include/allFontMusic.jsp"/>
+    <jsp:include page="/WEB-INF/views/include/report.jsp"/>
+
 <body>
     <div class="content-area frame-color">
         <section class="minihome-rayout " >

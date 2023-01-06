@@ -125,6 +125,7 @@
 <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
 <script>
     const folderNo = "${folderNo}";
+    console.log(folderNo);
     const datedatedate = "${datedatedate}";
     const flagNo = "${flagNo}";
     /* 세션에 있으니까 model에 안 담아줘도 jsp에서 바로 쓸 수 있음. */

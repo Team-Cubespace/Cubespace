@@ -114,7 +114,7 @@ const makeCalendar = (date) => {
     
     $.ajax({
         url : "/selectDate",
-        data : {"yearMonth":`${currentYear}-${currentMonth}`},
+        data : {"yearMonth":`${currentYear}-${currentMonth}`, "folderNo":folderNo},
         dataType : "JSON",
         success :  (dateList)  => {
             for(let date of dateList) {
@@ -315,7 +315,7 @@ function selectDiary(diaryDate){
                                 const div3_2_1 = document.createElement("div");
                                 
                                     const div3_2_1_a = document.createElement("a");
-                                    div3_2_1_a.setAttribute("href","/diaryUpdate/"+diary.diaryNo+"");
+                                    div3_2_1_a.setAttribute("href","/diaryUpdate/"+diary.diaryNo+"?folderNo=" + folderNo+"&dateContainer="+dateContainer);
                                     div3_2_1_a.innerText = "수정";
                                 div3_2_1.append(div3_2_1_a);
                                 
@@ -357,7 +357,7 @@ document.getElementById("nextMonth").addEventListener("click", ()=>{
     makeCalendar(new Date(date.setMonth(date.getMonth() + 1)));
 });
 
-
+/* 즉시실행합수 원래의 위치 */
 (()=>{
 
     /* ------------------------------------------------------------------------------------- */
@@ -365,6 +365,7 @@ document.getElementById("nextMonth").addEventListener("click", ()=>{
     let today;
     let today2;
     if(flagNo != ""){ //flag가 있으면, 그 날짜가 담긴 date객체가 나오며, 거기에 따른 일기목록이 조회됨.
+        console.log("취소됨");
         today = new Date(datedatedate);
         today2 = new Date(datedatedate);
     }else {
@@ -414,12 +415,13 @@ document.getElementById("nextMonth").addEventListener("click", ()=>{
 
 })();
 
+
 function writeBtn(){    
     
     /* [dateContainer 변수] 쓰려면 함수가 밑에 있어야 될 걸..? */
 
-    location.href = "/diaryWrite?date=" + dateContainer;
-
+    // location.href = "/diaryWrite?date=" + dateContainer;
+    location.href = `/diaryWrite?date=${dateContainer}&folderNo=${folderNo}`;
     // return false;
 }
 

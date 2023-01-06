@@ -97,8 +97,8 @@
 </head>
 <body>
     <!-- 모달창 -->
-    <div class="popup_layer" id="popup_layer" >
-        <!-- style="display: none;" -->
+    <div class="popup_layer" id="popup_layer"  style="display: none;"  >
+         
         <div class="popup_box">
             <div class="popup_cont" id = "popup_con"> 
                 <div>
@@ -130,7 +130,7 @@
 
     let memberName;
 
-    function reportFriend(){
+    function reportFriend(memberNo){
         document.getElementById("popup_layer").style.display = "block";
         // 신고하는 사람은 loginMember니까
         // 1. 신고받은 사람
@@ -150,9 +150,9 @@
     }
     document.getElementById("reportBtn").addEventListener("click",function(){
         
-        let description = document.getElementById("description").value;
+        let complainContent = document.getElementById("description").value;
         
-        if(description.trim().length == 0){
+        if(complainContent.trim().length == 0){
             alert("신고 사유를 입력해주십시오.")
         } else {
 

@@ -4,15 +4,16 @@ design: https://dribbble.com/shots/3533847-Mini-Music-Player
 I can't find any open music api or mp3 api so i have to download all musics as mp3 file.
 You can fork on github: https://github.com/muhammederdem/mini-player
 */
+let musicArr = [];
 let temp
 (()=>{
     $.ajax({
         url : "/miniMusicPlyer",
-        data: {"loginMemberNo":loginMemberNo},
+        data: {"loginMemberNo":loginMemberNo, "cp":currentPage},
         dataType : "JSON",
         success : miniMusicList =>{
-            let musicArr = [];
             
+
             if(miniMusicList.length > 0) {
                 
                 for(let music of miniMusicList) {
@@ -24,17 +25,17 @@ let temp
                         favorited=false;
                     }
 
-
                     musicArr.push({
                         name:music.goodsName, // 음악이름
                         artist:music.goodsCreater, // 음악 제작자
                         cover:music.goodsImagePath, // 음악 썸네일
                         // cover: "/resources/music/img/test-로아쿠크세이튼테마.gif",
                         source:music.goodsPath ,// 음악 경로
-                        url: "https://www.youtube.com/watch?v=z3wAjJXbYzA",// 상점url
-
+                        url: "/",// 상점url
                         favorited:favorited // 보유상태
                     })
+
+                    console.log(musicArr);
                 }
             }
 
@@ -103,8 +104,16 @@ let temp
                     updateBar(x) {
                         let progress = this.$refs.progress;
                         let maxduration = this.audio.duration;
-                        let position = x - progress.offsetLeft;
+                        let position = x; //- progress.offsetLeft;
                         let percentage = (100 * position) / progress.offsetWidth;
+
+                        // console.log(this);
+                        // console.log(x);
+                        // console.log(progress.offsetWidth);
+                        // console.log(maxduration);
+                        // console.log(position);
+                        // console.log(percentage);
+
                         if (percentage > 100) {
                         percentage = 100;
                         }
@@ -119,7 +128,7 @@ let temp
                     clickProgress(e) {
                         this.isTimerPlaying = true;
                         this.audio.pause();
-                        this.updateBar(e.pageX);
+                        this.updateBar(e.offsetX);
                     },
                     prevTrack() {
                         this.transitionName = "scale-in";
@@ -197,7 +206,35 @@ let temp
 })()
 
 
+/* 모달 열기 */
+function MusicPlayerOpen(index){
+    document.getElementById("modalPlayer").style.display = "block";
+    console.log(index);
+    temp.currentTrackIndex = index;
+    temp.currentTrack = temp.tracks[temp.currentTrackIndex];
+    temp.resetPlayer();
 
+
+    
+    /*
+    클릭시 ajax를이용해 DB에서 목록조회 musicArr배열로 담음
+    
+    index =0 클릭 시  일반포문을 이용해서  musicArr의배열 i를 찾음
+    
+    musicArr[0] 을 실행 한다
+
+    */
+    
+}
+/* 모달 닫기 */
+function MusicPlayerClose(){
+    document.getElementById("modalPlayer").style.display = "none";
+    temp.audio.pause();
+    /* 노래정지 */
+    const playbtn = document.querySelector(".play-btn")
+    playbtn.firstElementChild.setAttribute("xlink:href","#icon-play")
+    temp.isTimerPlaying = false;
+}
 
 
 // let temp = new Vue({
@@ -424,17 +461,3 @@ let temp
 // });
 
 
-/* 모달 열기 */
-function MusicPlayerOpen(index){
-    document.getElementById("modalPlayer").style.display = "block";
-    
-}
-/* 모달 닫기 */
-function MusicPlayerClose(){
-    document.getElementById("modalPlayer").style.display = "none";
-    temp.audio.pause();
-    /* 노래정지 */
-    const playbtn = document.querySelector(".play-btn")
-    playbtn.firstElementChild.setAttribute("xlink:href","#icon-play")
-    temp.isTimerPlaying = false;
-}

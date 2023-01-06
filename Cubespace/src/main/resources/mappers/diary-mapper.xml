@@ -57,7 +57,8 @@
   	SELECT DISTINCT TO_NUMBER(TO_CHAR(D_CREATE, 'DD')) YEAR_MONTH 
 	FROM DIARY 
 	WHERE TO_CHAR(D_CREATE, 'YYYY-MM') = '${yearMonth}' 
-	AND MEMBER_NO = #{memberNo} 
+	AND MEMBER_NO = #{memberNo}
+	AND FOLDER_NO = #{folderNo} 
 	AND D_DEL_YN = 'N'
 	ORDER BY 1
   	</select>
@@ -80,6 +81,7 @@
 		
 		</otherwise>
 	</choose>
+	ORDER BY DIARY_NO DESC
  	</select>
  	
  	<select id="selectEmojiList" resultMap="emoji_rm">

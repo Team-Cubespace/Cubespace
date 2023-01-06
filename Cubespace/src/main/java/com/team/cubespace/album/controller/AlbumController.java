@@ -46,7 +46,7 @@ public class AlbumController {
 	public String albumList(@PathVariable("boardTypeNo") int boardTypeNo, 
 			Model model, @SessionAttribute(value="loginMember", required=false) Member loginMember,
 			@SessionAttribute("minihome") Minihome minihome,
-			@SessionAttribute("folderList") List<Folder> folderList,
+//			@SessionAttribute("folderList") List<Folder> folderList,
 			@RequestParam(value="folderNo", required=false, defaultValue="-1") int folderNo,
 			@RequestParam(value="cp", required=false, defaultValue="1") int cp
 			/*HttpServletRequest req*/) {
@@ -55,7 +55,7 @@ public class AlbumController {
 			// 폴더리스트를 가져와
 			// 폴더리스트의 0번째 인덱스의 폴더번호를
 			// folderNo로 지정
-			folderNo = folderList.get(0).getFolderNo();
+			folderNo = minihome.getAlbumFolderList().get(0).getFolderNo();
 		}
 		
 		Map<String, Integer> paramMap = new HashMap<>();
@@ -87,7 +87,7 @@ public class AlbumController {
 		
 		// 폴더 이름 찾기
 		String folderName = "";
-		for(Folder folder : folderList) {
+		for(Folder folder : minihome.getAlbumFolderList()) {
 			if(folder.getFolderNo() == folderNo) {
 				folderName = folder.getFolderName();
 				break;

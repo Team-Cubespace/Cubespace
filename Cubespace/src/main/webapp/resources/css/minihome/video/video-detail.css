@@ -61,5 +61,6 @@ header {
 }
 
 #vid1 {
+    border: 1px solid #ddd;
     height: 100%;
 }

@@ -1,5 +1,27 @@
+const getByteSize = size => {
+    for(let i =0; i< 2; i++) {
+        size = Math.floor(size / 1024);
+    }
+    return size;
+}
+
 // 동영상 미리보기
-let videoDuration;
+const videoVariable = {
+    duration : 0,
+    size : 0,
+}
+
+const initVideoInfo = () => {
+    // 동영상 유효성 객체에 값 대입
+    const video = document.getElementById("myVideo");
+    video.preload = 'metadata';
+    video.onloadedmetadata = () =>{
+        videoVariable.duration = video.duration.toFixed(1);
+        document.getElementById("videoDurationSpan").innerText = videoVariable.duration;
+    }
+}
+
+// 동영상 미리보기
 const addVideo = input => {
     document.getElementById("addVideoArea").innerHTML = "";
     // const myVideo = document.createElement("video-js");
@@ -11,7 +33,7 @@ const addVideo = input => {
         const video = document.createElement("video");
         video.setAttribute("id", "myVideo");
         video.controls = true;
-        console.log(file.name);
+
         const videoURL = URL.createObjectURL(file);
         // const source = document.createElement("source");
         // source.setAttribute("src", videoURL);
@@ -20,15 +42,37 @@ const addVideo = input => {
         video.src=videoURL;
         video.preload = 'metadata';
         video.onloadedmetadata = () =>{
-            console.log(video.duration);
+            videoVariable.duration = video.duration.toFixed(1);
+            videoVariable.size = getByteSize(file.size);
+
+            document.getElementById("videoSizeSpan").innerText = videoVariable.size;
+            document.getElementById("videoDurationSpan").innerText = videoVariable.duration;
         }
         document.getElementById("addVideoArea").append(video);
+    } else {
+        videoVariable.duration = 0;
+        videoVariable.size = 0;
+        console.log(videoVariable.duration);
+        console.log(videoVariable.size);
+        document.getElementById("videoSizeSpan").innerText = 0;
+        document.getElementById("videoDurationSpan").innerText = 0;
     }
 }
 
 const checkVideo= ()=>{
-    const myVideo = document.getElementById("myVideo");
-    console.log(myVideo.duration);
+    if(document.getElementById("myVideo") == null) {
+        alert("동영상을 업로드해주세요.");
+        return false;
+    }
+    if (videoVariable.size > 100000000) {
+        alert("100mb이하의 동영상만 업로드할 수 있습니다.");
+        return false;
+    }
+    if (videoVariable.duration > 60) {
+        alert("1분 미만의 동영상만 업로드할 수 있습니다.");
+        return false;
+    }
+    return true;
 }
 
 const submitForm = ()=>{
@@ -54,11 +98,13 @@ const submitForm = ()=>{
             }
         },
         error: result =>{
+            document.getElementById("loadingMask").style.display = "none";
             alert("파일업로드 실패");
         }
     })
 }
 
+initVideoInfo();
 
 (()=>{
     document.getElementById("writeVideoForm").addEventListener("submit", e=>{
@@ -75,11 +121,13 @@ const submitForm = ()=>{
         if(document.getElementById("myVideo") == null) {
             alert("동영상을 업로드해주세요.");
             return;
-        } else if(document.getElementById("myVideo").duration > 60) { 
-            alert("1분 이상의 동영상은 업로드할 수 없습니다.");
+        }
+        
+        // 비디오 유효성 검사
+        if(!checkVideo()) {
             return;
         }
-        console.log(document.getElementById("myVideo").duration);
+
         // 제출 함수 (ajax) 작성 필요
         submitForm();
         document.getElementById("loadingMask").style.display = "flex";

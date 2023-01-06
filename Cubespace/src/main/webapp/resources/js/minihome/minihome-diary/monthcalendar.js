@@ -10,8 +10,6 @@ $.ajax({
   data:{"loginMember1":loginMember1},
   aysnc : false,
   success:function(data){
-    console.log("스케줄리스트가 잘 불러져 왔니?");
-    console.log(data);
 
     /* 이벤트객체를 담는 빈 배열 */
     var events=[];
@@ -36,9 +34,7 @@ $.ajax({
           });
           
         });
-    console.log("이벤트 목록입니다.");
     defaultEvents = events;
-    console.log(defaultEvents);
 
     /* ■ DB값을 defaultEvents라는 변수에 담아서 calendar에 넣어야 되기 때문에 캘린더 만드는 걸 createCalendar() 함수에 넣음 ■  */
     createCalendar();
@@ -85,12 +81,10 @@ document.getElementById("startDate").addEventListener("change",function(){
 
 /* 이벤트들은 밖으로 빼준당 왜냐면 호출될 때마다 클릭되기를 기다리고 있다가... 쌓이는 듯...*/
 document.querySelectorAll("input[name='allDay']")[0].addEventListener("click",function(){
-  console.log("allDay에 '예'를 클릭하셨나요...?");  
   allDayTrue();
 });
 /* 이벤트들은 밖으로 빼준당 */
 document.querySelectorAll("input[name='allDay']")[1].addEventListener("click",function(){
-  console.log("allDay에 '아니오'를 클릭하셨나요...?");  
   allDayFalse()
 });
 
@@ -253,7 +247,7 @@ function createCalendar(){
           popup(arg);
         },
 
-        editable : editableFlag,
+        eventStartEditable : editableFlag,
         
         /* 이벤트 클릭 시 모달 호출 */
         /* arg = 클릭한 그 이벤트의 내용임. 얘를 모달에 담고, 수정버튼을 눌렀을 때, 수정되도록... */
@@ -269,7 +263,7 @@ function createCalendar(){
 
 /* ****************************************************************************** */
         eventDragStart: function (event, jsEvent, ui, view) {
-          //alert("eventDragStart 이건 언제 발생?")
+        
         },
         eventDragStop : function (){
           //alert(" eventDragStop 이건 언제 발생?")
@@ -402,10 +396,8 @@ function addEvent(){
         
         if(result > 0){ //성공
           alert("일정이 등록되었습니다.");
-          console.log(result);
           /* ● calendar자체의 addEvent함수를 쓰고 싶어서 전역변수를 먼저 만든 다음, fullCalendar 값을 넣고 걔의 함수를 씀. ● */
           if(allDay =="true"){
-            console.log("allday가 trueㅋ")
             calendar.addEvent({
               planId : result,
               category: category,
@@ -446,7 +438,6 @@ function addEvent(){
 
 /* [함수] 수정하기 */
 function updateEvent(){
-  console.log("안녕...");
   
   const planId = document.getElementById("number").value;
   const category = document.getElementById("category").value;
@@ -497,8 +488,6 @@ function updateEvent(){
           "allDayFlag" : 'N'
         }
       }
-      console.log("수정할 일정 잘 담겼니?");
-      console.log(updateData);
       $.ajax({
         url: "/diary/calendar/updateSchedule",
         contentType: 'application/json',
@@ -511,8 +500,6 @@ function updateEvent(){
           
             //1. 카테고리
             selectEvent.event.setExtendedProp("category", document.getElementById("category").value)
-            console.log("카테고리실험1"+selectEvent.event.category);
-            console.log("카테고리실험2"+selectEvent.event.extendedProps.category);
             //2. 제목
             selectEvent.event.setProp("title", document.getElementById("title").value)
             //3. 내용
@@ -527,12 +514,8 @@ function updateEvent(){
             //8. 종일 여부
               if(document.querySelector("input[name='allDay']:checked").value =="true"){
                 selectEvent.event.setAllDay(true);
-                // selectEvent.event.setExtendedProp("allDay","true");
-                console.log("true임");
               } else {
                 selectEvent.event.setAllDay(false);
-              // selectEvent.event.setExtendedProp("allDay","false");
-                console.log("false임");
               }
               /* 색깔 */
               selectEvent.event.setProp("color", backgroundColor);

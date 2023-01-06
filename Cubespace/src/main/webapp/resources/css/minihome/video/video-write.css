@@ -178,6 +178,7 @@ input[type='file'] {
     width: 100%;
     max-height: 450px;
     height: 100%;
+    border: 1px solid #ddd;
 }
 
 #loadingMask {

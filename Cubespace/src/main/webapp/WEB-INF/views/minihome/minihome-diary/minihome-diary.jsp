@@ -40,7 +40,10 @@
                 <!-- 전체 내용 div 태그로 한 번 감싸주세요 -->
                 <!-- ex) <div class="home-area"> <div></div> <span></span> ... </div> -->
                 <div class = "home-area">
-                    <header><span>다이어리 > </span><span>${folderName}</span></header>
+                    <header>
+                        <span>다이어리 > </span>
+                        <span>${folderName}</span>
+                    </header>
                     <div class = "calendar-box">
                         <div class = "calendar-section">
                             <!-- jsp인 경우 include할 거...? -->
@@ -101,7 +104,6 @@
                         </div>
                     </div>
                     <div class = "write-section">
-                        
                         <c:if test = "${minihome.memberNo==loginMember.memberNo}">
                             <div  class = "writeBtn" onclick="writeBtn()">
                                 <span>글쓰기</span>
@@ -123,16 +125,12 @@
 <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
 <script>
     const folderNo = "${folderNo}";
+    console.log(folderNo);
     const datedatedate = "${datedatedate}";
     const flagNo = "${flagNo}";
     /* 세션에 있으니까 model에 안 담아줘도 jsp에서 바로 쓸 수 있음. */
     const minihomeNo = "${minihome.memberNo}";
     const loginMemberNo = "${loginMember.memberNo}";
-    console.log("homepageMemberNo" +minihomeNo );
-    console.log("loginMember" + loginMemberNo );
-    console.log("folderNo" + folderNo );
-    console.log("datedatedate" + datedatedate );
-    console.log("flagNo" + flagNo );
 </script>
 <script src="/resources/js/minihome/minihome-diary/diary-main.js"></script>
 <%-- <script src="/resources/js/minihome/minihome-diary/try1.js"></script> --%>

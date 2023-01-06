@@ -60,5 +60,6 @@
 		<mapper resource="/mappers/admin-mapper.xml"/>	
 		<mapper resource="/mappers/mainHomepage-mapper.xml"/>	
 		<mapper resource="/mappers/guestBook-mapper.xml"/>	
+		<mapper resource="/mappers/member-mapper.xml"/>	
 	</mappers>
 </configuration>

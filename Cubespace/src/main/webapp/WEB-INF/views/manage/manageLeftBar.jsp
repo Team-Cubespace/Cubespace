@@ -4,19 +4,19 @@
 
 <section class="side">
         <div class="sideBarLink">
-            <a href="/manage/music">
+            <a href="/manage/music" class="musicTab">
                 <i class="fa-solid fa-check"></i> 배경음악 설정
             </a>
-            <a href="/manage/font">
+            <a href="/manage/font" class="fontTab">
                 <i class="fa-solid fa-check"></i> 폰트 설정
             </a>
-            <a href="/manage/friend">
+            <a href="/manage/friend" class="friendTab">
                 <i class="fa-solid fa-check"></i> 깐부 관리
             </a>
-            <a href="/manage/menu">
+            <a href="/manage/menu" class="menuTab">
                 <i class="fa-solid fa-check"></i> 메뉴 관리
             </a>
-            <a href="/manage/background">
+            <a href="/manage/background" class="backgroundTab">
                 <i class="fa-solid fa-check"></i> 배경 설정
             </a>
         </div>

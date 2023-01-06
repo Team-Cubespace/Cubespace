@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.cubespace.admin.model.service.AdminService;
 import com.team.cubespace.admin.model.vo.Block;
+import com.team.cubespace.admin.model.vo.FAQ;
 import com.team.cubespace.common.Util;
 import com.team.cubespace.complain.model.vo.Complain;
 import com.team.cubespace.login.model.service.LoginService;
@@ -74,6 +75,34 @@ public class AdminController {
 		return "admin/admin-complain";
 	}
 	
+	
+	/** FAQ 목록 조회, 이동
+	 * @return
+	 */
+	@GetMapping("/faq")
+	public String gotoFAQ(Model model) {
+		
+		List<FAQ> faqList = service.selectFAQList();
+		model.addAttribute("faqList", faqList);
+		
+		return "admin/admin-FAQ";
+	}
+	
+	/** 이용약관 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/termsOfUse")
+	public String gotoTermsOfUse() {
+		return "admin/admin-termsOfUse";
+	}
+	
+	/** 개인정보처리방침 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/privatePolicy")
+	public String gotoPrivatePolicy() {
+		return "admin/admin-privatePolicy";
+	}
 
 	
 //	-------------------------------------------------------------------------------

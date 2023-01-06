@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.team.cubespace.admin.model.vo.Block;
+import com.team.cubespace.admin.model.vo.FAQ;
 import com.team.cubespace.complain.model.vo.Complain;
 import com.team.cubespace.main.model.vo.ShopMiniroom;
 import com.team.cubespace.manage.model.vo.Background;
@@ -160,5 +161,10 @@ public interface AdminService {
 	 * @throws Exception 
 	 */
 	int updateAllColor(Map<String, Object> map) throws Exception;
+
+	/** FAQ 목록 조회
+	 * @return
+	 */
+	List<FAQ> selectFAQList();
 
 }

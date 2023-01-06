@@ -457,3 +457,29 @@ seePwConfirm.addEventListener("click", e => {
         memberPwConfirm.setAttribute("type", "password");
     }
 })
+
+
+
+/* --------------------------------------------------------- */
+// input이 focus되었을때 밑줄색 변경
+const inputBoxList = document.getElementsByClassName("inputBox");
+for(let inputBox of inputBoxList){
+
+    inputBox.addEventListener("focus", e=> {
+
+        if(e.target.getAttribute("id") == 'memberPw' || e.target.getAttribute("id") == 'memberPwConfirm'){
+            e.target.parentElement.parentElement.parentElement.style.borderBottom = "3px solid var(--mainColor)";
+        } else {
+            e.target.parentElement.parentElement.style.borderBottom = "3px solid var(--mainColor)";
+        }
+
+    })
+    inputBox.addEventListener("focusout", e=> {
+
+        if(e.target.getAttribute("id") == 'memberPw' || e.target.getAttribute("id") == 'memberPwConfirm'){
+            e.target.parentElement.parentElement.parentElement.style.borderBottom = "3px solid #eee";
+        } else {
+            e.target.parentElement.parentElement.style.borderBottom = "3px solid #eee";
+        }
+    })
+}

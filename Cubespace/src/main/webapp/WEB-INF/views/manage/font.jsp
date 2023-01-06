@@ -32,7 +32,7 @@
         <section class="minihome-rayout">
             <div class="main">
                 <header>
-                    <a href="" class="storeLinkArea"> <%-- 상점 이동 링크 --%>
+                    <a href="/cubespace/shop/1" target="_blank" class="storeLinkArea"> <%-- 상점 이동 링크 --%>
                         <i class="fa-solid fa-store"></i> 상점이동
                     </a>
                     <div class="rightFontTitleArea">

@@ -1,3 +1,8 @@
+.musicTab{
+    font-weight: bold;
+    background-color: #eee;
+}
+
 /* ------------------------------------------------------ */
 /* 배경음악 설정 */
 .backgroundHeader, .backgroundMain{
@@ -19,7 +24,12 @@
     justify-content: flex-start;
     padding: 5px 10px;
 }
-
+.musicTitle{
+    align-items: center;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
 
 
 .rightMusicTitleArea {
@@ -50,6 +60,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 .musicUse {
     border-bottom: 1px solid #eee;
@@ -70,11 +81,8 @@
     border-radius: 3px;
     margin-right: 5px;
 }
-.fa-play {
-    margin-right: 20px;
-}
 .fa-play, .fa-stop{
-    font-size: 17px;
+    font-size: 20px;
     cursor: pointer;
 }
 .rightTitle{
@@ -102,4 +110,7 @@
 
 #shopLink {
     cursor: pointer;
+}
+.originalMusic {
+    background-color: rgb(0,0,0,0.03);
 }

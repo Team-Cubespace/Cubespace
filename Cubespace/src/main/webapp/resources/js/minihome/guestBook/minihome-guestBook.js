@@ -65,7 +65,7 @@ const listGuestBook=()=>{
 
                                         const li2 = document.createElement("li")
                                             const a2 = document.createElement("a")
-                                            a2.setAttribute("onclick","reportFriend()")
+                                            a2.setAttribute("onclick","reportFriend("+listGuestbook.gbNo+")")
                                             a2.innerText="신고";
 
 

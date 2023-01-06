@@ -83,6 +83,7 @@
             height: 30px;
             font-weight: bold;
             border-radius: 10px;
+            cursor: pointer;
         }
 
         .modal-footer > :first-child {
@@ -98,7 +99,7 @@
 <body>
     <!-- 모달창 -->
     <div class="popup_layer" id="popup_layer"  style="display: none;"  >
-         
+    
         <div class="popup_box">
             <div class="popup_cont" id = "popup_con"> 
                 <div>
@@ -106,9 +107,9 @@
                         <span class = "modal-title">회원 신고하기</span>
                     </div>
                     <div class = "input-row">
-                        <div class="description">신고 대상</div>
+                        <div class="nameBox">신고 대상</div>
                         <div>
-                            <span>이슬</span>
+                            <span class = "name"></span>
                         </div>
                     </div>
                     <div class = "input-row">
@@ -132,10 +133,11 @@
 
     function reportFriend(memberNo){
         document.getElementById("popup_layer").style.display = "block";
+        console.log("하이");
         // 신고하는 사람은 loginMember니까
         // 1. 신고받은 사람
         // 2. 신고 내용
-
+        console.log(memberNo); 
         //1. 멤버 이름 가져오는 ajax
         $.ajax({
             url:"/selectreportedMember",
@@ -144,6 +146,8 @@
             success : function(result){
                 memberName = result;
                 console.log("memberName" + memberName);
+                document.getElementById("name").value = memberName;
+
             }, error : function (){
             }
         })
@@ -171,6 +175,13 @@
 
         }
     })
+
+    document.getElementById("cancleBtn").addEventListener("click",function(){
+
+        document.getElementById("popup_layer").style.display = "none";
+
+    }
+
 
 </script>
 <!-- html에서 파일을 include 할 수 있도록 해주는 js (근데 VSCode Live Server에서만 보임) -->

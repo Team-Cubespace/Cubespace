@@ -153,6 +153,5 @@
     </div>
     <%-- </main> --%>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-    <script src="/resources/js/webmain/MiniMusicPlayer.js"></script>
 <%-- </body> --%>
 </html>

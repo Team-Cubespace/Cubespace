@@ -139,10 +139,12 @@ public class ShopDAO {
 	 * @return
 	 */
 	public List<ShopFont> miniMusicPlyer(Pagination pagination, int loginMemberNo) {
+//	public List<ShopFont> miniMusicPlyer(int loginMemberNo) {
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
 		return sqlSession.selectList("shop.miniMusicPlyer",loginMemberNo,rowBounds);
+//		return sqlSession.selectList("shop.miniMusicPlyer",loginMemberNo);
 	}
 
 	/** 폰트 상점 상품 갯수 구하기(배경음악 보류)

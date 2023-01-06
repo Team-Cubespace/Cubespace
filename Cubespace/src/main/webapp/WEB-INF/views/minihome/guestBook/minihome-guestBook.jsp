@@ -29,7 +29,7 @@
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/include/allFontMusic.jsp"/>
-    <%-- <jsp:include page="/WEB-INF/views/include/report.jsp"/> --%>
+    <jsp:include page="/WEB-INF/views/include/report.jsp"/>
     <div class="content-area frame-color">
         <section class="minihome-rayout " >
                 <!-- 좌측 section 코드 작성 또는 include -->

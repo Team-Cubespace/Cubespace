@@ -1,0 +1,144 @@
+main {
+    margin-bottom: 50px;
+}
+
+.frequent-question__title {
+    padding: 50px 20px 10px;
+    margin-bottom: 50px;
+    font-size: 30px;
+    font-weight: bold;
+
+    display: flex;
+    justify-content: space-between;
+}
+#foldAll {
+    width: 80px;
+    height: 40px;
+    background-color: white;
+    font-weight: bold;
+    color: var(--mainColor);
+    border: 2px solid var(--mainColor);
+    border-radius: 5px;
+    cursor: pointer;
+}
+#foldAll {
+    margin-right: 50px;
+}
+
+#foldAll:hover {
+    background-color: var(--mainColor);
+    color: white;
+    transition-duration: 0.3s;
+}
+.frequent-question__content {
+    width: 1140px;
+}
+.frequent-question__content > p{
+    font-weight: bold;
+}
+.faqArea {
+    width: 1140px;
+    border-bottom: 3px solid var(--mainColor);
+}
+
+.frequent-question__content-detail {
+    display: flex;
+    align-items: center;
+    padding: 30px 0 15px;
+
+    font-size: 18px;
+    text-decoration: none;
+    color: black;
+}
+.frequent-question__content-detail:hover {
+    background-color: var(--lightMain);
+}
+
+.fa-circle-question {
+    margin-left: 20px;
+    margin-right: 10px;
+    color: var(--mainColor);
+    font-size: 25px;
+}
+.fa-circle-question+* {
+    font-size: 18px;
+    text-decoration: none;
+    color: black;
+
+}
+.frequent-question__answer {
+    background-color: rgba(0, 0, 0, 0.05);
+    min-height: 50px;
+    padding: 20px 15px;
+}
+.area {
+    display: none;
+
+    justify-content: center;
+
+    width: 1110px;
+    flex-direction: column;
+    padding: 0 20px 20px;
+    margin: 15px;
+    background-color: #eee;
+}
+.profile-img>img {
+    height: 70px;
+    border-radius: 50%;
+    border: 2px solid #eee;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+
+    padding: 30px 20px 10px 20px;
+}
+.name-date {
+    margin-left: 10px;
+}
+.nickname {
+    font-weight: bold;
+}
+#question-date,
+#answer-date {
+    font-size: 12px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.user-content {
+
+    background-color: white;
+    width: 100%;
+    overflow-x: hidden;
+    padding: 20px;
+    resize: none;
+
+    display: flex;
+    justify-content: flex-start;
+
+    line-height: 150%;
+}
+#answer-content {
+    min-height: 12rem;
+}
+.search-result-area {
+
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.allFoldBtnArea {
+    display: flex;
+    justify-content: flex-end;
+}
+.faqNoArea {
+    font-size: 40px;
+    margin-right: 10px;
+    color: var(--mainColor);
+}
+.fa-caret-up, .fa-caret-down {
+    font-size: 40px;
+    margin: 0 20px 0 10px;
+    color: var(--mainColor);
+}

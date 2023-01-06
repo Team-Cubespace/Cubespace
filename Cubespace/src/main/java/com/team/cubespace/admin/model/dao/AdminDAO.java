@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.team.cubespace.admin.model.vo.Block;
+import com.team.cubespace.admin.model.vo.FAQ;
 import com.team.cubespace.common.Pagination;
 import com.team.cubespace.complain.model.vo.Complain;
 import com.team.cubespace.main.model.vo.ShopMiniroom;
@@ -340,6 +341,14 @@ public class AdminDAO {
 	public int updateDBColor(Map<String, Object> map) {
 
 		return sqlSession.update("adminMapper.updateDBColor", map);
+	}
+
+	/** FAQ 목록 조회
+	 * @return
+	 */
+	public List<FAQ> selectFAQList() {
+		
+		return sqlSession.selectList("adminMapper.selectFAQList");
 	}
 
 

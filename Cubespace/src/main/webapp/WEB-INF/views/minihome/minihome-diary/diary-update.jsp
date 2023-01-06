@@ -52,13 +52,13 @@
                     <header>
                         <span>다이어리 작성</span>
                     </header>
-                    <form id="writediaryForm" action="/diaryUpdate/${diary.diaryNo}" method="POST" encType="">
+                    <form id="writediaryForm" action="/diaryUpdate/${diary.diaryNo}" method="POST" encType="" onsubmit="return writeValidate();">
                         <div class="input-row">
                             <label for="">폴더</label>
                             <select name="folderNo" id="">
-                            <c:forEach var="folder" items="${folderList}">
+                            <c:forEach var="folder" items="${minihome.diaryFolderList}">
                                 <c:if test = "${folder.folderName != '나의 월간달력'}">
-                                <option value="${folder.folderNo}">${folder.folderName}</option>
+                                <option value="${folder.folderNo}" <c:if test="${param.folderNo == folder.folderNo}">selected</c:if>>${folder.folderName}</option>
                                 </c:if>
                             </c:forEach>
                             </select>
@@ -107,8 +107,9 @@
                             </ul>
                         </div>
                         <div class="form-button-area">
-                            <button id="submitButton" type="submit">작성</button>
-                            <a id="cancelWrite">취소</a>
+                            <button type = "submit" id="submitButton">수정</button>
+                            <%-- <button id="submitButton" type="submit">작성</button> --%>
+                            <a id="cancelWrite" href = "/diaryCancle/${param.dateContainer}?folderNo=${param.folderNo}">취소</a>
                         </div>
                     </form>
 

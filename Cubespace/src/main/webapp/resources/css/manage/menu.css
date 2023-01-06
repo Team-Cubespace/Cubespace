@@ -1,0 +1,281 @@
+.fa-minus {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    right: 0;
+    top: 0px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fa-minus:hover {
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+}
+.folderTitle {
+    outline: none;
+    border: none;
+}
+
+input {
+    background-color: white;
+    color: var(--ink);
+}
+
+.menuTab {
+    font-weight: bold;
+    background-color: #eee;
+}
+
+/* ---------------------------------------------------- */
+.diary,
+.album,
+.video,
+.guestBook,
+.home {
+    padding: 10px 0;
+    border-bottom: 2px dashed var(--ink);
+}
+
+/* 폴더 내 게시글 조회 */
+.menuRightArea {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuRightTitle {
+    font-size: 17px;
+    width: 100%;
+    padding: 5px auto;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.folderNameArea {
+    display: flex;
+    font-size: 17px;
+    margin-bottom: 20px;
+}
+
+.folderImg {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+
+.myFile {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    z-index: 5;
+}
+
+.myFile:hover {
+    background-color: #eee;
+}
+
+.myFileNameArea {
+    display: flex;
+}
+
+.fa-file {
+    margin: 0 5px;
+}
+
+.dropdown-btn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.fileUpdateBtnArea {
+    display: flex;
+}
+
+.folderTitle {
+    width: 150px;
+}
+
+
+
+/* ----------------------------------------------------- */
+/* 메뉴설정 */
+.menuHeader,
+.menuMain {
+    display: flex;
+}
+
+.menuHeader>div:nth-child(2),
+.menuMain>div:nth-child(2) {
+    flex-basis: 15%;
+
+    display: flex;
+    justify-content: center;
+}
+
+.menuHeader>div:nth-child(3),
+.menuMain>div:nth-child(3) {
+    flex-basis: 60%;
+}
+
+.menuExample {
+    color: #aaa;
+}
+
+
+.menuLeftArea {
+    border: 1px solid black;
+    width: 250px;
+    margin-top: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.categoryTitle {
+    font-size: 23px;
+}
+
+.subCategoryArea {
+    display: flex;
+    flex-direction: column;
+}
+
+.subCategory {
+    padding: 3px;
+    padding-left: 20px;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.categoryArea {
+    padding: 7px 0;
+    cursor: pointer;
+
+    display: flex;
+    align-content: center;
+    position: relative;
+}
+
+.categoryArea:hover,
+.subCategory:hover {
+    background-color: #eee;
+}
+
+.homeCategoryArea:hover {
+    background-color: white;
+}
+
+.category {
+    height: 20px;
+    width: 20px;
+}
+
+.subCategoryImg {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+
+
+.menuSaveArea {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+#menuSaveBtn,
+#menuSelectBtn {
+    margin-right: 10px;
+}
+
+.checkedImg {
+    height: 21px;
+    width: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.menuTitle {
+    font-size: 17px;
+}
+
+.menuLeftRight {
+    display: flex;
+}
+
+.menuRightArea {
+    border: 1px solid black;
+    width: 370px;
+    margin-left: 30px;
+    margin-top: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.clicked {
+    border: 2px solid #aaa;
+}
+
+.fa-plus {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.fa-plus:hover {
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+}
+
+#menuSelectCancelBtn {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.menuListArea {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuOrder1 {
+    order: 1;
+}
+
+.menuOrder2 {
+    order: 2;
+}
+
+.menuOrder3 {
+    order: 3;
+}
+
+.menuOrder4 {
+    order: 4;
+}

@@ -33,7 +33,7 @@ public class MemberController {
 	public String selectMember(
 			int memberNo
 			) {
-		
+		System.out.println(memberNo);
 		String result = service.selectMember(memberNo);
 		
 		return result; 

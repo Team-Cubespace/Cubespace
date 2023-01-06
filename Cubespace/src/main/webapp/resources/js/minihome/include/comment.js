@@ -2,6 +2,7 @@
 const createCommentList = (commentList) => {
     const commentListArea = document.getElementById("commentListArea");
     commentListArea.innerHTML = "";
+    console.log(commentList);
     for(let comment of commentList) {
         // 댓글 li
         const commentRow = document.createElement("li");
@@ -97,7 +98,7 @@ const createCommentList = (commentList) => {
 
         const commentContentP = document.createElement("P");
         commentContentP.innerHTML = comment.commentContent;
-        commentContentP.style.fontFamily = `${comment.ownFontNo}`;
+        commentContentP.style.fontFamily = `"${comment.ownFontNo}"`;
         // 답글 버튼 영역
         const commentButtonArea = document.createElement("div");
         commentButtonArea.classList.add("comment-button-area");

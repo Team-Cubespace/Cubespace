@@ -3,10 +3,13 @@ package com.team.cubespace;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.team.cubespace.common.Util;
+
 public class Test {
 	public static void main(String[] args) {
-//		System.out.println((double)3 / (double)6 * 100);
-		System.out.println((3 * 1.0) / (6 * 1.0) * 100);
 		
+		for(int i=0; i<25; i++) {
+			System.out.printf("%d.%s\n", i, Util.fileRename("1.png"));			
+		}
 	}
 }

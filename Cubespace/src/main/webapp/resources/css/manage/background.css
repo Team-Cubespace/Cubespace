@@ -1,0 +1,119 @@
+.backgroundTab{
+    font-weight: bold;
+    background-color: #eee;
+}
+
+/* ----------------------------------------------------- */
+/* 배경설정 */
+.backgroundTitleArea {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.backgroundTitleArea {
+    padding-top: 20px;
+}
+
+.backgroundTitle {
+    font-size: 17px;
+}
+
+.backgroundExplain {
+    color: #aaa;
+    margin-right: 10px;
+}
+
+.backgroundExplain>p {
+    padding-top: 5px;
+    text-align: end;
+    /* font-size: 14px; */
+}
+
+#selectImgBtn {
+    width: 50px;
+    cursor: pointer;
+}
+
+#imageInput {
+    display: none;
+}
+
+.changeImgArea {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    /* margin-top: 15px; */
+    margin-bottom: 30px;
+    border-bottom: 3px solid #eee;
+}
+
+.changeColorArea {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* margin-bottom: 15px; */
+    padding: 10px 0;
+    border-bottom: 3px solid #eee;
+}
+
+.changeColorArea div:nth-child(1) {
+    display: flex;
+}
+
+.colorShow {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.changeColorTitle {
+    margin-right: 15px;
+    height: 30px;
+    cursor: pointer;
+    /* border: 1px solid black; */
+    padding: 5px;
+    border-radius: 3px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+
+#BGColorInput {
+    display: none;
+}
+
+#frameColorInput, #frameMenuColorInput {
+    display: none;
+}
+
+.backgroundBtnArea>span:nth-child(2) {
+    margin: 5px;
+}
+
+.changeImgArea>.backgroundBtnArea {
+    margin-left: 35px;
+}
+
+.bgImage {
+    height: 100px;
+    width: 100px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
+#allFriend {
+    font-size: 13px;
+}
+
+.frameMenuColorArea {
+    margin-bottom: 20px;
+}

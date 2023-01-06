@@ -91,11 +91,11 @@ public class ShopController {
 	@GetMapping("/miniMusicPlyer")
 	@ResponseBody
 	public String miniMusicPlyer(@RequestParam(value="cp", required=false, defaultValue="1") int cp,
-								int loginMemberNo) {
+			int loginMemberNo) {
 		
-//		Map<String,Object> paramMap = new HashMap<String, Object>();
-//		paramMap.put("loginMemberNo", loginMemberNo);
-//		paramMap.put("cp", cp);
+		Map<String,Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("loginMemberNo", loginMemberNo);
+		paramMap.put("cp", cp);
 
 		List<ShopFont> miniMusicPlyerList = service.miniMusicPlyer(loginMemberNo,cp); 
 

@@ -31,6 +31,11 @@ menuSelectBtn.addEventListener("click", () => {
 
     var checkArr = [];
 
+    if($("input[name='useMenu']:checked").length == 0){
+        alert("최소 1개의 메뉴를 선택해주세요");
+        return;
+    }
+
     $("input[name='useMenu']:checked").each(function (e) {
         var value = $(this).val();
         checkArr.push(value);

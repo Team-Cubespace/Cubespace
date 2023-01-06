@@ -17,12 +17,8 @@ const initVideoInfo = () => {
     video.preload = 'metadata';
     video.onloadedmetadata = () =>{
         videoVariable.duration = video.duration.toFixed(1);
-        videoVariable.size = getByteSize(video.size);
-
-        document.getElementById("videoSizeSpan").innerText = videoVariable.size;
         document.getElementById("videoDurationSpan").innerText = videoVariable.duration;
     }
-    // 화면에 출력
 }
 
 // 동영상 미리보기

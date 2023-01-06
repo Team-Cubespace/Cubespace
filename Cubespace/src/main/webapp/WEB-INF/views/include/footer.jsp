@@ -4,10 +4,10 @@
 <footer>
     <!------------------ 푸터 메뉴 ------------------>
     <ul class="footer-menu-nav">
-        <li><a href="">이용약관</a></li>
-        <li><a href="">개인정보처리방침</a></li>
+        <li><a href="/admin/termsOfUse">이용약관</a></li>
+        <li><a href="/admin/privatePolicy">개인정보처리방침</a></li>
         <li><a href="">저작권정책</a></li>
-        <li><a href="">FAQ</a></li>
+        <li><a href="/admin/faq">FAQ</a></li>
         <li><a href="/admin/member">관리자</a></li>
     </ul>
     <!------------------ 헤더 내용 ------------------>

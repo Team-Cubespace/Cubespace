@@ -160,6 +160,7 @@
         </div>
     </main>
     <script>
+        const currentPage = '${param.cp}';
         let shopCathNo;
 
         if(${shopCt != null}){
@@ -171,5 +172,8 @@
     <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
     <script src="/resources/js/webmain/main-shop.js"></script>
     <script src="/resources/js/webmain/shop-common.js"></script>
+    <%-- 재생플레이어 js --%>
+    <script src="/resources/js/webmain/MiniMusicPlayer.js"></script>
+
 </body>
 </html>

@@ -98,7 +98,7 @@
 </head>
 <body>
     <!-- 모달창 -->
-    <div class="popup_layer" id="popup_layer"  style="display: none;"  >
+    <div class="popup_layer" id="popup_layer1"  style="display: none;"  >
     
         <div class="popup_box">
             <div class="popup_cont" id = "popup_con"> 
@@ -132,7 +132,7 @@
     let memberName;
 
     function reportFriend(memberNo){
-        document.getElementById("popup_layer").style.display = "block";
+        document.getElementById("popup_layer1").style.display = "block";
         console.log("하이");
         // 신고하는 사람은 loginMember니까
         // 1. 신고받은 사람
@@ -167,7 +167,7 @@
             success : function(result){
                 if (result > 0){
                     alert("신고가 완료되었습니다.");
-                    document.getElementById("popup_layer").style.display = "none";
+                    document.getElementById("popup_layer1").style.display = "none";
                 }
             }, error : function (){
             }
@@ -181,7 +181,7 @@
         document.getElementById("popup_layer").style.display = "none";
 
     }
-
+    )
 
 </script>
 <!-- html에서 파일을 include 할 수 있도록 해주는 js (근데 VSCode Live Server에서만 보임) -->

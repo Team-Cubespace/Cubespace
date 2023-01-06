@@ -147,12 +147,11 @@ const notificationsCount = ()=>{
         dataType : "JSON",
         success : notificationsCount =>{
 
-            console.log("로그인번호"+loginMemberNo);
-            console.log("카운트"+notificationsCount);
-
             // 프로필 알림 숫자 변경
             const mainAlarmCount = document.getElementById("mainAlarmCount")
-            mainAlarmCount.innerText=notificationsCount;
+            if(mainAlarmCount!=null){
+                mainAlarmCount.innerText=notificationsCount;
+            }
             
             const noticeNew = document.getElementById("alarmCount");
             // 헤더 빨간색 추가 / 제거

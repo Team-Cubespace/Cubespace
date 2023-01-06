@@ -9,7 +9,7 @@ let temp
 (()=>{
     $.ajax({
         url : "/miniMusicPlyer",
-        data: {"loginMemberNo":loginMemberNo, "cp":currentPage},
+        data: {"loginMemberNo":loginMemberNo},
         dataType : "JSON",
         success : miniMusicList =>{
             
@@ -49,7 +49,7 @@ let temp
                         duration: null,
                         currentTime: null,
                         isTimerPlaying: false,
-                        tracks: musicArr,
+                        tracks: musicArr[i],
                         // tracks: [
                         //     {
                         //         name: "화려한서커스(Splendid Circus)",
@@ -210,19 +210,18 @@ let temp
 function MusicPlayerOpen(index){
     document.getElementById("modalPlayer").style.display = "block";
     console.log(index);
-    temp.currentTrackIndex = index;
-    temp.currentTrack = temp.tracks[temp.currentTrackIndex];
-    temp.resetPlayer();
-
 
     
+    for(let i=index;i<=musicArr.length;i++){
+        musicArr[i]
+    }
     /*
-    클릭시 ajax를이용해 DB에서 목록조회 musicArr배열로 담음
-    
-    index =0 클릭 시  일반포문을 이용해서  musicArr의배열 i를 찾음
-    
+    index =0 클릭 시  
     musicArr[0] 을 실행 한다
-
+    musicArr[0]
+    
+    클릭 시 인덱스 에서 아래 정보를 가져와 
+    name,artist,cover,source,url,favorited
     */
     
 }

@@ -32,6 +32,9 @@ const memberNotifications=()=>{
         dataType : "JSON",
         success : memberNotificationsList =>{
 
+            
+            // 헤더 빨간색 추가 제거 if문 
+            
         alarmSection.innerHTML="";  // 이전 내용 제거
 
         for(let alarmProfile of memberNotificationsList){

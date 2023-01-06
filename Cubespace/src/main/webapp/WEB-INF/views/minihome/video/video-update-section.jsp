@@ -9,7 +9,7 @@
         <div class="input-row">
             <label for="">폴더</label>
             <select name="folderNo" id="">
-            <c:forEach var="folder" items="${folderList}">
+            <c:forEach var="folder" items="${minihome.videoFolderList}">
                 <option value="${folder.folderNo}" <c:if test="${folderNo == video.folderNo}">selected</c:if>>${folder.folderName}</option>
             </c:forEach>
             </select>

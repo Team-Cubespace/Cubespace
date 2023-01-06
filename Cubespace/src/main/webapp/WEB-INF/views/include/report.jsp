@@ -177,7 +177,7 @@
 
     document.getElementById("cancleBtn").addEventListener("click",function(){
 
-        document.getElementById("popup_layer").style.display = "none";
+        document.getElementById("popup_layer1").style.display = "none";
 
     }
     )

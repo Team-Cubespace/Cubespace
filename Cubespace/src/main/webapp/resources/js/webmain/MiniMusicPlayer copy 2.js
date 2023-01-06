@@ -9,7 +9,7 @@ let temp
 (()=>{
     $.ajax({
         url : "/miniMusicPlyer",
-        data: {"loginMemberNo":loginMemberNo, "cp":currentPage},
+        data: {"loginMemberNo":loginMemberNo},
         dataType : "JSON",
         success : miniMusicList =>{
             
@@ -210,12 +210,11 @@ let temp
 function MusicPlayerOpen(index){
     document.getElementById("modalPlayer").style.display = "block";
     console.log(index);
-    temp.currentTrackIndex = index;
-    temp.currentTrack = temp.tracks[temp.currentTrackIndex];
-    temp.resetPlayer();
-
 
     
+    for(let i=index;i<=musicArr.length;i++){
+        musicArr[i]
+    }
     /*
     클릭시 ajax를이용해 DB에서 목록조회 musicArr배열로 담음
     

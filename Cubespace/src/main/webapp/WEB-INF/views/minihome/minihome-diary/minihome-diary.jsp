@@ -125,16 +125,12 @@
 <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
 <script>
     const folderNo = "${folderNo}";
+    console.log(folderNo);
     const datedatedate = "${datedatedate}";
     const flagNo = "${flagNo}";
     /* 세션에 있으니까 model에 안 담아줘도 jsp에서 바로 쓸 수 있음. */
     const minihomeNo = "${minihome.memberNo}";
     const loginMemberNo = "${loginMember.memberNo}";
-    console.log("homepageMemberNo" +minihomeNo );
-    console.log("loginMember" + loginMemberNo );
-    console.log("folderNo" + folderNo );
-    console.log("datedatedate" + datedatedate );
-    console.log("flagNo" + flagNo );
 </script>
 <script src="/resources/js/minihome/minihome-diary/diary-main.js"></script>
 <%-- <script src="/resources/js/minihome/minihome-diary/try1.js"></script> --%>

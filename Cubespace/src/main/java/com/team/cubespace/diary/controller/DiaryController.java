@@ -41,7 +41,7 @@ public class DiaryController {
 	@GetMapping("/diary/{boardTypeNo}")
 	public String move(
 			@PathVariable ("boardTypeNo") int boardTypeNo,
-			@SessionAttribute("folderList") List<Folder> folderList,
+//			@SessionAttribute("folderList") List<Folder> folderList,
 			@RequestParam(value="folderNo", required=false, defaultValue="-1") int folderNo,
 			@SessionAttribute("minihome") Minihome minihome,
 			@SessionAttribute("loginMember") Member loginMember,
@@ -54,15 +54,15 @@ public class DiaryController {
 			// folderNo로 지정
 			
 			//무조건 탭 누를 때는 '나의다이어리'띄우고 싶다면, 설정하기
-			if(folderList.get(0).getFolderName().equals("나의 월간달력")) {
-				folderNo = folderList.get(1).getFolderNo();
+			if(minihome.getDiaryFolderList().get(0).getFolderName().equals("나의 월간달력")) {
+				folderNo = minihome.getDiaryFolderList().get(1).getFolderNo();
 			} else {
-				folderNo = folderList.get(0).getFolderNo();
+				folderNo = minihome.getDiaryFolderList().get(0).getFolderNo();
 			}
 		}
 		// 폴더 이름 찾기
 		String folderName = "";
-		for(Folder folder : folderList) {
+		for(Folder folder : minihome.getDiaryFolderList()) {
 			if(folder.getFolderNo() == folderNo) {
 				folderName = folder.getFolderName();
 				break;
@@ -93,11 +93,13 @@ public class DiaryController {
 	@ResponseBody
 	public String selectDateList(
 			@SessionAttribute("minihome") Minihome minihome,
-			String yearMonth
+			String yearMonth,
+			int folderNo
 			) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("yearMonth", yearMonth);
 		map.put("memberNo", minihome.getMemberNo());
+		map.put("folderNo", folderNo);
 		List<Integer> dateList = service.selectDateList(map);
 		return new Gson().toJson(dateList);
 	}
@@ -238,7 +240,9 @@ public class DiaryController {
    
    	@GetMapping("/diaryCancle/{date}")
    	public String diaryCancle(@PathVariable("date") String date
-   			, Model model) {
+   			, Model model,
+   			int folderNo) {
+   		model.addAttribute("folderNo", folderNo);
    		model.addAttribute("datedatedate",date);
    		model.addAttribute("flagNo", 1);
    		return "minihome/minihome-diary/minihome-diary";

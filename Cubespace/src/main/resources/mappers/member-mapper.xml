@@ -6,19 +6,19 @@
 	<resultMap type="Member" id="member_rm">
 		<id property="memberNo" column="MEMBER_NO"/>
 		
-		<result property="memberNickname" column="MEMBER_NO"/>
-		<result property="complainerNo" column="MEMBER_NICKNAME"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+		<result property="complainerNo" column="COMPLAINER_NO"/>
 		<result property="complainedNo" column="COMPLAINED_NO"/>
 		<result property="complainContent" column="COMPLAIN_CONTENT"/>
 	</resultMap>
 	
-	<select id="selectMember" resultMap = "member_rm">
+	<select id="selectMember" resultType = "string">
 	SELECT MEMBER_NICKNAME FROM MEMBER
 	WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
 	<insert id="reportMember">
 	INSERT INTO MEMBER_COMPLAIN
-	VALUES (SEQ_COMPLAIN_NO.NEXTVAL, #{complainerNo},#{complainedNo},#{complainContent},SYSDATE)
+	VALUES (SEQ_COMPLAIN_NO.NEXTVAL, #{complainerNo},#{complainedNo},#{complainContent},DEFAULT,DEFAULT)
 	</insert>
 </mapper>

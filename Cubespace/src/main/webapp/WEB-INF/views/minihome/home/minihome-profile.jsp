@@ -58,7 +58,7 @@
         </div>
  
         <!-- 프로필 메시지 (수정 필요) -->
-        <textarea class="profile-message" spellcheck="false" readonly>${profile.comment}</textarea>
+        <textarea class="profile-message" wrap="physical" spellcheck="false" readonly>${profile.comment}</textarea>
 
         <!-- 프로필 수정 -->
         <c:if test="${minihome.memberNo == loginMember.memberNo}">

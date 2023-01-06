@@ -3,6 +3,8 @@ package com.team.cubespace.minihome.model.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.team.cubespace.member.model.vo.Member;
 import com.team.cubespace.minihome.model.vo.FriendMessage;
 import com.team.cubespace.minihome.model.vo.NewPost;
@@ -39,4 +41,15 @@ public interface MinihomeMainService {
 	 * @return result
 	 */
 	int emotion(Map<String, Object> paramMap);
+
+	/**
+	 * 프로필 수정
+	 * @param webPath
+	 * @param filePath
+	 * @param profileImage
+	 * @param loginMember
+	 * @return result
+	 * @throws Exception
+	 */
+	int updateProfile(String webPath, String filePath, MultipartFile profileImage, Member loginMember) throws Exception;
 }

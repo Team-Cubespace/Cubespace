@@ -72,4 +72,22 @@ public class MinihomeMainDAO {
 	public int updateEmotion(Map<String, Object> paramMap) {
 		return sqlSession.update("minihomeMainMapper.updateEmotion", paramMap);
 	}
+
+	/**
+	 * 프로필 이미지 수정
+	 * @param loginMember
+	 * @return result
+	 */
+	public int updateProfileImage(Member loginMember) {
+		return sqlSession.update("minihomeMainMapper.updateProfileImage", loginMember);
+	}
+
+	/**
+	 * 프로필 메시지 수정
+	 * @param loginMember
+	 * @return result
+	 */
+	public int updateComment(Member loginMember) {
+		return sqlSession.update("minihomeMainMapper.updateComment", loginMember);
+	}
 }

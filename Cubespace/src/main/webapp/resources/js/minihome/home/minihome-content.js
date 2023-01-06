@@ -1,34 +1,33 @@
 /* 메시지 남기기 */
 document.getElementById("writeBtn").addEventListener("click", e => {
-    // if(minihomeNo == loginNo){
-    //     alert("자기 자신에게 깐부 메시지를 남길 수 없습니다.");
-    //     e.preventDefault();
-    // }
-
-    var arr = [1, 2, 3];
+    if(minihomeNo == loginNo){
+        alert("자기 자신에게 깐부 메시지를 남길 수 없습니다.");
+        e.preventDefault();
+    }
 
     $.ajax({
         url : "/friendFlag",
-        data : {
-                "arr" : arr},
+        data : {"homeNo" : homeNo,
+                "loginNo" : loginNo},
         type : "GET",
         success : (friendFlag) => {
-            // if(friendFlag > 0) {
-            //     const 
+            if(friendFlag > 0) {
+                const content = document.getElementById("dearFriend").value;
 
-            //     $.ajax({
-            //         url : "/friendFlag",
-            //         data : {"homeNo" : homeNo,
-            //                 "loginNo" : loginNo},
-            //         type : "GET",
-            //         success : (result) => {
+                $.ajax({
+                    url : "/friendFlag",
+                    data : {"homeNo" : homeNo,
+                            "loginNo" : loginNo,
+                            "content" : content},
+                    type : "GET",
+                    success : (result) => {
+                        
+                    }
+                })
 
-            //         }
-            //     })
-
-            // } else {
-            //     alert("깐부 상태일 때 메시지를 남길 수 있습니다.");
-            // }
+            } else {
+                alert("깐부 상태일 때 메시지를 남길 수 있습니다.");
+            }
         },
         error : () => {console.log("깐부 사이 확인 실패");}
     });

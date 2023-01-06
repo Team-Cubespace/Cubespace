@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.team.cubespace.member.model.vo.Member;
 import com.team.cubespace.minihome.model.service.MinihomeMainService;
@@ -71,4 +74,20 @@ public class MinihomeMainController {
 	
 	// 깐부 메시지 등록
 	
+	
+	// 프로필 수정
+	@GetMapping("/updateProfile")
+	@ResponseBody
+	public int updateProfile(@RequestParam(value="profileImage") MultipartFile profileImage,
+							 @RequestParam(value="comment") String comment,
+            		   		 @SessionAttribute("loginMember") Member loginMember,
+            		   		 HttpServletRequest req) throws Exception {
+		
+		loginMember.setComment(comment);
+		String webPath = "/resources/images/memberProfile/";
+		String filePath = req.getSession().getServletContext().getRealPath(webPath);
+		
+		int result = service.updateProfile(webPath, filePath, profileImage, loginMember);
+		return result;
+	}
 }

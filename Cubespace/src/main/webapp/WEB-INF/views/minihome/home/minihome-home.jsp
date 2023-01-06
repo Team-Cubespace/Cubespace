@@ -27,7 +27,7 @@
                 <header>최근 게시물</header>
 
                 <!-- 최근 게시물 -->
-                <div class="new-post-container">W
+                <div class="new-post-container">
                     <c:choose>
                         <c:when test="${fn:length(newPost) == 0}">
                             <div class="nothing">최근 게시물이 없습니다&nbsp;<i class="fa-solid fa-face-sad-tear"></i></div>
@@ -96,14 +96,14 @@
         
                 <header>깐부 메시지</header>
 
-                <!-- 깐부 메시지 남기기 -->
+                <!-- 깐부 메시지 남기기 (기능 구현 예정) -->
                 <div class="write-message">
                     <span>메시지 남기기</span>
                     <input type="text" id="dearFriend" placeholder="깐부에게 메시지를 남겨보세요!">
                     <span id="writeBtn">등록</span>
                 </div>
 
-                <!-- 깐부 메시지 목록 (dropdown 추가할 때 깐부 닉네임 태그 button으로 수정) -->
+                <!-- 깐부 메시지 목록 (폰트 관련 수정 필요, dropdown 추가할 때 깐부 닉네임 태그 button으로 수정) -->
                 <div class="friend-message-container">
                     <c:choose>
                         <c:when test="${fn:length(friendMessage) == 0}">
@@ -119,6 +119,9 @@
                                         <span class="message"><span title="${message.content}">${message.content}</span></span>
                                     </div>
                                     <div class="message-time">${message.create}</div>
+                                    <!-- <c:if test="${minihome.memberNo == loginMember.memberNo || message.memberNo == loginMember.memberNo}">
+                                            <button class="delete-btn" value="${message.commentNo}">&times;</button>
+                                    </c:if> -->
                                 </div>
                             </c:forEach>
                         </c:otherwise>

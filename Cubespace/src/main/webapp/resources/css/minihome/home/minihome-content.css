@@ -134,3 +134,11 @@
     justify-content: center;
     align-items: center;
 }
+
+/* delete */
+.delete-btn{
+    margin-left: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}

@@ -21,11 +21,11 @@
             <!-- 프로필 이미지 -->
             <c:choose>
                 <c:when test="${profile.profileImage == null}">
-                    <img src="/resources/images/common/cubes.png" class="profile-img">
+                    <img src="/resources/images/common/cubes.png" id="preview">
                 </c:when>
 
                 <c:otherwise>
-                    <img src="${profile.profileImage}" class="profile-img">
+                    <img src="${profile.profileImage}" id="preview">
                 </c:otherwise>
             </c:choose>
 
@@ -38,8 +38,8 @@
 
         <!-- 프로필 메시지 수정 -->
         <div class="message-container">
-            <textarea id="updateMessage" spellcheck="false"></textarea>
-            <span id="letterCount"></span>
+            <textarea name="updateMessage" id="updateMessage" class="updateMessage" wrap="physical" spellcheck="false"></textarea>
+            <span class="letter">Letter(<span id="letterCount">0</span> / 98)</span>
         </div>
 
         <!-- 프로필 수정 버튼 -->

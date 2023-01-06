@@ -128,4 +128,14 @@
 	<update id="updateEmotion">
 		UPDATE "MEMBER" SET EMOTION_NO = #{emotionNo} WHERE MEMBER_NO = #{memberNo}
 	</update>
+	
+	<!-- 프로필 이미지 수정 -->
+	<update id="updateProfileImage">
+		UPDATE "MEMBER" SET PROFILE_IMG = #{profileImage} WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 프로필 메시지 수정 -->
+	<update id="updateComment">
+		UPDATE MINI_HOMEPAGE SET "COMMENT" = #{comment} WHERE MEMBER_NO = #{memberNo}
+	</update>
 </mapper>

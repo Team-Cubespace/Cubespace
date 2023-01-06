@@ -46,4 +46,12 @@ public class NotificationsDAO {
 		return sqlSession.update("notifications.alarmRead",aList);
 	}
 
+	/** 알림 카운트 확인
+	 * @param loginMemberNo
+	 * @return
+	 */
+	public int notificationsCount(int loginMemberNo) {
+		return sqlSession.selectOne("notifications.notificationsCount",loginMemberNo);
+	}
+
 }

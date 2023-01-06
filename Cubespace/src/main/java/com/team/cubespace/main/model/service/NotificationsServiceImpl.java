@@ -65,5 +65,11 @@ public class NotificationsServiceImpl implements NotificationsService {
 		return dao.alarmRead(aList);
 	}
 
+	// 알림 카운트 확인
+	@Override
+	public int notificationsCount(int loginMemberNo) {
+		return dao.notificationsCount(loginMemberNo);
+	}
+
 
 }

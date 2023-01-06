@@ -49,6 +49,12 @@ public interface NotificationsService {
 	 */
 	int alarmRead(String aList);
 
+	/** 알림 카운트 확인
+	 * @param loginMemberNo
+	 * @return
+	 */
+	int notificationsCount(int loginMemberNo);
+
 
 
 }

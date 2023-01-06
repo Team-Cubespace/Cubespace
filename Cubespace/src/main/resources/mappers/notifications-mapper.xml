@@ -56,12 +56,18 @@
 		DELETE FROM ALARM WHERE ALARM_NO IN (${alarmNoList}) 
 	</delete>
 		
+		<!-- 확인된 알림 값 변경 -->
 	<update id="alarmRead">
 		UPDATE ALARM SET READ_YN = 'Y'
 	WHERE ALARM_NO IN (${alarmNoList}) 
 	AND READ_YN = 'N'
 	</update>
 
- 		
+ 		<select id="notificationsCount" resultType="_int">
+	 		SELECT COUNT(*) 
+			FROM ALARM 
+			WHERE READ_YN = 'N' 
+			AND RECEIVER_NO = #{loginMemberNo}
+ 		</select>
   
 </mapper>

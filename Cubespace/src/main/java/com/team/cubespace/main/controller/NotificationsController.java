@@ -111,8 +111,23 @@ public class NotificationsController {
 		int result =service.alarmRead(aList);
 		
 		return result;
-		
 	}
+	
+	
+	/** 알림 카운트 확인
+	 * @param loginMemberNo
+	 * @return
+	 */
+	@GetMapping("/notificationsCount")
+	@ResponseBody
+	public int  notificationsCount(int loginMemberNo) {
+		
+		int result = service.notificationsCount(loginMemberNo);
+		
+		return result;
+	}
+	
+	
 	
 	
 	

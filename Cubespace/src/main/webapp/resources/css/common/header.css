@@ -47,8 +47,10 @@ header {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: red;
     right: 0px;
+}
+.notice-new.alarm-count{
+    background-color: red;
 }
 
 /* 헤더 로고 영역 */

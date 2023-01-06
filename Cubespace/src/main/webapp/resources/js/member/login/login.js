@@ -24,8 +24,9 @@ function kakaoLogin() {
                 success: e => {
                   if (e == 0) {
                     location.href = "/";
-                  } else {
-                    alert(e);
+                  } else { // 전화번호가 저장되지 않은경우->수정페이지 이동
+                    alert("큐브스페이스에 오신 것을 환영합니다. 카카오에서 불러오지 못한 필수 정보 입력을 위해 회원 수정 페이지로 이동합니다");
+                    location.href = "/member/updateInfo";
                   }
                 }
 

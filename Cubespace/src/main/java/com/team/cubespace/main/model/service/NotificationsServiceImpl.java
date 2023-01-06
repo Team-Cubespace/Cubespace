@@ -40,4 +40,36 @@ public class NotificationsServiceImpl implements NotificationsService {
 		return daoMemberSear.memberCancelBtn(paramMap);
 
 	}
+
+	// 활동알림 목록 조회
+	@Override
+	public List<Notifications> activityNotification(int loginMemberNo) {
+		return dao.activityNotification(loginMemberNo);
+	}
+
+	// 알람 개별삭제
+	@Override
+	public int messageDelete(int alarmNo) {
+		return dao.messageDelete(alarmNo);
+	}
+
+	// 알림 전체삭제
+	@Override
+	public int messageDeleteAll(String alarmNoList) {
+		return dao.messageDeleteAll(alarmNoList);
+	}
+
+	// 확인된 알림 값 변경
+	@Override
+	public int alarmRead(String aList) {
+		return dao.alarmRead(aList);
+	}
+
+	// 알림 카운트 확인
+	@Override
+	public int notificationsCount(int loginMemberNo) {
+		return dao.notificationsCount(loginMemberNo);
+	}
+
+
 }

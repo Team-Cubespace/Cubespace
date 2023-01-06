@@ -9,7 +9,7 @@
         <div class="input-row">
             <label for="">폴더</label>
             <select name="folderNo" id="">
-            <c:forEach var="folder" items="${folderList}">
+            <c:forEach var="folder" items="${minihome.albumFolderList}">
                 <c:choose>
                     <%-- 앨범이 작성된 폴더라면 --%>
                     <c:when test="${folder.folderNo == album.folderNo}">

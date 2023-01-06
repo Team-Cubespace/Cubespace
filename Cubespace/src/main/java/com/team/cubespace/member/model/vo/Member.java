@@ -43,4 +43,9 @@ public class Member {
 	private int friendCount; // 친구수
 	
 	private String comment; // 홈페이지 소개
+	
+	//회원 신고
+	private int complainerNo; // 신고한 사람
+ 	private int complainedNo; // 신고당한 사람
+ 	private String complainContent; //신고 내용
 	}

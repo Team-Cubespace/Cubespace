@@ -48,7 +48,6 @@ useMusicBtn.addEventListener("click", e => {
     const musicNo = $('input[type=radio][name=useMusicRadio]:checked').val();
     if(musicNo != undefined) {
 
-        
         $.ajax({
             url : "/manage/music/useMusic",
             type: "get",
@@ -56,13 +55,15 @@ useMusicBtn.addEventListener("click", e => {
             success : result => {
                 if(result > 0) {
                     alert("배경음악이 적용되었습니다");
-                    window.parent.location.reload();
+                    window.parent.postMessage(musicNo, "*");
                 } else {
                     console.log("배경음악 적용 실패");
                 }
             }, 
             error : e => {console.log("배경음악 적용 중 오류 발생");}
         })
+
+
     } else {
         alert("배경음악을 선택한 후 버튼을 눌러주세요");
     }
@@ -82,7 +83,7 @@ deleteMusic.addEventListener("click", e => {
             success : result => {
                 if(result > 0) {
                     alert("배경음악이 적용되었습니다");
-                    window.parent.location.reload();
+                    window.parent.postMessage(0, "*");
                 } else {
                     console.log("배경음악 적용 실패");
                 }

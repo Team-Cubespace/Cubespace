@@ -200,6 +200,8 @@ header {
 .fontHeader>div {
     font-size: 17px;
     text-align: center;
+    align-items: center;
+    justify-content: ce;
 
 }
 

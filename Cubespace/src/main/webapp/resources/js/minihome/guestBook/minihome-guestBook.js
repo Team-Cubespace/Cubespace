@@ -65,7 +65,7 @@ const listGuestBook=()=>{
 
                                         const li2 = document.createElement("li")
                                             const a2 = document.createElement("a")
-                                            a2.setAttribute("onclick","reportFriend()")
+                                            a2.setAttribute("onclick","reportFriend("+listGuestbook.gbNo+")")
                                             a2.innerText="신고";
 
 
@@ -151,7 +151,7 @@ const listGuestBook=()=>{
     
                                 const member_message = document.createElement("div");
                                 member_message.classList.add("member-message");
-                                member_message.setAttribute("style","font-family:"+listGuestbook.memberFontNo+"")
+                                member_message.setAttribute("style","font-family:'"+listGuestbook.memberFontNo+"'")
     
     
                                 const secretImg = document.createElement("img");

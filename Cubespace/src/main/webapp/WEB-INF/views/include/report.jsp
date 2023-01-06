@@ -97,8 +97,8 @@
 </head>
 <body>
     <!-- 모달창 -->
-    <div class="popup_layer" id="popup_layer" >
-        <!-- style="display: none;" -->
+    <div class="popup_layer" id="popup_layer" style="display: none;">
+        
         <div class="popup_box">
             <div class="popup_cont" id = "popup_con"> 
                 <div>

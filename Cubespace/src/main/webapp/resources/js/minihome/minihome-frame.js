@@ -240,6 +240,7 @@ const createMusic = (musicPath, autoplay) => {
         },
         onend: () =>{
             console.log("노래끝남");
+            clearInterval(interval);
             currentTime = 0;
         }
     });

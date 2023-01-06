@@ -40,7 +40,10 @@
                 <!-- 전체 내용 div 태그로 한 번 감싸주세요 -->
                 <!-- ex) <div class="home-area"> <div></div> <span></span> ... </div> -->
                 <div class = "home-area">
-                    <header><span>다이어리 > </span><span>${folderName}</span></header>
+                    <header>
+                        <span>다이어리 > </span>
+                        <span>${folderName}</span>
+                    </header>
                     <div class = "calendar-box">
                         <div class = "calendar-section">
                             <!-- jsp인 경우 include할 거...? -->
@@ -101,7 +104,6 @@
                         </div>
                     </div>
                     <div class = "write-section">
-                        
                         <c:if test = "${minihome.memberNo==loginMember.memberNo}">
                             <div  class = "writeBtn" onclick="writeBtn()">
                                 <span>글쓰기</span>

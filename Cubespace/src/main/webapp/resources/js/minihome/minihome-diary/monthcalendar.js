@@ -253,7 +253,7 @@ function createCalendar(){
           popup(arg);
         },
 
-        editable : editableFlag,
+        eventStartEditable : editableFlag,
         
         /* 이벤트 클릭 시 모달 호출 */
         /* arg = 클릭한 그 이벤트의 내용임. 얘를 모달에 담고, 수정버튼을 눌렀을 때, 수정되도록... */
@@ -269,7 +269,7 @@ function createCalendar(){
 
 /* ****************************************************************************** */
         eventDragStart: function (event, jsEvent, ui, view) {
-          //alert("eventDragStart 이건 언제 발생?")
+        
         },
         eventDragStop : function (){
           //alert(" eventDragStop 이건 언제 발생?")

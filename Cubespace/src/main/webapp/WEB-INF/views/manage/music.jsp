@@ -59,7 +59,12 @@
                     <%-- 작성자가 unknown이라면 넣을 문구 추가 --%>
                 <c:if test="${not empty musicList}">
                 <c:forEach var="music" items="${musicList}">
+                <c:if test="${minihome.musicPath == music.musicPath}">
+                    <div class="fontMain backgroundMain musicMain originalMusic">
+                </c:if>
+               <c:if test="${minihome.musicPath != music.musicPath}">
                     <div class="fontMain backgroundMain musicMain">
+                </c:if>
                         <div class="musicTitleArea">
                             <img src="${music.musicThumnail}" class="musicThumbnail">
                         <c:choose>
@@ -81,11 +86,16 @@
                             </c:otherwise>
                         </c:choose>
                         <div class="musicListen">
-                            <i class="fa-solid fa-play" id="${music.musicPath}"></i>
-                            <i class="fa-solid fa-stop"></i>
+                            <i class="playMusic fa-solid fa-play " id="${music.musicPath}"></i>
                         </div>
                         <div class="musicUse">
-                            <input type="radio" name="useMusicRadio" class="useMusicRadio" value="${music.musicNo}">
+                        <c:if test="${minihome.musicPath == music.musicPath}">
+                            <input type="radio" name="useMusicRadio" class="useMusicRadio" value="${music.musicNo}" checked>
+                        </c:if>
+                        <c:if test="${minihome.musicPath != music.musicPath}">
+                            <input type="radio" name="useMusicRadio" class="useMusicRadio" value="${music.musicNo}" >
+                        </c:if>
+                        
                         </div>
                     </div>
                 </c:forEach>

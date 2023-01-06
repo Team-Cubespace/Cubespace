@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/resources/css/common/checkBox.css">
     <link rel="stylesheet" href="/resources/css/minihome/minihome-rayout.css">
     <link rel="stylesheet" href="/resources/css/manage/manage.css">
+    <link rel="stylesheet" href="/resources/css/manage/background.css">
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
     <title></title>
     <style>
@@ -45,11 +46,10 @@
                         <div class="changeColorArea">
                             <div>
                                 <label for="BGColorInput" class="changeColorTitle whiteBtn">색상변경</label>
-                                <input type="color" id="BGColorInput" name="BGColorInput" />
-                                <span class="colorShow" id="bgColorShow"></span>
+                                <input type="color" id="BGColorInput" name="BGColorInput"  value="${minihome.backgroundSkin}"/>
+                                <span class="colorShow" id="bgColorShow" style="background-color: ${minihome.backgroundSkin}"></span>
                             </div>
                             <div class="backgroundBtnArea">
-                                <%-- <span class="whiteBtn" id="bgColorPreview">미리보기</span> --%>
                                 <span class="whiteBtn" id="bgColorUse">적용하기</span>
                                 <span class="whiteBtn" id="bgColorReturn">초기화하기</span>
                             </div>
@@ -60,7 +60,6 @@
                                 <input type="file" id="imageInput" name="imageInput" accept="image/*"/>
                             </div>
                             <div class="backgroundBtnArea">
-                                <%-- <span class="whiteBtn" id="bgImagePreview">미리보기</span> --%>
                                 <span class="whiteBtn" id="bgImageUse">적용하기</span>
                                 <span class="whiteBtn" id="bgImageReturn">초기화하기</span>
                             </div>
@@ -78,11 +77,10 @@
                         <div class="changeColorArea">
                             <div>
                                 <label for="frameColorInput" class="changeColorTitle whiteBtn">색상변경</label>
-                                <input type="color" id="frameColorInput" name="frameColorInput" />
-                                <p class="colorShow" id="frameColorShow"></p>
+                                <input type="color" id="frameColorInput" name="frameColorInput" value="${minihome.frameColor}" />
+                                <p class="colorShow" id="frameColorShow" style="background-color: ${minihome.frameColor}"></p>
                             </div>
                             <div class="backgroundBtnArea">
-                                <%-- <span class="whiteBtn" id="framePreview">미리보기</span> --%>
                                 <span class="whiteBtn" id="frameUse">적용하기</span>
                                 <span class="whiteBtn" id="frameReturn">초기화하기</span>
                             </div>
@@ -99,11 +97,10 @@
                         <div class="changeColorArea">
                             <div>
                                 <label for="frameMenuColorInput" class="changeColorTitle whiteBtn">색상변경</label>
-                                <input type="color" id="frameMenuColorInput" name="frameColorInput" />
-                                <p class="colorShow" id="frameMenuColorShow"></p>
+                                <input type="color" id="frameMenuColorInput" name="frameColorInput" value="${minihome.frameMenuColor}"/>
+                                <p class="colorShow" id="frameMenuColorShow" style="background-color: ${minihome.frameMenuColor}"></p>
                             </div>
                             <div class="backgroundBtnArea">
-                                <%-- <span class="whiteBtn" id="frameMenuPreview">미리보기</span> --%>
                                 <span class="whiteBtn" id="frameMenuUse">적용하기</span>
                                 <span class="whiteBtn" id="frameMenuReturn">초기화하기</span>
                             </div>

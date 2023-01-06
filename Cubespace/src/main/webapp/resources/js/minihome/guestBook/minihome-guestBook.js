@@ -151,7 +151,7 @@ const listGuestBook=()=>{
     
                                 const member_message = document.createElement("div");
                                 member_message.classList.add("member-message");
-                                member_message.setAttribute("style","font-family:"+listGuestbook.memberFontNo+"")
+                                member_message.setAttribute("style","font-family:'"+listGuestbook.memberFontNo+"'")
     
     
                                 const secretImg = document.createElement("img");

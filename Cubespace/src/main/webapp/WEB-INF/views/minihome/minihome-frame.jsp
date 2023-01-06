@@ -135,7 +135,7 @@
                 <%-- <iframe src="/diary/write" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
 
                 <%-- <iframe src="/albumList/2" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
-                <iframe src="/manage/font" frameborder="0" name="minihomeMenu" scrolling="no">
+                <iframe src="/manage/menu" frameborder="0" name="minihomeMenu" scrolling="no">
 
                 </iframe>
                 <ul class="minihome-menu frame-menu-color">

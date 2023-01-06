@@ -44,7 +44,7 @@ const addVideo = input => {
         console.log(videoVariable.duration);
         console.log(videoVariable.size);
         document.getElementById("videoSizeSpan").innerText = 0;
-            document.getElementById("videoDurationSpan").innerText = 0;
+        document.getElementById("videoDurationSpan").innerText = 0;
     }
 }
 
@@ -53,14 +53,14 @@ const checkVideo= ()=>{
         alert("동영상을 업로드해주세요.");
         return false;
     }
-    // if (videoVariable.size > 100000000) {
-    //     alert("100mb이하의 동영상만 업로드할 수 있습니다.");
-    //     return false;
-    // }
-    // if (videoVariable.duration > 60) {
-    //     alert("1분 미만의 동영상만 업로드할 수 있습니다.");
-    //     return false;
-    // }
+    if (videoVariable.size > 100000000) {
+        alert("100mb이하의 동영상만 업로드할 수 있습니다.");
+        return false;
+    }
+    if (videoVariable.duration > 60) {
+        alert("1분 미만의 동영상만 업로드할 수 있습니다.");
+        return false;
+    }
     return true;
 }
 
@@ -90,7 +90,6 @@ const submitForm = ()=>{
             console.log(result);
             document.getElementById("loadingMask").style.display = "none";
             alert("파일업로드 실패");
-            
         }
     })
 }

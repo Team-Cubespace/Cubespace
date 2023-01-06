@@ -17,5 +17,4 @@ public class Folder {
 	private String boardTypeName;	// 게시판 타입 이름 
 	private int fileCount; // 폴더 안의 게시글 수
 	private String folderDelYN; // 폴더 삭제 여부
-
 }

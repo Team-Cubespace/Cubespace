@@ -21,6 +21,13 @@ public interface MinihomeMainService {
 	Map<String, Object> profile(int memberNo);
 
 	/**
+	 * 깐부 상태 확인 (최근 게시물 공개 여부, 깐부 메시지 등록)
+	 * @param paramMap
+	 * @return friendFlag
+	 */
+	int friendFlag(Map<String, Integer> paramMap);
+	
+	/**
 	 * 최근 게시물 조회
 	 * @param loginNo
 	 * @param memberNo
@@ -53,4 +60,19 @@ public interface MinihomeMainService {
 	 */
 	int updateProfile(String webPath, String filePath, MultipartFile profileImage,
 					  String updateFlag, Member loginMember) throws Exception;
+
+	/**
+	 * 깐부 메시지 등록
+	 * @param paramMap
+	 * @param loginMember
+	 * @return friendMessage
+	 */
+	FriendMessage insertMessage(Map<String, Object> paramMap, Member loginMember);
+
+	/**
+	 * 깐부 메시지 삭제
+	 * @param commentNo
+	 * @return result
+	 */
+	int deleteMessage(int commentNo);
 }

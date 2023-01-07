@@ -38,6 +38,12 @@ public class MinihomeMainServiceImpl implements MinihomeMainService{
 		
 		return map;
 	}
+	
+	// 깐부 상태 확인 (최근 게시물 공개 여부, 깐부 메시지 등록)
+	@Override
+	public int friendFlag(Map<String, Integer> paramMap) {
+		return dao.selectFriendFlag(paramMap);
+	}
 
 	// 최근 게시물 조회
 	@Override
@@ -106,5 +112,32 @@ public class MinihomeMainServiceImpl implements MinihomeMainService{
         
 		result = dao.updateComment(loginMember);
         return result;
+	}
+
+	// 깐부 메시지 등록
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public FriendMessage insertMessage(Map<String, Object> paramMap, Member loginMember) {
+		paramMap.put("content", Util.XSSHandling((String)(paramMap.get("content"))));
+		
+		FriendMessage friendMessage = new FriendMessage();
+		
+		int commentNo = dao.selectCommentNo();
+		int result = dao.insertMessage(paramMap);
+		
+		if(result > 0) {
+			friendMessage.setCommentNo(commentNo);
+			friendMessage.setMemberNo(loginMember.getMemberNo());
+			friendMessage.setMemberNickname(loginMember.getMemberNickname());
+		}
+		
+		return friendMessage;
+	}
+
+	// 깐부 메시지 삭제
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int deleteMessage(int commentNo) {
+		return dao.deleteMessage(commentNo);
 	}
 }

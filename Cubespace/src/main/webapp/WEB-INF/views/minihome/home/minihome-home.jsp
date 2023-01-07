@@ -91,14 +91,14 @@
         
                 <header>깐부 메시지</header>
 
-                <!-- 깐부 메시지 남기기 (기능 구현 예정) -->
+                <!-- 깐부 메시지 남기기 -->
                 <div class="write-message">
                     <span>메시지 남기기</span>
                     <input type="text" id="dearFriend" placeholder="깐부에게 메시지를 남겨보세요!">
                     <span id="writeBtn">등록</span>
                 </div>
 
-                <!-- 깐부 메시지 목록 -->
+                <!-- 깐부 메시지 목록 (신고 기능 완성되면 테스트, 시간 남으면 요소 추가 방식으로 변경) -->
                 <div class="friend-message-container">
                     <c:choose>
                         <c:when test="${fn:length(friendMessage) == 0}">
@@ -113,7 +113,7 @@
                                             ${message.memberNickname}
                                             <ul class="nickname-drop-down-box">
                                                 <li><a href="/minihome/${message.memberNo}" onclick="return openMinihome(this.href)">미니홈피</a></li>
-                                                <li><a onclick="reportFriend()">신고</a></li>
+                                                <li><a onclick="reportFriend('${message.memberNo}')">신고</a></li>
                                             </ul>
                                         </button>
                                         
@@ -139,12 +139,18 @@
                     <span id="moreBtn">메시지 더보기</span>
                     <span id="topBtn">상단으로 가기</span>
                 </div>
+
+                <jsp:include page="/WEB-INF/views/include/report.jsp"/>
             </div>
         </section>
     </div>
 </body>
 
+<script>
+    const fontNo = "${loginMember.ownFontNo}";
+</script>
+
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-<script src="/resources/js/minihome/home/minihome-content.js"></script>
 <script src="/resources/js/minihome/include/minihome-common.js"></script>
+<script src="/resources/js/minihome/home/minihome-content.js"></script>
 </html>

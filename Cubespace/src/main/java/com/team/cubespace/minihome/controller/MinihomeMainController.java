@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,7 +50,7 @@ public class MinihomeMainController {
 		
 		// 미니룸 조회 (추가 예정)
 		
-		// 깐부 메시지 조회 (시간 남으면 수정)
+		// 깐부 메시지 조회
 		List<FriendMessage> friendMessage = service.friendMessage(memberNo);
 		
 		model.addAttribute("profileMap", profileMap);
@@ -83,12 +84,26 @@ public class MinihomeMainController {
 		return result;
 	}
 	
-	// 깐부 상태 확인
+	// 깐부 상태 확인 (최근 게시물 공개 여부, 깐부 메시지 등록)
 	@GetMapping("/friendFlag")
-	public void friend(@RequestParam(value="arr[]") int[] arr) {
-		for(int i =0; i<arr.length; i++)
-		System.out.println(arr[i]);
+	@ResponseBody
+	public int friendFlag(@RequestParam Map<String, Integer> paramMap) {
+		return service.friendFlag(paramMap);
 	}
 	
 	// 깐부 메시지 등록
+	@GetMapping("/insertMessage")
+	@ResponseBody
+	public FriendMessage insertMessage(@RequestParam Map<String, Object> paramMap,
+									   @SessionAttribute("loginMember") Member loginMember) {
+		FriendMessage friendMessage = service.insertMessage(paramMap, loginMember);
+		return friendMessage;
+	}
+	
+	// 깐부 메시지 삭제
+	@GetMapping("/deleteMessage")
+	@ResponseBody
+	public int deleteMessage(int commentNo) {
+		return service.deleteMessage(commentNo);
+	}
 }

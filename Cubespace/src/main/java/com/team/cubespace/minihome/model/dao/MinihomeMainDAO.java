@@ -90,4 +90,30 @@ public class MinihomeMainDAO {
 	public int updateComment(Member loginMember) {
 		return sqlSession.update("minihomeMainMapper.updateComment", loginMember);
 	}
+
+	/**
+	 * 깐부 메시지 번호 조회
+	 * @return commentNo
+	 */
+	public int selectCommentNo() {
+		return sqlSession.selectOne("minihomeMainMapper.selectCommentNo");
+	}
+
+	/**
+	 * 깐부 메시지 등록
+	 * @param paramMap
+	 * @return result
+	 */
+	public int insertMessage(Map<String, Object> paramMap) {
+		return sqlSession.insert("minihomeMainMapper.insertMessage", paramMap);
+	}
+
+	/**
+	 * 깐부 메시지 삭제
+	 * @param commentNo
+	 * @return result
+	 */
+	public int deleteMessage(int commentNo) {
+		return sqlSession.delete("minihomeMainMapper.deleteMessage", commentNo);
+	}
 }

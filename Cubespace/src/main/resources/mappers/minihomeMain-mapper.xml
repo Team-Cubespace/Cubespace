@@ -138,4 +138,19 @@
 	<update id="updateComment">
 		UPDATE MINI_HOMEPAGE SET "COMMENT" = #{comment} WHERE MEMBER_NO = #{memberNo}
 	</update>
+	
+	<!-- 깐부 메시지 번호 조회 -->
+	<select id="selectCommentNo" resultType="_int">
+		SELECT LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME = 'SEQ_F_COMMENT_NO'
+	</select>
+	
+	<!-- 깐부 메시지 등록 -->
+	<insert id="insertMessage">
+		INSERT INTO FRIEND_COMMENT VALUES (SEQ_F_COMMENT_NO.NEXTVAL, #{content}, DEFAULT, #{loginNo}, #{homeNo})
+	</insert>
+	
+	<!-- 깐부 메시지 삭제 -->
+	<delete id="deleteMessage">
+		DELETE FROM FRIEND_COMMENT WHERE F_COMMENT_NO = #{commentNo}
+	</delete>
 </mapper>

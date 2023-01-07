@@ -87,7 +87,7 @@ const memberNotifications=()=>{
                         const member_cancel_div = document.createElement("div");
                         member_cancel_div.innerText="거절";
 
-                    /* 미니홈피 생성 */
+                    /* 스페이스 생성 */
                     const member_minihome =document.createElement("a");
                     member_minihome.setAttribute("href","/minihome/"+alarmProfile.memberNo);
                     member_minihome.setAttribute("onclick","return openMinihome(this.href)");
@@ -99,7 +99,7 @@ const memberNotifications=()=>{
                         minihome_img.setAttribute("src","/resources/images/common/smallCube.png");
 
                         const member_minihome_div = document.createElement("div");
-                        member_minihome_div.innerText="미니홈피";
+                        member_minihome_div.innerText="스페이스";
 
             alarmSection.append(mebmer_profile);
                 mebmer_profile.append(profile_head, profile_body);

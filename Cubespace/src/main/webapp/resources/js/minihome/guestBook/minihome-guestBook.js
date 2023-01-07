@@ -64,7 +64,7 @@ const listGuestBook=()=>{
                                     const a1 = document.createElement("a")
                                     a1.setAttribute("href","/minihome/"+listGuestbook.senderNo+"")
                                     a1.setAttribute("onclick","return openMinihome(this.href)")
-                                    a1.innerText="미니홈피";
+                                    a1.innerText="스페이스";
                                     
                                     const li2 = document.createElement("li")
                                     const a2 = document.createElement("a")

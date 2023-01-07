@@ -1,20 +1,4 @@
-/* 음악 듣기 */
-// const playBtnList = document.getElementsByClassName("fa-play");
-// const stopBtnList = document.getElementsByClassName("fa-stop");
 
-// for(let i = 0; i < playBtnList.length; i++){
-//     playBtnList[i].addEventListener("click", e => {
-//         const musicPath = e.target.getAttribute("id");
-//         var audio1 = new Audio(musicPath);
-//         audio1.loop = false; // 반복재생하지 않음
-//         audio1.volume = 0.5; // 음량 설정
-//         audio1.play(); // sound1.mp3 재생
-
-//         stopBtnList[i].addEventListener("click", () => {
-//             audio1.pause();
-//         })
-//     })
-// }
 audio1 = new Audio(); // 새 오디오 객체 생성
 
 let playBtnList = document.getElementsByClassName("fa-play");
@@ -43,7 +27,7 @@ const playFx = e => {
     
     audio1 = new Audio(musicPath);
 
-    audio1.loop = false; // 반복재생하지 않음
+    audio1.loop = true; // 반복재생
     audio1.volume = 0.5; // 음량 설정
     var playPromise = audio1.play(); // sound1.mp3 재생
     if (playPromise !== undefined) { playPromise.then((_) => {}).catch((error) => {}); }
@@ -97,6 +81,7 @@ useMusicBtn.addEventListener("click", e => {
     const musicNo = $('input[type=radio][name=useMusicRadio]:checked').val();
     if(musicNo != undefined) {
 
+
         $.ajax({
             url : "/manage/music/useMusic",
             type: "get",
@@ -104,6 +89,7 @@ useMusicBtn.addEventListener("click", e => {
             success : result => {
                 if(result > 0) {
                     alert("배경음악이 적용되었습니다");
+                    originalMusic(musicNo);
                     window.parent.postMessage(musicNo, "*");
                 } else {
                     console.log("배경음악 적용 실패");
@@ -118,6 +104,19 @@ useMusicBtn.addEventListener("click", e => {
     }
 })
 
+
+const originalMusic =  musicNo => {
+    const useMusicRadioList = document.getElementsByClassName("useMusicRadio");
+    for(let useMusicRadio of useMusicRadioList){
+        if(useMusicRadio.value == musicNo){
+            useMusicRadio.parentElement.parentElement.classList.add("originalMusic");
+        } else {
+            useMusicRadio.parentElement.parentElement.classList.remove("originalMusic");
+        }
+    }
+}
+
+
 /* 배경음악 없애기 버튼 */
 const deleteMusic = document.getElementsByClassName("deleteMusic")[0];
 deleteMusic.addEventListener("click", e => {
@@ -131,13 +130,13 @@ deleteMusic.addEventListener("click", e => {
             data : {"memberNo" : memberNo},
             success : result => {
                 if(result > 0) {
-                    alert("배경음악이 적용되었습니다");
+                    alert("배경음악이 삭제되었습니다");
                     window.parent.postMessage(0, "*");
                 } else {
-                    console.log("배경음악 적용 실패");
+                    console.log("배경음악 삭제 실패");
                 }
             }, 
-            error : e => {console.log("배경음악 적용 중 오류 발생");}
+            error : e => {console.log("배경음악 삭제 중 오류 발생");}
         })
     }
 })

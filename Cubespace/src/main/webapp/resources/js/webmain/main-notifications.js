@@ -117,26 +117,34 @@ const memberNotifications=()=>{
 /* 모달처음 시작시 깐부알림 함수 즉시 적용 */
 // (selectMemeberAlarm)()
 
+
 /* 깐부알림 클릭 시  함수 호출 */
-alarmLeftChoice.addEventListener("click",selectMemeberAlarm)
+if(alarmLeftChoice!=null){
+    alarmLeftChoice.addEventListener("click",selectMemeberAlarm)
+}
 
-/* 활동 알림 마우스 올라갈시 */
-alarmRightChoice.addEventListener("mouseover", () => {
-    alarmLeftChoice.classList.add("alarm-delete-css")
-    alarmLeftChoice.classList.remove("alarm-select-css")
-    alarmRightChoice.classList.add("alarm-select-css")
-    alarmRightChoice.classList.remove("alarm-delete-css")
-})
 
-/* 활동 알림 마우스 나갈시 */
-alarmRightChoice.addEventListener("mouseout", () => {
-    if(document.getElementById("modalChoiceLeft")!=null ){
-        alarmLeftChoice.classList.add("alarm-select-css")
-        alarmLeftChoice.classList.remove("alarm-delete-css")
-        alarmRightChoice.classList.add("alarm-delete-css")
-        alarmRightChoice.classList.remove("alarm-select-css")
-    }
-})
+if(alarmRightChoice!=null){
+
+    /* 활동 알림 마우스 올라갈시 */
+    alarmRightChoice.addEventListener("mouseover", () => {
+        alarmLeftChoice.classList.add("alarm-delete-css")
+        alarmLeftChoice.classList.remove("alarm-select-css")
+        alarmRightChoice.classList.add("alarm-select-css")
+        alarmRightChoice.classList.remove("alarm-delete-css")
+    })
+    
+    
+    /* 활동 알림 마우스 나갈시 */
+    alarmRightChoice.addEventListener("mouseout", () => {
+        if(document.getElementById("modalChoiceLeft")!=null ){
+            alarmLeftChoice.classList.add("alarm-select-css")
+            alarmLeftChoice.classList.remove("alarm-delete-css")
+            alarmRightChoice.classList.add("alarm-delete-css")
+            alarmRightChoice.classList.remove("alarm-select-css")
+        }
+    })
+}
 
 /* 비동기로 내 알림카운트 함수 선언  */
 const notificationsCount = ()=>{
@@ -273,34 +281,40 @@ const activityNotification=()=>{
 }
 
 
-/* 활동 알림 클릭 시 */
-alarmRightChoice.addEventListener("click",()=>{
-    alarmLeftChoice.classList.add("alarm-delete-css")
-    alarmLeftChoice.classList.remove("alarm-select-css")
-    alarmRightChoice.classList.add("alarm-select-css")
-    alarmRightChoice.classList.remove("alarm-delete-css")
-    modalChoice.setAttribute("id","modalChoiceRight") 
-    alarmSection.innerHTML="";
-    activityNotification()
-})
+if(alarmRightChoice!=null){
 
-/* 깐부알림 마우스 올라갈시 */
-alarmLeftChoice.addEventListener("mouseover", () => {
-    alarmLeftChoice.classList.add("alarm-select-css")
-    alarmLeftChoice.classList.remove("alarm-delete-css")
-    alarmRightChoice.classList.add("alarm-delete-css")
-    alarmRightChoice.classList.remove("alarm-select-css")
-})
-
-/* 깐부알림 마우스 나갈시 */
-alarmLeftChoice.addEventListener("mouseout", () => {
-    if(document.getElementById("modalChoiceRight")!=null ){
+    /* 활동 알림 클릭 시 */
+    alarmRightChoice.addEventListener("click",()=>{
         alarmLeftChoice.classList.add("alarm-delete-css")
         alarmLeftChoice.classList.remove("alarm-select-css")
         alarmRightChoice.classList.add("alarm-select-css")
         alarmRightChoice.classList.remove("alarm-delete-css")
-    }
-})
+        modalChoice.setAttribute("id","modalChoiceRight") 
+        alarmSection.innerHTML="";
+        activityNotification()
+    })
+}
+
+if(alarmLeftChoice!=null){
+
+    /* 깐부알림 마우스 올라갈시 */
+    alarmLeftChoice.addEventListener("mouseover", () => {
+        alarmLeftChoice.classList.add("alarm-select-css")
+        alarmLeftChoice.classList.remove("alarm-delete-css")
+        alarmRightChoice.classList.add("alarm-delete-css")
+        alarmRightChoice.classList.remove("alarm-select-css")
+    })
+    
+    /* 깐부알림 마우스 나갈시 */
+    alarmLeftChoice.addEventListener("mouseout", () => {
+        if(document.getElementById("modalChoiceRight")!=null ){
+            alarmLeftChoice.classList.add("alarm-delete-css")
+            alarmLeftChoice.classList.remove("alarm-select-css")
+            alarmRightChoice.classList.add("alarm-select-css")
+            alarmRightChoice.classList.remove("alarm-delete-css")
+        }
+    })
+}
 
 /* 전체삭제 비동기 함수 선언 */
 const messageDeleteAll =(alarmNoList) =>{
@@ -327,34 +341,38 @@ const messageDeleteAll =(alarmNoList) =>{
 
 /* 오른쪽 클릭 시 전체삭제 추가 하기*/
 /* 다른스크립트에서 전역변수로 선언했는데 변수명이 사용됨!!! */
-alarmRightChoice.addEventListener("click",()=>{
-    /* 만들위치 지정 */
-    const deleteall = document.createElement("div");
-    const delete_all = document.querySelector(".delete-all");
-    alarmNoList=[];
 
-    /* 특정위치에 1번만 요소추가하기 */
-    if(delete_all==null){
-        /* div태그 생성 */
-        modalChoice.insertAdjacentElement("afterend",deleteall)
-        deleteall.classList.add("delete-all");
-        
-        /* 자식 전체삭제버튼 생성 */
-        const deleteAllButton = document.createElement("div");
-        deleteAllButton.classList.add("delete-all-button");
-        deleteAllButton.innerHTML="전체삭제";
-        deleteall.append(deleteAllButton);
+if(alarmRightChoice!=null){
 
-        /* 전체삭제 클릭시 전체 삭제 */
-        const deleteButton = document.querySelector(".delete-all-button");
-        if(deleteButton){
-            deleteButton.addEventListener("click",()=>{
-                /* 전체삭제함수 호출 */
-                messageDeleteAll(alarmNoList)
-            })
+    alarmRightChoice.addEventListener("click",()=>{
+        /* 만들위치 지정 */
+        const deleteall = document.createElement("div");
+        const delete_all = document.querySelector(".delete-all");
+        alarmNoList=[];
+    
+        /* 특정위치에 1번만 요소추가하기 */
+        if(delete_all==null){
+            /* div태그 생성 */
+            modalChoice.insertAdjacentElement("afterend",deleteall)
+            deleteall.classList.add("delete-all");
+            
+            /* 자식 전체삭제버튼 생성 */
+            const deleteAllButton = document.createElement("div");
+            deleteAllButton.classList.add("delete-all-button");
+            deleteAllButton.innerHTML="전체삭제";
+            deleteall.append(deleteAllButton);
+    
+            /* 전체삭제 클릭시 전체 삭제 */
+            const deleteButton = document.querySelector(".delete-all-button");
+            if(deleteButton){
+                deleteButton.addEventListener("click",()=>{
+                    /* 전체삭제함수 호출 */
+                    messageDeleteAll(alarmNoList)
+                })
+            }
         }
-    }
-})
+    })
+}
 
 
 

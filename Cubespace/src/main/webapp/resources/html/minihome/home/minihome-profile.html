@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="profile-area">
+        <img src="../../../images/삐약.gif" class="profile-img">
+
+        <div class="emoji-container">
+            <div class="today-emoji">
+                <span>Today is..&nbsp;</span>
+                <span>슬픔&nbsp;</span>
+                <img src="../../../images/emotion/002-sad.png">
+            </div>
+
+            <!-- 스페이스 주인 번호와 loginMember.memberNo가 같을 경우 -->
+            <div class="dropdown-btn"><i class="fa-solid fa-caret-down dropdown-btn-icon"></i></div>
+
+            <div class="dropdown">
+                <span>기뻐요 <img src="../../../images/emotion/001-happy.png"></span>
+                <span>슬퍼요 <img src="../../../images/emotion/002-sad.png"></span>
+                <span>화나요 <img src="../../../images/emotion/003-angry.png"></span>
+                <span>졸려요 <img src="../../../images/emotion/004-sleeping.png"></span>
+                <span>아파요 <img src="../../../images/emotion/005-sick.png"></span>
+                <span>고민중 <img src="../../../images/emotion/006-thinking.png"></span>
+                <span>유혹중 <img src="../../../images/emotion/007-temptation.png"></span>
+                <span>연애중 <img src="../../../images/emotion/008-loving.png"></span>
+            </div>
+        </div>
+ 
+        <div class="profile-message">
+            집에 가고싶다...
+        </div>
+
+        <!-- 스페이스 주인 번호와 loginMember.memberNo가 같을 경우 -->
+        <span id="profileUpdate">프로필 수정</span>
+
+        <div class="line"></div>
+
+        <div class="user-info">
+            <span>편의점에서썸타는</span>
+            <span class="detail-info">(김효동)</span>
+        </div>
+
+        <span class="user-email detail-info">gyehd1230@naver.com</span>
+
+        <div class="surf-container">
+            <select onchange="window.open(value,'_self');">
+                <option>♥ 깐부 파도타기 ♥</option>
+                <option value="#">현진</option>
+                <option value="#">수연</option>
+                <option value="#">영현</option>
+                <option value="#">다원</option>
+                <option value="#">동현띠</option>
+            </select>
+        </div>
+
+        <!-- 스페이스 주인 번호와 loginMember.memberNo가 다를 경우 -->
+        <!-- <span id="returnMyHome">내 스페이스로 돌아가기</span> -->
+    </div>
+</body>
+
+<script src="../../../js/minihome/minihome-home/minihome-profile.js"></script>
+</html>

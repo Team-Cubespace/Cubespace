@@ -127,22 +127,24 @@
                 </div>
             </div>
             <section class="minihome-main">
-
+                <iframe src="/minihome/home/${minihome.memberNo}" frameborder="0" name="minihomeMenu" scrolling="no">
+                <%-- <iframe src="/manage/friend" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
                 <%-- 내꺼 --%>
                 <%-- <iframe src="/diary/1" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
                 <%-- <iframe src="/diary/write" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
-
                 <%-- <iframe src="/albumList/2" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
+                <%-- <iframe src="/manage/background" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
+                <%-- <iframe src="/manage/font" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
                 <%-- <c:if test="${empty param.goVideo}">
                     <c:set var="iframeURL" value="${'/albumList/2'}"></c:set>
                 </c:if>
                 <c:if test="${not empty param.goVideo}">
                     <c:set var="iframeURL" value="${'/videoDetail/' + param.videoNo + '?folrderNo=' + param.folderNo}"></c:set>
                 </c:if> --%>
-
                 <iframe src="<c:if test="${not empty param.goVideo}">/videoDetail/${param.videoNo}?folderNo=${param.folderNo}</c:if><c:if test="${empty param.goVideo}">/albumList/2</c:if>" frameborder="0" name="minihomeMenu" scrolling="no">
 
                 </iframe>
+                
                 <ul class="minihome-menu frame-menu-color">
                     <li><a href="">홈</a></li>
                     <c:if test="${minihome.categoryOrder.diary != -1}">

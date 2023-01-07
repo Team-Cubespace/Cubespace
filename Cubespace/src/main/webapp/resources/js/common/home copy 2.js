@@ -102,6 +102,7 @@ const shortsSelect = (shortsChoice) => {
 
             for(let shorts of mainShortsList){
                 
+                console.log(mainShortsList);
                 // 회원 번호 저장
                 memberNo= shorts.memberNo;
                 folderNo= shorts.folderNo;
@@ -110,9 +111,7 @@ const shortsSelect = (shortsChoice) => {
                 place_item.classList.add("place-item");
 
                     const place_item_a = document.createElement("a");
-                    place_item_a.setAttribute("href","/minihome/"+ shorts.memberNo +"?videoNo="+ shorts.videoNo +"&folderNo="+ shorts.folderNo +"&goVideo=1")
-                    place_item_a.setAttribute("onclick","return openMinihome(this.href)")
-
+                    place_item_a.setAttribute("href","해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)")
 
                         /* 썸네일 이미지 생성 */
                         const place_item_img = document.createElement("img");

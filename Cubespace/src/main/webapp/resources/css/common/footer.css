@@ -1,5 +1,8 @@
 footer {
-    border: 1px solid black;
+    border: 2px var(--mainColor) solid;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom: none;
     width: 1200px;
     height: auto;
     padding: 25px 30px;

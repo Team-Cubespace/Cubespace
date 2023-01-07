@@ -1,12 +1,12 @@
 
 /* 썸머노트 설정 */
 
-$(document).ready(function () {
-    console.log($.summernote.options);
-    // 실행시 언어 설정을 한글로 설정 
-    $.summernote.options.lang = 'ko-KR';
-    $.summernote.options.airMode = false;
-});
+// $(document).ready(function () {
+//     console.log($.summernote.options);
+//     // 실행시 언어 설정을 한글로 설정 
+//     $.summernote.options.lang = 'ko-KR';
+//     $.summernote.options.airMode = false;
+// });
 
 $('#summernote').summernote({
     // 에디터 높이
@@ -48,14 +48,13 @@ $('#summernote').summernote({
     fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
     ,
     callbacks: {
-        onImageUpload: function (files) { //이미지 업로드 처리
-            RealTimeImageUpdate(files, this);
-        },
         onChange:function(contents, $editable){ //텍스트 글자수 및 이미지등록개수
             setContentsLength(contents, 0);
         }
-    }
+    },
+    // disableDragAndDrop: true
 });
+console.log("하이");
 let contentLength;
 //글자수 체크
 //태그와 줄바꿈, 공백을 제거하고 텍스트 글자수만 가져옵니다.

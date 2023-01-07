@@ -1,0 +1,73 @@
+/* 프로필 수정 영역 */
+.profile-update-area{
+    display: none;
+}
+
+#profileFrm{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#selectImage{
+    display: none;
+}
+
+.image-btn-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 이미지 버튼 */
+.image-btn-container > div, .image-btn-container > label{
+    width: 90%;
+    height: 22px;
+    display: flex;
+    margin-top: 10px;
+    color: white;
+    background-color: var(--ink);
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* 프로필 메시지 수정 */
+#updateMessage{
+    width: 185px;
+    height: 124px;
+    padding: 4px;
+    border: 1px solid var(--ink);
+    border-radius: 5px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 18px;
+    word-wrap: break-word;
+    word-break: break-all;
+    resize: none;
+    overflow: hidden;
+}
+
+#updateMessage:focus{
+    outline: none;
+}
+
+.letter{
+    font-size: 10px;
+}
+
+/* 수정완료, 취소 버튼 */
+.update-btn-container{
+    width: 100%;
+}
+
+#updateBtn, #cancellBtn{
+    margin-left: 10px;
+    color: darksalmon;
+    float: right;
+    cursor: pointer;
+}

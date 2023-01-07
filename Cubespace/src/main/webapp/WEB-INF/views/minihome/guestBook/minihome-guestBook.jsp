@@ -33,71 +33,9 @@
     <div class="content-area frame-color">
         <section class="minihome-rayout " >
         
-        왼쪽 section 부분에 jsp 파일 include
-        <jsp:include page="/WEB-INF/views/minihome/home/minihome-profile.jsp"/>
+            <jsp:include page="/WEB-INF/views/minihome/home/minihome-profile.jsp"/>
 
-                방명록 컨트롤러에 객체 추가
-                @Autowired
-                private MinihomeMainService service;
-
-                방명록 컨트롤러에 service 호출문 추가
-                Map<String, Object> profileMap = service.profile(memberNo);
-
-                profileMap 값 담아서 포워드해주기
-                model.addAttribute("profileMap", profileMap);
-                <!-- 좌측 section 코드 작성 또는 include -->
-                <!-- 전체 내용 div 태그로 한 번 감싸주세요 -->
-                <!-- ex) <div class="home-area"> <div></div> <span></span> ... </div> -->
-                <div class="profile-area">
-                    <img src="/resources/images/common/Mokoko1.gif" class="profile-img">
-            
-                    <div class="today-emoji">
-                        <div>
-                            <span>Today is..</span>
-                            <span>슬픔 <i class="fa-regular fa-face-sad-tear"></i></span>
-                        </div>
-                        <!-- <div></div> -->
-                    </div>
-            
-                    <div class="profile-message">
-                        난... ㄱr끔 눈물을 흘린ㄷ ㅏ..
-                        ㄱ ㅏ 끔은 눈물을 참을 수 없는
-                        ㄴ ㅐ 가 별루 ㄷr...
-                        맘이 ㅇ ㅏ ㅍ ㅏ서...
-                        소 ㄹi 치며.. 울 수 있 다 는건..
-                        좋은 ㄱ ㅓ ㅇ ㅑ...
-                    </div>
-            
-                    <!-- 스페이스 주인 번호와 loginMember.memberNo가 같을 경우 -->
-                    <span id="profileUpdate">프로필 수정</span>
-            
-                    <div class="line"></div>
-            
-                    <div class="user-info">
-                        <span>묘동</span>
-                        <span class="detail-info">(남)</span>
-                        <span class="detail-info">1994.04.26</span>
-                    </div>
-            
-                    <span class="user-email detail-info">gyehd1230@naver.com</span>
-            
-                    <div class="surf-container">
-                        <select id="surf">
-                            <option value="">♥ 깐부 파도타기 ♥</option>
-                            <option value="">슈슈슈</option>
-                            <option value="">mung</option>
-                            <option value="">포뱅이</option>
-                            <option value="">여너</option>
-                            <option value="">BDH</option>
-                        </select>
-                    </div>
-            
-                    <!-- 스페이스 주인 번호와 loginMember.memberNo가 다를 경우 -->
-                    <span id="returnMyHome">내 스페이스로 돌아가기</span>
-                </div>
         </section>
-
-
 
         <section class="minihome-rayout">
             <!-- 우측 section 코드 작성 또는 inclue -->

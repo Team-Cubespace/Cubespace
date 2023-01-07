@@ -1,3 +1,62 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    overflow: auto;
+
+}
+
+.error-container{
+    width: 800px;
+    height: 300px;
+    text-align: center;
+}
+
+.error-container > h1{
+    margin-bottom: 50px;
+}
+
+.error-content-title{
+    display: block;
+    text-align: left;
+    font-weight: bold;
+}
+
+.button-area{
+    text-align: center;
+}
+
+#background {
+    position: absolute;
+    z-index: -1;
+    height: 600px;
+    width: 600px;
+    opacity: 0.5;
+}
+
+.explain{
+    font-weight: bold;
+}
+
+a, button{
+    text-decoration: none;
+    color: white;
+    background-color: rgba(0,0,0,0.6);
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 0;
+    font-size: 16px;
+    font-weight: bold;
+    /* margin-right: 10px; */
+    cursor: pointer;
+}
+
+a:hover, button:hover{
+    background-color: black;
+}
+/******************************************/
 :root {
     --border-width: calc(var(--diameter-tile) / 60);
     --diameter-board: min(85vw, 85vh);
@@ -74,14 +133,14 @@ aside div svg {
     width: auto;
 }
 
-html,
+/* html,
 body {
     height: 100%;
-}
+} */
 
 body {
     background: var(--color-background);
-    overflow: hidden;
+    /* overflow: hidden; */
     transition: background-color 250ms ease-in-out;
 }
 

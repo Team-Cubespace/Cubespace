@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,10 +30,13 @@ public class GuestBookController {
 	 * @return
 	 */
 	@GetMapping("/guestBook")
-	public String guestBook() {
+	public String guestBook(Model model,
+			@SessionAttribute("minihome") Minihome minihome) {
 		
-		Map<String, Object> profileMap = service.profile(memberNo);
 		
+		Map<String, Object> profileMap = serviceMinihome.profile(minihome.getMemberNo());
+        model.addAttribute("profileMap", profileMap);
+
 		return "/minihome/guestBook/minihome-guestBook";
 	}
 	

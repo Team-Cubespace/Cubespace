@@ -268,7 +268,7 @@
 		<if test= 'shopSearch != null and shopSearch!="" '>
 		WHERE GOODS_NAME LIKE '%${shopSearch}%' OR GOODS_CREATER LIKE '%${shopSearch}%'
 		</if>
-		ORDER BY F.GOODS_NO DESC;
+		ORDER BY F.GOODS_NO DESC
 	</select>
 	
 		<!-- 음악재생 목록 조회 -->

@@ -17,6 +17,8 @@ const deleteImage = (order, target) =>{
 
     // html요소 삭제
     target.parentElement.remove();
+
+    document.getElementById("addImageCount").innerText = Number(document.getElementById("addImageCount").innerText) - 1;
 }
 
 /* 첨부파일 추가 */
@@ -110,6 +112,7 @@ function deleteFile(num) {
     document.querySelector("#file" + num).remove();
     filesArr[num].is_delete = true;
     console.log(deleteImageList);
+    document.getElementById("addImageCount").innerText = Number(document.getElementById("addImageCount").innerText) - 1;
 }
 
 /* 폼 전송 */

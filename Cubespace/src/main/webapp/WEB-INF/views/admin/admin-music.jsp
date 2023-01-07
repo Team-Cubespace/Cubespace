@@ -85,8 +85,8 @@
                     <select onchange="orderBy()" id="order">
                         <option value="order1" ${order1}>등록일 빠른순</option>
                         <option value="order2" ${order2}>등록일 느린순</option>
-                        <option value="order3" ${order3}>사용횟수 많은순</option>
-                        <option value="order4" ${order4}>사용횟수 적은순</option>
+                        <option value="order3" ${order3}>사용회원 많은순</option>
+                        <option value="order4" ${order4}>사용회원 적은순</option>
                     </select>
                 </div>
 
@@ -142,7 +142,7 @@
                         </c:forEach>
                     </div>
                     <div class="search-result-div" id="signDate">
-                        <div class="search-result-tab">사용횟수</div>
+                        <div class="search-result-tab">사용 회원수</div>
                         <c:forEach var="music" items="${musicList}">
                             <div class="search-content">${music.musicUseCount}</div>
                         </c:forEach>

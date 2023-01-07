@@ -12,6 +12,7 @@
     width: 90px;
     height: 70px;
     border: 1px solid black;
+    z-index: 5;
 }
 .nickname-drop-down-box li {
     width: 100%;

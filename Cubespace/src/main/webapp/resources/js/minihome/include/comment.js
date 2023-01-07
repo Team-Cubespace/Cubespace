@@ -2,6 +2,7 @@
 const createCommentList = (commentList) => {
     const commentListArea = document.getElementById("commentListArea");
     commentListArea.innerHTML = "";
+    console.log(commentList);
     for(let comment of commentList) {
         // 댓글 li
         const commentRow = document.createElement("li");
@@ -49,7 +50,7 @@ const createCommentList = (commentList) => {
 
             const menu2 = document.createElement("li");
             const report = document.createElement("a");
-            // 모달창 여는 함수
+            report.setAttribute("onclick", `reportFriend(${comment.memberNo})`);
             report.innerText = "신고";
 
             menu1.append(openMinihome);
@@ -97,7 +98,7 @@ const createCommentList = (commentList) => {
 
         const commentContentP = document.createElement("P");
         commentContentP.innerHTML = comment.commentContent;
-        commentContentP.style.fontFamily = `${comment.ownFontNo}`;
+        commentContentP.style.fontFamily = `"${comment.ownFontNo}"`;
         // 답글 버튼 영역
         const commentButtonArea = document.createElement("div");
         commentButtonArea.classList.add("comment-button-area");
@@ -339,21 +340,23 @@ const deleteComment = (commentNo) => {
 
 // 페이지 로딩시 댓글관련 이벤트 초기화
 (()=>{
-    // 댓글 드롭박스 초기화
-    const commentDropDownButtonList = document.getElementsByClassName("comment-drop-down-button");
-    for(let button of commentDropDownButtonList) {
-        // 클릭 시 메뉴 출력
-        button.addEventListener("click", e=>{
-            e.currentTarget.firstElementChild.style.display = "block";
-        });
-        
-        // 블러 시 메뉴 삭제
-        button.addEventListener("blur", e=>{
-            setTimeout(()=>{
-                button.firstElementChild.style.display = "none";
-            }, 100);
-        });
-    }
+    document.addEventListener("DOMContentLoaded", ()=>{
+        // 댓글 드롭박스 초기화
+        const commentDropDownButtonList = document.getElementsByClassName("comment-drop-down-button");
+        for(let button of commentDropDownButtonList) {
+            // 클릭 시 메뉴 출력
+            button.addEventListener("click", e=>{
+                e.currentTarget.firstElementChild.style.display = "block";
+            });
+            
+            // 블러 시 메뉴 삭제
+            button.addEventListener("blur", e=>{
+                setTimeout(()=>{
+                    button.firstElementChild.style.display = "none";
+                }, 100);
+            });
+        }
+    });
 })();
 
 /* 답글 작성 영역 생성 */

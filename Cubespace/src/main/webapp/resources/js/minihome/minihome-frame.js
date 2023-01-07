@@ -163,7 +163,7 @@ let interval;
 
 // 재생 시간 출력 함수
 const printCurrentTime = () => {
-    musicDuration.innerText = moment(currentTime * 1000).format("mm:ss");
+    document.getElementById("duration").innerText = moment(currentTime * 1000).format("mm:ss");
     currentTime++;
 }
 
@@ -225,11 +225,13 @@ const createMusic = (musicPath, autoplay) => {
         autoplay: autoplay,
         loop: true,
         onplay: () => {
+            console.log("재생");
             interval = setInterval(printCurrentTime, 1000);
             playButton.classList.remove("fa-circle-play");
             playButton.classList.add("fa-circle-pause");
 
             document.getElementById("minihomeMusicName").classList.add("music-play-marquee");
+            console.log("재생");
         },
         onpause: ()=>{
             clearInterval(interval);
@@ -237,6 +239,7 @@ const createMusic = (musicPath, autoplay) => {
             playButton.classList.remove("fa-circle-pause");
 
             document.getElementById("minihomeMusicName").classList.remove("music-play-marquee");
+            console.log("재생");
         },
         onend: () =>{
             console.log("노래끝남");
@@ -249,7 +252,7 @@ const createMusic = (musicPath, autoplay) => {
 const removeMusic = () => {
     // 화면에 오디오플레이어 삭제
     if(minihomeMusic.playing()){    // 재생중이었다면
-        minihomeMusic.stop();
+        minihomeMusic.pause();
     }
     document.getElementsByClassName("audio-container")[0].remove();
     clearInterval(interval);

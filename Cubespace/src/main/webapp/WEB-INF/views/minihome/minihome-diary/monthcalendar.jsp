@@ -87,7 +87,7 @@
         }
         .input-row{
             border-bottom: 1px solid #ddd;
-            padding: 6px 0px;
+            padding: 10px 0px;
             display: flex;
             align-items: flex-start;
             letter-spacing: -1px;
@@ -112,6 +112,8 @@
             resize: none;
             border: none;
             outline: none;
+            height: 92px;
+            width: 75%;
         }
         .modal-footer {
             display: flex;
@@ -120,12 +122,55 @@
         }
 
         /* 모달창2 css */
-        .input-row > div:nth-child(1) {
+        .popup_layer2 {
+        /* position: absolute; */
+        position :fixed;
+        top: 0;
+        left: 0;
+        z-index: 10001;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .input-row2{
+            height : 37px;
+            border-bottom: 1px solid #ddd;
+            padding: 13px 0px;
+            display: flex;
+            align-items: flex-start;
+            letter-spacing: -1px;
+        }
+
+        .input-row2:nth-child(4){
+            height : 125px;
+        }
+        .input-row2 > div:nth-child(1) {
             width: 100px;
             font-weight: bold;
             /* display: inline-block */
         }
 
+        .contentShow {
+            overflow : auto;
+            height: 100px !important;
+            width: 79%;
+        }
+      
+        .cancleBtn {
+            display: flex;
+            justify-content: end;
+            padding: 5px 30px 0px 0px;
+        }
+
+        /* 버튼들 cursor pointer */
+        .fa-x {
+            cursor: pointer;
+        }
+        button {
+            cursor: pointer;
+            margin-right : 10px;
+        }
     </style>
 </head>
 <body>
@@ -152,13 +197,12 @@
                 <div class="popup_layer" id="popup_layer" style ="display:none;">
                     <!-- style="display: none;" -->
                     <div class="popup_box">
-                        <%-- <div class="popup_cont" id = "popup_con"> --%>
-                        <!-- <a href="javascript:closePop4();" class="xbtn">
-                            <i class="fa-solid fa-x xbtnBack" id = "fa-x"></i>
-                        </a> -->
+                         <div class = cancleBtn>
+                            <i id = cancleBtn class="fa-solid fa-x xbtnBack" ></i>
+                        </div>
                             <div>
-                                <div class = "input-row">
-                                    <span class = "modal-title">일정등록</span>
+                                <div class = "input-row2-title">
+                                    <div class = "modal-title" id = "modal-title">일정등록</div>
                                     <input type="hidden" id = "number">
                                 </div>
                                 <div class = "input-row">
@@ -205,11 +249,11 @@
                                 <div class = "modal-footer">
                                     <button id = "mainBtn" onClick = "addEvent()">등록</button>
 
-                                    <button id = "updateBtn" onClick = "updateEvent()">수정</button>
+                                    <button id = "updateBtn" onClick = "updateEvent()">수정완료</button>
 
-                                    <button id = "deleteBtn" onClick = "deleteEvent()">삭제</button>
+                                    <%-- <button id = "deleteBtn" onClick = "deleteEvent()">삭제</button> --%>
 
-                                    <button id = "cancleBtn">취소</button>
+                                    <%-- <button id = "cancleBtn">닫기</button> --%>
                                 </div>
                             </div>
                         <%-- </div> --%>
@@ -217,52 +261,48 @@
                 </div>
 
                 <!-- 모달창2 -->
-                <div class="popup_layer" id="popup_layer2" style ="display:none;">
+                <div class="popup_layer2" id="popup_layer2" style ="display:none;">
                     <!-- style="display: none;" -->
                     <div class="popup_box">
                         <%-- <div class="popup_cont" id = "popup_con"> --%>
-                        <!-- <a href="javascript:closePop4();" class="xbtn">
-                            <i class="fa-solid fa-x xbtnBack" id = "fa-x"></i>
-                        </a> -->
+                        <div class = cancleBtn>
+                            <i id = cancleShowBtn class="fa-solid fa-x xbtnBack" ></i>
+                        </div>
                             <div>
-                                <div class = "input-row">
-                                    <div class = "modal-title">일정등록</div>
+                                <div class = "input-row2-title">
+                                    <div class = "modal-title">일정확인</div>
                                     <input type="hidden" id = "number">
                                 </div>
-                                <div class = "input-row">
+                                <div class = "input-row2">
                                     <div >카테고리</div>
                                     <div id = "categoryShow"></div>
                                 </div>
-                                <div class = "input-row">
+                                <div class = "input-row2">
                                     <div >일정 제목</div>
                                     <div id = "titleShow"></div>
                                 </div>
-                                <div class = "input-row">
+                                <div class = "input-row2">
                                     <div >일정 내용</div>
-                                    <div id = "contentShow"></div>
+                                    <div id = "contentShow" class =  "contentShow" ></div>
                                 </div>
-                                <div class = "input-row ">
+                                <div class = "input-row2 ">
                                     <div>시작</div>
                                     <div id = "startDateShow"></div>
                                 </div>
-                                <div class = "input-row ">
+                                <div class = "input-row2 ">
                                     <div>종료</div>
                                     <div id = "endDateShow"></div>
                                 </div>
-                                <div class = "input-row">
+                                <div class = "input-row2">
                                     <div>하루 종일</div>
                                     <div id = "allDayShow"></div>
                                 </div>
                                 
 
                                 <div class = "modal-footer">
-                                    <button id = "mainBtn" onClick = "addEvent()">등록</button>
-
-                                    <button id = "updateBtn" onClick = "updateEvent()">수정</button>
-
-                                    <button id = "deleteBtn" onClick = "deleteEvent()">삭제</button>
-
-                                    <button id = "cancleBtn">취소</button>
+                                    <button id = "updateShowBtn">수정하기</button>
+                                    <button id = "deleteBtn" onClick = "deleteEvent()">삭제하기</button>
+                                    <%-- <button id = "cancleShowBtn">닫기</button> --%>
                                 </div>
                             </div>
                         <%-- </div> --%>

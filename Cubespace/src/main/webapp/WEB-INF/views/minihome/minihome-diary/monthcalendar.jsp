@@ -208,10 +208,10 @@
                                 <div class = "input-row">
                                     <label for="category">카테고리</label>
                                     <select class="selectBox" id="category" >
-                                        <option value="1" style = "background-color: #C0EEE4;" >없음1</option>
-                                        <option value="2" style = "background-color: #F3CCFF;" >직장2</option>
-                                        <option value="3" style = "background-color: #D8F8B7;">집3</option>
-                                        <option value="4" style = "background-color: #FFCAC8;">기념일4</option>
+                                        <option value="1" style = "background-color: #C0EEE4;" >없음</option>
+                                        <option value="2" style = "background-color: #F3CCFF;" >직장</option>
+                                        <option value="3" style = "background-color: #D8F8B7;">집</option>
+                                        <option value="4" style = "background-color: #FFCAC8;">기념일</option>
                                     </select>
                                 </div>
                                 <div class = "input-row">
@@ -242,6 +242,13 @@
                                     <%-- 이거 라벨 잘못 붙인 듯.... 먼가 css할때 조정 필요할 듯? --%>
                                         <input type="radio"  id = "allDay1" value="true" name="allDay">예
                                         <input type="radio" id = "allDay2"  value="false" name="allDay">아니오
+                                    </div>
+                                </div>
+                                 <div class = "input-row">
+                                    <label for="allDay">하루 종일</label>
+                                    <%-- 이거 라벨 잘못 붙인 듯.... 먼가 css할때 조정 필요할 듯? --%>
+                                        <input type="radio"  id = "allDay3" value="true" name="allDay">예
+                                        <input type="radio" id = "allDay4"  value="false" name="allDay">아니오
                                     </div>
                                 </div>
                                 
@@ -296,6 +303,10 @@
                                 <div class = "input-row2">
                                     <div>하루 종일</div>
                                     <div id = "allDayShow"></div>
+                                </div>
+                                <div class = "input-row2">
+                                    <div>하루 종일</div>
+                                    <div id = "allDayShow2"></div>
                                 </div>
                                 
 

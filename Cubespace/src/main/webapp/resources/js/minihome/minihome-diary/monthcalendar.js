@@ -143,7 +143,15 @@ function popup2(arg){
     //0. 일정 번호
     document.getElementById("number").value =  arg.event.extendedProps.planId;
     //1. 카테고리
-    document.getElementById("categoryShow").innerText =  arg.event.extendedProps.category;
+    // document.getElementById("categoryShow").innerText =  arg.event.extendedProps.category;
+    let category =  arg.event.extendedProps.category;
+    let innerText =  document.getElementById("categoryShow").innerText;
+    switch(category){
+      case 1 : document.getElementById("categoryShow").innerText = "없음"; break;
+      case 2 :  document.getElementById("categoryShow").innerText = "직장"; break;
+      case 3 :  document.getElementById("categoryShow").innerText = "집";break;
+      case 4 :  document.getElementById("categoryShow").innerText = "기념일"; break;
+    }
     //2. 제목
     document.getElementById("titleShow").innerText = arg.event.title;
     //3. 내용
@@ -153,10 +161,16 @@ function popup2(arg){
         document.getElementById("contentShow").innerText = "";
       }
     //4. 시작 날짜
-    document.getElementById("startDateShow").innerText = startFullYear +"-"+startMonth+"-"+startDate + " " +startHour+":"+startMinute ;
+    let amPm;
+    if (startHour>=12){
+      amPm = "오후";
+    } else {
+      amPm = "오전";
+    }
+    document.getElementById("startDateShow").innerText = startFullYear +"-"+startMonth+"-"+startDate + " "+amPm+ " " +startHour+":"+startMinute ;
 
     //6. 종료 날짜
-    document.getElementById("endDateShow").innerText = endFullYear +"-"+endMonth+"-"+endDate + " " + endHour+":"+endMinute;
+    document.getElementById("endDateShow").innerText = endFullYear +"-"+endMonth+"-"+endDate + " " +amPm+ " " + endHour+":"+endMinute;
 
     //8. 종일 여부
       if(arg.event.allDay){
@@ -168,12 +182,8 @@ function popup2(arg){
 }
 
 
-
-
 /* [함수] : 팝업 모달창 = (1) 이벤트 수정  & (2) 신규 이벤트 등록 */
 function popup(arg){
-
-  
 
   /* (1)이벤트 값이 있는 경우(수정) */
   if(arg.event != undefined){

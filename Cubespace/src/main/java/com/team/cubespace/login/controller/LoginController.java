@@ -76,28 +76,38 @@ public class LoginController {
 			@RequestParam(value = "saveId", required = false) String saveId,
 			@RequestHeader(value = "referer") String referer
 			) throws Exception {
-
+		
+//		inputMember.setMemberTel(inputMember.getMemberTel().trim()); // 공백문자 제거
 		Member loginMember = service.login(inputMember);
 		String path = null;
 
 		if (loginMember != null) {
+			
+			// 차단 처
 			if (loginMember.getMemberBlockYN().equals("Y")) {
-				path = referer;
+
 				String message = "차단된 회원은 이용할 수 없습니다\n" + loginMember.getBlockStart() + "부터\n"
 						+ loginMember.getBlockEnd() + "까지 이용할 수 없습니다.\n" + "자세한 사항은 고객센터를 참고하세요";
 				ra.addFlashAttribute("message", message);
+				path = referer;
+			} 
+			// 카카오 로그인 사용자가 일반 로그인했을 경우 막기
+			if(loginMember.getLoginType() == 3){
+				ra.addFlashAttribute("message", "카카오로 가입한 회원은 카카오로그인 버튼을 통해 로그인해주세요");
+				path = referer;
+			}
 
-			} else {
-
+			else { // 정상 로그인
+				
 				// 관리자가 로그인했을 경우 관리자 알림 출력
 				if (loginMember.getAuthority() == 2) {
 					ra.addFlashAttribute("message", "관리자 로그인!");
 				}
-
-				path = "/";
+				
+				
 				model.addAttribute("loginMember", loginMember);
 				Cookie cookie = new Cookie("saveId", loginMember.getMemberEmail());
-
+				
 				if (saveId != null) {
 					cookie.setMaxAge(60 * 60 * 24 * 365);
 				} else {
@@ -106,10 +116,11 @@ public class LoginController {
 				cookie.setPath("/");
 				resp.addCookie(cookie);
 				
-				
+				path = "/";
 			}
-
-		} else {
+			
+						
+		} else { // 아이디, 비밀번호 일치X
 
 			path = referer;
 			ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다");
@@ -146,20 +157,17 @@ public class LoginController {
 		// JSON String -> Map
 		try {
 			Map<String, Object> jsonMap = objectMapper.readValue(kakaoLoginMember,
-					new TypeReference<Map<String, Object>>() {
-					});
+					new TypeReference<Map<String, Object>>() {});
 			Map<String, Object> properties = (Map<String, Object>) jsonMap.get("properties");
 			Map<String, Object> kakao_account = (Map<String, Object>) jsonMap.get("kakao_account");
 
 			inputMember.setMemberNickname(properties.get("nickname").toString());
 			inputMember.setProfileImage(properties.get("profile_image").toString());
-			if (properties.containsKey("birthday")) {
-				inputMember.setBirthDay(properties.get("birthday").toString());
-			}
 			inputMember.setMemberEmail(kakao_account.get("email").toString());
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			
 		}
 
 		Member loginMember = service.kakaoLogin(inputMember, backgroundInfo);
@@ -172,16 +180,13 @@ public class LoginController {
 
 		}
 
-//			if(loginMember.getMemberTel().equals("01000000000")) { // 처음 카카오 회원가입시
-//				Member tempMember = loginMember;
-//				ra.addFlashAttribute(tempMember);
-//				
-//				return "1"; // 페이지 이동
-//				
-//			} else {
 		model.addAttribute("loginMember", loginMember);
-//			}
-		return "0";
+		
+		if(loginMember.getMemberTel().trim().equals("01000000000")) { // 처음 카카오 회원가입시
+			return "1"; // 페이지 이동
+		} else { // 메인페이지 요청
+			return "0";
+		}
 	}
 
 	/**

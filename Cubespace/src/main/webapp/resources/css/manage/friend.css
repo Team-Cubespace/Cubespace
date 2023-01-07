@@ -1,0 +1,64 @@
+.fa-minus {
+    border: 2px solid black;
+    border-radius: 50%;
+    padding: 2px;
+}
+#searchBtn{
+    cursor: default;
+}
+.friendTab{
+font-weight: bold;
+background-color: #eee;
+}
+
+/* -------------------------------------------- */
+.friendDetail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.friendDetail:hover {
+    background-color: #eee;
+}
+
+.friendImgName,
+.friendBtn {
+    display: flex;
+    align-items: center;
+}
+
+#minihomeImg {
+    height: 20px;
+    /* width: 30px; */
+}
+
+.minihomeLink {
+    display: flex;
+    align-items: center;
+}
+
+.minihomeLink {
+    padding: 0 20px 0 20px;
+}
+
+.deleteFriend {
+    cursor: pointer;
+}
+
+.friendDetail {
+    border-bottom: 3px solid #eee;
+}
+/* 친구 리스트 */
+.friendArea {
+    display: flex;
+    flex-direction: column;
+}
+
+.profileImg {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    padding: 5px;
+}

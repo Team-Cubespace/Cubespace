@@ -29,7 +29,6 @@
    		<result property="fontNo" column="FONT_NO"></result>
    		<result property="emotionPath" column="EMOTION_PATH"></result>
    		<result property="emotionName" column="EMOTION_NAME"></result>
-   		<result property="alarmCount" column="ALARM_COUNT"></result>
    		<result property="today" column="TODAY"></result>
    		<result property="total" column="TOTAL"></result>
    		<result property="friendCount" column="FRIEND_COUNT"></result>
@@ -54,7 +53,6 @@
 			THEN 'N'
 			ELSE 'Y'
 		END MEMBER_BLOCK_YN, LOGIN_TYPE, OWN_FONT_NO,  ]]>
-		(SELECT COUNT(*) FROM ALARM WHERE RECEIVER_NO = M.MEMBER_NO) ALARM_COUNT,
 		(SELECT TODAY FROM MINI_HOMEPAGE MH WHERE MH.MEMBER_NO = M.MEMBER_NO) TODAY,
 		(SELECT COUNT(*) FROM FRIEND WHERE FRIEND_ACCEPT_FL = 1 AND M.MEMBER_NO IN (ASKED_MEMBER_NO, ASKING_MEMBER_NO)) FRIEND_COUNT
 		FROM MEMBER M
@@ -142,14 +140,7 @@
 		</if>
 		
 			DEFAULT, DEFAULT, DEFAULT, NULL,
-			
-		<if test='birthDay != null'>
-			#{birthDay}, 
-		</if>
-		<if test='birthDay == null'>
-			NULL,
-		</if>
-			DEFAULT, DEFAULT, 3)
+			NULL, DEFAULT, DEFAULT, 3)
  	 </insert>
  	
  	

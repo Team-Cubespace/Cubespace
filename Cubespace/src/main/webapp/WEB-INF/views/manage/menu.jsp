@@ -9,38 +9,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/resources/css/reset.css">
+    <link rel="stylesheet" href="/resources/css/variables.css">
     <link rel="stylesheet" href="/resources/css/common/checkBox.css">
     <link rel="stylesheet" href="/resources/css/minihome/minihome-rayout.css">
     <link rel="stylesheet" href="/resources/css/manage/manage.css">
+    <link rel="stylesheet" href="/resources/css/manage/menu.css">
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
     <title></title>
     <style>
-        .fa-minus{
-            height: 20px;
-            width: 20px;
-            position:absolute;
-            right: 0;
-            top: 0px;
-
-            display:flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .fa-minus:hover{
-            background-color: black;
-            color: white;
-            border-radius: 50%;
-        }
         .frame-color {
             background-color : ${minihome.frameColor};
-        }
-        .folderTitle {
-            outline: none;
-            border: none;
-        }
-        input{
-            background-color: white;
-            color: var(--ink);
         }
     </style>
     
@@ -104,7 +82,7 @@
                                 <div class="fontMain menuMain">
                                     <div class="fontTitle">홈</div>
                                     <div class="fontUse">
-                                        <img class="useFontRadio checkedImg" src="/resources/images/common/checked.png">
+                                        <div class="useFontRadio checkedImg">필수</div>
                                     </div>
                                     <div class="fontExample menuExample">내 프로필과 미니룸 정보가 표시됩니다</div>
                                 </div>
@@ -144,7 +122,7 @@
                                 <div class="fontMain menuMain">
                                     <div class="fontTitle">관리</div>
                                     <div class="fontUse">
-                                        <img class="useFontRadio checkedImg" src="/resources/images/common/checked.png">
+                                        <div class="useFontRadio checkedImg">필수</div>
                                     </div>
                                     <div class="fontExample menuExample">다양한 설정을 변경하고 친구를 관리할 수 있습니다</div>
                                 </div>
@@ -169,7 +147,6 @@
                                     <div class=" homeCategoryArea">
                                         <span class="menuTitle">홈</span>
                                     </div>
-                                    <div>--------------------------------------</div>
                                 </div>                        
                                 <div class="menuListArea" id="sortable1">
                                     <c:if test="${fn:split(realOrder, ',')[0] == 1}"> 
@@ -197,7 +174,6 @@
                                         </c:if>
                                     </c:forEach>
                                         </div>
-                                        <div>--------------------------------------</div>
                                     </div>
                                     </c:if>
                                     </c:if>
@@ -218,7 +194,6 @@
                                             </c:if>          
                                         </c:forEach>
                                             </div>
-                                            <div>--------------------------------------</div>
                                         </div>
                                     </c:if> 
                                     </c:if> 
@@ -239,7 +214,6 @@
                                             </c:if>
                                         </c:forEach>
                                             </div>
-                                            <div>--------------------------------------</div>
                                         </div>
                                     </c:if>
                                     </c:if>
@@ -250,7 +224,6 @@
                                             <div class="categoryArea" name="4">
                                                 <span class="menuTitle">방명록</span>
                                             </div>
-                                            <div>--------------------------------------</div>
                                         </div>
                                     </c:if>            
                                     </c:if>            
@@ -281,7 +254,6 @@
                                         </c:if>
                                     </c:forEach>
                                         </div>
-                                        <div>--------------------------------------</div>
                                     </div>
                                     </c:if>
                                     </c:if>
@@ -303,7 +275,6 @@
                                             </c:if>          
                                         </c:forEach>
                                             </div>
-                                            <div>--------------------------------------</div>
                                         </div>
                                     </c:if> 
                                     </c:if> 
@@ -325,7 +296,6 @@
                                             </c:if>
                                         </c:forEach>
                                             </div>
-                                            <div>--------------------------------------</div>
                                         </div>
                                     </c:if>
                                     </c:if>
@@ -336,7 +306,6 @@
                                             <div class="categoryArea" name="4">
                                                 <span class="menuTitle">방명록</span>
                                             </div>
-                                            <div>--------------------------------------</div>
                                         </div>
                                     </c:if>            
                                     </c:if>            
@@ -369,7 +338,6 @@
                                         </c:if>
                                     </c:forEach>
                                         </div>
-                                        <div>--------------------------------------</div>
                                     </div>
                                     </c:if>
                                     </c:if>
@@ -391,7 +359,6 @@
                                             </c:if>          
                                         </c:forEach>
                                             </div>
-                                            <div>--------------------------------------</div>
                                         </div>
                                     </c:if> 
                                     </c:if> 
@@ -413,7 +380,6 @@
                                             </c:if>
                                         </c:forEach>
                                             </div>
-                                            <div>--------------------------------------</div>
                                         </div>
                                     </c:if>
                                     </c:if>
@@ -424,7 +390,6 @@
                                             <div class="categoryArea" name="4">
                                                 <span class="menuTitle">방명록</span>
                                             </div>
-                                            <div>--------------------------------------</div>
                                         </div>
                                     </c:if>            
                                     </c:if>            
@@ -457,7 +422,6 @@
                                         </c:if>
                                     </c:forEach>
                                         </div>
-                                        <div>--------------------------------------</div>
                                     </div>
                                     </c:if>
                                     </c:if>
@@ -479,7 +443,6 @@
                                             </c:if>          
                                         </c:forEach>
                                             </div>
-                                            <div>--------------------------------------</div>
                                         </div>
                                     </c:if> 
                                     </c:if> 
@@ -501,7 +464,6 @@
                                             </c:if>
                                         </c:forEach>
                                             </div>
-                                            <div>--------------------------------------</div>
                                         </div>
                                     </c:if>
                                     </c:if>
@@ -512,7 +474,6 @@
                                             <div class="categoryArea" name="4">
                                                 <span class="menuTitle">방명록</span>
                                             </div>
-                                            <div>--------------------------------------</div>
                                         </div>
                                     </c:if>            
                                     </c:if>            
@@ -529,7 +490,6 @@
                             <div class="menuRightArea">
                                 <div class="menuRightTitle">
                                     <p>폴더 내 게시글 조회</p>
-                                    <p>-----------------------------------------</p>
                                 </div>
                             <c:if test="${not empty fileList}"> 
                                 <div class="menuRightContent">
@@ -599,6 +559,7 @@
                         <input type="hidden" name="diaryFolderOrder" id="diaryFolderOrder">
                         <input type="hidden" name="albumFolderOrder" id="albumFolderOrder">
                         <input type="hidden" name="videoFolderOrder" id="videoFolderOrder">
+                        <input hidden="hidden" />
                     </form>
 
                 </div>

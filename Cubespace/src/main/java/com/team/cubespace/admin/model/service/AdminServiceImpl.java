@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.cubespace.admin.model.dao.AdminDAO;
 import com.team.cubespace.admin.model.vo.Block;
+import com.team.cubespace.admin.model.vo.FAQ;
 import com.team.cubespace.common.Pagination;
 import com.team.cubespace.common.Util;
 import com.team.cubespace.complain.model.vo.Complain;
@@ -461,6 +462,15 @@ public class AdminServiceImpl implements AdminService{
 		} else {
 			throw new Exception("배경 변경 중 오류 발생");
 		}
+	}
+
+	/**
+	 * FAQ 목록 조회
+	 */
+	@Override
+	public List<FAQ> selectFAQList() {
+		
+		return dao.selectFAQList();
 	}
 
 

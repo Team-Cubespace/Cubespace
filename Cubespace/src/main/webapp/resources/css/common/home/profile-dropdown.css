@@ -1,4 +1,4 @@
-.dropdown-btn{
+.profile-dropdown-btn{
     width: 30px;
     height: 30px;
     background-color: var(--mainColor);
@@ -14,12 +14,12 @@
     z-index: 5;
 }
 
-.dropdown-btn-icon{
+.profile-dropdown-btn-icon{
     color: white;
     font-size: 20px;
 }
 
-.dropdown {
+.profile-dropdown {
     width: 100px;
     height: 0px;
     background-color: white;
@@ -31,7 +31,7 @@
     z-index: 20;
 }
 
-.dropdown > a{
+.profile-dropdown > a{
     width: 100%;
     height: 25px;
     display: flex;
@@ -39,6 +39,6 @@
     align-items: center;
 }
 
-.dropdown > a:hover{
+.profile-dropdown > a:hover{
     background-color: #ececff;
 }

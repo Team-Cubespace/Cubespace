@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<jsp:include page="/WEB-INF/views/include/report.jsp"></jsp:include>
 <link rel="stylesheet" href="/resources/css/minihome/include/minihome-common.css">
 <div class="comment-section">
     <div class="comment-header">
@@ -52,7 +53,7 @@
                                                 <li>
                                                     <a href="/minihome/${comment.memberNo}" onclick="return openMinihome(this.href)">미니홈피</a>
                                                 </li>
-                                                <li><a onclick="test()">신고</a></li>
+                                                <li><a onclick="reportFriend(${comment.memberNo})">신고</a></li>
                                             </ul>
                                         </button>
                                     </c:when>

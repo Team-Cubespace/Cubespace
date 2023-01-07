@@ -224,8 +224,9 @@ const frameColorShow = document.getElementById("frameColorShow");
 
 frameColorInput.addEventListener("change", () => {
 
-    frameColorFlag = true; // 프레임색이 바뀌었음을 표시하는 flag
     frameColorShow.style.backgroundColor = frameColorInput.value;
+
+    frameColorFlag = true; // 프레임색이 바뀌었음을 표시하는 flag
 });
 
 

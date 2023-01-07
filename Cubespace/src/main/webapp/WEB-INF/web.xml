@@ -2,6 +2,11 @@
 <web-app version="4.0.1" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_4_0_1.xsd">
+	
+	<!-- 세션 유지시간 설정  -->
+	<session-config> 
+		<session-timeout>1140</session-timeout> <!-- 24시간 == 1140분 -->
+	</session-config>
 
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>

@@ -1,0 +1,153 @@
+/* 최근 게시물, 깐부 메시지 컨테이너 */
+.new-post-container, .friend-message-container{
+    margin-bottom: 35px;
+    padding: 0 7px;
+}
+
+.friend-message-container{
+    margin: 15px 0;
+}
+
+/* 최근 게시물, 깐부 메시지 한 행 */
+.new-post, .friend-message{
+    height: 13px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.friend-message{
+    display: none;
+}
+
+/* 최근 게시물, 깐부 메시지 내용 부분 */
+.post-content, .message-content{
+    display: flex;
+    align-items: baseline;
+}
+
+.post-content > span, .message-content > span{
+    display: inline-block;
+}
+
+.post-content > span:nth-child(2), .message-content > span:nth-child(2){
+    margin: 0 10px;
+}
+
+/* 카테고리 이름, 깐부 이름 */
+.post-category a, .friend-name{
+    color: darksalmon;
+    font-weight: bold;
+}
+
+.friend-name{
+    width: auto;
+}
+
+.friend-name > span{
+    cursor: pointer;
+}
+
+/* 게시물 제목, 깐부 메시지 */
+.post-title, .message{
+    width: 450px;
+    text-overflow: ellipsis;
+    overflow : hidden;
+    white-space : nowrap;
+}
+
+.message{
+    width: 350px;
+}
+
+/* 작성 시간 */
+.post-time, .message-time{
+    height: 100%;
+    margin-left: 10px;
+    text-align: right;
+    display: flex;
+    align-items: flex-end;
+}
+
+/* 깐부 메시지 남기기 */
+.write-message{
+    width: 100%;
+    height: 50px;
+    padding: 20px;
+    background-color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.write-message > span{
+    color: white;
+    font-weight: bold;
+}
+
+#dearFriend{
+    width: 420px;
+    height: 20px;
+    background-color: white;
+    border: none;
+    font-size: 13px;
+}
+
+#dearFriend:focus{
+    outline: none;
+}
+
+#writeBtn{
+    cursor: pointer;
+}
+
+/* 메시지 더보기, 상단으로 가기 */
+#btnArea{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#btnArea > span{
+    width: 130px;
+    height: 30px;
+    margin: 0 10px;
+    margin-top: 1px;
+    background-color: var(--ink);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* 자물쇠 */
+.fa-lock{
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+/* nothing */
+.nothing{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* delete button */
+.delete-btn{
+    height: 100%;
+    padding: 0;
+    margin-left: 7px;
+    background: none;
+    border: none;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}

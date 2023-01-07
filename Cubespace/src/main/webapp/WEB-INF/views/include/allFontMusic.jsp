@@ -23,7 +23,7 @@
         font-family : "${myFont}";
     }
 
-    input:not(#minihomeTitle), textarea {
+    input:not(#minihomeTitle), textarea:not(.profile-message) {
         font-family : "${loginMember.ownFontNo}";
     }
     </style>
@@ -38,3 +38,9 @@
 
     <%-- 여기에 어떤 코드를 쓰면 될까요 --%>
     </c:forEach>
+
+    <style>
+        .content-area{
+            background-color : ${minihome.frameColor};
+        }
+    </style>

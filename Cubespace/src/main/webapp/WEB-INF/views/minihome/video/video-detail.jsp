@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/minihome/minihome-rayout.css">
     <link rel="stylesheet" href="/resources/css/common/swiper.min.css">
+    <link rel="stylesheet" href="/resources/css/minihome/include/minihome-common.css">
     <link rel="stylesheet" href="/resources/css/minihome/video/video-detail.css">
     <link rel="stylesheet" href="/resources/css/minihome/include/comment.css">
     <link rel="stylesheet" href="/resources/css/minihome/include/scrap.css">
@@ -58,6 +59,7 @@
     <script src="/resources/js/common/jQuery-core.js"></script>
     <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
     <script src="/resources/js/minihome/video/video-detail.js"></script>
+    <script src="/resources/js/minihome/include/minihome-common.js"></script>
     <script src="/resources/js/minihome/include/comment.js"></script>
     <script src="/resources/js/minihome/include/board-scrap.js"></script>
 </body>

@@ -135,11 +135,11 @@ public class LoginServiceImpl implements LoginService{
 		
 		Member loginMember = dao.login(inputMember.getMemberEmail());
 		
-		if(loginMember != null) {
+		if(loginMember != null) { // 기존에 가입했던 회원이면
 			loginMember.setMemberPw(null);
 			return loginMember;
 			
-		} else {
+		} else { // 신규회원이면
 			inputMember.setMemberPw(bcrypt.encode(inputMember.getMemberEmail())); // 비밀번호 자리에 로그인 인코딩정보 넣음
 			
 			int result = dao.kakaoSignUp(inputMember);

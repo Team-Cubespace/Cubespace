@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.cubespace.admin.model.service.AdminService;
 import com.team.cubespace.admin.model.vo.Block;
+import com.team.cubespace.admin.model.vo.FAQ;
 import com.team.cubespace.common.Util;
 import com.team.cubespace.complain.model.vo.Complain;
 import com.team.cubespace.login.model.service.LoginService;
@@ -42,7 +43,6 @@ import com.team.cubespace.member.model.vo.Member;
  *
  */
 @Controller
-@RequestMapping("/admin")
 @SessionAttributes({"loginMember", "message", "allFontList", "allMusicList"})
 public class AdminController {
 
@@ -61,7 +61,7 @@ public class AdminController {
 	/** 회원관리 페이지 이동
 	 * @return
 	 */
-	@GetMapping("/member")
+	@GetMapping("/admin/member")
 	public String adminMember() {
 		return "admin/admin-member";
 	}
@@ -69,11 +69,55 @@ public class AdminController {
 	/** 회원 차단, 신고관리 페이지 이동
 	 * @return
 	 */
-	@GetMapping("/complain")
+	@GetMapping("/admin/complain")
 	public String adminComplain() {
 		return "admin/admin-complain";
 	}
 	
+	
+	/** FAQ 목록 조회, 이동
+	 * @return
+	 */
+	@GetMapping("/faq")
+	public String gotoFAQ(Model model) {
+		
+		List<FAQ> faqList = service.selectFAQList();
+		model.addAttribute("faqList", faqList);
+		
+		return "admin/admin-FAQ";
+	}
+	
+	/** 이용약관 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/termsOfUse")
+	public String gotoTermsOfUse() {
+		return "admin/admin-termsOfUse";
+	}
+	
+	/** 개인정보처리방침 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/privatePolicy")
+	public String gotoPrivatePolicy() {
+		return "admin/admin-privatePolicy";
+	}
+	
+	/** 저작권소개 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/copyrightPolicy")
+	public String gotoCopyrightPolicy() {
+		return "admin/admin-copyrightPolicy";
+	}
+	
+	/** 프로젝트소개 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/projectExplain")
+	public String gotoProjectExplain() {
+		return "admin/projectExplain";
+	}
 
 	
 //	-------------------------------------------------------------------------------
@@ -82,7 +126,7 @@ public class AdminController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/member/memberSearch")
+	@GetMapping("/admin/member/memberSearch")
 	public String memberSearch(@RequestParam Map<String, Object> paramMap,
 			@RequestParam(value="cp", required=false, defaultValue="1" ) int cp,
 			Model model
@@ -99,7 +143,7 @@ public class AdminController {
 	 * @param memberNo
 	 * @return
 	 */
-	@PostMapping("/member/deleteMember")
+	@PostMapping("/admin/member/deleteMember")
 	@ResponseBody
 	public int deleteMember(int memberNo) {
 		
@@ -111,7 +155,7 @@ public class AdminController {
 	 * @param memberNo
 	 * @return
 	 */
-	@PostMapping("/member/deleteMemberBack")
+	@PostMapping("/admin/member/deleteMemberBack")
 	@ResponseBody
 	public int deleteMemberBack(int memberNo) {
 		
@@ -126,7 +170,7 @@ public class AdminController {
 	 * @return
 	 * @throws Exception 
 	 */
-	@PostMapping("/member/insertNewMember")
+	@PostMapping("/admin/member/insertNewMember")
 	@ResponseBody
 	public int insertNewMember(Member inputMember) throws Exception {
 		
@@ -146,7 +190,7 @@ public class AdminController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/complain/complainSearch")
+	@GetMapping("/admin/complain/complainSearch")
 	public String blockSearch(@RequestParam Map<String, Object> paramMap,
 			@RequestParam(value="cp", required=false, defaultValue="1" ) int cp,
 			Model model
@@ -160,7 +204,7 @@ public class AdminController {
 	}
 	
 	// 처리 상태 변경
-	@GetMapping("/complain/updateStatusToggle")
+	@GetMapping("/admin/complain/updateStatusToggle")
 	@ResponseBody
 	public int updateStatusToggle(Complain inputComplain) {
 		// inputComplain : complainNo, status(0/1)
@@ -169,7 +213,7 @@ public class AdminController {
 	
 	
 	// 회원 차단하기
-	@GetMapping("/complain/blockMember")
+	@GetMapping("/admin/complain/blockMember")
 	@ResponseBody
 	public int blockMember(Block inputBlock) throws ParseException {
 		// block : memberNo, blockStart, blockEnd
@@ -183,7 +227,7 @@ public class AdminController {
 	/** 폰트 페이지 이동
 	 * @return
 	 */
-	@GetMapping("/goods/font")
+	@GetMapping("/admin/goods/font")
 	public String adminGoods_font(@RequestParam Map<String, Object> paramMap,
 			@RequestParam(value="cp", required=false, defaultValue="1" ) int cp,
 			Model model) {
@@ -204,7 +248,7 @@ public class AdminController {
 	 * @return
 	 * @throws Exception 
 	 */
-	@PostMapping("/font/insertFont")
+	@PostMapping("/admin/font/insertFont")
 	public String insertFont(Font inputFont, MultipartFile fontFile, 
 			HttpSession session, Model model,
 			RedirectAttributes ra) throws Exception {
@@ -241,7 +285,7 @@ public class AdminController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/font/deleteFont")
+	@GetMapping("/admin/font/deleteFont")
 	public String deleteFont(@RequestParam Map<String, Object> paramMap, Model model,
 			RedirectAttributes ra) {
 		
@@ -271,7 +315,7 @@ public class AdminController {
 	/** 배경음악 페이지 
 	 * @return
 	 */
-	@GetMapping("/goods/music")
+	@GetMapping("/admin/goods/music")
 	public String adminGoods_music(@RequestParam Map<String, Object> paramMap,
 			@RequestParam(value="cp", required=false, defaultValue="1" ) int cp,
 			Model model) {
@@ -295,7 +339,7 @@ public class AdminController {
 	 * @return
 	 * @throws Exception
 	 */
-	@PostMapping("/goods/insertMusic")
+	@PostMapping("/admin/goods/insertMusic")
 	public String insertMusic(Music inputMusic, 
 			@RequestParam(name = "musicThumnailFile") MultipartFile musicThumnailFile,
 			@RequestParam(name = "musicPathFile") MultipartFile musicPathFile,
@@ -351,7 +395,7 @@ public class AdminController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/music/deleteMusic")
+	@GetMapping("/admin/music/deleteMusic")
 	public String deleteMusic(int musicNo, Model model,
 			RedirectAttributes ra) {
 		
@@ -379,7 +423,7 @@ public class AdminController {
 	/** 소품등록 이동
 	 * @return
 	 */
-	@GetMapping("/goods/goods")
+	@GetMapping("/admin/goods/goods")
 	public String adminGoods_goods(@RequestParam Map<String, Object> paramMap,
 			@RequestParam(value="cp", required=false, defaultValue="1" ) int cp,
 			Model model) {
@@ -399,7 +443,7 @@ public class AdminController {
 	 * @return
 	 * @throws Exception 
 	 */
-	@PostMapping("/goods/insertGoods")
+	@PostMapping("/admin/goods/insertGoods")
 	public String insertGoods(ShopMiniroom inputGoods, MultipartFile goodsPathFile, 
 			HttpSession session, Model model,
 			RedirectAttributes ra) throws Exception {
@@ -429,7 +473,7 @@ public class AdminController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/goods/deleteGoods")
+	@GetMapping("/admin/goods/deleteGoods")
 	public String deleteGoods(int goodsNo, RedirectAttributes ra) {
 		
 		int result = service.deleteGoods(goodsNo);
@@ -446,7 +490,7 @@ public class AdminController {
 	 * @return
 	 * @throws Exception 
 	 */
-	@GetMapping("/goods/updateAllColor")
+	@GetMapping("/admin/goods/updateAllColor")
 	public String updateAllColor(Background background, RedirectAttributes ra) throws Exception {
 				
 		Background originalBGColor = (Background) application.getAttribute("backgroundColorInfo");

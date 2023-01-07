@@ -179,9 +179,12 @@
 .passwordArea{
     padding: 0 0 !important;
 }
-.questionBox:hover {
+/* .questionBox:hover {
     border-bottom: 3px solid var(--mainColor);
-}
+} */
+/* .inputBox:focus .questionBox{
+    border-bottom: 3px solid var(--mainColor);
+} */
 
 
 .confirm{

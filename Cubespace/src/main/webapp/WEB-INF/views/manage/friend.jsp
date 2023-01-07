@@ -12,20 +12,13 @@
     <link rel="stylesheet" href="/resources/css/common/checkBox.css">
     <link rel="stylesheet" href="/resources/css/minihome/minihome-rayout.css">
     <link rel="stylesheet" href="/resources/css/manage/manage.css">
+    <link rel="stylesheet" href="/resources/css/manage/friend.css">
     <script src="https://kit.fontawesome.com/3fe30a9b47.js"></script>
     <title></title>
 
     <style>
-        .fa-minus {
-            border: 2px solid black;
-            border-radius: 50%;
-            padding: 2px;
-        }
         .frame-color {
             background-color : ${minihome.frameColor};
-        }
-        #searchBtn{
-            cursor: default;
         }
     </style>
 

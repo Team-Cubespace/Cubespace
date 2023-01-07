@@ -189,7 +189,8 @@ body *{
     border: 1px solid black;
     border-radius: 50%;
     background-color: white;
-    height: 65%;
+    height: 80px;
+    width: 80px;
 
 }
 .goods-exampleimg-music:hover{

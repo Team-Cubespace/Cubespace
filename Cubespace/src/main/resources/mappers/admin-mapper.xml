@@ -46,6 +46,14 @@
 		<result property="frameFontColor" column="FRAME_FONT_COLOR"></result>
 	</resultMap>
 	
+ 	 
+	<resultMap type="FAQ" id="faq_rm">
+		<id property="faqNo" column="FAQ_NO"/>
+		<result property="faqTitle" column="FAQ_TITLE"></result>
+		<result property="faqContent" column="FAQ_CONTENT"></result>
+	</resultMap>
+	
+
 	
 	<!-- 회원 차단====================================================  -->
 	
@@ -320,5 +328,11 @@
 		FRAME_FONT_COLOR  = #{frameFontColor}
 		WHERE BACKGROUND_NO = 1
   	</update>
+  	
+  	
+  <!-- FAQ====================================================  -->
+  	<select id="selectFAQList" resultMap="faq_rm">
+  		SELECT * FROM FAQ
+  	</select>
 		  
 </mapper>

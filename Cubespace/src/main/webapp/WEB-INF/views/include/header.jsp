@@ -16,16 +16,9 @@
     <ul class="header-menu-nav">
         <jsp:include page="/WEB-INF/views/webmain/main-memberSearch.jsp"/>
         <!-- 로그인 X && 메인 페이지 X -->
-        <c:choose>
-            <c:when test="${empty loginMember}">
-                <li class="header-menu">
-                    <a href="/member/login">
-                        <i class="fa-solid fa-right-to-bracket"></i>
-                        <span>로그인</span>
-                    </a>
-                </li>
-            </c:when>
-            <c:otherwise>
+
+        <c:if test="${not empty loginMember}">
+        
             <li class="header-menu">
                 <a href="/cubespace/shop/1">
                     <i class="fa-solid fa-shop"></i>
@@ -40,37 +33,37 @@
             </li>
             
             <!-- 로그인 O -->
-                <jsp:include page="/WEB-INF/views/webmain/main-notifications.jsp"/>
-                <li class="header-menu" onclick="openmodalAlarm()">
-                    <a>
-                        <div class="notice">
-                            <span class="notice-new" id="alarmCount"></span>
-                            <i class="fa-solid fa-bell"></i>
-                        </div>
-                        <span>알림</span>
-                    </a>
+            <jsp:include page="/WEB-INF/views/webmain/main-notifications.jsp"/>
+            <li class="header-menu" onclick="openmodalAlarm()">
+                <a>
+                    <div class="notice">
+                        <span class="notice-new" id="alarmCount"></span>
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <span>알림</span>
+                </a>
+            </li>
+            <c:set var="fileName" value="${fn:split(pageContext.request.requestURI, '/')}"></c:set>
+            <c:if test="${fileName[fn:length(fileName) - 1] != 'home.jsp'}">
+                <li class="header-menu">
+                    <button type="button" id="headerDropDownButton">
+                        <c:if test="${empty loginMember.profileImage}">
+                            <img src="/resources/images/common/cubes.png" alt="로그인 회원 프로필 이미지" class="header-profile-image">
+                        </c:if>
+                        <c:if test="${not empty loginMember.profileImage}">
+                            <img src="${loginMember.profileImage}" alt="로그인 회원 프로필 이미지" class="header-profile-image">
+                        </c:if>
+                        <ul class="header-drop-down" id="headerDropDown">
+                            <li><a href="/minihome/${loginMember.memberNo}" onclick="return openMinihome(this.href)">내 미니홈피</a></li>
+                            <li><a href="/member/updateInfo">내 정보 수정</a></li>
+                            <li><a href="/member/logout">로그아웃</a></li>
+                        </ul>
+                        <i class="fa-solid fa-angle-down"></i>
+                    </button>
                 </li>
-                <c:set var="fileName" value="${fn:split(pageContext.request.requestURI, '/')}"></c:set>
-                <c:if test="${fileName[fn:length(fileName) - 1] != 'home.jsp'}">
-                    <li class="header-menu">
-                        <button type="button" id="headerDropDownButton">
-                            <c:if test="${empty loginMember.profileImage}">
-                                <img src="/resources/images/common/cubes.png" alt="로그인 회원 프로필 이미지" class="header-profile-image">
-                            </c:if>
-                            <c:if test="${not empty loginMember.profileImage}">
-                                <img src="${loginMember.profileImage}" alt="로그인 회원 프로필 이미지" class="header-profile-image">
-                            </c:if>
-                            <ul class="header-drop-down" id="headerDropDown">
-                                <li><a href="/minihome/${loginMember.memberNo}" onclick="return openMinihome(this.href)">내 미니홈피</a></li>
-                                <li><a href="/member/updateInfo">내 정보 수정</a></li>
-                                <li><a href="/member/logout">로그아웃</a></li>
-                            </ul>
-                            <i class="fa-solid fa-angle-down"></i>
-                        </button>
-                    </li>
-                </c:if>
-            </c:otherwise>
-        </c:choose>
+            </c:if>
+        </c:if>           
+    
     </ul>
     <!------------------ 헤더 로고 영역 ------------------>
     <div class="header-logo">

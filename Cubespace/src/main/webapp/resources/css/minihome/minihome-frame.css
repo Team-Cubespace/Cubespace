@@ -89,6 +89,11 @@ html {
     border: 1px solid black;
 }
 
+.active-range .fill {
+    height: 88%;
+    top: 0.8px;
+    left: 0.8px;
+}
 /* 미니홈 헤더 오른쪽 */
 .minihome-header-right {
     width: 72%;

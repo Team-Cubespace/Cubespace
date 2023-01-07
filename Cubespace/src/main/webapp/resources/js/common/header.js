@@ -25,7 +25,7 @@ const openMinihome = (url) => {
         if(confirm("로그인 상태가 아닙니다.\n로그인 하시겠습니까?")) {
             location.href = "/member/login";
         } else {
-            return;
+            return false;
         }
     }
     console.log("오픈함수 호출");

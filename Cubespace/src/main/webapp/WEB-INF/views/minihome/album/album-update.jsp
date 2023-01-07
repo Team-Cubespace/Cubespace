@@ -13,6 +13,7 @@
     <title>Minihome Content Area</title>
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/minihome/minihome-rayout.css">
+    <link rel="stylesheet" href="/resources/css/common/swiper.min.css">
     <link rel="stylesheet" href="/resources/css/minihome/album/album-write.css">
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
     <style>
@@ -53,6 +54,6 @@
     </script>
 <script src="/resources/js/common/jQuery-core.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ab8d18a2840806f79cff0f4f1542dde4&libraries=services"></script>
+<script src="/resources/js/common/swiper.min.js"></script>
 <script src="/resources/js/minihome/album/album-update.js"></script>
-<script src="../../js/common/temp.js"></script>
 </html>

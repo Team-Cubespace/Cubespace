@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.google.gson.Gson;
 import com.team.cubespace.guestbook.model.service.GuestBookService;
 import com.team.cubespace.guestbook.model.vo.GuestBook;
+import com.team.cubespace.minihome.model.service.MinihomeMainService;
 import com.team.cubespace.minihome.model.vo.Minihome;
 
 @Controller
@@ -21,11 +23,20 @@ public class GuestBookController {
 	@Autowired
 	private GuestBookService service;
 	
+	 @Autowired
+     private MinihomeMainService serviceMinihome;
+	
 	/** 방명록 이동
 	 * @return
 	 */
 	@GetMapping("/guestBook")
-	public String guestBook() {
+	public String guestBook(Model model,
+			@SessionAttribute("minihome") Minihome minihome) {
+		
+		
+		Map<String, Object> profileMap = serviceMinihome.profile(minihome.getMemberNo());
+        model.addAttribute("profileMap", profileMap);
+
 		return "/minihome/guestBook/minihome-guestBook";
 	}
 	

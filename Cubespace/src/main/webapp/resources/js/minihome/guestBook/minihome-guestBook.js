@@ -51,22 +51,35 @@ const listGuestBook=()=>{
     
                                 /* 닉네임 생성 */
                                 const member_nickname = document.createElement("button");
-                                member_nickname.classList.add("member-nickname","nickname-drop-down-button");
                                 member_nickname.innerText=listGuestbook.memberNickname;
                                 
-                                const nicknameDropDownBox = document.createElement("ul")
-                                nicknameDropDownBox.classList.add("nickname-drop-down-box");
-                                
-                                        const li1 = document.createElement("li")
-                                            const a1 = document.createElement("a")
-                                            a1.setAttribute("href","/minihome/"+listGuestbook.senderNo+"")
-                                            a1.setAttribute("onclick","return openMinihome(this.href)")
-                                            a1.innerText="미니홈피";
+                                // 내 닉네임 클릭시 
+                                if(loginMemberNo!=listGuestbook.senderNo){ // 내가 아니라면 
+                                    
+                                    member_nickname.classList.add("member-nickname","nickname-drop-down-button");
+                                    const nicknameDropDownBox = document.createElement("ul")
+                                    nicknameDropDownBox.classList.add("nickname-drop-down-box");
+                                    
+                                    const li1 = document.createElement("li")
+                                    const a1 = document.createElement("a")
+                                    a1.setAttribute("href","/minihome/"+listGuestbook.senderNo+"")
+                                    a1.setAttribute("onclick","return openMinihome(this.href)")
+                                    a1.innerText="미니홈피";
+                                    
+                                    const li2 = document.createElement("li")
+                                    const a2 = document.createElement("a")
+                                    a2.setAttribute("onclick","reportFriend("+listGuestbook.senderNo+")")
+                                    a2.innerText="신고";
 
-                                        const li2 = document.createElement("li")
-                                            const a2 = document.createElement("a")
-                                            a2.setAttribute("onclick","reportFriend("+listGuestbook.senderNo+")")
-                                            a2.innerText="신고";
+                                    
+                                    member_nickname.append(nicknameDropDownBox);
+                                    nicknameDropDownBox.append(li1,li2);
+                                    li1.append(a1);
+                                    li2.append(a2);
+                                } else{ // 나라면 
+                                    member_nickname.classList.add("member-nickname");
+                                }
+                                
 
 
                                 /* 글 작성 날짜 시간 생성 */
@@ -112,7 +125,8 @@ const listGuestBook=()=>{
                                             btn_delete.innerText="삭제";
                                             btn_delete.setAttribute("onclick","deleteGuestBook("+listGuestbook.gbNo+", this)")
                                             btn_box.append(btn_secret,btn_modify,btn_delete);
-            
+
+
                                         }else{ // 방명록 비공개
                                             btn_modify.innerText="수정";
                                             btn_modify.setAttribute("onclick","modifyGuestBook("+listGuestbook.gbNo+",'"+gbSecret+"', this)")
@@ -192,10 +206,10 @@ const listGuestBook=()=>{
                         guest_message.append(message_header,message_body);
                             message_header.append(div,btn_box);
                                 div.append(member_nickname,time);
-                                    member_nickname.append(nicknameDropDownBox);
-                                    nicknameDropDownBox.append(li1,li2);
-                                    li1.append(a1);
-                                    li2.append(a2);
+                                    // member_nickname.append(nicknameDropDownBox);
+                                    // nicknameDropDownBox.append(li1,li2);
+                                    // li1.append(a1);
+                                    // li2.append(a2);
                             message_body.append(member_img,message_box);
                                 member_img.append(img);
                 }

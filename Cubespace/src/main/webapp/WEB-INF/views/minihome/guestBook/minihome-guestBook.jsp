@@ -32,6 +32,19 @@
     <jsp:include page="/WEB-INF/views/include/report.jsp"/>
     <div class="content-area frame-color">
         <section class="minihome-rayout " >
+        
+        왼쪽 section 부분에 jsp 파일 include
+        <jsp:include page="/WEB-INF/views/minihome/home/minihome-profile.jsp"/>
+
+                방명록 컨트롤러에 객체 추가
+                @Autowired
+                private MinihomeMainService service;
+
+                방명록 컨트롤러에 service 호출문 추가
+                Map<String, Object> profileMap = service.profile(memberNo);
+
+                profileMap 값 담아서 포워드해주기
+                model.addAttribute("profileMap", profileMap);
                 <!-- 좌측 section 코드 작성 또는 include -->
                 <!-- 전체 내용 div 태그로 한 번 감싸주세요 -->
                 <!-- ex) <div class="home-area"> <div></div> <span></span> ... </div> -->

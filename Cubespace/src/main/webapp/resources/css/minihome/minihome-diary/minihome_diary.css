@@ -22,36 +22,41 @@
 
 /* 글쓰기 버튼 */
 .writeBtn{
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    background-color: #aaa;
     border-radius: 10px;
-    padding :10px;
+    padding :15px;
     margin-right: 20px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 /* 일기가 있는 공간 */
 .diary-section {
-    border: 1px solid black;
-    padding :10px;
+    border: 2px solid #aaa;
+    /* padding :10px; */
     margin-top: 30px;
     margin-bottom: 150px;
 }
 
-
+.title-section {
+    background-color: #ccc;
+}
 /* 제목 밑에 공개여부 & 시간 */
 .title-section > div:nth-child(2) {
     display: flex;
     justify-content: flex-end;
+    
 }
 
 .title-section > div:nth-child(2) > *{
-    padding :10px;
+    padding :10px 10px 20px 10px;
 }
 
 .title {
-    padding-left: 10px;
-    padding-top : 10px;
-    font-size : 15px;
+    padding : 20px 20px 0px 20px;
+    font-weight: bold;
+    font-size : 17px;
 }
 
 /* 내용이 있는 공간 */
@@ -61,17 +66,19 @@
     max-height: 1000px;
     overflow: auto;
     border-top: 1px solid black;
-    border-bottom:  1px solid black;
-    padding-top: 20px;
-    padding-left: 10px;
+    /* border-bottom:  1px solid black; */
+    padding : 20px;
+    line-height: 1.6;
 
     
 }
 /* 밑 공간 */
 .under-section {
+    height:75px;
     padding-top: 10px;
     display: flex;
     justify-content: space-between;
+    padding-left: 20px;
 }
 /******* 밑공간 part1 *******/
 .under1 {
@@ -136,6 +143,7 @@
     width: 35px;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 /* 이미지 */
 .emoji {
@@ -156,6 +164,14 @@
 /* 공감하기 버튼 */
 .emoji-btn{
     cursor: pointer;
+    width: 80px;
+    background-color: #aaa;
+    border-radius: 3px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
 }
 /* 공감하기 버튼에 커서를 갖다댈 때 */
 .emoji-btn:hover{
@@ -168,8 +184,36 @@
     align-items: center;
 }
 .under2 > * {
+    margin:0 10px;
     padding :10px;
     cursor: pointer;
+    background-color: black;
+    color:white;
+    width:100px;
+    display: flex;
+    justify-content: center;
+}
+
+.under2 > div:nth-child(1){
+    background-color: black;
+    color:white !important;
+    border-radius: 5px;
+    
+}
+.under2 > div>a{
+    color:white !important;
+    
+}
+
+.under2 > a:nth-child(1){
+    color:white !important;
+}
+
+.under2 > div:nth-child(2){
+    background-color: white;
+    color:black;
+    border: 1px solid black;
+    border-radius: 3px;
 }
 .under2 > *:hover{
     font-weight: bold;
@@ -193,6 +237,7 @@
     display: flex;
     align-content: center;
     justify-content: space-evenly;
+    z-index: 2;
 }
 /* .choose-emoji > div {
     display: flex;

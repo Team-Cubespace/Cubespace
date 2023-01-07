@@ -85,8 +85,6 @@
             font-weight : bold;
             padding-bottom : 10px;
         }
-
-
         .input-row{
             border-bottom: 1px solid #ddd;
             padding: 6px 0px;
@@ -108,6 +106,7 @@
         .input-row input[type = 'text']{
             border:none;
             outline: none;
+            width : 80%;
         }
         .input-row >textarea{
             resize: none;
@@ -118,6 +117,13 @@
             display: flex;
             justify-content: end;
             padding: 10px;
+        }
+
+        /* 모달창2 css */
+        .input-row > div:nth-child(1) {
+            width: 100px;
+            font-weight: bold;
+            /* display: inline-block */
         }
 
     </style>
@@ -193,6 +199,59 @@
                                         <input type="radio"  id = "allDay1" value="true" name="allDay">예
                                         <input type="radio" id = "allDay2"  value="false" name="allDay">아니오
                                     </div>
+                                </div>
+                                
+
+                                <div class = "modal-footer">
+                                    <button id = "mainBtn" onClick = "addEvent()">등록</button>
+
+                                    <button id = "updateBtn" onClick = "updateEvent()">수정</button>
+
+                                    <button id = "deleteBtn" onClick = "deleteEvent()">삭제</button>
+
+                                    <button id = "cancleBtn">취소</button>
+                                </div>
+                            </div>
+                        <%-- </div> --%>
+                    </div>
+                </div>
+
+                <!-- 모달창2 -->
+                <div class="popup_layer" id="popup_layer2" style ="display:none;">
+                    <!-- style="display: none;" -->
+                    <div class="popup_box">
+                        <%-- <div class="popup_cont" id = "popup_con"> --%>
+                        <!-- <a href="javascript:closePop4();" class="xbtn">
+                            <i class="fa-solid fa-x xbtnBack" id = "fa-x"></i>
+                        </a> -->
+                            <div>
+                                <div class = "input-row">
+                                    <div class = "modal-title">일정등록</div>
+                                    <input type="hidden" id = "number">
+                                </div>
+                                <div class = "input-row">
+                                    <div >카테고리</div>
+                                    <div id = "categoryShow"></div>
+                                </div>
+                                <div class = "input-row">
+                                    <div >일정 제목</div>
+                                    <div id = "titleShow"></div>
+                                </div>
+                                <div class = "input-row">
+                                    <div >일정 내용</div>
+                                    <div id = "contentShow"></div>
+                                </div>
+                                <div class = "input-row ">
+                                    <div>시작</div>
+                                    <div id = "startDateShow"></div>
+                                </div>
+                                <div class = "input-row ">
+                                    <div>종료</div>
+                                    <div id = "endDateShow"></div>
+                                </div>
+                                <div class = "input-row">
+                                    <div>하루 종일</div>
+                                    <div id = "allDayShow"></div>
                                 </div>
                                 
 

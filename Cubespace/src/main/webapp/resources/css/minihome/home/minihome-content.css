@@ -63,6 +63,7 @@
 
 /* 작성 시간 */
 .post-time, .message-time{
+    height: 100%;
     margin-left: 10px;
     text-align: right;
     display: flex;
@@ -140,10 +141,13 @@
 
 /* delete button */
 .delete-btn{
+    height: 100%;
     padding: 0;
     margin-left: 7px;
     background: none;
     border: none;
     font-size: 10px;
+    display: flex;
+    align-items: center;
     cursor: pointer;
 }

@@ -33,6 +33,8 @@
 .member-nickname{
     font-size: 15px;
     font-weight: bold;
+    border: none;
+    background-color: transparent;
 }
 
 .btn-box{

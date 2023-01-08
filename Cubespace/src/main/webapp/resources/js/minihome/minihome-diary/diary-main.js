@@ -219,12 +219,13 @@ function selectDiary(diaryDate){
             const diarySectionContainer = document.querySelector(".diary-section-container");
             /* 기존에 목록 불러온거 지워주는 거..? 누적방지용? */
             diarySectionContainer.innerText = "";
-            if(diaryList == null){
+            if(diaryList == null || diaryList.length == 0){
                 const empty = document.getElementById("div");
                 const icon = document.getElementById("i");
-                icon.classList.add("fa-solid fa-book");
+                icon.classList.add("fa-solid");
+                icon.classList.add("fa-book");
                 empty.append(icon);
-                diarySectionContainer.insertAdjacentElement("beforeend",empty);
+                diarySectionContainer.append(empty);
             } else {
 
             

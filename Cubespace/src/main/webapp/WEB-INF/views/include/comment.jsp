@@ -51,7 +51,7 @@
                                             ${comment.memberNickname}
                                             <ul class="nickname-drop-down-box">
                                                 <li>
-                                                    <a href="/minihome/${comment.memberNo}" onclick="return openMinihome(this.href)">미니홈피</a>
+                                                    <a href="/minihome/${comment.memberNo}" onclick="return openMinihome(this.href)">스페이스</a>
                                                 </li>
                                                 <li><a onclick="reportFriend(${comment.memberNo})">신고</a></li>
                                             </ul>

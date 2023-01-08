@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미니홈피</title>
+    <title>스페이스</title>
     <link rel="stylesheet" href="/resources/css/reset.css">
     <link rel="stylesheet" href="/resources/css/variables.css">
     <link rel="stylesheet" href="/resources/css/minihome/minihome-frame.css">
@@ -166,7 +166,7 @@
                         <li class="manage-menu" ><a href="/manage/font" target="minihomeMenu">관리</a></li>
                     </c:if>
 
-                        <li id="goBackButton"><a onclick="goBack()">이전<br>미니홈피</a></li>
+                        <li id="goBackButton"><a onclick="goBack()">이전<br>스페이스</a></li>
                 </ul>
             </section>
         </div>

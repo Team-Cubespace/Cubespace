@@ -19,7 +19,7 @@
 
 
     <style>
-    *{
+    *:not(.content){
         font-family : "${myFont}";
     }
 

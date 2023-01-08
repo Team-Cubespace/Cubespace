@@ -255,6 +255,7 @@ function selectDiary(diaryDate){
 
                     const div2 = document.createElement("div");
                     div2.classList.add("content");
+                    div2.classList.add("nonoFont");
                 
                     let replaceDiaryContent =  diary.diaryContent;
 
@@ -694,8 +695,10 @@ document.addEventListener("click",function(e){
             }
         }
 
-    
-    document.querySelector(".choose-emoji").remove();
+    if(document.querySelector(".choose-emoji") != undefined){
+
+        document.querySelector(".choose-emoji").remove();
+    }
 
 
 })

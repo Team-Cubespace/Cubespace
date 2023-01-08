@@ -26,6 +26,7 @@
     input:not(#minihomeTitle), textarea:not(.profile-message) {
         font-family : "${loginMember.ownFontNo}";
     }
+
     </style>
 
 

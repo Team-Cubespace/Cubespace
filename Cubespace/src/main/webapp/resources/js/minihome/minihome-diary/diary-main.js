@@ -221,6 +221,7 @@ function selectDiary(diaryDate){
             diarySectionContainer.innerText = "";
             if(diaryList == null || diaryList.length == 0){
                 const empty = document.createElement("div");
+                empty.classList.add("empty");
                 const icon = document.createElement("i");
                 icon.classList.add("fa-solid");
                 icon.classList.add("fa-book");

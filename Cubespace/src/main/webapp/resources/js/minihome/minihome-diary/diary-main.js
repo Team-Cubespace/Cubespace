@@ -255,6 +255,7 @@ function selectDiary(diaryDate){
 
                     const div2 = document.createElement("div");
                     div2.classList.add("content");
+                    div2.classList.add("nonoFont");
                 
                     let replaceDiaryContent =  diary.diaryContent;
 

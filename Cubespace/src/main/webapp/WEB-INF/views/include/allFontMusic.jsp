@@ -19,13 +19,14 @@
 
 
     <style>
-    *{
+    *:not(.content){
         font-family : "${myFont}";
     }
 
     input:not(#minihomeTitle), textarea:not(.profile-message) {
         font-family : "${loginMember.ownFontNo}";
     }
+
     </style>
 
 

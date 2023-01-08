@@ -23,6 +23,7 @@
     <%-- 제이쿼리 --%>
     <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
+
     
     <style>
         .frame-color {
@@ -171,6 +172,7 @@
             cursor: pointer;
             margin-right : 10px;
         }
+
     </style>
 </head>
 <body>
@@ -197,10 +199,10 @@
                 <div class="popup_layer" id="popup_layer" style ="display:none;">
                     <!-- style="display: none;" -->
                     <div class="popup_box">
-                         <div class = cancleBtn>
-                            <i id = cancleBtn class="fa-solid fa-x xbtnBack" ></i>
-                        </div>
-                            <div>
+                            <div class = cancleBtn>
+                                <i id = cancleBtn class="fa-solid fa-x xbtnBack" ></i>
+                            </div>
+                            <div class = "container">
                                 <div class = "input-row2-title">
                                     <div class = "modal-title" id = "modal-title">일정등록</div>
                                     <input type="hidden" id = "number">
@@ -242,17 +244,8 @@
                                     <%-- 이거 라벨 잘못 붙인 듯.... 먼가 css할때 조정 필요할 듯? --%>
                                         <input type="radio"  id = "allDay1" value="true" name="allDay">예
                                         <input type="radio" id = "allDay2"  value="false" name="allDay">아니오
-                                    </div>
+                                    
                                 </div>
-                                 <div class = "input-row">
-                                    <label for="allDay">하루 종일</label>
-                                    <%-- 이거 라벨 잘못 붙인 듯.... 먼가 css할때 조정 필요할 듯? --%>
-                                        <input type="radio"  id = "allDay3" value="true" name="allDay">예
-                                        <input type="radio" id = "allDay4"  value="false" name="allDay">아니오
-                                    </div>
-                                </div>
-                                
-
                                 <div class = "modal-footer">
                                     <button id = "mainBtn" onClick = "addEvent()">등록</button>
 
@@ -263,7 +256,7 @@
                                     <%-- <button id = "cancleBtn">닫기</button> --%>
                                 </div>
                             </div>
-                        <%-- </div> --%>
+                        
                     </div>
                 </div>
 
@@ -304,12 +297,6 @@
                                     <div>하루 종일</div>
                                     <div id = "allDayShow"></div>
                                 </div>
-                                <div class = "input-row2">
-                                    <div>하루 종일</div>
-                                    <div id = "allDayShow2"></div>
-                                </div>
-                                
-
                                 <div class = "modal-footer">
                                     <button id = "updateShowBtn">수정하기</button>
                                     <button id = "deleteBtn" onClick = "deleteEvent()">삭제하기</button>
@@ -331,6 +318,7 @@ const loginMemberNo = "${loginMember.memberNo}";
 <!-- include 방법 : <section class="minihome-rayout"> 안에 <div data-include-path="파일 경로"></div> 작성 -->
 <script src="/resources/js/common/temp.js"></script>
 <script src="/resources/js/minihome/minihome-diary/monthcalendar.js"></script>
+
 
 
 </html>

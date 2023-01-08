@@ -36,6 +36,7 @@
     </style>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/include/allFontMusic.jsp"/>
     <div class="content-area frame-color">
         <section class="minihome-rayout">
             <jsp:include page="/WEB-INF/views/include/side-folder.jsp"/>

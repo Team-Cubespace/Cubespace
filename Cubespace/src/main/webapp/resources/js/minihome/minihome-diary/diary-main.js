@@ -219,6 +219,17 @@ function selectDiary(diaryDate){
             const diarySectionContainer = document.querySelector(".diary-section-container");
             /* 기존에 목록 불러온거 지워주는 거..? 누적방지용? */
             diarySectionContainer.innerText = "";
+            if(diaryList == null || diaryList.length == 0){
+                const empty = document.createElement("div");
+                empty.classList.add("empty");
+                const icon = document.createElement("i");
+                icon.classList.add("fa-solid");
+                icon.classList.add("fa-book");
+                // icon.innerText = "글이 없습니다.";
+                empty.append(icon);
+                diarySectionContainer.append(empty);
+            } else {
+
             
             for(diary of diaryList){
 
@@ -334,7 +345,7 @@ function selectDiary(diaryDate){
 
                 diarySectionContainer.insertAdjacentElement("beforeend",div);
             }
-            
+        }    
 
         }, error : () => { 
             

@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
 
 import com.team.cubespace.member.model.vo.Member;
 
-@WebFilter(filterName = "adminFilter")
-public class AdminFilter extends HttpFilter implements Filter{
+@WebFilter(filterName = "loginFilter")
+public class LoginFilter extends HttpFilter implements Filter{
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
@@ -31,23 +31,15 @@ public class AdminFilter extends HttpFilter implements Filter{
 		HttpSession session = req.getSession();
 		
 
-		if(session.getAttribute("loginMember") == null) { // 로그인 안했으면
-			session.setAttribute("message", "관리자만 이용할 수 있는 기능입니다");
-			
-			resp.sendRedirect("/");
-		} 
 		
-		else if(((Member)session.getAttribute("loginMember")).getAuthority() == 1) { // 일반 회원
-			session.setAttribute("message", "관리자만 이용할 수 있는 기능입니다");
+		if(session.getAttribute("loginMember") == null) { // 로그아웃 상태이면
+			session.setAttribute("message", "로그인 후 이용할 수 있습니다");
 			
-			resp.sendRedirect("/");
-		} 
-		
-		else { // 관리자
+			
+			resp.sendRedirect("/member/login");
+		} else { 
 			chain.doFilter(request, response);
 		}
-		
-
 	}
 
 }

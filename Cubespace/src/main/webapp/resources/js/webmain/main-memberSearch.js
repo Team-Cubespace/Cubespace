@@ -176,7 +176,7 @@ const memberSearch=()=>{
                             div2_divimg.setAttribute("src","/resources/images/common/smallCube.png");
     
                             const a = document.createElement("a");
-                            a.innerText="미니홈피";
+                            a.innerText="스페이스";
                             a.setAttribute("href","/minihome/"+profile.memberNo);
                             a.setAttribute("onclick","return openMinihome(this.href)");
 
@@ -291,7 +291,7 @@ const memberAddFriendList=()=>{
                             div2_divimg.setAttribute("src","/resources/images/common/smallCube.png");
     
                             const a = document.createElement("a");
-                            a.innerText="미니홈피";
+                            a.innerText="스페이스";
                             a.setAttribute("href","/minihome/"+profile.memberNo);
                             a.setAttribute("onclick","return openMinihome(this.href)");
 

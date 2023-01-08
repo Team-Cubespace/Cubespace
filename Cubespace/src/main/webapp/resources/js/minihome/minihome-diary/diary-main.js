@@ -695,8 +695,10 @@ document.addEventListener("click",function(e){
             }
         }
 
-    
-    document.querySelector(".choose-emoji").remove();
+    if(document.querySelector(".choose-emoji") != undefined){
+
+        document.querySelector(".choose-emoji").remove();
+    }
 
 
 })

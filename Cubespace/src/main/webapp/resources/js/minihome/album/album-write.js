@@ -1,10 +1,18 @@
+let swiper = new Swiper(".add-image-list", {
+    slidesPerView: "auto",
+    spaceBetween: 10,
+    observer:true,
+    observerParents:true,
+    mousewheel:true
+    // watchOverflow:true,
+});
+
 var fileNo = 0;
 var filesArr = new Array();
-console.log("hello");
 /* 첨부파일 추가 */
-console.log(location.href);
 const addFile = (obj)=>{
-    var maxFileCnt = 5;   // 첨부파일 최대 개수
+    let fCount = 0;
+    var maxFileCnt = 10;   // 첨부파일 최대 개수
     var attFileCnt = document.getElementsByClassName('file-item').length;    // 기존 추가된 첨부파일 개수
     var remainFileCnt = maxFileCnt - attFileCnt;    // 추가로 첨부가능한 개수
     var curFileCnt = obj.files.length;  // 현재 선택된 첨부파일 개수
@@ -20,50 +28,48 @@ const addFile = (obj)=>{
             if (validation(file)) {
                 // 파일 배열에 담기
                 var reader = new FileReader();
-                reader.onload = function () {
-                    filesArr.push(file);
-                };
                 reader.readAsDataURL(file);
+                reader.onload = e=> {
+                    filesArr.push(file);
 
-                // 목록 추가
-                const addFileList = document.getElementById("addFileList");
+                    // 목록 추가
+                    const addFileList = document.getElementById("addFileList");
+    
+                    // 파일아이템 생성
+                    const fileItem = document.createElement("li");
+                    fileItem.classList.add("file-item", "swiper-slide");
+                    fileItem.setAttribute("id", `file${fileNo}`);
+    
+                    // 파일 이름영역
+                    // const fileName = document.createElement("span");
+                    // fileName.classList.add("file-name");
+                    // fileName.innerText = file.name;
+                    
+                    // 파일 이미지
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
 
-                // 파일아이템 생성
-                const fileItem = document.createElement("li");
-                fileItem.classList.add("file-item");
-                fileItem.setAttribute("id", `file${fileNo}`);
-
-                // 파일 이름영역
-                const fileName = document.createElement("span");
-                fileName.classList.add("file-name");
-                fileName.innerText = file.name;
-                
-                // 파일 업로드 취소 버튼
-                const button = document.createElement("button");
-                button.classList.add("fa-solid", "fa-xmark");
-                button.setAttribute("onclick", `deleteFile(${fileNo})`);
-
-                // 파일아이템 조립
-                fileItem.append(fileName, button);
-
-                // 파일 목록에 추가
-                addFileList.append(fileItem);
-                fileNo++;
-
-
-                // let htmlData = '';
-                // htmlData += '<div id="file' + fileNo + '" class="filebox">';
-                // htmlData += '   <p class="name">' + file.name + '</p>';
-                // htmlData += '   <a class="delete" onclick="deleteFile(' + fileNo + ');"><i class="far fa-minus-square"></i></a>';
-                // htmlData += '</div>';
-                // $('.file-list').append(htmlData);
-                // fileNo++;
+                    // 파일 업로드 취소 버튼
+                    const button = document.createElement("button");
+                    button.classList.add("fa-solid", "fa-xmark");
+                    button.setAttribute("onclick", `deleteFile(${fileNo})`);
+    
+                    // 파일아이템 조립
+                    fileItem.append(img, button);
+    
+                    // 파일 목록에 추가
+                    addFileList.append(fileItem);
+                    fileNo++;
+                    fCount++;
+                };
             } else {
                 continue;
             }
-        }
+        }    
+        setTimeout(()=>{
+            document.getElementById("addImageCount").innerText = Number(document.getElementById("addImageCount").innerText) + fCount;
+        }, 200);
     }
-    // 초기화
     document.querySelector("input[type=file]").value = "";
     console.log(filesArr);
 }
@@ -92,6 +98,7 @@ function validation(obj){
 function deleteFile(num) {
     document.querySelector("#file" + num).remove();
     filesArr[num].is_delete = true;
+    document.getElementById("addImageCount").innerText = Number(document.getElementById("addImageCount").innerText) - 1;
 }
 
 /* 폼 전송 */

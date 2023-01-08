@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.team.cubespace.common.filter.AdminFilter" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/common/filter/AdminFilter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="116" width="431" x="3525" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.team.cubespace.common.filter.LoginFilter" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/common/filter/LoginFilter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="116" width="431" x="941" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.team.cubespace.common.interceptor.MinihomeInterceptor" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/common/interceptor/MinihomeInterceptor.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="156" width="502" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.team.cubespace.common.interceptor.FolderInterceptor" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/common/interceptor/FolderInterceptor.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="156" width="502" x="1725" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.team.cubespace.common.interceptor.VideoInterceptor" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/common/interceptor/VideoInterceptor.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="156" width="592" x="2580" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.team.cubespace.common.scheduling.BlockMemberDelScheduling" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/common/scheduling/BlockMemberDelScheduling.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="196" width="273" x="3212" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.team.cubespace.common.scheduling.FileScheduling" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/common/scheduling/FileScheduling.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="196" width="273" x="1412" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.team.cubespace.common.Pagination" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/common/Pagination.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="696" width="201" x="4549" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.team.cubespace.common.scheduling.InitTodayScheduling" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/common/scheduling/InitTodayScheduling.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="156" width="273" x="2267" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.team.cubespace.common.Util" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/common/Util.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="513" x="3996" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.team.cubespace.common.scheduling.FontMusicGoodsScheduling" 
+    project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/common/scheduling/FontMusicGoodsScheduling.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="196" width="273" x="4790" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.team.cubespace.common.ExceptionController" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/common/ExceptionController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="116" width="318" x="583" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

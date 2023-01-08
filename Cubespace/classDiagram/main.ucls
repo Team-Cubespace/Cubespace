@@ -4,7 +4,7 @@
   <class id="1" language="java" name="com.team.cubespace.main.controller.ShopController" project="Cubespace" 
     file="/Cubespace/src/main/java/com/team/cubespace/main/controller/ShopController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="196" width="440" x="3480" y="37"/>    
+    <position height="196" width="440" x="2463" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -14,7 +14,7 @@
   <class id="2" language="java" name="com.team.cubespace.main.controller.NotificationsController" project="Cubespace" 
     file="/Cubespace/src/main/java/com/team/cubespace/main/controller/NotificationsController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="256" width="325" x="2171" y="37"/>    
+    <position height="256" width="325" x="3585" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -24,7 +24,7 @@
   <class id="3" language="java" name="com.team.cubespace.main.controller.MainHomepageController" project="Cubespace" 
     file="/Cubespace/src/main/java/com/team/cubespace/main/controller/MainHomepageController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="136" width="247" x="4602" y="37"/>    
+    <position height="136" width="247" x="2176" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -34,136 +34,138 @@
   <class id="4" language="java" name="com.team.cubespace.main.controller.MemberSearchController" project="Cubespace" 
     file="/Cubespace/src/main/java/com/team/cubespace/main/controller/MemberSearchController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="176" width="377" x="3063" y="37"/>    
+    <position height="176" width="377" x="4850" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="5" language="java" name="com.team.cubespace.main.model.service.MemberSearchService" project="Cubespace" 
+  <class id="5" language="java" name="com.team.cubespace.main.model.dao.MemberSearchDAO" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/main/model/dao/MemberSearchDAO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="276" width="487" x="4304" y="913"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.team.cubespace.main.model.dao.MainHomepageDAO" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/main/model/dao/MainHomepageDAO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="156" width="334" x="1715" y="913"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.team.cubespace.main.model.dao.ShopDAO" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/main/model/dao/ShopDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="416" width="571" x="2974" y="913"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.team.cubespace.main.model.dao.NotificationsDAO" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/main/model/dao/NotificationsDAO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="216" width="310" x="3954" y="913"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="9" language="java" name="com.team.cubespace.main.model.service.MemberSearchService" project="Cubespace" 
     file="/Cubespace/src/main/java/com/team/cubespace/main/model/service/MemberSearchService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="156" width="487" x="2953" y="913"/>    
+    <position height="156" width="487" x="4831" y="913"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="6" language="java" name="com.team.cubespace.main.model.service.ShopServiceImpl" project="Cubespace" 
+  <class id="10" language="java" name="com.team.cubespace.main.model.service.ShopServiceImpl" project="Cubespace" 
     file="/Cubespace/src/main/java/com/team/cubespace/main/model/service/ShopServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="196" width="471" x="3960" y="37"/>    
+    <position height="196" width="471" x="2943" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="7" language="java" name="com.team.cubespace.main.model.service.NotificationsService" 
+  <interface id="11" language="java" name="com.team.cubespace.main.model.service.NotificationsService" 
     project="Cubespace" file="/Cubespace/src/main/java/com/team/cubespace/main/model/service/NotificationsService.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="236" width="329" x="2057" y="913"/>    
+    <position height="236" width="329" x="3585" y="913"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="8" language="java" name="com.team.cubespace.main.model.service.MainHomepageServiceImpl" project="Cubespace" 
+  <class id="12" language="java" name="com.team.cubespace.main.model.service.MainHomepageServiceImpl" 
+    project="Cubespace" 
     file="/Cubespace/src/main/java/com/team/cubespace/main/model/service/MainHomepageServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="136" width="334" x="4889" y="37"/>    
+    <position height="136" width="334" x="1802" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="com.team.cubespace.main.model.service.MemberSearchServiceImpl" project="Cubespace" 
+  <class id="13" language="java" name="com.team.cubespace.main.model.service.MemberSearchServiceImpl" 
+    project="Cubespace" 
     file="/Cubespace/src/main/java/com/team/cubespace/main/model/service/MemberSearchServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="176" width="487" x="2536" y="37"/>    
+    <position height="176" width="487" x="4323" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="com.team.cubespace.main.model.service.NotificationsServiceImpl" 
+  <class id="14" language="java" name="com.team.cubespace.main.model.service.NotificationsServiceImpl" 
     project="Cubespace" 
     file="/Cubespace/src/main/java/com/team/cubespace/main/model/service/NotificationsServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="256" width="329" x="1802" y="37"/>    
+    <position height="256" width="329" x="3954" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="11" language="java" name="com.team.cubespace.main.model.service.MainHomepageService" 
+  <interface id="15" language="java" name="com.team.cubespace.main.model.service.MainHomepageService" 
     project="Cubespace" file="/Cubespace/src/main/java/com/team/cubespace/main/model/service/MainHomepageService.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="116" width="334" x="4602" y="913"/>    
+    <position height="116" width="334" x="2089" y="913"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="12" language="java" name="com.team.cubespace.main.model.service.ShopService" project="Cubespace" 
+  <interface id="16" language="java" name="com.team.cubespace.main.model.service.ShopService" project="Cubespace" 
     file="/Cubespace/src/main/java/com/team/cubespace/main/model/service/ShopService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="176" width="471" x="3480" y="913"/>    
+    <position height="176" width="471" x="2463" y="913"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="13" language="java" name="com.team.cubespace.main.model.dao.MemberSearchDAO" project="Cubespace" 
-    file="/Cubespace/src/main/java/com/team/cubespace/main/model/dao/MemberSearchDAO.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="276" width="487" x="2426" y="913"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="14" language="java" name="com.team.cubespace.main.model.dao.MainHomepageDAO" project="Cubespace" 
-    file="/Cubespace/src/main/java/com/team/cubespace/main/model/dao/MainHomepageDAO.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="156" width="334" x="4976" y="913"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="15" language="java" name="com.team.cubespace.main.model.dao.ShopDAO" project="Cubespace" 
-    file="/Cubespace/src/main/java/com/team/cubespace/main/model/dao/ShopDAO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="416" width="571" x="3991" y="913"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="16" language="java" name="com.team.cubespace.main.model.dao.NotificationsDAO" project="Cubespace" 
-    file="/Cubespace/src/main/java/com/team/cubespace/main/model/dao/NotificationsDAO.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="216" width="310" x="1707" y="913"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
   <class id="17" language="java" name="com.team.cubespace.main.model.vo.ShopFont" project="Cubespace" 
     file="/Cubespace/src/main/java/com/team/cubespace/main/model/vo/ShopFont.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="476" width="239" x="912" y="37"/>    
+    <position height="476" width="239" x="41" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -173,7 +175,7 @@
   <class id="18" language="java" name="com.team.cubespace.main.model.vo.Notifications" project="Cubespace" 
     file="/Cubespace/src/main/java/com/team/cubespace/main/model/vo/Notifications.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="836" width="259" x="334" y="37"/>    
+    <position height="836" width="259" x="898" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -182,7 +184,7 @@
   </class>  
   <class id="19" language="java" name="com.team.cubespace.main.model.vo.ShopMusic" project="Cubespace" 
     file="/Cubespace/src/main/java/com/team/cubespace/main/model/vo/ShopMusic.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="536" width="253" x="41" y="37"/>    
+    <position height="536" width="253" x="1197" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -192,7 +194,7 @@
   <class id="20" language="java" name="com.team.cubespace.main.model.vo.MainHomepage" project="Cubespace" 
     file="/Cubespace/src/main/java/com/team/cubespace/main/model/vo/MainHomepage.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="716" width="259" x="1191" y="37"/>    
+    <position height="716" width="259" x="599" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -212,7 +214,7 @@
   <class id="22" language="java" name="com.team.cubespace.main.model.vo.ShopMiniroom" project="Cubespace" 
     file="/Cubespace/src/main/java/com/team/cubespace/main/model/vo/ShopMiniroom.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="536" width="239" x="633" y="37"/>    
+    <position height="536" width="239" x="320" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -221,92 +223,128 @@
   </class>  
   <association id="23">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="24" name="service"/>      
-      <multiplicity id="25" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="26">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="27" name="dao"/>      
-      <multiplicity id="28" minimum="0" maximum="1"/>    
+      <attribute id="24" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="25" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="29">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="30" name="dao"/>      
-      <multiplicity id="31" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="32">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="33" name="dao"/>      
-      <multiplicity id="34" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="35">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <realization id="36">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="12"/>  
-  </realization>  
-  <realization id="37">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="5"/>  
-  </realization>  
-  <association id="38">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="39" name="service"/>      
-      <multiplicity id="40" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="41">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="42" name="dao"/>      
-      <multiplicity id="43" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="44">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="45" name="service"/>      
-      <multiplicity id="46" minimum="0" maximum="1"/>    
+  <association id="26">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="27" name="daoMemberSear">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="28" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="47">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="48" name="daoMemberSear"/>      
-      <multiplicity id="49" minimum="0" maximum="1"/>    
+  <association id="29">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="30" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="31" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
+    <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="50">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="51" name="service"/>      
-      <multiplicity id="52" minimum="0" maximum="1"/>    
+  <realization id="32">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <realization id="33">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <association id="34">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="35" name="dao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="36" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="37">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="38" name="dao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="39" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="53">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="11"/>  
+  <association id="40">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="41" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="42" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="43">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="44" name="dao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="45" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="46">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="47" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="48" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="49">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="9"/>  
   </realization>  
+  <realization id="50">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="16"/>  
+  </realization>  
+  <association id="51">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="52" name="dao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="53" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

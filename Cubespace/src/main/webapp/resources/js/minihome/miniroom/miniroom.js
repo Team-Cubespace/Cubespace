@@ -82,7 +82,7 @@ const dropdownEvent = () => {
     // 소품 이미지 추가
     const propsImg = document.createElement("img");
     propsImg.classList.add("props-img");
-    propsImg.src = "../../../images/ribbit.png";
+    propsImg.src = "../../../miniroomGoods/20230105104623_04440.png";
 
     props.appendChild(propsImg);
     miniroomContainer.appendChild(props);
@@ -229,27 +229,4 @@ $("#pictureBtn").click(e => {
         a.download = 'image.png'
         a.click()
     })
-})
-
-let wallStyle = "#"
-
-/* 벽지 */
-$("input:radio[name=wall]").change(() => {
-    const wallColor = document.getElementById("wallColor");
-    const wallImage = document.getElementById("wallImage");
-    
-    if(wallColor.checked) {
-        wallImage.nextElementSibling.classList.add("no-checked");
-        wallColor.nextElementSibling.classList.remove("no-checked");
-        
-    }
-
-    if(wallImage.checked) {
-        wallColor.nextElementSibling.classList.add("no-checked");
-        wallImage.nextElementSibling.classList.remove("no-checked");
-    }
-})
-
-document.getElementById("abc").addEventListener("change", () => {
-    console.log(document.getElementById("abc").value);
 })

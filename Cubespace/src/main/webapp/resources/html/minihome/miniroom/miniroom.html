@@ -87,33 +87,71 @@
                     </div>
                 </div>
 
-                <div class="btn-container">
-                    <button id="pictureBtn">미니룸 사진 저장</button> <button id="saveBtn">현재 상태 저장</button>
+                <div class="save-btn-container">
+                    <button id="pictureBtn">미니룸 사진 저장</button> <button type="" id="saveBtn">현재 상태 저장</button>
                 </div>
 
                 <header>벽지</header>
 
-                <div class="select-wall">
-                    <input type="radio" name="wall" id="wallColor"> <div class="s">색상 선택<input type="color" id="abc"></div>
-                    <input type="radio" name="wall" id="wallImage"> <span>이미지 선택 패턴 채우기</span>
-                    <button>원래대로</button>
+                <div class="wall-container">
+                    <div class="wall-color-container">
+                        <input type="color" id="inputWallColor">
+                        <label for="inputWallColor" class="setting-btn" id="selectWallColor">색상변경</label>
+                        <div id="wallColorPriview"></div>
+                    </div>
+
+                    <div class="wall-image-container">
+                        <input type="file" id="inputWallImage">
+                        <label for="inputWallImage" class="setting-btn" id="selectWallImage" accept="image/*">이미지변경</label>
+                        <div class="pattern-container" id="wallPattern">
+                            <input type="radio" class="wall-radio" name="wall" value="1">&nbsp;채우기
+                            <input type="radio" class="wall-radio" name="wall" value="2">&nbsp;반복
+                        </div>
+                    </div>
+
+                    <div class="btn-container">
+                        <div class="setting-btn" id="rollbackWallBtn">원래대로</div>
+                        <div class="setting-btn" id="eraseWallBtn">지우기</div>
+                    </div>
                 </div>
 
                 <header>바닥</header>
 
+                <div class="floor-container">
+                    <div class="floor-color-container">
+                        <input type="color" id="inputFloorColor">
+                        <label for="inputFloorColor" class="setting-btn" id="selectFloorColor">색상변경</label>
+                        <div id="floorColorPriview"></div>
+                    </div>
 
-                <header class="miniroom-header">
+                    <div class="floor-image-container">
+                        <input type="file" id="inputFloorImage" accept="image/*">
+                        <label for="inputFloorImage" class="setting-btn" id="selectFloorImage">이미지변경</label>
+                        <div class="pattern-container" id="floorPattern">
+                            <input type="radio" class="floor-radio" name="floor" value="1">&nbsp;채우기
+                            <input type="radio" class="floor-radio" name="floor" value="2">&nbsp;반복
+                        </div>
+                    </div>
+
+                    <div class="btn-container">
+                        <div class="setting-btn" id="rollbackFloorBtn">원래대로</div>
+                        <div class="setting-btn" id="eraseFloorBtn">지우기</div>
+                    </div>
+                </div>
+
+                <header class="goods-header">
                     <span>미니미 & 소품</span>
+                    <span class="select-container">
+                        <span id="selectMinimee">미니미</span><span>|</span><span id="selectGoods">소품</span>
+                    </span>
                 </header>
 
-                <div id="testArea">
-                    <span>미니미</span> <span>소품</span>
-                    <div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                <div class="goods-container">
+                    <div class="goods-"></div>
+                    <div class="goods-info">
+                        <img src="../../../miniroomGoods/miniroom-bear.png" class="goods-img">
+                        <div title="곰도리" class="goods-name">곰도리</div>
+                        <div class="goods-btn"><span class="move-goods-btn">배치</span><span class="delete-goods-btn">삭제</span></div>
                     </div>
                 </div>
             </div>
@@ -125,5 +163,6 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> 
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script src="../../../js/minihome/miniroom/miniroom.js"></script>
+<script src="../../../js/minihome/miniroom/miniroom-fill.js"></script>
 <script src="../../../js/common/temp.js"></script>
 </html>

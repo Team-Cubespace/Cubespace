@@ -1,25 +1,166 @@
+/* 저장 버튼 */
 .miniroom-container{
     margin-bottom: 5px;
 }
 
-.btn-container{
+.save-btn-container{
     margin-bottom: 35px;
 }
 
-.select-wall{
+/* wall, floor container */
+.wall-container, .floor-container{
+    width: 100%;
+    margin-bottom: 35px;
+    position: relative;
     display: flex;
     align-items: center;
 }
 
-#abc{
-    border: none;
-    padding: 0;
-    background-color: white;
+.wall-container > div, .floor-container > div{
+    display: flex;
+    align-items: center;
 }
 
-.no-checked{
+/* color, image container */
+.wall-image-container, .floor-image-container{
+    margin-left: 35px;
+}
+
+.wall-color-container > div, .wall-image-container > div,
+.floor-color-container > div, .floor-image-container > div{
+    margin-left: 15px;
+}
+
+/* input color, file */
+#inputWallColor, #inputWallImage, #inputFloorColor, #inputFloorImage{
+    display: none;
+}
+
+/* 색상변경, 이미지변경, 원래대로, 지우기 */
+.setting-btn{
+    background-color: white;
+    padding: 3.5px;
+    border: 1px solid var(--ink);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.setting-btn:hover{
+    color: white;
+    background-color: var(--ink);
+    transition-duration: 0.2s;
+}
+
+/* color priview */
+#wallColorPriview, #floorColorPriview{
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgb(224, 224, 224);
+    border-radius: 10px;
+    display: inline-block;
+}
+
+/* pattern container */
+.pattern-container{
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.pattern-container > input:last-child{
+    margin-left: 10px;
+}
+
+/* btn container */
+.btn-container{
+    position: absolute;
+    right: 0;
+}
+
+.btn-container > div{
+    margin-left: 15px;
+}
+
+/* radio 비활성화 */
+.inactive{
     opacity: 0.5;
     pointer-events: none;
 }
 
+/* 미니미, 소품 헤더 */
+.goods-header{
+    position: relative;
+}
+
+.select-container{
+    font-size: 10px;
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+}
+
+.select-container > span:nth-child(2){
+    margin: 7px;
+}
+
+#selectMinimee, #selectGoods{
+    cursor: pointer;
+}
+
+#selectMinimee:hover, #selectGoods:hover{
+    color: darksalmon;
+}
+
+#selectMinimee{
+    color: darksalmon;
+    font-weight: bold;
+}
+
 /* 미니미 & 소품 */
+.goods-info{
+    width: 116px;
+    height: 156px;
+    border: 1px solid var(--ink);
+    padding: 3px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.goods-info > *{
+    margin: 3px 0;
+}
+
+.goods-img{
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+    border: 1px solid rgb(190, 190, 190);
+}
+
+.goods-name{
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.goods-btn{
+    display: flex;
+    justify-content: space-around;
+}
+
+.move-goods-btn, .delete-goods-btn{
+    background-color: var(--ink);
+    color: white;
+    padding: 3px;
+    border-radius: 3px;
+    margin: 0 3px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 11px;
+}

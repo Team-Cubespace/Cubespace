@@ -82,7 +82,7 @@ const dropdownEvent = () => {
     // 소품 이미지 추가
     const propsImg = document.createElement("img");
     propsImg.classList.add("props-img");
-    propsImg.src = "../../../miniroomGoods/20230105104623_04440.png";
+    propsImg.src = "../../../miniroomGoods/miniroom-bear.png";
 
     props.appendChild(propsImg);
     miniroomContainer.appendChild(props);

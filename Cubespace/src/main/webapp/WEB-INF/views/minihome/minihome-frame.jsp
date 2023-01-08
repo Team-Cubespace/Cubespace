@@ -84,7 +84,7 @@
                         <span>매력지수 액티브</span>
                         <div class="active-range">
                             <div class="empty"></div>
-                            <div class="fill frame-color" style="width: ${(minihome.total * 1.0) / (minihome.maxTotal * 1.0) * 100}%"></div>
+                            <div class="fill frame-color" style="width: ${(minihome.total * 1.0) / (minihome.maxTotal * 1.0) * 100 - 1.5}%"></div>
                         </div>
                     </div>
                 </div>
@@ -94,10 +94,12 @@
                         <div id="minihomeTitleContainer">
                             <p class="minihome-title" id="minihomeTitle">${minihome.homepageName}</p>
                         </div>
-                        <button id="updateMinihomeTitleButton" type="button" class="fa-solid fa-gear header-hover"></button>
-                        <button type="button" id="confirmUpdateButton">수정</button>
-                        <button type="button" id="cancelUpdateButton">
-                        취소</button>
+                        <c:if test="${loginMember.memberNo == minihome.memberNo}">
+                            <button id="updateMinihomeTitleButton" type="button" class="fa-solid fa-gear header-hover"></button>
+                            <button type="button" id="confirmUpdateButton">수정</button>
+                            <button type="button" id="cancelUpdateButton">
+                            취소</button>
+                        </c:if>
                     </div>
                     <c:if test="${not empty minihome.musicPath}">
                         <div class="audio-container">
@@ -146,7 +148,7 @@
                 </iframe>
                 
                 <ul class="minihome-menu frame-menu-color">
-                    <li><a href="">홈</a></li>
+                    <li><a href="/minihome/home/${minihome.memberNo}" target="minihomeMenu">홈</a></li>
                     <c:if test="${minihome.categoryOrder.diary != -1}">
                         <li style="order:${minihome.categoryOrder.diary}"><a href="/diary/1" target="minihomeMenu">다이어리</a></li>
                     </c:if>

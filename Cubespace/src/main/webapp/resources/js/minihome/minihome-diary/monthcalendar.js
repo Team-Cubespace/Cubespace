@@ -202,7 +202,7 @@ function popup(arg){
     document.getElementById("endDate").value = arg.startStr;
     //7. 종료 시간
     document.getElementById("endTime").value = "00:00";
-    //8. 종일 여부 (이거 '아니오'를 택하도록 하고 싶은데 못하겠넴)
+    //8. 종일 여부
     $("#allDay2").prop("checked", true); 
     allDayFalse();
   

@@ -28,14 +28,14 @@ public class MemberController {
 	 * @param reportedMemberNo
 	 * @return
 	 */
-	@PostMapping("/selectreportedMember")
+	@PostMapping(value="/selectreportedMember", produces="application/text; charset=utf8")
 	@ResponseBody
 	public String selectMember(
 			int memberNo
 			) {
 		System.out.println(memberNo);
 		String result = service.selectMember(memberNo);
-		
+		System.out.println(result);
 		return result; 
 	}
 	
@@ -52,6 +52,7 @@ public class MemberController {
 			) {
 		reportMember.setComplainerNo(loginMember.getMemberNo());
 		
+		System.out.println(reportMember);
 		int result = service.reportMember(reportMember);
 		
 		return result;

@@ -110,17 +110,22 @@
         </div>
         <div class="input-row">
             <label class="add-image" for="addFileInput">이미지 등록
-                <img src="/resources/images/add-image.png" alt="">
+                <div class="add-image-info">
+                    <img src="/resources/images/add-image.png" alt="">
+                    <span><span id="addImageCount">${fn:length(album.albumImageList)}</span> / 10</span>
+                </div>
             </label>
             <input type="file" onchange="addFile(this)" multiple id="addFileInput">
-            <ul id="addFileList">
-                <c:forEach var="albumImage" items="${album.albumImageList}">
-                    <li class="file-item">
-                        <span class="file-name">${albumImage.imageOriginalName}</span>
-                        <button class="fa-solid fa-xmark" onclick="deleteImage(${albumImage.imageOrder}, this)"></button>
-                    </li>
-                </c:forEach>
-            </ul>
+            <div class="add-image-list">
+                <ul id="addFileList" class="swiper-wrapper">
+                    <c:forEach var="albumImage" items="${album.albumImageList}">
+                        <li class="file-item swiper-slide">
+                            <button class="fa-solid fa-xmark" onclick="deleteImage(${albumImage.imageOrder}, this)"></button>
+                            <img src="${albumImage.imagePath}${albumImage.imageRename}" alt="">
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
         </div>
 
         <div class="form-button-area">

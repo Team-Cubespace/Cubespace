@@ -101,7 +101,7 @@
                                     <a href="#">알림</a> : <a id="mainAlarmCount" href="#">0</a>
                                 </span>
                                 <span>Today : ${loginMember.today}</span>
-                                <span>일촌 : <fmt:formatNumber value="${loginMember.friendCount}" pattern="#,###"/>명</span>
+                                <span>깐부 : <fmt:formatNumber value="${loginMember.friendCount}" pattern="#,###"/>명</span>
                             </div>
                         </div>
 
@@ -126,14 +126,14 @@
 
                     <ul class="place-list">
 
-                        <li class="place-item">
+                        <%-- <li class="place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
                                 <img src="../../resources/images/toy.jpg">
                                 <span class="place-title">형이 인형 뽑는 방법 알려준다</span>
                                 <span>김효동2</span>
                                 <span>조회수 5,000</span>
                             </a>
-                        </li>
+                        </li> --%>
 
                         <%-- <li class="place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">

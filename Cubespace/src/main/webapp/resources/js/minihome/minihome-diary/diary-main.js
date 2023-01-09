@@ -212,7 +212,7 @@ function selectDiary(diaryDate){
         data : {"diaryDate":diaryDate,"folderNo":folderNo},
         dataType : "JSON",
         success :  (diaryList)  => {
-
+            console.log(diaryList);
             /* diaryNo, diaryTitle, diaryContent, diaryCreateDate, diaryOpenFlag 가지고 옴. */
             
             /* 각각의 diary-section의 위치를 잡아주는 기준(부모) */

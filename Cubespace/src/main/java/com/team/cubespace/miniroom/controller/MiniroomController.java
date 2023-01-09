@@ -82,17 +82,27 @@ public class MiniroomController {
 	
 	// 현재 상태 저장
 	@PostMapping("/save")
-	public String save(@SessionAttribute("minihome") Minihome minihome, 
-					   @RequestParam(value="inputWallColor", required=false) String wallColor,
-					   @RequestParam(value="inputWallImage", required=false) MultipartFile wallImage,
-					   @RequestParam(value="inputFloorColor", required=false) String floorColor,
-					   @RequestParam(value="inputFloorImage", required=false) MultipartFile floorImage,
-					   @RequestParam(value="wall", required=false) int wallPattern,
-					   @RequestParam(value="floor", required=false) int floorPattern,
-					   @RequestParam(value="propsArray", required=false) String[] props,
-					   @RequestParam(value="wallFlag", required=false) String wallFlag,
-					   @RequestParam(value="floorFlag", required=false) String floorFlag,
+	public String save(@SessionAttribute("minihome") Minihome minihome, // 미니홈피 주인 번호
+					   @RequestParam(value="inputWallColor", required=false) String wallColor, 			 // 벽지 색상
+					   @RequestParam(value="inputWallImage", required=false) MultipartFile wallImage,	 // 벽지 이미지
+					   @RequestParam(value="inputFloorColor", required=false) String floorColor,		 // 바닥 색상
+					   @RequestParam(value="inputFloorImage", required=false) MultipartFile floorImage,  // 바닥 이미지
+					   @RequestParam(value="wall", required=false, defaultValue="0") int wallPattern,	 // 벽지 패턴
+					   @RequestParam(value="floor", required=false, defaultValue="0") int floorPattern,	 // 바닥 패턴
+					   @RequestParam(value="propsArray", required=false) String[] props,				 // 소품 배열
+					   @RequestParam(value="wallFlag", required=false) String wallFlag,					 // 벽지가 변경되었는지
+					   @RequestParam(value="floorFlag", required=false) String floorFlag,				 // 바닥이 변경되었는지
 				   	   HttpServletRequest req) throws IllegalStateException, IOException, Exception {
+		
+		System.out.println(wallColor);
+		System.out.println(wallImage);
+		System.out.println(floorColor);
+		System.out.println(floorImage);
+		System.out.println(wallPattern);
+		System.out.println(floorPattern);
+		System.out.println(props);
+		System.out.println(floorFlag);
+		System.out.println(wallFlag);
 		
 		// 회원 번호, 소품 번호, 카테고리 번호, 자리번호 insert
 		int result1 = service.props(minihome.getMemberNo(), props);

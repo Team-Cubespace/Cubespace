@@ -485,14 +485,14 @@ const putGoods = (goodsPath, cathNo, goodsNo) => {
 document.getElementById("saveBtn").addEventListener("click", () => {
     if(confirm("저장하시겠습니까?")) {
         alert("저장되었습니다.");
-        
+
         const propsList = document.getElementsByClassName("props");
         let inputProps;
     
         for(let props of propsList) {
             inputProps = document.createElement("input");
             inputProps.type = "hidden";
-            inputProps.name = propsArray;
+            inputProps.name = "propsArray";
             inputProps.value = props.id;
             miniroomContainer.append(inputProps);
         }
@@ -500,7 +500,7 @@ document.getElementById("saveBtn").addEventListener("click", () => {
         var miniroomFrm = $('#miniroomFrm')[0];
         var formData = new FormData(miniroomFrm);
     
-        miniroomFrm.sibmit();
+        miniroomFrm.submit();
     }
 })
 

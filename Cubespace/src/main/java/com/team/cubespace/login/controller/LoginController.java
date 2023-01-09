@@ -53,7 +53,7 @@ public class LoginController {
 	 * 
 	 * @return
 	 */
-	@GetMapping("/login")
+	@GetMapping("/member/login")
 	public String loginPage() {
 		return "member/login/login";
 	}

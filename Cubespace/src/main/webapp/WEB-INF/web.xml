@@ -77,22 +77,22 @@
 	
 
 	
- 	<!-- <filter-mapping>
-		<filter-name>loginFilter</filter-name>
-	 	<url-pattern>/member/logout</url-pattern>
+ 	 <filter-mapping>
+ 		<filter-name>loginFilter</filter-name>
+  	 	<url-pattern>/member/logout</url-pattern>
 	 	<url-pattern>/member/findId</url-pattern>
 	 	<url-pattern>/member/findPw</url-pattern>
 	 	<url-pattern>/member/updateInfo</url-pattern>
 	 	<url-pattern>/member/changePw</url-pattern>
-	 	<url-pattern>/member/secession</url-pattern>
-		<url-pattern>/minihome/*</url-pattern>
-		<url-pattern>/manage/*</url-pattern>
+	 	<url-pattern>/member/secession</url-pattern> 
+ 		<url-pattern>/minihome/*</url-pattern>
+		<url-pattern>/manage/*</url-pattern>     
 		
-		<url-pattern>/albumList/*</url-pattern>
+ 		<url-pattern>/albumList/*</url-pattern>
 		<url-pattern>/albumWrite</url-pattern>
 		<url-pattern>/albumDetail/*</url-pattern>
 		<url-pattern>/albumUpdate/*</url-pattern>
-		<url-pattern>/boardScrap/*</url-pattern>emotion
+		<url-pattern>/boardScrap/*</url-pattern> 
 		
 		<url-pattern>/diary/*</url-pattern>
 		<url-pattern>/monthCalendar</url-pattern>
@@ -114,27 +114,23 @@
 		<url-pattern>/secretGuestBook</url-pattern>
 		<url-pattern>/deleteGuestBook</url-pattern>
 		<url-pattern>/modifyGuestBook</url-pattern>
-		<url-pattern>/mainTodaySelect</url-pattern>
-		<url-pattern>/mainShortsSelect</url-pattern>
-		
+
+
 		<url-pattern>/memberAllSearch</url-pattern> 
-		<url-pattern>/memberAddFriend</url-pattern> 
+		<url-pattern>/memberAddFriend</url-pattern>  
 		<url-pattern>/memberAddFriendList</url-pattern> 
 		<url-pattern>/memberAddCancel</url-pattern> 
-		
-		<url-pattern>/memberNotifications</url-pattern> 
+  		<url-pattern>/memberNotifications</url-pattern> 
 		<url-pattern>/memberAcceptBtn</url-pattern> 
 		<url-pattern>/memberCancelBtn</url-pattern> 
 		<url-pattern>/activityNotification</url-pattern> 
 		<url-pattern>/messageDelete</url-pattern> 
-		<url-pattern>/messageDeleteAll</url-pattern> 
-		<url-pattern>/alarmRead</url-pattern> 
-		<url-pattern>/notificationsCount</url-pattern> 
-		<url-pattern>/cubespace/*</url-pattern> 
+		<url-pattern>/messageDeleteAll</url-pattern>  
+ 		<url-pattern>/alarmRead</url-pattern> 
+		<url-pattern>/cubespace/*</url-pattern>  
 		<url-pattern>/shopNewGoods</url-pattern> 
 		<url-pattern>/shopPopularGoods</url-pattern> 
-		<url-pattern>/miniMusicPlyer</url-pattern> 
-		
+		<url-pattern>/miniMusicPlyer</url-pattern>  
 		<url-pattern>/selectreportedMember</url-pattern> 
 		<url-pattern>/reportingMember</url-pattern> 
 		<url-pattern>/emotion</url-pattern> 
@@ -145,17 +141,17 @@
 		<url-pattern>/updateMinihomeTitle</url-pattern> 
 		<url-pattern>/selectMusic</url-pattern> 
 		
-		<url-pattern>/videoList/*</url-pattern> 
+ 		<url-pattern>/videoList/*</url-pattern> 
 		<url-pattern>/videoDetail/*</url-pattern> 
 		<url-pattern>/videoWrite</url-pattern> 
 		<url-pattern>/videoUpdate/*</url-pattern> 
-		<url-pattern>/videoDelete/*</url-pattern> 
+		<url-pattern>/videoDelete/*</url-pattern>  
 	</filter-mapping>  
 		
  	<filter-mapping>
 		<filter-name>adminFilter</filter-name>
 		<url-pattern>/admin/*</url-pattern>
-	</filter-mapping>  --> 
+	</filter-mapping>  
 	
 
 </web-app>

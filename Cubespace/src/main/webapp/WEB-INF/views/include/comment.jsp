@@ -20,7 +20,7 @@
             </c:choose>
         </div>
         <div class="comment-content">
-            <textarea name="" id="addComment" placeholder="댓글 추가.." rows="1" onkeyup="resizeTextarea(this)"></textarea>
+            <textarea name="" id="addComment" placeholder="댓글 추가.." rows="1" onkeyup="resizeTextarea(this)" maxLength="200"></textarea>
             <div class="comment-write-button-area">
                 <button id="addCommentCencel" class="cancel-button" type="button">취소</button>
                 <button id="addCommentInsert" class="insert-button" type="button">등록</button>
@@ -64,7 +64,7 @@
                                     </c:otherwise>
                                 </c:choose>
                                 <!-- 로그인 회원번호와 댓글의 회원번호가 일치할때만 생성 -->
-                                <c:if test="${loginMember.memberNo == comment.memberNo}">
+                                <c:if test="${loginMember.memberNo == comment.memberNo || minihome.memberNo == loginMember.memberNo}">
                                     <button class="comment-drop-down-button fa-solid fa-ellipsis-vertical">
                                         <ul class="comment-drop-down-menu">
                                             <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>
@@ -104,7 +104,7 @@
                             <div class="comment-nickname-area">
                                 <span class="member-nickname">${comment.memberNickname}</span>
                                 <!-- 로그인 회원번호와 댓글의 회원번호가 일치할때만 생성 -->
-                                <c:if test="${loginMember.memberNo == comment.memberNo}">
+                                <c:if test="${loginMember.memberNo == comment.memberNo || minihome.memberNo == loginMember.memberNo}">
                                     <button class="comment-drop-down-button fa-solid fa-ellipsis-vertical">
                                         <ul class="comment-drop-down-menu">
                                             <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>

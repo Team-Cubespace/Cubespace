@@ -61,7 +61,7 @@ const createCommentList = (commentList) => {
         }
 
         commentNicknameArea.append(memberNickname);
-        if(loginMemberNo == comment.memberNo) { // 자신이 작성한 댓글일 때만 생성
+        if(loginMemberNo == comment.memberNo || loginMemberNo == minihomeHostNo) { // 자신이 작성한 댓글일 때만 생성
             const commentDropDownButton = document.createElement("button");
             commentDropDownButton.classList.add("comment-drop-down-button", "fa-solid", "fa-ellipsis-vertical");
             commentDropDownButton.addEventListener("click", e=>{
@@ -260,7 +260,7 @@ const showUpdateComment= (commentNo, btn) =>{
 
     const textarea = document.createElement("textarea");
     textarea.classList.add("update-textarea");
-
+    textarea.setAttribute("maxLength", 300);
     // XSS 방지 처리 해제
     beforeContent =  beforeContent.replaceAll("&amp;", "&");
     beforeContent =  beforeContent.replaceAll("&lt;", "<");
@@ -268,7 +268,7 @@ const showUpdateComment= (commentNo, btn) =>{
     beforeContent =  beforeContent.replaceAll("&quot;", "\"");
     
     // 개행문자 처리 해제
-    beforeContent =  beforeContent.replaceAll("<br>", "\n").replaceAll("&nbsp;", " ");
+    beforeContent =  beforeContent.replaceAll("<br>", "\n");
 
     textarea.value = beforeContent;
     textarea.setAttribute("rows", 1);
@@ -390,6 +390,7 @@ function addCommentArea(parentCommentNo, target) {
     const commentContent = document.createElement("div");
     commentContent.classList.add("comment-content");
     const textarea = document.createElement("textarea");
+    textarea.setAttribute("maxLength", 300);
     // name값 세팅
     // textarea.setAttribute("name", "");
     textarea.setAttribute("placeholder", "댓글 추가..");

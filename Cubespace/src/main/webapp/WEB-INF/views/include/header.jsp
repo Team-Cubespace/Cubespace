@@ -56,7 +56,7 @@
                         <ul class="header-drop-down" id="headerDropDown">
                             <li><a href="/minihome/${loginMember.memberNo}" onclick="return openMinihome(this.href)">내 미니홈피</a></li>
                             <li><a href="/member/updateInfo">내 정보 수정</a></li>
-                            <li><a href="/member/logout">로그아웃</a></li>
+                            <li><a href="/member/logout" onclick="return closePopup()">로그아웃</a></li>
                         </ul>
                         <i class="fa-solid fa-angle-down"></i>
                     </button>

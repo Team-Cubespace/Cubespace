@@ -1,5 +1,7 @@
 /* 댓글 리스트 생성 */
 const createCommentList = (commentList) => {
+    document.getElementById("commentCount").innerText = commentList.length;
+
     const commentListArea = document.getElementById("commentListArea");
     commentListArea.innerHTML = "";
     console.log(commentList);

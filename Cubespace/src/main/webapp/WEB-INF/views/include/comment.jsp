@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/resources/css/minihome/include/minihome-common.css">
 <div class="comment-section">
     <div class="comment-header">
-        <span class="comment-count">댓글 ${fn:length(board.commentList)}개</span>
+        <span class="comment-count">댓글 <span id="commentCount">${fn:length(board.commentList)}</span>개</span>
     </div>
     <div class="comment-write-row">
         <div class="comment-profile-image-area">

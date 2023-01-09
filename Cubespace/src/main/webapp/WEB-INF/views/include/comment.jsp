@@ -67,7 +67,9 @@
                                 <c:if test="${loginMember.memberNo == comment.memberNo || minihome.memberNo == loginMember.memberNo}">
                                     <button class="comment-drop-down-button fa-solid fa-ellipsis-vertical">
                                         <ul class="comment-drop-down-menu">
-                                            <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>
+                                            <c:if test="${loginMember.memberNo == comment.memberNo}">
+                                                <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>
+                                            </c:if>
                                             <li onclick="deleteComment(${comment.commentNo})">삭제</li>
                                         </ul>
                                     </button>
@@ -105,7 +107,9 @@
                                 <c:if test="${loginMember.memberNo == comment.memberNo || minihome.memberNo == loginMember.memberNo}">
                                     <button class="comment-drop-down-button fa-solid fa-ellipsis-vertical">
                                         <ul class="comment-drop-down-menu">
-                                            <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>
+                                            <c:if test="${loginMember.memberNo == comment.memberNo}">
+                                                <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>
+                                            </c:if>
                                             <li onclick="deleteComment(${comment.commentNo})">삭제</li>
                                         </ul>
                                     </button>

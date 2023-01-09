@@ -77,16 +77,20 @@ const createCommentList = (commentList) => {
             // 드랍다운 메뉴 영역
             const commentDropDownMenu = document.createElement("ul");
             commentDropDownMenu.classList.add("comment-drop-down-menu");
-            // 수정 버튼
-            const updateComment = document.createElement("li");
-            updateComment.innerText = "수정";
-            updateComment.setAttribute("onclick", `showUpdateComment(${comment.commentNo}, this)`);
             // 삭제 버튼
             const deleteComment = document.createElement("li");
             deleteComment.innerText = "삭제";
             deleteComment.setAttribute("onclick", `deleteComment(${comment.commentNo})`);
+
+            // 수정 버튼
+            if(loginMemberNo == comment.memberNo) {
+                const updateComment = document.createElement("li");
+                updateComment.innerText = "수정";
+                updateComment.setAttribute("onclick", `showUpdateComment(${comment.commentNo}, this)`);
+                commentDropDownMenu.append(updateComment);
+            }
             // 조립
-            commentDropDownMenu.append(updateComment, deleteComment);
+            commentDropDownMenu.append(deleteComment);
             commentDropDownButton.append(commentDropDownMenu);
             commentNicknameArea.append(commentDropDownButton);
         }

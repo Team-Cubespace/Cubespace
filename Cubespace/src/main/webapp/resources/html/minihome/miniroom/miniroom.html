@@ -57,65 +57,122 @@
 
         <section class="minihome-rayout">
             <div id="homeArea">
-                <header class="miniroom-header">
-                    <span><i class="fa-solid fa-wand-magic-sparkles"></i> 미니룸 꾸미기</span>
-                </header>
+                <form method="POST" enctype="multipart/form-data" id="miniroomFrm">
+                    <header class="miniroom-header">
+                        <span><i class="fa-solid fa-wand-magic-sparkles"></i> 미니룸 꾸미기</span>
+                    </header>
 
-                <div class="miniroom-container">
-                    <div class="miniroom">
-                        <div class="left"></div>
-                        <div class="right"></div>
-                        <div class="bottom"></div>
+                    <div class="miniroom-container">
+                        <div class="miniroom">
+                            <div class="left"></div>
+                            <div class="right"></div>
+                            <div class="bottom"></div>
+                        </div>
+                    
+                        <div class="tile-container" id="sortable1">
+                            <div class="empty" id="tile1"><div id="tileLocation1"></div></div>
+                            <div class="empty" id="tile2"><div id="tileLocation2"></div></div>
+                            <div class="empty" id="tile3"><div id="tileLocation3"></div></div>
+                            <div class="empty" id="tile4"><div id="tileLocation4"></div></div>
+                            <div class="empty" id="tile5"><div id="tileLocation5"></div></div>
+                            <div class="empty" id="tile6"><div id="tileLocation6"></div></div>
+                            <div class="empty" id="tile7"><div id="tileLocation7"></div></div>
+                            <div class="empty" id="tile8"><div id="tileLocation8"></div></div>
+                            <div class="empty" id="tile9"><div id="tileLocation9"></div></div>
+                            <div class="empty" id="tile10"><div id="tileLocation10"></div></div>
+                        </div>
+
+                        <div class="dropdown">
+                            <span id="moveBtn">이동하기</span>
+                            <span id="removeBtn">삭제하기</span>
+                        </div>
                     </div>
-                  
-                    <div class="tile-container" id="sortable1">
-                        <div class="empty" id="tile1"><div id="tileLocation1"></div></div>
-                        <div class="empty" id="tile2"><div id="tileLocation2"></div></div>
-                        <div class="empty" id="tile3"><div id="tileLocation3"></div></div>
-                        <div class="empty" id="tile4"><div id="tileLocation4"></div></div>
-                        <div class="empty" id="tile5"><div id="tileLocation5"></div></div>
-                        <div class="empty" id="tile6"><div id="tileLocation6"></div></div>
-                        <div class="empty" id="tile7"><div id="tileLocation7"></div></div>
-                        <div class="empty" id="tile8"><div id="tileLocation8"></div></div>
-                        <div class="empty" id="tile9"><div id="tileLocation9"></div></div>
-                        <div class="empty" id="tile10"><div id="tileLocation10"></div></div>
+
+                    <div class="save-btn-container">
+                        <button type="button" id="pictureBtn">미니룸 사진 저장</button>
+                        <button id="saveBtn">현재 상태 저장</button>
                     </div>
 
-                    <div class="dropdown">
-                        <span id="moveBtn">이동하기</span>
-                        <span id="removeBtn">삭제하기</span>
+                    <header>벽지</header>
+
+                    <div class="wall-container">
+                        <div class="wall-color-container">
+                            <input type="color" id="inputWallColor">
+                            <label for="inputWallColor" class="setting-btn" id="selectWallColor">색상변경</label>
+                            <div id="wallColorPriview"></div>
+                        </div>
+
+                        <div class="wall-image-container">
+                            <input type="file" id="inputWallImage">
+                            <label for="inputWallImage" class="setting-btn" id="selectWallImage" accept="image/*">이미지변경</label>
+                            <div class="pattern-container" id="wallPattern">
+                                <input type="radio" class="wall-radio" name="wall" value="1">&nbsp;채우기
+                                <input type="radio" class="wall-radio" name="wall" value="2">&nbsp;반복
+                            </div>
+                        </div>
+
+                        <div class="btn-container">
+                            <div class="setting-btn" id="rollbackWallBtn">원래대로</div>
+                            <div class="setting-btn" id="eraseWallBtn">지우기</div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="btn-container">
-                    <button id="pictureBtn">미니룸 사진 저장</button> <button id="saveBtn">현재 상태 저장</button>
-                </div>
+                    <header>바닥</header>
 
-                <header>벽지</header>
+                    <div class="floor-container">
+                        <div class="floor-color-container">
+                            <input type="color" id="inputFloorColor">
+                            <label for="inputFloorColor" class="setting-btn" id="selectFloorColor">색상변경</label>
+                            <div id="floorColorPriview"></div>
+                        </div>
 
-                <div class="select-wall">
-                    <input type="radio" name="wall" id="wallColor"> <div class="s">색상 선택<input type="color" id="abc"></div>
-                    <input type="radio" name="wall" id="wallImage"> <span>이미지 선택 패턴 채우기</span>
-                    <button>원래대로</button>
-                </div>
+                        <div class="floor-image-container">
+                            <input type="file" id="inputFloorImage" accept="image/*">
+                            <label for="inputFloorImage" class="setting-btn" id="selectFloorImage">이미지변경</label>
+                            <div class="pattern-container" id="floorPattern">
+                                <input type="radio" class="floor-radio" name="floor" value="1">&nbsp;채우기
+                                <input type="radio" class="floor-radio" name="floor" value="2">&nbsp;반복
+                            </div>
+                        </div>
 
-                <header>바닥</header>
-
-
-                <header class="miniroom-header">
-                    <span>미니미 & 소품</span>
-                </header>
-
-                <div id="testArea">
-                    <span>미니미</span> <span>소품</span>
-                    <div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                        <div class="btn-container">
+                            <div class="setting-btn" id="rollbackFloorBtn">원래대로</div>
+                            <div class="setting-btn" id="eraseFloorBtn">지우기</div>
+                        </div>
                     </div>
-                </div>
+
+                    <header class="goods-header">
+                        <span>미니미 & 소품</span>
+                        <span class="select-container">
+                            <span id="selectMinimee">미니미</span><span>|</span><span id="selectGoods">소품</span>
+                        </span>
+                    </header>
+
+                    <div class="goods-container">
+                        <!-- <div class="goods-list">
+                            <div class="goods-info goods-info-right">
+                                <img src="../../../miniroomGoods/miniroom-bear.png" class="goods-img">
+                                <div title="곰도리" class="goods-name">곰도리</div>
+                                <div class="goods-btn">
+                                    <button class="move-goods-btn">배치</button>
+                                    <button class="delete-goods-btn">삭제</button>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="no-goods">보유한 소품이 없습니다&nbsp;<i class="fa-solid fa-face-sad-tear"></i></div>
+                    </div>
+
+                    <!-- <div class="page-container">
+                        <a href="#" class="page"><i class="fa-solid fa-angle-left"></i></a>
+                        <a href="#" class="page current">1</a>
+                        <a href="#" class="page">2</a>
+                        <a href="#" class="page"><i class="fa-solid fa-angle-right"></i></a>
+                    </div> -->
+
+                    <input type="hidden" name="wallFlag" value="N">
+                    <input type="hidden" name="floorFlag" value="N">
+                </form>
             </div>
         </section>
     </div>
@@ -125,5 +182,6 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> 
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script src="../../../js/minihome/miniroom/miniroom.js"></script>
+<script src="../../../js/minihome/miniroom/miniroom-fill.js"></script>
 <script src="../../../js/common/temp.js"></script>
 </html>

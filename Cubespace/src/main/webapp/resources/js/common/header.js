@@ -1,3 +1,5 @@
+let minihomePopup;
+
 // 드랍다운 버튼 이벤트 달기
 (()=>{
     // header 드랍다운 버튼 가져오기
@@ -13,10 +15,19 @@
             setTimeout(()=>{
                 document.getElementById("headerDropDown").style.display = "none";
             }, 100);
-            
         });
     }
 })();
+
+const closePopup = () => {
+    if(minihomePopup != null) {
+        minihomePopup.close(); 
+    } else {
+        minihomePopup = window.open("https://www.naver.com", "minihome", "resizable=no, status=no, menubar=no, width=1203, height=718, top=50, left=300");
+        minihomePopup.close();
+    }
+    return true;
+}
 
 /* 미니홈페이지 오픈 */
 const openMinihome = (url) => {
@@ -34,7 +45,7 @@ const openMinihome = (url) => {
     let title = "minihome";
 
     let status = "resizable=no, status=no, menubar=no, width=1203, height=718, top=50, left=300";
-    window.open(url, title, status, false);
+    minihomePopup = window.open(url, title, status, false);
 
     return false;
 }
@@ -46,7 +57,7 @@ if(logout != null){
 
     logout.addEventListener("click", e => {
     
-        //카카오로그아웃  
+        //카카오로그아웃
         (()=>{
             
             if (Kakao.Auth.getAccessToken()) {

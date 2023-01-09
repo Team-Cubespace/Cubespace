@@ -391,7 +391,6 @@ const folderMinus = e => {
 
 // 파일 순서 재정렬
 const orderSubCategory = () => {
-    alert("241243");
     const subCategoryList = document.getElementsByClassName("subCategory");
     let i = 1;
     for(let subCategory of subCategoryList){

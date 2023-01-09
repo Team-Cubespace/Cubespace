@@ -155,7 +155,7 @@ public class ManageDAO {
 	 */
 	public int updateFolderOrder(Map<String, Object> paramMap) {
 		
-		return sqlSession.delete("manageMapper.updateFolderOrder", paramMap);
+		return sqlSession.update("manageMapper.updateFolderOrder", paramMap);
 	}
 
 

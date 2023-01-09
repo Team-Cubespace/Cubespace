@@ -202,10 +202,22 @@ public class ManageController {
 	@GetMapping("/menu/deleteFolder")
 	@ResponseBody
 	public int deleteFolder(@SessionAttribute("folderList") List<Folder> folderList,
-			@RequestParam Map<String, Object> paramMap) throws Exception {
+			@RequestParam Map<String, Object> paramMap,
+			Model model) throws Exception {
 		
 		// paramMap : boardTypeNo, folderOrder, folderNo, subCategoryLength, memberNo
-		return service.deleteFolder(paramMap);
+		int result =  service.deleteFolder(paramMap);
+		if(result > 0) {
+			List<Folder> originalFolderList = (List<Folder>) model.getAttribute("folderList");
+			for(int i = 0; i < originalFolderList.size(); i++) {
+				if(originalFolderList.get(i).getFolderNo() == Integer.parseInt((String)paramMap.get("folderNo"))) {
+					originalFolderList.remove(i);
+					break;
+				}
+			}
+		}
+		
+		return result;
 	}
 	
 	/** 해당 파일의 폴더목록 조회

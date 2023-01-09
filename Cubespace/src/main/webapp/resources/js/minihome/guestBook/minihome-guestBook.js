@@ -98,8 +98,6 @@ const listGuestBook=()=>{
                                 /* 글 버튼 관련 생성 */
                                 if(listGuestbook.receiverNo==loginMemberNo){ // 미니홈주인일때
                                     
-
-                                    
                                     if(listGuestbook.gbSecret =='N'){ // 방명록 공개
                                         btn_secret.innerText="비밀글변경";
                                         btn_secret.setAttribute("onclick","secretGuestBook("+listGuestbook.gbNo+", this)")
@@ -336,7 +334,7 @@ const modifyGuestBook =(gbNo,gbSecret,btn)=>{
         }else{ // 취소시 
         }
 
-    }else{
+    }else{ // 수정중이 아닐때
         
         /* 수정 제출버튼 생성 */
         btnSecondary.setAttribute("onclick","updateGuestBook("+gbNo+")")
@@ -357,7 +355,7 @@ const modifyGuestBook =(gbNo,gbSecret,btn)=>{
         /* 글 수정시 바로바로 변경됨 */
         guestInput.onkeyup = () => {prevText.innerText=guestInput.value;}
 
-        if(gbSecret){
+        if(gbSecret=='Y'){
             checkbox.checked=true
         }else{
             checkbox.checked=false

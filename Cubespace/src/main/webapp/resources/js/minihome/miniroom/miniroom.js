@@ -50,6 +50,7 @@ const moveLocation = (tile, props) => {
 /* dropdown */
 const dropdown = document.querySelector(".dropdown");
 let toggleFlag = true;
+let clickFlag = true;
 
 const dropdownEvent = (x, y) => {
     if(toggleFlag){
@@ -110,13 +111,15 @@ const hideDropdown = () => {
 /* 소품 click -> dropdown */
 const clickProps = props => {
     props.addEventListener("click", e => {
-        movedProps = props;
-        movedPropsX = movedProps.style.left.substring(0, movedProps.style.left.length-2);
-        movedPropsY = movedProps.style.top.substring(0, movedProps.style.top.length-2);
-
-        let mouseX = e.pageX - miniroomX - movedProps.offsetWidth/2 + homeArea.scrollLeft;
-        let mouseY = e.pageY - miniroomY - movedProps.offsetHeight/2 + homeArea.scrollTop;
-        dropdownEvent(mouseX, mouseY);
+        if(clickFlag){
+            movedProps = props;
+            movedPropsX = movedProps.style.left.substring(0, movedProps.style.left.length-2);
+            movedPropsY = movedProps.style.top.substring(0, movedProps.style.top.length-2);
+    
+            let mouseX = e.pageX - miniroomX - movedProps.offsetWidth/2 + homeArea.scrollLeft;
+            let mouseY = e.pageY - miniroomY - movedProps.offsetHeight/2 + homeArea.scrollTop;
+            dropdownEvent(mouseX, mouseY);
+        }
     })
 }
 
@@ -126,6 +129,7 @@ const hideTile = () => {
     $(tileContainer).off("mousemove");
     $(homeArea).off("scroll");
     $(document).off("keydown");
+    clickFlag = true;
     
     // 소품 불투명하게, 포인터 이벤트 O
     movedProps.style.opacity = "1";
@@ -145,6 +149,7 @@ const hideTile = () => {
 /* 이동하기 click */
 document.getElementById("moveBtn").addEventListener("click", () => {
     hideDropdown();
+    clickFlag = false;
 
     const miniroomHeader = document.querySelector(".miniroom-header");
     miniroomHeader.innerHTML += "<span id='esc'>esc를 눌러 이동을 취소할 수 있습니다.</span>";
@@ -213,6 +218,7 @@ for(let tile of tileList){
     tile.addEventListener("click", e => {
         if(tile.classList.contains('empty')) {
             hideTile();
+            clickFlag = true;
 
             // 소품 좌표 변경
             moveLocation(tile.firstChild, movedProps);
@@ -485,14 +491,14 @@ const putGoods = (goodsPath, cathNo, goodsNo) => {
 document.getElementById("saveBtn").addEventListener("click", () => {
     if(confirm("저장하시겠습니까?")) {
         alert("저장되었습니다.");
-        
+
         const propsList = document.getElementsByClassName("props");
         let inputProps;
     
         for(let props of propsList) {
             inputProps = document.createElement("input");
             inputProps.type = "hidden";
-            inputProps.name = propsArray;
+            inputProps.name = "propsArray";
             inputProps.value = props.id;
             miniroomContainer.append(inputProps);
         }
@@ -500,7 +506,7 @@ document.getElementById("saveBtn").addEventListener("click", () => {
         var miniroomFrm = $('#miniroomFrm')[0];
         var formData = new FormData(miniroomFrm);
     
-        miniroomFrm.sibmit();
+        miniroomFrm.submit();
     }
 })
 

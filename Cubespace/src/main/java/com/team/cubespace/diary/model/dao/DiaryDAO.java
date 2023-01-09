@@ -174,9 +174,9 @@ public class DiaryDAO {
 	 * @param params
 	 * @return
 	 */
-	public int updateSchedule(Map<String, Object> params) {
+	public int updateSchedule(Plan plan) {
 		
-		return sqlSession.update("diaryMapper.updateSchedule",params);
+		return sqlSession.update("diaryMapper.updateSchedule",plan);
 	}
 
 	/** 월간달력_일정 삭제

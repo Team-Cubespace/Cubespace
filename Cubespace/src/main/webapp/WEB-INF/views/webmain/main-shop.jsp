@@ -60,7 +60,7 @@
                 <div class="rank-choose"> <%-- 최신/인기 선택 --%>
                     <div id="newGoodsBox">
                         <i class="fa-sharp fa-solid fa-star"></i>
-                        <div>최신폰트</div>
+                        <div>최신상품</div>
                     </div>
                     <div id="shopRankBox">
                         <i class="fa-solid fa-ranking-star"></i>

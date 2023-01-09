@@ -44,9 +44,8 @@ public interface MiniroomService {
 
 	int props(int memberNo, String[] props);
 
-	int updateRoom(String webPath1, String filePath1, String webPath2, String filePath2, String wallColor,
-			MultipartFile wallImage, String floorColor,
-			MultipartFile floorImage, int wallPattern, int floorPattern, String wallFlag,
-			String floorFlag, Miniroom miniroom) throws IllegalStateException, IOException, Exception;
+	int updateRoom(String webPath1, String filePath1, String webPath2, String filePath2,
+				   String wallColor, MultipartFile wallImage, String floorColor, MultipartFile floorImage,
+				   int wallPattern, int floorPattern, String wallFlag, String floorFlag, Miniroom miniroom) throws Exception;
 
 }

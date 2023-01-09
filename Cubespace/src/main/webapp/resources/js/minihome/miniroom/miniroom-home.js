@@ -64,6 +64,9 @@ let floorPatternNo;
 
                 loadWall();
                 loadFloor();
+                selectWallPattern(wallPatternNo);
+                selectFloorPattern(floorPatternNo);
+                
 
             } else {
                 console.log("벽지, 바닥 정보 불러오기 실패");
@@ -112,5 +115,26 @@ const loadFloor = () => {
     } else {
         let url = "url(" + floorPath + ")";
         setFloorBackground(url);
+    }
+}
+
+/* 벽지, 바닥 패턴 */
+const selectWallPattern = patternNo => {
+    if(patternNo == 1) {
+        left.style.backgroundSize = "450px 500px";
+        right.style.backgroundSize = "450px 500px";
+
+    } else {
+        left.style.backgroundSize = "112.5px 125px";
+        right.style.backgroundSize = "112.5px 125px";
+    }
+}
+
+const selectFloorPattern = patternNo => {
+    if(patternNo == 1) {
+        bottom.style.backgroundSize = "450px 500px";
+
+    } else {
+        bottom.style.backgroundSize = "112.5px 112.5px";
     }
 }

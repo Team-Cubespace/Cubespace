@@ -69,6 +69,7 @@
             resize: none;
             border: none;
             outline: none;
+            width: 360px;
         }
         /*  */
         .modal-footer {
@@ -89,6 +90,7 @@
         .modal-footer > :first-child {
             background-color: black;
             color :white;
+            
         }
 
         .modal-footer > :last-child {
@@ -167,6 +169,7 @@
                 if (result > 0){
                     alert("신고가 완료되었습니다.");
                     document.getElementById("popup_layer1").style.display = "none";
+                    document.getElementById("description").innerText = "";
                 }
             }, error : function (){
             }
@@ -178,6 +181,7 @@
     document.getElementById("cancleBtn").addEventListener("click",function(){
 
         document.getElementById("popup_layer1").style.display = "none";
+        document.getElementById("description").innerText = "";
 
     }
     )

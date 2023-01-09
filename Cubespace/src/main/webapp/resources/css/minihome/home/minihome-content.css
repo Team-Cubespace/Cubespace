@@ -151,3 +151,8 @@
     align-items: center;
     cursor: pointer;
 }
+
+/* 소품 cursor 제거 */
+.props-img{
+    cursor: default;
+}

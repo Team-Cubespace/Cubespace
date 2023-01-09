@@ -67,11 +67,13 @@ header {
     align-items: center;
 }
 .header-logo img {
-    width: 100px;
+    width: 135px;
     margin-right: 10px;
 }
 .header-logo-title {
     font-family: var(--orbitron);
+    font-size: 80px;
+    
 }
 
 /* 로그인 시 */

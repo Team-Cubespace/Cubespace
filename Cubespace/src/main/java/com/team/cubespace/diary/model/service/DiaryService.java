@@ -100,7 +100,7 @@ public interface DiaryService {
 	 * @param params
 	 * @return
 	 */
-	int updateSchedule(Map<String, Object> params);
+	int updateSchedule(Plan plan);
 
 	/** 월간달력_일정 삭제
 	 * @param planId

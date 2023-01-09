@@ -100,8 +100,8 @@
                                 <span>
                                     <a href="#">알림</a> : <a id="mainAlarmCount" href="#">0</a>
                                 </span>
-                                <span>Today : ${loginMember.today}</span>
-                                <span>깐부 : <fmt:formatNumber value="${loginMember.friendCount}" pattern="#,###"/>명</span>
+                                <span>Today : ${loginInfo.TODAY}</span>
+                                <span>깐부 : <fmt:formatNumber value="${loginInfo.FRIEND_COUNT}" pattern="#,###"/>명</span>
                             </div>
                         </div>
 

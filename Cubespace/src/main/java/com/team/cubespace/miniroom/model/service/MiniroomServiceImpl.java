@@ -84,6 +84,9 @@ public class MiniroomServiceImpl implements MiniroomService {
 		String rename1 = null;
 		String rename2 = null;
 		
+		System.out.println(wallFlag);
+		System.out.println(floorFlag);
+		
 		if(wallImage.getSize() == 0) {
 			miniroom.setWall(wallColor);
 		}else {

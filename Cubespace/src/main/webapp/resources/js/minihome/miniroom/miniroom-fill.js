@@ -24,8 +24,8 @@ let wallColorF = 'N';
 let floorColorF = 'N';
 
 /* image flag */
-const wallFlag = document.getElementsByName("wallFlag");
-const floorFlag = document.getElementsByName("floorFlag");
+const wallFlag = document.getElementById("wallFlag");
+const floorFlag = document.getElementById("floorFlag");
 
 /* 원본 값을 저장할 변수 */
 let wallPath;
@@ -87,14 +87,12 @@ const resetWallBackground = () => {
     left.style.backgroundImage = "none";
     right.style.backgroundColor = "white";
     right.style.backgroundImage = "none";
-    inputWallColor.value = "#ffffff";
     wallColorF = 'Y';
 }
 
 const resetFloorBackground = () => {
     bottom.style.backgroundColor = "white";
     bottom.style.backgroundImage = "none";
-    inputFloorColor.value = "#ffffff";
     floorColorF = 'Y';
 }
 
@@ -214,6 +212,7 @@ inputWallColor.addEventListener("input", () => {
     wallColorPriview.style.backgroundColor = inputWallColor.value;
     setWallBackground(inputWallColor.value);
     wallFlag.value = "Y";
+    console.log(wallFlag.value);
 })
 
 inputFloorColor.addEventListener("input", () => {
@@ -299,6 +298,7 @@ document.getElementById("eraseWallBtn").addEventListener("click", () => {
     wallColorPriview.style.backgroundColor = "white";
     resetWallBackground();
     wallPatternOff();
+    inputWallColor.value = "#ffffff";
     wallFlag.value = "Y";
 })
 
@@ -307,5 +307,6 @@ document.getElementById("eraseFloorBtn").addEventListener("click", () => {
     floorColorPriview.style.backgroundColor = "white";
     resetFloorBackground();
     floorPatternOff();
+    inputFloorColor.value = "#ffffff";
     floorFlag.value = "Y";
 })

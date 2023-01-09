@@ -74,8 +74,8 @@
 	<update id="updateRoom">
 		UPDATE MINIROOM
 		SET WALL_PATTERN = #{wallPattern}, FLOOR_PATTERN = #{floorPattern}
-		<if test="wallFlag > 0">, WALL = #{wall} </if>
-		<if test="floorFlag > 0">,"FLOOR" = #{floor} </if>
+		<if test='wallFlag == "Y"'>, WALL = #{wall} </if>
+		<if test='floorFlag == "Y"'>,"FLOOR" = #{floor} </if>
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	

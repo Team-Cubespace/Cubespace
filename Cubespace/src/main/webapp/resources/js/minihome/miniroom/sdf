@@ -1,0 +1,7 @@
+document.getElementById("erasefloorBtn").addEventListener("click", () => {
+    inputfloorColor.value = "";
+    inputfloorImage.value = "";
+    floorColorPriview.style.backgroundColor = "white";
+    resetfloorBackground();
+    floorPatternOff();
+})

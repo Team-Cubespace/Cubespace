@@ -95,15 +95,15 @@ document.getElementById("cancleBtn").addEventListener("click",function(){
 });
 
 /* [이벤트] :모달창2 내에서 (수정하기)버튼 눌렀을 때 팝업 닫기 */
-document.getElementById("updateShowBtn").addEventListener("click",function(){
-  document.getElementById("popup_layer2").style.display = "none";
+if(minihomeNo == loginMemberNo){
+  document.getElementById("updateShowBtn").addEventListener("click",function(){
+    document.getElementById("popup_layer2").style.display = "none";
 
-   //수정,등록 모달창은 미니홈피 주인장만 열 수 있도록 처리함.
-  if(minihomeNo == loginMemberNo){
-    document.getElementById("popup_layer").style.display = "block";
-  }
-})
-
+    //수정,등록 모달창은 미니홈피 주인장만 열 수 있도록 처리함.
+      document.getElementById("popup_layer").style.display = "block";
+    
+  })
+}
 /* [이벤트] :모달창2 내에서 닫기버튼 눌렀을 때 팝업 닫기 */
 document.getElementById("cancleShowBtn").addEventListener("click",function(){
   document.getElementById("popup_layer2").style.display = "none";

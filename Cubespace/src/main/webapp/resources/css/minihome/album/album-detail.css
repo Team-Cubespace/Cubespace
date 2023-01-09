@@ -91,6 +91,7 @@ header {
 /* 앨범 내용 영역 */
 .album-content {
     margin: 10px 0px;
+    word-break: break-all;
 }
 
 /* 앨범 내용 푸터 */

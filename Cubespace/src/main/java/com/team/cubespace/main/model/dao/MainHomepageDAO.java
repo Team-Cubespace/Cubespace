@@ -1,6 +1,7 @@
 package com.team.cubespace.main.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,14 @@ public class MainHomepageDAO {
 	 */
 	public List<MainHomepage> mainShortsSelect(int shortsChoice) {
 		return sqlSession.selectList("mainHomepage.mainShortsSelect",shortsChoice);
+	}
+
+	/** 로그인 회원의 깐부수, TODAY 조회
+	 * @param memberNo
+	 * @return resultMap
+	 */
+	public Map<String, Integer> selectInfo(int memberNo) {
+		return sqlSession.selectOne("mainHomepage.selectInfo", memberNo);
 	}
 
 }

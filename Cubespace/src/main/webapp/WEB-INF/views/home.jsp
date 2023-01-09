@@ -91,7 +91,7 @@
                                 <!-- profile dropdown -->
                                 <div class="profile-dropdown">
                                     <a href="/member/updateInfo">내 정보 수정</a>
-                                    <a href="/member/logout" id="logout">로그아웃</a>
+                                    <a href="/member/logout" id="logout" onclick="return closePopup()">로그아웃</a>
                                 </div>
                             </div>
         

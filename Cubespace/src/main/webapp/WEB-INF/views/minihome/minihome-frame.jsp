@@ -129,7 +129,7 @@
                 </div>
             </div>
             <section class="minihome-main">
-                <iframe src="/minihome/home/${minihome.memberNo}" frameborder="0" name="minihomeMenu" scrolling="no">
+                <%-- <iframe src="/minihome/home/${minihome.memberNo}" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
                 <%-- <iframe src="/manage/friend" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
                 <%-- 내꺼 --%>
                 <%-- <iframe src="/diary/1" frameborder="0" name="minihomeMenu" scrolling="no"> --%>
@@ -143,7 +143,7 @@
                 <c:if test="${not empty param.goVideo}">
                     <c:set var="iframeURL" value="${'/videoDetail/' + param.videoNo + '?folrderNo=' + param.folderNo}"></c:set>
                 </c:if> --%>
-                <iframe src="<c:if test="${not empty param.goVideo}">/videoDetail/${param.videoNo}?folderNo=${param.folderNo}</c:if><c:if test="${empty param.goVideo}">/albumList/2</c:if>" frameborder="0" name="minihomeMenu" scrolling="no">
+                <iframe src="<c:if test="${not empty param.goVideo}">/videoDetail/${param.videoNo}?folderNo=${param.folderNo}</c:if><c:if test="${empty param.goVideo}">/minihome/home/${minihome.memberNo}</c:if>" frameborder="0" name="minihomeMenu" scrolling="no">
 
                 </iframe>
                 

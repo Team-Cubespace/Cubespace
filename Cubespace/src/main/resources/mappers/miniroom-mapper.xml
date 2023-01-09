@@ -67,10 +67,17 @@
 		ORDER BY GOODS_NAME
 	</select>
 	
+	<!-- 미니미, 소품 좌표 저장 -->
 	<delete id="deleteprops">
 		DELETE FROM MINIROOM_PLACE WHERE MEMBER_NO = #{memberNo}
 	</delete>
 	
+	<!-- 미니미, 소품 좌표 저장 -->
+	<insert id="insertprops">
+		INSERT INTO MINIROOM_PLACE VALUES (#{memberNo}, #{locationNo}, #{shopCathNo}, #{goodsNo})
+	</insert>
+	
+	<!-- 벽지, 바닥 저장 -->
 	<update id="updateRoom">
 		UPDATE MINIROOM
 		SET WALL_PATTERN = #{wallPattern}, FLOOR_PATTERN = #{floorPattern}
@@ -78,8 +85,4 @@
 		<if test='floorFlag == "Y"'>,"FLOOR" = #{floor} </if>
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
-	
-	<insert id="insertprops">
-		INSERT INTO MINIROOM_PLACE VALUES (#{memberNo}, #{locationNo}, #{shopCathNo}, #{goodsNo})
-	</insert>
 </mapper>

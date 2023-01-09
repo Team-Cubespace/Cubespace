@@ -115,20 +115,7 @@
                         </span>
                     </header>
 
-                    <div class="goods-container">
-                        <!-- <div class="goods-list">
-                            <div class="goods-info goods-info-right">
-                                <img src="/resources/miniroomGoods/miniroom-bear.png" class="goods-img">
-                                <div title="곰도리" class="goods-name">곰도리</div>
-                                <div class="goods-btn">
-                                    <button class="move-goods-btn">배치</button>
-                                    <button class="delete-goods-btn">삭제</button>
-                                </div>
-                            </div>
-                        </div> -->
-
-                        <%-- <div class="no-goods">보유한 소품이 없습니다&nbsp;<i class="fa-solid fa-face-sad-tear"></i></div> --%>
-                    </div>
+                    <div class="goods-container"></div>
 
                     <!-- <div class="page-container">
                         <a href="#" class="page"><i class="fa-solid fa-angle-left"></i></a>

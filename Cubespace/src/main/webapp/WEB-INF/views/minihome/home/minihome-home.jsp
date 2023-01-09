@@ -98,7 +98,7 @@
                     <span id="writeBtn">등록</span>
                 </div>
 
-                <!-- 깐부 메시지 목록 (신고 기능 완성되면 테스트, 시간 남으면 요소 추가 방식으로 변경) -->
+                <!-- 깐부 메시지 목록 -->
                 <div class="friend-message-container">
                     <c:choose>
                         <c:when test="${fn:length(friendMessage) == 0}">
@@ -109,12 +109,24 @@
                             <c:forEach var="message" items="${friendMessage}">
                                 <div class="friend-message">
                                     <div class="message-content">
-                                        <button class="friend-name member-nickname nickname-drop-down-button" style="font-family: '${message.ownFontNo}';">
+                                        <c:choose>
+                                            <c:when test="${message.memberNo != loginMember.memberNo}">
+                                                <button class="friend-name member-nickname nickname-drop-down-button" style="font-family: '${message.ownFontNo}';">
+                                            </c:when>
+
+                                            <c:otherwise>
+                                                <button class="friend-name" style="font-family: '${message.ownFontNo}'; cursor: text;">
+                                            </c:otherwise>
+                                        </c:choose>
+
                                             ${message.memberNickname}
-                                            <ul class="nickname-drop-down-box">
-                                                <li><a href="/minihome/${message.memberNo}" onclick="return openMinihome(this.href)">미니홈피</a></li>
-                                                <li><a onclick="reportFriend('${message.memberNo}')">신고</a></li>
-                                            </ul>
+
+                                            <c:if test="${message.memberNo != loginMember.memberNo}">
+                                                <ul class="nickname-drop-down-box">
+                                                    <li><a href="/minihome/${message.memberNo}" onclick="return openMinihome(this.href)">스페이스</a></li>
+                                                    <li><a onclick="reportFriend('${message.memberNo}')">신고</a></li>
+                                                </ul>
+                                            </c:if>
                                         </button>
                                         
                                         <span style="font-family: '${message.ownFontNo}';">::</span>

@@ -136,6 +136,10 @@
 }
 
 /* 미니미 & 소품 */
+.goods-container{
+    min-height: 70px;
+}
+
 .goods-list{
     width: 100%;
     display: flex;

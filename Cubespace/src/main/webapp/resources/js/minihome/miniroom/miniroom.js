@@ -381,6 +381,8 @@ const selectgoodsList = () => {
         url : "/miniroom/goodsList",
         type : "GET",
         success : (goods) => {
+            console.log(goods.length);
+
             if(goods.length > 0) {
                 // goodsList div
                 const goodsList = document.createElement("div");
@@ -443,6 +445,10 @@ const selectgoodsList = () => {
                 const noGoods = document.createElement("div");
                 noGoods.classList.add("no-goods");
                 noGoods.innerHTML = "보유한 소품이 없습니다&nbsp;<i class='fa-solid fa-face-sad-tear'></i>";
+
+                // last append
+                const goodsContainer = document.querySelector(".goods-container");
+                goodsContainer.append(noGoods);
             }
         },
         error : () => {console.log("소품 가져오기 실패");}

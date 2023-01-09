@@ -42,8 +42,31 @@ public interface MiniroomService {
 	 */
 	List<ShopMiniroom> goodsList(int memberNo);
 
-	int props(int memberNo, String[] props);
+	/**
+	 * 미니미, 소품 좌표 저장
+	 * @param memberNo
+	 * @param props
+	 */
+	void props(int memberNo, String[] props);
 
+	/**
+	 * 벽지, 바닥 저장
+	 * @param webPath1
+	 * @param filePath1
+	 * @param webPath2
+	 * @param filePath2
+	 * @param wallColor
+	 * @param wallImage
+	 * @param floorColor
+	 * @param floorImage
+	 * @param wallPattern
+	 * @param floorPattern
+	 * @param wallFlag
+	 * @param floorFlag
+	 * @param miniroom
+	 * @return result
+	 * @throws Exception
+	 */
 	int updateRoom(String webPath1, String filePath1, String webPath2, String filePath2,
 				   String wallColor, MultipartFile wallImage, String floorColor, MultipartFile floorImage,
 				   int wallPattern, int floorPattern, String wallFlag, String floorFlag, Miniroom miniroom) throws Exception;

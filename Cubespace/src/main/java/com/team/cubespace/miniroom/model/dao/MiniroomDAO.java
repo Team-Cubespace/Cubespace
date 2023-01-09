@@ -54,15 +54,28 @@ public class MiniroomDAO {
 		return sqlSession.selectList("miniroomMapper.selectGoodsList", memberNo);
 	}
 
+	/**
+	 * 미니미, 소품 좌표 저장
+	 * @param memberNo
+	 */
+	public void deleteprops(int memberNo) {
+		sqlSession.delete("miniroomMapper.deleteprops", memberNo);
+	}
+
+	/**
+	 * 미니미, 소품 좌표 저장
+	 * @param miniroomPlace
+	 */
+	public void insertprops(MiniroomPlace miniroomPlace) {
+		sqlSession.insert("miniroomMapper.insertprops", miniroomPlace);
+	}
+	
+	/**
+	 * 벽지, 바닥 저장
+	 * @param miniroom
+	 * @return result
+	 */
 	public int updateRoom(Miniroom miniroom) {
 		return sqlSession.update("miniroomMapper.updateRoom", miniroom);
-	}
-
-	public int deleteprops(int memberNo) {
-		return sqlSession.delete("miniroomMapper.deleteprops", memberNo);
-	}
-
-	public int insertprops(MiniroomPlace miniroomPlace) {
-		return sqlSession.insert("miniroomMapper.insertprops", miniroomPlace);
 	}
 }

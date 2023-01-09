@@ -43,40 +43,10 @@ document.getElementById("writeBtn").addEventListener("click", e => {
     
                             // friend-name button
                             const friendNameBtn = document.createElement("button");
-                            friendNameBtn.classList.add("friend-name", "member-nickname", "nickname-drop-down-button");
+                            friendNameBtn.classList.add("friend-name");
                             friendNameBtn.style.fontFamily = "'" + fontNo + "'";
+                            friendNameBtn.style.cursor = "text";
                             friendNameBtn.innerText = friendMessage.memberNickname;
-    
-                            // nickname-drop-down-box ul
-                            const nicknameUl = document.createElement("ul");
-                            nicknameUl.classList.add("nickname-drop-down-box");
-    
-                            // drop-down li1
-                            const dropdownLi1 = document.createElement("li");
-    
-                            // drop-down li2
-                            const dropdownLi2 = document.createElement("li");
-    
-                            // drop-down a1
-                            const dropdownA1 = document.createElement("a");
-                            dropdownA1.innerText = "미니홈피";
-                            dropdownA1.href = "/minihome/" + friendMessage.memberNo;
-    
-                            // drop-down a2
-                            const dropdownA2 = document.createElement("a");
-                            dropdownA2.innerText = "신고";
-    
-                            // drop-down li1 append
-                            dropdownLi1.append(dropdownA1);
-    
-                            // drop-down li2 append
-                            dropdownLi2.append(dropdownA2);
-    
-                            // nickname-drop-down-box ul append
-                            nicknameUl.append(dropdownLi1, dropdownLi2);
-    
-                            // friend-name button append
-                            friendNameBtn.append(nicknameUl);
     
                             // colon span
                             const colonSpan = document.createElement("span");
@@ -123,23 +93,8 @@ document.getElementById("writeBtn").addEventListener("click", e => {
                             // append end
                             document.querySelector(".friend-message-container").prepend(firendMessageDiv);
     
-                            // 각 요소 함수 추가
-                            friendNameBtn.addEventListener("click", () => {
-                                friendNameBtn.firstElementChild.classList.toggle("show");
-                                friendNameBtn.firstElementChild.style.left = e.offsetX + "px";
-                                friendNameBtn.firstElementChild.style.top = e.offsetY + "px";
-                            });
-    
-                            friendNameBtn.addEventListener("blur", ()=>{
-                                setTimeout(()=> {
-                                    friendNameBtn.firstElementChild.classList.remove("show");
-                                }, 100);
-                            })
-    
-                            dropdownA1.addEventListener("click", e => {openMinihome(dropdownA1.href); e.preventDefault();});
-                            dropdownA2.addEventListener("click", () => {reportFriend(friendMessage.memberNo)});
                             deleteBtnButton.addEventListener("click", () => {deleteMessage(deleteBtnButton);});
-    
+                            
                             dearFriend.value = "";
                         },
                         error : () => {console.log("깐부 메시지 등록 실패");}

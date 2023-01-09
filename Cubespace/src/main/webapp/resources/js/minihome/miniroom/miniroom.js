@@ -357,7 +357,7 @@ const putMinimee = (minimeePath, cathNo, minimeeNo) => {
 
         afterAlreadyTile(empty[0].id.substring(4));
     
-        /* 소품 클릭 이벤트 */
+        // 소품 클릭 이벤트
         clickProps(props);
 
         } else {
@@ -486,7 +486,7 @@ const putGoods = (goodsPath, cathNo, goodsNo) => {
 
         afterAlreadyTile(empty[0].id.substring(4));
     
-        /* 소품 클릭 이벤트 */
+        // 소품 클릭 이벤트
         clickProps(props);
 
     } else {
@@ -494,6 +494,17 @@ const putGoods = (goodsPath, cathNo, goodsNo) => {
     }
 }
 
+/* 미니룸 사진 저장 */
+$("#pictureBtn").click(e => {
+    html2canvas(miniroomContainer).then(canvas => {
+        var a = document.createElement("a")
+        a.href = canvas.toDataURL("image/png")
+        a.download = 'image.png'
+        a.click()
+    })
+})
+
+/* 현재 상태 저장 */
 document.getElementById("saveBtn").addEventListener("click", () => {
     if(confirm("저장하시겠습니까?")) {
         alert("저장되었습니다.");
@@ -514,14 +525,4 @@ document.getElementById("saveBtn").addEventListener("click", () => {
     
         miniroomFrm.submit();
     }
-})
-
-/* 미니룸 사진 저장 */
-$("#pictureBtn").click(e => {
-    html2canvas(miniroomContainer).then(canvas => {
-        var a = document.createElement("a")
-        a.href = canvas.toDataURL("image/png")
-        a.download = 'image.png'
-        a.click()
-    })
 })

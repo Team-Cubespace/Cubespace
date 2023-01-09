@@ -6,6 +6,17 @@ const miniroomContainer = document.querySelector(".miniroom-container");
 const miniroomX = window.pageYOffset + miniroomContainer.getBoundingClientRect().left;
 const miniroomY = window.pageYOffset + miniroomContainer.getBoundingClientRect().top;
 
+/* 미니룸 벽지, 바닥 상수 */
+const left = document.querySelector(".left");
+const right = document.querySelector(".right");
+const bottom = document.querySelector(".bottom");
+
+/* 원본 값을 저장할 변수 */
+let wallPath;
+let floorPath;
+let wallPatternNo;
+let floorPatternNo;
+
 /* 배치할 소품 좌표 설정 */
 const stayLocation = (props, x, y) => {
     props.style.left = x + "px";
@@ -39,17 +50,6 @@ const stayLocation = (props, x, y) => {
         error : () => {console.log("소품 가져오기 실패");}
     });
 })();
-
-/* 미니룸 벽지, 바닥 상수 */
-const left = document.querySelector(".left");
-const right = document.querySelector(".right");
-const bottom = document.querySelector(".bottom");
-
-/* 원본 값을 저장할 변수 */
-let wallPath;
-let floorPath;
-let wallPatternNo;
-let floorPatternNo;
 
 (() => {
     $.ajax({

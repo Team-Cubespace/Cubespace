@@ -1,6 +1,7 @@
 package com.team.cubespace.main.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.team.cubespace.main.model.vo.MainHomepage;
 
@@ -18,4 +19,9 @@ public interface MainHomepageService {
 	 */
 	List<MainHomepage> mainShortsSelect(int shortsChoice);
 
+	/** TODAY, FRIEND_COUNT 조회
+	 * @param memberNo
+	 * @return resultMap
+	 */
+	Map<String, Integer> selectInfo(int memberNo);
 }

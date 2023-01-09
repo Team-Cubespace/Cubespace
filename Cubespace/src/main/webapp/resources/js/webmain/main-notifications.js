@@ -247,7 +247,11 @@ const activityNotification=()=>{
                                 /* 게시물 제목 생성 */
                                 const boardTitle = document.createElement("div");
                                 boardTitle.classList.add("board-title");
-                                boardTitle.innerText=alarmActivity.boardTitle;
+                                if(alarmActivity.boardTitle==null||alarmActivity.boardTitle==""){
+                                    boardTitle.innerText="{삭제된게시물입니다.}"
+                                }else{
+                                    boardTitle.innerText=alarmActivity.boardTitle;
+                                }
 
                                 /* 댓글/스크랩  생성 */
                                 const boardType = document.createElement("div");

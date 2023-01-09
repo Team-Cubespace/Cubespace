@@ -11,4 +11,6 @@ public class Miniroom {
 	private String floor;	   // 바닥 경로
 	private int wallPattern;   // 벽지 패턴
 	private int floorPattern;  // 바닥 패턴
+	private String wallFlag;   // 벽지 업데이트 플래그
+	private String floorFlag;  // 바닥 업데이트 플래그
 }

@@ -24,7 +24,7 @@
 
         <section class="minihome-rayout">
             <div id="homeArea">
-                <form method="POST" enctype="multipart/form-data" id="miniroomFrm">
+                <form method="POST" enctype="multipart/form-data" id="miniroomFrm" action="/miniroom/save">
                     <header class="miniroom-header">
                         <span><i class="fa-solid fa-wand-magic-sparkles"></i> 미니룸 꾸미기</span>
                     </header>

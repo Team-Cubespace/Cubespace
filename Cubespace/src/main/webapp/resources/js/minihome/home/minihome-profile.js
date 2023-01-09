@@ -3,23 +3,23 @@ if(minihomeNo == loginNo){
     const todayDropdownBtn = document.querySelector(".today-dropdown-btn");
     const todayDropdownBtnIcon = document.querySelector(".today-dropdown-btn-icon");
     const todayDropdown = document.querySelector(".today-dropdown");
-    let toggleFlag = true;
+    let todayToggleFlag = true;
     
     const hideTodayDropdown = () => {
         todayDropdown.style.height = "0px";
         todayDropdown.style.border = "none";
         todayDropdownBtnIcon.classList.add("fa-caret-down");
         todayDropdownBtnIcon.classList.remove("fa-caret-up");
-        toggleFlag = true;
+        todayToggleFlag = true;
     }
     
     const todayDropdownEvent = () => {
-        if(toggleFlag){
+        if(todayToggleFlag){
             todayDropdown.style.height = "200px";
             todayDropdown.style.border = "1px solid var(--ink)";
             todayDropdownBtnIcon.classList.add("fa-caret-up");
             todayDropdownBtnIcon.classList.remove("fa-caret-down");
-            toggleFlag = false;
+            todayToggleFlag = false;
     
         }else{
             hideTodayDropdown();

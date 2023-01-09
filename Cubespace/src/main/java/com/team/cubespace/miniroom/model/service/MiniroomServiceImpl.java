@@ -55,21 +55,22 @@ public class MiniroomServiceImpl implements MiniroomService {
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int props(int memberNo, String[] props) {
-		int result = 0;
+		int result = dao.deleteprops(memberNo);
 		
-		result = dao.deleteprops(memberNo);
-		
-		MiniroomPlace miniroomPlace = new MiniroomPlace();
-		String[] pArr;
-		
-		for(int i=0; i < props.length; i++) {
-			miniroomPlace.setMemberNo(memberNo);
-			pArr = props[i].split(("-"));
-			miniroomPlace.setLocationNo(Integer.parseInt(pArr[0]));
-			miniroomPlace.setShopCathNo(Integer.parseInt(pArr[1]));
-			miniroomPlace.setGoodsNo(Integer.parseInt(pArr[2]));
+		if(result > 0) {
+			MiniroomPlace miniroomPlace = new MiniroomPlace();
 			
-			result = dao.insertprops(miniroomPlace);
+			String[] pArr;
+			
+			for(int i=0; i < props.length; i++) {
+				miniroomPlace.setMemberNo(memberNo);
+				pArr = props[i].split(("-"));
+				miniroomPlace.setLocationNo(Integer.parseInt(pArr[0]));
+				miniroomPlace.setShopCathNo(Integer.parseInt(pArr[1]));
+				miniroomPlace.setGoodsNo(Integer.parseInt(pArr[2]));
+				
+				result = dao.insertprops(miniroomPlace);
+			}			
 		}
 		
 		return result;
@@ -77,14 +78,14 @@ public class MiniroomServiceImpl implements MiniroomService {
 
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int updateRoom(String webPath1, String filePath1, String webPath2, String filePath2, String wallColor, MultipartFile wallImage,
-			String floorColor, MultipartFile floorImage, int wallPattern, int floorPattern, String wallFlag,
-			String floorFlag, Miniroom miniroom) throws Exception {
-		
-		int result = 0;
-
+	public int updateRoom(String webPath1, String filePath1, String webPath2, String filePath2,
+						  String wallColor, MultipartFile wallImage, String floorColor, MultipartFile floorImage,
+						  int wallPattern, int floorPattern, String wallFlag, String floorFlag, Miniroom miniroom) throws Exception {
 		String rename1 = null;
 		String rename2 = null;
+		
+		System.out.println(wallFlag);
+		System.out.println(floorFlag);
 		
 		if(wallImage.getSize() == 0) {
 			miniroom.setWall(wallColor);
@@ -93,7 +94,7 @@ public class MiniroomServiceImpl implements MiniroomService {
 			miniroom.setWall(webPath1 + rename1);
 		}
 		
-		if(wallImage.getSize() == 0) {
+		if(floorImage.getSize() == 0) {
 			miniroom.setFloor(floorColor);
 		}else {
 			rename2 = Util.fileRename(floorImage.getOriginalFilename());
@@ -102,15 +103,17 @@ public class MiniroomServiceImpl implements MiniroomService {
 		
 		miniroom.setWallPattern(wallPattern);
 		miniroom.setFloorPattern(floorPattern);
+		miniroom.setWallFlag(wallFlag);
+		miniroom.setFloorFlag(floorFlag);
 				
-		result = dao.updateRoom(miniroom);
+		int result = dao.updateRoom(miniroom);
 				
 		if(result > 0) {
 			if(rename1 != null) {
 				wallImage.transferTo(new File(filePath1 + rename1));
 			}
-			if(rename1 != null) {
-				wallImage.transferTo(new File(filePath2 + rename2));
+			if(rename2 != null) {
+				floorImage.transferTo(new File(filePath2 + rename2));
 			}
 			
 		}else {

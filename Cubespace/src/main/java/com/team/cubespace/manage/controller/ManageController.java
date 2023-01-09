@@ -35,7 +35,7 @@ import com.team.cubespace.minihome.model.vo.Minihome;
 
 @Controller
 @RequestMapping("/manage")
-@SessionAttributes({ "folderList",  "fileList" /* , "friendList", "fontList" */})
+@SessionAttributes({ "folderList",  "fileList", "minihome"})
 public class ManageController {
 	
 	@Autowired
@@ -187,10 +187,36 @@ public class ManageController {
 	 */
 	@GetMapping("/menu/addFolder")
 	@ResponseBody
-	public int addFolder(@RequestParam Map<String, Object> paramMap) {
+	public int addFolder(@RequestParam Map<String, Object> paramMap, Model model) {
 		
-		// paramMap : boardTypeNo, folderName, memberNo
-		return service.addFolder(paramMap);
+		// paramMap : boardTypeNo, folderName, memberNo, folderOrder, folderNo
+		int result= service.addFolder(paramMap);
+		
+		if(result > 0) {
+			
+			Folder newFolder = new Folder();
+			newFolder.setFolderNo(Integer.parseInt(String.valueOf(paramMap.get("folderNo"))));
+			newFolder.setMemberNo(Integer.parseInt(String.valueOf(paramMap.get("memberNo"))));
+			newFolder.setBoardTypeNo(Integer.parseInt(String.valueOf(paramMap.get("boardTypeNo"))));
+			newFolder.setFolderOrder(Integer.parseInt(String.valueOf(paramMap.get("folderOrder"))));
+			newFolder.setFolderName(String.valueOf(paramMap.get("folderName")));
+			
+			
+			Minihome minihome = (Minihome) model.getAttribute("minihome");
+			
+			// boardTypeNo에 따라 각각 다른 folderList에 집어넣음
+			if(newFolder.getBoardTypeNo() == 1) {
+				minihome.getDiaryFolderList().add(newFolder);
+			}
+			if(newFolder.getBoardTypeNo() == 2) {
+				minihome.getAlbumFolderList().add(newFolder);
+			}
+			if(newFolder.getBoardTypeNo() == 3) {
+				minihome.getVideoFolderList().add(newFolder);
+			}
+		}
+		
+		return result;
 	}
 	
 	/** 카테고리에서 폴더 삭제
@@ -208,13 +234,23 @@ public class ManageController {
 		// paramMap : boardTypeNo, folderOrder, folderNo, subCategoryLength, memberNo
 		int result =  service.deleteFolder(paramMap);
 		if(result > 0) {
-			List<Folder> originalFolderList = (List<Folder>) model.getAttribute("folderList");
-			for(int i = 0; i < originalFolderList.size(); i++) {
-				if(originalFolderList.get(i).getFolderNo() == Integer.parseInt((String)paramMap.get("folderNo"))) {
-					originalFolderList.remove(i);
-					break;
-				}
+			
+			// 삭제 뒤 새 폴더리스트 조회(boardTypeNo별로)
+			List<Folder> updatedFolderList = service.selectFolderList(paramMap); 
+			Minihome minihome = (Minihome) model.getAttribute("minihome");
+			if(Integer.parseInt(String.valueOf(paramMap.get("boardTypeNo"))) == 1){
+				minihome.setDiaryFolderList(updatedFolderList);
 			}
+			if(Integer.parseInt(String.valueOf(paramMap.get("boardTypeNo"))) == 2){
+				minihome.setAlbumFolderList(updatedFolderList);
+			}
+			if(Integer.parseInt(String.valueOf(paramMap.get("boardTypeNo"))) == 3){
+				minihome.setVideoFolderList(updatedFolderList);
+			}
+			
+			// session의 folderList update??
+			
+			
 		}
 		
 		return result;

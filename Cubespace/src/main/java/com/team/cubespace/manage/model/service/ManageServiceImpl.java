@@ -438,6 +438,17 @@ public class ManageServiceImpl implements ManageService{
 		return dao.deleteMusic(memberNo);
 	}
 
+	/**
+	 * // 삭제 뒤 새 폴더리스트 조회(boardTypeNo별로)
+	 */
+	@Override
+	public List<Folder> selectFolderList(Map<String, Object> paramMap) {
+		
+		return dao.selectFolderList(paramMap);
+	}
+
+
+
 
 
 }

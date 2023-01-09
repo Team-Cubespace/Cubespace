@@ -156,6 +156,14 @@
 	</update>
 	
 	
+	
+	<!-- 삭제 뒤 새 폴더리스트 조회(boardTypeNo별로) -->
+	<select id="selectFolderList" resultMap="folder_rm">
+		SELECT * FROM FOLDER 
+		WHERE MEMBER_NO = #{memberNo}
+		AND BOARD_TYPE_NO = #{boardTypeNo}
+		AND FOLDER_DEL_YN = 'N'
+	</select>
 
 
 	

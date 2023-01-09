@@ -42,11 +42,6 @@
 .left{
     width: 450px;
     height: 500px;
-    background-color: rgb(242, 247, 255);
-    background-image: url("../../../images/wallsample.gif");
-    /* background-size: 150px;
-    background-repeat: repeat; */
-    background-size: cover;
     top: -187px;
     left: -72px;
     transform: rotateX(315deg) rotateY(45deg) rotateZ(0deg);
@@ -55,22 +50,16 @@
 .right{
     width: 450px;
     height: 500px;
-    background-color: rgb(242, 247, 255);
-    background-image: url("../../../images/wallsample.gif");
-    /* background-size: 150px; */
-    /* background-repeat: repeat; */
-    background-size: cover;
+    background-color: white;
     top: -187px;
     right: -72px;
-    transform: rotateX(315deg) rotateY(-45deg) rotateZ(0deg) scaleX(-1);
+    transform: rotateX(315deg) rotateY(-45deg) rotateZ(0deg);
 }
 
 .bottom{
     width: 450px;
     height: 450px;
-    background-color: rgb(25 108 139);
-    background-size: cover;
-    /* background-repeat: repeat; */
+    background-color: white;
     top: 125px;
     left: 86px;
     transform: rotateX(45deg) rotateY(0deg) rotateZ(45deg);

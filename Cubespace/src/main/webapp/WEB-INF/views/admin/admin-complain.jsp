@@ -268,7 +268,7 @@
                                 <c:when test="${fn:length(complain.complainContent) > 45}">
                                     <div class="search-content seeComplainContent">
                                         <p>${fn:substring(complain.complainContent, 0, 44)}...</p>
-                                        <p class="allComplainContent" style="display: none; word-break:break-all;">${complain.complainContent}</p>
+                                        <p class="allComplainContent" style="display: none; word-break:break-all; white-space: pre-wrap;">${complain.complainContent}</p>
                                     </div>
                                 </c:when>
                                 <c:when test="${fn:length(complain.complainContent) <= 44}">

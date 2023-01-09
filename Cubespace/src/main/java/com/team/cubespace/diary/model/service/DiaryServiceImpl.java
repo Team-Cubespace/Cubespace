@@ -146,6 +146,13 @@ public class DiaryServiceImpl implements DiaryService {
 	 */
 	@Override
 	public int addSchedule(Plan plan) {
+				
+//				plan.setPlanTitle(Util.XSSHandling(plan.getPlanTitle()));
+//				//내용이 null이 아닐 경우...
+//				if(plan.getPlanDescription() != null) {
+//					plan.setPlanDescription(Util.XSSHandling(plan.getPlanDescription()));
+//					plan.setPlanDescription(Util.newLineHandling(plan.getPlanDescription()));
+//				}
 		
 		return dao.addSchedule(plan);
 	}
@@ -154,9 +161,17 @@ public class DiaryServiceImpl implements DiaryService {
 	 *
 	 */
 	@Override
-	public int updateSchedule(Map<String, Object> params) {
+	public int updateSchedule(Plan plan) {
 		
-		return dao.updateSchedule(params);
+//		plan.setPlanTitle(Util.XSSHandling(plan.getPlanTitle()));
+//		//내용이 null이 아닐 경우...
+//		if(plan.getPlanDescription() != null) {
+//			plan.setPlanDescription(Util.XSSHandling(plan.getPlanDescription()));
+//			plan.setPlanDescription(Util.newLineHandling(plan.getPlanDescription()));
+//		}
+
+		
+		return dao.updateSchedule(plan);
 	}
 
 	// 월간달력_일정 삭제

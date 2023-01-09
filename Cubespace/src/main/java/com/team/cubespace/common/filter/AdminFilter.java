@@ -31,13 +31,19 @@ public class AdminFilter extends HttpFilter implements Filter{
 		HttpSession session = req.getSession();
 		
 
-		
-		if(((Member)session.getAttribute("loginMember")).getAuthority() == 1) { // 일반 회원
+		if(session.getAttribute("loginMember") == null) { // 로그인 안했으면
 			session.setAttribute("message", "관리자만 이용할 수 있는 기능입니다");
 			
+			resp.sendRedirect("/");
+		} 
+		
+		else if(((Member)session.getAttribute("loginMember")).getAuthority() == 1) { // 일반 회원
+			session.setAttribute("message", "관리자만 이용할 수 있는 기능입니다");
 			
 			resp.sendRedirect("/");
-		} else { // 관리자
+		} 
+		
+		else { // 관리자
 			chain.doFilter(request, response);
 		}
 		

@@ -1,13 +1,15 @@
 /* 미니홈 전체 크기 */
 html {
-    background-color: #ddd;
+    /* background-color: #ddd; */
+    background-image: url("/resources/images/background-image.PNG");
+    background-size: 50px;
 }
 .minihome {
-    width: 1200px;
-    height: 725px;
+    width: 1204px;
+    height: 733px;
     background-color: #ddd;
     padding-left: 15px;
-    margin-top: 3px;
+    /* margin-top: 3px; */
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -89,6 +91,11 @@ html {
     border: 1px solid black;
 }
 
+.active-range .fill {
+    height: 88%;
+    top: 0.8px;
+    left: 0.8px;
+}
 /* 미니홈 헤더 오른쪽 */
 .minihome-header-right {
     width: 72%;

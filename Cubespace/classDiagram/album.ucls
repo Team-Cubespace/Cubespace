@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.team.cubespace.album.controller.AlbumController" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/album/controller/AlbumController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="256" width="628" x="545" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.team.cubespace.album.controller.CommentController" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/album/controller/CommentController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="176" width="356" x="1213" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.team.cubespace.album.model.dao.AlbumDAO" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/album/model/dao/AlbumDAO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="376" width="457" x="1679" y="1213"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.team.cubespace.album.model.dao.CommentDAO" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/album/model/dao/CommentDAO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="216" width="426" x="2176" y="1213"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.team.cubespace.album.model.service.AlbumServiceImpl" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/album/model/service/AlbumServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="256" width="523" x="1609" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="6" language="java" name="com.team.cubespace.album.model.service.AlbumService" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/album/model/service/AlbumService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="236" width="523" x="650" y="1213"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="7" language="java" name="com.team.cubespace.album.model.service.CommentServiceImpl" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/album/model/service/CommentServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="196" width="426" x="2172" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="8" language="java" name="com.team.cubespace.album.model.service.CommentService" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/album/model/service/CommentService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="176" width="426" x="1213" y="1213"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="9" language="java" name="com.team.cubespace.album.model.vo.Album" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/album/model/vo/Album.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1136" width="332" x="173" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.team.cubespace.album.model.vo.Comment" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/album/model/vo/Comment.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="876" width="259" x="351" y="1213"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.team.cubespace.album.model.vo.AlbumImage" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/album/model/vo/AlbumImage.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="456" width="270" x="41" y="1213"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="12">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <realization id="13">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <association id="14">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="15" name="dao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="16" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="17">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="18" name="cService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="19" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="20">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="21" name="dao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="22" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="23">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="24" name="albumImageList">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="25" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="26">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="27" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="28" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="29">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="30" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="31" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="32">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="33" name="commentList">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="34" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

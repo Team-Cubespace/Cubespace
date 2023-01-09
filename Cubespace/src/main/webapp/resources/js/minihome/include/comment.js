@@ -46,7 +46,7 @@ const createCommentList = (commentList) => {
             const openMinihome = document.createElement("a");
             openMinihome.href = `/minihome/${comment.memberNo}`;
             openMinihome.setAttribute("onclick", "return openMinihome(this.href)");
-            openMinihome.innerText = "미니홈피";
+            openMinihome.innerText = "스페이스";
 
             const menu2 = document.createElement("li");
             const report = document.createElement("a");

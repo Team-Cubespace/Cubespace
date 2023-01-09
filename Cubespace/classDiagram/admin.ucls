@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.team.cubespace.admin.controller.AdminController" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/admin/controller/AdminController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="616" width="644" x="899" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.team.cubespace.admin.model.dao.AdminDAO" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/admin/model/dao/AdminDAO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="816" width="497" x="329" y="693"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.team.cubespace.admin.model.service.AdminServiceImpl" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/admin/model/service/AdminServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="536" width="530" x="329" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="4" language="java" name="com.team.cubespace.admin.model.service.AdminService" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/admin/model/service/AdminService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="516" width="530" x="866" y="693"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="5" language="java" name="com.team.cubespace.admin.model.vo.Block" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/admin/model/vo/Block.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="296" width="247" x="42" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.team.cubespace.admin.model.vo.FAQ" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/admin/model/vo/FAQ.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="296" width="247" x="1583" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="7">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="8">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="9" name="dao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="10" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="11">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="12" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="13" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

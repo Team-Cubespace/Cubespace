@@ -89,35 +89,112 @@ document.querySelectorAll("input[name='allDay']")[1].addEventListener("click",fu
 });
 
 
-//게시글 작성 유효성 검사
-
-let oldTitle = document.getElementById("title").value;
-document.getElementById("title").addEventListener("keyup",function(){
-  if(document.getElementById("title").value.length > 100){
-    alert("제목은 100글자 이하만 입력할 수 있습니다.");
-    document.getElementById("title").value = oldTitle;
-  }
-});
-
-/* [이벤트] :모달창 내에서 취소버튼 눌렀을 때 팝업 닫기 */
+/* [이벤트] :모달창 내에서 닫기버튼 눌렀을 때 팝업 닫기 */
 document.getElementById("cancleBtn").addEventListener("click",function(){
-  
   document.getElementById("popup_layer").style.display = "none";
 });
 
-/* [함수] : 팝업 모달창 = (1) 이벤트 수정  & (2) 신규 이벤트 등록 */
-function popup(arg){
+/* [이벤트] :모달창2 내에서 (수정하기)버튼 눌렀을 때 팝업 닫기 */
+document.getElementById("updateShowBtn").addEventListener("click",function(){
+  document.getElementById("popup_layer2").style.display = "none";
+
+   //수정,등록 모달창은 미니홈피 주인장만 열 수 있도록 처리함.
   if(minihomeNo == loginMemberNo){
     document.getElementById("popup_layer").style.display = "block";
   }
+})
+
+/* [이벤트] :모달창2 내에서 닫기버튼 눌렀을 때 팝업 닫기 */
+document.getElementById("cancleShowBtn").addEventListener("click",function(){
+  document.getElementById("popup_layer2").style.display = "none";
+});
+
+
+
+/* [함수] : 팝업 모달창2 = 모든 사람이 볼 수 있는 일정 디테일 모달창  */
+function popup2(arg){
+  document.getElementById("popup_layer2").style.display = "block";
+
+    /* 날짜 세팅 =  (월은 1 더해줘야 하고 / 월&일 둘다 1자리수일 경우 세팅 필요함.*/
+    let startFullYear = arg.event.start.getFullYear();
+    let startMonth = ("0" + (arg.event.start.getMonth() + 1)).slice(-2);
+    let startDate= ("0" + arg.event.start.getDate()).slice(-2);
+    let startHour = ("0" + arg.event.start.getHours()).slice(-2);
+    let startMinute = ("0" + arg.event.start.getMinutes()).slice(-2);
+    let endFullYear;
+    let endMonth; 
+    let endDate;
+    let endHour;
+    let endMinute;
+    /* 시작 = 끝이 완전 똑같을 경우 NVL처리를 해줘도...캘린더 자체에서...end가 null이 되기 때문에....세팅을 해줘야해..... */
+      if(arg.event.end != null){
+        endFullYear = arg.event.end.getFullYear();
+        endMonth = ("0" + (arg.event.end.getMonth() + 1)).slice(-2);
+        endDate = ("0" + arg.event.end.getDate()).slice(-2);
+        endHour = ("0" + arg.event.end.getHours()).slice(-2);
+        endMinute  = ("0" + arg.event.end.getMinutes()).slice(-2);
+      } else {
+        endFullYear = arg.event.start.getFullYear();
+        endMonth = startMonth;
+        endDate = startDate;
+        endHour = startHour;
+        endMinute = startMinute;
+      }
+    //0. 일정 번호
+    document.getElementById("number").value =  arg.event.extendedProps.planId;
+    //1. 카테고리
+    // document.getElementById("categoryShow").innerText =  arg.event.extendedProps.category;
+    let category =  arg.event.extendedProps.category;
+    let innerText =  document.getElementById("categoryShow").innerText;
+    switch(category){
+      case 1 : document.getElementById("categoryShow").innerText = "없음"; break;
+      case 2 :  document.getElementById("categoryShow").innerText = "직장"; break;
+      case 3 :  document.getElementById("categoryShow").innerText = "집";break;
+      case 4 :  document.getElementById("categoryShow").innerText = "기념일"; break;
+    }
+    //2. 제목
+    document.getElementById("titleShow").innerText = arg.event.title;
+    //3. 내용
+      if(arg.event.extendedProps.description != undefined){
+        document.getElementById("contentShow").innerText = arg.event.extendedProps.description;
+      } else {
+        document.getElementById("contentShow").innerText = "";
+      }
+    //4. 시작 날짜
+    let amPm;
+    if (startHour>=12){
+      amPm = "오후";
+    } else {
+      amPm = "오전";
+    }
+    document.getElementById("startDateShow").innerText = startFullYear +"-"+startMonth+"-"+startDate + " "+amPm+ " " +startHour+":"+startMinute ;
+
+    //6. 종료 날짜
+    document.getElementById("endDateShow").innerText = endFullYear +"-"+endMonth+"-"+endDate + " " +amPm+ " " + endHour+":"+endMinute;
+
+    //8. 종일 여부
+      if(arg.event.allDay){
+        document.getElementById("allDayShow").innerText = "예";
+      }else{
+        document.getElementById("allDayShow").innerText = "아니오";
+    }
+
+}
+
+
+/* [함수] : 팝업 모달창 = (1) 이벤트 수정  & (2) 신규 이벤트 등록 */
+function popup(arg){
 
   /* (1)이벤트 값이 있는 경우(수정) */
   if(arg.event != undefined){
+
+    document.getElementById("modal-title").innerText = "일정수정";
+  
     /* 등록버튼 숨기기 */
     document.getElementById("mainBtn").style.display = "none";
     /* 수정/삭제버튼 띄우기 */
     document.getElementById("updateBtn").style.display = "block";
-    document.getElementById("deleteBtn").style.display = "block";
+    // document.getElementById("deleteBtn").style.display = "block";
     /* 날짜 세팅 =  (월은 1 더해줘야 하고 / 월&일 둘다 1자리수일 경우 세팅 필요함.*/
     let startFullYear = arg.event.start.getFullYear();
     let startMonth = ("0" + (arg.event.start.getMonth() + 1)).slice(-2);
@@ -181,11 +258,18 @@ function popup(arg){
     /* 그와 동시에, event도 addEvent되어야 하는데... */
 
   }else{ /* (2)이벤트 값이 없는 경우(생성) */
+
+  //수정,등록 모달창은 미니홈피 주인장만 열 수 있도록 처리함.
+  if(minihomeNo == loginMemberNo){
+    document.getElementById("popup_layer").style.display = "block";
+  }
+  document.getElementById("modal-title").innerText = "일정등록";
+
     /* 등록버튼 띄우기 */
     document.getElementById("mainBtn").style.display = "block";
     /* 수정,삭제버튼 숨기기 */
     document.getElementById("updateBtn").style.display = "none";
-    document.getElementById("deleteBtn").style.display = "none";
+    // document.getElementById("deleteBtn").style.display = "none";
 
     //0.일정번호 -> 없겠지?
     //1. 카테고리
@@ -202,7 +286,7 @@ function popup(arg){
     document.getElementById("endDate").value = arg.startStr;
     //7. 종료 시간
     document.getElementById("endTime").value = "00:00";
-    //8. 종일 여부 (이거 '아니오'를 택하도록 하고 싶은데 못하겠넴)
+    //8. 종일 여부
     $("#allDay2").prop("checked", true); 
     allDayFalse();
   
@@ -252,6 +336,7 @@ function createCalendar(){
         /* 이벤트 클릭 시 모달 호출 */
         /* arg = 클릭한 그 이벤트의 내용임. 얘를 모달에 담고, 수정버튼을 눌렀을 때, 수정되도록... */
         eventClick : function (arg){ 
+          popup2(arg);
           popup(arg);
           selectEvent = arg;
         },
@@ -327,6 +412,16 @@ function createCalendar(){
     });
     calendar.render();
 }
+
+//게시글 작성 유효성 검사
+
+let oldTitle = document.getElementById("title").value;
+document.getElementById("title").addEventListener("keyup",function(){
+  if(document.getElementById("title").value.length > 100){
+    alert("제목은 100글자 이하만 입력할 수 있습니다.");
+    document.getElementById("title").value = oldTitle;
+  }
+});
 
 /* 유효성 검사 */
 function submitCommon(){
@@ -537,30 +632,32 @@ function updateEvent(){
 function deleteEvent(){
   
   const planId = document.getElementById("number").value;
+  
+  if(confirm("정말 삭제하시겠습니까?")){
 
-  $.ajax({
-    url: "/diary/calendar/deleteSchedule",
-    type:'POST',
-    data: {"planId":planId},
-    success:function(result){
+    $.ajax({
+      url: "/diary/calendar/deleteSchedule",
+      type:'POST',
+      data: {"planId":planId},
+      success:function(result){
 
-      if(result > 0){ //성공
-        alert("일정이 삭제되었습니다.");
-        selectEvent.event.remove();
-        
-      } else { //실패
-        console.log("서버에 저장 실패");
+        if(result > 0){ //성공
+          alert("일정이 삭제되었습니다.");
+          selectEvent.event.remove();
+          
+        } else { //실패
+          console.log("서버에 저장 실패");
+        }
+      },
+      error:function(status, request, error){
+
       }
-    },
-    error:function(status, request, error){
+    });
 
-    }
-  });
-
-//팝업 닫기
-document.getElementById("popup_layer").style.display = "none";
+    //팝업 닫기
+    document.getElementById("popup_layer2").style.display = "none";
+  }
 }
-
 /* ------------------------------------------------------------------------------ */
 
 

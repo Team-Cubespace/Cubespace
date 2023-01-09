@@ -88,12 +88,20 @@
         </div>
         <div class="input-row">
             <label class="add-image" for="addFileInput">이미지 등록
-                <img src="/resources/images/add-image.png" alt="">
+                <div class="add-image-info">
+                    <img src="/resources/images/add-image.png" alt="">
+                    <span><span id="addImageCount">0</span> / 10</span>
+                </div>
             </label>
             <input type="file" onchange="addFile(this)" multiple id="addFileInput">
-            <ul id="addFileList">
-                
-            </ul>
+            <div class="add-image-list">
+                <ul id="addFileList" class="swiper-wrapper">
+                    <%-- <li class="file-item swiper-slide" id="file1">
+                        <button>x</button>    
+                        <img src="/resources/images/common/cubes.png" alt="">
+                    </li> --%>
+                </ul>
+            </div>
         </div>
 
         <div class="form-button-area">

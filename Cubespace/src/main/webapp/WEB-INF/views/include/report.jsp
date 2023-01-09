@@ -109,7 +109,7 @@
                     <div class = "input-row">
                         <div class="nameBox">신고 대상</div>
                         <div>
-                            <span class = "name"></span>
+                            <span id = "name"></span>
                         </div>
                     </div>
                     <div class = "input-row">
@@ -130,14 +130,14 @@
 <script>
 
     let memberName;
-
-    function reportFriend(memberNo){
+    let memberNo;
+    function reportFriend(memberNumber){
         document.getElementById("popup_layer1").style.display = "block";
         console.log("하이");
         // 신고하는 사람은 loginMember니까
         // 1. 신고받은 사람
         // 2. 신고 내용
-        console.log(memberNo); 
+        memberNo = memberNumber;
         //1. 멤버 이름 가져오는 ajax
         $.ajax({
             url:"/selectreportedMember",
@@ -145,8 +145,7 @@
             data : {"memberNo": memberNo},
             success : function(result){
                 memberName = result;
-                console.log("memberName" + memberName);
-                document.getElementById("name").value = memberName;
+                document.getElementById("name").innerText = memberName;
 
             }, error : function (){
             }
@@ -163,7 +162,7 @@
             $.ajax({
             url:"/reportingMember",
             type : "POST",
-            data : {"memberNo": memberNo,"complainContent":complainContent},
+            data : {"complainedNo": memberNo,"complainContent":complainContent},
             success : function(result){
                 if (result > 0){
                     alert("신고가 완료되었습니다.");

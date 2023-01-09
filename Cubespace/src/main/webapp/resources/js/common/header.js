@@ -23,7 +23,7 @@ const openMinihome = (url) => {
     // 로그인 상태가 아닐 때
     if(loginMemberNo == "") {
         if(confirm("로그인 상태가 아닙니다.\n로그인 하시겠습니까?")) {
-            location.href = "/member/login";
+            location.href = "/login";
         } else {
             return false;
         }

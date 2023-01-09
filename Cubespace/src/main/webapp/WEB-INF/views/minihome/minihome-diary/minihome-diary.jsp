@@ -20,16 +20,50 @@
 
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
 
+
+
+ <%-- 내 폰트 설정 --%>
+    <c:forEach var="font" items="${allFontList}">
+    <c:if test="${font.fontNo == minihome.fontNo}">
+        <c:set var="myFont" value="${font.fontNo}"/>
+    </c:if>
+
     <style>
+        @font-face{
+            font-family : "${font.fontNo}";
+            src : url(${font.fontPath});
+        }
+    </style>
+    </c:forEach>
+
+    <style>
+     .side-folder,  header,  .input-row, .form-button-area, .under-section,  .title-section,  .write-section{
+        font-family : "${myFont}";
+    } 
+
+    input:not(#minihomeTitle), textarea:not(.profile-message) {
+        font-family : "${loginMember.ownFontNo}";
+    }
+
     .frame-color {
             background-color : ${minihome.frameColor};
         }
+
     </style>
 </head>
 <body>
+    <jsp:include page="/WEB-INF/views/include/allFontMusic.jsp"/>
     <div class="content-area frame-color">
         <section class="minihome-rayout">
                 <jsp:include page="/WEB-INF/views/include/side-folder.jsp"/>
+
+                <style>
+                    .side-folder{
+        font-family : "${myFont}";
+    }
+                </style>
+
+
                 <!-- 좌측 section 코드 작성 또는 include -->
                 <!-- 전체 내용 div 태그로 한 번 감싸주세요 -->
                 <!-- ex) <div class="home-area"> <div></div> <span></span> ... </div> -->
@@ -105,7 +139,7 @@
                     </div>
                     <div class = "write-section">
                         <c:if test = "${minihome.memberNo==loginMember.memberNo}">
-                            <div  class = "writeBtn" onclick="writeBtn()">
+                            <div  class = "writeBtn whiteBtn" onclick="writeBtn()">
                                 <span>글쓰기</span>
                             </div>
                         </c:if>

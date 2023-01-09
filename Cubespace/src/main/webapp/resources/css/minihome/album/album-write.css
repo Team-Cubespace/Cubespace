@@ -78,21 +78,54 @@ input[type='radio'] {
 }
 .add-image img{
     background-color: transparent;
+    width: 70px;
+    height: 70px;
     margin-top: 10px;
     border: none;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 input[type='file'] {
     display: none;
 }
+.add-image-info {
+    display: flex;
+    flex-direction: column;
+    padding-right: 15px;
+}
+.add-image-info > span{
+    font-size: 14px;
+    color: grey;
+    text-align: end;
+}
+#addImageCount {
+    font-size: 15px;
+    color: var(--ink);
+}
+.add-image-list {
+    overflow: hidden;
+    width: 100%;
+}
 
 /* 파일 리스트 */
 .file-item {
-    background-color: #ddd;
+    position: relative;
+    width: 100px;
+    height: 100px;
     padding: 5px;
     margin: 5px 0px;
 }
+.file-item img{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+}
 .file-item button {
+    font-size: 15px;
+    background-color: white;
+    right: 5px;
+    top: 5px;
+    position: absolute;
     background-color: transparent;
     border: none;
     cursor: pointer;

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.team.cubespace.minihome.controller.MinihomeController" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/minihome/controller/MinihomeController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="176" width="425" x="1392" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.team.cubespace.minihome.controller.MinihomeMainController" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/minihome/controller/MinihomeMainController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="216" width="523" x="2351" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.team.cubespace.minihome.model.dao.MinihomeMainDAO" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/minihome/model/dao/MinihomeMainDAO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="336" width="391" x="1857" y="1253"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.team.cubespace.minihome.model.dao.MinihomeDAO" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/minihome/model/dao/MinihomeDAO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="216" width="353" x="999" y="1253"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="5" language="java" name="com.team.cubespace.minihome.model.service.MinihomeMainService" 
+    project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/minihome/model/service/MinihomeMainService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="236" width="454" x="2288" y="1253"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="6" language="java" name="com.team.cubespace.minihome.model.service.MinihomeMainServiceImpl" 
+    project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/minihome/model/service/MinihomeMainServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="256" width="454" x="1857" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="7" language="java" name="com.team.cubespace.minihome.model.service.MinihomeService" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/minihome/model/service/MinihomeService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="176" width="353" x="1392" y="1253"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="8" language="java" name="com.team.cubespace.minihome.model.service.MinihomeServiceImpl" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/minihome/model/service/MinihomeServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="196" width="353" x="999" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.team.cubespace.minihome.model.vo.FriendMessage" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/minihome/model/vo/FriendMessage.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="456" width="269" x="690" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.team.cubespace.minihome.model.vo.Minihome" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/minihome/model/vo/Minihome.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="1176" width="298" x="43" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.team.cubespace.minihome.model.vo.NewPost" project="Cubespace" 
+    file="/Cubespace/src/main/java/com/team/cubespace/minihome/model/vo/NewPost.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="516" width="269" x="381" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="12">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="13" name="dao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="14" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="15">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <association id="16">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="17" name="minihomeService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="18" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="19">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <association id="20">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="21" name="dao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="22" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="23">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="24" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="25" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

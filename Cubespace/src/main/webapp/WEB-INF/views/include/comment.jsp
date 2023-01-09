@@ -64,7 +64,7 @@
                                     </c:otherwise>
                                 </c:choose>
                                 <!-- 로그인 회원번호와 댓글의 회원번호가 일치할때만 생성 -->
-                                <c:if test="${loginMember.memberNo == comment.memberNo}">
+                                <c:if test="${loginMember.memberNo == comment.memberNo || minihome.memberNo == loginMember.memberNo}">
                                     <button class="comment-drop-down-button fa-solid fa-ellipsis-vertical">
                                         <ul class="comment-drop-down-menu">
                                             <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>
@@ -104,7 +104,7 @@
                             <div class="comment-nickname-area">
                                 <span class="member-nickname">${comment.memberNickname}</span>
                                 <!-- 로그인 회원번호와 댓글의 회원번호가 일치할때만 생성 -->
-                                <c:if test="${loginMember.memberNo == comment.memberNo}">
+                                <c:if test="${loginMember.memberNo == comment.memberNo || minihome.memberNo == loginMember.memberNo}">
                                     <button class="comment-drop-down-button fa-solid fa-ellipsis-vertical">
                                         <ul class="comment-drop-down-menu">
                                             <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>

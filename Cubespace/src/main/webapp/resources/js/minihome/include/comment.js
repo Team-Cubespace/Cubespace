@@ -61,7 +61,7 @@ const createCommentList = (commentList) => {
         }
 
         commentNicknameArea.append(memberNickname);
-        if(loginMemberNo == comment.memberNo) { // 자신이 작성한 댓글일 때만 생성
+        if(loginMemberNo == comment.memberNo || loginMemberNo == minihomeHostNo) { // 자신이 작성한 댓글일 때만 생성
             const commentDropDownButton = document.createElement("button");
             commentDropDownButton.classList.add("comment-drop-down-button", "fa-solid", "fa-ellipsis-vertical");
             commentDropDownButton.addEventListener("click", e=>{

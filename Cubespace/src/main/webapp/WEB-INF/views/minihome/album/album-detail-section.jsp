@@ -96,7 +96,7 @@
 
                     <div class="modal-comment-content">
                         <label class="modal-label" for="">흔적남기기</label>
-                        <textarea id="modalCommentContent" name="commentContent" rows="5">퍼가요~</textarea>
+                        <textarea id="modalCommentContent" name="commentContent" rows="5" maxLength="200">퍼가요~</textarea>
                     </div>
 
                     <div class="modal-scrap-allow">

@@ -10,17 +10,17 @@
             <label for="">폴더</label>
             <select name="folderNo" id="">
             <c:forEach var="folder" items="${minihome.videoFolderList}">
-                <option value="${folder.folderNo}" <c:if test="${folderNo == video.folderNo}">selected</c:if>>${folder.folderName}</option>
+                <option value="${folder.folderNo}" <c:if test="${folder.folderNo == video.folderNo}">selected</c:if>>${folder.folderName}</option>
             </c:forEach>
             </select>
         </div>
         <div class="input-row">
             <label for="videoTitle">제목</label>
-            <input id="videoTitle" name="videoTitle" type="text" placeholder="제목을 입력하세요" value="${video.videoTitle}" maxLength="100">
+            <input id="videoTitle" name="videoTitle" type="text" placeholder="제목을 입력하세요" value="${video.videoTitle}" maxLength="25">
         </div>
         <div class="input-row">
             <label for="videoContent">내용</label>
-            <textarea name="videoContent" id="videoContent" rows="6" placeholder="내용을 입력하세요" maxLength="4000">${video.videoContent}</textarea>
+            <textarea name="videoContent" id="videoContent" rows="6" placeholder="내용을 입력하세요" maxLength="1000">${video.videoContent}</textarea>
         </div>
 
         <div class="input-row">

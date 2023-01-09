@@ -16,11 +16,11 @@
         </div>
         <div class="input-row">
             <label for="videoTitle">제목</label>
-            <input id="videoTitle" name="videoTitle" type="text" placeholder="제목을 입력하세요" maxLength="100">
+            <input id="videoTitle" name="videoTitle" type="text" placeholder="제목을 입력하세요" maxLength="25">
         </div>
         <div class="input-row">
             <label for="videoContent">내용</label>
-            <textarea name="videoContent" id="videoContent" rows="6" placeholder="내용을 입력하세요" maxLength="4000"></textarea>
+            <textarea name="videoContent" id="videoContent" rows="6" placeholder="내용을 입력하세요" maxLength="1000"></textarea>
         </div>
 
         <div class="input-row">

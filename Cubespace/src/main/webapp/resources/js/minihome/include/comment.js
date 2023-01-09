@@ -268,7 +268,7 @@ const showUpdateComment= (commentNo, btn) =>{
     beforeContent =  beforeContent.replaceAll("&quot;", "\"");
     
     // 개행문자 처리 해제
-    beforeContent =  beforeContent.replaceAll("<br>", "\n").replaceAll("&nbsp;", " ");
+    beforeContent =  beforeContent.replaceAll("<br>", "\n");
 
     textarea.value = beforeContent;
     textarea.setAttribute("rows", 1);

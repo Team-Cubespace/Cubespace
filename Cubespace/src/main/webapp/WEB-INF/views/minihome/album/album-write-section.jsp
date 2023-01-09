@@ -16,11 +16,11 @@
         </div>
         <div class="input-row">
             <label for="albumTitle">제목</label>
-            <input id="albumTitle" name="albumTitle" type="text" placeholder="제목을 입력하세요" maxLength="100">
+            <input id="albumTitle" name="albumTitle" type="text" placeholder="제목을 입력하세요" maxLength="25">
         </div>
         <div class="input-row">
             <label for="albumContent">내용</label>
-            <textarea name="albumContent" id="albumContent" rows="6" placeholder="내용을 입력하세요" maxLength="4000"></textarea>
+            <textarea name="albumContent" id="albumContent" rows="6" placeholder="내용을 입력하세요" maxLength="1000"></textarea>
         </div>
         <div class="input-row">
             <label for="">위치 찾기</label>

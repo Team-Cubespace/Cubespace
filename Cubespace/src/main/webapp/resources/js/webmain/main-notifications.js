@@ -148,31 +148,32 @@ if(alarmRightChoice!=null){
 
 /* 비동기로 내 알림카운트 함수 선언  */
 const notificationsCount = ()=>{
-
-    $.ajax({
-        url : "/notificationsCount",
-        data: {"loginMemberNo":loginMemberNo},
-        dataType : "JSON",
-        success : notificationsCount =>{
-
-            // 프로필 알림 숫자 변경
-            const mainAlarmCount = document.getElementById("mainAlarmCount")
-            if(mainAlarmCount!=null){
-                mainAlarmCount.innerText=notificationsCount;
+    if(loginMemberNo != "") {
+        $.ajax({
+            url : "/notificationsCount",
+            data: {"loginMemberNo":loginMemberNo},
+            dataType : "JSON",
+            success : notificationsCount =>{
+    
+                // 프로필 알림 숫자 변경
+                const mainAlarmCount = document.getElementById("mainAlarmCount")
+                if(mainAlarmCount!=null){
+                    mainAlarmCount.innerText=notificationsCount;
+                }
+                
+                const noticeNew = document.getElementById("alarmCount");
+                // 헤더 빨간색 추가 / 제거
+                if(notificationsCount > 0){ //카운트 있을시 추가
+                    noticeNew.classList.add("alarm-count");
+                }else{ // 없을시 제거 
+                    noticeNew.classList.remove("alarm-count");
+                }
             }
-            
-            const noticeNew = document.getElementById("alarmCount");
-            // 헤더 빨간색 추가 / 제거
-            if(notificationsCount > 0){ //카운트 있을시 추가
-                noticeNew.classList.add("alarm-count");
-            }else{ // 없을시 제거 
-                noticeNew.classList.remove("alarm-count");
-            }
-        }
-    })
+        })
+    }
 }
 /* 즉시 실행 */
-(notificationsCount)()
+(notificationsCount)();
 
 /* 알람 읽음 처리 함수 선언 */
 const alarmRead=(alarmNoList)=>{

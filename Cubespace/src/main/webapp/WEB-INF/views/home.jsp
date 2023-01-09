@@ -68,7 +68,7 @@
                 <c:choose>
                     <c:when test="${empty loginMember}">
                         <div class="login">
-                            <img src="../../resources/images/common/cubes.png">
+                            <img src="/resources/images/common/cubes.png">
                             <span>로그인 후 이용해주세요.</span>
                         </div>
                         <a href="/member/login" id="loginBtn"><i class="fa-solid fa-right-to-bracket"></i>&nbsp;Login</a>

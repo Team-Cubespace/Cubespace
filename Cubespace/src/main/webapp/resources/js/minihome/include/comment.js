@@ -260,7 +260,7 @@ const showUpdateComment= (commentNo, btn) =>{
 
     const textarea = document.createElement("textarea");
     textarea.classList.add("update-textarea");
-
+    textarea.setAttribute("maxLength", 300);
     // XSS 방지 처리 해제
     beforeContent =  beforeContent.replaceAll("&amp;", "&");
     beforeContent =  beforeContent.replaceAll("&lt;", "<");
@@ -390,6 +390,7 @@ function addCommentArea(parentCommentNo, target) {
     const commentContent = document.createElement("div");
     commentContent.classList.add("comment-content");
     const textarea = document.createElement("textarea");
+    textarea.setAttribute("maxLength", 300);
     // name값 세팅
     // textarea.setAttribute("name", "");
     textarea.setAttribute("placeholder", "댓글 추가..");

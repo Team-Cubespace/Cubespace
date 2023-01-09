@@ -124,7 +124,12 @@ const createFolderList = (folderList) => {
                 if(result > 0) {
                     console.log(result);
                     alert("게시글을 스크랩 하였습니다.");
+
+                    
+
                     document.getElementById("boardScrapModal").style.display = "none";
+                    document.getElementById("modalCommentContent").value = "";
+                    document.getElementById("modalOpenFlag1").checked = true;
                     selectCommentList(boardNo);
                 }
             }

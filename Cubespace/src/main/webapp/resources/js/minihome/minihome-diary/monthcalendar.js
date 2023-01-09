@@ -95,15 +95,15 @@ document.getElementById("cancleBtn").addEventListener("click",function(){
 });
 
 /* [이벤트] :모달창2 내에서 (수정하기)버튼 눌렀을 때 팝업 닫기 */
-document.getElementById("updateShowBtn").addEventListener("click",function(){
-  document.getElementById("popup_layer2").style.display = "none";
+if(minihomeNo == loginMemberNo){
+  document.getElementById("updateShowBtn").addEventListener("click",function(){
+    document.getElementById("popup_layer2").style.display = "none";
 
-   //수정,등록 모달창은 미니홈피 주인장만 열 수 있도록 처리함.
-  if(minihomeNo == loginMemberNo){
-    document.getElementById("popup_layer").style.display = "block";
-  }
-})
-
+    //수정,등록 모달창은 미니홈피 주인장만 열 수 있도록 처리함.
+      document.getElementById("popup_layer").style.display = "block";
+    
+  })
+}
 /* [이벤트] :모달창2 내에서 닫기버튼 눌렀을 때 팝업 닫기 */
 document.getElementById("cancleShowBtn").addEventListener("click",function(){
   document.getElementById("popup_layer2").style.display = "none";
@@ -156,9 +156,18 @@ function popup2(arg){
     document.getElementById("titleShow").innerText = arg.event.title;
     //3. 내용
       if(arg.event.extendedProps.description != undefined){
-        document.getElementById("contentShow").innerText = arg.event.extendedProps.description;
+        document.getElementById("contentShow").innerHTML = arg.event.extendedProps.description;
+
+        // let temp = arg.event.extendedProps.description;
+        // temp = temp.replaceAll("&", "&amp;");
+        // temp = temp.replaceAll("<", "&lt;");
+        // temp = temp.replaceAll(">", "&gt;");
+        // temp = temp.replaceAll("\"", "&quot;");
+        // temp = temp.replaceAll("(\r\n|\n|\r|\n\r)", "<br>")
+        // temp = temp.replaceAll(" ", "&nbsp;");
+        // document.getElementById("contentShow").innerHTML = temp;
       } else {
-        document.getElementById("contentShow").innerText = "";
+        document.getElementById("contentShow").innerHTML = "";
       }
     //4. 시작 날짜
     let amPm;
@@ -228,7 +237,15 @@ function popup(arg){
     document.getElementById("title").value = arg.event.title;
     //3. 내용
       if(arg.event.extendedProps.description != undefined){
-        document.getElementById("description").value = arg.event.extendedProps.description;
+        // document.getElementById("description").value = arg.event.extendedProps.description;
+        let temp = arg.event.extendedProps.description;
+        temp = temp.replaceAll("&amp;","&");
+        temp = temp.replaceAll("&lt;","<");
+        temp = temp.replaceAll("&gt;",">");
+        temp = temp.replaceAll("&quot;","\"");
+        temp = temp.replaceAll("<br>","\n");
+        temp = temp.replaceAll("&nbsp;"," ");
+        document.getElementById("description").value = temp;
       } else {
         document.getElementById("description").value = "";
       }
@@ -415,11 +432,18 @@ function createCalendar(){
 
 //게시글 작성 유효성 검사
 
-let oldTitle = document.getElementById("title").value;
+
 document.getElementById("title").addEventListener("keyup",function(){
-  if(document.getElementById("title").value.length > 100){
-    alert("제목은 100글자 이하만 입력할 수 있습니다.");
-    document.getElementById("title").value = oldTitle;
+  if(document.getElementById("title").value.length > 30){
+    alert("제목은 30글자 이하만 입력할 수 있습니다.");
+  
+  }
+});
+
+document.getElementById("title").addEventListener("keyup",function(){
+  if(document.getElementById("description").value.length > 1000){
+    alert("내용은 1000글자 이하만 입력할 수 있습니다.");
+    
   }
 });
 
@@ -438,13 +462,17 @@ function submitCommon(){
     alert("시작날짜가 끝날짜보다 클 수 없습니다.");
     submitFlag = false;
   }
+  if(end>9999){
+    alert("미치셨나요? 그만해주세여");
+    submitFlag = false;
+  }
 }
 
 /* [함수] 일정 등록 = 모달창에 있는 값을 화면에 뿌리기 & DB에 저장하기 */
 function addEvent(){
   const category = document.getElementById("category").value;
   const title = document.getElementById("title").value;
-  const description = document.getElementById("description").value;
+  let description = document.getElementById("description").value;
   const startDate = document.getElementById("startDate").value;
   const startTime = document.getElementById("startTime").value;
   const endDate = document.getElementById("endDate").value;
@@ -463,6 +491,17 @@ function addEvent(){
     backgroundColor = "#FFCAC8"
   }
   
+  /* description 세팅 */
+  
+  // description = description.replaceAll("&", "&amp;");
+  // description = description.replaceAll("<", "&lt;");
+  // description = description.replaceAll(">", "&gt;");
+  // description = description.replaceAll("\"", "&quot;");
+  // description = description.replaceAll("(\r\n|\n|\r|\n\r)", "<br>")
+  // description = description.replaceAll(" ", "&nbsp;");
+  // console.log(description);
+
+
   /* db에 추가할 데이터 */
   let addEventdata;
   if(allDay =="true"){
@@ -537,7 +576,7 @@ function updateEvent(){
   const planId = document.getElementById("number").value;
   const category = document.getElementById("category").value;
   const title = document.getElementById("title").value;
-  const description = document.getElementById("title").value;
+  const description = document.getElementById("description").value;
   const startDate = document.getElementById("startDate").value;
   const startTime = document.getElementById("startTime").value;
   const endDate = document.getElementById("endDate").value;
@@ -566,7 +605,7 @@ function updateEvent(){
             "planNo" : document.getElementById("number").value,
             "planCategory": document.getElementById("category").value,
             "planTitle" : document.getElementById("title").value,
-            "planDescription" : document.getElementById("title").value,
+            "planDescription" : document.getElementById("description").value,
             "startDate" : document.getElementById("startDate").value+" "+document.getElementById("startTime").value,
             "endDate": document.getElementById("endDate").value+" "+document.getElementById("endTime").value,
             "allDayFlag" : 'Y'
@@ -577,7 +616,7 @@ function updateEvent(){
           "planNo" : document.getElementById("number").value,
           "planCategory": document.getElementById("category").value,
           "planTitle" : document.getElementById("title").value,
-          "planDescription" : document.getElementById("title").value,
+          "planDescription" : document.getElementById("description").value,
           "startDate" : document.getElementById("startDate").value+" "+document.getElementById("startTime").value,
           "endDate": document.getElementById("endDate").value+" "+document.getElementById("endTime").value,
           "allDayFlag" : 'N'
@@ -585,9 +624,9 @@ function updateEvent(){
       }
       $.ajax({
         url: "/diary/calendar/updateSchedule",
-        contentType: 'application/json',
+        // contentType: 'application/json',
         type:'POST',
-        data: JSON.stringify(updateData),
+        data: updateData,
         success:function(result){
 
           if(result > 0){ //성공

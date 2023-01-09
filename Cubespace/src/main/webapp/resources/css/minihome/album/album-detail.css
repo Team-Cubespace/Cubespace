@@ -88,9 +88,15 @@ header {
     margin-left: auto;
 }
 
+.detail-title-area {
+    word-break: break-all;
+    white-space: pre-wrap;
+}
 /* 앨범 내용 영역 */
 .album-content {
     margin: 10px 0px;
+    word-break: break-all;
+    white-space: pre-wrap;
 }
 
 /* 앨범 내용 푸터 */

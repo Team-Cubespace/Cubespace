@@ -69,7 +69,7 @@
     overflow: hidden;
 }
 .update-textarea {
-    width: 100%;
+    width: 98%;
 }
 .comment-write-button-area,
 .update-button-area {
@@ -186,4 +186,8 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+}
+.comment-content-area > p {
+    word-break: break-all;
+    white-space: pre-wrap;
 }

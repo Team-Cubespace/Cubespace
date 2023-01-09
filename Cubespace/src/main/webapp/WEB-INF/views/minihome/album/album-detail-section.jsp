@@ -47,9 +47,7 @@
         </c:if>
     </div>
 
-    <p class="album-content">
-        ${board.albumContent}
-    </p>
+    <p class="album-content">${board.albumContent}</p>
     <div class="album-detail-footer">
         <%-- 게시글에 좌표가 등록 되었을때만 --%>
         <c:if test="${not empty board.latitude}">
@@ -96,7 +94,7 @@
 
                     <div class="modal-comment-content">
                         <label class="modal-label" for="">흔적남기기</label>
-                        <textarea id="modalCommentContent" name="commentContent" rows="5">퍼가요~</textarea>
+                        <textarea id="modalCommentContent" name="commentContent" rows="5" maxLength="300">퍼가요~</textarea>
                     </div>
 
                     <div class="modal-scrap-allow">

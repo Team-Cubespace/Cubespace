@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/resources/css/minihome/include/minihome-common.css">
 <div class="comment-section">
     <div class="comment-header">
-        <span class="comment-count">댓글 ${fn:length(board.commentList)}개</span>
+        <span class="comment-count">댓글 <span id="commentCount">${fn:length(board.commentList)}</span>개</span>
     </div>
     <div class="comment-write-row">
         <div class="comment-profile-image-area">
@@ -20,7 +20,7 @@
             </c:choose>
         </div>
         <div class="comment-content">
-            <textarea name="" id="addComment" placeholder="댓글 추가.." rows="1" onkeyup="resizeTextarea(this)"></textarea>
+            <textarea name="" id="addComment" placeholder="댓글 추가.." rows="1" onkeyup="resizeTextarea(this)" maxLength="300"></textarea>
             <div class="comment-write-button-area">
                 <button id="addCommentCencel" class="cancel-button" type="button">취소</button>
                 <button id="addCommentInsert" class="insert-button" type="button">등록</button>
@@ -64,19 +64,19 @@
                                     </c:otherwise>
                                 </c:choose>
                                 <!-- 로그인 회원번호와 댓글의 회원번호가 일치할때만 생성 -->
-                                <c:if test="${loginMember.memberNo == comment.memberNo}">
+                                <c:if test="${loginMember.memberNo == comment.memberNo || minihome.memberNo == loginMember.memberNo}">
                                     <button class="comment-drop-down-button fa-solid fa-ellipsis-vertical">
                                         <ul class="comment-drop-down-menu">
-                                            <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>
+                                            <c:if test="${loginMember.memberNo == comment.memberNo}">
+                                                <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>
+                                            </c:if>
                                             <li onclick="deleteComment(${comment.commentNo})">삭제</li>
                                         </ul>
                                     </button>
                                 </c:if>
                             </div>
                             <div class="comment-content-area">
-                                <p style="font-family: '${comment.ownFontNo}'">
-                                    ${comment.commentContent}
-                                </p>                            
+                                <p style="font-family: '${comment.ownFontNo}'">${comment.commentContent}</p>                            
                             </div>
                             <div class="comment-button-area">
                                 <span class="comment-date">${comment.commentCreate}</span><button type="button" onclick="addCommentArea(${comment.commentNo}, this)">답글</button>
@@ -104,10 +104,12 @@
                             <div class="comment-nickname-area">
                                 <span class="member-nickname">${comment.memberNickname}</span>
                                 <!-- 로그인 회원번호와 댓글의 회원번호가 일치할때만 생성 -->
-                                <c:if test="${loginMember.memberNo == comment.memberNo}">
+                                <c:if test="${loginMember.memberNo == comment.memberNo || minihome.memberNo == loginMember.memberNo}">
                                     <button class="comment-drop-down-button fa-solid fa-ellipsis-vertical">
                                         <ul class="comment-drop-down-menu">
-                                            <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>
+                                            <c:if test="${loginMember.memberNo == comment.memberNo}">
+                                                <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>
+                                            </c:if>
                                             <li onclick="deleteComment(${comment.commentNo})">삭제</li>
                                         </ul>
                                     </button>

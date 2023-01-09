@@ -106,11 +106,11 @@ function writeValidate() {
         return false;
     }
     console.log("contentLength22"+contentLength);
-    if(contentLength > 3878){
-        console.log("contentLength"+contentLength);
-        alert("내용 길이가 너무 깁니다.")
-        return false;
-    }
+    // if(contentLength > 3878){
+    //     console.log("contentLength"+contentLength);
+    //     alert("내용 길이가 너무 깁니다.")
+    //     return false;
+    // }
 
 
 

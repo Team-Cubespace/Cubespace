@@ -269,6 +269,9 @@ for (let plusBtn of plusBtnList) {
         const i = document.createElement("i");
         i.classList.add("fa-solid");
         i.classList.add("fa-minus");
+        i.addEventListener("click", btn => {
+            folderMinus(btn);
+        })
 
         const div = document.createElement("div");
         div.classList.add("subCategory");
@@ -309,8 +312,13 @@ for (let plusBtn of plusBtnList) {
 const minusBtnList = document.getElementsByClassName("fa-minus");
 for (let minusBtn of minusBtnList) {
     minusBtn.addEventListener("click", e => {
+        folderMinus(e);  
+    })
+}
 
-        const categoryName = e.target.parentElement.parentElement.parentElement; // diary, album, video
+const folderMinus = e => {
+
+    const categoryName = e.target.parentElement.parentElement.parentElement; // diary, album, video
         const folderOrder = e.target.parentElement.getAttribute("name"); //해당 폴더의 folderOrder
         const folderNo = e.target.parentElement.getAttribute("id"); //해당 폴더의 folderNo
         const subCategoryLength = e.target.parentElement.parentElement.childElementCount; // 해당 카테고리의 폴더 갯수
@@ -378,7 +386,6 @@ for (let minusBtn of minusBtnList) {
             error: e => { console.log("폴더 삭제 중 오류 발생"); }
             // })
         })
-    })
 }
 
 

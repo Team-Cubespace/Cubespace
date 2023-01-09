@@ -155,7 +155,7 @@ public class ManageDAO {
 	 */
 	public int updateFolderOrder(Map<String, Object> paramMap) {
 		
-		return sqlSession.delete("manageMapper.updateFolderOrder", paramMap);
+		return sqlSession.update("manageMapper.updateFolderOrder", paramMap);
 	}
 
 
@@ -336,6 +336,18 @@ public class ManageDAO {
 		
 		return sqlSession.update("manageMapper.deleteMusic", memberNo);	
 	}
+
+
+	/** // 삭제 뒤 새 폴더리스트 조회(boardTypeNo별로)
+	 * @param paramMap
+	 * @return
+	 */
+	public List<Folder> selectFolderList(Map<String, Object> paramMap) {
+		
+		return sqlSession.selectList("manageMapper.selectFolderList", paramMap);
+	}
+
+
 
 
 	

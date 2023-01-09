@@ -90,6 +90,7 @@
         .modal-footer > :first-child {
             background-color: black;
             color :white;
+            
         }
 
         .modal-footer > :last-child {

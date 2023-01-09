@@ -1,6 +1,7 @@
 package com.team.cubespace.main.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,11 @@ public class MainHomepageServiceImpl implements MainHomepageService {
 	@Override
 	public List<MainHomepage> mainShortsSelect(int shortsChoice) {
 		return  dao.mainShortsSelect(shortsChoice);
+	}
+
+	// TODAY, FRIEND_COUNT 조회
+	@Override
+	public Map<String, Integer> selectInfo(int memberNo) {
+		return dao.selectInfo(memberNo);
 	}
 }

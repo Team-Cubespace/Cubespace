@@ -15,7 +15,7 @@ public class InitTodayScheduling {
 	
 	private Logger logger = LoggerFactory.getLogger(InitTodayScheduling.class);
 	
-	@Scheduled(fixedRate = 1000 * 60 * 10)	// 2 분마다
+	@Scheduled(cron="0 59 23 * * *")	// 2 분마다
 	public void initTodayScheduling() {
 		int result = service.initToday();
 		String message = null;

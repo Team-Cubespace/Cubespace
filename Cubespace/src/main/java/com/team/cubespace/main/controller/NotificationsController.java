@@ -8,10 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.google.gson.Gson;
 import com.team.cubespace.main.model.service.NotificationsService;
 import com.team.cubespace.main.model.vo.Notifications;
+import com.team.cubespace.member.model.vo.Member;
 
 @Controller
 public class NotificationsController {
@@ -40,8 +42,15 @@ public class NotificationsController {
 	 */
 	@GetMapping("/memberAcceptBtn")
 	@ResponseBody
-	public int memberAcceptBtn(@RequestParam Map<String, Object> paramMap) {
+	public int memberAcceptBtn(@RequestParam Map<String, Object> paramMap,
+						@SessionAttribute("loginMember") Member loginMember) {
 		int result = service.memberAcceptBtn(paramMap);
+		
+		if(result >0) {
+			loginMember.setFriendCount(loginMember.getFriendCount()+1);
+			
+		}
+		
 		return result;
 	}
 	

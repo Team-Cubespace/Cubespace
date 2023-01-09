@@ -129,7 +129,8 @@
     color: darksalmon;
 }
 
-#selectMinimee{
+/* 카테고리 선택 */
+.select-category{
     color: darksalmon;
     font-weight: bold;
 }

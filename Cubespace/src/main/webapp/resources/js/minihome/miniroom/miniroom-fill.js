@@ -23,34 +23,65 @@ const floorRadio = document.getElementsByName("floor");
 let wallColorF = 'N';
 let floorColorF = 'N';
 
-/* 임시 변수 */
-let abc = "#ffe5e5";
-let def = "../../../images/help.png";
-let wallPatternNo = 2;
-let floorPatternNo = 1;
+/* image flag */
+const wallFlag = document.getElementsByName("wallFlag");
+const floorFlag = document.getElementsByName("floorFlag");
+
+/* 원본 값을 저장할 변수 */
+let wallPath;
+let floorPath;
+let wallPatternNo;
+let floorPatternNo;
+
+/* 벽지, 바닥 변수 세팅 */
+(() => {
+    $.ajax({
+        url : "/miniroom/room",
+        type : "GET",
+        success : (room) => {
+            if (room != null) {
+                wallPath = room.wall;
+                floorPath = room.floor;
+                wallPatternNo = room.wallPattern;
+                floorPatternNo = room.floorPattern;
+
+                loadWall();
+                loadFloor();
+
+            } else {
+                console.log("벽지, 바닥 정보 불러오기 실패");
+            }
+        },
+        error : () => {console.log("벽지, 바닥 정보 불러오기 실패");}
+    });
+})();
 
 /* 벽지, 바닥 지정 */
 const setWallBackground = input => {
-    if(input.charAt(0) == "#" && abc.length == 7){
+    if(input.charAt(0) == "#" && input.length == 7){
         left.style.backgroundColor = input;
         right.style.backgroundColor = input;
         wallColorF = 'Y';
+        wallFlag.value = 'N';
 
     } else {
         left.style.backgroundImage = input;
         right.style.backgroundImage = input;
         wallColorF = 'N';
+        wallFlag.value = 'Y';
     }
 }
 
 const setFloorBackground = input => {
-    if(input.charAt(0) == "#" && abc.length == 7){
+    if(input.charAt(0) == "#" && input.length == 7){
         bottom.style.backgroundColor = input;
         floorColorF = 'Y';
+        floorFlag.value = 'N';
 
     } else {
         bottom.style.backgroundImage = input;
         floorColorF = 'N';
+        floorFlag.value = 'Y';
     }
 }
 
@@ -61,15 +92,17 @@ const resetWallBackground = () => {
     right.style.backgroundColor = "white";
     right.style.backgroundImage = "none";
     wallColorF = 'Y';
+    wallFlag.value = 'N';
 }
 
 const resetFloorBackground = () => {
     bottom.style.backgroundColor = "white";
     bottom.style.backgroundImage = "none";
     floorColorF = 'Y';
+    floorFlag.value = 'N';
 }
 
-/* 벽지 패턴 */
+/* 벽지, 바닥 패턴 */
 const selectWallPattern = patternNo => {
     if(patternNo == 1) {
         left.style.backgroundSize = "450px 500px";
@@ -81,7 +114,6 @@ const selectWallPattern = patternNo => {
     }
 }
 
-/* 바닥 패턴 */
 const selectFloorPattern = patternNo => {
     if(patternNo == 1) {
         bottom.style.backgroundSize = "450px 500px";
@@ -139,14 +171,14 @@ const floorPatternOff = () => {
 
 /* 벽지, 바닥 불러오기 */
 const loadWall = () => {
-    if(abc.charAt(0) == "#" && abc.length == 7){
-        inputWallColor.value = abc;
-        wallColorPriview.style.backgroundColor = abc;
+    if(wallPath.charAt(0) == "#" && wallPath.length == 7){
+        inputWallColor.value = wallPath;
+        wallColorPriview.style.backgroundColor = wallPath;
         wallPatternOff();
-        setWallBackground(abc);
+        setWallBackground(wallPath);
     
     } else {
-        let url = "url('" + abc + "')";
+        let url = "url('" + wallPath + "')";
         setWallBackground(url);
 
         for(let radio of wallRadio) {
@@ -159,14 +191,14 @@ const loadWall = () => {
 }
 
 const loadFloor = () => {
-    if(def.charAt(0) == "#" && def.length == 7){
-        inputFloorColor.value = abc;
-        floorColorPriview.style.backgroundColor = abc;
+    if(floorPath.charAt(0) == "#" && floorPath.length == 7){
+        inputFloorColor.value = floorPath;
+        floorColorPriview.style.backgroundColor = floorPath;
         floorPatternOff();
-        setFloorBackground(def);
+        setFloorBackground(floorPath);
     
     } else {
-        let url = "url(" + def + ")";
+        let url = "url(" + floorPath + ")";
         setFloorBackground(url);
     
         for(let radio of floorRadio) {
@@ -177,9 +209,6 @@ const loadFloor = () => {
         }
     }
 }
-
-loadWall();
-loadFloor();
 
 /* 색상 변경 */
 inputWallColor.addEventListener("input", () => {

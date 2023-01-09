@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="miniroomMapper">
+	<resultMap type="Miniroom" id="miniroom_rm">
+		<id property="memberNo" column="MEMBER_NO"/>
+		<result property="wall" column="WALL"></result>
+		<result property="floor" column="FLOOR"></result>
+		<result property="wallPattern" column="WALL_PATTERN"></result>
+		<result property="floorPattern" column="FLOOR_PATTERN"></result>
+	</resultMap>
+	
+	<resultMap type="MiniroomPlace" id="place_rm">
+		<id property="goodsNo" column="GOODS_NO"/>
+		<result property="shopCathNo" column="SHOP_CATH_NO"></result>
+		<result property="locationNo" column="LOCATION_NO"></result>
+		<result property="top" column="TOP"></result>
+		<result property="left" column="LEFT"></result>
+		<result property="path" column="PATH"></result>
+	</resultMap>
+	
+	<resultMap type="Minimee" id="minimee_rm">
+		<id property="minimeeNo" column="MINIMEE_NO"/>
+		<result property="minimeeName" column="MINIMEE_NAME"></result>
+		<result property="minimeePath" column="MINIMEE_PATH"></result>
+		<result property="shopCathNo" column="SHOP_CATH_NO"></result>
+	</resultMap>
+
+	<resultMap type="ShopMiniroom" id="goods_rm">
+		<id property="goodsNo" column="GOODS_NO"/>
+		<result property="goodsName" column="GOODS_NAME"></result>
+		<result property="goodsPath" column="GOODS_PATH"></result>
+		<result property="shopCathNo" column="SHOP_CATH_NO"></result>
+	</resultMap>
+	
+	<!-- 미니룸 벽지, 바닥 조회 -->
+	<select id="selectRoom" parameterType="_int" resultMap="miniroom_rm">
+		SELECT * FROM MINIROOM WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 배치된 소품 좌표 조회 -->
+	<select id="selectPlaceList" parameterType="_int" resultMap="place_rm">
+		SELECT MP.GOODS_NO, SHOP_CATH_NO, LOCATION_NO, TOP, "LEFT",
+		CASE
+			WHEN SHOP_CATH_NO = 3
+			THEN GOODS_PATH
+			ELSE MINIMEE_PATH
+		END "PATH"
+		FROM MINIROOM_PLACE MP
+		JOIN MINIROOM_LOCATION USING (LOCATION_NO)
+		LEFT JOIN GOODS_SHOP GS ON (GS.GOODS_NO = MP.GOODS_NO) AND SHOP_CATH_NO = 3
+		LEFT JOIN MINIMEE ON (MINIMEE_NO = MP.GOODS_NO) AND SHOP_CATH_NO = 4
+		WHERE MEMBER_NO = #{memberNo}
+		ORDER BY LOCATION_NO
+	</select>
+	
+	<!-- 미니미 목록 조회 -->
+	<select id="selectMinimeeList" resultMap="minimee_rm">
+		SELECT MINIMEE_NO, MINIMEE_NAME, MINIMEE_PATH, 4 SHOP_CATH_NO FROM MINIMEE
+	</select>
+	
+	<!-- 소유한 소품 목록 조회 -->
+	<select id="selectGoodsList" parameterType="_int" resultMap="goods_rm">
+		SELECT GOODS_NO, GOODS_NAME, GOODS_PATH, SHOP_CATH_NO
+		FROM MEMBER_OWN_GOODS
+		JOIN GOODS_SHOP USING (GOODS_NO)
+		WHERE MEMBER_NO = #{memberNo} AND SHOP_CATH_NO = 3
+		ORDER BY GOODS_NAME
+	</select>
+</mapper>

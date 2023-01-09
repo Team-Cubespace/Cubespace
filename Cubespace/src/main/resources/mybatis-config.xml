@@ -44,6 +44,9 @@
 		<typeAlias type="com.team.cubespace.minihome.model.vo.NewPost" alias="NewPost"/>
 		<typeAlias type="com.team.cubespace.minihome.model.vo.FriendMessage" alias="FriendMessage"/>
 		<typeAlias type="com.team.cubespace.guestbook.model.vo.GuestBook" alias="GuestBook"/>
+		<typeAlias type="com.team.cubespace.miniroom.model.vo.Minimee" alias="Minimee"/>
+		<typeAlias type="com.team.cubespace.miniroom.model.vo.Miniroom" alias="Miniroom"/>
+		<typeAlias type="com.team.cubespace.miniroom.model.vo.MiniroomPlace" alias="MiniroomPlace"/>
 	</typeAliases>
 	
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->
@@ -63,6 +66,7 @@
 		<mapper resource="/mappers/admin-mapper.xml"/>	
 		<mapper resource="/mappers/mainHomepage-mapper.xml"/>	
 		<mapper resource="/mappers/guestBook-mapper.xml"/>	
-		<mapper resource="/mappers/member-mapper.xml"/>	
+		<mapper resource="/mappers/member-mapper.xml"/>
+		<mapper resource="/mappers/miniroom-mapper.xml"/>
 	</mappers>
 </configuration>

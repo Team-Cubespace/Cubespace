@@ -76,7 +76,7 @@
                     <span>미니룸</span>
 
                     <c:if test="${minihome.memberNo == loginMember.memberNo}">
-                        <a href="#" class="miniroom-deco"><i class="fa-solid fa-gear"></i>&nbsp;미니룸 꾸미기</a>
+                        <a href="/miniroom/decorating/${minihome.memberNo}" class="miniroom-deco"><i class="fa-solid fa-gear"></i>&nbsp;미니룸 꾸미기</a>
                     </c:if>
                 </header>
 
@@ -153,4 +153,5 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="/resources/js/minihome/include/minihome-common.js"></script>
 <script src="/resources/js/minihome/home/minihome-content.js"></script>
+<script src="/resources/js/minihome/miniroom/miniroom-home.js"></script>
 </html>

@@ -120,6 +120,7 @@
             display: flex;
             justify-content: end;
             padding: 10px;
+            height: 44px;
         }
 
         /* 모달창2 css */
@@ -158,7 +159,7 @@
             width: 79%;
         }
       
-        .cancleBtn {
+        .cancle {
             display: flex;
             justify-content: end;
             padding: 5px 30px 0px 0px;
@@ -200,8 +201,8 @@
                 <div class="popup_layer" id="popup_layer" style ="display:none;">
                     <!-- style="display: none;" -->
                     <div class="popup_box">
-                            <div class = cancleBtn>
-                                <i id = cancleBtn class="fa-solid fa-x xbtnBack" ></i>
+                            <div class = "cancle">
+                                <i id = "cancleBtn" class="fa-solid fa-x xbtnBack" ></i>
                             </div>
                             <div class = "container">
                                 <div class = "input-row2-title">
@@ -211,10 +212,10 @@
                                 <div class = "input-row">
                                     <label for="category">카테고리</label>
                                     <select class="selectBox" id="category" >
-                                        <option value="1" style = "background-color: #C0EEE4;" >없음</option>
-                                        <option value="2" style = "background-color: #F3CCFF;" >직장</option>
-                                        <option value="3" style = "background-color: #D8F8B7;">집</option>
-                                        <option value="4" style = "background-color: #FFCAC8;">기념일</option>
+                                        <option value="1" style = "color: #C0EEE4; font-weight : bold;" >없음</option>
+                                        <option value="2" style = "color: #F3CCFF; font-weight : bold;" >직장</option>
+                                        <option value="3" style = "color: #D8F8B7; font-weight : bold;">집</option>
+                                        <option value="4" style = "color: #FFCAC8; font-weight : bold;">기념일</option>
                                     </select>
                                 </div>
                                 <div class = "input-row">
@@ -266,8 +267,8 @@
                     <!-- style="display: none;" -->
                     <div class="popup_box">
                         <%-- <div class="popup_cont" id = "popup_con"> --%>
-                        <div class = cancleBtn>
-                            <i id = cancleShowBtn class="fa-solid fa-x xbtnBack" ></i>
+                        <div class = "cancle">
+                            <i id = "cancleShowBtn" class="fa-solid fa-x xbtnBack" ></i>
                         </div>
                             <div>
                                 <div class = "input-row2-title">
@@ -299,8 +300,10 @@
                                     <div id = "allDayShow"></div>
                                 </div>
                                 <div class = "modal-footer">
+                                <c:if test = "${loginMember.memberNo == minihome.memberNo}">
                                     <button id = "updateShowBtn">수정하기</button>
                                     <button id = "deleteBtn" onClick = "deleteEvent()">삭제하기</button>
+                                </c:if>
                                     <%-- <button id = "cancleShowBtn">닫기</button> --%>
                                 </div>
                             </div>

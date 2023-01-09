@@ -140,7 +140,7 @@ public class VideoController {
 		String videoWebPath = "/resources/video/";
 		String videoFolderPath = session.getServletContext().getRealPath(videoWebPath);
 		
-		String ffmpegPath = "/resources/ffmpeg-5.1.2-essentials_build/bin";
+		String ffmpegPath = "/resources/ffmpeg-5.1.2-essentials_build";
 		ffmpegPath = session.getServletContext().getRealPath(ffmpegPath);
 		
 		String thumbnailWebPath = "/resources/videothumbnail/";
@@ -196,7 +196,7 @@ public class VideoController {
 		String videoWebPath = "/resources/video/";
 		String videoFolderPath = session.getServletContext().getRealPath(videoWebPath);
 		
-		String ffmpegPath = "/resources/ffmpeg-5.1.2-essentials_build/bin";
+		String ffmpegPath = "/resources/ffmpeg-5.1.2-essentials_build";
 		ffmpegPath = session.getServletContext().getRealPath(ffmpegPath);
 		
 		String thumbnailWebPath = "/resources/videothumbnail/";

@@ -87,15 +87,15 @@ public class LoginController {
 			// 차단 처
 			if (loginMember.getMemberBlockYN().equals("Y")) {
 
-				message = "차단된 회원은 이용할 수 없습니다\n" + loginMember.getBlockStart() + "부터\n"
-						+ loginMember.getBlockEnd() + "까지 이용할 수 없습니다.\n" + "자세한 사항은 고객센터를 참고하세요";
-				path = "/";
+				message = "차단된 회원은 이용할 수 없습니다\\n" + loginMember.getBlockStart() + "부터\\n"
+						+ loginMember.getBlockEnd() + "까지 이용할 수 없습니다.\\n" + "자세한 사항은 고객센터를 참고하세요";
+				path = referer;
 				
 			} 
 			// 카카오 로그인 사용자가 일반 로그인했을 경우 막기
 			else if(loginMember.getLoginType() == 3){
 				message = "카카오로 가입한 회원은 카카오로그인 버튼을 통해 로그인해주세요";
-				path = "/";
+				path = referer;
 				
 			}
 
@@ -121,6 +121,8 @@ public class LoginController {
 				path = "/";
 			}
 			
+			
+			
 						
 		} else { // 아이디, 비밀번호 일치X
 
@@ -129,6 +131,10 @@ public class LoginController {
 		}
 		ra.addFlashAttribute("message", message);
 
+
+		
+		
+		
 		return "redirect:" + path;
 	}
 

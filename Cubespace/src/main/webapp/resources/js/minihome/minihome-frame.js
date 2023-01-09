@@ -270,13 +270,12 @@ const initMinihomeMusic = music => {
             autoplay = true;
         }
         
-        
         // 플레이버튼 가져와서 아이콘 변경
         // 제목 슬라이드 멈추기
         // document.getElementById("minihomeMusicName").classList.remove("music-play-marquee");
         document.getElementById("minihomeMusicName").innerText = music.MUSIC_NAME;
         // 재생시간 초기화 00:00
-        musicDuration.innerText = "00:00";
+        document.getElementById("duration").innerText = "00:00";
         createMusic(music.MUSIC_PATH, autoplay);
     } else {
     // 기존 설정된 음악이 없을 때

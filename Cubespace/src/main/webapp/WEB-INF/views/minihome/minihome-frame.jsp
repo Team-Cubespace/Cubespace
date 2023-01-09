@@ -163,7 +163,7 @@
                     </c:if>
 
                     <c:if test="${minihome.memberNo == loginMember.memberNo}">
-                        <li class="manage-menu" ><a href="/manage/font" target="minihomeMenu">관리</a></li>
+                        <li class="manage-menu" ><a href="/manage/music" target="minihomeMenu">관리</a></li>
                     </c:if>
 
                         <li id="goBackButton"><a onclick="goBack()">이전<br>스페이스</a></li>

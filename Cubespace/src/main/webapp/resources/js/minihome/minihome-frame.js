@@ -398,3 +398,12 @@ const initMinihomeMusic = music => {
         }
     });
 })();
+
+
+
+
+// // 카테고리 이동 전 새로고침
+// const gotoDiary = () => {
+//     // location.href = location.href;
+//     document.getElementById('minihomeMenu').src = "/diary/1"
+// }

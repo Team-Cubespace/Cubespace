@@ -71,7 +71,7 @@
                             <img src="../../resources/images/common/cubes.png">
                             <span>로그인 후 이용해주세요.</span>
                         </div>
-                        <a href="/login" id="loginBtn"><i class="fa-solid fa-right-to-bracket"></i>&nbsp;Login</a>
+                        <a href="/member/login" id="loginBtn"><i class="fa-solid fa-right-to-bracket"></i>&nbsp;Login</a>
                     </c:when>
 
                     <c:otherwise>

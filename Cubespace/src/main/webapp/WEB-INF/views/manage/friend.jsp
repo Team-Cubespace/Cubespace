@@ -55,7 +55,7 @@
                                 <span class="nickname">${friend.memberNickname}</span>
                             </div>
                             <div class="friendBtn">
-                                <span class="deleteFriend"><i class="fa-solid fa-minus"></i> 깐부끊기</span>
+                                <div class="deleteFriend"><i class="fa-solid fa-minus"></i> 깐부끊기</div>
                                 <a href="/minihome/${friend.friendNo}"  id="${friend.friendNo}" class="minihomeLink" onclick="return openMinihome(this.href)">
                                     <img src="/resources/images/common/smallCube.png" id="minihomeImg">
                                      미니홈피

@@ -189,6 +189,14 @@ public interface ManageService {
 	 */
 	int deleteMusic(int memberNo);
 
+	/** // 삭제 뒤 새 폴더리스트 조회(boardTypeNo별로)
+	 * @param paramMap
+	 * @return
+	 */
+	List<Folder> selectFolderList(Map<String, Object> paramMap);
+
+
+
 	
 
 

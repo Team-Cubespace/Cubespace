@@ -143,18 +143,27 @@
 		FOLDER_DEL_YN = 'Y'
 		WHERE MEMBER_NO = #{memberNo}
 		AND FOLDER_NO = #{folderNo}
+		AND FOLDER_DEL_YN = 'N'
 	</update>
 	
 	<!-- 폴더삭제 후 나머지 폴더순서 새로 정렬 -->
 	<update id="updateFolderOrder">
 		UPDATE FOLDER SET
-		FOLDER_ORDER = #{folderNewOrder}
+		FOLDER_ORDER = #{folderOrder}
 		WHERE MEMBER_NO = #{memberNo}
-		AND FOLDER_ORDER = #{folderNewOrder} + 1
+		AND FOLDER_ORDER = #{folderNewOrder}
 		AND BOARD_TYPE_NO = #{boardTypeNo}
 	</update>
 	
 	
+	
+	<!-- 삭제 뒤 새 폴더리스트 조회(boardTypeNo별로) -->
+	<select id="selectFolderList" resultMap="folder_rm">
+		SELECT * FROM FOLDER 
+		WHERE MEMBER_NO = #{memberNo}
+		AND BOARD_TYPE_NO = #{boardTypeNo}
+		AND FOLDER_DEL_YN = 'N'
+	</select>
 
 
 	

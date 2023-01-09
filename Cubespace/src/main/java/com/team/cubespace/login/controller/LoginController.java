@@ -53,7 +53,7 @@ public class LoginController {
 	 * 
 	 * @return
 	 */
-	@GetMapping("/login")
+	@GetMapping("/member/login")
 	public String loginPage() {
 		return "member/login/login";
 	}
@@ -74,34 +74,36 @@ public class LoginController {
 	@PostMapping("/member/login")
 	public String login(Member inputMember, Model model, RedirectAttributes ra, HttpServletResponse resp,
 			@RequestParam(value = "saveId", required = false) String saveId,
-			@RequestHeader(value = "referer") String referer
+			@RequestHeader("referer") String referer
 			) throws Exception {
 		
 //		inputMember.setMemberTel(inputMember.getMemberTel().trim()); // 공백문자 제거
 		Member loginMember = service.login(inputMember);
 		String path = null;
+		String message = null;
 
 		if (loginMember != null) {
 			
 			// 차단 처
 			if (loginMember.getMemberBlockYN().equals("Y")) {
 
-				String message = "차단된 회원은 이용할 수 없습니다\n" + loginMember.getBlockStart() + "부터\n"
-						+ loginMember.getBlockEnd() + "까지 이용할 수 없습니다.\n" + "자세한 사항은 고객센터를 참고하세요";
-				ra.addFlashAttribute("message", message);
+				message = "차단된 회원은 이용할 수 없습니다\\n" + loginMember.getBlockStart() + "부터\\n"
+						+ loginMember.getBlockEnd() + "까지 이용할 수 없습니다.\\n" + "자세한 사항은 고객센터를 참고하세요";
 				path = referer;
+				
 			} 
 			// 카카오 로그인 사용자가 일반 로그인했을 경우 막기
-			if(loginMember.getLoginType() == 3){
-				ra.addFlashAttribute("message", "카카오로 가입한 회원은 카카오로그인 버튼을 통해 로그인해주세요");
+			else if(loginMember.getLoginType() == 3){
+				message = "카카오로 가입한 회원은 카카오로그인 버튼을 통해 로그인해주세요";
 				path = referer;
+				
 			}
 
 			else { // 정상 로그인
 				
 				// 관리자가 로그인했을 경우 관리자 알림 출력
 				if (loginMember.getAuthority() == 2) {
-					ra.addFlashAttribute("message", "관리자 로그인!");
+					message = "관리자 로그인!";
 				}
 				
 				
@@ -119,13 +121,20 @@ public class LoginController {
 				path = "/";
 			}
 			
+			
+			
 						
 		} else { // 아이디, 비밀번호 일치X
 
 			path = referer;
-			ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다");
+			message = "아이디 또는 비밀번호가 일치하지 않습니다";
 		}
+		ra.addFlashAttribute("message", message);
 
+
+		
+		
+		
 		return "redirect:" + path;
 	}
 

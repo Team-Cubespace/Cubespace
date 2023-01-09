@@ -269,7 +269,7 @@ for (let plusBtn of plusBtnList) {
         const i = document.createElement("i");
         i.classList.add("fa-solid");
         i.classList.add("fa-minus");
-        minusBtn.addEventListener("click", btn => {
+        i.addEventListener("click", btn => {
             folderMinus(btn);
         })
 

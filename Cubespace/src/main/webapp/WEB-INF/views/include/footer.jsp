@@ -9,7 +9,9 @@
         <li><a href="/privatePolicy">개인정보처리방침</a></li>
         <li><a href="/copyrightPolicy">저작권정책</a></li>
         <li><a href="/faq">FAQ</a></li>
-        <li><a href="/admin/member">관리자</a></li>
+        <c:if test="${loginMember.authority == 2}">
+            <li><a href="/admin/member">관리자</a></li>
+        </c:if>
     </ul>
     <!------------------ 헤더 내용 ------------------>
     <div class="footer-content">

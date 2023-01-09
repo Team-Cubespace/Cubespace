@@ -20,7 +20,7 @@
             </c:choose>
         </div>
         <div class="comment-content">
-            <textarea name="" id="addComment" placeholder="댓글 추가.." rows="1" onkeyup="resizeTextarea(this)" maxLength="200"></textarea>
+            <textarea name="" id="addComment" placeholder="댓글 추가.." rows="1" onkeyup="resizeTextarea(this)" maxLength="300"></textarea>
             <div class="comment-write-button-area">
                 <button id="addCommentCencel" class="cancel-button" type="button">취소</button>
                 <button id="addCommentInsert" class="insert-button" type="button">등록</button>
@@ -74,9 +74,7 @@
                                 </c:if>
                             </div>
                             <div class="comment-content-area">
-                                <p style="font-family: '${comment.ownFontNo}'">
-                                    ${comment.commentContent}
-                                </p>                            
+                                <p style="font-family: '${comment.ownFontNo}'">${comment.commentContent}</p>                            
                             </div>
                             <div class="comment-button-area">
                                 <span class="comment-date">${comment.commentCreate}</span><button type="button" onclick="addCommentArea(${comment.commentNo}, this)">답글</button>

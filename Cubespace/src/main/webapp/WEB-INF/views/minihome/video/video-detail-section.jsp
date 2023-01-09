@@ -35,9 +35,7 @@
         </video-js>
     </div>
 
-    <p class="video-content">
-        ${board.videoContent}
-    </p>
+    <p class="video-content">${board.videoContent}</p>
     <div class="video-detail-footer">
         <div class="video-button-area">
             <c:choose>
@@ -76,7 +74,7 @@
 
                     <div class="modal-comment-content">
                         <label class="modal-label" for="">흔적남기기</label>
-                        <textarea id="modalCommentContent" name="commentContent" rows="5" maxLength="200">퍼가요~</textarea>
+                        <textarea id="modalCommentContent" name="commentContent" rows="5" maxLength="300">퍼가요~</textarea>
                     </div>
 
                     <div class="modal-scrap-allow">

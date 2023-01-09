@@ -111,10 +111,6 @@ public class MiniroomController {
 		int result2 = service.updateRoom(webPath1, filePath1, webPath2, filePath2, wallColor, wallImage, floorColor, floorImage,
 										 wallPattern, floorPattern, wallFlag, floorFlag, miniroom);
 		
-		if(result1 > 0 && result2 > 0) {
-			return "redirect:/minihome/home/" + minihome.getMemberNo();
-		} else {
-			return "redirect:/miniroom/decorating/" + minihome.getMemberNo();
-		}
+		return "redirect:/minihome/home/" + minihome.getMemberNo();
 	}
 }

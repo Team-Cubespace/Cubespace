@@ -62,13 +62,11 @@ const setWallBackground = input => {
         left.style.backgroundColor = input;
         right.style.backgroundColor = input;
         wallColorF = 'Y';
-        wallFlag.value = 'N';
 
     } else {
         left.style.backgroundImage = input;
         right.style.backgroundImage = input;
         wallColorF = 'N';
-        wallFlag.value = 'Y';
     }
 }
 
@@ -76,12 +74,10 @@ const setFloorBackground = input => {
     if(input.charAt(0) == "#" && input.length == 7){
         bottom.style.backgroundColor = input;
         floorColorF = 'Y';
-        floorFlag.value = 'N';
 
     } else {
         bottom.style.backgroundImage = input;
         floorColorF = 'N';
-        floorFlag.value = 'Y';
     }
 }
 
@@ -91,15 +87,15 @@ const resetWallBackground = () => {
     left.style.backgroundImage = "none";
     right.style.backgroundColor = "white";
     right.style.backgroundImage = "none";
+    inputWallColor.value = "#ffffff";
     wallColorF = 'Y';
-    wallFlag.value = 'N';
 }
 
 const resetFloorBackground = () => {
     bottom.style.backgroundColor = "white";
     bottom.style.backgroundImage = "none";
+    inputFloorColor.value = "#ffffff";
     floorColorF = 'Y';
-    floorFlag.value = 'N';
 }
 
 /* 벽지, 바닥 패턴 */
@@ -217,6 +213,7 @@ inputWallColor.addEventListener("input", () => {
     wallPatternOff();
     wallColorPriview.style.backgroundColor = inputWallColor.value;
     setWallBackground(inputWallColor.value);
+    wallFlag.value = "Y";
 })
 
 inputFloorColor.addEventListener("input", () => {
@@ -225,6 +222,7 @@ inputFloorColor.addEventListener("input", () => {
     floorPatternOff();
     floorColorPriview.style.backgroundColor = inputFloorColor.value;
     setFloorBackground(inputFloorColor.value);
+    floorFlag.value = "Y";
 })
 
 /* 이미지 변경 */
@@ -238,9 +236,10 @@ inputWallImage.addEventListener("change", e => {
         reader.onload = e => {
             setWallBackground("url('" + e.target.result + "')");
         }
+        wallFlag.value = "Y";
 
     } else {
-        if(wallColorF == 'N') {resetWallBackground(); loadWall();}
+        if(wallColorF == 'N') {resetWallBackground(); loadWall(); wallFlag.value = "N";}
     }
 })
 
@@ -255,8 +254,10 @@ inputFloorImage.addEventListener("change", e => {
         reader.onload = e => {
             setFloorBackground("url('" + e.target.result + "')");
         }
+        floorFlag.value = "Y";
+
     } else {
-        if(floorColorF == 'N') {resetFloorBackground(); loadFloor();}
+        if(floorColorF == 'N') {resetFloorBackground(); loadFloor(); floorFlag.value = "N";}
     }
 })
 
@@ -282,12 +283,14 @@ document.getElementById("rollbackWallBtn").addEventListener("click", () => {
     resetWallBackground();
     wallPatternOn();
     loadWall();
+    wallFlag.value = "N";
 })
 
 document.getElementById("rollbackFloorBtn").addEventListener("click", () => {
     resetFloorBackground();
     floorPatternOn();
     loadFloor();
+    floorFlag.value = "N";
 })
 
 /* 지우기 */
@@ -296,6 +299,7 @@ document.getElementById("eraseWallBtn").addEventListener("click", () => {
     wallColorPriview.style.backgroundColor = "white";
     resetWallBackground();
     wallPatternOff();
+    wallFlag.value = "Y";
 })
 
 document.getElementById("eraseFloorBtn").addEventListener("click", () => {
@@ -303,4 +307,5 @@ document.getElementById("eraseFloorBtn").addEventListener("click", () => {
     floorColorPriview.style.backgroundColor = "white";
     resetFloorBackground();
     floorPatternOff();
+    floorFlag.value = "Y";
 })

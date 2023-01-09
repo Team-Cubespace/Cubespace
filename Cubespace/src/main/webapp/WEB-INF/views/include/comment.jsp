@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/resources/css/minihome/include/minihome-common.css">
 <div class="comment-section">
     <div class="comment-header">
-        <span class="comment-count">댓글 ${fn:length(board.commentList)}개</span>
+        <span class="comment-count">댓글 <span id="commentCount">${fn:length(board.commentList)}</span>개</span>
     </div>
     <div class="comment-write-row">
         <div class="comment-profile-image-area">
@@ -67,7 +67,9 @@
                                 <c:if test="${loginMember.memberNo == comment.memberNo || minihome.memberNo == loginMember.memberNo}">
                                     <button class="comment-drop-down-button fa-solid fa-ellipsis-vertical">
                                         <ul class="comment-drop-down-menu">
-                                            <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>
+                                            <c:if test="${loginMember.memberNo == comment.memberNo}">
+                                                <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>
+                                            </c:if>
                                             <li onclick="deleteComment(${comment.commentNo})">삭제</li>
                                         </ul>
                                     </button>
@@ -105,7 +107,9 @@
                                 <c:if test="${loginMember.memberNo == comment.memberNo || minihome.memberNo == loginMember.memberNo}">
                                     <button class="comment-drop-down-button fa-solid fa-ellipsis-vertical">
                                         <ul class="comment-drop-down-menu">
-                                            <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>
+                                            <c:if test="${loginMember.memberNo == comment.memberNo}">
+                                                <li onclick="showUpdateComment(${comment.commentNo}, this)">수정</li>
+                                            </c:if>
                                             <li onclick="deleteComment(${comment.commentNo})">삭제</li>
                                         </ul>
                                     </button>

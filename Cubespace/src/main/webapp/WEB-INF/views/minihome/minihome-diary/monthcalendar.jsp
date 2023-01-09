@@ -157,6 +157,9 @@
             overflow : auto;
             height: 100px !important;
             width: 79%;
+            word-break: break-all;
+            /* 개행문자 대신 처리... */
+            white-space: pre-wrap;
         }
       
         .cancle {

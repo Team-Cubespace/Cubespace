@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
+import com.team.cubespace.common.Util;
 import com.team.cubespace.diary.model.service.DiaryService;
 import com.team.cubespace.diary.model.vo.Diary;
 import com.team.cubespace.diary.model.vo.Emoji;
@@ -364,10 +365,14 @@ public class DiaryController {
 	@ResponseBody
 	public int updateSchedule(
 			@SessionAttribute("loginMember") Member loginMember,
-			@RequestBody Map<String, Object> params
+			Plan plan
 			) {
-		params.put("memberNo", loginMember.getMemberNo());
-		int result = service.updateSchedule(params);
+		//plan.setMemberNo(loginMember.getMemberNo());
+//		if(plan.getPlanDescription() != null) {
+//		plan.setPlanDescription(Util.newLineClear(plan.getPlanDescription()));
+//		}
+		System.out.println(plan);
+		int result = service.updateSchedule(plan);
 		return result;
 	}
 	

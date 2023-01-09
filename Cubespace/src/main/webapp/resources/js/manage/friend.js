@@ -4,7 +4,13 @@ const deleteFriendBtnList = document.getElementsByClassName("deleteFriend");
 for(let deleteFriendBtn of deleteFriendBtnList){
     deleteFriendBtn.addEventListener("click", e => {
 
-        const friendNo = e.target.parentElement.lastElementChild.getAttribute("id");
+        let friendNo = 0;
+        if(e.target.classList.contains("fa-minus")){
+            friendNo = e.target.parentElement.parentElement.lastElementChild.getAttribute("id");
+        } else {
+            friendNo = e.target.parentElement.lastElementChild.getAttribute("id");
+        }
+
 
         if(confirm("정말 깐부를 끊겠습니까?")){
             $.ajax({

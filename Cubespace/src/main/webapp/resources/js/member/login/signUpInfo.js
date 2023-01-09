@@ -396,7 +396,13 @@ const checkAuthKeyBtn = document.getElementById("checkAuthKeyBtn");
 checkAuthKeyBtn.addEventListener("click", function(){
     authKeyMessage.classList.remove("confirm");
 
-    if(authMin > 0 || authSec > 0){ // 시간 제한이 지나지 않은 경우에만 인증번호 검사 진행
+    if(memberEmailCertification.value.trim().length == 0){
+        alert("인증번호를 입력하신 후 인증 버튼을 눌러주세요");
+        memberEmailCertification.innerText = "";
+        checkObj.memberEmailCertification = false;
+        return;
+
+    } else if(authMin > 0 || authSec > 0){ // 시간 제한이 지나지 않은 경우에만 인증번호 검사 진행
 
         $.ajax({
             url : "/sendEmail/checkAuthKey",

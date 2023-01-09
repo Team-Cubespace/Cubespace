@@ -258,8 +258,9 @@ input {
 
 #menuSelectCancelBtn {
     display: flex;
-    align-content: center;
-    justify-content: center;
+    flex-wrap: wrap !important;
+    align-content: center !important;
+    justify-content: center !important;
 }
 
 .menuListArea {

@@ -40,8 +40,9 @@
                             <button class="fa-solid fa-magnifying-glass" id="searchBtn"></button>
                         </form>
                     </div>
-                    <a href="/cubespace/shop/2" target="_blank" id="shopLink" class="storeLinkArea"> 상점 이동
+                    <a href="/cubespace/shop/2" target="_blank" id="shopLink" class="storeLinkArea"> 
                         <i class="fa-solid fa-store"></i>
+                        상점 이동
                     </a>
                 </header>
                 <div class="musicArea">

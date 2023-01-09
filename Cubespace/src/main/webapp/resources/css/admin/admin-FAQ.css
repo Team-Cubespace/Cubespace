@@ -49,10 +49,11 @@ main {
     font-size: 18px;
     text-decoration: none;
     color: black;
+    cursor: pointer;
 }
-.frequent-question__content-detail:hover {
+/* .frequent-question__content-detail:hover {
     background-color: var(--lightMain);
-}
+} */
 
 .fa-circle-question {
     margin-left: 20px;

@@ -4,7 +4,6 @@
 <footer>
     <!------------------ 푸터 메뉴 ------------------>
     <ul class="footer-menu-nav">
-        <li><a href="/projectExplain">프로젝트 소개</a></li>
         <li><a href="/termsOfUse">이용약관</a></li>
         <li><a href="/privatePolicy">개인정보처리방침</a></li>
         <li><a href="/copyrightPolicy">저작권정책</a></li>

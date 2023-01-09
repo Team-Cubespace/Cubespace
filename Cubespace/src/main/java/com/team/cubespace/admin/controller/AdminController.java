@@ -111,13 +111,7 @@ public class AdminController {
 		return "admin/admin-copyrightPolicy";
 	}
 	
-	/** 프로젝트소개 페이지 이동
-	 * @return
-	 */
-	@GetMapping("/projectExplain")
-	public String gotoProjectExplain() {
-		return "admin/projectExplain";
-	}
+
 
 	
 //	-------------------------------------------------------------------------------

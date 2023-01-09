@@ -208,6 +208,18 @@ public class LoginDAO {
 
 
 
+	/** 회원가입시 미니룸테이블에 값 삽입
+	 * @param memberNo
+	 * @return
+	 */
+	public int insertMiniroom(int memberNo) {
+		
+		return sqlSession.insert("loginMapper.insertMiniroom", memberNo);
+	}
+
+
+
+
 
 
 

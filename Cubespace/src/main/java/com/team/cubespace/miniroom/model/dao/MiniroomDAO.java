@@ -53,4 +53,16 @@ public class MiniroomDAO {
 	public List<ShopMiniroom> selectGoodsList(int memberNo) {
 		return sqlSession.selectList("miniroomMapper.selectGoodsList", memberNo);
 	}
+
+	public int updateRoom(Miniroom miniroom) {
+		return sqlSession.update("miniroomMapper.updateRoom", miniroom);
+	}
+
+	public int deleteprops(int memberNo) {
+		return sqlSession.delete("miniroomMapper.deleteprops", memberNo);
+	}
+
+	public int insertprops(MiniroomPlace miniroomPlace) {
+		return sqlSession.insert("miniroomMapper.insertprops", miniroomPlace);
+	}
 }

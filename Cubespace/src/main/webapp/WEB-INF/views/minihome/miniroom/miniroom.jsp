@@ -64,13 +64,13 @@
 
                     <div class="wall-container">
                         <div class="wall-color-container">
-                            <input type="color" id="inputWallColor">
+                            <input type="color" id="inputWallColor" name="inputWallColor">
                             <label for="inputWallColor" class="setting-btn" id="selectWallColor">색상변경</label>
                             <div id="wallColorPriview"></div>
                         </div>
 
                         <div class="wall-image-container">
-                            <input type="file" id="inputWallImage">
+                            <input type="file" id="inputWallImage" name="inputWallImage" accept="image/*">
                             <label for="inputWallImage" class="setting-btn" id="selectWallImage" accept="image/*">이미지변경</label>
                             <div class="pattern-container" id="wallPattern">
                                 <input type="radio" class="wall-radio" name="wall" value="1">&nbsp;채우기
@@ -88,13 +88,13 @@
 
                     <div class="floor-container">
                         <div class="floor-color-container">
-                            <input type="color" id="inputFloorColor">
+                            <input type="color" id="inputFloorColor" name="inputFloorColor">
                             <label for="inputFloorColor" class="setting-btn" id="selectFloorColor">색상변경</label>
                             <div id="floorColorPriview"></div>
                         </div>
 
                         <div class="floor-image-container">
-                            <input type="file" id="inputFloorImage" accept="image/*">
+                            <input type="file" id="inputFloorImage" name="inputFloorImage" accept="image/*">
                             <label for="inputFloorImage" class="setting-btn" id="selectFloorImage">이미지변경</label>
                             <div class="pattern-container" id="floorPattern">
                                 <input type="radio" class="floor-radio" name="floor" value="1">&nbsp;채우기

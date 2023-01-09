@@ -1,6 +1,9 @@
 package com.team.cubespace.miniroom.model.service;
 
+import java.io.IOException;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.team.cubespace.main.model.vo.ShopMiniroom;
 import com.team.cubespace.miniroom.model.vo.Minimee;
@@ -38,5 +41,12 @@ public interface MiniroomService {
 	 * @return goodsList
 	 */
 	List<ShopMiniroom> goodsList(int memberNo);
+
+	int props(int memberNo, String[] props);
+
+	int updateRoom(String webPath1, String filePath1, String webPath2, String filePath2, String wallColor,
+			MultipartFile wallImage, String floorColor,
+			MultipartFile floorImage, int wallPattern, int floorPattern, String wallFlag,
+			String floorFlag, Miniroom miniroom) throws IllegalStateException, IOException, Exception;
 
 }

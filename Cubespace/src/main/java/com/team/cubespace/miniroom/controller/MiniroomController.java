@@ -1,7 +1,10 @@
 package com.team.cubespace.miniroom.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.team.cubespace.main.model.vo.ShopMiniroom;
@@ -77,7 +82,35 @@ public class MiniroomController {
 	
 	// 현재 상태 저장
 	@PostMapping("/save")
-	public String save() {
-		return "";
+	public String save(@SessionAttribute("minihome") Minihome minihome, 
+					   @RequestParam(value="inputWallColor", required=false) String wallColor,
+					   @RequestParam(value="inputWallImage", required=false) MultipartFile wallImage,
+					   @RequestParam(value="inputFloorColor", required=false) String floorColor,
+					   @RequestParam(value="inputFloorImage", required=false) MultipartFile floorImage,
+					   @RequestParam(value="wall", required=false) int wallPattern,
+					   @RequestParam(value="floor", required=false) int floorPattern,
+					   @RequestParam(value="propsArray", required=false) String[] props,
+					   @RequestParam(value="wallFlag", required=false) String wallFlag,
+					   @RequestParam(value="floorFlag", required=false) String floorFlag,
+				   	   HttpServletRequest req) throws IllegalStateException, IOException, Exception {
+		
+		// 회원 번호, 소품 번호, 카테고리 번호, 자리번호 insert
+		int result1 = service.props(minihome.getMemberNo(), props);
+		
+		// 벽지 바닥 업데이트
+		String webPath1 = "/resources/images/wallImage/";
+		String filePath1 = req.getSession().getServletContext().getRealPath(webPath1);
+		
+		String webPath2 = "/resources/images/floorImage/";
+		String filePath2 = req.getSession().getServletContext().getRealPath(webPath1);
+		
+		Miniroom miniroom = new Miniroom();
+		
+		miniroom.setMemberNo(minihome.getMemberNo());
+		
+		int result2 = service.updateRoom(webPath1, filePath1, webPath2, filePath2, wallColor, wallImage, floorColor, floorImage,
+											wallPattern, floorPattern, wallFlag, floorFlag, miniroom);
+		
+		return "redirect:/minihome/home/" + minihome.getMemberNo();
 	}
 }

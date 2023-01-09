@@ -66,4 +66,18 @@
 		WHERE MEMBER_NO = #{memberNo} AND SHOP_CATH_NO = 3
 		ORDER BY GOODS_NAME
 	</select>
+	
+	<delete id="deleteprops">
+		DELETE FROM MINIROOM_PLACE WHERE MEMBER_NO = #{memberNo}
+	</delete>
+	
+	<update id="updateRoom">
+		UPDATE MINIROOM
+		SET WALL = #{wall}, "FLOOR" = #{floor}, WALL_PATTERN = #{wallPattern}, FLOOR_PATTERN = #{floorPattern}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<insert id="insertprops">
+		INSERT INTO MINIROOM_PLACE VALUES (#{memberNo}, #{locationNo}, #{shopCathNo}, #{goodsNo})
+	</insert>
 </mapper>

@@ -16,11 +16,11 @@
         </div>
         <div class="input-row">
             <label for="videoTitle">제목</label>
-            <input id="videoTitle" name="videoTitle" type="text" placeholder="제목을 입력하세요">
+            <input id="videoTitle" name="videoTitle" type="text" placeholder="제목을 입력하세요" maxLength="100">
         </div>
         <div class="input-row">
             <label for="videoContent">내용</label>
-            <textarea name="videoContent" id="videoContent" rows="6" placeholder="내용을 입력하세요"></textarea>
+            <textarea name="videoContent" id="videoContent" rows="6" placeholder="내용을 입력하세요" maxLength="4000"></textarea>
         </div>
 
         <div class="input-row">
@@ -76,7 +76,7 @@
                 <span><span id="videoDurationSpan">0</span> / 60초</span>
             </div>
             </label>
-            <input type="file" name="inputVideo" onchange="addVideo(this)" id="addFileInput">
+            <input type="file" name="inputVideo" onchange="addVideo(this)" id="addFileInput" accept="video/*">
             <div id="addVideoArea">
                 <%-- <video-js id="myVideo" class="video-js vjs-big-play-button vjs-big-play-centered vjs-fluid"
                 data-setup='{"controls":true, "playbackRates": [0.5, 1, 1.5, 2]}'>

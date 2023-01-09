@@ -25,11 +25,11 @@
         </div>
         <div class="input-row">
             <label for="albumTitle">제목</label>
-            <input id="albumTitle" name="albumTitle" type="text" placeholder="제목을 입력하세요" value="${album.albumTitle}">
+            <input id="albumTitle" name="albumTitle" type="text" placeholder="제목을 입력하세요" value="${album.albumTitle}" maxLength="100">
         </div>
         <div class="input-row">
             <label for="albumContent">내용</label>
-            <textarea name="albumContent" id="albumContent" rows="6" placeholder="내용을 입력하세요">${album.albumContent}</textarea>
+            <textarea name="albumContent" id="albumContent" rows="6" placeholder="내용을 입력하세요" maxLength="4000">${album.albumContent}</textarea>
         </div>
         <div class="input-row">
             <label for="">위치 찾기</label>
@@ -137,7 +137,7 @@
     <section id="mapModal">
         <div class="map-modal-header">
             <form id="searchPlaceForm">
-                <input id="searchPlaceInput" type="text" maxLength="15" autocomplete="off">
+                <input id="searchPlaceInput" type="text" maxLength="30" autocomplete="off">
                 <button hidden></button>
                 <span id="initLavelButton" class="fa-solid fa-location-crosshairs modal-header-button"></span>
             </form>

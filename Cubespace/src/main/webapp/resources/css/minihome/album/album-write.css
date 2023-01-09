@@ -31,6 +31,10 @@
     outline: none;
 }
 
+#albumTitle {
+    width: 80%;
+}
+
 /* 라디오 리스트 */
 .radio-list {
     display: flex;

@@ -73,6 +73,7 @@ header {
 .header-logo-title {
     font-family: var(--orbitron);
     font-size: 80px;
+    
 }
 
 /* 로그인 시 */

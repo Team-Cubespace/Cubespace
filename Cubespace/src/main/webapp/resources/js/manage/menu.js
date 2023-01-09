@@ -361,7 +361,7 @@ const folderMinus = e => {
         }
 
 
-
+        
 
         // 4번째 폴더를 삭제했으면 그 뒤 폴더들의 순서도 하나씩 밀기
         // 전체 폴더가 6개고, 4번째를 삭제했으면 
@@ -379,6 +379,7 @@ const folderMinus = e => {
                 if (result > 0) {
                     alert("폴더가 삭제되었습니다");
                     e.target.parentElement.remove();
+                    orderSubCategory(); // 파일 순서 재정렬
                 } else {
                     console.log("폴더 삭제 실패");
                 }
@@ -388,6 +389,15 @@ const folderMinus = e => {
         })
 }
 
+// 파일 순서 재정렬
+const orderSubCategory = () => {
+    const subCategoryList = document.getElementsByClassName("subCategory");
+    let i = 1;
+    for(let subCategory of subCategoryList){
+        subCategory.setAttribute("name", i);
+        i++;
+    }
+}
 
 /* 폴더 내부 게시글 설정변경 */
 const folderImageList = document.getElementsByClassName("subCategoryImg");

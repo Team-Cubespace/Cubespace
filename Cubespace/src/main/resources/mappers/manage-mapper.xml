@@ -149,10 +149,11 @@
 	<!-- 폴더삭제 후 나머지 폴더순서 새로 정렬 -->
 	<update id="updateFolderOrder">
 		UPDATE FOLDER SET
-		FOLDER_ORDER = #{folderOrder}
-		WHERE MEMBER_NO = #{memberNo}
-		AND FOLDER_ORDER = #{folderNewOrder}
+		FOLDER_ORDER = FOLDER_ORDER - 1
+		WHERE FOLDER_ORDER > #{folderOrder}
+		AND MEMBER_NO  = #{memberNo}
 		AND BOARD_TYPE_NO = #{boardTypeNo}
+		AND FOLDER_DEL_YN = 'N'
 	</update>
 	
 	

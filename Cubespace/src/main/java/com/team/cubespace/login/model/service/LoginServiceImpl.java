@@ -68,7 +68,8 @@ public class LoginServiceImpl implements LoginService{
 			int minihomeResult = dao.insertMinihome(backgroundInfo); // 미니홈
 			int folderResult = dao.insertFolder(memberNo); // 폴더
 			int categoryOrderResult = dao.insertCategoryOrder(memberNo); // 카테고리순서
-			if(ownResult * minihomeResult * folderResult * categoryOrderResult <= 0) {
+			int miniroomResult = dao.insertMiniroom(memberNo); // 미니룸
+			if(ownResult * minihomeResult * folderResult * categoryOrderResult * miniroomResult <= 0) {
 				
 				throw new Exception("회원가입 중 오류 발생");
 				
@@ -157,8 +158,9 @@ public class LoginServiceImpl implements LoginService{
 					int minihomeResult = dao.insertMinihome(backgroundInfo); // 미니홈
 					int folderResult = dao.insertFolder(loginMember.getMemberNo()); // 폴더
 					int categoryOrderResult = dao.insertCategoryOrder(loginMember.getMemberNo()); // 카테고리순서
+					int miniroomResult = dao.insertMiniroom(loginMember.getMemberNo()); // 미니룸
 					
-					if(ownResult * minihomeResult * folderResult * categoryOrderResult <= 0) {
+					if(ownResult * minihomeResult * folderResult * categoryOrderResult * miniroomResult <= 0) {
 						
 						throw new Exception("회원가입 중 오류 발생");
 

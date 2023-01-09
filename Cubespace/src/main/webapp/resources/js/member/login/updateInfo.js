@@ -162,6 +162,16 @@ memberBirth.addEventListener("input",()=>{
 const memberTel = document.getElementById("memberTel");
 const telMessage = document.getElementById("telMessage");
 
+(()=> {
+
+    if(memberTel.value == "01000000000"){
+        telMessage.classList.remove("confirm");
+        telMessage.classList.add("error");
+        checkObj.memberTel = false;
+    }
+})();
+
+
 memberTel.addEventListener("input",()=>{
 
     checkObj.memberTel = false; 
@@ -177,6 +187,15 @@ memberTel.addEventListener("input",()=>{
     const regEx = /^0(1[01679]|2|[3-6][1-5]|70)[1-9]\d{2,3}\d{4}$/;
 
     if(regEx.test(memberTel.value)){ // 정규표현식이 일치한 경우
+
+        if(memberTel.value == "01000000000"){
+            telMessage.innerText="전화번호 형식이 유효하지 않습니다.";
+            telMessage.classList.remove("confirm");
+            telMessage.classList.add("error");
+            checkObj.memberTel = false;
+            return;
+        }
+
         const dbTelCheck ={"memberTel":memberTel.value};
             $.ajax({
                 url :"/telDupCheck",

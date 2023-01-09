@@ -138,6 +138,7 @@
                             <span class="backgroundTitle">메뉴설정 변경</span>
                             <div class="backgroundExplain">
                                 <p>메뉴 구성을 변경할 수 있으며 메뉴 하단에 폴더를 생성할 수 있습니다</p>
+                                <p>폴더 아이콘 더블클릭시 폴더 내부의 게시글 설정을 변경할 수 있습니다</p>
                             </div>
                         </div>
                        

@@ -84,7 +84,17 @@
                         <span>매력지수 액티브</span>
                         <div class="active-range">
                             <div class="empty"></div>
-                            <div class="fill frame-color" style="width: ${(minihome.total * 1.0) / (minihome.maxTotal * 1.0) * 100 - 1.5}%"></div>
+                            <c:set var="fillRange" value="${(minihome.total * 1.0) / (minihome.maxTotal * 1.0) * 100}"/>
+
+
+                            <c:choose>
+                                <c:when test="${fillRange > 99}">
+                                    <div class="fill frame-color" style="width: ${fillRange - 1.5}%"></div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="fill frame-color" style="width: ${fillRange}%"></div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                 </div>

@@ -218,7 +218,7 @@ const addFriend = (memberNo, btn)=>{
                 add.removeAttribute("id");
             }else{
                 alert("이미 해당 회원에게 깐부신청을 받았습니다. 깐부수락을 해주세요")
-                console.log("이미 해당 회원에게 깐부신청을 받았습니다. 깐부수락을 해주세요");
+                // console.log("이미 해당 회원에게 깐부신청을 받았습니다. 깐부수락을 해주세요");
             }
         }
     })

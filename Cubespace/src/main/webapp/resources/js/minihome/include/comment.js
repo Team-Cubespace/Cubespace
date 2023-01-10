@@ -4,7 +4,6 @@ const createCommentList = (commentList) => {
 
     const commentListArea = document.getElementById("commentListArea");
     commentListArea.innerHTML = "";
-    console.log(commentList);
     for(let comment of commentList) {
         // 댓글 li
         const commentRow = document.createElement("li");
@@ -152,7 +151,6 @@ const selectCommentList = (boardNo) => {
         },
         dataType: "JSON",
         success: result => {
-            console.log(result);
             createCommentList(result);
         }
     })
@@ -167,9 +165,7 @@ const insertComment = (commentNo) => {
 /* 자식 댓글 출력/삭제 */
 const toggleChildComment = (target) => {
     // 자식 댓글 초기화
-    console.log(target);
     let childComment = target.nextElementSibling;
-    console.log(childComment);
 
     while(childComment.classList.contains("child-comment")) {
         childComment.classList.toggle("show");
@@ -253,7 +249,6 @@ const showUpdateComment= (commentNo, btn) =>{
     for(; !currentElement.classList.contains("comment-content"); currentElement = currentElement.parentElement);
 
     const commentContentArea = currentElement.getElementsByClassName("comment-content-area")[0];
-    console.log(commentContentArea);
 
     // 수정전 p태그 백업
     beforeCommentRow = commentContentArea.innerHTML;

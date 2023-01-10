@@ -4,12 +4,12 @@
 <%-- <c:if test="${not empty sessionScope.loginMember}">
     <c:set var="loginMember" value="${sessionScope.loginMember}"/>
 </c:if> --%>
+        <%-- 로그인한 회원 번호 --%>
     <script>
-        // 로그인한 회원 번호
 		const loginMemberNo = "${loginMember.memberNo}";
     </script>
     <script>
-        const loginMember = "${loginMember}";
+        const loginMember = '${loginMember}';
     </script>
 <header>
     <!------------------ 헤더 메뉴 ------------------>

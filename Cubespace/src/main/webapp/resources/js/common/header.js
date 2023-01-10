@@ -39,9 +39,7 @@ const openMinihome = (url) => {
             return false;
         }
     }
-    console.log("오픈함수 호출");
     localStorage.removeItem("minihomeHistory");
-    console.log(url);
     let title = "minihome";
 
     let status = "resizable=no, status=no, menubar=no, width=1203, height=718, top=50, left=300";
@@ -65,7 +63,6 @@ if(logout != null){
                 url: '/v1/user/unlink'
                 , success: function (response) {
         
-                console.log(response);
                 window.location.href="/";
                 },
                 fail: function () {

@@ -173,8 +173,8 @@
 }
 /* 이미지에 커서를 갖다댈 때 */
 .emoji:hover{
-    height:30px;
-    width: 30px;
+    height:28px;
+    width: 28px;
     cursor: pointer;
 }
 /* 숫자 */

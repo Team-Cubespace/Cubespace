@@ -85,6 +85,7 @@
                 <div id="startKakao">카카오로 시작하기</div>
             </div>
         </div>
+        <p class="alertKakaoAgree">카카오 로그인시 선택항목(카카오계정(이메일))에 동의해야만 큐브스페이스 서비스 이용이 가능합니다</p>
 
     </form>
 

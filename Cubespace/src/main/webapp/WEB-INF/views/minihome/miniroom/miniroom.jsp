@@ -117,13 +117,6 @@
 
                     <div class="goods-container"></div>
 
-                    <!-- <div class="page-container">
-                        <a href="#" class="page"><i class="fa-solid fa-angle-left"></i></a>
-                        <a href="#" class="page current">1</a>
-                        <a href="#" class="page">2</a>
-                        <a href="#" class="page"><i class="fa-solid fa-angle-right"></i></a>
-                    </div> -->
-
                     <input type="hidden" name="wallFlag" id="wallFlag" value="N">
                     <input type="hidden" name="floorFlag" id="floorFlag" value="N">
                 </form>

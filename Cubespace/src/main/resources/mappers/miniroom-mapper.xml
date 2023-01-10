@@ -53,9 +53,19 @@
 		ORDER BY LOCATION_NO
 	</select>
 	
+	<!-- 미니미 수 조회 -->
+	<select id="minimeeCount" resultType="_int">
+		SELECT COUNT(*) FROM MINIMEE
+	</select>
+	
 	<!-- 미니미 목록 조회 -->
 	<select id="selectMinimeeList" resultMap="minimee_rm">
 		SELECT MINIMEE_NO, MINIMEE_NAME, MINIMEE_PATH, 4 SHOP_CATH_NO FROM MINIMEE
+	</select>
+	
+	<!-- 소유한 소품 수 조회 -->
+	<select id="goodsListCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER_OWN_GOODS WHERE MEMBER_NO = #{memberNo} AND SHOP_CATH_NO = 3
 	</select>
 	
 	<!-- 소유한 소품 목록 조회 -->
@@ -67,13 +77,19 @@
 		ORDER BY GOODS_NAME
 	</select>
 	
+	<!-- 소품 삭제 -->
+	<delete id="deleteGoods">
+		DELETE FROM MEMBER_OWN_GOODS
+		WHERE MEMBER_NO = #{memberNo} AND SHOP_CATH_NO = #{shopCathNo} AND GOODS_NO = #{goodsNo}
+	</delete>
+	
 	<!-- 미니미, 소품 좌표 저장 -->
-	<delete id="deleteprops">
+	<delete id="deleteProps">
 		DELETE FROM MINIROOM_PLACE WHERE MEMBER_NO = #{memberNo}
 	</delete>
 	
 	<!-- 미니미, 소품 좌표 저장 -->
-	<insert id="insertprops">
+	<insert id="insertProps">
 		INSERT INTO MINIROOM_PLACE VALUES (#{memberNo}, #{locationNo}, #{shopCathNo}, #{goodsNo})
 	</insert>
 	

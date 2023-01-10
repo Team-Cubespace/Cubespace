@@ -15,6 +15,22 @@ let movedProps;
 let movedPropsX;
 let movedPropsY;
 
+/* 미니미, 소품 카테고리 */
+const selectMinimee = document.getElementById("selectMinimee");
+const selectGoods = document.getElementById("selectGoods");
+
+/* 카테고리 플래그 변수 */
+let categoryFlag;
+
+/* 리스트 개수 변수 */
+let listCount;
+
+/* 페이지네이션 변수 */
+let paginationObject;
+
+/* 페이지네이션 플래그 */
+let pageFlag = "Y";
+
 /* 소품 배치 O -> 소품 배치 X */
 const afterEmptyTile = tileNo => {
     const tile = document.getElementById("tile" + tileNo);
@@ -244,39 +260,40 @@ document.getElementById("removeBtn").addEventListener("click", () => {
     movedProps.remove();
 })
 
-/* 미니미 카테고리 선택 */
-const selectMinimee = document.getElementById("selectMinimee");
-const selectGoods = document.getElementById("selectGoods");
-
-selectMinimee.addEventListener("click", () => {
-    clickMinimee();
-})
-
 /* 미니미 목록 조회 */
-const selectminimeeList = () => {
+const selectminimeeList = cp => {
     $.ajax({
         url : "/miniroom/minimeeList",
         type : "GET",
-        success : (minimeeList) => {
+        async : false,
+        data : {"cp" : cp},
+        success : map => {
+            const goodsContainer = document.querySelector(".goods-container");
+            goodsContainer.innerHTML = "";
+            listCount = map.minimeeList.length;
+
+            if(listCount < 6) {goodsContainer.style.height = "167.8px";}
+            else {goodsContainer.style.height = "335.6px";}
+
             // goodsList div
             const goodsList = document.createElement("div");
             goodsList.classList.add("goods-list");
 
-            for(let i = 0; i < minimeeList.length; i++) {
+            for(let i = 0; i < map.minimeeList.length; i++) {
                 // goods-info div
                 const goodsInfo = document.createElement("div");
                 goodsInfo.classList.add("goods-info");
-                if(i + 1 != 5) {goodsInfo.classList.add("goods-info-right");}
+                if((i+1) % 5 != 0) {goodsInfo.classList.add("goods-info-right");}
 
                 // goods-img img
                 const goodsImg = document.createElement("img");
                 goodsImg.classList.add("goods-img");
-                goodsImg.src = minimeeList[i].minimeePath;
+                goodsImg.src = map.minimeeList[i].minimeePath;
 
                 // goods-name div
                 const goodsName = document.createElement("div");
                 goodsName.classList.add("goods-name");
-                goodsName.innerText = minimeeList[i].minimeeName;
+                goodsName.innerText = map.minimeeList[i].minimeeName;
 
                 // goods-btn div
                 const goodsBtn = document.createElement("div");
@@ -298,12 +315,13 @@ const selectminimeeList = () => {
                 goodsList.append(goodsInfo);
 
                 // last append
-                const goodsContainer = document.querySelector(".goods-container");
                 goodsContainer.append(goodsList);
 
-                let minimeePath = minimeeList[i].minimeePath;
-                let cathNo = minimeeList[i].shopCathNo;
-                let minimeeNo = minimeeList[i].minimeeNo;
+                let minimeePath = map.minimeeList[i].minimeePath;
+                let cathNo = map.minimeeList[i].shopCathNo;
+                let minimeeNo = map.minimeeList[i].minimeeNo;
+
+                paginationObject = map.pagination;
 
                 moveGoodsBtn.addEventListener("click", () => {putMinimee(minimeePath, cathNo, minimeeNo);})
             }
@@ -312,97 +330,41 @@ const selectminimeeList = () => {
     });
 }
 
-const clickMinimee = () => {
-    document.querySelector(".goods-container").innerHTML = "";
-    selectMinimee.classList.add("select-category");
-    selectGoods.classList.remove("select-category");
-    selectminimeeList();
-}
-
-clickMinimee();
-
-/* 미니미 배치 */
-const putMinimee = (minimeePath, cathNo, minimeeNo) => {
-    const propsList = document.getElementsByClassName("props");
-    let minimeeCount = 0;
-
-    for(let pl of propsList){
-        plArray = pl.id.split("-");
-        if(plArray[1] == 4) {
-            minimeeCount++;
-            break;
-        }
-    }
-
-    if(minimeeCount == 0) {
-        const empty = document.getElementsByClassName("empty");
-
-        if(empty[0]) {
-        // 소품 추가
-        const props = document.createElement("div");
-        props.classList.add("props");
-        props.id = empty[0].id.substring(4) + "-" + cathNo + "-" + minimeeNo;
-        
-        // 소품 이미지 추가
-        const propsImg = document.createElement("img");
-        propsImg.classList.add("props-img");
-        propsImg.src = minimeePath;
-    
-        props.appendChild(propsImg);
-        miniroomContainer.appendChild(props);
-        props.style.zIndex = empty[0].id.substring(4);
-    
-        // 타일 좌표, 소품 좌표
-        moveLocation(empty[0].firstChild, props);
-
-        afterAlreadyTile(empty[0].id.substring(4));
-    
-        // 소품 클릭 이벤트
-        clickProps(props);
-
-        } else {
-            alert("더 이상 미니미를 추가할 수 없습니다.");
-        }
-
-    } else {
-        alert("더 이상 미니미를 추가할 수 없습니다.");
-    }
-}
-
-
-/* 소품 카테고리 선택 */
-selectGoods.addEventListener("click", () => {
-    clickGoods();
-})
-
 /* 소품 목록 조회 */
-const selectgoodsList = () => {
+const selectgoodsList = cp => {
     $.ajax({
         url : "/miniroom/goodsList",
         type : "GET",
-        success : (goods) => {
-            console.log(goods.length);
+        async : false,
+        data : {"cp" : cp},
+        success : (map) => {
+            const goodsContainer = document.querySelector(".goods-container");
+            goodsContainer.innerHTML = "";
+            listCount = map.goodsList.length;
 
-            if(goods.length > 0) {
+            if(listCount < 6) {goodsContainer.style.height = "167.8px";}
+            else {goodsContainer.style.height = "335.6px";}
+
+            if(listCount > 0) {
                 // goodsList div
                 const goodsList = document.createElement("div");
                 goodsList.classList.add("goods-list");
     
-                for(let i = 0; i < goods.length; i++) {
+                for(let i = 0; i < map.goodsList.length; i++) {
                     // goods-info div
                     const goodsInfo = document.createElement("div");
                     goodsInfo.classList.add("goods-info");
-                    if(i + 1 != 5) {goodsInfo.classList.add("goods-info-right");}
+                    if((i+1) % 5 != 0) {goodsInfo.classList.add("goods-info-right");}
     
                     // goods-img img
                     const goodsImg = document.createElement("img");
                     goodsImg.classList.add("goods-img");
-                    goodsImg.src = goods[i].goodsPath;
+                    goodsImg.src = map.goodsList[i].goodsPath;
     
                     // goods-name div
                     const goodsName = document.createElement("div");
                     goodsName.classList.add("goods-name");
-                    goodsName.innerText = goods[i].goodsName;
+                    goodsName.innerText = map.goodsList[i].goodsName;
     
                     // goods-btn div
                     const goodsBtn = document.createElement("div");
@@ -430,14 +392,17 @@ const selectgoodsList = () => {
                     goodsList.append(goodsInfo);
     
                     // last append
-                    const goodsContainer = document.querySelector(".goods-container");
                     goodsContainer.append(goodsList);
     
-                    let goodsPath = goods[i].goodsPath;
-                    let cathNo = goods[i].shopCathNo;
-                    let goodsNo = goods[i].goodsNo;
+                    let goodsPath = map.goodsList[i].goodsPath;
+                    let cathNo = map.goodsList[i].shopCathNo;
+                    let goodsNo = map.goodsList[i].goodsNo;
+                    let name = map.goodsList[i].goodsName;
+
+                    paginationObject = map.pagination;
     
                     moveGoodsBtn.addEventListener("click", () => {putGoods(goodsPath, cathNo, goodsNo);})
+                    deleteGoodsBtn.addEventListener("click", () => {deleteGoods(goodsInfo, name, cathNo, goodsNo);})
                 }
 
             } else {
@@ -448,18 +413,158 @@ const selectgoodsList = () => {
 
                 // last append
                 const goodsContainer = document.querySelector(".goods-container");
+                goodsContainer.style.height = "70px";
                 goodsContainer.append(noGoods);
+
+                const pageContainer = document.querySelector(".page-container");
+                pageContainer.remove();
+
+                pageFlag == "Y";
             }
         },
         error : () => {console.log("소품 가져오기 실패");}
     });
 }
 
-const clickGoods = () => {
-    document.querySelector(".goods-container").innerHTML = "";
-    selectGoods.classList.add("select-category");
-    selectMinimee.classList.remove("select-category");
-    selectgoodsList();
+/* 페이지네이션 */
+const categoryPage = () => {
+ const pageContainer = document.querySelector(".page-container");
+    pageContainer.innerHTML = "";
+
+    const leftArrow = document.createElement("span");
+    leftArrow.classList.add("page");
+    leftArrow.innerHTML = "<i class='fa-solid fa-angle-left'></i>";
+    pageContainer.append(leftArrow);
+
+    leftArrow.addEventListener("click", () => {
+        if(categoryFlag == "M") {selectminimeeList(paginationObject.prevPage);}
+        else {selectgoodsList(paginationObject.prevPage);}
+        categoryPage();
+    })
+
+    let page;
+
+    for(let i = paginationObject.startPage; i < paginationObject.endPage + 1; i++) {
+        page = document.createElement("span");
+        page.innerText = i;
+        page.classList.add("page");
+        pageContainer.append(page);
+
+        if(page.innerText == paginationObject.currentPage) {page.classList.add("current");}
+
+        page.addEventListener("click", () => {
+            console.log("이벤트발생");
+
+            const pageList = document.getElementsByClassName("page");
+            for(let pl of pageList) {pl.classList.remove("current");}
+
+            page.classList.add("current");
+
+            if(categoryFlag == "M") {selectminimeeList(i);}
+            else {selectgoodsList(i);}
+
+            categoryPage();
+        })
+    }
+
+    const rightArrow = document.createElement("span");
+    rightArrow.classList.add("page");
+    rightArrow.innerHTML = "<i class='fa-solid fa-angle-right'></i>";
+    pageContainer.append(rightArrow);
+
+    rightArrow.addEventListener("click", () => {
+        if(categoryFlag == "M") {selectminimeeList(paginationObject.nextPage);}
+        else {selectgoodsList(paginationObject.nextPage);}
+        categoryPage();
+    })
+}
+
+/* 미니미 카테고리 선택 */
+const clickMinimee = () => {
+    if(!selectMinimee.classList.contains("select-category")){
+        categoryFlag = "M";
+        selectMinimee.classList.add("select-category");
+        selectGoods.classList.remove("select-category");
+        selectminimeeList(1);
+
+        if(pageFlag == "Y") {
+            const pageContainer = document.createElement("div");
+            pageContainer.classList.add("page-container");
+            homeArea.append(pageContainer);
+            pageFlag == "N";
+        }
+
+        categoryPage();
+    }
+}
+
+selectMinimee.addEventListener("click", () => {
+    clickMinimee();
+})
+
+clickMinimee();
+
+/* 소품 카테고리 선택 */
+selectGoods.addEventListener("click", () => {
+    if(!selectGoods.classList.contains("select-category")){
+        categoryFlag = "G";
+        selectGoods.classList.add("select-category");
+        selectMinimee.classList.remove("select-category");
+        selectgoodsList(1);
+
+        if(listCount > 0) {
+            categoryPage();
+            pageFlag = "N";
+        }
+    }
+})
+
+/* 미니미 배치 */
+const putMinimee = (minimeePath, cathNo, minimeeNo) => {
+    const propsList = document.getElementsByClassName("props");
+    let minimeeCount = 0;
+
+    for(let pl of propsList){
+        plArray = pl.id.split("-");
+        if(plArray[1] == 4) {
+            minimeeCount++;
+            break;
+        }
+    }
+
+    if(minimeeCount == 0) {
+        const empty = document.getElementsByClassName("empty");
+
+        if(empty[0]) {
+        // 미니미 추가
+        const props = document.createElement("div");
+        props.classList.add("props");
+        props.id = empty[0].id.substring(4) + "-" + cathNo + "-" + minimeeNo;
+        
+        // 미니미 이미지 추가
+        const propsImg = document.createElement("img");
+        propsImg.classList.add("props-img");
+        propsImg.src = minimeePath;
+    
+        props.appendChild(propsImg);
+        miniroomContainer.appendChild(props);
+        props.style.zIndex = empty[0].id.substring(4);
+    
+        // 타일 좌표, 미니미 좌표
+        moveLocation(empty[0].firstChild, props);
+
+        afterAlreadyTile(empty[0].id.substring(4));
+    
+        // 미니미 클릭 이벤트
+        clickProps(props);
+
+        } else {
+            alert("더 이상 미니미를 추가할 수 없습니다.");
+        }
+
+    } else {
+        alert("더 이상 미니미를 추가할 수 없습니다.");
+    }
 }
 
 /* 소품 배치 */
@@ -494,6 +599,43 @@ const putGoods = (goodsPath, cathNo, goodsNo) => {
     }
 }
 
+/* 소품 삭제 */
+const deleteGoods = (goodsInfo, goodsName, cathNo, goodsNo) => {
+    if(confirm(goodsName + "을(를) 목록에서 삭제하시겠습니까?")) {
+        $.ajax({
+            url : "/miniroom/delete",
+            data : {"shopCathNo" : cathNo,
+                    "goodsNo" : goodsNo},
+            type : "GET",
+            success : (result) => {
+                if(result > 0) {
+                    alert("삭제되었습니다.");
+                    goodsInfo.remove();
+                    const goodsList = document.querySelector(".goods-list");
+                    const pageContainer = document.querySelector(".page-container");
+
+                    if(goodsList.innerHTML == ""){
+                        goodsList.remove();
+                        pageContainer.remove();
+
+                        // goodsList div
+                        const noGoods = document.createElement("div");
+                        noGoods.classList.add("no-goods");
+                        noGoods.innerHTML = "보유한 소품이 없습니다&nbsp;<i class='fa-solid fa-face-sad-tear'></i>";
+
+                        // last append
+                        const goodsContainer = document.querySelector(".goods-container");
+                        goodsContainer.style.height = "70px";
+                        goodsContainer.append(noGoods);
+                    }
+            
+                } else {console.log("소품 삭제 실패");}
+            },
+            error : () => {console.log("소품 삭제 실패");}
+        });
+    }
+}
+
 /* 미니룸 사진 저장 */
 $("#pictureBtn").click(e => {
     html2canvas(miniroomContainer).then(canvas => {
@@ -521,8 +663,6 @@ document.getElementById("saveBtn").addEventListener("click", () => {
         }
     
         var miniroomFrm = $('#miniroomFrm')[0];
-        var formData = new FormData(miniroomFrm);
-    
         miniroomFrm.submit();
     }
 })

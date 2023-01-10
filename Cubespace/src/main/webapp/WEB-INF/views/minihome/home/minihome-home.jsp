@@ -102,7 +102,7 @@
                 <div class="friend-message-container">
                     <c:choose>
                         <c:when test="${fn:length(friendMessage) == 0}">
-                            <div class="nothing">깐부 메시지가 없습니다&nbsp;<i class="fa-solid fa-face-sad-tear"></i></div>
+                            <div class="nothing nothingMessage">깐부 메시지가 없습니다&nbsp;<i class="fa-solid fa-face-sad-tear"></i></div>
                         </c:when>
 
                         <c:otherwise>

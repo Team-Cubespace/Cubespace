@@ -2,13 +2,16 @@ package com.team.cubespace.miniroom.model.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.team.cubespace.common.Pagination;
 import com.team.cubespace.common.Util;
 import com.team.cubespace.main.model.vo.ShopMiniroom;
 import com.team.cubespace.miniroom.model.dao.MiniroomDAO;
@@ -40,16 +43,46 @@ public class MiniroomServiceImpl implements MiniroomService {
 
 	// 미니미 목록 조회
 	@Override
-	public List<Minimee> minimeeList() {
-		List<Minimee> minimeeList = dao.selectMinimeeList();
-		return minimeeList;
+	public Map<String, Object> minimeeList(int cp) {
+        // 1. 특정 게시판의 전체 게시글 수 조회(단, 삭제 제외)
+        int listCount = dao.minimeeCount();
+        
+        // 2. 전체 게시글 수 + cp(현재 페이지)를 이용해서 페이징 처리 객체 생성
+        Pagination pagination = new Pagination(listCount, cp);
+        
+        // 3. 페이징 처리 객체를 이용해서 게시글 목록 조회
+		List<Minimee> minimeeList = dao.selectMinimeeList(pagination);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+        map.put("pagination", pagination);
+        map.put("minimeeList", minimeeList);
+		
+		return map;
 	}
 
 	// 소유한 소품 목록 조회
 	@Override
-	public List<ShopMiniroom> goodsList(int memberNo) {
-		List<ShopMiniroom> goodsList = dao.selectGoodsList(memberNo);
-		return goodsList;
+	public Map<String, Object> goodsList(int memberNo, int cp) {
+        // 1. 특정 게시판의 전체 게시글 수 조회(단, 삭제 제외)
+        int listCount = dao.goodsListCount(memberNo);
+        
+        // 2. 전체 게시글 수 + cp(현재 페이지)를 이용해서 페이징 처리 객체 생성
+        Pagination pagination = new Pagination(listCount, cp);
+        
+        // 3. 페이징 처리 객체를 이용해서 게시글 목록 조회
+		List<ShopMiniroom> goodsList = dao.selectGoodsList(pagination, memberNo);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+        map.put("pagination", pagination);
+        map.put("goodsList", goodsList);
+		
+		return map;
+	}
+	
+	// 소품 삭제
+	@Override
+	public int deleteGoods(Map<String, Object> paramMap) {
+		return dao.deleteGoods(paramMap);
 	}
 
 	// 미니미, 소품 좌표 저장
@@ -57,7 +90,7 @@ public class MiniroomServiceImpl implements MiniroomService {
 	@Override
 	public void props(int memberNo, String[] props) {
 		// 기존의 소품 좌표 모두 삭제
-		dao.deleteprops(memberNo);
+		dao.deleteProps(memberNo);
 		
 		if(props != null) {
 			// parameter를 담을 객체, 배열 생성;
@@ -73,7 +106,7 @@ public class MiniroomServiceImpl implements MiniroomService {
 				miniroomPlace.setShopCathNo(Integer.parseInt(propsArr[1]));
 				miniroomPlace.setGoodsNo(Integer.parseInt(propsArr[2]));
 				
-				dao.insertprops(miniroomPlace);
+				dao.insertProps(miniroomPlace);
 			}
 		}
 	}

@@ -136,10 +136,6 @@
 }
 
 /* 미니미 & 소품 */
-.goods-container{
-    min-height: 70px;
-}
-
 .goods-list{
     width: 100%;
     display: flex;
@@ -206,6 +202,7 @@
 
 /* 페이지 */
 .page-container{
+    height: 21.6px;
     display: flex;
     justify-content: center;
     align-items: baseline;
@@ -214,6 +211,7 @@
 .page{
     padding: 3px 5px;
     margin: 0 3.5px;
+    cursor: pointer;
 }
 
 .current{

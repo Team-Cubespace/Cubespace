@@ -96,6 +96,11 @@ document.getElementById("writeBtn").addEventListener("click", e => {
                             deleteBtnButton.addEventListener("click", () => {deleteMessage(deleteBtnButton);});
                             
                             dearFriend.value = "";
+
+                            const nothingMessage = document.getElementsByClassName("nothingMessage");
+
+                            console.log(nothingMessage);
+                            if(nothingMessage[0]) {nothingMessage[0].remove();}
                         },
                         error : () => {console.log("깐부 메시지 등록 실패");}
                     })
@@ -132,6 +137,16 @@ const deleteMessage = (btn) => {
                     alert("메시지가 삭제되었습니다.");
                     btn.parentElement.parentElement.remove();
                     $(".friend-message").slice(0, 5).css("display", "flex");
+
+                    const friendMessage = document.getElementsByClassName("friend-message");
+
+                    if(!friendMessage[0]) {
+                        const nothing = document.createElement("div");
+                        nothing.classList.add("nothing", "nothingMessage");
+                        nothing.innerHTML = "깐부 메시지가 없습니다&nbsp;<i class='fa-solid fa-face-sad-tear'></i>";
+                        const friendMessageContainer = document.querySelector(".friend-message-container");
+                        friendMessageContainer.append(nothing);
+                    }
                 }
                 
                 else {console.log("깐부 메시지 삭제 실패");}

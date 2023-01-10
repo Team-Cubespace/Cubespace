@@ -69,15 +69,25 @@ public class MiniroomController {
 	// 미니미 목록 조회
 	@GetMapping("/minimeeList")
 	@ResponseBody
-	public List<Minimee> minimeeList() {
-		return service.minimeeList();
+	public Map<String, Object> minimeeList(@RequestParam(value="cp", required=false, defaultValue="1") int cp) {
+		return service.minimeeList(cp);
 	}
 	
 	// 소유한 소품 목록 조회
 	@GetMapping("/goodsList")
 	@ResponseBody
-	public List<ShopMiniroom> goodsList(@SessionAttribute("minihome") Minihome minihome) {
-		return service.goodsList(minihome.getMemberNo());
+	public Map<String, Object> goodsList(@RequestParam(value="cp", required=false, defaultValue="1") int cp,
+										@SessionAttribute("minihome") Minihome minihome) {
+		return service.goodsList(minihome.getMemberNo(), cp);
+	}
+	
+	// 소품 삭제
+	@GetMapping("/delete")
+	@ResponseBody
+	public int deleteGoods(@SessionAttribute("minihome") Minihome minihome,
+						   @RequestParam Map<String, Object> paramMap) {
+		paramMap.put("memberNo", minihome.getMemberNo());
+		return service.deleteGoods(paramMap);
 	}
 	
 	// 현재 상태 저장

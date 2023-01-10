@@ -48,8 +48,6 @@ public class MinihomeMainController {
 		
 		List<NewPost> newPost = service.newPost(paramMap);
 		
-		// 미니룸 조회 (추가 예정)
-		
 		// 깐부 메시지 조회
 		List<FriendMessage> friendMessage = service.friendMessage(memberNo);
 		

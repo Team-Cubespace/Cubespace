@@ -18,6 +18,7 @@
     justify-content: end;
     align-items: center;
     height: 40px;
+    margin-bottom: 20px;
 }
 
 /* 글쓰기 버튼 */
@@ -34,9 +35,7 @@
 /* 일기가 있는 공간 */
 .diary-section {
     border: 2px solid #aaa;
-    /* padding :10px; */
-    margin-top: 30px;
-    margin-bottom: 60px;
+    margin-bottom: 110px;
     box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
 }
 
@@ -100,7 +99,30 @@
     border-radius: 10px;
     top:50px;
     left:10px;
+    height: 125px;
+    overflow-y : scroll;
 }
+
+/* -----------------------스크롤 설정----------------------- */
+/* 임의의 영역 생성 */
+
+
+/* 아래의 모든 코드는 영역::코드로 사용 */
+.people-pop::-webkit-scrollbar {
+    width: 10px;  /* 스크롤바의 너비 */
+}
+
+.people-pop::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #ececf8; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.people-pop::-webkit-scrollbar-track {
+    /* background: rgba(33, 122, 244, .1);  스크롤바 뒷 배경 색상 */
+}
+
+/*--------------------- 끝 -----------------------------*/
 .people-list {
     display: flex;
     justify-content: center;
@@ -193,13 +215,13 @@
     justify-content: center;
 }
 
-.under2 > div:nth-child(1){
+.under2 > a:nth-child(1){
     background-color: black;
     color:white !important;
     border-radius: 5px;
     
 }
-.under2 > div>a{
+.under2 > a> div{
     color:white !important;
     
 }

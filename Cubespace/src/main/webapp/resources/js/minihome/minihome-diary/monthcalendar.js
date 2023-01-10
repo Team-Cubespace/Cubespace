@@ -57,7 +57,7 @@ function allDayTrue(){ //alDay == true 일 때
 
   /* 하루종일을 [예]로 클릭할 때 */
   if( $("#startTime").attr("disabled") == "disabled"){
-    alert("끝날짜도 바뀐당1~");
+    //alert("끝날짜도 바뀐당1~");
     $("#endDate").val($("#startDate").val());
   }
   
@@ -74,7 +74,7 @@ function allDayFalse(){ //alDay == false 일 때
 /* 하루종일[예]인 상태에서 시작날짜가 바뀔 때 */
 document.getElementById("startDate").addEventListener("change",function(){
   if( $("#startTime").attr("disabled") == "disabled"){
-    alert("끝날짜도 바뀐당2~");
+    //alert("끝날짜도 바뀐당2~");
     $("#endDate").val($("#startDate").val());
   }
 })
@@ -151,6 +151,7 @@ function popup2(arg){
       case 2 :  document.getElementById("categoryShow").innerText = "직장"; break;
       case 3 :  document.getElementById("categoryShow").innerText = "집";break;
       case 4 :  document.getElementById("categoryShow").innerText = "기념일"; break;
+      case 5 :  document.getElementById("categoryShow").innerText = "약속"; break;
     }
     //2. 제목
     document.getElementById("titleShow").innerText = arg.event.title;
@@ -463,7 +464,7 @@ function submitCommon(){
     submitFlag = false;
   }
   if(end>9999){
-    alert("미치셨나요? 그만해주세여");
+    alert("너무 큰 값은 넣을 수 없습니다.");
     submitFlag = false;
   }
 }
@@ -487,8 +488,10 @@ function addEvent(){
     backgroundColor = "#F3CCFF"
   } else if (category == 3){
     backgroundColor = "#D8F8B7"
-  } else {
+  } else if (category == 4){
     backgroundColor = "#FFCAC8"
+  } else {
+    backgroundColor = "#95a5a6"
   }
   
   /* description 세팅 */
@@ -512,7 +515,7 @@ function addEvent(){
   submitCommon();
 
   if(submitFlag){
-    alert("제출...?" + submitFlag);
+    //alert("제출...?" + submitFlag);
     /* 제목 이상 없으면 제출 */
     $.ajax({
       url: "/diary/calendar/addSchedule",
@@ -590,8 +593,10 @@ function updateEvent(){
       backgroundColor = "#F3CCFF"
     } else if (document.getElementById("category").value == 3){
       backgroundColor = "#D8F8B7"
-    } else {
+    } else if (document.getElementById("category").value == 4){
       backgroundColor = "#FFCAC8"
+    } else {
+      backgroundColor = "#95a5a6"
     }
     /* 수정 시 제목 유효성 검사 */
     submitCommon();
@@ -643,8 +648,11 @@ function updateEvent(){
               selectEvent.event.setExtendedProp("description", document.getElementById("description").value);
             // }
             //4.5.6.7 시작 & 종료 날짜 & 시간
-            selectEvent.event.setDates(document.getElementById("startDate").value+"T"+document.getElementById("startTime").value+":00",
-                                      document.getElementById("endDate").value+"T"+document.getElementById("endTime").value+":00")
+            //selectEvent.event.setDates(document.getElementById("startDate").value+"T"+document.getElementById("startTime").value+":00",
+            //                          document.getElementById("endDate").value+"T"+document.getElementById("endTime").value+":00")
+            selectEvent.event.setStart(document.getElementById("startDate").value+"T"+document.getElementById("startTime").value+":00");
+            selectEvent.event.setEnd(document.getElementById("endDate").value+"T"+document.getElementById("endTime").value+":00");
+            console.log(document.getElementById("endDate").value+"T"+document.getElementById("endTime").value+":00");
             //8. 종일 여부
               if(document.querySelector("input[name='allDay']:checked").value =="true"){
                 selectEvent.event.setAllDay(true);

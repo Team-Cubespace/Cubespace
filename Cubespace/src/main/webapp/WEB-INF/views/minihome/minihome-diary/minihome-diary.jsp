@@ -22,7 +22,7 @@
 
 
 
- <%-- 내 폰트 설정 --%>
+<%-- 내 폰트 설정 --%>
     <c:forEach var="font" items="${allFontList}">
     <c:if test="${font.fontNo == minihome.fontNo}">
         <c:set var="myFont" value="${font.fontNo}"/>
@@ -37,7 +37,7 @@
     </c:forEach>
 
     <style>
-     .side-folder,  header,  .input-row, .form-button-area, .under-section,  .title-section,  .write-section{
+    .side-folder,  header,  .input-row, .form-button-area, .under-section,  .title-section,  .write-section, .calendar-container{
         font-family : "${myFont}";
     } 
 
@@ -52,7 +52,7 @@
     </style>
 </head>
 <body>
-    <jsp:include page="/WEB-INF/views/include/allFontMusic.jsp"/>
+    <%-- <jsp:include page="/WEB-INF/views/include/allFontMusic.jsp"/> --%>
     <div class="content-area frame-color">
         <section class="minihome-rayout">
                 <jsp:include page="/WEB-INF/views/include/side-folder.jsp"/>

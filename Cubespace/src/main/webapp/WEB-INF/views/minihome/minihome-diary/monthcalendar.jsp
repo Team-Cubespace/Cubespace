@@ -219,6 +219,7 @@
                                         <option value="2" style = "color: #F3CCFF; font-weight : bold;" >직장</option>
                                         <option value="3" style = "color: #D8F8B7; font-weight : bold;">집</option>
                                         <option value="4" style = "color: #FFCAC8; font-weight : bold;">기념일</option>
+                                        <option value="5" style = "color: #95a5a6; font-weight : bold;">약속</option>
                                     </select>
                                 </div>
                                 <div class = "input-row">

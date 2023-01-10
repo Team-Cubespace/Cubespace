@@ -44,13 +44,7 @@ public class NotificationsController {
 	@ResponseBody
 	public int memberAcceptBtn(@RequestParam Map<String, Object> paramMap,
 						@SessionAttribute("loginMember") Member loginMember) {
-		int result = service.memberAcceptBtn(paramMap);
-		
-		if(result >0) {
-			loginMember.setFriendCount(loginMember.getFriendCount()+1);
-			
-		}
-		
+		int result = service.memberAcceptBtn(paramMap);			
 		return result;
 	}
 	

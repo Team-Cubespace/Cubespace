@@ -166,3 +166,8 @@
     border: none;
     background-color: white;
 }
+.alertKakaoAgree {
+    padding-top: 10px;
+    font-weight: bold;
+    color: #8b0b47
+}

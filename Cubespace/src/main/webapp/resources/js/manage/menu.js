@@ -275,6 +275,19 @@ for (let plusBtn of plusBtnList) {
 
         const div = document.createElement("div");
         div.classList.add("subCategory");
+
+        if (category.classList.contains("diary")) {
+            div.classList.add("diaryFolder");
+        }
+        if (category.classList.contains("album")) {
+            div.classList.add("albumFolder");
+        }
+        if (category.classList.contains("video")) {
+            div.classList.add("videoFolder");
+        }
+
+
+
         div.setAttribute("name", Number(subCategoryLength) + 1); // ajax에 사용
 
 
@@ -379,7 +392,7 @@ const folderMinus = e => {
                 if (result > 0) {
                     alert("폴더가 삭제되었습니다");
                     e.target.parentElement.remove();
-                    orderSubCategory(); // 파일 순서 재정렬
+                    orderSubCategory(boardTypeNo); // 파일 순서 재정렬
                 } else {
                     console.log("폴더 삭제 실패");
                 }
@@ -390,12 +403,33 @@ const folderMinus = e => {
 }
 
 // 파일 순서 재정렬
-const orderSubCategory = () => {
-    const subCategoryList = document.getElementsByClassName("subCategory");
+const orderSubCategory = (boardTypeNo) => {
+
     let i = 1;
-    for(let subCategory of subCategoryList){
-        subCategory.setAttribute("name", i);
-        i++;
+    if(boardTypeNo == 1){
+        const diaryFolderList = document.getElementsByClassName("diaryFolder");
+        for(diaryFolder of diaryFolderList){
+            diaryFolder.setAttribute("name", i);
+            i++;
+        }
+    }
+
+    i = 1;
+    if(boardTypeNo == 2){
+        const albumFolderList = document.getElementsByClassName("albumFolder");
+        for(albumFolder of albumFolderList){
+            albumFolder.setAttribute("name", i);
+            i++;
+        }
+    }
+
+    i = 1;
+    if(boardTypeNo == 3){
+        const videoFolderList = document.getElementsByClassName("videoFolder");
+        for(videoFolder of videoFolderList){
+            videoFolder.setAttribute("name", i);
+            i++;
+        }
     }
 }
 

@@ -31,6 +31,9 @@ let paginationObject;
 /* 페이지네이션 플래그 */
 let pageFlag = "Y";
 
+/* 현재 페이지 변수 */
+let curPage;
+
 /* 소품 배치 O -> 소품 배치 X */
 const afterEmptyTile = tileNo => {
     const tile = document.getElementById("tile" + tileNo);
@@ -428,8 +431,9 @@ const selectgoodsList = cp => {
 
 /* 페이지네이션 */
 const categoryPage = () => {
- const pageContainer = document.querySelector(".page-container");
+    const pageContainer = document.querySelector(".page-container");
     pageContainer.innerHTML = "";
+    curPage = paginationObject.currentPage;
 
     const leftArrow = document.createElement("span");
     leftArrow.classList.add("page");
@@ -626,7 +630,7 @@ const deleteGoods = (goodsInfo, goodsName, cathNo, goodsNo, goodsPath) => {
 
                     alert("삭제되었습니다.");
 
-                    if(goodsList.innerHTML == ""){
+                    if((goodsList.innerHTML == "") && (curPage == 1)){
                         goodsList.remove();
                         pageContainer.remove();
 
@@ -639,6 +643,14 @@ const deleteGoods = (goodsInfo, goodsName, cathNo, goodsNo, goodsPath) => {
                         const goodsContainer = document.querySelector(".goods-container");
                         goodsContainer.style.height = "70px";
                         goodsContainer.append(noGoods);
+
+                    } else if((goodsList.innerHTML == "") && (curPage != 1)) {
+                        selectgoodsList(curPage-1);
+                        categoryPage();
+
+                    } else {
+                        selectgoodsList(curPage);
+                        categoryPage();
                     }
             
                 } else {console.log("소품 삭제 실패");}

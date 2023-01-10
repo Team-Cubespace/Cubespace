@@ -171,16 +171,22 @@ function popup2(arg){
         document.getElementById("contentShow").innerHTML = "";
       }
     //4. 시작 날짜
-    let amPm;
+    let amPm1;
     if (startHour>=12){
-      amPm = "오후";
+      amPm1 = "오후";
     } else {
-      amPm = "오전";
+      amPm1 = "오전";
     }
-    document.getElementById("startDateShow").innerText = startFullYear +"-"+startMonth+"-"+startDate + " "+amPm+ " " +startHour+":"+startMinute ;
+    let amPm2;
+    if (endHour>=12){
+      amPm2 = "오후";
+    } else {
+      amPm2 = "오전";
+    }
+    document.getElementById("startDateShow").innerText = startFullYear +"-"+startMonth+"-"+startDate + " "+amPm1+ " " +startHour+":"+startMinute ;
 
     //6. 종료 날짜
-    document.getElementById("endDateShow").innerText = endFullYear +"-"+endMonth+"-"+endDate + " " +amPm+ " " + endHour+":"+endMinute;
+    document.getElementById("endDateShow").innerText = endFullYear +"-"+endMonth+"-"+endDate + " " +amPm2+ " " + endHour+":"+endMinute;
 
     //8. 종일 여부
       if(arg.event.allDay){
@@ -331,8 +337,8 @@ function createCalendar(){
         headerToolbar: {
             left: 'prevYear,prev,next,nextYear today',
             center: 'title',
-            // right: 'dayGridMonth,dayGridWeek,dayGridDay'
-            right: 'dayGridMonth'
+            right: 'dayGridMonth,dayGridWeek,dayGridDay'
+            // right: 'dayGridMonth'
         },
         // initialDate: '2020-09-12',
         navLinks: true, // can click day/week names to navigate views
@@ -652,7 +658,7 @@ function updateEvent(){
             //                          document.getElementById("endDate").value+"T"+document.getElementById("endTime").value+":00")
             selectEvent.event.setStart(document.getElementById("startDate").value+"T"+document.getElementById("startTime").value+":00");
             selectEvent.event.setEnd(document.getElementById("endDate").value+"T"+document.getElementById("endTime").value+":00");
-            console.log(document.getElementById("endDate").value+"T"+document.getElementById("endTime").value+":00");
+            //console.log(document.getElementById("endDate").value+"T"+document.getElementById("endTime").value+":00");
             //8. 종일 여부
               if(document.querySelector("input[name='allDay']:checked").value =="true"){
                 selectEvent.event.setAllDay(true);

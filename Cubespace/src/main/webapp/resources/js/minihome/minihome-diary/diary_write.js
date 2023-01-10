@@ -54,7 +54,7 @@ $('#summernote').summernote({
     },
     // disableDragAndDrop: true
 });
-console.log("하이");
+//console.log("하이");
 let contentLength;
 //글자수 체크
 //태그와 줄바꿈, 공백을 제거하고 텍스트 글자수만 가져옵니다.
@@ -63,8 +63,8 @@ let contentLength;
         // if(str.length > 3878){
         //     alert("내용 길이가 너무 깁니다.")
         // }
-        console.log("str.length"+str.length);
-        console.log("contentLength"+contentLength);
+        //console.log("str.length"+str.length);
+        //console.log("contentLength"+contentLength);
 	}
 
 
@@ -82,7 +82,7 @@ function writeValidate() {
     const diaryTitle = document.getElementById("diaryTitle");
     const diaryContent = document.getElementById("summernote");
     const diaryDate = document.getElementById("diaryDate").value;
-    console.log("다이어리작성시"+diaryDate);
+    //console.log("다이어리작성시"+diaryDate);
     if(diaryTitle.value.trim().length == 0){
         
         alert("제목을 입력해주세요.");
@@ -105,7 +105,7 @@ function writeValidate() {
         alert("현재 이후의 다이어리를 작성하실 수 없습니다.");
         return false;
     }
-    console.log("contentLength22"+contentLength);
+    //console.log("contentLength22"+contentLength);
     // if(contentLength > 3878){
     //     console.log("contentLength"+contentLength);
     //     alert("내용 길이가 너무 깁니다.")

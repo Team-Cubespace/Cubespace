@@ -606,28 +606,26 @@ const deleteGoods = (goodsInfo, goodsName, cathNo, goodsNo, goodsPath) => {
             url : "/miniroom/delete",
             data : {"shopCathNo" : cathNo,
                     "goodsNo" : goodsNo},
+            async : false,
             type : "GET",
             success : (result) => {
                 if(result > 0) {
-                    alert("삭제되었습니다.");
-
-                    // const propsList = document.getElementsByClassName("props");
-
-                    // const propsSrc = "http://localhost" + goodsPath;
+                    const propsImg = document.getElementsByClassName("props-img");
                     
-                    console.log(object);
-
-                    for(let props of propsList) {
-                        if(props.firstChild.getAttribute("src") == goodsPath) {
-                            const propsArray = props.id.split("-");
+                    for(let i = 0; i < propsImg.length; i++) {
+                        if(propsImg[i].getAttribute("src") == goodsPath) {
+                            propsArray = propsImg[i].parentElement.id.split("-");
                             afterEmptyTile(propsArray[0]);
-                            props.remove();
+                            propsImg[i].parentElement.remove();
+                            i--;
                         }
                     }
 
                     goodsInfo.remove();
                     const goodsList = document.querySelector(".goods-list");
                     const pageContainer = document.querySelector(".page-container");
+
+                    alert("삭제되었습니다.");
 
                     if(goodsList.innerHTML == ""){
                         goodsList.remove();

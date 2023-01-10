@@ -42,8 +42,7 @@ public class NotificationsController {
 	 */
 	@GetMapping("/memberAcceptBtn")
 	@ResponseBody
-	public int memberAcceptBtn(@RequestParam Map<String, Object> paramMap,
-						@SessionAttribute("loginMember") Member loginMember) {
+	public int memberAcceptBtn(@RequestParam Map<String, Object> paramMap) {
 		int result = service.memberAcceptBtn(paramMap);			
 		return result;
 	}

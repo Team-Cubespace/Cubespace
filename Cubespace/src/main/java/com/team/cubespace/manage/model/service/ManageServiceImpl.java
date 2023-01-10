@@ -162,21 +162,25 @@ public class ManageServiceImpl implements ManageService{
 		
 		int result = dao.deleteFolder(paramMap);
 		
+		int subCategoryLength = Integer.parseInt((String)paramMap.get("subCategoryLength"));
+		int folderOrder = Integer.parseInt((String)paramMap.get("folderOrder"));
+		
+		
 		if(result > 0) {
 			
-			int subCategoryLength = Integer.parseInt((String)paramMap.get("subCategoryLength"));
-			int folderOrder = Integer.parseInt((String)paramMap.get("folderOrder"));
-			
-
-			// paramMap : boardTypeNo, memberNo, folderNewOrder(바꿀 순서)
-			int updateFolderOrderResult = dao.updateFolderOrder(paramMap);
+			if(subCategoryLength > folderOrder) {
 				
-
-			// result가 폴더삭제 + 업데이트 갯수와 동일할경우
-			if(updateFolderOrderResult <= 0) {
+				// paramMap : boardTypeNo, memberNo, folderNewOrder(바꿀 순서)
+				int updateFolderOrderResult = dao.updateFolderOrder(paramMap);
+				
+				
+				// result가 폴더삭제 + 업데이트 갯수와 동일할경우
+				if(updateFolderOrderResult <= 0) {
 //				if(updateFolderOrderResult != (subCategoryLength - folderOrder)) {
-				throw new Exception("폴더 삭제 중 오류 발생");
+					throw new Exception("폴더 삭제 중 오류 발생");
+				}
 			}
+
 			
 		// 폴더가 삭제되지 않은 경우
 		} else { 

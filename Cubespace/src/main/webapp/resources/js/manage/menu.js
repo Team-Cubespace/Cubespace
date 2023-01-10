@@ -405,8 +405,8 @@ const folderMinus = e => {
 // 파일 순서 재정렬
 const orderSubCategory = (boardTypeNo) => {
 
-    let i = 1;
     if(boardTypeNo == 1){
+        let i = 1;
         const diaryFolderList = document.getElementsByClassName("diaryFolder");
         for(diaryFolder of diaryFolderList){
             diaryFolder.setAttribute("name", i);
@@ -414,8 +414,8 @@ const orderSubCategory = (boardTypeNo) => {
         }
     }
 
-    i = 1;
     if(boardTypeNo == 2){
+        i = 1;
         const albumFolderList = document.getElementsByClassName("albumFolder");
         for(albumFolder of albumFolderList){
             albumFolder.setAttribute("name", i);
@@ -423,8 +423,8 @@ const orderSubCategory = (boardTypeNo) => {
         }
     }
 
-    i = 1;
     if(boardTypeNo == 3){
+        i = 1;
         const videoFolderList = document.getElementsByClassName("videoFolder");
         for(videoFolder of videoFolderList){
             videoFolder.setAttribute("name", i);

@@ -119,6 +119,15 @@ menuSelectCancelBtn.addEventListener("click", () => {
 /* 메뉴설정 변경*/
 const orderCategory = () => {
 
+    const folderTitleList = document.getElementsByClassName("folderTitle");
+    for(let folderTitle of folderTitleList){
+        if(folderTitle.value.trim().length == 0){
+            alert("폴더명을 입력하신 후에 [변경사항 저장] 버튼을 눌러주세요");
+            return false;
+        }
+    }
+
+
     /* 카테고리 정렬 */
     const categoryArea = document.getElementsByClassName("categoryArea");
     let orderString = "";
@@ -285,6 +294,12 @@ for (let plusBtn of plusBtnList) {
         if (category.classList.contains("video")) {
             div.classList.add("videoFolder");
         }
+
+
+        // 폴더아이콘 더블클릭시 -> "폴더 내 게시글이 없습니다" 출력되도록 함
+        img.addEventListener("dblclick", f=> {
+            emptyFolder(folderName);
+        })
 
 
 

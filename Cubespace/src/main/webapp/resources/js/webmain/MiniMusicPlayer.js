@@ -34,8 +34,7 @@ let temp
                         url: "/",// 상점url
                         favorited:favorited // 보유상태
                     })
-
-                    console.log(musicArr);
+                    // console.log(musicArr);
                 }
             }
 
@@ -208,7 +207,7 @@ let temp
 /* 모달 열기 */
 function MusicPlayerOpen(index){
     document.getElementById("modalPlayer").style.display = "block";
-    console.log(index);
+    // console.log(index);
     temp.currentTrackIndex = index;
     temp.currentTrack = temp.tracks[temp.currentTrackIndex];
     temp.resetPlayer();

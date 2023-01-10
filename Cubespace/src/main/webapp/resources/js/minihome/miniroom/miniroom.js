@@ -601,7 +601,7 @@ const putGoods = (goodsPath, cathNo, goodsNo) => {
 
 /* 소품 삭제 */
 const deleteGoods = (goodsInfo, goodsName, cathNo, goodsNo, goodsPath) => {
-    if(confirm(goodsName + "을(를) 목록에서 삭제하시겠습니까? (이미 배치되어 있던" + goodsName + "도 함께 삭제됩니다!)")) {     
+    if(confirm(goodsName + "을(를) 목록에서 삭제하시겠습니까?\n(이미 배치되어 있던 " + goodsName + "도 함께 삭제됩니다!)")) {     
         $.ajax({
             url : "/miniroom/delete",
             data : {"shopCathNo" : cathNo,
@@ -611,19 +611,19 @@ const deleteGoods = (goodsInfo, goodsName, cathNo, goodsNo, goodsPath) => {
                 if(result > 0) {
                     alert("삭제되었습니다.");
 
-                    const propsList = document.getElementsByClassName("props");
+                    // const propsList = document.getElementsByClassName("props");
+
+                    // const propsSrc = "http://localhost" + goodsPath;
+                    
+                    console.log(object);
 
                     for(let props of propsList) {
-                        if(props.firstChild.src == goodsPath) {
+                        if(props.firstChild.getAttribute("src") == goodsPath) {
                             const propsArray = props.id.split("-");
                             afterEmptyTile(propsArray[0]);
                             props.remove();
                         }
                     }
-
-                    const propsArray = movedProps.id.split("-");
-                    afterEmptyTile(propsArray[0]);
-                    movedProps.remove();
 
                     goodsInfo.remove();
                     const goodsList = document.querySelector(".goods-list");

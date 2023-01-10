@@ -56,6 +56,7 @@
                     </div>
 
                     <div class="save-btn-container">
+                        <button type="button" id="resetBtn">소품d </button>
                         <button type="button" id="pictureBtn">미니룸 사진 저장</button>
                         <button type="button" id="saveBtn">현재 상태 저장</button>
                     </div>

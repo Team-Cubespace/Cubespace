@@ -324,10 +324,10 @@ function selectDiary(diaryDate){
                         div3_2.classList.add("under2");
 
                             if(minihomeNo == loginMemberNo){
-                                const div3_2_1 = document.createElement("div");
+                                const div3_2_1 = document.createElement("a");
+                                div3_2_1.setAttribute("href","/diaryUpdate/"+diary.diaryNo+"?folderNo=" + folderNo+"&dateContainer="+dateContainer);
                                 
-                                    const div3_2_1_a = document.createElement("a");
-                                    div3_2_1_a.setAttribute("href","/diaryUpdate/"+diary.diaryNo+"?folderNo=" + folderNo+"&dateContainer="+dateContainer);
+                                    const div3_2_1_a = document.createElement("div");
                                     div3_2_1_a.innerText = "수정";
                                 div3_2_1.append(div3_2_1_a);
                                 
@@ -470,7 +470,7 @@ function chooseEmoji(diaryNo,btn){
 
     }
 
-    /* [이모지 고르는 리스트]가 만들어짐. */
+    /* [3] [이모지 고르는 리스트]가 만들어짐. */
     const div3_1_2_2 = document.createElement("div");
     div3_1_2_2.classList.add("choose-emoji");
 
@@ -538,7 +538,7 @@ function chooseEmoji(diaryNo,btn){
         
 }
 
-/* [공감하기]에서 이모지를 누른 경우*/
+/* [공감하기]에서 이모지를 누른 경우 - (이모지 목록 조회 새로 하기) */
 function likeUp(number,diaryNo,btn){
     
     $.ajax({
@@ -575,6 +575,7 @@ function likeUp(number,diaryNo,btn){
 1. 이모지 목록 비동기로 불러오기 
 2. 이모지를 누른 사람의 목록 비동기로 불러오기
 */
+/* [4] 이모지 목록 select */
 function selectEmojiList(diaryNo,div3_1_1_1,div3_1_1){
 
     
@@ -601,7 +602,7 @@ function selectEmojiList(diaryNo,div3_1_1_1,div3_1_1){
                 // 안됨...실험해보자...
                 //1)
                 
-                div3_1_1_1_1_1.setAttribute("onmouseenter","selectEmojiPeopleList("+emoji.emojiNo+","+emoji.diaryNo+", this)");
+                div3_1_1_1_1_1.setAttribute("onclick","selectEmojiPeopleList("+emoji.emojiNo+","+emoji.diaryNo+", this)");
                 //2)
                 // div3_1_1_1_1_1.setAttribute("onclick","selectEmojiPeopleList("+emoji.emojiNo,emoji.diaryNo,div3_1_1_2+")")
                 //3)
@@ -631,8 +632,7 @@ function selectEmojiList(diaryNo,div3_1_1_1,div3_1_1){
     })
 }
 
-
-// const selectEmojiPeopleList = (emojiNo,diaryNo,div3_1_1_2)=>{
+/* [5] 공감을 누른 회원들의 목록 */
 function selectEmojiPeopleList(emojiNo,diaryNo,btn){
     /* div3_1_1_1_1_1 = btn */
     // btn.parentElement.parentElement.nextSibling
@@ -691,11 +691,39 @@ function selectEmojiPeopleList(emojiNo,diaryNo,btn){
     })
 }
 
-function mouseout(btn){
-    btn.parentElement.parentElement.nextSibling.innerText = "";
+/* [5] 공감을 누른 회원들의 목록 하나만 나오게 조회하기 */
+if(document.querySelector(".people-pop")!= null) {
+    document.querySelector(".people-pop").remove();
 }
 
-// 화면 어디를 클릭하든
+// [5] 공감을 누른 회원들의 목록
+// 화면 어디를 클릭하든 (그 영역만 빼고) 없애기
+document.addEventListener("click",function(e){
+
+    const temp = document.querySelectorAll(".people-pop, .people-pop *");
+
+        for(let t of temp){
+            if(t == e.target){
+                return;
+            }
+        }
+
+    if(document.querySelector(".people-pop") != undefined){
+
+        document.querySelector(".people-pop").remove();
+    }
+
+
+})
+
+
+
+// function mouseout(btn){
+//     btn.parentElement.parentElement.nextSibling.innerText = "";
+// }
+
+// [3] [이모지 고르는 리스트] 
+// 화면 어디를 클릭하든 (그 영역만 빼고) 없애기
 document.addEventListener("click",function(e){
 
     const temp = document.querySelectorAll(".emoji-btn, .choose-emoji, .choose-emoji  *");
@@ -713,4 +741,5 @@ document.addEventListener("click",function(e){
 
 
 })
+
 

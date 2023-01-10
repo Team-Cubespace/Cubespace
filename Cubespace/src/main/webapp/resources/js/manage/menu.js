@@ -275,6 +275,19 @@ for (let plusBtn of plusBtnList) {
 
         const div = document.createElement("div");
         div.classList.add("subCategory");
+
+        if (category.classList.contains("diary")) {
+            div.classList.add("diaryFolder");
+        }
+        if (category.classList.contains("album")) {
+            div.classList.add("albumFolder");
+        }
+        if (category.classList.contains("video")) {
+            div.classList.add("videoFolder");
+        }
+
+
+
         div.setAttribute("name", Number(subCategoryLength) + 1); // ajax에 사용
 
 
@@ -361,7 +374,7 @@ const folderMinus = e => {
         }
 
 
-
+        
 
         // 4번째 폴더를 삭제했으면 그 뒤 폴더들의 순서도 하나씩 밀기
         // 전체 폴더가 6개고, 4번째를 삭제했으면 
@@ -379,6 +392,7 @@ const folderMinus = e => {
                 if (result > 0) {
                     alert("폴더가 삭제되었습니다");
                     e.target.parentElement.remove();
+                    orderSubCategory(boardTypeNo); // 파일 순서 재정렬
                 } else {
                     console.log("폴더 삭제 실패");
                 }
@@ -388,6 +402,36 @@ const folderMinus = e => {
         })
 }
 
+// 파일 순서 재정렬
+const orderSubCategory = (boardTypeNo) => {
+
+    let i = 1;
+    if(boardTypeNo == 1){
+        const diaryFolderList = document.getElementsByClassName("diaryFolder");
+        for(diaryFolder of diaryFolderList){
+            diaryFolder.setAttribute("name", i);
+            i++;
+        }
+    }
+
+    i = 1;
+    if(boardTypeNo == 2){
+        const albumFolderList = document.getElementsByClassName("albumFolder");
+        for(albumFolder of albumFolderList){
+            albumFolder.setAttribute("name", i);
+            i++;
+        }
+    }
+
+    i = 1;
+    if(boardTypeNo == 3){
+        const videoFolderList = document.getElementsByClassName("videoFolder");
+        for(videoFolder of videoFolderList){
+            videoFolder.setAttribute("name", i);
+            i++;
+        }
+    }
+}
 
 /* 폴더 내부 게시글 설정변경 */
 const folderImageList = document.getElementsByClassName("subCategoryImg");

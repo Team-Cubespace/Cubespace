@@ -189,7 +189,7 @@ const profileDropdownEvent = () => {
     }
 }
 
-if(loginMember != '') {
+if(loginMemberNo != '') {
     profileDropdownBtn.addEventListener("click", () => {
         profileDropdownEvent();
     })

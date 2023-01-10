@@ -1,9 +1,6 @@
 // 뒤로가기
 (()=>{
     const checkHistory = localStorage.getItem("minihomeHistory");
-    if(checkHistory == null) {
-        console.log("null임");
-    }
     if(checkHistory != null) {
         if(JSON.parse(checkHistory).length != 0) {
             document.getElementById("goBackButton").style.display = "block";
@@ -107,7 +104,6 @@ let prevMiniohmeTitleEl;
                     type:"POST",
                     success: result=>{
                         if(result > 0) {
-                            console.log("변경 성공");
                             document.getElementById("minihomeTitleContainer").innerHTML = prevMiniohmeTitleEl;
                             document.getElementById("minihomeTitle").innerText = value;
                         }
@@ -175,7 +171,6 @@ const toggleMusicPlay = playButton => {
         // 음악 재생
         // minihomeMusic.play();
         if(minihomeMusic.pause()) {
-            console.log("재생");
             minihomeMusic.play();
         }
         // 1초마다 현재 재생 시간을 출력   
@@ -219,7 +214,6 @@ const handleVolume = musicVolume=>{
 }
 
 const createMusic = (musicPath, autoplay) => {
-    console.log("음악생성");
     currentTime = 0;    // 시간 초기화
     // 뮤직플레이어 소스 변경
     minihomeMusic = new Howl({
@@ -227,13 +221,11 @@ const createMusic = (musicPath, autoplay) => {
         autoplay: autoplay,
         loop: true,
         onplay: () => {
-            console.log("재생");
             interval = setInterval(printCurrentTime, 1000);
             playButton.classList.remove("fa-circle-play");
             playButton.classList.add("fa-circle-pause");
 
             document.getElementById("minihomeMusicName").classList.add("music-play-marquee");
-            console.log("재생");
         },
         onpause: ()=>{
             clearInterval(interval);
@@ -241,10 +233,8 @@ const createMusic = (musicPath, autoplay) => {
             playButton.classList.remove("fa-circle-pause");
 
             document.getElementById("minihomeMusicName").classList.remove("music-play-marquee");
-            console.log("재생");
         },
         onend: () =>{
-            console.log("노래끝남");
             clearInterval(interval);
             currentTime = 0;
         }

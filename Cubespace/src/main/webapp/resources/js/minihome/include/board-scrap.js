@@ -34,7 +34,6 @@ const createFolderList = (folderList) => {
                 },
                 dataType: "JSON",
                 success: result=>{
-                    console.log(result);
                     createFolderList(result);
                 }
             })
@@ -100,15 +99,12 @@ const createFolderList = (folderList) => {
 
         // 폴더 번호
         const folderNo = document.getElementById("folderSelectBox").value;
-        console.log(folderNo);
 
         // 남길 댓글 내용
         const modalCommentContent = document.getElementById("modalCommentContent").value.trim();
-        console.log(modalCommentContent);
 
         // 공개 범위
         const openFlag = document.querySelector("input[name='openFlag']:checked").value;
-        console.log(openFlag);
         $.ajax({
             url:"/boardScrap/" + boardTypeNo,
             data: {
@@ -122,7 +118,6 @@ const createFolderList = (folderList) => {
             type:"POST",
             success: result =>{
                 if(result > 0) {
-                    console.log(result);
                     alert("게시글을 스크랩 하였습니다.");
 
                     

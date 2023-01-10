@@ -1,9 +1,9 @@
 
 audio1 = new Audio(); // 새 오디오 객체 생성
 
-let playBtnList = document.getElementsByClassName("fa-play");
-for(let playBtn of playBtnList){
-    playBtn.addEventListener("click", e=>{
+let playMusicList = document.getElementsByClassName("playMusic");
+for(let playMusic of playMusicList){
+    playMusic.addEventListener("click", e=>{
 
         playFx(e);
     })
@@ -11,44 +11,78 @@ for(let playBtn of playBtnList){
 
 
 const playFx = e => {
-    
-    audio1.pause();
 
-    const musicPath = e.target.getAttribute("id");
-    // 기존의 모든 stop버튼을 다 start(대기)상태로 만들기
-    stopBtnList = document.getElementsByClassName("fa-stop");
-    for(let stopBtn of stopBtnList){
-        stopBtn.classList.add("fa-play");
-        stopBtn.classList.remove("fa-stop");
+
+    if(e.target.classList.contains("fa-stop")){
+
+        audio1.pause();
+
+        e.target.classList.remove("fa-stop");
+        e.target.classList.add("fa-play");
+
+
+    } else{
+
+        const musicPath = e.target.getAttribute("id");
+        // 기존의 모든 stop버튼을 다 start(대기)상태로 만들기
+        stopBtnList = document.getElementsByClassName("fa-stop");
+        for(let stopBtn of stopBtnList){
+            stopBtn.classList.add("fa-play");
+            stopBtn.classList.remove("fa-stop");
+        }
+
+        // 기존의 모든 stop버튼을 다 start(대기)상태로 만들기
+        stopBtnList = document.getElementsByClassName("fa-stop");
+        for(let stopBtn of stopBtnList){
+            stopBtn.classList.add("fa-play");
+            stopBtn.classList.remove("fa-stop");
+        }
+
+        // 오디오 버튼 변경
+        e.target.classList.add("fa-stop");
+        e.target.classList.remove("fa-play");
+        
+        play(musicPath); // 오디오 플레이어 실행
     }
-
-    e.target.classList.add("fa-stop");
-    e.target.classList.remove("fa-play");
     
-    audio1 = new Audio(musicPath);
 
-    audio1.loop = true; // 반복재생
-    audio1.volume = 0.5; // 음량 설정
-    var playPromise = audio1.play(); // sound1.mp3 재생
-    if (playPromise !== undefined) { playPromise.then((_) => {}).catch((error) => {}); }
 
-    stopBtnList = document.getElementsByClassName("fa-stop");
-    for(let stopBtn of stopBtnList){
-        stopBtn.addEventListener("click", f=>{
-            audio1.pause();
-            f.target.classList.add("fa-play");
-            f.target.classList.remove("fa-stop");
 
-            let playBtnList = document.getElementsByClassName("fa-play");
-            for(let playBtn of playBtnList){
-                playBtn.addEventListener("click", g=>{
+    // audio1.loop = true; // 반복재생
+    // audio1.volume = 0.5; // 음량 설정
+    // var playPromise = audio1.play(); // sound1.mp3 재생
+    // if (playPromise !== undefined) { playPromise.then((_) => {}).catch((error) => {}); }
 
-                    playFx(g);
-                })
-            }
-        })
-    }
+    // stopBtnList = document.getElementsByClassName("fa-stop");
+    // for(let stopBtn of stopBtnList){
+    //     stopBtn.addEventListener("click", f=>{
+    //         audio1.pause();
+    //         f.target.classList.add("fa-play");
+    //         f.target.classList.remove("fa-stop");
+
+    //     })
+    // }
+    // let playBtnList = document.getElementsByClassName("fa-play");
+    // for(let playBtn of playBtnList){
+    //     playBtn.addEventListener("click", g=>{
+    //         g.target.classList.remove("fa-play");
+    //         g.target.classList.add("fa-stop");
+    //     })
+    // }
 }
+
+function play(url) {
+    return new Promise(function (resolve, reject) {
+      audio1.preload = "auto";
+      audio1.autoplay = true;
+      audio1.onerror = reject;
+      audio1.onended = resolve;
+  
+      audio1.src = url;
+    });
+  }
+
+
 
 
 /* 배경음악 검색 */

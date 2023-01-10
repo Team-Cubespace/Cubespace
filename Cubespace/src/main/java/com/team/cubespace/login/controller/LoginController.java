@@ -182,8 +182,8 @@ public class LoginController {
 		Member loginMember = service.kakaoLogin(inputMember, backgroundInfo);
 
 		if (loginMember.getMemberBlockYN().equals("Y")) {
-			String message = "차단된 회원은 이용할 수 없습니다\n" + loginMember.getBlockStart() + "부터" + loginMember.getBlockEnd()
-					+ "까지 이용할 수 없습니다.\n" + "자세한 사항은 고객센터를 참고하세요";
+			String message = "차단된 회원은 이용할 수 없습니다\\n" + loginMember.getBlockStart() + "부터" + loginMember.getBlockEnd()
+					+ "까지 이용할 수 없습니다.\\n" + "자세한 사항은 고객센터를 참고하세요";
 
 			return message;
 

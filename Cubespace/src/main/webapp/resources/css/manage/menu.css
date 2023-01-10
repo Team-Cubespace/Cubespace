@@ -15,6 +15,7 @@
     color: white;
     border-radius: 50%;
 }
+
 .folderTitle {
     outline: none;
     border: none;
@@ -50,9 +51,11 @@ input {
     font-size: 17px;
     width: 100%;
     padding: 5px;
+    margin-bottom: 5px;
 
     display: flex;
     flex-direction: column;
+    border-bottom: 2px dashed var(--ink);
 }
 
 .folderNameArea {
@@ -255,8 +258,9 @@ input {
 
 #menuSelectCancelBtn {
     display: flex;
-    align-content: center;
-    justify-content: center;
+    flex-wrap: wrap !important;
+    align-content: center !important;
+    justify-content: center !important;
 }
 
 .menuListArea {
@@ -278,4 +282,16 @@ input {
 
 .menuOrder4 {
     order: 4;
+}
+
+.backgroundTitle {
+    font-size: 17px;
+    margin-bottom: 5px;
+}    
+.listTitle{
+    height: 70px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }

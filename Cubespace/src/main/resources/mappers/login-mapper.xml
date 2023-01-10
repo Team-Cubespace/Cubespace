@@ -191,6 +191,12 @@
  	</insert>
  	
  	
+ 	<!-- 회원가입시 미니룸테이블에 값 삽입 -->
+ 	<insert id="insertMiniroom">
+ 		INSERT INTO MINIROOM VALUES(#{memberNo}, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+ 	</insert>
+ 	
+ 	
  	
  	
  	 <!-- 내 회원 정보 수정 -->

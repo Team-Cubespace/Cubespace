@@ -24,7 +24,7 @@ public class FileScheduling {
 	@Autowired 
 	private ServletContext application;
 	
-	@Scheduled(fixedRate = 1000 * 60 * 5)
+	@Scheduled(cron="0 59 23 * * *")
 	public void deleteAlbumImage() {
 		// DB에서 album의 모든 이미지 변경명을 조회
 		List<String> dbImageList = aService.selectImageList();
@@ -84,7 +84,6 @@ public class FileScheduling {
 			for(File file : thumbnailList) {
 				String tempName = file.getName();
 				String fileName = tempName.substring(0, tempName.lastIndexOf(".")) + ".mp4";
-				System.out.println(fileName);
 				
 				if(dbVideoList.indexOf(fileName) == -1) {
 					file.delete();

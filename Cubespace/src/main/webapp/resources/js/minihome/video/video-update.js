@@ -52,8 +52,6 @@ const addVideo = input => {
     } else {
         videoVariable.duration = 0;
         videoVariable.size = 0;
-        console.log(videoVariable.duration);
-        console.log(videoVariable.size);
         document.getElementById("videoSizeSpan").innerText = 0;
         document.getElementById("videoDurationSpan").innerText = 0;
     }
@@ -90,7 +88,6 @@ const submitForm = ()=>{
         processData: false,
         contentType: false,
         success: result=>{
-            console.log(result);
             if(result.videoNo > 0) {
                 document.getElementById("loadingMask").style.display = "none";
                 const cp = new URLSearchParams(location.search).get("cp");

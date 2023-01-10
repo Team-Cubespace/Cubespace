@@ -34,7 +34,6 @@ const addFile = (obj)=>{
         alert("첨부파일은 최대 " + maxFileCnt + "개 까지 첨부 가능합니다.");
     } else {
         for (const file of obj.files) {
-            console.log(file);
 
             // 첨부파일 검증
             if (validation(file)) {
@@ -84,7 +83,6 @@ const addFile = (obj)=>{
     }
     // 초기화
     document.querySelector("input[type=file]").value = "";
-    console.log(filesArr);
 }
 
 /* 첨부파일 검증 */
@@ -111,7 +109,6 @@ function validation(obj){
 function deleteFile(num) {
     document.querySelector("#file" + num).remove();
     filesArr[num].is_delete = true;
-    console.log(deleteImageList);
     document.getElementById("addImageCount").innerText = Number(document.getElementById("addImageCount").innerText) - 1;
 }
 
@@ -130,7 +127,6 @@ function submitForm() {
     formData.append("deleteImageList", deleteImageList);
     formData.append("albumNo", albumNo);
     formData.append("prevLength", prevLength);
-    console.log(filesArr);
     $.ajax({
         method: 'POST',
         url: '/albumUpdate',
@@ -144,13 +140,11 @@ function submitForm() {
         // cache: false,
         // headers: {'cache-control': 'no-cache', 'pragma': 'no-cache'},
         success: result => {
-            console.log(result);
             if(result.albumNo > 0) {
                 location.href=`/albumDetail/${result.albumNo}?folderNo=${result.folderNo}&cp=1`;
             }
         },
         error: result => {
-            console.log(result);
             alert("파일업로드 실패");
         }
 
@@ -285,8 +279,6 @@ const initLocation = (obj) => {
     // input value 초기화
     document.querySelector("input[name='latitude']").value = "";
     document.querySelector("input[name='longitude']").value = "";
-    console.log(document.querySelector("input[name='latitude']").value);
-    console.log(document.querySelector("input[name='longitude']").value);
 
     // 지도 펼치기 버튼 출력
     document.getElementById("addLocationButton").style.display = "flex";
@@ -305,8 +297,6 @@ const selectPlace = (y, x) => {
     document.getElementById("longitude").value = x;
     document.getElementById("locationName").value = searchPlaceInput.value.trim();
 
-    console.log(document.querySelector("input[name='latitude']").value);
-    console.log(document.querySelector("input[name='longitude']").value);
     // 모달 삭제
     document.getElementById("mapModal").style.display = "none";
 

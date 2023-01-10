@@ -606,7 +606,6 @@ const deleteGoods = (goodsInfo, goodsName, cathNo, goodsNo, goodsPath) => {
             url : "/miniroom/delete",
             data : {"shopCathNo" : cathNo,
                     "goodsNo" : goodsNo},
-            async : false,
             type : "GET",
             success : (result) => {
                 if(result > 0) {

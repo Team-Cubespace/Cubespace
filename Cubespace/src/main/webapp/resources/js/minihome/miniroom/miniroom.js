@@ -402,7 +402,7 @@ const selectgoodsList = cp => {
                     paginationObject = map.pagination;
     
                     moveGoodsBtn.addEventListener("click", () => {putGoods(goodsPath, cathNo, goodsNo);})
-                    deleteGoodsBtn.addEventListener("click", () => {deleteGoods(goodsInfo, name, cathNo, goodsNo);})
+                    deleteGoodsBtn.addEventListener("click", () => {deleteGoods(goodsInfo, name, cathNo, goodsNo, goodsPath);})
                 }
 
             } else {
@@ -563,7 +563,7 @@ const putMinimee = (minimeePath, cathNo, minimeeNo) => {
         }
 
     } else {
-        alert("더 이상 미니미를 추가할 수 없습니다.");
+        alert("미니미는 하나만 놓을 수 있습니다.");
     }
 }
 
@@ -600,8 +600,8 @@ const putGoods = (goodsPath, cathNo, goodsNo) => {
 }
 
 /* 소품 삭제 */
-const deleteGoods = (goodsInfo, goodsName, cathNo, goodsNo) => {
-    if(confirm(goodsName + "을(를) 목록에서 삭제하시겠습니까?")) {
+const deleteGoods = (goodsInfo, goodsName, cathNo, goodsNo, goodsPath) => {
+    if(confirm(goodsName + "을(를) 목록에서 삭제하시겠습니까?\n(이미 배치되어 있던 " + goodsName + "도 함께 삭제됩니다!)")) {     
         $.ajax({
             url : "/miniroom/delete",
             data : {"shopCathNo" : cathNo,
@@ -609,10 +609,22 @@ const deleteGoods = (goodsInfo, goodsName, cathNo, goodsNo) => {
             type : "GET",
             success : (result) => {
                 if(result > 0) {
-                    alert("삭제되었습니다.");
+                    const propsImg = document.getElementsByClassName("props-img");
+                    
+                    for(let i = 0; i < propsImg.length; i++) {
+                        if(propsImg[i].getAttribute("src") == goodsPath) {
+                            propsArray = propsImg[i].parentElement.id.split("-");
+                            afterEmptyTile(propsArray[0]);
+                            propsImg[i].parentElement.remove();
+                            i--;
+                        }
+                    }
+
                     goodsInfo.remove();
                     const goodsList = document.querySelector(".goods-list");
                     const pageContainer = document.querySelector(".page-container");
+
+                    alert("삭제되었습니다.");
 
                     if(goodsList.innerHTML == ""){
                         goodsList.remove();

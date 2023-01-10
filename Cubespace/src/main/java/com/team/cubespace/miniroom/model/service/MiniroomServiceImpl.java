@@ -117,11 +117,6 @@ public class MiniroomServiceImpl implements MiniroomService {
 	public int updateRoom(String webPath1, String filePath1, String webPath2, String filePath2,
 						  String wallColor, MultipartFile wallImage, String floorColor, MultipartFile floorImage,
 						  int wallPattern, int floorPattern, String wallFlag, String floorFlag, Miniroom miniroom) throws Exception {
-		
-		// 임시 콘솔 출력용 구문 (이미지 선택 후 패턴 코드 제대로 가져오는지)
-		System.out.println(wallPattern);
-		System.out.println(floorPattern);
-		
 		String rename1 = null;
 		String rename2 = null;
 		

@@ -212,7 +212,7 @@ function selectDiary(diaryDate){
         data : {"diaryDate":diaryDate,"folderNo":folderNo},
         dataType : "JSON",
         success :  (diaryList)  => {
-            console.log(diaryList);
+            //console.log(diaryList);
             /* diaryNo, diaryTitle, diaryContent, diaryCreateDate, diaryOpenFlag 가지고 옴. */
             
             /* 각각의 diary-section의 위치를 잡아주는 기준(부모) */
@@ -377,7 +377,7 @@ document.getElementById("nextMonth").addEventListener("click", ()=>{
     let today;
     let today2;
     if(flagNo != ""){ //flag가 있으면, 그 날짜가 담긴 date객체가 나오며, 거기에 따른 일기목록이 조회됨.
-        console.log("취소됨");
+        //console.log("취소됨");
         today = new Date(datedatedate);
         today2 = new Date(datedatedate);
     }else {

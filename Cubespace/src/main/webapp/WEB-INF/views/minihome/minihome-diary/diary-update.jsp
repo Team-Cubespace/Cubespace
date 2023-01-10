@@ -73,12 +73,7 @@
                             <input id="diaryTitle" name="diaryTitle" type="text" placeholder="제목을 입력하세요" value = "${diary.diaryTitle}" maxlength = "30">
                         </div>
                         <div class="input-row">
-                            <%-- <label for="diaryContent">내용</label> --%>
-                            <%-- <div id="summernote" name = "diaryContent"><p>Hello Summernote</p></div>
-                            <script>
-                            const summmernote = document.getElementById("summernote");
-                            </script>
-                            <input type="hidden" > --%>
+                        
                             <textarea id="summernote" name = "diaryContent">${diary.diaryContent}</textarea>
                         </div>
                         <div class="input-row">
@@ -86,30 +81,20 @@
                             <ul class="radio-list">
                                 <li>
                                     <input type="radio" id="scope1" name="diaryOpenFlag" value="1" <c:if test="${diary.diaryOpenFlag == 1}">checked</c:if> >
-                                    <%-- <label class="radio" for="scope1">
-                                        <i class="fa-solid fa-check"></i>
-                                    </label> --%>
                                     <label for="scope1">공개</label>
                                 </li>
                                 <li>
                                     <input type="radio" id="scope2" name="diaryOpenFlag" value="2" <c:if test="${diary.diaryOpenFlag == 2}">checked</c:if> >
-                                    <%-- <label class="radio" for="scope2">
-                                        <i class="fa-solid fa-check"></i>
-                                    </label> --%>
                                     <label for="scope2">깐부공개</label>
                                 </li>
                                 <li>
                                     <input type="radio" id="scope3" name="diaryOpenFlag" value="3" <c:if test="${diary.diaryOpenFlag == 3}">checked</c:if> >
-                                    <%-- <label class="radio" for="scope3">
-                                        <i class="fa-solid fa-check"></i>
-                                    </label> --%>
                                     <label for="scope3">비공개</label>             
                                 </li>
                             </ul>
                         </div>
                         <div class="form-button-area">
                             <button type = "submit" id="submitButton">수정</button>
-                            <%-- <button id="submitButton" type="submit">작성</button> --%>
                             <a id="cancelWrite" href = "/diaryCancle/${param.dateContainer}?folderNo=${param.folderNo}">취소</a>
                         </div>
                     </form>
@@ -122,8 +107,5 @@
 
 <!-- html에서 파일을 include 할 수 있도록 해주는 js (근데 VSCode Live Server에서만 보임) -->
 <!-- include 방법 : <section class="minihome-rayout"> 안에 <div data-include-path="파일 경로"></div> 작성 -->
-<script src="/resources/js/common/temp.js"></script>
 <script src="/resources/js/minihome/minihome-diary/diary_write.js"></script>
-<%-- <script src = "/resources/js/minihome/minihome-diary/minihome-diary.js"></script> --%>
-
 </html>

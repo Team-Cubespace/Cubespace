@@ -1,5 +1,4 @@
 // 미니홈 히스토리 저장
-console.log("안녕");
 const openMinihome = (url) => {
     // 현재 보고있는 미니홈 번호 가져오기
     const minihomeNo = window.parent.location.href.substring(window.parent.location.href.lastIndexOf('/') + 1);
@@ -41,7 +40,6 @@ const initNicknameDropDown= ()=>{
             nickName.firstElementChild.style.top = e.offsetY + "px";
         });
         nickName.addEventListener("blur", ()=>{
-            console.log("blur실행");
             setTimeout(()=> {
                 nickName.firstElementChild.classList.remove("show");
             }, 100);
@@ -50,8 +48,3 @@ const initNicknameDropDown= ()=>{
 }
 
 initNicknameDropDown();
-
-const test = ()=>{
-    console.log("신고합니다.");
-    return false;
-}

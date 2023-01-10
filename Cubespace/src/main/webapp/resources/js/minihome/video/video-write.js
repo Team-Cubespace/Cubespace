@@ -22,7 +22,6 @@ const addVideo = input => {
         const video = document.createElement("video");
         video.setAttribute("id", "myVideo");
         video.controls = true;
-        console.log(file.name);
         const videoURL = URL.createObjectURL(file);
         // const source = document.createElement("source");
         // source.setAttribute("src", videoURL);
@@ -41,8 +40,6 @@ const addVideo = input => {
     } else {
         videoVariable.duration = 0;
         videoVariable.size = 0;
-        console.log(videoVariable.duration);
-        console.log(videoVariable.size);
         document.getElementById("videoSizeSpan").innerText = 0;
         document.getElementById("videoDurationSpan").innerText = 0;
     }
@@ -79,7 +76,6 @@ const submitForm = ()=>{
         processData: false,
         contentType: false,
         success: result=>{
-            console.log(result);
             if(result.videoNo > 0) {
                 document.getElementById("loadingMask").style.display = "none";
                 const cp = new URLSearchParams(location.search).get("cp");
@@ -87,7 +83,6 @@ const submitForm = ()=>{
             }
         },
         error: result =>{
-            console.log(result);
             document.getElementById("loadingMask").style.display = "none";
             alert("파일업로드 실패");
         }

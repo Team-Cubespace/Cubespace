@@ -28,9 +28,9 @@ $('#summernote').summernote({
     // 글자색
     ['color', ['color']],
     // 표만들기
-    ['table', ['table']],
+   // ['table', ['table']],
     // 글머리 기호, 번호매기기, 문단정렬
-    ['para', ['ul', 'ol', 'paragraph']],
+    ['para', [ 'paragraph']],
     // 줄간격
     ['height', ['height']],
     // 굵기, 기울임꼴, 밑줄,취소 선, 서식지우기

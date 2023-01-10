@@ -116,7 +116,7 @@
                                 </c:if>
                             </div>
                             <div class="comment-content-area">
-                                <p class="comment-content">${comment.commentContent}</p>
+                                <p style="font-family: '${comment.ownFontNo}'" class="comment-content">${comment.commentContent}</p>
 
                             </div>
                             <div class="comment-button-area">

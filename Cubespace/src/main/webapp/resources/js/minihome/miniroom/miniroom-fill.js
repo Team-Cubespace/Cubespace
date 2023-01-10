@@ -174,6 +174,7 @@ const loadWall = () => {
     } else {
         let url = "url('" + wallPath + "')";
         setWallBackground(url);
+        wallColorPriview.style.backgroundColor = "white";
 
         for(let radio of wallRadio) {
             if(radio.value == wallPatternNo){
@@ -194,9 +195,10 @@ const loadFloor = () => {
     } else {
         let url = "url(" + floorPath + ")";
         setFloorBackground(url);
+        floorColorPriview.style.backgroundColor = "white";
     
         for(let radio of floorRadio) {
-            if(radio.value == wallPatternNo){
+            if(radio.value == floorPatternNo){
                 radio.checked = true;
                 selectFloorPattern(radio.value);
             }

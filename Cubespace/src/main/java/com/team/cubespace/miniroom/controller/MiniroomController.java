@@ -69,15 +69,25 @@ public class MiniroomController {
 	// 미니미 목록 조회
 	@GetMapping("/minimeeList")
 	@ResponseBody
-	public List<Minimee> minimeeList() {
-		return service.minimeeList();
+	public Map<String, Object> minimeeList(@RequestParam(value="cp", required=false, defaultValue="1") int cp) {
+		return service.minimeeList(cp);
 	}
 	
 	// 소유한 소품 목록 조회
 	@GetMapping("/goodsList")
 	@ResponseBody
-	public List<ShopMiniroom> goodsList(@SessionAttribute("minihome") Minihome minihome) {
-		return service.goodsList(minihome.getMemberNo());
+	public Map<String, Object> goodsList(@RequestParam(value="cp", required=false, defaultValue="1") int cp,
+										@SessionAttribute("minihome") Minihome minihome) {
+		return service.goodsList(minihome.getMemberNo(), cp);
+	}
+	
+	// 소품 삭제
+	@GetMapping("/delete")
+	@ResponseBody
+	public int deleteGoods(@SessionAttribute("minihome") Minihome minihome,
+						   @RequestParam Map<String, Object> paramMap) {
+		paramMap.put("memberNo", minihome.getMemberNo());
+		return service.deleteGoods(paramMap);
 	}
 	
 	// 현재 상태 저장
@@ -94,8 +104,8 @@ public class MiniroomController {
 					   @RequestParam(value="floorFlag", required=false) String floorFlag,				 // 바닥 업데이트 플래그
 				   	   HttpServletRequest req) throws Exception {
 		
-		// 회원 번호, 소품 번호, 카테고리 번호, 자리번호 insert
-		int result1 = service.props(minihome.getMemberNo(), props);
+		// 미니미, 소품 좌표 저장
+		service.props(minihome.getMemberNo(), props);
 		
 		// 벽지, 바닥 경로 지정
 		String webPath1 = "/resources/images/wallImage/";
@@ -104,13 +114,15 @@ public class MiniroomController {
 		String webPath2 = "/resources/images/floorImage/";
 		String filePath2 = req.getSession().getServletContext().getRealPath(webPath2);
 		
+		// miniroom 객체 생성
 		Miniroom miniroom = new Miniroom();
-		
 		miniroom.setMemberNo(minihome.getMemberNo());
 		
-		int result2 = service.updateRoom(webPath1, filePath1, webPath2, filePath2, wallColor, wallImage, floorColor, floorImage,
+		// 벽지, 바닥 저장
+		int result = service.updateRoom(webPath1, filePath1, webPath2, filePath2, wallColor, wallImage, floorColor, floorImage,
 										 wallPattern, floorPattern, wallFlag, floorFlag, miniroom);
 		
-		return "redirect:/minihome/home/" + minihome.getMemberNo();
+		if(result > 0) {return "redirect:/minihome/home/" + minihome.getMemberNo();}
+		else {return "redirect:/miniroom/decorating" + minihome.getMemberNo();}
 	}
 }

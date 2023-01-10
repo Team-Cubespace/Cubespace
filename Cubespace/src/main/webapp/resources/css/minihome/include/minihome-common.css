@@ -10,13 +10,12 @@
     display: none;
     background-color: white;
     width: 90px;
-    height: 70px;
     border: 1px solid black;
     z-index: 5;
 }
 .nickname-drop-down-box li {
     width: 100%;
-    height: 50%;
+    height: 35px;
 }
 .nickname-drop-down-box a {
     width: 100%;

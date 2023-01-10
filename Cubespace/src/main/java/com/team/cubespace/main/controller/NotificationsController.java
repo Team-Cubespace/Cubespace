@@ -42,15 +42,8 @@ public class NotificationsController {
 	 */
 	@GetMapping("/memberAcceptBtn")
 	@ResponseBody
-	public int memberAcceptBtn(@RequestParam Map<String, Object> paramMap,
-						@SessionAttribute("loginMember") Member loginMember) {
-		int result = service.memberAcceptBtn(paramMap);
-		
-		if(result >0) {
-			loginMember.setFriendCount(loginMember.getFriendCount()+1);
-			
-		}
-		
+	public int memberAcceptBtn(@RequestParam Map<String, Object> paramMap) {
+		int result = service.memberAcceptBtn(paramMap);			
 		return result;
 	}
 	

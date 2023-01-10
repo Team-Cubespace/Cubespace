@@ -51,6 +51,7 @@
         </script>
     </c:if>
     <script>
+        const minihomeHostNo = '${minihome.memberNo}';
         const loginMemberNo = '${loginMember.memberNo}';
         const boardNo = '${board.videoNo}';
         const profileImage = '${loginMember.profileImage}';

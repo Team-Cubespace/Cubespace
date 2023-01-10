@@ -105,6 +105,9 @@
 }
 
 .user-nickname{
+    padding: 0;
+    background: none;
+    border: none;
     font-size: 1em;
     font-weight: bold;
 }

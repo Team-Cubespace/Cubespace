@@ -84,7 +84,6 @@ public class FileScheduling {
 			for(File file : thumbnailList) {
 				String tempName = file.getName();
 				String fileName = tempName.substring(0, tempName.lastIndexOf(".")) + ".mp4";
-				System.out.println(fileName);
 				
 				if(dbVideoList.indexOf(fileName) == -1) {
 					file.delete();

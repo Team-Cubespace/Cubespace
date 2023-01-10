@@ -67,7 +67,24 @@
 
         <!-- 닉네임, 이름, 이메일 -->
         <div class="user-info-container">
-            <span class="user-nickname">${profile.memberNickname}</span>
+            <c:choose>
+                <c:when test="${minihome.memberNo != loginMember.memberNo}">
+                    <button class="user-nickname member-nickname nickname-drop-down-button">
+                </c:when>
+
+                <c:otherwise>
+                    <button class="user-nickname" style="cursor: text;">
+                </c:otherwise>
+            </c:choose>
+            
+                ${profile.memberNickname}
+
+                <c:if test="${minihome.memberNo != loginMember.memberNo}">
+                    <ul class="nickname-drop-down-box">
+                        <li><a onclick="reportFriend('${minihome.memberNo}')">신고</a></li>
+                    </ul>
+                </c:if>
+            </button>
             <span class="user-name">(${profile.memberName})</span>
         </div>
 

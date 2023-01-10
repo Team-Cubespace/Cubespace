@@ -37,16 +37,15 @@
 
 /* 카테고리 이름, 깐부 이름 */
 .post-category a, .friend-name{
+    padding: 0;
+    background: none;
+    border: none;
     color: darksalmon;
     font-weight: bold;
 }
 
 .friend-name{
     width: auto;
-}
-
-.friend-name > span{
-    cursor: pointer;
 }
 
 /* 게시물 제목, 깐부 메시지 */

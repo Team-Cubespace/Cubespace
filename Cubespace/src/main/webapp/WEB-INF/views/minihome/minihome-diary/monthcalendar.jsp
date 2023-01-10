@@ -257,9 +257,7 @@
 
                                     <button id = "updateBtn" onClick = "updateEvent()">수정완료</button>
 
-                                    <%-- <button id = "deleteBtn" onClick = "deleteEvent()">삭제</button> --%>
 
-                                    <%-- <button id = "cancleBtn">닫기</button> --%>
                                 </div>
                             </div>
                         
@@ -308,10 +306,8 @@
                                     <button id = "updateShowBtn">수정하기</button>
                                     <button id = "deleteBtn" onClick = "deleteEvent()">삭제하기</button>
                                 </c:if>
-                                    <%-- <button id = "cancleShowBtn">닫기</button> --%>
                                 </div>
                             </div>
-                        <%-- </div> --%>
                     </div>
                 </div>
             </div>
@@ -324,9 +320,5 @@ const loginMemberNo = "${loginMember.memberNo}";
 </script>
 <!-- html에서 파일을 include 할 수 있도록 해주는 js (근데 VSCode Live Server에서만 보임) -->
 <!-- include 방법 : <section class="minihome-rayout"> 안에 <div data-include-path="파일 경로"></div> 작성 -->
-<script src="/resources/js/common/temp.js"></script>
 <script src="/resources/js/minihome/minihome-diary/monthcalendar.js"></script>
-
-
-
 </html>

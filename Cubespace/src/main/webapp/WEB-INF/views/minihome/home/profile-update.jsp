@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/resources/css/minihome/home/profile-update.css">
-    <title>프로필 수정 (시간 남으면 프로필 이미지 scheduling)</title>
+    <title>프로필 수정</title>
 </head>
 <body>
     <div class="profile-update-area">

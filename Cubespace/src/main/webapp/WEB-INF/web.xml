@@ -80,7 +80,7 @@
  	 <filter-mapping>
 		<filter-name>loginFilter</filter-name>
 	 	<url-pattern>/member/logout</url-pattern>
-	 	<url-pattern>/member/findId</url-pattern>
+	 	<!-- <url-pattern>/member/findId</url-pattern> -->
 	 	<url-pattern>/member/findPw</url-pattern>
 <!-- 	 	<url-pattern>/member/updateInfo</url-pattern> -->
 	 	<url-pattern>/member/changePw</url-pattern>

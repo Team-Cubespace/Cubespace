@@ -137,6 +137,10 @@ const deleteMessage = (btn) => {
                     alert("메시지가 삭제되었습니다.");
                     btn.parentElement.parentElement.remove();
                     $(".friend-message").slice(0, 5).css("display", "flex");
+                    
+                    if($(".friend-message:hidden").length == 0){
+                        $("#moreBtn").css("display", "none");
+                    }
 
                     const friendMessage = document.getElementsByClassName("friend-message");
 

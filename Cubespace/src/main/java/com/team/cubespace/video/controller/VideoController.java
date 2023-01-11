@@ -224,7 +224,7 @@ public class VideoController {
 	public String videoDelete(@PathVariable("videoNo") int videoNo,
 			@RequestHeader("referer") String referer,
 			int folderNo,
-			int cp,
+			@RequestParam(value="cp", required=false, defaultValue="1") int cp,
 			RedirectAttributes ra) {
 		
 		int result = service.videoDelete(videoNo);

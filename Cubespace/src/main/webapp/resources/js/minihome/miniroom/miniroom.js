@@ -268,7 +268,7 @@ const selectminimeeList = cp => {
     $.ajax({
         url : "/miniroom/minimeeList",
         type : "GET",
-        async : false,
+        // async : false,
         data : {"cp" : cp},
         success : map => {
             const goodsContainer = document.querySelector(".goods-container");
@@ -338,7 +338,7 @@ const selectgoodsList = cp => {
     $.ajax({
         url : "/miniroom/goodsList",
         type : "GET",
-        async : false,
+        // async : false,
         data : {"cp" : cp},
         success : (map) => {
             const goodsContainer = document.querySelector(".goods-container");
@@ -490,6 +490,8 @@ const clickMinimee = () => {
         selectMinimee.classList.add("select-category");
         selectGoods.classList.remove("select-category");
         selectminimeeList(1);
+
+        console.log("테스트");
 
         if(pageFlag == "Y") {
             const pageContainer = document.createElement("div");
@@ -643,6 +645,8 @@ const deleteGoods = (goodsInfo, goodsName, cathNo, goodsNo, goodsPath) => {
                         const goodsContainer = document.querySelector(".goods-container");
                         goodsContainer.style.height = "70px";
                         goodsContainer.append(noGoods);
+                        
+                        pageFlag == "Y";
 
                     } else if((goodsList.innerHTML == "") && (curPage != 1)) {
                         selectgoodsList(curPage-1);

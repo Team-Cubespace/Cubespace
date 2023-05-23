@@ -65,7 +65,10 @@
 	
 	<!-- 소유한 소품 수 조회 -->
 	<select id="goodsListCount" resultType="_int">
-		SELECT COUNT(*) FROM MEMBER_OWN_GOODS WHERE MEMBER_NO = #{memberNo} AND SHOP_CATH_NO = 3
+		SELECT COUNT(*)
+		FROM MEMBER_OWN_GOODS
+		JOIN GOODS_SHOP USING (GOODS_NO)
+		WHERE MEMBER_NO = #{memberNo} AND SHOP_CATH_NO = 3
 	</select>
 	
 	<!-- 소유한 소품 목록 조회 -->

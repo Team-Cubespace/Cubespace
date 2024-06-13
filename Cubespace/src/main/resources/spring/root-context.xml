@@ -28,7 +28,7 @@
 <!--      <property name="password" value="cubespace"/>-->
       <property name="url" value="jdbc:oracle:thin:@61.73.18.134:1521:XE" />
       <property name="username" value="KH_FINALPROJECT" />
-      <property name="password" value="Myodong312" />
+      <property name="password" value="akstp3ckd!!" />
 
       <!-- SQL이 수행된 후 자동으로 Commit 되는것을 지정 -->
       <property name="defaultAutoCommit" value="false"/>
